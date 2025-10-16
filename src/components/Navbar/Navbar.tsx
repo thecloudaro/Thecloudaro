@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Dropdown from '@/components/Navbar/DynamicDropdown';
-import { Menu, X } from 'lucide-react';
+import { Link, Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,7 +49,9 @@ const Navbar = () => {
             <div className="w-8 h-8 bg-white rounded-sm mr-2 flex items-center justify-center">
               <div className="w-4 h-4 bg-[#0a0e27] transform rotate-45"></div>
             </div>
-           <a href='/'><span className="text-white text-xl font-bold">spaceship</span></a>
+            <Link href="/" className="text-white text-xl font-bold">
+  spaceship
+</Link>
           </div>
 
           {/* 🔹 Desktop Menu */}

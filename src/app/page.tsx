@@ -2,7 +2,6 @@ import Navbar from '@/components/Navbar/Navbar';
 import HeroSection from '@/components/Hero/HeroSection';
 import NextSection from '@/components/Hero/NextSection';
 import PageTransition from '@/components/Hero/PageTransition';
-import NextSection1 from '@/components/Hero/NextSection1';
 
 
 export default function Home() {
@@ -20,10 +19,6 @@ export default function Home() {
         <NextSection />
       </section>
       
-
-      <section>
-        {/* <NextSection1/> */}
-      </section>
 
      
     </>
