@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useViewportScroll, useTransform, useSpring } from 'framer-motion';
 
-const NextSection = () => {
+const NextSection1 = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const { scrollY } = useViewportScroll();
 
@@ -16,7 +16,7 @@ const NextSection = () => {
   const bgOpacity = useSpring(rawBgOpacity, { stiffness: 80, damping: 20 });
 
   // -----------------------------
-  // Bottom fade-in shadow (Spaceship-style)
+  // Bottom fade-in shadow
   // -----------------------------
   const rawBottomShadow = useTransform(scrollY, [0, 400], [0, 1]);
   const bottomShadowOpacity = useSpring(rawBottomShadow, { stiffness: 80, damping: 20 });
@@ -38,14 +38,13 @@ const NextSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-      {/* Background Image */}
-      <motion.div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/BgPics/bg2.jpg')",
-          scale: bgScale,
-          opacity: bgOpacity,
-        }}
+      {/* Background Image with lazy load */}
+      <motion.img
+        src="/BgPics/black.jpg"
+        alt="Background"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        style={{ scale: bgScale, opacity: bgOpacity }}
+        loading="lazy"
       />
 
       {/* Bottom Fade Shadow */}
@@ -56,13 +55,13 @@ const NextSection = () => {
 
       {/* Content */}
       <motion.div
-        className="relative z-30 text-center text-white px-4 sm:px-8 max-w-2xl"
+        className="relative z-30 text-center text-white px-4 sm:px-8 max-w-xl sm:max-w-2xl"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-          New Section Heading
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold">
+          New Section 1 Heading
         </h1>
-        <p className="mt-4 text-base sm:text-lg md:text-xl">
+        <p className="mt-2 sm:mt-4 text-sm sm:text-base md:text-xl">
           This section fades in from the bottom like Spaceship.com’s smooth scroll transition.
         </p>
       </motion.div>
@@ -70,4 +69,4 @@ const NextSection = () => {
   );
 };
 
-export default NextSection;
+export default NextSection1;

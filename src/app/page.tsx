@@ -1,27 +1,38 @@
 import Navbar from '@/components/Navbar/Navbar';
 import HeroSection from '@/components/Hero/HeroSection';
-import NextSection from '@/components/Hero/NextSection';
-import PageTransition from '@/components/Hero/PageTransition';
+import DynamicSection from '@/components/Hero/DynamicSection';
 
+
+const sectionsData = [
+  { heading: 'Section 1', text: 'This is the first cinematic section.', bgImage: '/BgPics/black.jpg' },
+  { heading: 'Section 2', text: 'Second section with smooth scroll effect.', bgImage: '/BgPics/black.jpg' },
+  { heading: 'Section 3', text: 'Third section, default background will be used.', bgImage: '/BgPics/black.jpg' }
+];
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#0a0e27]">
       <Navbar />
-      <>
-      <PageTransition />
 
-      <section >
-        <HeroSection />
-      </section >
-
+      {/* Hero Section */}
       <section>
-        <NextSection />
+        <HeroSection />
       </section>
-      
 
-     
-    </>
+      {/* Dynamic Sections */}
+      <section>
+        {sectionsData.map((section, index) => (
+          <DynamicSection
+            key={index}
+            heading={section.heading}
+            text={section.text}
+            bgImage={section.bgImage}
+          />
+        ))}
+      </section>
+
+      {/* Footer */}
+      {/* <Footer /> */}
     </div>
   );
 }

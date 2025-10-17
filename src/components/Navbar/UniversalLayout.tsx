@@ -1,21 +1,21 @@
-"use client";
+'use client';
+
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Sidebar from "@/components/Navbar/SideBar";
 import DomainCard from "@/components/Navbar/DomainCard";
 
 interface UniversalLayoutProps {
-  section: string; // incoming section from dropdown
+  section: string;
 }
 
 export default function UniversalLayout({ section }: UniversalLayoutProps) {
   const [active, setActive] = useState(section);
 
   useEffect(() => {
-    setActive(section); // Update active section when dropdown changes
+    setActive(section);
   }, [section]);
 
-  // Define options dynamically for all sections
   const allOptions: Record<string, { title: string; desc: string }[]> = {
     domains: [
       { title: "Domains", desc: "Start your story with the right domain." },
@@ -49,25 +49,27 @@ export default function UniversalLayout({ section }: UniversalLayoutProps) {
     ],
   };
 
-  // Get options for current active section
-  const options = allOptions[active.toLowerCase()] || [];
+  const options = allOptions[active?.toLowerCase()] || [];
 
   return (
-    <div className="flex min-h-[50vh] bg-[#0c0c0e] text-gray-200 rounded-xl">
-      <Sidebar active={active} setActive={setActive} />
+    <div className="flex flex-col lg:flex-row min-h-[50vh] bg-[#0c0c0e] text-gray-200 rounded-xl">
+      {/* Sidebar */}
+      <div className="lg:w-1/4 w-full">
+        <Sidebar active={active} setActive={setActive} />
+      </div>
 
+      {/* Main Content */}
       <motion.main
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="flex-1 p-10 overflow-y-auto"
+        className="flex-1 p-6 sm:p-8 md:p-10 overflow-y-auto"
       >
-        {/* Display heading with first letter uppercase */}
-        <h1 className="text-2xl font-bold text-white mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-white mb-6">
           {active.charAt(0).toUpperCase() + active.slice(1).toLowerCase()}
         </h1>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {options.map((opt, i) => (
             <DomainCard key={i} title={opt.title} desc={opt.desc} />
           ))}
