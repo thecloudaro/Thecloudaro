@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Dropdown from '@/components/Navbar/DynamicDropdown';
-import { Link, Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

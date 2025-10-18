@@ -16,6 +16,18 @@ export default function UniversalLayout({ section }: UniversalLayoutProps) {
     setActive(section);
   }, [section]);
 
+  const getSectionKey = (label: string): string => {
+    const normalized = (label || '').toLowerCase();
+    if (normalized.includes('explore')) return 'all';
+    if (normalized.includes('starlight')) return 'cloud';
+    if (normalized.includes('domain')) return 'domains';
+    if (normalized.includes('host')) return 'hosting';
+    if (normalized.includes('email')) return 'email';
+    if (normalized.includes('cloud')) return 'cloud';
+    if (normalized.includes('security')) return 'security';
+    return '';
+  };
+
   const allOptions: Record<string, { title: string; desc: string }[]> = {
     domains: [
       { title: "Domains", desc: "Start your story with the right domain." },
@@ -49,7 +61,11 @@ export default function UniversalLayout({ section }: UniversalLayoutProps) {
     ],
   };
 
-  const options = allOptions[active?.toLowerCase()] || [];
+  const sectionKey = getSectionKey(active);
+  const options =
+    sectionKey === 'all'
+      ? Object.values(allOptions).flat()
+      : allOptions[sectionKey] || [];
 
   return (
     <div className="flex flex-col lg:flex-row min-h-[50vh] bg-[#0c0c0e] text-gray-200 rounded-xl">
