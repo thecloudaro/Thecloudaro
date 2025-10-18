@@ -55,7 +55,7 @@ export default function Sidebar({ active, setActive }: SidebarProps) {
           whileHover={{ scale: 1.05 }}
           className="block w-full text-left text-gray-400 hover:text-white transition"
         >
-          Why Spaceship
+          Why Us
         </motion.button>
         <motion.button
           whileHover={{ scale: 1.05 }}

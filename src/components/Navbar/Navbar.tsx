@@ -38,8 +38,8 @@ const Navbar = () => {
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
       {/* 🔹 Top Banner */}
-      <div className="bg-[#001F3F] text-white text-center py-2 text-sm">
-        Create your site using AI, included with Spaceship Web Hosting →
+      <div className="bg-[#0b1b3d] text-white text-center py-2 text-xs sm:text-sm">
+        Create your site using AI, included with our Web Hosting →
       </div>
 
       {/* 🔹 Main Navbar */}
@@ -51,8 +51,8 @@ const Navbar = () => {
               <div className="w-4 h-4 bg-[#0a0e27] transform rotate-45"></div>
             </div>
             <Link href="/" className="text-white text-xl font-bold">
-  spaceship
-</Link>
+              Cloud Aro
+            </Link>
           </div>
 
           {/* 🔹 Desktop Menu */}
