@@ -19,7 +19,7 @@ const HeroSection = () => {
   const rawBaseShadow = useTransform(scrollY, [0, 100], [0, 0.25]);
   const baseShadow = useSpring(rawBaseShadow, { stiffness: 80, damping: 20 });
 
-  // Cinematic scroll transition overlay (like spaceship.com)
+  // Cinematic scroll transition overlay
   const rawTransitionShadow = useTransform(scrollY, [200, 700], [0, 1]);
   const transitionShadow = useSpring(rawTransitionShadow, { stiffness: 80, damping: 20 });
 
@@ -62,7 +62,7 @@ const HeroSection = () => {
           animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 50 }}
           transition={{ duration: 0.8, delay: 1 }}
         >
-          A domain odyssey
+          Launch your next idea
         </motion.h1>
 
         {/* Domain Search Section */}
@@ -129,7 +129,7 @@ const HeroSection = () => {
             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 30 }}
             transition={{ duration: 0.6, delay: 1.6 }}
           >
-            {[{ label: '.com only $8.88' }, { label: '.net only $11.20' }].map(
+            {[{ label: '.com from $8.88' }, { label: '.net from $11.20' }].map(
               (item, idx) => (
                 <div
                   key={idx}

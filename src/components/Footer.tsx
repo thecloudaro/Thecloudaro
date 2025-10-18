@@ -61,9 +61,9 @@ const Footer: React.FC = () => {
       <div className="border-b border-gray-700">
         <div className="container mx-auto max-w-screen-xl px-8 lg:px-10 py-12 md:py-16 flex flex-col md:flex-row items-center justify-center gap-6">
           <div className="text-center md:text-left max-w-lg">
-            <h1 className="text-white text-2xl font-bold mb-2">Join the Spaceship universe</h1>
+            <h1 className="text-white text-2xl font-bold mb-2">Join our universe</h1>
             <p className="text-gray-400 text-sm md:text-base">
-              Subscribe to keep up with everything happening on Spaceship, from deals and promotions to product launches.
+              Subscribe to keep up with everything happening here, from deals and promotions to product launches.
             </p>
           </div>
 
@@ -150,11 +150,11 @@ const Footer: React.FC = () => {
                 </div>
               ))}
             </div>
-            <p className="text-xs text-gray-400">We protect and save your data.</p>
+            <p className="text-xs text-gray-400">We protect and safeguard your data.</p>
           </div>
 
           <div className="text-gray-400 text-sm mt-4 lg:mt-0">
-            <p>© 2019–2025 Spaceship, Inc</p>
+            <p>© 2019–2025 Cloud Aro</p>
             <p className="mt-1">4600 East Washington Street, Suite 300, Phoenix, AZ 85034, USA</p>
           </div>
         </div>

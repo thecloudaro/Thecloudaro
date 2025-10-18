@@ -62,7 +62,7 @@ const NextSection1 = () => {
           New Section 1 Heading
         </h1>
         <p className="mt-2 sm:mt-4 text-sm sm:text-base md:text-xl">
-          This section fades in from the bottom like Spaceship.com’s smooth scroll transition.
+          This section fades in from the bottom with a smooth scroll transition.
         </p>
       </motion.div>
     </section>

@@ -11,7 +11,7 @@ const sectionsData = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#0a0e27]">
+    <div className="min-h-screen bg-background">
       <Navbar />
 
       {/* Hero Section */}
@@ -31,8 +31,7 @@ export default function Home() {
         ))}
       </section>
 
-      {/* Footer */}
-      {/* <Footer /> */}
+      {/* Footer rendered in root layout */}
     </div>
   );
 }

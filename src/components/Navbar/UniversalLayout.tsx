@@ -33,7 +33,7 @@ export default function UniversalLayout({ section }: UniversalLayoutProps) {
       { title: "Domains", desc: "Start your story with the right domain." },
       { title: "Domain Name Search", desc: "Search and find your ideal domain name." },
       { title: "Domain Pricing", desc: "Check the latest and best domain prices." },
-      { title: "Transfer Domains", desc: "Move your domains to Spaceship easily." },
+      { title: "Transfer Domains", desc: "Move your domains to us easily." },
     ],
     hosting: [
       { title: "Web Hosting", desc: "Fast and reliable web hosting for your site." },
