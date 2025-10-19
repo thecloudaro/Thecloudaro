@@ -1,117 +1,165 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Dropdown from '@/components/Navbar/DynamicDropdown';
-import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import UniversalDropdown from "@/components/Navbar/DynamicDropdown";
+import { Menu, X, Globe, ShoppingCart, User } from "lucide-react";
+import HeaderBanner from "@/components/HeaderBanner";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     setIsLoaded(true);
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50); // becomes dark after scrolling a bit
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleDropdown = (menu: string) => {
-    if (activeDropdown === menu) {
-      setActiveDropdown(null);
+  // Scroll lock when dropdown or mobile menu is open
+  useEffect(() => {
+    if (activeDropdown || isMenuOpen) {
+      document.body.style.overflow = "hidden";
     } else {
-      setActiveDropdown(menu);
+      document.body.style.overflow = "";
     }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeDropdown, isMenuOpen]);
+
+  const toggleDropdown = (menu: string) => {
+    setActiveDropdown(activeDropdown === menu ? null : menu);
   };
 
-  // Close dropdown when mobile menu closes
   useEffect(() => {
     if (!isMenuOpen) setActiveDropdown(null);
   }, [isMenuOpen]);
 
-  const menuItems = ['Domains', 'Hosting', 'Email', 'Cloud', 'Security', 'Explore All'];
+  const menuItems = ["Domains", "Hosting", "Email", "Cloud", "Security"];
 
   return (
     <motion.nav
-      className="bg-transparent fixed top-0 left-0 right-0 z-50"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        activeDropdown
+          ? "bg-slate-900/80 backdrop-blur-lg shadow-lg"
+          : isScrolled
+          ? "bg-slate-900/70 backdrop-blur-md"
+          : "bg-transparent backdrop-blur-none"
+      }`}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: isLoaded ? 0 : -100, opacity: isLoaded ? 1 : 0 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      {/* 🔹 Top Banner */}
-      <div className="bg-[#001F3F] text-white text-center py-2 text-sm">
-        Create your site using AI, included with Spaceship Web Hosting →
-      </div>
+      {/* Top Banner - Hide when dropdown is open */}
+      {!activeDropdown && <HeaderBanner />}
 
-      {/* 🔹 Main Navbar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* 🔹 Logo */}
-          <div className="flex items-center">
-            <div className="w-8 h-8 bg-white rounded-sm mr-2 flex items-center justify-center">
-              <div className="w-4 h-4 bg-[#0a0e27] transform rotate-45"></div>
+      <div
+        className={`transition-all duration-500 ${
+          activeDropdown
+            ? "bg-slate-900/80 backdrop-blur-lg"
+            : isScrolled
+            ? "bg-slate-900/70 backdrop-blur-md"
+            : "bg-transparent backdrop-blur-none"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-14 sm:h-16 md:h-18">
+            {/* Logo */}
+            <div className="flex items-center">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-sm mr-2 flex items-center justify-center">
+                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-blue-600 transform rotate-45"></div>
+              </div>
+              <Link href="/" className="text-white text-lg sm:text-xl font-bold">
+                spaceship
+              </Link>
             </div>
-            <Link href="/" className="text-white text-xl font-bold">
-  spaceship
-</Link>
-          </div>
 
-          {/* 🔹 Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-            {menuItems.map((item) => (
-              <Dropdown
-                key={item}
-                section={item}
-                activeDropdown={activeDropdown}
-                toggleDropdown={toggleDropdown}
-              />
-            ))}
-          </div>
-
-          {/* 🔹 Right Side Icons */}
-          <div className="hidden md:flex items-center space-x-2">
-            {['💱', '🛒', '👤'].map((icon, i) => (
-              <button
-                key={i}
-                className="text-white hover:text-[#60a5fa] p-2 hover:bg-gray-800 rounded-md"
-              >
-                {icon}
-              </button>
-            ))}
-          </div>
-
-          {/* 🔹 Mobile Menu Button */}
-          <div className="lg:hidden flex items-center">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-white p-2 rounded-md hover:bg-gray-800"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* 🔹 Mobile Dropdowns */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="lg:hidden bg-[#111] border-t border-gray-800 overflow-hidden"
-          >
-            <div className="flex flex-col px-4 py-4 space-y-2">
+            {/* Desktop Menu */}
+            <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
               {menuItems.map((item) => (
-                <Dropdown
+                <button
                   key={item}
-                  section={item}
-                  activeDropdown={activeDropdown}
-                  toggleDropdown={toggleDropdown}
-                />
+                  onClick={() => toggleDropdown(item)}
+                  className={`text-white hover:text-gray-400 font-medium py-2 px-4 rounded-full transition-colors ${
+                    activeDropdown === item ? "bg-gray-800/50" : "hover:bg-gray-800/50"
+                  }`}
+                >
+                  {item}
+                </button>
               ))}
             </div>
-          </motion.div>
+
+            {/* Right Icons */}
+            <div className="hidden sm:flex items-center space-x-1 sm:space-x-2">
+              {[Globe, ShoppingCart, User].map((Icon, i) => (
+                <button
+                  key={i}
+                  className="text-white hover:text-gray-400 p-1.5 sm:p-2 hover:bg-gray-800/50 rounded-full transition-colors"
+                >
+                  <Icon size={16} className="sm:w-5 sm:h-5" />
+                </button>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="lg:hidden flex items-center">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-white hover:text-gray-400 p-1.5 sm:p-2 rounded-full hover:bg-gray-800/50 transition-colors"
+              >
+                {isMenuOpen ? (
+                  <X size={20} className="sm:w-6 sm:h-6" />
+                ) : (
+                  <Menu size={20} className="sm:w-6 sm:h-6" />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Dropdowns */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="lg:hidden bg-transparent backdrop-blur-md overflow-hidden"
+            >
+              <div className="flex flex-col px-4 py-4 space-y-2">
+                {menuItems.map((item) => (
+                  <button
+                    key={item}
+                    onClick={() => toggleDropdown(item)}
+                    className={`text-white hover:text-gray-400 font-medium py-2 px-4 rounded-full transition-colors text-left ${
+                      activeDropdown === item
+                        ? "bg-gray-800/50"
+                        : "hover:bg-gray-800/50"
+                    }`}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Universal Dropdown */}
+      <AnimatePresence>
+        {activeDropdown && (
+          <UniversalDropdown activeMenu={activeDropdown.toLowerCase()} />
         )}
       </AnimatePresence>
     </motion.nav>
