@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar/Navbar';
-import HeroSection from '@/components/Hero/HeroSection';
-import DynamicSection from '@/components/Hero/DynamicSection';
+import HeroSection from '@/components/HomeSection/HeroSection';
+import DynamicSection from '@/components/HomeSection/DynamicSection';
+import BuildAround from '@/components/BuildAround/BuildAround';
 
 
 const sectionsData = [
@@ -30,6 +31,8 @@ export default function Home() {
           />
         ))}
       </section>
+
+      <BuildAround/>
 
       {/* Footer rendered in root layout */}
     </div>

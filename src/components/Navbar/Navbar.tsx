@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import UniversalDropdown from "@/components/Navbar/DynamicDropdown";
 import { Menu, X, Globe, ShoppingCart, User } from "lucide-react";
 import HeaderBanner from "@/components/HeaderBanner";
@@ -12,6 +13,7 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     setIsLoaded(true);
@@ -159,7 +161,7 @@ const Navbar = () => {
       {/* Universal Dropdown */}
       <AnimatePresence>
         {activeDropdown && (
-          <UniversalDropdown activeMenu={activeDropdown.toLowerCase()} />
+          <UniversalDropdown activeMenu={activeDropdown.toLowerCase()} currentPath={pathname || ''} />
         )}
       </AnimatePresence>
     </motion.nav>
