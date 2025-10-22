@@ -1,7 +1,7 @@
 import Navbar from '@/components/Navbar/Navbar';
 import HeroSection from '@/components/HomeSection/HeroSection';
 import DynamicSection from '@/components/HomeSection/DynamicSection';
-import BuildAround from '@/components/BuildAround/BuildAround';
+import BuildAround from '@/components/HomeSection/BuildAround/BuildAround';
 
 
 const sectionsData = [

@@ -46,7 +46,7 @@ const Navbar = () => {
     if (!isMenuOpen) setActiveDropdown(null);
   }, [isMenuOpen]);
 
-  const menuItems = ["Domains", "Hosting", "Email", "Cloud", "Security"];
+  const menuItems = ["Domains", "Hosting", "Email", "Cloud", "Security" , "Explore all"];
 
   return (
     <motion.nav
@@ -73,17 +73,18 @@ const Navbar = () => {
             : "bg-transparent backdrop-blur-none"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center h-14 sm:h-16 md:h-18">
-            {/* Logo */}
-            <div className="flex items-center">
-              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-sm mr-2 flex items-center justify-center">
-                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-blue-600 transform rotate-45"></div>
-              </div>
-              <Link href="/" className="text-white text-lg sm:text-xl font-bold">
-                spaceship
-              </Link>
-            </div>
+{/* Logo */}
+<div className="flex items-center -ml-14 sm:-ml-16">
+  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-sm mr-2 flex items-center justify-center">
+    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-blue-600 transform rotate-45"></div>
+  </div>
+  <Link href="/" className="text-white text-xl sm:text-2xl font-light font-nunito">
+    TheCloudaro
+  </Link>
+</div>
+
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
@@ -91,7 +92,7 @@ const Navbar = () => {
                 <button
                   key={item}
                   onClick={() => toggleDropdown(item)}
-                  className={`text-white hover:text-gray-400 font-medium py-2 px-4 rounded-full transition-colors ${
+                  className={`text-white hover:text-white font-medium py-2 px-2 rounded-full transition-colors ${
                     activeDropdown === item ? "bg-gray-800/50" : "hover:bg-gray-800/50"
                   }`}
                 >
@@ -105,7 +106,7 @@ const Navbar = () => {
               {[Globe, ShoppingCart, User].map((Icon, i) => (
                 <button
                   key={i}
-                  className="text-white hover:text-gray-400 p-1.5 sm:p-2 hover:bg-gray-800/50 rounded-full transition-colors"
+                  className="text-white hover:text-white p-1.5 sm:p-2 hover:bg-gray-800/50 rounded-full transition-colors"
                 >
                   <Icon size={16} className="sm:w-5 sm:h-5" />
                 </button>
@@ -161,7 +162,11 @@ const Navbar = () => {
       {/* Universal Dropdown */}
       <AnimatePresence>
         {activeDropdown && (
-          <UniversalDropdown activeMenu={activeDropdown.toLowerCase()} currentPath={pathname || ''} />
+          <UniversalDropdown 
+            activeMenu={activeDropdown.toLowerCase()} 
+            currentPath={pathname || ''} 
+            onClose={() => setActiveDropdown(null)}
+          />
         )}
       </AnimatePresence>
     </motion.nav>

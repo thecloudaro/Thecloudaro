@@ -11,7 +11,7 @@ interface SeePlanButtonProps {
 
 const SeePlanButton: React.FC<SeePlanButtonProps> = ({ href, onClick, className = '' }) => {
   const baseClasses = `
-    inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-full shadow-sm
+    inline-flex items-center justify-center px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm md:text-base font-semibold rounded-full shadow-sm
     bg-gray-700 text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700
     transition-transform duration-200 ease-in-out ${className}
   `
