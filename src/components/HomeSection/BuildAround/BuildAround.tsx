@@ -8,11 +8,11 @@ import { useState } from "react";
 const BuildAroundDomain = () => {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
-  const handleMouseEnter = (cardId: string) => {
-    setHoveredCard(cardId);
+  const handleMouseEnter = () => {
+    setHoveredCard('active');
   };
 
-  const handleMouseLeave = (cardId: string) => {
+  const handleMouseLeave = () => {
     setTimeout(() => {
       setHoveredCard(null);
     }, 2000); // 2 seconds delay before hiding
@@ -54,17 +54,18 @@ const BuildAroundDomain = () => {
             viewport={{ once: true }}
             whileHover={{ y: -8, scale: 1.02 }}
             className="group"
-            onMouseEnter={() => handleMouseEnter('web-hosting')}
-            onMouseLeave={() => handleMouseLeave('web-hosting')}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             <div className="bg-gray-800 rounded-2xl sm:rounded-3xl overflow-hidden h-auto lg:h-[460px] flex flex-col lg:flex-row gap-3 transition-all duration-500 ease-in-out touch-manipulation">
               {/* Left side - Abstract graphic */}
               <div className="w-full lg:w-1/2 lg:h-full min-h-36 sm:min-h-48 relative overflow-hidden bg-[#0d1b2a]">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <img 
+                  <Image 
                     src="/a.svg" 
                     alt="Graphic" 
-                    className="absolute inset-0 w-full h-full object-cover opacity-90" 
+                    fill
+                    className="object-cover opacity-90" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-[#0d1b2a]/40 via-[#1b263b]/40 to-[#415a77]/30" />
                 </div>
@@ -93,8 +94,8 @@ const BuildAroundDomain = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ 
-                    opacity: hoveredCard === 'web-hosting' ? 1 : 0,
-                    y: hoveredCard === 'web-hosting' ? 0 : 20
+                    opacity: hoveredCard ? 1 : 0,
+                    y: hoveredCard ? 0 : 20
                   }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
                   className="mt-2 hidden lg:block"
@@ -115,17 +116,18 @@ const BuildAroundDomain = () => {
               viewport={{ once: true }}
               whileHover={{ y: -8, scale: 1.02 }}
               className="group"
-              onMouseEnter={() => handleMouseEnter('easywp')}
-              onMouseLeave={() => handleMouseLeave('easywp')}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             >
               <div className="bg-gray-800 rounded-2xl sm:rounded-3xl overflow-hidden h-[400px] sm:h-[450px] md:h-[550px] lg:h-[650px] xl:h-[720px] flex flex-col transition-all duration-500 ease-in-out touch-manipulation">
                 {/* Top - 3D geometric shapes */}
                 <div className="h-1/3 sm:h-2/5 bg-gradient-to-r from-green-600 to-teal-500 relative overflow-hidden">
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <img 
+                    <Image 
                       src="/3d3.png" 
                       alt="The Cloudaro" 
-                      className="absolute inset-0 w-full h-full object-cover opacity-90" 
+                      fill
+                      className="object-cover opacity-90" 
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-green-600/40 to-teal-500/40" />
                   </div>
@@ -161,15 +163,16 @@ const BuildAroundDomain = () => {
               viewport={{ once: true }}
               whileHover={{ y: -8, scale: 1.02 }}
               className="group"
-              onMouseEnter={() => handleMouseEnter('starlight')}
-              onMouseLeave={() => handleMouseLeave('starlight')}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             >
               <div className="bg-gray-800 rounded-2xl sm:rounded-3xl overflow-hidden h-[400px] sm:h-[450px] md:h-[550px] lg:h-[650px] xl:h-[720px] flex flex-col transition-all duration-500 ease-in-out touch-manipulation">
                 <div className="h-1/3 sm:h-2/5 bg-orange-400 relative overflow-hidden flex items-center justify-center">
-                  <img 
+                  <Image 
                     src="/3d4.png" 
                     alt="Profile Fan" 
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                 </div>
                 
@@ -202,8 +205,8 @@ const BuildAroundDomain = () => {
             viewport={{ once: true }}
             whileHover={{ y: -8, scale: 1.02 }}
             className="group"
-            onMouseEnter={() => handleMouseEnter('spacemail')}
-            onMouseLeave={() => handleMouseLeave('spacemail')}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             <div className="bg-gray-800 rounded-2xl sm:rounded-3xl overflow-hidden h-auto lg:h-[500px] flex flex-col lg:flex-row gap-4 transition-all duration-500 ease-in-out touch-manipulation">
               {/* Left side - Content */}
@@ -225,8 +228,8 @@ const BuildAroundDomain = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ 
-                    opacity: hoveredCard === 'spacemail' ? 1 : 0,
-                    y: hoveredCard === 'spacemail' ? 0 : 20
+                    opacity: hoveredCard ? 1 : 0,
+                    y: hoveredCard ? 0 : 20
                   }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
                   className="mt-2 hidden lg:block"
@@ -237,10 +240,11 @@ const BuildAroundDomain = () => {
 
               {/* Right side - Image */}
               <div className="w-full lg:w-1/2 order-first lg:order-none lg:h-full min-h-40 sm:min-h-56 bg-gradient-to-br from-purple-500 to-purple-700 relative overflow-hidden">
-                <img
+                <Image
                   src="/3d5.jpeg"
                   alt="Email Service"
-                  className="absolute inset-0 w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/40 to-purple-700/40" />
               </div>

@@ -34,6 +34,18 @@ export default function Home() {
 
       <BuildAround/>
 
+      {/* Single Dynamic Section render */}
+<section>
+  <DynamicSection
+    heading="Security as Standard"
+    text="This page will be developed later,
+    once the pictures are available and animations are added."
+
+    bgImage="/BgPics/black.jpg"
+  />
+</section>
+
+
       {/* Footer rendered in root layout */}
     </div>
   );
