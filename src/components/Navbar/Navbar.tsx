@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import UniversalDropdown from "@/components/Navbar/DynamicDropdown";
-import { Menu, X, Globe, ShoppingCart, User } from "lucide-react";
 import HeaderBanner from "@/components/HeaderBanner";
+import Logo from "./Logo";
+import DesktopMenu from "./DesktopMenu";
+import MobileMenu from "./MobileMenu";
+import RightIcons from "./RightIcons";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,8 +21,9 @@ const Navbar = () => {
     setIsLoaded(true);
 
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50); // becomes dark after scrolling a bit
+      setIsScrolled(window.scrollY > 50);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -46,7 +49,7 @@ const Navbar = () => {
     if (!isMenuOpen) setActiveDropdown(null);
   }, [isMenuOpen]);
 
-  const menuItems = ["Domains", "Hosting", "Email", "Cloud", "Security" , "Explore all"];
+  const menuItems = ["Domains", "Hosting", "Email", "Cloud", "Security", "Explore all"];
 
   return (
     <motion.nav
@@ -54,7 +57,7 @@ const Navbar = () => {
         activeDropdown
           ? "bg-slate-900/80 backdrop-blur-lg shadow-lg"
           : isScrolled
-          ? "bg-slate-900/70 backdrop-blur-md"
+          ? "bg-slate-900/70 backdrop-blur-md shadow-sm"
           : "bg-transparent backdrop-blur-none"
       }`}
       initial={{ y: -100, opacity: 0 }}
@@ -73,98 +76,45 @@ const Navbar = () => {
             : "bg-transparent backdrop-blur-none"
         }`}
       >
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center h-14 sm:h-16 md:h-18">
-{/* Logo */}
-<div className="flex items-center -ml-14 sm:-ml-16">
-  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-sm mr-2 flex items-center justify-center">
-    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-blue-600 transform rotate-45"></div>
-  </div>
-  <Link href="/" className="text-white text-xl sm:text-2xl font-light font-nunito">
-    TheCloudaro
-  </Link>
-</div>
-
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-14 sm:h-16 md:h-20">
+            {/* Logo */}
+            <Logo />
 
             {/* Desktop Menu */}
-            <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-              {menuItems.map((item) => (
-                <button
-                  key={item}
-                  onClick={() => toggleDropdown(item)}
-                  className={`text-white hover:text-white font-medium py-2 px-2 rounded-full transition-colors ${
-                    activeDropdown === item ? "bg-gray-800/50" : "hover:bg-gray-800/50"
-                  }`}
-                >
-                  {item}
-                </button>
-              ))}
+            <div className="hidden md:flex items-center space-x-8">
+              <DesktopMenu
+                menuItems={menuItems}
+                activeDropdown={activeDropdown}
+                toggleDropdown={toggleDropdown}
+              />
             </div>
 
-            {/* Right Icons */}
-            <div className="hidden sm:flex items-center space-x-1 sm:space-x-2">
-              {[Globe, ShoppingCart, User].map((Icon, i) => (
-                <button
-                  key={i}
-                  className="text-white hover:text-white p-1.5 sm:p-2 hover:bg-gray-800/50 rounded-full transition-colors"
-                >
-                  <Icon size={16} className="sm:w-5 sm:h-5" />
-                </button>
-              ))}
+            {/* Right icons for desktop */}
+            <div className="hidden md:flex items-center">
+              <RightIcons />
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="lg:hidden flex items-center">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-white hover:text-gray-400 p-1.5 sm:p-2 rounded-full hover:bg-gray-800/50 transition-colors"
-              >
-                {isMenuOpen ? (
-                  <X size={20} className="sm:w-6 sm:h-6" />
-                ) : (
-                  <Menu size={20} className="sm:w-6 sm:h-6" />
-                )}
-              </button>
+            <div className="flex md:hidden items-center">
+              <MobileMenu
+                isMenuOpen={isMenuOpen}
+                setIsMenuOpen={setIsMenuOpen}
+                menuItems={menuItems}
+                activeDropdown={activeDropdown}
+                toggleDropdown={toggleDropdown}
+              />
             </div>
           </div>
         </div>
-
-        {/* Mobile Dropdowns */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="lg:hidden bg-transparent backdrop-blur-md overflow-hidden"
-            >
-              <div className="flex flex-col px-4 py-4 space-y-2">
-                {menuItems.map((item) => (
-                  <button
-                    key={item}
-                    onClick={() => toggleDropdown(item)}
-                    className={`text-white hover:text-gray-400 font-medium py-2 px-4 rounded-full transition-colors text-left ${
-                      activeDropdown === item
-                        ? "bg-gray-800/50"
-                        : "hover:bg-gray-800/50"
-                    }`}
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
 
       {/* Universal Dropdown */}
       <AnimatePresence>
         {activeDropdown && (
-          <UniversalDropdown 
-            activeMenu={activeDropdown.toLowerCase()} 
-            currentPath={pathname || ''} 
+          <UniversalDropdown
+            activeMenu={activeDropdown.toLowerCase()}
+            currentPath={pathname || ""}
             onClose={() => setActiveDropdown(null)}
           />
         )}

@@ -1,7 +1,9 @@
 import Navbar from '@/components/Navbar/Navbar';
-import HeroSection from '@/components/HomeSection/HeroSection';
-import DynamicSection from '@/components/HomeSection/DynamicSection';
+import HeroSection from '@/components/HomeSection/Hero/HeroSection';
+import DynamicSection from '@/components/HomeSection//DynamicSections/DynamicSections';
 import BuildAround from '@/components/HomeSection/BuildAround/BuildAround';
+import Customer from '@/components/HomeSection/Customers/Customers';
+import FAQ from '@/components/HomeSection/FAQ/FAQ';
 
 
 const sectionsData = [
@@ -31,9 +33,9 @@ export default function Home() {
           />
         ))}
       </section>
-
+      <div className="min-h-screen bg-black">
       <BuildAround/>
-
+      </div>
       {/* Single Dynamic Section render */}
 <section>
   <DynamicSection
@@ -44,6 +46,19 @@ export default function Home() {
     bgImage="/BgPics/black.jpg"
   />
 </section>
+
+<section>
+  <div className="min-h-screen bg-black">
+  <Customer/>
+  </div>
+</section>
+<div className="min-h-screen bg-black">
+<FAQ/>
+</div>
+<section>
+  
+</section>
+
 
 
       {/* Footer rendered in root layout */}
