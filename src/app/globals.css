@@ -95,6 +95,13 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
+  /* global.css */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
   }
 
   .dark {

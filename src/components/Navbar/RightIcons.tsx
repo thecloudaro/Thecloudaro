@@ -8,7 +8,7 @@ const RightIcons = () => {
       {[Globe, ShoppingCart, User].map((Icon, i) => (
         <button
           key={i}
-          className="text-white hover:text-white p-1.5 sm:p-2 hover:bg-gray-800/50 rounded-full transition-colors"
+          className="text-slate-200 hover:text-white font-medium transition-all hover:bg-gray-600/50 px-2 py-2 rounded-full"
         >
           <Icon size={16} className="sm:w-5 sm:h-5" />
         </button>

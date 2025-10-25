@@ -16,6 +16,7 @@ import {
   ChevronDown
 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
+import Logo from "./Logo";
 
 interface UniversalDropdownProps {
   activeMenu: string;
@@ -31,8 +32,7 @@ export default function UniversalDropdown({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [selectedMenu, setSelectedMenu] = useState(activeMenu || "domains");
   const [showMobileDetail, setShowMobileDetail] = useState(false);
-  const [languageOpen, setLanguageOpen] = useState(false);
-  const [currencyOpen, setCurrencyOpen] = useState(false);
+  
 
   // Update selectedMenu when activeMenu changes
   useEffect(() => {
@@ -143,217 +143,174 @@ export default function UniversalDropdown({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -20, scale: 0.98 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="fixed top-[72px] left-0 w-full h-[80vh] bg-slate-900 border-t border-slate-700 overflow-hidden z-40"
+      className="fixed top-[72px] left-0 w-full h-[75vh] bg-slate-900 border-t border-slate-700 overflow-hidden z-40"
       onClick={(e) => e.stopPropagation()}
     >
-      {/* Mobile View */}
-      <div className="md:hidden h-full overflow-y-auto">
-        <AnimatePresence mode="wait">
-          {!showMobileDetail ? (
-            <motion.div
-              key="menu-list"
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -20, opacity: 0 }}
-              className="p-4"
+{/* Mobile View */}
+<div className="md:hidden fixed top-0 left-0 right-0 h-screen overflow-y-auto z-50 bg-slate-900">
+  <AnimatePresence mode="wait">
+    {!showMobileDetail ? (
+      <motion.div
+        key="menu-list"
+        initial={{ x: -20, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: -20, opacity: 0 }}
+        className="px-4 pt-4 pb-4"
+      >
+        {/* Logo & Close/Back Button */}
+<div className="flex items-center justify-between mb-6 px-4">
+  <Logo showText={true} />
+
+  <button
+    onClick={onClose}
+    className="text-slate-300 hover:text-white transition-colors text-2xl font-bold"
+  >
+    ✕
+  </button>
+</div>
+
+
+        {/* Login Section */}
+        <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg p-4 mb-6 border border-blue-400/30">
+          <div className="flex items-start gap-3 mb-3">
+            <User className="text-blue-400 mt-1" size={20} />
+            <div>
+              <h3 className="text-white font-semibold text-sm">
+                Log in to TheCloudaro
+              </h3>
+              <p className="text-slate-400 text-xs mt-1">
+                Manage your products and Apps
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-xs">
+<span className="text-slate-400">Don&apos;t have an account?</span>
+            <a
+              href="/signup"
+              className="text-blue-400 font-medium hover:underline"
             >
-              {/* Login Section */}
-              <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg p-4 mb-6 border border-blue-400/30">
-                <div className="flex items-start gap-3 mb-3">
-                  <User className="text-blue-400 mt-1" size={20} />
-                  <div>
-                    <h3 className="text-white font-semibold text-sm">
-                      Log in to TheCloudaro
-                    </h3>
-                    <p className="text-slate-400 text-xs mt-1">
-                      Manage your products and Apps
-                    </p>
+              Sign up
+            </a>
+          </div>
+        </div>
+
+        {/* Sidebar Links (Domains, Hosting, etc.) */}
+        <div className="mb-6">
+          <SectionHeading title="ALL PRODUCTS" />
+          <ul className="space-y-2">
+            {menuItems.map((item, idx) => (
+              <li key={idx}>
+                <button
+                  onClick={() => handleMenuSelect(item.key)}
+                  className="w-full text-left flex items-center justify-between gap-3 px-3 py-3 rounded-md transition-all duration-300 text-slate-300 hover:text-white hover:bg-slate-800/60 hover:scale-105"
+                >
+                  <div className="flex items-center gap-3">
+                    {item.icon}
+                    <span className="font-medium">{item.label}</span>
                   </div>
-                </div>
-                <div className="flex items-center gap-2 text-xs">
-                  <span className="text-slate-400">Don't have an account?</span>
-                  <a
-                    href="/signup"
-                    className="text-blue-400 font-medium hover:underline"
-                  >
-                    Sign up
-                  </a>
-                </div>
-              </div>
+                  <ArrowRight size={16} />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-              {/* What's Hot */}
-              <div className="mb-6">
-                <SectionHeading title="WHAT'S HOT" />
-                <ul className="space-y-2">
-                  {hotItems.map((item, idx) => (
-                    <li key={idx}>
-                      <a
-                        href={item.href}
-                        className={`flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 ${
-                          isPathActive(item.href)
-                            ? "bg-gradient-to-r from-blue-500/30 to-purple-500/30 text-blue-200 border border-blue-400/60 shadow"
-                            : "text-slate-300 hover:text-white hover:bg-slate-800/60 hover:scale-105"
-                        }`}
-                      >
-                        {item.icon}
-                        <span className="text-sm font-medium">{item.label}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        {/* What's Hot */}
+        <div className="mb-6">
+          <SectionHeading title="WHAT'S HOT" />
+          <ul className="space-y-2">
+            {hotItems.map((item, idx) => (
+              <li key={idx}>
+                <a
+                  href={item.href}
+                  className="flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-slate-300 hover:text-white hover:bg-slate-800/60 hover:scale-105"
+                >
+                  {item.icon}
+                  <span className="text-sm font-medium">{item.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-              {/* All Products */}
-              <div className="mb-6">
-                <SectionHeading title="ALL PRODUCTS" />
-                <ul className="space-y-2">
-                  {menuItems.map((item, idx) => (
-                    <li key={idx}>
-                      <button
-                        onClick={() => handleMenuSelect(item.key)}
-                        className={`w-full text-left flex items-center justify-between gap-3 px-3 py-3 rounded-md transition-all duration-300 ${
-                          selectedMenu === item.key
-                            ? "bg-gradient-to-r from-blue-500/30 to-purple-500/30 text-blue-200 border border-blue-400/60 shadow"
-                            : "text-slate-300 hover:text-white hover:bg-slate-800/60 hover:scale-105"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          {item.icon}
-                          <span className="font-medium">{item.label}</span>
-                        </div>
-                        <ArrowRight size={16} />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        {/* TheCloudaro Universe */}
+        <div className="mb-6">
+          <SectionHeading title="THECLOUDARO UNIVERSE" />
+          <ul className="space-y-2">
+            {universeItems.map((item, idx) => (
+              <li key={idx}>
+                <a
+                  href={item.href}
+                  className="flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-slate-300 hover:text-white hover:bg-slate-800/60 hover:scale-105"
+                >
+                  {item.icon}
+                  <span className="text-sm font-medium">{item.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-              {/* TheCloudaro Universe */}
-              <div className="mb-6">
-                <SectionHeading title="THECLOUDARO UNIVERSE" />
-                <ul className="space-y-2">
-                  {universeItems.map((item, idx) => (
-                    <li key={idx}>
-                      <a
-                        href={item.href}
-                        className={`flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 ${
-                          isPathActive(item.href)
-                            ? "bg-gradient-to-r from-blue-500/30 to-purple-500/30 text-blue-200 border border-blue-400/60 shadow"
-                            : "text-slate-300 hover:text-white hover:bg-slate-800/60 hover:scale-105"
-                        }`}
-                      >
-                        {item.icon}
-                        <span className="text-sm font-medium">{item.label}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        {/* Language & Currency - static text only */}
+        <div className="mb-6 space-y-2">
+          <div className="flex items-center justify-between px-3 py-2 rounded-md bg-slate-800/60 text-slate-300">
+            <span className="text-sm font-medium">English-US</span>
+            <ChevronDown size={16} />
+          </div>
+          <div className="flex items-center justify-between px-3 py-2 rounded-md bg-slate-800/60 text-slate-300">
+            <span className="text-sm font-medium">US Dollar $</span>
+            <ChevronDown size={16} />
+          </div>
+        </div>
+      </motion.div>
+    ) : (
+      <motion.div
+        key="detail-view"
+        initial={{ x: 20, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: 20, opacity: 0 }}
+        className="px-4 pt-4 pb-4"
+      >
+        {/* Back Button */}
+        <div
+          className="flex items-center gap-2 text-slate-300 mb-6 cursor-pointer"
+          onClick={handleBackToMenu}
+        >
+          <ChevronLeft size={20} className="text-white" />
+          <span className="font-medium">Back</span>
+        </div>
 
-              {/* Language & Currency */}
-              <div className="mb-6">
-                {/* Language */}
-                <div className="mb-3">
-                  <button
-                    onClick={() => setLanguageOpen(!languageOpen)}
-                    className="w-full flex items-center justify-between px-3 py-2 rounded-md bg-slate-800/60 text-slate-300 hover:text-white transition-all duration-300"
-                  >
-                    <span className="text-sm font-medium">English-US</span>
-                    <ChevronDown
-                      size={16}
-                      className={`transition-transform ${languageOpen ? "rotate-180" : ""}`}
-                    />
-                  </button>
-                  {languageOpen && (
-                    <div className="mt-1 ml-4 space-y-1">
-                      <button className="w-full text-left px-3 py-1 text-sm text-slate-300 hover:text-white hover:bg-slate-700/60 rounded-md transition-colors">
-                        English-UK
-                      </button>
-                      <button className="w-full text-left px-3 py-1 text-sm text-slate-300 hover:text-white hover:bg-slate-700/60 rounded-md transition-colors">
-                        Spanish
-                      </button>
-                      <button className="w-full text-left px-3 py-1 text-sm text-slate-300 hover:text-white hover:bg-slate-700/60 rounded-md transition-colors">
-                        French
-                      </button>
-                    </div>
-                  )}
-                </div>
+        {/* Category Header */}
+        <div className="flex items-center gap-3 mb-6">
+          {getMenuIcon(selectedMenu)}
+          <h2 className="text-white text-xl font-bold">{currentMenu.title}</h2>
+        </div>
 
-                {/* Currency */}
-                <div>
-                  <button
-                    onClick={() => setCurrencyOpen(!currencyOpen)}
-                    className="w-full flex items-center justify-between px-3 py-2 rounded-md bg-slate-800/60 text-slate-300 hover:text-white transition-all duration-300"
-                  >
-                    <span className="text-sm font-medium">US Dollar $</span>
-                    <ChevronDown
-                      size={16}
-                      className={`transition-transform ${currencyOpen ? "rotate-180" : ""}`}
-                    />
-                  </button>
-                  {currencyOpen && (
-                    <div className="mt-1 ml-4 space-y-1">
-                      <button className="w-full text-left px-3 py-1 text-sm text-slate-300 hover:text-white hover:bg-slate-700/60 rounded-md transition-colors">
-                        Euro €
-                      </button>
-                      <button className="w-full text-left px-3 py-1 text-sm text-slate-300 hover:text-white hover:bg-slate-700/60 rounded-md transition-colors">
-                        GBP £
-                      </button>
-                      <button className="w-full text-left px-3 py-1 text-sm text-slate-300 hover:text-white hover:bg-slate-700/60 rounded-md transition-colors">
-                        INR ₹
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="detail-view"
-              initial={{ x: 20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 20, opacity: 0 }}
-              className="p-4"
+        {/* Items List */}
+        <div className="space-y-3">
+          {currentMenu.sections.map((item, idx) => (
+            <div
+              key={idx}
+              className="group hover:bg-slate-800/40 p-4 rounded-lg transition-all cursor-pointer border border-slate-600/50"
             >
-              {/* Back Button */}
-              <button
-                onClick={handleBackToMenu}
-                className="flex items-center gap-2 text-slate-300 hover:text-white mb-6 transition-colors"
-              >
-                <ChevronLeft size={20} />
-                <span className="font-medium">Back</span>
-              </button>
+              <h3 className="text-white font-semibold text-base group-hover:text-blue-400 mb-1">
+                {item.title}
+              </h3>
+              <p className="text-slate-400 text-sm">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+</div>
 
-              {/* Category Header */}
-              <div className="flex items-center gap-3 mb-6">
-                {getMenuIcon(selectedMenu)}
-                <h2 className="text-white text-xl font-bold">{currentMenu.title}</h2>
-              </div>
-
-              {/* Items List */}
-              <div className="space-y-3">
-                {currentMenu.sections.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="group hover:bg-slate-800/40 p-4 rounded-lg transition-all cursor-pointer border border-slate-600/50"
-                  >
-                    <h3 className="text-white font-semibold text-base group-hover:text-blue-400 mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="text-slate-400 text-sm">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
 
       {/* Desktop View */}
       <div className="hidden md:flex h-full max-h-[80vh]">
         {/* Sidebar */}
         <div className="bg-slate-800 border-r border-slate-700 p-6 w-[18rem] flex flex-col">
-          <div className="flex-1">
+          <div className="flex-1 ml-[40px]">
             {/* What's Hot */}
             <div className="mb-8">
               <SectionHeading title="WHAT'S HOT" />
