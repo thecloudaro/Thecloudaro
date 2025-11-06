@@ -31,7 +31,7 @@ const WebHostingCard = () => {
     >
       <div className="bg-gray-800 rounded-2xl sm:rounded-3xl overflow-hidden h-auto lg:h-[460px] flex flex-col lg:flex-row gap-3 transition-all duration-500 ease-in-out touch-manipulation">
         {/* Left side - Abstract graphic */}
-        <div className="w-full lg:w-1/2 lg:h-full min-h-36 sm:min-h-48 relative overflow-hidden bg-[#0d1b2a]">
+        <div className="w-full lg:w-1/2 lg:h-full min-h-36 sm:min-h-48 relative overflow-hidden bg-webhosting-card-bg">
           <div className="absolute inset-0 flex items-center justify-center">
             <Image 
               src="/a.svg" 

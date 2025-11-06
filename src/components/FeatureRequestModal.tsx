@@ -1,5 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { useState, FormEvent } from "react";
 
 interface FeatureRequestModalProps {
@@ -37,12 +38,12 @@ export default function FeatureRequestModal({
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="relative w-full max-w-lg bg-[#0b0b0f] text-white rounded-2xl shadow-2xl border border-gray-800 p-6 sm:p-7"
+            className="relative w-full max-w-lg bg-modal-bg text-modal-text rounded-2xl shadow-2xl border border-modal-border p-6 sm:p-7"
           >
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 text-gray-400 hover:text-white text-lg"
+              className="absolute right-4 top-4 text-modal-text-muted hover:text-modal-text text-lg"
             >
               ✕
             </button>
@@ -74,14 +75,14 @@ export default function FeatureRequestModal({
   <h2 className="text-xl sm:text-2xl font-semibold">
     Request a New Feature
   </h2>
-  <p className="text-gray-400 text-sm mt-1">
+  <p className="text-modal-text-muted text-sm mt-1">
     We love to know what you like to see next.
   </p>
-  <p className="text-gray-500 text-xs mt-1">
+  <p className="text-modal-text-secondary text-xs mt-1">
     Need help instead?{" "}
-    <a href="#" className="text-blue-400 hover:underline">
+    <Link href="#" className="text-blue-400 hover:underline">
       Contact Support
-    </a>
+    </Link>
   </p>
 </div>
 

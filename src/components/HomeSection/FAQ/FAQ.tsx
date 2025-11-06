@@ -1,5 +1,6 @@
 "use client"
 import { motion } from "framer-motion";
+import Link from "next/link";
 import QuestionAnswer from "./QandA";
 import Heading from "../BuildAround/Heading";
 
@@ -101,12 +102,12 @@ const FAQ = () => {
         >
           <p className="text-[hsl(var(--faq-text-muted))] text-base md:text-lg">
             Still have questions?{" "}
-            <a
+            <Link
               href="#contact"
               className="text-[hsl(var(--faq-text))] hover:underline font-semibold transition-all duration-300"
             >
               Contact our support team
-            </a>
+            </Link>
           </p>
         </motion.div>
       </div>

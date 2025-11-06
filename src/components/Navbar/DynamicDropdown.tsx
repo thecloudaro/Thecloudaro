@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import {
   Globe,
   Server,
@@ -22,21 +23,53 @@ interface UniversalDropdownProps {
   activeMenu: string;
   currentPath?: string;
   onClose?: () => void;
+  onMenuSelect?: (menuKey: string) => void;
 }
 
 export default function UniversalDropdown({
   activeMenu,
   currentPath,
-  onClose
+  onClose,
+  onMenuSelect
 }: UniversalDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [selectedMenu, setSelectedMenu] = useState(activeMenu || "domains");
+  
+  // Map navbar menu names to dropdown keys
+  const mapMenuToKey = (menu: string | null): string => {
+    if (!menu) return "domains";
+    const menuLower = menu.toLowerCase().trim();
+    const menuMap: Record<string, string> = {
+      "domains": "domains",
+      "hosting": "hosting",
+      "email": "email",
+      "cloud": "cloud",
+      "security": "security",
+      "explore all": "domains"
+    };
+    return menuMap[menuLower] || "domains";
+  };
+
+  // Map dropdown keys back to navbar menu names
+  const mapKeyToMenu = (key: string): string => {
+    const keyMap: Record<string, string> = {
+      "domains": "Domains",
+      "hosting": "Hosting",
+      "email": "Email",
+      "cloud": "Cloud",
+      "security": "Security"
+    };
+    return keyMap[key] || "Domains";
+  };
+
+  const initialMenuKey = mapMenuToKey(activeMenu);
+  const [selectedMenu, setSelectedMenu] = useState(initialMenuKey);
   const [showMobileDetail, setShowMobileDetail] = useState(false);
   
 
   // Update selectedMenu when activeMenu changes
   useEffect(() => {
-    setSelectedMenu(activeMenu || "domains");
+    const menuKey = mapMenuToKey(activeMenu);
+    setSelectedMenu(menuKey);
   }, [activeMenu]);
 
   // Close dropdown when clicking outside
@@ -50,23 +83,29 @@ export default function UniversalDropdown({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
+  // Types
+  type MenuSection = { title: string; desc: string; href?: string };
+  type MenuCategory = { title: string; sections: MenuSection[] };
+
   // Menu data
-  const menuData = {
+  const menuData: Record<string, MenuCategory> = {
     domains: {
       title: "Domains",
       sections: [
-        { title: "Domain Name Search", desc: "Find the perfect domain name." },
-        { title: "Domain Pricing", desc: "Check the latest domain prices." },
-        { title: "Transfer Domains", desc: "Move your domains easily." }
+        { title: "Domains", desc: "Start your story with the right domain name.", href: "/domain" },
+        { title: "Domain Name Search", desc: "Find the perfect domain name.", href: "/domain-search" },
+        { title: "Domain Pricing", desc: "Check the latest domain prices.", href: "/domain" },
+        { title: "Transfer Domains", desc: "Move your domains easily.", href: "/domain/transfer" }
       ]
     },
     hosting: {
       title: "Hosting",
       sections: [
-        { title: "Web Hosting", desc: "Fast and reliable hosting for any site." },
+        { title: "Web Hosting", desc: "Fast and reliable hosting for any site.", href: "/web-hosting" },
         { title: "WordPress Hosting", desc: "Optimized hosting for WP sites." },
         { title: "Business Hosting", desc: "Powerful hosting for growing teams." },
-        { title: "Ecommerce Hosting", desc: "Secure hosting for online stores." }
+        { title: "Ecommerce Hosting", desc: "Secure hosting for online stores." },
+        { title: "Transfer Hosting", desc: "Make your move to better hosting." }
       ]
     },
     email: {
@@ -87,6 +126,7 @@ export default function UniversalDropdown({
     security: {
       title: "Security",
       sections: [
+        { title: "Security", desc: "See how Thecloudaro keeps you secure." },
         { title: "Domain Privacy", desc: "Keep your domain info private." },
         { title: "CDN", desc: "Speed up your site worldwide." },
         { title: "VPN", desc: "Secure your online presence." }
@@ -94,13 +134,14 @@ export default function UniversalDropdown({
     }
   };
 
-  const currentMenu = menuData[selectedMenu as keyof typeof menuData] || menuData.domains;
+  const currentMenu: MenuCategory = menuData[selectedMenu as keyof typeof menuData] || menuData.domains;
 
   const isPathActive = (path: string) => currentPath?.startsWith(path);
 
   const handleMenuSelect = (key: string) => {
     setSelectedMenu(key);
     setShowMobileDetail(true);
+    onMenuSelect?.(key);
   };
 
   const handleBackToMenu = () => setShowMobileDetail(false);
@@ -115,7 +156,7 @@ export default function UniversalDropdown({
 
   const hotItems = [
     { href: "/domain-search", icon: <Globe size={14} />, label: "Domain Name Search" },
-    { href: "/transfer-domains", icon: <Mail size={14} />, label: "Transfer Domains" },
+    { href: "/domain/transfer", icon: <Mail size={14} />, label: "Transfer Domains" },
     { href: "/web-hosting", icon: <Cloud size={14} />, label: "Web Hosting" }
   ];
 
@@ -143,11 +184,12 @@ export default function UniversalDropdown({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -20, scale: 0.98 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="fixed top-[72px] left-0 w-full h-[75vh] bg-slate-900 border-t border-slate-700 overflow-hidden z-40"
+      className="z-40 border-t border-dropdown-border overflow-hidden bg-dropdown-bg-primary md:absolute md:top-full md:left-0 md:w-full md:h-[75vh] fixed inset-0 md:inset-auto"
+      style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}
       onClick={(e) => e.stopPropagation()}
     >
 {/* Mobile View */}
-<div className="md:hidden fixed top-0 left-0 right-0 h-screen overflow-y-auto z-50 bg-slate-900">
+<div className="md:hidden fixed top-0 left-0 right-0 h-screen overflow-y-auto z-50 bg-dropdown-bg-primary" style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}>
   <AnimatePresence mode="wait">
     {!showMobileDetail ? (
       <motion.div
@@ -163,7 +205,7 @@ export default function UniversalDropdown({
 
   <button
     onClick={onClose}
-    className="text-slate-300 hover:text-white transition-colors text-2xl font-bold"
+    className="text-dropdown-text-secondary hover:text-dropdown-text-primary transition-colors text-2xl font-bold"
   >
     ✕
   </button>
@@ -178,19 +220,19 @@ export default function UniversalDropdown({
               <h3 className="text-white font-semibold text-sm">
                 Log in to TheCloudaro
               </h3>
-              <p className="text-slate-400 text-xs mt-1">
+              <p className="text-dropdown-text-muted text-xs mt-1">
                 Manage your products and Apps
               </p>
             </div>
           </div>
           <div className="flex items-center gap-2 text-xs">
-<span className="text-slate-400">Don&apos;t have an account?</span>
-            <a
+<span className="text-dropdown-text-muted">Don&apos;t have an account?</span>
+            <Link
               href="/signup"
               className="text-blue-400 font-medium hover:underline"
             >
               Sign up
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -201,8 +243,13 @@ export default function UniversalDropdown({
             {menuItems.map((item, idx) => (
               <li key={idx}>
                 <button
-                  onClick={() => handleMenuSelect(item.key)}
-                  className="w-full text-left flex items-center justify-between gap-3 px-3 py-3 rounded-md transition-all duration-300 text-slate-300 hover:text-white hover:bg-slate-800/60 hover:scale-105"
+                  onClick={() => {
+                    handleMenuSelect(item.key);
+                    // Map key back to navbar menu name and notify parent
+                    const navbarMenuName = mapKeyToMenu(item.key);
+                    onMenuSelect?.(navbarMenuName);
+                  }}
+                  className="w-full text-left flex items-center justify-between gap-3 px-3 py-3 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:bg-gray-700/50 hover:scale-105"
                 >
                   <div className="flex items-center gap-3">
                     {item.icon}
@@ -221,13 +268,13 @@ export default function UniversalDropdown({
           <ul className="space-y-2">
             {hotItems.map((item, idx) => (
               <li key={idx}>
-                <a
+                <Link
                   href={item.href}
-                  className="flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-slate-300 hover:text-white hover:bg-slate-800/60 hover:scale-105"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:bg-gray-700/50 hover:scale-105"
                 >
                   {item.icon}
                   <span className="text-sm font-medium">{item.label}</span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -239,13 +286,13 @@ export default function UniversalDropdown({
           <ul className="space-y-2">
             {universeItems.map((item, idx) => (
               <li key={idx}>
-                <a
+                <Link
                   href={item.href}
-                  className="flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-slate-300 hover:text-white hover:bg-slate-800/60 hover:scale-105"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:bg-gray-700/50 hover:scale-105"
                 >
                   {item.icon}
                   <span className="text-sm font-medium">{item.label}</span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -253,11 +300,11 @@ export default function UniversalDropdown({
 
         {/* Language & Currency - static text only */}
         <div className="mb-6 space-y-2">
-          <div className="flex items-center justify-between px-3 py-2 rounded-md bg-slate-800/60 text-slate-300">
+          <div className="flex items-center justify-between px-3 py-2 rounded-md bg-dropdown-bg-secondary text-dropdown-text-secondary">
             <span className="text-sm font-medium">English-US</span>
             <ChevronDown size={16} />
           </div>
-          <div className="flex items-center justify-between px-3 py-2 rounded-md bg-slate-800/60 text-slate-300">
+          <div className="flex items-center justify-between px-3 py-2 rounded-md bg-dropdown-bg-secondary text-dropdown-text-secondary">
             <span className="text-sm font-medium">US Dollar $</span>
             <ChevronDown size={16} />
           </div>
@@ -273,7 +320,7 @@ export default function UniversalDropdown({
       >
         {/* Back Button */}
         <div
-          className="flex items-center gap-2 text-slate-300 mb-6 cursor-pointer"
+          className="flex items-center gap-2 text-dropdown-text-secondary mb-6 cursor-pointer"
           onClick={handleBackToMenu}
         >
           <ChevronLeft size={20} className="text-white" />
@@ -289,15 +336,16 @@ export default function UniversalDropdown({
         {/* Items List */}
         <div className="space-y-3">
           {currentMenu.sections.map((item, idx) => (
-            <div
+            <Link
               key={idx}
-              className="group hover:bg-slate-800/40 p-4 rounded-lg transition-all cursor-pointer border border-slate-600/50"
+              href={item.href || "#"}
+              className="group hover:bg-gray-700/50 p-4 rounded-lg transition-all cursor-pointer border border-dropdown-border block"
             >
-              <h3 className="text-white font-semibold text-base group-hover:text-blue-400 mb-1">
+              <h3 className="text-white font-semibold text-base mb-1">
                 {item.title}
               </h3>
-              <p className="text-slate-400 text-sm">{item.desc}</p>
-            </div>
+              <p className="text-dropdown-text-muted text-sm">{item.desc}</p>
+            </Link>
           ))}
         </div>
       </motion.div>
@@ -309,42 +357,47 @@ export default function UniversalDropdown({
       {/* Desktop View */}
       <div className="hidden md:flex h-full max-h-[80vh]">
         {/* Sidebar */}
-        <div className="bg-slate-800 border-r border-slate-700 p-6 w-[18rem] flex flex-col">
+        <div className="bg-dropdown-bg-secondary border-r border-dropdown-border p-6 w-[18rem] flex flex-col" style={{ backgroundColor: 'hsl(210, 20%, 8%)' }}>
           <div className="flex-1 ml-[40px]">
             {/* What's Hot */}
-            <div className="mb-8">
+            <div className="mb-4">
               <SectionHeading title="WHAT'S HOT" />
               <ul className="space-y-1">
                 {hotItems.map((item, idx) => (
                   <li key={idx}>
-                    <a
+                    <Link
                       href={item.href}
                       className={`flex items-center gap-2 px-0 py-1.5 rounded-md transition-all duration-300 text-sm ${
                         isPathActive(item.href)
-                          ? "bg-gradient-to-r from-blue-500/30 to-purple-500/30 text-blue-200 border border-blue-400/60 shadow"
-                          : "text-slate-300 hover:text-white hover:bg-slate-800/60 hover:scale-105"
+                          ? "bg-dropdown-active-bg text-dropdown-active-text border border-dropdown-active-border shadow"
+                          : "text-dropdown-text-secondary hover:text-white hover:bg-gray-700/50 hover:scale-105"
                       }`}
                     >
                       {item.icon}
                       <span className="font-medium">{item.label}</span>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
             {/* All Products */}
-            <div className="mb-8">
+            <div className="mb-4">
               <SectionHeading title="ALL PRODUCTS" />
               <ul className="space-y-1">
                 {menuItems.map((item, idx) => (
                   <li key={idx}>
                     <button
-                      onClick={() => setSelectedMenu(item.key)}
+                      onClick={() => {
+                        setSelectedMenu(item.key);
+                        // Map key back to navbar menu name and notify parent
+                        const navbarMenuName = mapKeyToMenu(item.key);
+                        onMenuSelect?.(navbarMenuName);
+                      }}
                       className={`w-full text-left flex items-center gap-2 px-0 py-1.5 rounded-md transition-all duration-300 text-sm ${
                         selectedMenu === item.key
                           ? "bg-gradient-to-r from-blue-500/30 to-purple-500/30 text-blue-200 border border-blue-400/60 shadow"
-                          : "text-slate-300 hover:text-white hover:bg-slate-800/60 hover:scale-105"
+                          : "text-slate-300 hover:text-white hover:bg-gray-700/50 hover:scale-105"
                       }`}
                     >
                       {item.icon}
@@ -356,22 +409,22 @@ export default function UniversalDropdown({
             </div>
 
             {/* TheCloudaro Universe */}
-            <div>
+            <div className="mb-4">
               <SectionHeading title="THECLOUDARO UNIVERSE" />
               <ul className="space-y-1">
                 {universeItems.map((item, idx) => (
                   <li key={idx}>
-                    <a
+                    <Link
                       href={item.href}
                       className={`flex items-center gap-2 px-0 py-1.5 rounded-md transition-all duration-300 text-sm ${
                         isPathActive(item.href)
-                          ? "bg-gradient-to-r from-blue-500/30 to-purple-500/30 text-blue-200 border border-blue-400/60 shadow"
-                          : "text-slate-300 hover:text-white hover:bg-slate-800/60 hover:scale-105"
+                          ? "bg-dropdown-active-bg text-dropdown-active-text border border-dropdown-active-border shadow"
+                          : "text-dropdown-text-secondary hover:text-white hover:bg-gray-700/50 hover:scale-105"
                       }`}
                     >
                       {item.icon}
                       <span className="font-medium">{item.label}</span>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -380,20 +433,21 @@ export default function UniversalDropdown({
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-6 bg-slate-900 relative overflow-y-auto max-h-[80vh]">
+        <div className="flex-1 p-6 bg-dropdown-bg-primary relative overflow-y-auto max-h-[80vh]">
           <SectionHeading title={currentMenu.title} showLine lineWidth="700px" />
 
           <div className="grid grid-cols-2 gap-4 mt-4 w-full sm:w-[80%] lg:w-[70%] xl:w-[60%]">
             {currentMenu.sections.map((item, idx) => (
-              <div
+              <Link
                 key={idx}
-                className="group hover:bg-slate-800/40 p-3 rounded-lg transition-all cursor-pointer"
+                href={item.href || "#"}
+                className="group hover:bg-gray-700/50 p-3 rounded-lg transition-all cursor-pointer block"
               >
-                <h3 className="text-white font-semibold text-sm group-hover:text-blue-400">
+                <h3 className="text-white font-semibold text-sm group-hover:text-white">
                   {item.title}
                 </h3>
-                <p className="text-slate-400 text-xs mt-1 leading-relaxed">{item.desc}</p>
-              </div>
+                <p className="text-dropdown-text-muted text-xs mt-1 leading-relaxed group-hover:text-white">{item.desc}</p>
+              </Link>
             ))}
           </div>
 

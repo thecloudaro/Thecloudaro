@@ -48,7 +48,7 @@ export default function Customer() {
     });
 
   return (
-    <section className="bg-black text-white py-24 sm:py-32 md:py-40 lg:py-52 px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden">
+    <section className="bg-customer-bg text-customer-text py-24 sm:py-32 md:py-40 lg:py-52 px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden">
       <div className="max-w-[1400px] mx-auto flex flex-col space-y-28 sm:space-y-32 md:space-y-40">
         {/* Header */}
         <motion.div
@@ -116,14 +116,14 @@ export default function Customer() {
   whileInView={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.6 }}
   viewport={{ once: true }}
-  className="flex items-center justify-center gap-2 sm:gap-3 bg-white py-3 sm:py-4 px-4 sm:px-6 w-auto max-w-[200px] sm:max-w-[240px] h-14 sm:h-18 mx-auto"
+  className="flex items-center justify-center gap-2 sm:gap-3 bg-customer-trustpilot-bg py-3 sm:py-4 px-4 sm:px-6 w-auto max-w-[200px] sm:max-w-[240px] h-14 sm:h-18 mx-auto"
 >
-  <p className="text-black text-md sm:text-lg font-medium whitespace-nowrap">Review us</p>
+  <p className="text-customer-trustpilot-text text-md sm:text-lg font-medium whitespace-nowrap">Review us</p>
   <div className="flex">
     {[...Array(5)].map((_, i) => (
       <svg 
         key={i} 
-        className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 fill-current" 
+        className="w-5 h-5 sm:w-6 sm:h-6 text-customer-trustpilot-star fill-current" 
         viewBox="0 0 24 24"
       >
         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>

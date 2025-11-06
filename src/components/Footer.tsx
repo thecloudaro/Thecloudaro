@@ -56,13 +56,13 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-bgPrimary text-textSecondary">
+    <footer className="bg-footer-bg-primary text-footer-text-secondary">
       {/* Newsletter */}
-      <div className="border-b border-borderColor">
+      <div className="border-b border-footer-border">
         <div className="container mx-auto max-w-screen-xl px-8 lg:px-10 py-12 md:py-16 flex flex-col md:flex-row items-center justify-center gap-6">
           <div className="text-center md:text-left max-w-lg">
-            <h1 className="text-textPrimary text-2xl font-bold mb-2">Join our universe</h1>
-            <p className="text-textMuted text-sm md:text-base">
+            <h1 className="text-footer-text-primary text-2xl font-bold mb-2">Join our universe</h1>
+            <p className="text-footer-text-muted text-sm md:text-base">
               Subscribe to keep up with everything happening on Spaceship, from deals and promotions to product launches.
             </p>
           </div>
@@ -71,7 +71,7 @@ const Footer: React.FC = () => {
             <Input
               type="email"
               placeholder="Enter your email here"
-              className="bg-bgSecondary text-textPrimary placeholder-textMuted pr-12 h-12 rounded-full border border-borderColor"
+              className="bg-footer-bg-secondary text-footer-text-primary placeholder-footer-text-muted pr-12 h-12 rounded-full border border-footer-border"
             />
             <Button
               size="icon"
@@ -89,11 +89,11 @@ const Footer: React.FC = () => {
         <div>
           {footerSections[0].subSections?.map((sub) => (
             <div key={sub.heading} className="mb-6">
-              <h4 className="text-textPrimary font-semibold text-lg mb-3">{sub.heading}</h4>
+              <h4 className="text-footer-text-primary font-semibold text-lg mb-3">{sub.heading}</h4>
               <ul className="space-y-2">
                 {sub.links.map((link) => (
                   <li key={link}>
-                    <Link href="#" className="hover:text-primary transition-colors text-sm">
+                    <Link href="#" className="hover:text-footer-accent transition-colors text-sm">
                       {link}
                     </Link>
                   </li>
@@ -106,11 +106,11 @@ const Footer: React.FC = () => {
         {/* REMAINING COLUMNS */}
         {footerSections.slice(1).map((section) => (
           <div key={section.title}>
-            <h4 className="text-textPrimary font-semibold text-lg mb-4">{section.title}</h4>
+            <h4 className="text-footer-text-primary font-semibold text-lg mb-4">{section.title}</h4>
             <ul className="space-y-2">
               {section.links?.map((link) => (
                 <li key={link}>
-                  <Link href="#" className="hover:text-primary transition-colors text-sm">
+                  <Link href="#" className="hover:text-footer-accent transition-colors text-sm">
                     {link}
                   </Link>
                 </li>
@@ -118,7 +118,7 @@ const Footer: React.FC = () => {
             </ul>
 
             {section.hasButton && (
-              <Button className="mt-4 border border-borderColor text-textSecondary hover:bg-bgSecondary hover:text-primary">
+              <Button className="mt-4 border border-footer-border text-footer-text-secondary hover:bg-footer-bg-secondary hover:text-footer-accent">
                 Request New Feature
               </Button>
             )}
@@ -127,10 +127,10 @@ const Footer: React.FC = () => {
 
         {/* FOLLOW US */}
         <div>
-          <h4 className="text-textPrimary font-semibold text-lg mb-4">Follow Us</h4>
+          <h4 className="text-footer-text-primary font-semibold text-lg mb-4">Follow Us</h4>
           <div className="flex gap-4">
             {socialIcons.map((icon) => (
-              <Link key={icon.name} href="#" className="w-10 h-10 rounded-full bg-bgSecondary flex items-center justify-center hover:bg-primary transition-colors overflow-hidden">
+              <Link key={icon.name} href="#" className="w-10 h-10 rounded-full bg-footer-social-bg flex items-center justify-center hover:bg-footer-social-hover transition-colors overflow-hidden">
                 <Image src={icon.src} alt={icon.name} width={40} height={40} className="object-cover" />
               </Link>
             ))}
@@ -139,21 +139,21 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Payment & Copyright */}
-      <div className="border-t border-borderColor bg-bgSecondary">
+      <div className="border-t border-footer-border bg-footer-bg-secondary">
         <div className="container mx-auto max-w-screen-xl px-8 lg:px-10 py-8 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
           <div>
-            <h5 className="text-textPrimary font-semibold mb-3">Payment Options</h5>
+            <h5 className="text-footer-text-primary font-semibold mb-3">Payment Options</h5>
             <div className="flex flex-wrap gap-2 mb-3">
               {paymentMethods.map((method) => (
-                <div key={method.name} className="w-10 h-7 rounded-md overflow-hidden flex items-center justify-center bg-bgPrimary" title={method.name}>
+                <div key={method.name} className="w-10 h-7 rounded-md overflow-hidden flex items-center justify-center bg-footer-payment-bg" title={method.name}>
                   <Image src={method.src} alt={method.name} width={40} height={28} className="object-cover rounded-md" />
                 </div>
               ))}
             </div>
-            <p className="text-xs text-textMuted">We protect and save your data.</p>
+            <p className="text-xs text-footer-text-muted">We protect and save your data.</p>
           </div>
 
-          <div className="text-textMuted text-sm mt-4 lg:mt-0">
+          <div className="text-footer-text-muted text-sm mt-4 lg:mt-0">
             <p>© 2019–2025 The Cloudaro</p>
             <p className="mt-1">4600 East Washington Street, Suite 300, Phoenix, AZ 85034, USA</p>
           </div>

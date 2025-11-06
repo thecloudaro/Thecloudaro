@@ -1,7 +1,11 @@
 "use client";
 
-import DomainPage1 from "@/components/Domain/page1";
+import DomainHero from "@/components/Domain/Hero/HeroSection";
 
 export default function DomainNamePage() {
-  return <DomainPage1 />;
+  return (
+    <div className="min-h-screen overflow-hidden ">
+      <DomainHero />
+    </div>
+  );
 }

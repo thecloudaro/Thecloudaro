@@ -19,7 +19,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
   title,
 }) => {
   return (
-    <div className="bg-[#161616] text-white rounded-2xl p-5 w-[320px] h-[250px] flex-shrink-0 border border-[#2A2A2A] hover:border-[#3A3A3A] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 flex flex-col justify-between">
+    <div className="bg-review-card-bg text-review-card-text rounded-2xl p-5 w-[320px] h-[250px] flex-shrink-0 border border-review-card-border hover:border-review-card-border-hover transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 flex flex-col justify-between">
       {/* Top Content */}
       <div>
         {/* Rating + Verified */}
@@ -35,8 +35,8 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
             ))}
           </div>
 
-          <div className="flex items-center text-gray-400 text-[11px] space-x-1">
-            <CheckCircle className="w-3 h-3 text-[#00B67A]" />
+          <div className="flex items-center text-review-card-text-muted text-[11px] space-x-1">
+            <CheckCircle className="w-3 h-3 text-review-card-success" />
             <span>Verified</span>
           </div>
         </div>
@@ -55,7 +55,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
       </div>
 
       {/* Bottom Section (Author) */}
-      <div className="text-[11px] text-gray-400 pt-1 border-t border-[#2A2A2A] mt-2">
+      <div className="text-[11px] text-review-card-text-muted pt-1 border-t border-review-card-border mt-2">
         <span className="font-medium text-white">{name}</span> • {date}
       </div>
     </div>

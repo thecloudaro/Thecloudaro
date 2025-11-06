@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
+@import "../components/Navbar/navbar.css";
 
 
 /* ===============================
@@ -8,8 +9,8 @@
 @layer base {
   :root {
     /* ====== Base Colors ====== */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 210 8% 11%; /* #1b1d1f */
+    --foreground: 0 0% 89%; /* #e2e2e3 */
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -79,29 +80,156 @@
     --blur-accent: hsl(217.2 91.2% 59.8% / 0.1);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
-  }
 
-  /* global.css */
-html, body {
-  margin: 0;
-  padding: 0;
-}
+    /* ====== Component Colors ====== */
+    /* Header Banner */
+    --header-banner-bg: 217 91% 55%; /* Blue background */
+    --header-banner-text: 0 0% 100%;
+
+    /* Feature Request Modal */
+    --modal-bg: 240 20% 4%;
+    --modal-border: 0 0% 20%;
+    --modal-text: 0 0% 100%;
+    --modal-text-muted: 0 0% 70%;
+    --modal-text-secondary: 0 0% 60%;
+
+    /* Domain Page Colors */
+    --domain-hero-bg: 210 20% 15%; /* Keep hero different */
+    --domain-pages-bg: 180 5% 10%;
+    --domain-new-navbar-bg: 210 8% 11%; /* #191c1c - Same as pages */
+    --domain-text-primary: 0 0% 89%; /* #e2e2e3 */
+    --domain-text-secondary: 0 0% 70%;
+    --domain-button-bg: 210 8% 11%; /* #191c1c - Same as pages */
+    --domain-button-text: 0 0% 100%;
+    --domain-border: 0 0% 27%;
+
+    /* Review Card */
+    --review-card-bg: 0 0% 9%;
+    --review-card-border: 0 0% 16%;
+    --review-card-border-hover: 0 0% 23%;
+    --review-card-text: 0 0% 100%;
+    --review-card-text-muted: 0 0% 70%;
+    --review-card-success: 142 76% 36%;
+
+    /* Web Hosting Card */
+    --webhosting-card-bg: 210 100% 8%;
+
+    /* Navbar Colors */
+    --navbar-bg-transparent: 0 0% 0% / 0;
+    --navbar-bg-scrolled: 210 20% 7% / 0.7;
+    --navbar-bg-dropdown: 210 20% 7% / 0.8;
+    --navbar-text: 210 20% 90%;
+    --navbar-text-hover: 0 0% 100%;
+    --navbar-icon-bg: 0 0% 20% / 0.5;
+
+    /* Dropdown Colors */
+    --dropdown-bg-primary: 210 20% 7%;
+    --dropdown-bg-secondary: 210 20% 8%;
+    --dropdown-border: 0 0% 27%;
+    --dropdown-text-primary: 0 0% 100%;
+    --dropdown-text-secondary: 0 0% 70%;
+    --dropdown-text-muted: 0 0% 60%;
+    --dropdown-hover-bg: 210 20% 8% / 0.6;
+    --dropdown-active-bg: 217 91% 60% / 0.3;
+    --dropdown-active-text: 217 91% 80%;
+    --dropdown-active-border: 217 91% 60% / 0.6;
+
+    /* Button Colors */
+    --button-primary-bg: 217 91% 60%;
+    --button-primary-text: 0 0% 100%;
+    --button-primary-hover: 217 91% 55%;
+    --button-secondary-bg: 0 0% 20%;
+    --button-secondary-text: 0 0% 70%;
+    --button-secondary-hover: 0 0% 30%;
+
+    /* Hero Section */
+    --hero-bg: 210 20% 7%;
+    --hero-text: 0 0% 100%;
+    --hero-text-muted: 0 0% 70%;
+    --hero-search-bg: 0 0% 20% / 0.9;
+    --hero-search-border: 0 0% 27%;
+    --hero-tab-bg: 0 0% 20% / 0.7;
+    --hero-price-bg: 0 0% 20% / 0.7;
+    --hero-price-border: 0 0% 27%;
+
+    /* Build Around Section */
+    --buildaround-bg: 0 0% 0%;
+    --buildaround-text: 0 0% 100%;
+
+    /* Customer Section */
+    --customer-bg: 0 0% 0%;
+    --customer-text: 0 0% 100%;
+    --customer-text-muted: 0 0% 70%;
+    --customer-trustpilot-bg: 0 0% 100%;
+    --customer-trustpilot-text: 0 0% 0%;
+    --customer-trustpilot-star: 142 76% 36%;
+
+    /* Footer Colors */
+    --footer-bg-primary: 210 20% 15%;
+    --footer-bg-secondary: 210 20% 10%;
+    --footer-text-primary: 0 0% 95%;
+    --footer-text-secondary: 0 0% 70%;
+    --footer-text-muted: 0 0% 60%;
+    --footer-border: 210 15% 25%;
+    --footer-accent: 217 91% 60%;
+    --footer-social-bg: 210 20% 10%;
+    --footer-social-hover: 217 91% 60%;
+    --footer-payment-bg: 210 20% 15%;
 
 
+
+    /* Gradient colors for 3D glass sphere - Bright Green to Dark Teal */
+--gradient-bright-green: 145 70% 40%;  /* 50% se 40% */
+--gradient-turquoise: 174 65% 46%;     /* 56% se 46% */
+--gradient-aqua: 180 75% 35%;          /* 45% se 35% */
+--gradient-teal: 185 55% 25%;          /* 35% se 25% */
+--gradient-dark-teal: 190 40% 15%;     /* 20% se 15% */
+--gradient-near-black: 195 25% 8%;     /* 10% se 8% */
+
+--sidebar-background: 0 0% 98%;
+
+--sidebar-foreground: 240 5.3% 26.1%;
+
+--sidebar-primary: 240 5.9% 10%;
+
+--sidebar-primary-foreground: 0 0% 98%;
+
+--sidebar-accent: 240 4.8% 95.9%;
+
+--sidebar-accent-foreground: 240 5.9% 10%;
+
+--sidebar-border: 220 13% 91%;
+
+--sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Gradient colors for 3D glass sphere - Bright Green to Dark Teal */
+    --gradient-bright-green: 145 70% 40%;
+    --gradient-turquoise: 174 65% 46%;
+    --gradient-aqua: 180 75% 35%;
+    --gradient-teal: 185 55% 25%;
+    --gradient-dark-teal: 190 40% 15%;
+    --gradient-near-black: 195 25% 8%;
+
+    /* ====== Hosting Page Colors (RGB format) ====== */
+    --hosting-bg: 31 32 33; /* #1f2021 */
+    --hosting-text-white: 255 255 255;
+    --hosting-text-gray-800: 31 41 55;
+    --hosting-bg-white: 255 255 255;
+    --hosting-bg-gray-200: 229 231 235;
+    --hosting-bg-gray-100: 243 244 246;
+    --hosting-blue-600: 37 99 235;
+    --hosting-blue-500: 59 130 246;
+    --hosting-blue-300: 147 197 253;
+    --hosting-blue-200: 191 219 254;
+    --hosting-blue-800: 30 64 175;
+    --hosting-blue-900: 30 58 138;
   }
 
   .dark {
@@ -151,10 +279,11 @@ html, body {
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+}
 
-  /* ===============================
-     ⚙️ Global Styles
-     =============================== */
+/* ===============================
+   ⚙️ Global Styles
+   =============================== */
   * {
     border-color: hsl(var(--border));
     transition: background-color 0.25s, color 0.25s, border-color 0.25s;
@@ -167,7 +296,7 @@ html, body {
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+    font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
