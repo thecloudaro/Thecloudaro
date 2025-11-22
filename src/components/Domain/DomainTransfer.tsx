@@ -70,14 +70,14 @@ const DomainTransfer = () => {
   };
 
   return (
-    <section className="py-16 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 bg-gray-900/20">
+    <section className="py-16 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24" style={{ backgroundColor: 'rgba(var(--domain-common-bg-overlay))' }}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
             Transfer Your Domain
           </h2>
-          <p className="text-gray-400 text-lg sm:text-xl max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl max-w-3xl mx-auto" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>
             Move your existing domain to us and enjoy better management, security, and support. 
             Transfer process is simple, secure, and free.
           </p>
@@ -85,8 +85,8 @@ const DomainTransfer = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Transfer Form */}
-          <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-600 rounded-2xl p-8">
-            <h3 className="text-2xl font-bold text-white mb-6">
+          <div className="backdrop-blur-sm border rounded-2xl p-8" style={{ backgroundColor: 'rgba(var(--domain-common-bg-gray-800-30))', borderColor: 'rgb(var(--domain-common-border-gray-600))' }}>
+            <h3 className="text-2xl font-bold mb-6" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
               Start Domain Transfer
             </h3>
             
@@ -94,25 +94,25 @@ const DomainTransfer = () => {
             <div className="flex items-center justify-between mb-8">
               {transferSteps.map((step, index) => (
                 <div key={step.step} className="flex items-center">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                    transferStep >= step.step 
-                      ? 'bg-[hsl(var(--gradient-teal))] text-white' 
-                      : 'bg-gray-600 text-gray-300'
-                  }`}>
+                  <div 
+                    className="w-10 h-10 rounded-full flex items-center justify-center"
+                    style={{
+                      backgroundColor: transferStep >= step.step ? 'hsl(var(--gradient-teal))' : 'rgb(var(--domain-common-bg-gray-600))',
+                      color: transferStep >= step.step ? 'rgb(var(--domain-common-text-white))' : 'rgb(var(--domain-common-text-gray-300))'
+                    }}
+                  >
                     <step.icon className="w-5 h-5" />
                   </div>
                   <div className="ml-3">
-                    <div className={`font-medium ${
-                      transferStep >= step.step ? 'text-white' : 'text-gray-400'
-                    }`}>
+                    <div className="font-medium" style={{ color: transferStep >= step.step ? 'rgb(var(--domain-common-text-white))' : 'rgb(var(--domain-common-text-gray-400))' }}>
                       {step.title}
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm" style={{ color: 'rgb(var(--domain-common-text-gray-500))' }}>
                       {step.description}
                     </div>
                   </div>
                   {index < transferSteps.length - 1 && (
-                    <ArrowRight className="w-5 h-5 text-gray-500 mx-4" />
+                    <ArrowRight className="w-5 h-5 mx-4" style={{ color: 'rgb(var(--domain-common-text-gray-500))' }} />
                   )}
                 </div>
               ))}
@@ -122,7 +122,7 @@ const DomainTransfer = () => {
             {transferStep === 1 && (
               <div className="space-y-6">
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'rgb(var(--domain-common-text-gray-300))' }}>
                     Domain Name
                   </label>
                   <input
@@ -130,12 +130,25 @@ const DomainTransfer = () => {
                     value={domainName}
                     onChange={(e) => setDomainName(e.target.value)}
                     placeholder="example.com"
-                    className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[hsl(var(--gradient-teal))] focus:ring-2 focus:ring-[hsl(var(--gradient-teal))]/20 transition-all duration-300"
+                    className="w-full px-4 py-3 border rounded-lg focus:outline-none transition-all duration-300 placeholder:text-[rgb(var(--domain-common-text-gray-400))]"
+                    style={{
+                      backgroundColor: 'rgba(var(--domain-common-bg-gray-700-50))',
+                      borderColor: 'rgb(var(--domain-common-border-gray-600))',
+                      color: 'rgb(var(--domain-common-text-white))'
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = 'hsl(var(--gradient-teal))';
+                      e.currentTarget.style.boxShadow = '0 0 0 2px hsl(var(--gradient-teal) / 0.2)';
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = 'rgb(var(--domain-common-border-gray-600))';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'rgb(var(--domain-common-text-gray-300))' }}>
                     Authorization Code (EPP Code)
                   </label>
                   <input
@@ -143,9 +156,22 @@ const DomainTransfer = () => {
                     value={authCode}
                     onChange={(e) => setAuthCode(e.target.value)}
                     placeholder="Enter your domain's auth code"
-                    className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[hsl(var(--gradient-teal))] focus:ring-2 focus:ring-[hsl(var(--gradient-teal))]/20 transition-all duration-300"
+                    className="w-full px-4 py-3 border rounded-lg focus:outline-none transition-all duration-300 placeholder:text-[rgb(var(--domain-common-text-gray-400))]"
+                    style={{
+                      backgroundColor: 'rgba(var(--domain-common-bg-gray-700-50))',
+                      borderColor: 'rgb(var(--domain-common-border-gray-600))',
+                      color: 'rgb(var(--domain-common-text-white))'
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = 'hsl(var(--gradient-teal))';
+                      e.currentTarget.style.boxShadow = '0 0 0 2px hsl(var(--gradient-teal) / 0.2)';
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = 'rgb(var(--domain-common-border-gray-600))';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
                   />
-                  <p className="text-gray-500 text-sm mt-2">
+                  <p className="text-sm mt-2" style={{ color: 'rgb(var(--domain-common-text-gray-500))' }}>
                     You can get this code from your current domain registrar
                   </p>
                 </div>
@@ -155,7 +181,21 @@ const DomainTransfer = () => {
                   whileTap={{ scale: 0.98 }}
                   onClick={handleTransfer}
                   disabled={!domainName || !authCode || isTransferring}
-                  className="w-full bg-[hsl(var(--gradient-teal))] hover:bg-[hsl(var(--gradient-teal))]/80 disabled:opacity-50 disabled:cursor-not-allowed text-white py-3 rounded-lg font-medium transition-all duration-300"
+                  className="w-full disabled:opacity-50 disabled:cursor-not-allowed py-3 rounded-lg font-medium transition-all duration-300"
+                  style={{
+                    backgroundColor: 'hsl(var(--gradient-teal))',
+                    color: 'rgb(var(--domain-common-text-white))'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!e.currentTarget.disabled) {
+                      e.currentTarget.style.backgroundColor = 'hsl(var(--gradient-teal) / 0.8)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!e.currentTarget.disabled) {
+                      e.currentTarget.style.backgroundColor = 'hsl(var(--gradient-teal))';
+                    }
+                  }}
                 >
                   {isTransferring ? "Processing..." : "Start Transfer"}
                 </motion.button>
@@ -164,16 +204,16 @@ const DomainTransfer = () => {
 
             {transferStep === 2 && (
               <div className="text-center py-8">
-                <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-white mb-2">
+                <CheckCircle className="w-16 h-16 mx-auto mb-4" style={{ color: 'rgb(var(--domain-common-text-green-400))' }} />
+                <h4 className="text-xl font-bold mb-2" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
                   Transfer Initiated Successfully!
                 </h4>
-                <p className="text-gray-400 mb-6">
+                <p className="mb-6" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>
                   We&apos;ve started the transfer process. You&apos;ll receive email updates about the progress.
                 </p>
-                <div className="bg-gray-700/50 rounded-lg p-4 text-left">
-                  <h5 className="font-semibold text-white mb-2">Next Steps:</h5>
-                  <ul className="text-gray-300 text-sm space-y-1">
+                <div className="rounded-lg p-4 text-left" style={{ backgroundColor: 'rgba(var(--domain-common-bg-gray-700-50))' }}>
+                  <h5 className="font-semibold mb-2" style={{ color: 'rgb(var(--domain-common-text-white))' }}>Next Steps:</h5>
+                  <ul className="text-sm space-y-1" style={{ color: 'rgb(var(--domain-common-text-gray-300))' }}>
                     <li>• Check your email for transfer confirmation</li>
                     <li>• Approve the transfer when prompted</li>
                     <li>• Transfer will complete in 5-7 days</li>
@@ -188,7 +228,7 @@ const DomainTransfer = () => {
           <div className="space-y-8">
             {/* Benefits */}
             <div>
-              <h3 className="text-2xl font-bold text-white mb-6">
+              <h3 className="text-2xl font-bold mb-6" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
                 Why Transfer to Us?
               </h3>
               <div className="space-y-6">
@@ -204,10 +244,10 @@ const DomainTransfer = () => {
                       <benefit.icon className="w-6 h-6 text-[hsl(var(--gradient-teal))]" />
                     </div>
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-2">
+                      <h4 className="text-lg font-semibold mb-2" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
                         {benefit.title}
                       </h4>
-                      <p className="text-gray-400">
+                      <p style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>
                         {benefit.description}
                       </p>
                     </div>
@@ -217,17 +257,17 @@ const DomainTransfer = () => {
             </div>
 
             {/* Transfer Info */}
-            <div className="bg-gray-800/20 backdrop-blur-sm border border-gray-600 rounded-xl p-6">
+            <div className="backdrop-blur-sm border rounded-xl p-6" style={{ backgroundColor: 'rgba(var(--domain-common-bg-gray-800-20))', borderColor: 'rgb(var(--domain-common-border-gray-600))' }}>
               <div className="flex items-start mb-4">
-                <Info className="w-5 h-5 text-blue-400 mr-3 mt-1 flex-shrink-0" />
-                <h4 className="text-lg font-semibold text-white">
+                <Info className="w-5 h-5 mr-3 mt-1 flex-shrink-0" style={{ color: 'rgb(var(--domain-common-text-blue-400))' }} />
+                <h4 className="text-lg font-semibold" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
                   Transfer Information
                 </h4>
               </div>
-              <div className="space-y-3 text-sm text-gray-300">
+              <div className="space-y-3 text-sm" style={{ color: 'rgb(var(--domain-common-text-gray-300))' }}>
                 <div className="flex justify-between">
                   <span>Transfer Fee:</span>
-                  <span className="text-green-400 font-medium">FREE</span>
+                  <span className="font-medium" style={{ color: 'rgb(var(--domain-common-text-green-400))' }}>FREE</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Processing Time:</span>
@@ -235,7 +275,7 @@ const DomainTransfer = () => {
                 </div>
                 <div className="flex justify-between">
                   <span>Downtime:</span>
-                  <span className="text-green-400">None</span>
+                  <span style={{ color: 'rgb(var(--domain-common-text-green-400))' }}>None</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Support:</span>
@@ -245,14 +285,14 @@ const DomainTransfer = () => {
             </div>
 
             {/* Important Notes */}
-            <div className="bg-yellow-900/20 border border-yellow-600/30 rounded-xl p-6">
+            <div className="border rounded-xl p-6" style={{ backgroundColor: 'rgba(var(--domain-common-bg-yellow-900-20))', borderColor: 'rgba(var(--domain-common-border-yellow-600-30))' }}>
               <div className="flex items-start mb-3">
-                <AlertCircle className="w-5 h-5 text-yellow-400 mr-3 mt-1 flex-shrink-0" />
-                <h4 className="text-lg font-semibold text-yellow-400">
+                <AlertCircle className="w-5 h-5 mr-3 mt-1 flex-shrink-0" style={{ color: 'rgb(var(--domain-common-text-yellow-400))' }} />
+                <h4 className="text-lg font-semibold" style={{ color: 'rgb(var(--domain-common-text-yellow-400))' }}>
                   Important Notes
                 </h4>
               </div>
-              <ul className="text-gray-300 text-sm space-y-2">
+              <ul className="text-sm space-y-2" style={{ color: 'rgb(var(--domain-common-text-gray-300))' }}>
                 <li>• Domain must be unlocked at current registrar</li>
                 <li>• Privacy protection must be disabled</li>
                 <li>• Domain must be older than 60 days</li>

@@ -14,9 +14,23 @@ const DesktopMenu = ({ menuItems, activeDropdown, toggleDropdown }: DesktopMenuP
           key={item}
           onClick={() => toggleDropdown(item)}
           data-dropdown-trigger
-          className={`text-white hover:text-white font-medium py-2 px-2 rounded-full transition-colors ${
-            activeDropdown === item ? "bg-gray-800/50" : "hover:bg-gray-800/50"
-          }`}
+          className="font-medium py-2 px-2 rounded-full transition-colors"
+          style={{
+            color: 'rgb(var(--navbar-desktop-menu-text))',
+            backgroundColor: activeDropdown === item 
+              ? 'rgba(var(--navbar-desktop-menu-active-bg))' 
+              : 'transparent'
+          }}
+          onMouseEnter={(e) => {
+            if (activeDropdown !== item) {
+              e.currentTarget.style.backgroundColor = 'rgba(var(--navbar-desktop-menu-hover-bg))';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (activeDropdown !== item) {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }
+          }}
         >
           {item}
         </button>

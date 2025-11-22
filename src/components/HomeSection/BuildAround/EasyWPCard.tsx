@@ -29,9 +29,9 @@ const EasyWPCard = () => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="bg-gray-800 rounded-2xl sm:rounded-3xl overflow-hidden h-[400px] sm:h-[450px] md:h-[550px] lg:h-[650px] xl:h-[720px] flex flex-col transition-all duration-500 ease-in-out touch-manipulation">
+      <div className="bg-[hsl(var(--easywp-card-bg))] rounded-2xl sm:rounded-3xl overflow-hidden h-[400px] sm:h-[450px] md:h-[550px] lg:h-[650px] xl:h-[720px] flex flex-col transition-all duration-500 ease-in-out touch-manipulation">
         {/* Top - 3D geometric shapes */}
-        <div className="h-1/3 sm:h-2/5 bg-gradient-to-r from-green-600 to-teal-500 relative overflow-hidden">
+        <div className="h-1/3 sm:h-2/5 bg-gradient-to-r from-[hsl(var(--easywp-card-gradient-from))] to-[hsl(var(--easywp-card-gradient-to))] relative overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">
             <Image 
               src="/3d3.png" 
@@ -39,18 +39,18 @@ const EasyWPCard = () => {
               fill
               className="object-cover opacity-90" 
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-green-600/40 to-teal-500/40" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--easywp-card-gradient-overlay-from))] to-[hsl(var(--easywp-card-gradient-overlay-to))]" />
           </div>
         </div>
         
         {/* Bottom - Content */}
         <div className="h-2/3 sm:h-3/5 p-3 sm:p-5 md:p-6 lg:pl-12 flex flex-col justify-center items-start text-left font-sans">
           <div className="flex items-center justify-center mb-3 sm:mb-4">
-            <div className="w-4 h-4 sm:w-5 sm:h-5 bg-green-500 rounded mr-2 sm:mr-3"></div>
-            <p className="text-xs sm:text-sm md:text-base uppercase tracking-widest text-white font-normal">easywp</p>
+            <div className="w-4 h-4 sm:w-5 sm:h-5 bg-[hsl(var(--easywp-card-badge))] rounded mr-2 sm:mr-3"></div>
+            <p className="text-xs sm:text-sm md:text-base uppercase tracking-widest text-[hsl(var(--easywp-card-text))] font-normal">easywp</p>
           </div>
           <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-1.5 sm:mb-2 leading-tight">No stress hosting <br/> for WordPress</h3>
-          <p className="text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed items-start text-left max-w-xl">
+          <p className="text-[hsl(var(--easywp-card-text-muted))] text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed items-start text-left max-w-xl">
             Give your site a head start with the fastest <br/> 
             hosting for WordPress on next-gen cloud <br/>
             technology.

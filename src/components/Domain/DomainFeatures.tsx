@@ -88,10 +88,10 @@ const DomainFeatures = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
             Powerful Domain Features
           </h2>
-          <p className="text-gray-400 text-lg sm:text-xl max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl max-w-3xl mx-auto" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>
             Everything you need to manage your domains professionally with enterprise-grade features and tools.
           </p>
         </div>
@@ -104,15 +104,25 @@ const DomainFeatures = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-800/30 backdrop-blur-sm border border-gray-600 rounded-xl p-6 hover:border-[hsl(var(--gradient-teal))]/50 transition-all duration-300 group"
+              className="backdrop-blur-sm border rounded-xl p-6 transition-all duration-300 group"
+              style={{
+                backgroundColor: 'rgba(var(--domain-common-bg-gray-800-30))',
+                borderColor: 'rgb(var(--domain-common-border-gray-600))'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'hsl(var(--gradient-teal) / 0.5)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgb(var(--domain-common-border-gray-600))';
+              }}
             >
               <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <feature.icon className="w-6 h-6 text-white" />
+                <feature.icon className="w-6 h-6" style={{ color: 'rgb(var(--domain-common-text-white))' }} />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">
+              <h3 className="text-xl font-semibold mb-3" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
                 {feature.title}
               </h3>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="leading-relaxed" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>
                 {feature.description}
               </p>
             </motion.div>
@@ -120,13 +130,13 @@ const DomainFeatures = () => {
         </div>
 
         {/* Benefits Section */}
-        <div className="bg-gray-800/20 backdrop-blur-sm border border-gray-600 rounded-2xl p-8 md:p-12">
+        <div className="backdrop-blur-sm border rounded-2xl p-8 md:p-12" style={{ backgroundColor: 'rgba(var(--domain-common-bg-gray-800-20))', borderColor: 'rgb(var(--domain-common-border-gray-600))' }}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">
+              <h3 className="text-2xl sm:text-3xl font-bold mb-6" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
                 Why Choose Our Domain Services?
               </h3>
-              <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+              <p className="text-lg mb-8 leading-relaxed" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>
                 We provide comprehensive domain management solutions with industry-leading features, 
                 security, and support to help you succeed online.
               </p>
@@ -137,9 +147,10 @@ const DomainFeatures = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="flex items-center text-gray-300"
+                    className="flex items-center"
+                    style={{ color: 'rgb(var(--domain-common-text-gray-300))' }}
                   >
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 flex-shrink-0" />
+                    <CheckCircle className="w-5 h-5 mr-3 flex-shrink-0" style={{ color: 'rgb(var(--domain-common-text-green-400))' }} />
                     {benefit}
                   </motion.div>
                 ))}
@@ -150,25 +161,25 @@ const DomainFeatures = () => {
               <div className="bg-gradient-to-br from-[hsl(var(--gradient-teal))]/20 to-[hsl(var(--gradient-dark-teal))]/20 rounded-2xl p-8 border border-[hsl(var(--gradient-teal))]/30">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[hsl(var(--gradient-teal))] rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Users className="w-8 h-8 text-white" />
+                    <Users className="w-8 h-8" style={{ color: 'rgb(var(--domain-common-text-white))' }} />
                   </div>
-                  <h4 className="text-2xl font-bold text-white mb-4">
+                  <h4 className="text-2xl font-bold mb-4" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
                     Trusted by Millions
                   </h4>
                   <div className="grid grid-cols-2 gap-6 text-center">
                     <div>
-                      <div className="text-3xl font-bold text-[hsl(var(--gradient-teal))] mb-2">
+                      <div className="text-3xl font-bold mb-2" style={{ color: 'hsl(var(--gradient-teal))' }}>
                         10M+
                       </div>
-                      <div className="text-gray-400 text-sm">
+                      <div className="text-sm" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>
                         Domains Managed
                       </div>
                     </div>
                     <div>
-                      <div className="text-3xl font-bold text-[hsl(var(--gradient-teal))] mb-2">
+                      <div className="text-3xl font-bold mb-2" style={{ color: 'hsl(var(--gradient-teal))' }}>
                         99.9%
                       </div>
-                      <div className="text-gray-400 text-sm">
+                      <div className="text-sm" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>
                         Uptime Guarantee
                       </div>
                     </div>
@@ -201,7 +212,17 @@ const DomainFeatures = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-[hsl(var(--gradient-teal))] hover:bg-[hsl(var(--gradient-teal))]/80 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300"
+            className="px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300"
+            style={{
+              backgroundColor: 'hsl(var(--gradient-teal))',
+              color: 'rgb(var(--domain-common-text-white))'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'hsl(var(--gradient-teal) / 0.8)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'hsl(var(--gradient-teal))';
+            }}
           >
             Get Started Today
           </motion.button>

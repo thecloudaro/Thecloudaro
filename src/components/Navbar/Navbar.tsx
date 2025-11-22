@@ -4,20 +4,13 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import UniversalDropdown from "@/components/Navbar/DynamicDropdown";
-import HeaderBanner from "@/components/HeaderBanner";
 import Logo from "./Logo";
 import { Globe, ShoppingCart, User, Menu } from "lucide-react";
 
-// ✅ Add props type
-interface NavbarProps {
-  hideBanner?: boolean;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ hideBanner }) => {
+const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isPricingNavbarVisible, setIsPricingNavbarVisible] = useState(false);
-  const [isInHeroSection, setIsInHeroSection] = useState(true);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
@@ -26,7 +19,9 @@ const Navbar: React.FC<NavbarProps> = ({ hideBanner }) => {
   const isDomainPage = pathname?.includes('/domain');
   const isDomainSearchPage = pathname?.includes('/domain-search');
   const isTransferPage = pathname?.includes('/transfer');
-  const isHostingPage = pathname?.includes('/hosting');
+  const isHostingPage = pathname?.includes('/hosting') && !pathname?.includes('/migration-to-thecloudaro');
+  const isMigrationPage = pathname?.includes('/migration-to-thecloudaro');
+  const isRoadmapPage = pathname?.includes('/roadmap');
   const isHomepage = pathname === '/';
 
   const menuItems = ["Domains", "Hosting", "Email", "Cloud", "Security", "Explore all"];
@@ -50,7 +45,6 @@ const Navbar: React.FC<NavbarProps> = ({ hideBanner }) => {
       }
       
       setIsPricingNavbarVisible(scrollY > heroHeight && (isDomainPage || isTransferPage));
-      setIsInHeroSection(scrollY < heroHeight && (isDomainPage || isHomepage || isTransferPage));
     };
     
     // Check initial scroll position
@@ -59,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideBanner }) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDomainPage, isHomepage, isTransferPage]);
+  }, [isDomainPage, isHomepage, isTransferPage, isMigrationPage]);
 
   useEffect(() => {
     if (typeof document === "undefined") return;
@@ -71,90 +65,67 @@ const Navbar: React.FC<NavbarProps> = ({ hideBanner }) => {
   const toggleDropdown = (menu: string) =>
     setActiveDropdown(activeDropdown === menu ? null : menu);
 
-  // Show main navbar always (both navbars can be visible)
-  // Main navbar should always be visible, never hidden
-  // Hide main navbar when pricing navbar is visible (domain extension pages)
-
+  // Show single navbar - hide main navbar when pricing navbar is visible
   // Show navbar on domain/transfer page:
-  // 1. Hero section: always show (transparent background)
-  // 2. Scroll up on other pages: show navbar (with background color)
-  // 3. Scroll down on other pages: hide navbar (only pricing navbar visible)
+  // 1. Hero section: always show main navbar (transparent background)
+  // 2. When pricing navbar is visible: hide main navbar completely (only pricing navbar shows)
+  // 3. Other pages: always show main navbar
   
-  // Hide navbar only when scrolling down past hero section
-  // Show navbar: on hero section OR when scrolling up
-  // For transfer page: always show on scroll up (regardless of pricing navbar visibility)
-  const shouldShowNavbar = (isDomainPage || isTransferPage) && !isDomainSearchPage 
-    ? (isInHeroSection || (isTransferPage && isScrollingUp) || (isScrollingUp && isPricingNavbarVisible))
+  const shouldShowNavbar = isMigrationPage
+    ? true
+    : (isDomainPage || isTransferPage) && !isDomainSearchPage 
+    ? !isPricingNavbarVisible // Hide main navbar when pricing navbar is visible
     : true;
   
   if (!shouldShowNavbar) {
-    return null; // Hide navbar when scrolling down past hero section
+    return null; // Hide navbar when pricing navbar is visible
   }
 
-  // Background logic based on scroll direction:
-  // - Hosting page: always transparent (static) - even with dropdown
-  // - Transfer hero: always transparent
-  // - Scroll up: show background on all pages
-  // - Scroll down: transparent on transfer page, default on others
-  const shouldShowBackground = isHostingPage
-    ? false  // Always transparent on hosting page (even with dropdown)
-    : activeDropdown 
-    ? true
-    : (isTransferPage && isInHeroSection)
-    ? false  // Always transparent on transfer hero
-    : isScrollingUp
-    ? true  // Show background when scrolling up (all pages)
-    : (isTransferPage && !isInHeroSection)
-    ? false  // Transparent on transfer page scroll down
-    : false;  // Default transparent
-
-  const navClassName = `${''} ${''} left-0 right-0 relative ${isDomainPage || isHomepage || isTransferPage ? '' : 'transition-all duration-500'} ${
-    isDomainPage || isTransferPage ? 'z-[100]' : (isScrollingUp ? 'z-[100]' : 'z-50')
-  } ${
-    shouldShowBackground && !isHostingPage
-      ? "bg-dropdown-bg-primary"
-      : ""
+  const navClassName = `left-0 right-0 relative ${isDomainPage || isHomepage || isTransferPage || isHostingPage || isRoadmapPage ? "" : "transition-all duration-500"} ${
+    isDomainPage || isTransferPage || isHostingPage || isMigrationPage || isRoadmapPage
+      ? "z-[120]"
+      : isScrollingUp
+      ? "z-[100]"
+      : "z-50"
   }`;
 
-  const navStyle = { 
-    backgroundColor: isHostingPage
-      ? 'transparent'  // Always transparent on hosting page
-      : shouldShowBackground
-      ? (activeDropdown ? 'hsl(var(--dropdown-bg-primary))' : 'hsl(var(--dropdown-bg-primary))')
-      : 'transparent',
-    // No fixed positioning; let navbar scroll with the page (static)
+  // Consistent transparent style for all pages like homepage
+  const navStyle: React.CSSProperties = {
+    backgroundColor: activeDropdown ? 'hsl(var(--dropdown-bg-primary))' : 'transparent',
     transform: 'translateY(0)',
     willChange: 'transform, opacity',
-    // Remove shadow
-    boxShadow: 'none'
+    boxShadow: 'none',
+    backdropFilter: activeDropdown ? 'blur(18px)' : 'none',
+    WebkitBackdropFilter: activeDropdown ? 'blur(18px)' : 'none'
   };
 
   // Use regular nav for domain page (no animation), motion.nav for other pages
   const navContent = (
     <>
-
-      {/* ✅ Hide banner when hideBanner=true or on domain/transfer/hosting page */}
-      {!hideBanner && !activeDropdown && !isDomainPage && !isTransferPage && !isHostingPage && <HeaderBanner />}
-
-      <div className={`${isDomainPage || isHomepage || isTransferPage ? '' : 'transition-all duration-500'} ${
-        shouldShowBackground && !isHostingPage
-          ? "bg-dropdown-bg-primary"
-          : ""
-      }`}
-      style={{ 
-        backgroundColor: isHostingPage
-          ? 'transparent'  // Always transparent on hosting page
-          : shouldShowBackground
-          ? (activeDropdown ? 'hsl(var(--dropdown-bg-primary))' : 'hsl(var(--dropdown-bg-primary))')
-          : 'transparent',
-        boxShadow: 'none'
-      }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-14 sm:h-16 md:h-20 flex items-center justify-between">
+      <div
+        className={`${isDomainPage || isHomepage || isTransferPage || isHostingPage ? "" : "transition-all duration-500"}`}
+        style={{
+          backgroundColor: activeDropdown ? "hsl(var(--dropdown-bg-primary))" : "transparent",
+          boxShadow: "none",
+          border: "none",
+          borderTop: "none",
+          borderBottom: "none",
+          backdropFilter: activeDropdown ? "blur(18px)" : "none",
+          WebkitBackdropFilter: activeDropdown ? "blur(18px)" : "none"
+        }}
+      >
+        <div 
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          style={{ backgroundColor: 'transparent' }}
+        >
+          <div 
+            className="h-14 sm:h-16 md:h-20 flex items-center justify-between"
+            style={{ backgroundColor: 'transparent' }}
+          >
 
             {/* Left: Logo (desktop) */}
             <div className="hidden md:flex flex-shrink-0">
-              <Logo showText={true} />
+              <Logo />
             </div>
 
             {/* Center: Menu */}
@@ -165,12 +136,12 @@ const Navbar: React.FC<NavbarProps> = ({ hideBanner }) => {
                   onClick={() => toggleDropdown(item)}
                   className={`font-medium transition-all duration-300 px-3 py-2 rounded-full ${
                     activeDropdown === item
-                      ? 'bg-gray-700/50 text-white'
+                      ? 'bg-[hsl(var(--navbar-bg-hover))] text-[hsl(var(--navbar-text-active))]'
                       : (isHostingPage)
-                        ? 'text-white hover:text-white hover:bg-gray-700/50' 
+                        ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
                         : (isDomainPage || isHomepage) 
-                        ? 'text-gray-300 hover:text-white hover:bg-gray-700/50' 
-                        : 'text-gray-300 hover:text-white hover:bg-gray-700/50'
+                        ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
+                        : 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
                   }`}
                 >
                   {item}
@@ -185,10 +156,10 @@ const Navbar: React.FC<NavbarProps> = ({ hideBanner }) => {
                   key={i}
                   className={`font-medium transition-all duration-300 px-3 py-2 rounded-full ${
                     (isHostingPage)
-                      ? 'text-white hover:text-white hover:bg-gray-700/50' 
+                      ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
                       : (isDomainPage || isHomepage) 
-                      ? 'text-gray-300 hover:text-white hover:bg-gray-700/50' 
-                      : 'text-gray-300 hover:text-white hover:bg-gray-700/50'
+                      ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
+                      : 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
                   }`}
                 >
                   <Icon size={16} />
@@ -200,7 +171,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideBanner }) => {
             <div className="flex md:hidden items-center justify-between flex-1 px-2">
               {/* Logo */}
               <div className="flex-shrink-0">
-                <Logo showText={false} />
+                <Logo />
               </div>
 
               {/* Icons */}
@@ -210,10 +181,10 @@ const Navbar: React.FC<NavbarProps> = ({ hideBanner }) => {
                     key={i}
                     className={`font-medium transition-all duration-300 px-2 py-2 rounded-full ${
                       (isHostingPage)
-                        ? 'text-white hover:text-white hover:bg-gray-700/50' 
+                        ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
                         : (isDomainPage || isHomepage) 
-                        ? 'text-gray-300 hover:text-white hover:bg-gray-700/50' 
-                        : 'text-navbar-text hover:text-white hover:bg-gray-700/50'
+                        ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
+                        : 'text-[hsl(var(--navbar-text))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
                     }`}
                   >
                     <Icon size={16} />
@@ -226,10 +197,10 @@ const Navbar: React.FC<NavbarProps> = ({ hideBanner }) => {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className={`p-2 ${
                   (isHostingPage)
-                    ? 'text-white hover:text-white'
+                    ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))]'
                     : (isDomainPage || isHomepage)
-                    ? 'text-slate-200 hover:text-white'
-                    : 'text-navbar-text hover:text-white'
+                    ? 'text-[hsl(var(--navbar-text-slate))] hover:text-[hsl(var(--navbar-text-hover))]'
+                    : 'text-[hsl(var(--navbar-text))] hover:text-[hsl(var(--navbar-text-hover))]'
                 }`}
               >
                 <Menu size={24} />
@@ -256,6 +227,19 @@ const Navbar: React.FC<NavbarProps> = ({ hideBanner }) => {
       </AnimatePresence>
     </>
   );
+
+  // Consistent behavior for all pages like homepage
+  // For domain page: static navbar without animation
+  if (isDomainPage && !isDomainSearchPage) {
+    return (
+      <nav
+        className={navClassName}
+        style={navStyle}
+      >
+        {navContent}
+      </nav>
+    );
+  }
 
   return (
     <motion.nav

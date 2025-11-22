@@ -21,11 +21,11 @@ const BringItTogether = ({
   buttonText = "Choose my plan",
   buttonHref,
   buttonOnClick,
-  imageSrc = "/HostingSvg/bringit.svg",
+  imageSrc = "/Hosting/bringit.svg",
   imageAlt = "Bring it all together"
 }: BringItTogetherProps) => {
   return (
-    <section className="relative w-full bg-[#1a1a1a] py-8 lg:py-12">
+    <section className="relative w-full py-8 lg:py-12" style={{ backgroundColor: 'rgb(var(--hosting-section-bg))' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
           

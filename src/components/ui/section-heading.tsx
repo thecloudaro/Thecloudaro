@@ -9,6 +9,7 @@ interface SectionHeadingProps {
   align?: "left" | "center" | "right";
   headingTag?: "h1" | "h2" | "h3" | "div";
   headingStyle?: React.CSSProperties;
+  descriptionStyle?: React.CSSProperties;
 }
 
 const SectionHeading = ({
@@ -19,7 +20,8 @@ const SectionHeading = ({
   containerClassName = "",
   align = "center",
   headingTag = "h2",
-  headingStyle
+  headingStyle,
+  descriptionStyle
 }: SectionHeadingProps) => {
   const alignClasses = {
     left: "text-left",
@@ -42,11 +44,11 @@ const SectionHeading = ({
       )}
       {description && (
         typeof description === "string" ? (
-          <p className={descriptionClassName}>
+          <p className={descriptionClassName} style={descriptionStyle}>
             {description}
           </p>
         ) : (
-          <div className={descriptionClassName}>
+          <div className={descriptionClassName} style={descriptionStyle}>
             {description}
           </div>
         )

@@ -29,8 +29,8 @@ const StarlightCard = () => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="bg-gray-800 rounded-2xl sm:rounded-3xl overflow-hidden h-[400px] sm:h-[450px] md:h-[550px] lg:h-[650px] xl:h-[720px] flex flex-col transition-all duration-500 ease-in-out touch-manipulation">
-        <div className="h-1/3 sm:h-2/5 bg-orange-400 relative overflow-hidden flex items-center justify-center">
+      <div className="bg-[hsl(var(--starlight-card-bg))] rounded-2xl sm:rounded-3xl overflow-hidden h-[400px] sm:h-[450px] md:h-[550px] lg:h-[650px] xl:h-[720px] flex flex-col transition-all duration-500 ease-in-out touch-manipulation">
+        <div className="h-1/3 sm:h-2/5 bg-[hsl(var(--starlight-card-header-bg))] relative overflow-hidden flex items-center justify-center">
           <Image 
             src="/3d4.png" 
             alt="Profile Fan" 
@@ -41,11 +41,11 @@ const StarlightCard = () => {
         
         <div className="h-2/3 sm:h-3/5 p-3 sm:p-5 md:p-6 lg:pl-12 flex flex-col justify-center items-start text-left font-sans">
           <div className="flex items-center justify-center mb-3 sm:mb-4">
-            <div className="w-4 h-4 sm:w-5 sm:h-5 bg-yellow-400 rounded mr-2 sm:mr-3"></div>
-            <p className="text-xs sm:text-sm md:text-base uppercase tracking-widest text-white font-normal">starlight</p>
+            <div className="w-4 h-4 sm:w-5 sm:h-5 bg-[hsl(var(--starlight-card-badge))] rounded mr-2 sm:mr-3"></div>
+            <p className="text-xs sm:text-sm md:text-base uppercase tracking-widest text-[hsl(var(--starlight-card-text))] font-normal">starlight</p>
           </div>
           <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-1.5 sm:mb-2 leading-tight">Virtual machines</h3>
-          <p className="text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed items-start text-left max-w-xl">
+          <p className="text-[hsl(var(--starlight-card-text-muted))] text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed items-start text-left max-w-xl">
             Power more possibilities through extra server<br/> 
              muscle matched with flexible control and <br/> 
              scalability.

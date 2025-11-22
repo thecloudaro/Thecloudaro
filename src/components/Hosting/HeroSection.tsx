@@ -6,12 +6,12 @@ import HostingButton from '@/components/ui/hosting-button';
 
 const HostingHeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden" style={{ boxShadow: 'none' }}>
+    <section className="relative min-h-screen flex items-center overflow-hidden" style={{ boxShadow: 'none', zIndex: 1 }}>
       {/* Background Gradient - Soft teal in top-right corner, blending into deep gray */}
       <div 
         className="absolute inset-0 z-0"
         style={{
-          background: 'radial-gradient(ellipse 100% 70% at top right, rgba(20, 100, 120, 0.5) 0%, rgba(20, 100, 120, 0.3) 15%, rgba(20, 100, 120, 0.1) 30%, rgba(20, 100, 120, 0.03) 50%, transparent 70%, rgb(var(--hosting-bg)) 100%)'
+          background: `radial-gradient(ellipse 100% 70% at top right, rgba(var(--hosting-gradient-teal-rgba), 0.5) 0%, rgba(var(--hosting-gradient-teal-rgba), 0.3) 15%, rgba(var(--hosting-gradient-teal-rgba), 0.1) 30%, rgba(var(--hosting-gradient-teal-rgba), 0.03) 50%, transparent 70%, rgb(var(--hosting-bg)) 100%)`
         }}
       />
       
@@ -56,7 +56,7 @@ const HostingHeroSection = () => {
           >
             <div className="relative w-full max-w-md lg:max-w-2xl xl:max-w-3xl h-full flex items-center justify-center">
               <motion.img
-                src="/HostingSvg/hostingHero.svg"
+                src="/Hosting/hostingHero.svg"
                 alt="Web Hosting"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}

@@ -1,4 +1,3 @@
-import Navbar from '@/components/Navbar/Navbar';
 import TransferHeroSection from '@/components/Transfer/Hero/HeroSection';
 import TransferPricingNavbar from '@/components/Transfer/TransferPricingNavbar';
 import DiagonalDivider from '@/components/Transfer/DiagonalDivider';
@@ -28,7 +27,6 @@ const sectionsData = [
 export default function TransferPage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
 
       {/* Hero Section */}
       <section>

@@ -85,7 +85,7 @@ const TransferHeroSection = () => {
         >
           {/* Tabs */}
           <div className="flex justify-center mb-4 sm:mb-6 md:mb-8">
-            <div className="bg-gray-700/50 transition rounded-full p-1 flex shadow-md">
+            <div className="transition rounded-full p-1 flex shadow-md" style={{ backgroundColor: 'rgba(var(--transfer-hero-tab-bg))' }}>
               {['register', 'transfer'].map((tab) => (
                 <Button
                   key={tab}
@@ -102,7 +102,8 @@ const TransferHeroSection = () => {
             <div className="flex items-stretch bg-hero-search-bg backdrop-blur-md rounded-full p-1.5 sm:p-2 border border-hero-search-border shadow-lg">
               <div className="flex items-center flex-1 px-3 sm:px-4">
                 <svg
-                  className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 mr-2 sm:mr-3"
+                  className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3"
+                  style={{ color: 'rgb(var(--transfer-hero-icon))' }}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -122,7 +123,19 @@ const TransferHeroSection = () => {
                   className="flex-1 bg-transparent text-hero-text placeholder-hero-text-muted text-sm sm:text-base focus:outline-none"
                 />
               </div>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-sm sm:text-base transition">
+              <button 
+                className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-sm sm:text-base transition"
+                style={{ 
+                  backgroundColor: 'rgb(var(--transfer-hero-button-bg))',
+                  color: 'rgb(var(--transfer-hero-button-text))'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgb(var(--transfer-hero-button-hover))';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgb(var(--transfer-hero-button-bg))';
+                }}
+              >
                 Transfer
               </button>
             </div>

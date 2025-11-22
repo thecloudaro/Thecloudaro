@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const TransferUnlock = () => {
   return (
-    <section className="py-16 sm:py-20 md:py-24 lg:py-28" style={{ backgroundColor: '#1b1d1c' }}>
+    <section className="py-16 sm:py-20 md:py-24 lg:py-28" style={{ backgroundColor: 'rgb(var(--transfer-unlock-bg))' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24">
         {/* Two-Column Content Area */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
@@ -16,10 +16,10 @@ const TransferUnlock = () => {
             transition={{ duration: 0.6 }}
             className="text-left"
           >
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 whitespace-nowrap">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 whitespace-nowrap !text-[rgb(var(--transfer-unlock-heading))]">
               Unlock your domains
             </h3>
-            <p className="text-gray-400 text-xl sm:text-2xl leading-relaxed">
+            <p className="text-xl sm:text-2xl leading-relaxed !text-[rgb(var(--transfer-unlock-description))]">
               You may need to disable the registrar lock with your current registrar. Head there to check before transferring.
             </p>
           </motion.div>
@@ -104,7 +104,7 @@ const TransferUnlock = () => {
               <div
                 className="absolute top-1/4 left-1/4 w-12 h-12 lg:w-16 lg:h-16 rounded-full"
                 style={{
-                  background: 'radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%)',
+                  background: `radial-gradient(circle, rgba(var(--transfer-unlock-inner-highlight)) 0%, transparent 70%)`,
                   filter: 'blur(8px)'
                 }}
               />

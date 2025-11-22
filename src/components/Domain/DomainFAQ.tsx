@@ -69,7 +69,7 @@ const DomainFAQ = () => {
   };
 
   return (
-    <div className="min-h-screen py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#191c1c]">
+    <div className="min-h-screen py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgb(var(--domain-faq-bg))' }}>
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
@@ -78,12 +78,12 @@ const DomainFAQ = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white mb-4">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-4" style={{ color: 'rgb(var(--domain-faq-heading))' }}>
   We are here to help!
 </h2>
 
 
-          <p className="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl max-w-2xl mx-auto" style={{ color: 'rgb(var(--domain-faq-description))' }}>
             Frequently asked question
           </p>
         </motion.div>
@@ -97,14 +97,15 @@ const DomainFAQ = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="border-b border-gray-600"
+              className="border-b"
+              style={{ borderColor: 'rgb(var(--domain-faq-border))' }}
             >
               <button
                 onClick={() => toggleFAQ(index)}
                 className="w-full py-6 flex items-center justify-between text-left group transition-all duration-300 hover:opacity-80"
                 aria-expanded={openIndex === index}
               >
-                <h3 className="text-lg md:text-xl font-semibold text-white pr-8">
+                <h3 className="text-lg md:text-xl font-semibold pr-8" style={{ color: 'rgb(var(--domain-faq-question))' }}>
                   {faq.question}
                 </h3>
                 <motion.div
@@ -112,7 +113,7 @@ const DomainFAQ = () => {
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="flex-shrink-0"
                 >
-                  <ChevronDown className="w-6 h-6 text-white" />
+                  <ChevronDown className="w-6 h-6" style={{ color: 'rgb(var(--domain-faq-question))' }} />
                 </motion.div>
               </button>
 
@@ -130,7 +131,8 @@ const DomainFAQ = () => {
                       animate={{ y: 0 }}
                       exit={{ y: -10 }}
                       transition={{ duration: 0.3 }}
-                      className="pb-6 text-gray-300 leading-relaxed text-base md:text-lg"
+                      className="pb-6 leading-relaxed text-base md:text-lg"
+                      style={{ color: 'rgb(var(--domain-faq-answer))' }}
                     >
                       {faq.answer}
                     </motion.p>
@@ -149,11 +151,12 @@ const DomainFAQ = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-16 text-center"
         >
-          <p className="text-gray-400 text-base md:text-lg">
+          <p className="text-base md:text-lg" style={{ color: 'rgb(var(--domain-faq-description))' }}>
             Still have questions?{" "}
             <Link
               href="#contact"
-              className="text-white hover:underline font-semibold transition-all duration-300"
+              className="hover:underline font-semibold transition-all duration-300"
+              style={{ color: 'rgb(var(--domain-faq-link))' }}
             >
               Contact our support team
             </Link>

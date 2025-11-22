@@ -29,7 +29,7 @@ const DomainEmail = () => {
         "Email Forwarding"
       ],
       icon: Mail,
-      color: "from-gray-600 to-gray-700",
+      color: "from-[rgb(var(--domain-common-gradient-gray-600))] to-[rgb(var(--domain-common-gradient-gray-700))]",
       popular: false
     },
     {
@@ -107,14 +107,14 @@ const DomainEmail = () => {
   ];
 
   return (
-    <section className="py-16 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 bg-gray-900/20">
+    <section className="py-16 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24" style={{ backgroundColor: 'rgba(var(--domain-common-bg-overlay))' }}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
             Professional Email for Your Domain
           </h2>
-          <p className="text-gray-400 text-lg sm:text-xl max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl max-w-3xl mx-auto" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>
             Get professional email addresses with your domain name. 
             Reliable, secure, and feature-rich email hosting for your business.
           </p>
@@ -128,15 +128,19 @@ const DomainEmail = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`relative bg-gray-800/30 backdrop-blur-sm border rounded-2xl p-8 ${
+              className={`relative backdrop-blur-sm border rounded-2xl p-8 ${
                 plan.popular 
                   ? 'border-[hsl(var(--gradient-teal))] scale-105' 
-                  : 'border-gray-600'
+                  : ''
               }`}
+              style={{
+                backgroundColor: 'rgba(var(--domain-common-bg-gray-800-30))',
+                borderColor: plan.popular ? 'hsl(var(--gradient-teal))' : 'rgb(var(--domain-common-border-gray-600))'
+              }}
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-[hsl(var(--gradient-teal))] text-white px-4 py-2 rounded-full text-sm font-medium">
+                  <div className="bg-[hsl(var(--gradient-teal))] px-4 py-2 rounded-full text-sm font-medium" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
                     Most Popular
                   </div>
                 </div>
@@ -144,19 +148,19 @@ const DomainEmail = () => {
               
               <div className="text-center mb-8">
                 <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${plan.color} flex items-center justify-center`}>
-                  <plan.icon className="w-8 h-8 text-white" />
+                  <plan.icon className="w-8 h-8" style={{ color: 'rgb(var(--domain-common-text-white))' }} />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-                <div className="text-4xl font-bold text-white mb-2">
+                <h3 className="text-2xl font-bold mb-2" style={{ color: 'rgb(var(--domain-common-text-white))' }}>{plan.name}</h3>
+                <div className="text-4xl font-bold mb-2" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
                   ${plan.price}
                 </div>
-                <div className="text-gray-400">{plan.period}</div>
+                <div style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>{plan.period}</div>
               </div>
               
               <ul className="space-y-4 mb-8">
                 {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center text-gray-300">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 flex-shrink-0" />
+                  <li key={featureIndex} className="flex items-center" style={{ color: 'rgb(var(--domain-common-text-gray-300))' }}>
+                    <CheckCircle className="w-5 h-5 mr-3 flex-shrink-0" style={{ color: 'rgb(var(--domain-common-text-green-400))' }} />
                     {feature}
                   </li>
                 ))}
@@ -165,11 +169,17 @@ const DomainEmail = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`w-full py-3 rounded-lg font-medium transition-all duration-300 ${
-                  plan.popular
-                    ? 'bg-[hsl(var(--gradient-teal))] hover:bg-[hsl(var(--gradient-teal))]/80 text-white'
-                    : 'bg-gray-700 hover:bg-gray-600 text-white'
-                }`}
+                className="w-full py-3 rounded-lg font-medium transition-all duration-300"
+                style={{
+                  backgroundColor: plan.popular ? 'hsl(var(--gradient-teal))' : 'rgb(var(--domain-common-bg-gray-700))',
+                  color: 'rgb(var(--domain-common-text-white))'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = plan.popular ? 'hsl(var(--gradient-teal) / 0.8)' : 'rgb(var(--domain-common-bg-gray-600))';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = plan.popular ? 'hsl(var(--gradient-teal))' : 'rgb(var(--domain-common-bg-gray-700))';
+                }}
               >
                 Choose {plan.name}
               </motion.button>
@@ -179,7 +189,7 @@ const DomainEmail = () => {
 
         {/* Email Features */}
         <div className="mb-16">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-12">
+          <h3 className="text-2xl sm:text-3xl font-bold text-center mb-12" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
             Email Features & Benefits
           </h3>
           
@@ -195,10 +205,10 @@ const DomainEmail = () => {
                 <div className="w-16 h-16 bg-[hsl(var(--gradient-teal))]/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <feature.icon className="w-8 h-8 text-[hsl(var(--gradient-teal))]" />
                 </div>
-                <h4 className="text-lg font-semibold text-white mb-2">
+                <h4 className="text-lg font-semibold mb-2" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
                   {feature.title}
                 </h4>
-                <p className="text-gray-400 text-sm">
+                <p className="text-sm" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>
                   {feature.description}
                 </p>
               </motion.div>
@@ -206,13 +216,13 @@ const DomainEmail = () => {
           </div>
 
           {/* Benefits Grid */}
-          <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-600 rounded-xl p-8">
-            <h4 className="text-xl font-semibold text-white mb-6 text-center">
+          <div className="backdrop-blur-sm border rounded-xl p-8" style={{ backgroundColor: 'rgba(var(--domain-common-bg-gray-800-30))', borderColor: 'rgb(var(--domain-common-border-gray-600))' }}>
+            <h4 className="text-xl font-semibold mb-6 text-center" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
               What&apos;s Included with Email Hosting
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {emailBenefits.map((benefit, index) => (
-                <div key={index} className="flex items-center text-gray-300">
+                <div key={index} className="flex items-center" style={{ color: 'rgb(var(--domain-common-text-gray-300))' }}>
                   <div className="w-2 h-2 bg-[hsl(var(--gradient-teal))] rounded-full mr-3"></div>
                   {benefit}
                 </div>
@@ -223,66 +233,66 @@ const DomainEmail = () => {
 
         {/* Email Examples */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold text-white text-center mb-8">
+          <h3 className="text-2xl font-bold text-center mb-8" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
             Professional Email Examples
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-600 rounded-lg p-6 text-center">
-              <Mail className="w-12 h-12 text-[hsl(var(--gradient-teal))] mx-auto mb-4" />
-              <h4 className="text-lg font-semibold text-white mb-2">Business Email</h4>
-              <p className="text-gray-400 text-sm mb-4">info@yourdomain.com</p>
-              <p className="text-gray-300 text-sm">Perfect for general inquiries</p>
+            <div className="backdrop-blur-sm border rounded-lg p-6 text-center" style={{ backgroundColor: 'rgba(var(--domain-common-bg-gray-800-30))', borderColor: 'rgb(var(--domain-common-border-gray-600))' }}>
+              <Mail className="w-12 h-12 mx-auto mb-4" style={{ color: 'hsl(var(--gradient-teal))' }} />
+              <h4 className="text-lg font-semibold mb-2" style={{ color: 'rgb(var(--domain-common-text-white))' }}>Business Email</h4>
+              <p className="text-sm mb-4" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>info@yourdomain.com</p>
+              <p className="text-sm" style={{ color: 'rgb(var(--domain-common-text-gray-300))' }}>Perfect for general inquiries</p>
             </div>
             
-            <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-600 rounded-lg p-6 text-center">
-              <Users className="w-12 h-12 text-[hsl(var(--gradient-teal))] mx-auto mb-4" />
-              <h4 className="text-lg font-semibold text-white mb-2">Support Email</h4>
-              <p className="text-gray-400 text-sm mb-4">support@yourdomain.com</p>
-              <p className="text-gray-300 text-sm">Customer support inquiries</p>
+            <div className="backdrop-blur-sm border rounded-lg p-6 text-center" style={{ backgroundColor: 'rgba(var(--domain-common-bg-gray-800-30))', borderColor: 'rgb(var(--domain-common-border-gray-600))' }}>
+              <Users className="w-12 h-12 mx-auto mb-4" style={{ color: 'hsl(var(--gradient-teal))' }} />
+              <h4 className="text-lg font-semibold mb-2" style={{ color: 'rgb(var(--domain-common-text-white))' }}>Support Email</h4>
+              <p className="text-sm mb-4" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>support@yourdomain.com</p>
+              <p className="text-sm" style={{ color: 'rgb(var(--domain-common-text-gray-300))' }}>Customer support inquiries</p>
             </div>
             
-            <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-600 rounded-lg p-6 text-center">
-              <Laptop className="w-12 h-12 text-[hsl(var(--gradient-teal))] mx-auto mb-4" />
-              <h4 className="text-lg font-semibold text-white mb-2">Sales Email</h4>
-              <p className="text-gray-400 text-sm mb-4">sales@yourdomain.com</p>
-              <p className="text-gray-300 text-sm">Sales and business inquiries</p>
+            <div className="backdrop-blur-sm border rounded-lg p-6 text-center" style={{ backgroundColor: 'rgba(var(--domain-common-bg-gray-800-30))', borderColor: 'rgb(var(--domain-common-border-gray-600))' }}>
+              <Laptop className="w-12 h-12 mx-auto mb-4" style={{ color: 'hsl(var(--gradient-teal))' }} />
+              <h4 className="text-lg font-semibold mb-2" style={{ color: 'rgb(var(--domain-common-text-white))' }}>Sales Email</h4>
+              <p className="text-sm mb-4" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>sales@yourdomain.com</p>
+              <p className="text-sm" style={{ color: 'rgb(var(--domain-common-text-gray-300))' }}>Sales and business inquiries</p>
             </div>
           </div>
         </div>
 
         {/* Bundle Offer */}
         <div className="bg-gradient-to-r from-[hsl(var(--gradient-teal))]/20 to-[hsl(var(--gradient-dark-teal))]/20 border border-[hsl(var(--gradient-teal))]/30 rounded-2xl p-8 text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">
+          <h3 className="text-2xl font-bold mb-4" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
             Complete Domain Package
           </h3>
-          <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
+          <p className="mb-6 max-w-2xl mx-auto" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }}>
             Get your domain, hosting, and email all in one package. 
             Save money and simplify your setup with our complete solution.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-gray-800/30 rounded-lg p-4">
-              <div className="text-2xl font-bold text-[hsl(var(--gradient-teal))] mb-2">
+            <div className="rounded-lg p-4" style={{ backgroundColor: 'rgba(var(--domain-common-bg-gray-800-30))' }}>
+              <div className="text-2xl font-bold mb-2" style={{ color: 'hsl(var(--gradient-teal))' }}>
                 Domain
               </div>
-              <div className="text-gray-300 text-sm">
+              <div className="text-sm" style={{ color: 'rgb(var(--domain-common-text-gray-300))' }}>
                 Professional domain name
               </div>
             </div>
-            <div className="bg-gray-800/30 rounded-lg p-4">
-              <div className="text-2xl font-bold text-[hsl(var(--gradient-teal))] mb-2">
+            <div className="rounded-lg p-4" style={{ backgroundColor: 'rgba(var(--domain-common-bg-gray-800-30))' }}>
+              <div className="text-2xl font-bold mb-2" style={{ color: 'hsl(var(--gradient-teal))' }}>
                 Hosting
               </div>
-              <div className="text-gray-300 text-sm">
+              <div className="text-sm" style={{ color: 'rgb(var(--domain-common-text-gray-300))' }}>
                 Reliable web hosting
               </div>
             </div>
-            <div className="bg-gray-800/30 rounded-lg p-4">
-              <div className="text-2xl font-bold text-[hsl(var(--gradient-teal))] mb-2">
+            <div className="rounded-lg p-4" style={{ backgroundColor: 'rgba(var(--domain-common-bg-gray-800-30))' }}>
+              <div className="text-2xl font-bold mb-2" style={{ color: 'hsl(var(--gradient-teal))' }}>
                 Email
               </div>
-              <div className="text-gray-300 text-sm">
+              <div className="text-sm" style={{ color: 'rgb(var(--domain-common-text-gray-300))' }}>
                 Professional email accounts
               </div>
             </div>
@@ -291,7 +301,17 @@ const DomainEmail = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-[hsl(var(--gradient-teal))] hover:bg-[hsl(var(--gradient-teal))]/80 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 inline-flex items-center"
+            className="px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 inline-flex items-center"
+            style={{
+              backgroundColor: 'hsl(var(--gradient-teal))',
+              color: 'rgb(var(--domain-common-text-white))'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'hsl(var(--gradient-teal) / 0.8)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'hsl(var(--gradient-teal))';
+            }}
           >
             Get Complete Package
             <ArrowRight className="w-5 h-5 ml-2" />

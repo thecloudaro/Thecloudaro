@@ -29,7 +29,7 @@ const DynamicSection: React.FC<SectionProps> = ({ heading, text, bgImage = '/BgP
   const contentOpacity = useSpring(rawContentOpacity, { stiffness: 80, damping: 20 });
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-bg transition-colors duration-500">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[hsl(var(--dynamic-section-bg))] transition-colors duration-500">
       {/* Background image */}
       <motion.img
         src={bgImage}
@@ -41,16 +41,16 @@ const DynamicSection: React.FC<SectionProps> = ({ heading, text, bgImage = '/BgP
 
       {/* Bottom gradient shadow */}
       <motion.div
-        className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-bg to-transparent z-20 pointer-events-none"
+        className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[hsl(var(--dynamic-section-bg))] to-transparent z-20 pointer-events-none"
         style={{ opacity: bottomShadowOpacity }}
       />
 
       {/* Content */}
       <motion.div
-        className="relative z-30 text-center text-text px-4 sm:px-8 max-w-xl sm:max-w-2xl transition-colors duration-500"
+        className="relative z-30 text-center text-[hsl(var(--dynamic-section-text))] px-4 sm:px-8 max-w-xl sm:max-w-2xl transition-colors duration-500"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-primary">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-[hsl(var(--dynamic-section-heading))]">
           {heading}
         </h1>
         <p className="mt-2 sm:mt-4 text-sm sm:text-base md:text-xl">

@@ -23,12 +23,12 @@ export default function ChatButton({
       <button
         onClick={onClick}
         className="w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 
-                   bg-blue-600 hover:bg-blue-700 
+                   bg-[hsl(var(--chat-button-bg))] hover:bg-[hsl(var(--chat-button-hover-bg))] 
                    rounded-full flex items-center justify-center 
                    shadow-lg transition"
       >
         <svg
-          className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white"
+          className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-[hsl(var(--chat-button-text))]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

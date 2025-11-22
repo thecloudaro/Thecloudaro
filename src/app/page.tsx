@@ -1,4 +1,3 @@
-import Navbar from '@/components/Navbar/Navbar';
 import HeroSection from '@/components/HomeSection/Hero/HeroSection';
 import DynamicSection from '@/components/HomeSection//DynamicSections/DynamicSections';
 import BuildAround from '@/components/HomeSection/BuildAround/BuildAround';
@@ -15,7 +14,6 @@ const sectionsData = [
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
 
       {/* Hero Section */}
       <section>
@@ -33,7 +31,7 @@ export default function Home() {
           />
         ))}
       </section>
-      <div className="min-h-screen bg-black">
+      <div className="min-h-screen bg-[hsl(var(--faq-bg-default))]">
       <BuildAround/>
       </div>
       {/* Single Dynamic Section render */}
@@ -48,11 +46,11 @@ export default function Home() {
 </section>
 
 <section>
-  <div className="min-h-screen bg-black">
+  <div className="min-h-screen bg-[hsl(var(--faq-bg-default))]">
   <Customer/>
   </div>
 </section>
-<div className="min-h-screen bg-black">
+<div className="min-h-screen bg-[hsl(var(--faq-bg-default))]">
 <FAQ/>
 </div>
 <section>

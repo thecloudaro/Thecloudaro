@@ -5,23 +5,26 @@ import { Search, CheckCircle, ShoppingCart, MessageCircle, Shield, RotateCcw, Li
 
 const DomainGuide = () => {
   return (
-    <section className="py-20 bg-[#191c1c]">
+    <section className="py-20" style={{ backgroundColor: 'rgb(var(--domain-guide-bg))' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* First Section - Domain Name Guide */}
         <div className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6" style={{ color: 'rgb(var(--domain-guide-text-white))' }}>
               Find a domain name that&apos;s right for you
             </h2>
-            <p className="text-gray-400 text-xl">
+            <p className="text-xl" style={{ color: 'rgb(var(--domain-guide-text-gray-400))' }}>
               How to choose the best fit.
             </p>
           </div>
           
           {/* Teal graphic element in bottom-left */}
           <div className="relative">
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-teal-500 rounded-bl-3xl opacity-20"></div>
-            <div className="absolute bottom-0 right-0 text-white text-2xl font-bold">
+            <div 
+              className="absolute bottom-0 left-0 w-32 h-32 rounded-bl-3xl"
+              style={{ backgroundColor: 'rgba(var(--domain-guide-teal-500-opacity))' }}
+            ></div>
+            <div className="absolute bottom-0 right-0 text-2xl font-bold" style={{ color: 'rgb(var(--domain-guide-text-white))' }}>
               Keep it simple
             </div>
           </div>
@@ -36,22 +39,46 @@ const DomainGuide = () => {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="bg-gradient-to-br from-teal-400 via-teal-500 to-green-600 rounded-3xl p-8 relative overflow-hidden">
+            <div 
+              className="rounded-3xl p-8 relative overflow-hidden"
+              style={{
+                background: `linear-gradient(to bottom right, rgb(var(--domain-guide-teal-400)), rgb(var(--domain-guide-teal-500)), rgb(var(--domain-guide-green-600)))`
+              }}
+            >
               {/* Organic curved shapes */}
-              <div className="absolute top-0 right-0 w-20 h-20 bg-teal-300/30 rounded-full blur-xl"></div>
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-green-500/20 rounded-full blur-2xl"></div>
-              <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-teal-400/20 rounded-full blur-lg"></div>
+              <div 
+                className="absolute top-0 right-0 w-20 h-20 rounded-full blur-xl"
+                style={{ backgroundColor: 'rgba(var(--domain-guide-teal-300-opacity))' }}
+              ></div>
+              <div 
+                className="absolute bottom-0 left-0 w-32 h-32 rounded-full blur-2xl"
+                style={{ backgroundColor: 'rgba(var(--domain-guide-green-500-opacity))' }}
+              ></div>
+              <div 
+                className="absolute top-1/2 left-1/4 w-16 h-16 rounded-full blur-lg"
+                style={{ backgroundColor: 'rgba(var(--domain-guide-teal-400-opacity))' }}
+              ></div>
               
               {/* Search Bar */}
               <div className="relative z-10 flex items-center justify-center">
-                <div className="bg-gray-900 rounded-2xl p-4 w-full max-w-md">
+                <div className="rounded-2xl p-4 w-full max-w-md" style={{ backgroundColor: 'rgb(var(--domain-guide-gray-900))' }}>
                   <div className="flex items-center">
                     <input
                       type="text"
                       placeholder="myidea.com"
-                      className="flex-1 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none"
+                      className="flex-1 bg-transparent text-lg focus:outline-none placeholder:text-[rgb(var(--domain-guide-text-gray-400))]"
+                      style={{ color: 'rgb(var(--domain-guide-text-white))' }}
                     />
-                    <button className="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full transition-colors duration-300">
+                    <button 
+                      className="p-3 rounded-full transition-colors duration-300"
+                      style={{ backgroundColor: 'rgb(var(--domain-guide-blue-500))', color: 'rgb(var(--domain-guide-text-white))' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgb(var(--domain-guide-blue-600))';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgb(var(--domain-guide-blue-500))';
+                      }}
+                    >
                       <Search className="w-5 h-5" />
                     </button>
                   </div>
@@ -65,12 +92,12 @@ const DomainGuide = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-white"
+            style={{ color: 'rgb(var(--domain-guide-text-white))' }}
           >
             <h3 className="text-4xl sm:text-5xl font-bold mb-6">
               Keep it simple
             </h3>
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-lg leading-relaxed" style={{ color: 'rgb(var(--domain-guide-text-gray-300))' }}>
               When you register a domain, choose one that&apos;s easy to spell and keep it short. 
               Ask for honest feedback from people you know.
             </p>
@@ -102,17 +129,35 @@ const DomainGuide = () => {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="bg-gray-800 rounded-2xl p-6 relative overflow-hidden">
+            <div className="rounded-2xl p-6 relative overflow-hidden" style={{ backgroundColor: 'rgb(var(--domain-guide-gray-800))' }}>
               {/* Green Glow Effect */}
-              <div className="absolute bottom-0 right-0 w-32 h-32 bg-green-500/20 rounded-full blur-3xl"></div>
+              <div 
+                className="absolute bottom-0 right-0 w-32 h-32 rounded-full blur-3xl"
+                style={{ backgroundColor: 'rgba(var(--domain-guide-green-500-opacity))' }}
+              ></div>
               
               {/* Available Domain */}
-              <div className="bg-green-500/20 border border-green-500/30 rounded-xl p-4 mb-4 flex items-center justify-between">
+              <div 
+                className="border rounded-xl p-4 mb-4 flex items-center justify-between"
+                style={{
+                  backgroundColor: 'rgba(var(--domain-guide-green-400-opacity))',
+                  borderColor: 'rgba(var(--domain-guide-green-500-border))'
+                }}
+              >
                 <div className="flex items-center">
-                  <CheckCircle className="w-5 h-5 text-green-400 mr-3" />
-                  <span className="text-white font-medium">myidea.com is available</span>
+                  <CheckCircle className="w-5 h-5 mr-3" style={{ color: 'rgb(var(--domain-guide-green-400))' }} />
+                  <span className="font-medium" style={{ color: 'rgb(var(--domain-guide-text-white))' }}>myidea.com is available</span>
                 </div>
-                <button className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full transition-colors duration-300">
+                <button 
+                  className="p-2 rounded-full transition-colors duration-300"
+                  style={{ backgroundColor: 'rgb(var(--domain-guide-blue-500))', color: 'rgb(var(--domain-guide-text-white))' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgb(var(--domain-guide-blue-600))';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgb(var(--domain-guide-blue-500))';
+                  }}
+                >
                   <ShoppingCart className="w-4 h-4" />
                 </button>
               </div>
@@ -120,20 +165,47 @@ const DomainGuide = () => {
               {/* Alternative Domains */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between py-2">
-                  <span className="text-gray-300">myidea.ai</span>
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full transition-colors duration-300">
+                  <span style={{ color: 'rgb(var(--domain-guide-text-gray-300))' }}>myidea.ai</span>
+                  <button 
+                    className="p-2 rounded-full transition-colors duration-300"
+                    style={{ backgroundColor: 'rgb(var(--domain-guide-blue-500))', color: 'rgb(var(--domain-guide-text-white))' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgb(var(--domain-guide-blue-600))';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgb(var(--domain-guide-blue-500))';
+                    }}
+                  >
                     <ShoppingCart className="w-4 h-4" />
                   </button>
                 </div>
                 <div className="flex items-center justify-between py-2">
-                  <span className="text-gray-300">myidea.online</span>
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full transition-colors duration-300">
+                  <span style={{ color: 'rgb(var(--domain-guide-text-gray-300))' }}>myidea.online</span>
+                  <button 
+                    className="p-2 rounded-full transition-colors duration-300"
+                    style={{ backgroundColor: 'rgb(var(--domain-guide-blue-500))', color: 'rgb(var(--domain-guide-text-white))' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgb(var(--domain-guide-blue-600))';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgb(var(--domain-guide-blue-500))';
+                    }}
+                  >
                     <ShoppingCart className="w-4 h-4" />
                   </button>
                 </div>
                 <div className="flex items-center justify-between py-2">
-                  <span className="text-gray-300">myidea.info</span>
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full transition-colors duration-300">
+                  <span style={{ color: 'rgb(var(--domain-guide-text-gray-300))' }}>myidea.info</span>
+                  <button 
+                    className="p-2 rounded-full transition-colors duration-300"
+                    style={{ backgroundColor: 'rgb(var(--domain-guide-blue-500))', color: 'rgb(var(--domain-guide-text-white))' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgb(var(--domain-guide-blue-600))';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgb(var(--domain-guide-blue-500))';
+                    }}
+                  >
                     <MessageCircle className="w-4 h-4" />
                   </button>
                 </div>
@@ -151,20 +223,37 @@ const DomainGuide = () => {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="bg-gray-800 rounded-2xl p-6 relative">
+            <div className="rounded-2xl p-6 relative" style={{ backgroundColor: 'rgb(var(--domain-guide-gray-800))' }}>
               {/* Domain Cards */}
               <div className="space-y-4">
                 {/* myidea.website */}
-                <div className="bg-gradient-to-br from-green-400 to-teal-600 rounded-xl p-4 relative">
-                  <div className="absolute top-2 left-2 bg-green-300 text-green-900 text-xs font-bold px-2 py-1 rounded">
+                <div 
+                  className="rounded-xl p-4 relative"
+                  style={{
+                    background: `linear-gradient(to bottom right, rgb(var(--domain-guide-green-400)), rgb(var(--domain-guide-teal-500)))`
+                  }}
+                >
+                  <div 
+                    className="absolute top-2 left-2 text-xs font-bold px-2 py-1 rounded"
+                    style={{ backgroundColor: 'rgb(var(--domain-guide-green-300))', color: 'rgb(var(--domain-guide-green-900))' }}
+                  >
                     20% OFF
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <CheckCircle className="w-4 h-4 text-white mr-2" />
-                      <span className="text-white font-bold">myidea.website</span>
+                      <CheckCircle className="w-4 h-4 mr-2" style={{ color: 'rgb(var(--domain-guide-text-white))' }} />
+                      <span className="font-bold" style={{ color: 'rgb(var(--domain-guide-text-white))' }}>myidea.website</span>
                     </div>
-                    <button className="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors duration-300">
+                    <button 
+                      className="p-2 rounded-full transition-colors duration-300"
+                      style={{ backgroundColor: 'rgba(var(--domain-guide-white-opacity-20))', color: 'rgb(var(--domain-guide-text-white))' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgba(var(--domain-guide-white-opacity-30))';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgba(var(--domain-guide-white-opacity-20))';
+                      }}
+                    >
                       <ShoppingCart className="w-4 h-4" />
                     </button>
                   </div>
@@ -173,29 +262,60 @@ const DomainGuide = () => {
                 {/* Bottom Row */}
                 <div className="grid grid-cols-2 gap-4">
                   {/* myidea.shop */}
-                  <div className="bg-gradient-to-br from-green-400 to-teal-600 rounded-xl p-4 relative">
-                    <div className="absolute top-2 left-2 bg-green-300 text-green-900 text-xs font-bold px-2 py-1 rounded">
+                  <div 
+                    className="rounded-xl p-4 relative"
+                    style={{
+                      background: `linear-gradient(to bottom right, rgb(var(--domain-guide-green-400)), rgb(var(--domain-guide-teal-500)))`
+                    }}
+                  >
+                    <div 
+                      className="absolute top-2 left-2 text-xs font-bold px-2 py-1 rounded"
+                      style={{ backgroundColor: 'rgb(var(--domain-guide-green-300))', color: 'rgb(var(--domain-guide-green-900))' }}
+                    >
                       20% OFF
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <CheckCircle className="w-4 h-4 text-white mr-2" />
-                        <span className="text-white font-bold text-sm">myidea.shop</span>
+                        <CheckCircle className="w-4 h-4 mr-2" style={{ color: 'rgb(var(--domain-guide-text-white))' }} />
+                        <span className="font-bold text-sm" style={{ color: 'rgb(var(--domain-guide-text-white))' }}>myidea.shop</span>
                       </div>
-                      <button className="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors duration-300">
+                      <button 
+                        className="p-2 rounded-full transition-colors duration-300"
+                        style={{ backgroundColor: 'rgba(var(--domain-guide-white-opacity-20))', color: 'rgb(var(--domain-guide-text-white))' }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(var(--domain-guide-white-opacity-30))';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(var(--domain-guide-white-opacity-20))';
+                        }}
+                      >
                         <ShoppingCart className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
 
                   {/* myidea.blog */}
-                  <div className="bg-gradient-to-br from-green-400 to-teal-600 rounded-xl p-4">
+                  <div 
+                    className="rounded-xl p-4"
+                    style={{
+                      background: `linear-gradient(to bottom right, rgb(var(--domain-guide-green-400)), rgb(var(--domain-guide-teal-500)))`
+                    }}
+                  >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <CheckCircle className="w-4 h-4 text-white mr-2" />
-                        <span className="text-white font-bold text-sm">myidea.blog</span>
+                        <CheckCircle className="w-4 h-4 mr-2" style={{ color: 'rgb(var(--domain-guide-text-white))' }} />
+                        <span className="font-bold text-sm" style={{ color: 'rgb(var(--domain-guide-text-white))' }}>myidea.blog</span>
                       </div>
-                      <button className="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors duration-300">
+                      <button 
+                        className="p-2 rounded-full transition-colors duration-300"
+                        style={{ backgroundColor: 'rgba(var(--domain-guide-white-opacity-20))', color: 'rgb(var(--domain-guide-text-white))' }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(var(--domain-guide-white-opacity-30))';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(var(--domain-guide-white-opacity-20))';
+                        }}
+                      >
                         <ShoppingCart className="w-4 h-4" />
                       </button>
                     </div>
@@ -224,7 +344,7 @@ const DomainGuide = () => {
 
         {/* Fifth Section - More than just a domain */}
         <div className="text-center">
-          <h2 className="text-[2.5rem] sm:text-[3.25rem] lg:text-6xl font-bold text-white mb-20 sm:mb-24 md:mb-28 lg:mb-32">
+          <h2 className="text-[2.5rem] sm:text-[3.25rem] lg:text-6xl font-bold mb-20 sm:mb-24 md:mb-28 lg:mb-32" style={{ color: 'rgb(var(--domain-guide-text-white))' }}>
             More than just a domain
           </h2>
           
@@ -272,12 +392,12 @@ const DomainGuide = () => {
                   className="text-center"
                 >
                   <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
-                    <IconComponent className="w-8 h-8 text-white" />
+                    <IconComponent className="w-8 h-8" style={{ color: 'rgb(var(--domain-guide-text-white))' }} />
                   </div>
-                  <h3 className="text-2xl sm:text-2xl font-bold text-white mb-4">
+                  <h3 className="text-2xl sm:text-2xl font-bold mb-4" style={{ color: 'rgb(var(--domain-guide-text-white))' }}>
                     {feature.title}
                   </h3>
-                  <p className="text-gray-400 text-lg leading-relaxed whitespace-pre-line">
+                  <p className="text-lg leading-relaxed whitespace-pre-line" style={{ color: 'rgb(var(--domain-guide-text-gray-400))' }}>
                     {feature.description}
                   </p>
                 </motion.div>

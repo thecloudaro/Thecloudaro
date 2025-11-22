@@ -11,7 +11,13 @@ interface CTAButtonProps {
 }
 
 const CTAButton = ({ children, onClick, href, className = "" }: CTAButtonProps) => {
-  const buttonClasses = `bg-white text-black px-8 py-4 rounded-full font-medium transition-all duration-300 hover:bg-gray-50 shadow-sm border border-gray-200 ${className}`;
+  const buttonClasses = `px-8 py-4 rounded-full font-medium transition-all duration-300 shadow-sm border ${className}`;
+  
+  const buttonStyle = {
+    backgroundColor: 'rgb(var(--ui-cta-button-bg))',
+    color: 'rgb(var(--ui-cta-button-text))',
+    borderColor: 'rgb(var(--ui-cta-button-border))'
+  } as React.CSSProperties;
 
   if (href) {
     return (
@@ -19,6 +25,13 @@ const CTAButton = ({ children, onClick, href, className = "" }: CTAButtonProps) 
         <Link
           href={href}
           className={buttonClasses}
+          style={buttonStyle}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgb(var(--ui-cta-button-hover))';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgb(var(--ui-cta-button-bg))';
+          }}
         >
           {children}
         </Link>
@@ -32,6 +45,13 @@ const CTAButton = ({ children, onClick, href, className = "" }: CTAButtonProps) 
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className={buttonClasses}
+      style={buttonStyle}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.backgroundColor = 'rgb(var(--ui-cta-button-hover))';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = 'rgb(var(--ui-cta-button-bg))';
+      }}
     >
       {children}
     </motion.button>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="uuid-2eda3589-2e81-41e6-aed4-ade2cebaecde" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 632 632">
+  <defs>
+    <clipPath id="uuid-39b9e999-853b-4475-a2bf-cca094c622a2">
+      <rect x="-.141" y=".3099" width="632" height="632" fill="none"/>
+    </clipPath>
+    <filter id="uuid-0cd7c55e-30a5-4611-ba61-6727b55c8e09" x="90.859" y="91.3099" width="450" height="450" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-color="#fff" result="bg"/>
+      <feBlend in="SourceGraphic" in2="bg"/>
+    </filter>
+    <radialGradient id="uuid-a9d84dd1-5063-4b5e-a28d-5fe7357d39c4" cx="-18922.0781" cy="5724.8497" fx="-18922.0781" fy="5724.8497" r="207.4179" gradientTransform="translate(11816.4586 3795.8005) scale(.6078 -.6078)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".0849" stop-color="#fff" stop-opacity=".9648"/>
+      <stop offset=".2235" stop-color="#fff" stop-opacity=".8691"/>
+      <stop offset=".3985" stop-color="#fff" stop-opacity=".7131"/>
+      <stop offset=".6031" stop-color="#fff" stop-opacity=".4965"/>
+      <stop offset=".8298" stop-color="#fff" stop-opacity=".2236"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="uuid-fb86948c-2a7c-4d8c-9c73-c107bc65a4a8" data-name="mask-1" x="189.793" y="190.244" width="252.1319" height="252.1319" maskUnits="userSpaceOnUse">
+      <circle cx="315.859" cy="316.3099" r="126.0659" fill="url(#uuid-a9d84dd1-5063-4b5e-a28d-5fe7357d39c4)"/>
+    </mask>
+    <linearGradient id="uuid-e8f93afb-ad47-4a98-aad9-fb898306ae55" x1="2516.8675" y1="9619.4268" x2="2772.6013" y2="9619.4268" gradientTransform="translate(2960.5934 9935.7368) rotate(-180)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".0936" stop-color="#fff" stop-opacity=".7764"/>
+      <stop offset=".2183" stop-color="#fff" stop-opacity=".5035"/>
+      <stop offset=".3308" stop-color="#fff" stop-opacity=".2869"/>
+      <stop offset=".4271" stop-color="#fff" stop-opacity=".1309"/>
+      <stop offset=".5033" stop-color="#fff" stop-opacity=".0352"/>
+      <stop offset=".55" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="uuid-fa5e2426-69a5-4492-8131-57abfc207c0e" data-name="mask-2" x="187.9921" y="188.4431" width="255.7338" height="255.7338" maskUnits="userSpaceOnUse">
+      <circle cx="315.859" cy="316.3099" r="127.8669" fill="url(#uuid-e8f93afb-ad47-4a98-aad9-fb898306ae55)"/>
+    </mask>
+    <mask id="uuid-7f7d66cf-45f0-44db-9ad1-8acceedb9b63" data-name="mask" x="90.859" y="91.3099" width="450" height="450" maskUnits="userSpaceOnUse">
+      <g filter="url(#uuid-0cd7c55e-30a5-4611-ba61-6727b55c8e09)">
+        <g>
+          <g mask="url(#uuid-fb86948c-2a7c-4d8c-9c73-c107bc65a4a8)">
+            <circle cx="315.859" cy="316.3099" r="126.0659"/>
+          </g>
+          <g mask="url(#uuid-fa5e2426-69a5-4492-8131-57abfc207c0e)">
+            <circle cx="315.859" cy="316.3099" r="126.0659"/>
+          </g>
+        </g>
+      </g>
+    </mask>
+    <linearGradient id="uuid-a9f89f61-0055-4892-a640-16de84ee25ee" x1="3083.553" y1="9228.7341" x2="3539.9816" y2="9228.7341" gradientTransform="translate(3627.6263 9545.044) rotate(-180)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="uuid-71487c58-f9a0-4e19-9f7e-3c553dd68324" data-name="mask-3" x="87.6447" y="88.0957" width="456.4286" height="456.4286" maskUnits="userSpaceOnUse">
+      <circle cx="315.859" cy="316.3099" r="228.2143" fill="url(#uuid-a9f89f61-0055-4892-a640-16de84ee25ee)"/>
+    </mask>
+    <linearGradient id="uuid-34527de0-bc4d-40b7-b473-f3fd301fb7f7" x1="-743.1604" y1="4159.3221" x2="-382.1786" y2="4159.3221" gradientTransform="translate(-3843.4632 -246.3595) rotate(-90)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".0251" stop-color="#fff" stop-opacity=".8552"/>
+      <stop offset=".064" stop-color="#fff" stop-opacity=".6568"/>
+      <stop offset=".1048" stop-color="#fff" stop-opacity=".4808"/>
+      <stop offset=".1467" stop-color="#fff" stop-opacity=".3325"/>
+      <stop offset=".19" stop-color="#fff" stop-opacity=".2117"/>
+      <stop offset=".2351" stop-color="#fff" stop-opacity=".1182"/>
+      <stop offset=".2829" stop-color="#fff" stop-opacity=".0519"/>
+      <stop offset=".3351" stop-color="#fff" stop-opacity=".0125"/>
+      <stop offset=".4" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="uuid-1f92884f-33e3-48a6-b228-2a47e964bcc0" data-name="mask-4" x="135.3681" y="135.819" width="360.9817" height="360.9818" maskUnits="userSpaceOnUse">
+      <circle cx="315.859" cy="316.3099" r="180.4909" fill="url(#uuid-34527de0-bc4d-40b7-b473-f3fd301fb7f7)"/>
+    </mask>
+    <linearGradient id="uuid-9a3093e7-ce77-4dfe-b15b-babf51bc7ccb" x1="-5616.2429" y1="3302.3847" x2="-5255.2611" y2="3302.3847" gradientTransform="translate(2533.2596 6277.5206) rotate(100.8766)" xlink:href="#uuid-e8f93afb-ad47-4a98-aad9-fb898306ae55"/>
+    <mask id="uuid-c0be9710-7bf1-4652-9ea0-0a4ab97c2d7b" data-name="mask-5" x="135.3676" y="135.7528" width="361.0484" height="361.0485" maskUnits="userSpaceOnUse">
+      <circle cx="315.8918" cy="316.2771" r="180.4909" fill="url(#uuid-9a3093e7-ce77-4dfe-b15b-babf51bc7ccb)"/>
+    </mask>
+    <linearGradient id="uuid-ec8c357c-688d-49d2-8f29-3a2e30e6a17a" x1="-1907.5946" y1="5610.4438" x2="-1546.6128" y2="5610.4438" gradientTransform="translate(-5294.5848 -1410.7938) rotate(-90)" xlink:href="#uuid-34527de0-bc4d-40b7-b473-f3fd301fb7f7"/>
+    <mask id="uuid-db29c07b-731b-46a5-a48e-5f1fbcde7a61" data-name="mask-6" x="135.3681" y="135.8191" width="360.9817" height="360.9818" maskUnits="userSpaceOnUse">
+      <circle cx="315.859" cy="316.31" r="180.4909" transform="translate(-131.152 315.9911) rotate(-45)" fill="url(#uuid-ec8c357c-688d-49d2-8f29-3a2e30e6a17a)"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#uuid-39b9e999-853b-4475-a2bf-cca094c622a2)">
+    <g mask="url(#uuid-7f7d66cf-45f0-44db-9ad1-8acceedb9b63)">
+      <g>
+        <g mask="url(#uuid-71487c58-f9a0-4e19-9f7e-3c553dd68324)">
+          <circle cx="315.859" cy="316.3099" r="225" fill="#225771"/>
+        </g>
+        <g mask="url(#uuid-1f92884f-33e3-48a6-b228-2a47e964bcc0)">
+          <circle cx="315.859" cy="316.3099" r="177.9488" fill="#246157"/>
+        </g>
+        <g mask="url(#uuid-c0be9710-7bf1-4652-9ea0-0a4ab97c2d7b)">
+          <circle cx="315.8918" cy="316.2771" r="177.9488" fill="#297497"/>
+        </g>
+        <g mask="url(#uuid-db29c07b-731b-46a5-a48e-5f1fbcde7a61)">
+          <circle cx="315.859" cy="316.31" r="177.9487" transform="translate(-131.152 315.9911) rotate(-45)" fill="#297497"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -15,12 +15,20 @@ const HeaderBanner = ({
       <span className="font-semibold">Spaceship Web Hosting</span>
     </>
   ),
-  backgroundColor = '#001b55'
+  backgroundColor
 }: HeaderBannerProps) => {
   return (
     <motion.div
-      className="text-white text-center py-2 text-sm font-medium tracking-wide"
-      style={{ backgroundColor, boxShadow: 'none' }}
+      className="text-center py-2 text-sm font-medium tracking-wide"
+      style={{ 
+        backgroundColor: backgroundColor || 'rgb(var(--header-banner-bg))',
+        color: 'rgb(var(--header-banner-text))',
+        boxShadow: 'none', 
+        border: 'none', 
+        borderTop: 'none', 
+        borderBottom: 'none', 
+        marginTop: 0 
+      }}
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}

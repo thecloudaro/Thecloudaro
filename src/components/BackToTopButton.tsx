@@ -34,7 +34,19 @@ const BackToTopButton = () => {
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 bg-white text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded-full p-3 shadow-lg transition-all duration-300 hover:shadow-xl"
+          className="fixed bottom-6 right-6 z-50 rounded-full p-3 shadow-lg transition-all duration-300 hover:shadow-xl"
+          style={{
+            backgroundColor: 'rgb(var(--back-to-top-bg))',
+            color: 'rgb(var(--back-to-top-text))'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = 'rgb(var(--back-to-top-text-hover))';
+            e.currentTarget.style.backgroundColor = 'rgb(var(--back-to-top-bg-hover))';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = 'rgb(var(--back-to-top-text))';
+            e.currentTarget.style.backgroundColor = 'rgb(var(--back-to-top-bg))';
+          }}
           aria-label="Back to top"
         >
           <ChevronUp className="w-6 h-6" />

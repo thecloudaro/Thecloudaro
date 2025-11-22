@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
-import Navbar from "@/components/Navbar/Navbar";
 import TransferPricing from "@/components/Transfer/TransferPricing";
 import TransferHeroFeatures from "@/components/Transfer/TransferHeroFeatures";
 import TransferInstructions from "@/components/Transfer/TransferInstructions";
@@ -31,7 +30,7 @@ const DomainTransferPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen text-gray-300 overflow-hidden" style={{ backgroundColor: '#2d2e2e' }}>
+    <div className="relative min-h-screen overflow-hidden" style={{ backgroundColor: 'rgb(var(--domain-transfer-page-bg))', color: 'rgb(var(--domain-transfer-page-text))' }}>
       {/* Radial gradient overlays to match reference (stronger from bottom) */}
       <div
         aria-hidden
@@ -89,13 +88,12 @@ const DomainTransferPage = () => {
       />
       {/* Content wrapper above gradient */}
       <div className="relative z-10">
-        <Navbar hideBanner />
         {/* Breadcrumb under navbar (aligned to logo) */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="py-4 text-sm text-gray-400">
+          <div className="py-4 text-sm" style={{ color: 'rgb(var(--domain-transfer-page-breadcrumb-inactive))' }}>
             <span className="opacity-80">Domains</span>
             <span className="mx-2">›</span>
-            <span className="text-gray-200">Transfer</span>
+            <span style={{ color: 'rgb(var(--domain-transfer-page-breadcrumb-active))' }}>Transfer</span>
           </div>
         </div>
         {/* Hero Section */}
@@ -127,9 +125,9 @@ const DomainTransferPage = () => {
             {/* Search Section */}
             <div className="max-w-2xl mx-auto w-full">
               <div className="relative w-full mb-4 sm:mb-6 md:mb-8">
-                <div className="flex items-stretch bg-hero-search-bg backdrop-blur-md rounded-full p-1.5 sm:p-2 border border-hero-search-border shadow-lg" style={{ backgroundColor: '#1b1d1c' }}>
+                <div className="flex items-stretch bg-hero-search-bg backdrop-blur-md rounded-full p-1.5 sm:p-2 border border-hero-search-border shadow-lg" style={{ backgroundColor: 'rgb(var(--domain-transfer-page-search-bg))' }}>
                   <div className="flex items-center flex-1 px-3 sm:px-4">
-                    <Search className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 mr-2 sm:mr-3" />
+                    <Search className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }} />
                     <input
                       type="text"
                       value={searchTerm}
@@ -144,7 +142,21 @@ const DomainTransferPage = () => {
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleSearch(searchTerm)}
                     disabled={isSearching}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-sm sm:text-base transition disabled:opacity-50"
+                    className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-sm sm:text-base transition disabled:opacity-50"
+                    style={{
+                      backgroundColor: 'rgb(var(--domain-transfer-page-button-bg))',
+                      color: 'rgb(var(--domain-transfer-page-button-text))'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!e.currentTarget.disabled) {
+                        e.currentTarget.style.backgroundColor = 'rgb(var(--domain-transfer-page-button-hover))';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!e.currentTarget.disabled) {
+                        e.currentTarget.style.backgroundColor = 'rgb(var(--domain-transfer-page-button-bg))';
+                      }
+                    }}
                   >
                     {isSearching ? "Searching..." : "Transfer"}
                   </motion.button>
@@ -158,12 +170,12 @@ const DomainTransferPage = () => {
         <div className="relative">
           <svg className="w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M0,120L1200,5L1200,120L0,120Z" 
-                  fill="#1b1d1c" 
+                  fill="rgb(var(--domain-transfer-page-divider))" 
                   opacity="1" />
           </svg>
         </div>
         {/* Transfer Pricing Section */}
-        <div style={{ backgroundColor: '#1b1d1c', position: 'relative' }}>
+        <div style={{ backgroundColor: 'rgb(var(--domain-transfer-page-divider))', position: 'relative' }}>
           <TransferPricing />
         </div>
 

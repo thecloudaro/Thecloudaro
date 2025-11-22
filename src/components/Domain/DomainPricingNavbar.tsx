@@ -57,7 +57,7 @@ const DomainPricingNavbar = () => {
       transition={{ duration: 0.3 }}
       className={`fixed left-0 right-0 transition-all duration-300 ease-out shadow-lg ${topOffsetClass} ${zIndexClass}`}
       style={{ 
-        backgroundColor: 'hsl(var(--domain-new-navbar-bg))',
+        backgroundColor: 'rgb(var(--domain-pricing-navbar-bg))',
         top: isScrollingUp ? undefined : 0, // Force 0px when scrolling down
         left: 0,
         right: 0,
@@ -74,14 +74,27 @@ const DomainPricingNavbar = () => {
           {/* Only Search Bar - Wider */}
           <div className="w-full max-w-6xl">
             <div className="relative">
-              <div className="flex items-center rounded-full p-4 border border-gray-700" style={{ backgroundColor: 'hsl(var(--domain-button-bg))' }}>
-                <Search className="w-5 h-5 text-gray-400 mr-4 ml-3" />
+              <div className="flex items-center rounded-full p-4 border" style={{ backgroundColor: 'rgb(var(--domain-pricing-navbar-bg))', borderColor: 'rgb(var(--domain-pricing-navbar-border))' }}>
+                <Search className="w-5 h-5 mr-4 ml-3" style={{ color: 'rgb(var(--domain-hero-text-gray-400))' }} />
                 <input
                   type="text"
                   placeholder="Search for a domain name"
-                  className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none text-base"
+                  className="flex-1 bg-transparent outline-none text-base placeholder:text-[rgb(var(--domain-hero-text-gray-400))]"
+                  style={{ color: 'rgb(var(--hosting-text-white))' }}
                 />
-                <button className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition-colors duration-300 mr-2">
+                <button 
+                  className="p-3 rounded-full transition-colors duration-300 mr-2"
+                  style={{ 
+                    backgroundColor: 'rgb(var(--domain-pricing-navbar-search-button-bg))',
+                    color: 'rgb(var(--hosting-text-white))'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-navbar-search-button-hover))';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-navbar-search-button-bg))';
+                  }}
+                >
                   <Search className="w-5 h-5" />
                 </button>
               </div>

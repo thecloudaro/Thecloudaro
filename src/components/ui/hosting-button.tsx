@@ -34,34 +34,53 @@ const HostingButton = ({
   // Variant classes
   const variantClasses = {
     default: {
-      button: "bg-white text-gray-800 border border-gray-200 hover:bg-gray-100",
+      button: "border",
       style: {
         backgroundColor: 'rgb(var(--hosting-bg-white))',
         color: 'rgb(var(--hosting-text-gray-800))',
         borderColor: 'rgb(var(--hosting-bg-gray-200))',
         borderWidth: '1px'
+      },
+      hoverStyle: {
+        scale: 1.02,
+        backgroundColor: 'rgb(var(--hosting-bg-gray-100))'
       }
     },
     white: {
-      button: "bg-white text-black hover:bg-gray-50 border border-gray-200",
-      style: {}
+      button: "border",
+      style: {
+        backgroundColor: 'rgb(var(--hosting-bg-white))',
+        color: 'rgb(var(--hosting-text-black))',
+        borderColor: 'rgb(var(--hosting-bg-gray-200))',
+        borderWidth: '1px'
+      },
+      hoverStyle: {
+        scale: 1.02,
+        backgroundColor: 'rgb(var(--hosting-bg-gray-50))'
+      }
     }
   };
   
   const buttonClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant].button} ${className}`;
-  const buttonStyle = variant === "default" ? variantClasses[variant].style : {};
-  
-  const hoverStyle = variant === "default" 
-    ? { scale: 1.02, backgroundColor: 'rgb(var(--hosting-bg-gray-100))' }
-    : { scale: 1.02 };
+  const buttonStyle = variantClasses[variant].style;
 
   if (href) {
     return (
-      <motion.div whileHover={hoverStyle} whileTap={{ scale: 0.98 }}>
+      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
         <Link
           href={href}
-          className={buttonClasses}
+          className={`${buttonClasses} hover:transition-colors`}
           style={buttonStyle}
+          onMouseEnter={(e) => {
+            if (variant === 'default') {
+              e.currentTarget.style.backgroundColor = 'rgb(var(--hosting-bg-gray-100))';
+            } else {
+              e.currentTarget.style.backgroundColor = 'rgb(var(--hosting-bg-gray-50))';
+            }
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgb(var(--hosting-bg-white))';
+          }}
         >
           {children}
         </Link>
@@ -72,10 +91,20 @@ const HostingButton = ({
   return (
     <motion.button
       onClick={onClick}
-      whileHover={hoverStyle}
+      whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
-      className={buttonClasses}
+      className={`${buttonClasses} hover:transition-colors`}
       style={buttonStyle}
+      onMouseEnter={(e) => {
+        if (variant === 'default') {
+          e.currentTarget.style.backgroundColor = 'rgb(var(--hosting-bg-gray-100))';
+        } else {
+          e.currentTarget.style.backgroundColor = 'rgb(var(--hosting-bg-gray-50))';
+        }
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = 'rgb(var(--hosting-bg-white))';
+      }}
     >
       {children}
     </motion.button>

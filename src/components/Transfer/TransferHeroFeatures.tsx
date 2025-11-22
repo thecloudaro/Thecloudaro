@@ -24,7 +24,7 @@ const TransferHeroFeatures = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 lg:py-28" style={{ backgroundColor: '#1b1d1c' }}>
+    <section className="py-16 sm:py-20 md:py-24 lg:py-28" style={{ backgroundColor: 'rgb(var(--transfer-hero-features-bg))' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24">
         {/* Heading and Description */}
         <div className="mb-20 sm:mb-24 md:mb-28 lg:mb-32">
@@ -32,8 +32,8 @@ const TransferHeroFeatures = () => {
             heading="Effortless domain name transfer"
             description="Easy, fast, and safe transfers with free privacy protection."
             headingTag="h2"
-            headingClassName="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 text-center"
-            descriptionClassName="text-gray-400 text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto text-center"
+            headingClassName="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-center !text-[rgb(var(--transfer-hero-features-heading))]"
+            descriptionClassName="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto text-center !text-[rgb(var(--transfer-hero-features-description))]"
           />
         </div>
 
@@ -69,18 +69,18 @@ const TransferHeroFeatures = () => {
                         boxShadow: '0 0 30px hsl(var(--gradient-teal) / 0.5), inset 0 0 20px hsl(var(--gradient-teal) / 0.3)'
                       }}
                     >
-                      <IconComponent className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 text-white" />
+                      <IconComponent className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 !text-[rgb(var(--transfer-hero-features-icon))]" />
                     </div>
                   </div>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+                <h3 className="text-2xl sm:text-3xl font-bold mb-4 !text-[rgb(var(--transfer-hero-features-title))]">
                   {feature.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-400 text-base sm:text-lg leading-relaxed">
+                <p className="text-base sm:text-lg leading-relaxed !text-[rgb(var(--transfer-hero-features-description))]">
                   {feature.description}
                 </p>
               </motion.div>

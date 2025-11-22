@@ -80,7 +80,11 @@ export default function FeatureRequestModal({
   </p>
   <p className="text-modal-text-secondary text-xs mt-1">
     Need help instead?{" "}
-    <Link href="#" className="text-blue-400 hover:underline">
+    <Link 
+      href="#" 
+      className="hover:underline"
+      style={{ color: 'rgb(var(--feature-modal-link))' }}
+    >
       Contact Support
     </Link>
   </p>
@@ -90,20 +94,27 @@ export default function FeatureRequestModal({
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm mb-1 text-gray-300">
-                  Title <span className="text-gray-500 text-xs">(Optional)</span>
+                <label className="block text-sm mb-1" style={{ color: 'rgb(var(--feature-modal-label))' }}>
+                  Title <span className="text-xs" style={{ color: 'rgb(var(--feature-modal-label-optional))' }}>(Optional)</span>
                 </label>
                 <input
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Add a short title"
-                  className="w-full bg-transparent border border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 transition"
+                  className="w-full bg-transparent border rounded-lg px-3 py-2 text-sm focus:outline-none transition"
+                  style={{ borderColor: 'rgb(var(--feature-modal-input-border))' }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = 'rgb(var(--feature-modal-input-border-focus))';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = 'rgb(var(--feature-modal-input-border))';
+                  }}
                 />
               </div>
 
               <div>
-                <label className="block text-sm mb-1 text-gray-300">
+                <label className="block text-sm mb-1" style={{ color: 'rgb(var(--feature-modal-label))' }}>
                   Feature Description
                 </label>
                 <textarea
@@ -111,13 +122,20 @@ export default function FeatureRequestModal({
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Describe your feature..."
                   rows={3}
-                  className="w-full bg-transparent border border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 transition"
+                  className="w-full bg-transparent border rounded-lg px-3 py-2 text-sm focus:outline-none transition"
+                  style={{ borderColor: 'rgb(var(--feature-modal-input-border))' }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = 'rgb(var(--feature-modal-input-border-focus))';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = 'rgb(var(--feature-modal-input-border))';
+                  }}
                 />
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm mb-1 text-gray-300">
+                  <label className="block text-sm mb-1" style={{ color: 'rgb(var(--feature-modal-label))' }}>
                     Email
                   </label>
                   <input
@@ -125,20 +143,34 @@ export default function FeatureRequestModal({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full bg-transparent border border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 transition"
+                    className="w-full bg-transparent border rounded-lg px-3 py-2 text-sm focus:outline-none transition"
+                    style={{ borderColor: 'rgb(var(--feature-modal-input-border))' }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = 'rgb(var(--feature-modal-input-border-focus))';
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = 'rgb(var(--feature-modal-input-border))';
+                    }}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm mb-1 text-gray-300">
+                  <label className="block text-sm mb-1" style={{ color: 'rgb(var(--feature-modal-label))' }}>
                     Full Name{" "}
-                    <span className="text-gray-500 text-xs">(Optional)</span>
+                    <span className="text-xs" style={{ color: 'rgb(var(--feature-modal-label-optional))' }}>(Optional)</span>
                   </label>
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Enter your name"
-                    className="w-full bg-transparent border border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 transition"
+                    className="w-full bg-transparent border rounded-lg px-3 py-2 text-sm focus:outline-none transition"
+                    style={{ borderColor: 'rgb(var(--feature-modal-input-border))' }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = 'rgb(var(--feature-modal-input-border-focus))';
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = 'rgb(var(--feature-modal-input-border))';
+                    }}
                   />
                 </div>
               </div>
@@ -148,9 +180,10 @@ export default function FeatureRequestModal({
                   type="checkbox"
                   checked={agree}
                   onChange={(e) => setAgree(e.target.checked)}
-                  className="accent-blue-600 mt-1"
+                  className="mt-1"
+                  style={{ accentColor: 'rgb(var(--feature-modal-checkbox-accent))' }}
                 />
-                <label className="text-gray-400 leading-tight">
+                <label className="leading-tight" style={{ color: 'rgb(var(--feature-modal-checkbox-label))' }}>
                   I agree to be contacted about my feedback.
                 </label>
               </div>
@@ -159,13 +192,30 @@ export default function FeatureRequestModal({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="text-blue-400 hover:text-blue-300 text-sm font-medium"
+                  className="text-sm font-medium"
+                  style={{ color: 'rgb(var(--feature-modal-cancel-text))' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'rgb(var(--feature-modal-cancel-hover))';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'rgb(var(--feature-modal-cancel-text))';
+                  }}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-5 py-2 text-sm transition-all"
+                  className="rounded-full px-5 py-2 text-sm transition-all"
+                  style={{
+                    backgroundColor: 'rgb(var(--feature-modal-submit-bg))',
+                    color: 'rgb(var(--feature-modal-submit-text))'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgb(var(--feature-modal-submit-hover))';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgb(var(--feature-modal-submit-bg))';
+                  }}
                 >
                   Submit Feature
                 </button>

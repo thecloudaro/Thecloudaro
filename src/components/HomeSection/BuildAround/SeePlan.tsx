@@ -13,7 +13,7 @@ interface SeePlanButtonProps {
 const SeePlanButton: React.FC<SeePlanButtonProps> = ({ href, onClick, className = '' }) => {
   const baseClasses = `
     inline-flex items-center justify-center px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm md:text-base font-semibold rounded-full shadow-sm
-    bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600
+    bg-[hsl(var(--buildaround-seeplan-bg))] text-[hsl(var(--buildaround-seeplan-text))] hover:bg-[hsl(var(--buildaround-seeplan-hover-bg))] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[hsl(var(--buildaround-seeplan-focus-ring))]
     transition-transform duration-200 ease-in-out ${className}
   `
 

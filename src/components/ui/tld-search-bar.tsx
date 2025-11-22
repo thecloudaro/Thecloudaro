@@ -29,7 +29,7 @@ const TLDSearchBar = ({
         ...(borderColor && { border: `1px solid ${borderColor}` })
       }}
     >
-      <Search className="w-3 h-3 text-gray-300 mr-1.5 sm:mr-2 flex-shrink-0" />
+      <Search className="w-3 h-3 mr-1.5 sm:mr-2 flex-shrink-0" style={{ color: 'rgb(var(--ui-tld-search-icon))' }} />
       <input
         type="text"
         placeholder={placeholder}

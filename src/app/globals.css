@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
-@import "../components/Navbar/navbar.css";
 
 
 /* ===============================
@@ -59,6 +58,7 @@
 
         /* FAQ Page Custom Colors */
         --faq-background: 0 0% 10%;
+        --faq-bg-default: 0 0% 0%; /* black - default background */
         --faq-card: 0 0% 12%;
         --faq-border: 0 0% 20%;
         --faq-text: 0 0% 98%;
@@ -117,6 +117,12 @@
     --review-card-text: 0 0% 100%;
     --review-card-text-muted: 0 0% 70%;
     --review-card-success: 142 76% 36%;
+    --review-card-star-filled: 142 76% 36%; /* #00B67A - green */
+    --review-card-star-empty-stroke: 0 0% 23%; /* #3A3A3A - dark gray */
+    --review-card-title-text: 0 0% 100% / 0.9; /* white/90 */
+    --review-card-review-text: 0 0% 70%; /* gray-300 - Tailwind default */
+    --review-card-name-text: 0 0% 100%; /* white */
+    --review-card-shadow: 0 0% 0% / 0.2; /* black/20 */
 
     /* Web Hosting Card */
     --webhosting-card-bg: 210 100% 8%;
@@ -125,8 +131,12 @@
     --navbar-bg-transparent: 0 0% 0% / 0;
     --navbar-bg-scrolled: 210 20% 7% / 0.7;
     --navbar-bg-dropdown: 210 20% 7% / 0.8;
+    --navbar-bg-hover: 217 33% 17% / 0.5; /* gray-700/50 - Tailwind default */
     --navbar-text: 210 20% 90%;
-    --navbar-text-hover: 0 0% 100%;
+    --navbar-text-default: 0 0% 83%; /* gray-300 - Tailwind default */
+    --navbar-text-active: 0 0% 100%; /* white */
+    --navbar-text-hover: 0 0% 100%; /* white */
+    --navbar-text-slate: 215 20% 65%; /* slate-200 - Tailwind default */
     --navbar-icon-bg: 0 0% 20% / 0.5;
 
     /* Dropdown Colors */
@@ -149,6 +159,14 @@
     --button-secondary-text: 0 0% 70%;
     --button-secondary-hover: 0 0% 30%;
 
+    /* Hero Button Component */
+    --hero-button-active-bg: 217 91% 60%; /* blue-600 */
+    --hero-button-active-text: 0 0% 100%; /* white */
+    --hero-button-active-hover-bg: 217 91% 55%; /* blue-700 */
+    --hero-button-inactive-text: 0 0% 60%; /* gray-400 */
+    --hero-button-inactive-hover-text: 0 0% 100%; /* white */
+    --hero-button-inactive-hover-bg: 0 0% 35% / 0.5; /* gray-700/50 */
+
     /* Hero Section */
     --hero-bg: 210 20% 7%;
     --hero-text: 0 0% 100%;
@@ -158,10 +176,68 @@
     --hero-tab-bg: 0 0% 20% / 0.7;
     --hero-price-bg: 0 0% 20% / 0.7;
     --hero-price-border: 0 0% 27%;
+    
+    /* Hero Section Component Specific Colors */
+    --hero-section-search-icon: 0 0% 60%; /* gray-400 */
+    --hero-section-search-button-bg: 217 91% 60%; /* blue-600 */
+    --hero-section-search-button-hover-bg: 217 91% 55%; /* blue-700 */
+    --hero-section-search-button-text: 0 0% 100%; /* white */
 
     /* Build Around Section */
     --buildaround-bg: 0 0% 0%;
     --buildaround-text: 0 0% 100%;
+    
+    /* Build Around Heading Component */
+    --buildaround-heading-text: 0 0% 100%; /* white */
+    
+    /* Build Around Paragraph Component */
+    --buildaround-paragraph-text: 0 0% 60%; /* gray-400 - Tailwind default */
+    
+    /* Build Around SeePlan Button Component */
+    --buildaround-seeplan-bg: 217 91% 60%; /* blue-600 - Tailwind default */
+    --buildaround-seeplan-text: 0 0% 100%; /* white */
+    --buildaround-seeplan-hover-bg: 217 91% 55%; /* blue-700 - Tailwind default */
+    --buildaround-seeplan-focus-ring: 217 91% 60%; /* blue-600 - Tailwind default */
+    
+    /* Spacemail Card Component */
+    --spacemail-card-bg: 217 33% 17%; /* gray-800 - Tailwind default */
+    --spacemail-card-gradient-from: 271 81% 56%; /* purple-500 - Tailwind default */
+    --spacemail-card-gradient-to: 271 70% 45%; /* purple-700 - Tailwind default */
+    --spacemail-card-gradient-overlay-from: 271 81% 56% / 0.4; /* purple-500/40 */
+    --spacemail-card-gradient-overlay-to: 271 70% 45% / 0.4; /* purple-700/40 */
+    --spacemail-card-badge: 271 81% 56%; /* purple-500 - Tailwind default */
+    --spacemail-card-text: 0 0% 100%; /* white */
+    --spacemail-card-text-muted: 0 0% 70%; /* gray-300 - Tailwind default */
+    
+    /* Starlight Card Component */
+    --starlight-card-bg: 217 33% 17%; /* gray-800 - Tailwind default */
+    --starlight-card-header-bg: 38 92% 50%; /* orange-400 - Tailwind default */
+    --starlight-card-badge: 48 96% 53%; /* yellow-400 - Tailwind default */
+    --starlight-card-text: 0 0% 100%; /* white */
+    --starlight-card-text-muted: 0 0% 70%; /* gray-300 - Tailwind default */
+    
+    /* WebHosting Card Component */
+    --webhosting-card-main-bg: 217 33% 17%; /* gray-800 - Tailwind default */
+    --webhosting-card-gradient-from: 210 50% 15% / 0.4; /* #0d1b2a/40 */
+    --webhosting-card-gradient-via: 220 40% 20% / 0.4; /* #1b263b/40 */
+    --webhosting-card-gradient-to: 210 30% 35% / 0.3; /* #415a77/30 */
+    --webhosting-card-text: 0 0% 100%; /* white */
+    --webhosting-card-text-muted: 0 0% 70%; /* gray-300 - Tailwind default */
+    
+    /* Chat Button Component */
+    --chat-button-bg: 217 91% 60%; /* blue-600 - Tailwind default */
+    --chat-button-hover-bg: 217 91% 55%; /* blue-700 - Tailwind default */
+    --chat-button-text: 0 0% 100%; /* white */
+    
+    /* EasyWP Card Component */
+    --easywp-card-bg: 217 33% 17%; /* gray-800 - Tailwind default */
+    --easywp-card-gradient-from: 142 76% 36%; /* green-600 - Tailwind default */
+    --easywp-card-gradient-to: 173 80% 40%; /* teal-500 - Tailwind default */
+    --easywp-card-gradient-overlay-from: 142 76% 36% / 0.4; /* green-600/40 */
+    --easywp-card-gradient-overlay-to: 173 80% 40% / 0.4; /* teal-500/40 */
+    --easywp-card-badge: 142 76% 50%; /* green-500 - Tailwind default */
+    --easywp-card-text: 0 0% 100%; /* white */
+    --easywp-card-text-muted: 0 0% 70%; /* gray-300 - Tailwind default */
 
     /* Customer Section */
     --customer-bg: 0 0% 0%;
@@ -170,6 +246,22 @@
     --customer-trustpilot-bg: 0 0% 100%;
     --customer-trustpilot-text: 0 0% 0%;
     --customer-trustpilot-star: 142 76% 36%;
+    
+    /* Customer Section Component - Gradient Overlays */
+    --customer-gradient-from: 0 0% 0% / 0.8; /* black/80 */
+    --customer-gradient-via: 0 0% 0% / 0.4; /* black/40 */
+    
+    /* Rating Summary Component */
+    --rating-summary-text: 0 0% 100%; /* white */
+    --rating-summary-star-filled: 142 76% 36%; /* #00B67A - green */
+    --rating-summary-star-empty: 0 0% 10%; /* #1A1A1A - dark gray */
+    --rating-summary-text-muted: 0 0% 60%; /* gray-400 - Tailwind default */
+    --rating-summary-text-hover: 0 0% 70%; /* gray-300 - Tailwind default */
+
+    /* Dynamic Section Component */
+    --dynamic-section-bg: 210 8% 11%; /* Same as background */
+    --dynamic-section-text: 0 0% 89%; /* Same as foreground */
+    --dynamic-section-heading: 0 0% 100%; /* white for headings */
 
     /* Footer Colors */
     --footer-bg-primary: 210 20% 15%;
@@ -219,17 +311,1202 @@
 
     /* ====== Hosting Page Colors (RGB format) ====== */
     --hosting-bg: 31 32 33; /* #1f2021 */
+    --hosting-bg-dark: 26 26 26; /* #1a1a1a */
     --hosting-text-white: 255 255 255;
+    --hosting-text-gray-300: 209 213 219; /* gray-300 - Tailwind default */
     --hosting-text-gray-800: 31 41 55;
+    --hosting-text-black: 0 0 0; /* black */
     --hosting-bg-white: 255 255 255;
     --hosting-bg-gray-200: 229 231 235;
     --hosting-bg-gray-100: 243 244 246;
+    --hosting-bg-gray-50: 249 250 251; /* gray-50 - Tailwind default */
     --hosting-blue-600: 37 99 235;
     --hosting-blue-500: 59 130 246;
     --hosting-blue-300: 147 197 253;
     --hosting-blue-200: 191 219 254;
     --hosting-blue-800: 30 64 175;
     --hosting-blue-900: 30 58 138;
+    
+    /* Hosting Page Specific Colors */
+    --hosting-accent-cyan: 77 208 225; /* #4dd0e1 - Popular badge and gradient */
+    --hosting-accent-cyan-dark: 31 41 55; /* Text on cyan badge */
+    --hosting-gradient-teal: 20 100 120; /* Hero gradient teal */
+    --hosting-gradient-teal-rgba: 20, 100, 120; /* Hero gradient teal for rgba() */
+    --hosting-section-bg: 26 26 26; /* #1a1a1a - Section backgrounds */
+    --hosting-header-banner: 0 27 85; /* #001b55 - Header banner */
+    
+    /* Gradient colors for circular spotlight effect */
+    --hosting-spotlight-cyan: 77, 208, 225; /* #4dd0e1 for gradient rgba */
+    --hosting-spotlight-bg: 31, 32, 33; /* hosting-bg for gradient rgba */
+    --hosting-card-bg: 17 24 39; /* rgba equivalent for gray-900/80 */
+    --hosting-card-border: 55 65 81; /* gray-700/50 */
+    --hosting-divider: 75 85 99; /* gray-600 */
+    --hosting-text-muted: 156 163 175; /* gray-400 */
+    --hosting-text-gray: 209 213 219; /* gray-300 */
+    --hosting-text-gray-dark: 107 114 128; /* gray-500 */
+    --hosting-button-active: 0 0 0; /* black */
+    --hosting-button-inactive: 31, 41, 55, 0.5; /* gray-800/50 - for rgba() */
+    --hosting-discount-badge: 34 197 94; /* green-500 */
+    --hosting-select-bg: 55 65 81; /* gray-700/50 */
+    --hosting-select-border: 75 85 99; /* gray-600 */
+    --hosting-blur-bg: 31 41 55; /* gray-800/20 */
+    --hosting-blur-border: 55 65 81; /* gray-700/50 */
+    --hosting-button-bg: 31 41 55; /* gray-800 */
+    --hosting-button-hover: 55 65 81; /* gray-700 */
+    
+    /* HostingPlanControls Component Colors */
+    --hosting-controls-blur-bg: 75, 85, 99, 0.25; /* gray-600/25 - for rgba() */
+    --hosting-controls-toggle-bg: 31 41 55; /* gray-800 - #1F2937 */
+    --hosting-controls-toggle-bg-plain: 22 27 33; /* dark gray - #161b21 */
+    --hosting-controls-select-bg: 17 24 39; /* gray-900 - #111827 */
+    --hosting-controls-select-border: 31 41 55; /* gray-800 - #1f2937 */
+    --hosting-controls-border-white-15: 255, 255, 255, 0.15; /* white/15 - for rgba() */
+    --hosting-controls-border-white-12: 255, 255, 255, 0.12; /* white/12 - for rgba() */
+    --hosting-controls-text-white-50: 255, 255, 255, 0.5; /* white/50 - for rgba() */
+    --hosting-controls-text-white-60: 255, 255, 255, 0.6; /* white/60 - for rgba() */
+    --hosting-controls-chevron-gray: 156 163 175; /* gray-400 - #9CA3AF */
+    --hosting-controls-text-gray-300: 209 213 219; /* gray-300 - #D1D5DB */
+    --hosting-controls-blue-hover: 45, 140, 255, 0.2; /* blue hover - for rgba() */
+    --hosting-controls-focus-ring: 37 99 235; /* blue-600 - #2563EB */
+    
+    /* ChooseHosting Component Colors */
+    --hosting-choose-button-bg: 59 130 246; /* blue-500 - #3B82F6 */
+    --hosting-choose-button-hover: 37 99 235; /* blue-600 - #2563EB */
+    --hosting-choose-text-gray-300: 209 213 219; /* gray-300 */
+    --hosting-choose-text-gray-400: 156 163 175; /* gray-400 */
+    --hosting-choose-text-gray-500: 107 114 128; /* gray-500 */
+    --hosting-choose-text-gray-600: 75 85 99; /* gray-600 */
+    --hosting-choose-border-gray-600: 75 85 99; /* gray-600 */
+    --hosting-choose-border-gray-800: 31 41 55; /* gray-800 - #1f2937 */
+    --hosting-choose-text-green: 74 222 128; /* green-400 */
+    --hosting-choose-text-purple: 196 181 253; /* purple-300 */
+    
+    /* PickYourHosting Component Colors */
+    --hosting-pick-popular-badge: 33 150 243; /* blue-500 - #2196F3 */
+    --hosting-pick-button-bg: 33 150 243; /* blue-500 - #2196F3 */
+    --hosting-pick-button-text: 255 255 255; /* white */
+    --hosting-pick-discount-bg: 77, 208, 225, 0.12; /* cyan/12 - for rgba() */
+    --hosting-pick-text-green: 76 175 80; /* green-500 - #4CAF50 */
+    --hosting-pick-text-purple: 156 39 176; /* purple-500 - #9C27B0 */
+    --hosting-pick-addon-button-bg: 31 41 55; /* gray-800 - #1F2937 */
+    --hosting-pick-addon-button-hover: 75 85 99; /* gray-600 - #4B5563 */
+    --hosting-pick-addon-button-active: 33 150 243; /* blue-500 - #2196F3 */
+    --hosting-pick-compare-button-text: 33 150 243; /* blue-500 - #2196F3 */
+    
+    /* BuildAtHosting Component Colors */
+    --hosting-build-carousel-active: 37 99 235; /* blue-600 - #2563EB */
+    --hosting-build-carousel-inactive: 55 65 81; /* gray-700 - Tailwind default */
+    --hosting-build-border-gray-800: 31 41 55; /* gray-800 - Tailwind default */
+    --hosting-build-bg-overlay: 17, 24, 39, 0.6; /* gray-900/60 - for rgba() */
+    
+    /* MigrateHosting Component Colors */
+    --hosting-migrate-card-bg: 14 39 51; /* dark teal - #0E2733 */
+    --hosting-migrate-card-border: 19 57 74; /* teal border - #13394A */
+    --hosting-migrate-link: 37 99 235; /* blue-600 - #2563EB */
+    --hosting-migrate-image-border: 31 41 55; /* gray-800 - #1f2937 */
+    --hosting-migrate-image-bg: 17 24 39; /* gray-900 - #111827 */
+    
+    /* AutoBackupSection Component Colors */
+    --hosting-autobackup-gradient-1-from: 14 165 233; /* sky-500 - Tailwind default */
+    --hosting-autobackup-gradient-1-via: 59 130 246; /* blue-500 - Tailwind default */
+    --hosting-autobackup-gradient-1-to: 99 102 241; /* indigo-500 - Tailwind default */
+    --hosting-autobackup-gradient-2-from: 6 182 212; /* cyan-500 - Tailwind default */
+    --hosting-autobackup-gradient-2-via: 14 165 233; /* sky-500 - Tailwind default */
+    --hosting-autobackup-gradient-2-to: 37 99 235; /* blue-600 - Tailwind default */
+    --hosting-autobackup-gradient-3-from: 59 130 246; /* blue-500 - Tailwind default */
+    --hosting-autobackup-gradient-3-via: 99 102 241; /* indigo-500 - Tailwind default */
+    --hosting-autobackup-gradient-3-to: 100 116 139; /* slate-500 - Tailwind default */
+    --hosting-autobackup-shadow: 37, 99, 235, 0.35; /* blue-600/35 - for rgba() */
+    
+    /* FrequentlyBT Component Colors */
+    --hosting-frequently-gradient-spacemail-from: 123, 77, 255; /* #7B4DFF - for rgba() */
+    --hosting-frequently-gradient-spacemail-via: 136, 79, 255; /* #884FFF - for rgba() */
+    --hosting-frequently-gradient-spacemail-to: 130, 61, 255; /* #823DFF - for rgba() */
+    --hosting-frequently-gradient-easywp-from: 0, 133, 73; /* #008549 - for rgba() */
+    --hosting-frequently-gradient-easywp-via: 15, 141, 99; /* #0F8D63 - for rgba() */
+    --hosting-frequently-gradient-easywp-to: 1, 127, 52; /* #017F34 - for rgba() */
+    --hosting-frequently-gradient-starlight-from: 255, 179, 71; /* #FFB347 - for rgba() */
+    --hosting-frequently-gradient-starlight-via: 249, 144, 44; /* #F9902C - for rgba() */
+    --hosting-frequently-gradient-starlight-to: 246, 187, 83; /* #F6BB53 - for rgba() */
+    --hosting-frequently-gradient-webhosting-from: 4, 166, 208; /* #04A6D0 - for rgba() */
+    --hosting-frequently-gradient-webhosting-via: 10, 137, 180; /* #0A89B4 - for rgba() */
+    --hosting-frequently-gradient-webhosting-to: 10, 94, 155; /* #0A5E9B - for rgba() */
+    --hosting-frequently-button-bg: 255 255 255; /* white */
+    --hosting-frequently-button-text: 67 56 202; /* indigo-700 - Tailwind default */
+    --hosting-frequently-button-hover: 241 245 249; /* slate-100 - Tailwind default */
+    --hosting-frequently-button-shadow: 8, 10, 20, 0.25; /* for rgba() */
+    --hosting-frequently-arrow-bg: 255, 255, 255, 0.1; /* white/10 - for rgba() */
+    --hosting-frequently-arrow-hover: 255, 255, 255, 0.2; /* white/20 - for rgba() */
+    --hosting-frequently-arrow-shadow: 8, 10, 20, 0.35; /* for rgba() */
+    --hosting-frequently-dot-active: 255 255 255; /* white */
+    --hosting-frequently-dot-inactive: 255, 255, 255, 0.3; /* white/30 - for rgba() */
+    --hosting-frequently-card-shadow: 8, 10, 20, 0.35; /* for rgba() */
+    --hosting-frequently-card-shadow-hover: 8, 10, 20, 0.45; /* for rgba() */
+    --hosting-frequently-icon-bg: 255, 255, 255, 0.2; /* white/20 - for rgba() */
+    --hosting-frequently-text-white-80: 255, 255, 255, 0.8; /* white/80 - for rgba() */
+    --hosting-frequently-text-white-85: 255, 255, 255, 0.85; /* white/85 - for rgba() */
+    --hosting-frequently-text-white-70: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    
+    /* Disclaimers Component Colors */
+    --hosting-disclaimers-link: 31 122 255; /* #1f7aff - for rgb() */
+    --hosting-disclaimers-text: 203 213 225; /* slate-300 - Tailwind default */
+    
+    /* Business Email Page Colors */
+    --business-email-page-bg: 5 2 17; /* #050211 - for rgb() */
+    
+    /* BusinessHero Component Colors */
+    --business-hero-gradient-from: 122, 59, 255, 0.8; /* #7a3bff/80 - for rgba() */
+    --business-hero-gradient-via: 109, 59, 255, 0.7; /* #6d3bff/70 - for rgba() */
+    --business-hero-gradient-to: 79, 30, 255, 0.8; /* #4f1eff/80 - for rgba() */
+    --business-hero-blur-1: 161, 130, 255, 0.45; /* #a182ff/45 - for rgba() */
+    --business-hero-blur-2: 91, 17, 255, 0.6; /* #5b11ff/60 - for rgba() */
+    --business-hero-text-white-70: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --business-hero-text-white-85: 255, 255, 255, 0.85; /* white/85 - for rgba() */
+    --business-hero-button-white-bg: 255 255 255; /* white */
+    --business-hero-button-white-text: 0 0 0; /* black */
+    --business-hero-button-white-shadow: 0, 0, 0, 0.25; /* for rgba() */
+    --business-hero-button-white-shadow-hover: 0, 0, 0, 0.35; /* for rgba() */
+    --business-hero-button-purple-bg: 81 47 255; /* #512fff - for rgb() */
+    --business-hero-button-purple-hover: 67 29 245; /* #431df5 - for rgb() */
+    --business-hero-button-purple-shadow: 80, 46, 255, 0.35; /* for rgba() */
+    --business-hero-button-purple-shadow-hover: 80, 46, 255, 0.45; /* for rgba() */
+    --business-hero-divider-bg: 16 19 22; /* #101316 - for rgb() */
+    
+    /* Productivity Component Colors */
+    --business-productivity-bg: 16 19 22; /* #101316 - for rgb() */
+    --business-productivity-text-white-70: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    
+    /* ChooseYourBusiness Component Colors */
+    --business-choose-gradient-1-from: 122, 59, 255, 0.3; /* #7a3bff/30 - for rgba() */
+    --business-choose-gradient-1-via: 109, 59, 255, 0.2; /* #6d3bff/20 - for rgba() */
+    --business-choose-gradient-2-from: 79, 30, 255, 0.25; /* #4f1eff/25 - for rgba() */
+    --business-choose-card-bg: 22 27 33; /* #161b21 - for rgb() */
+    --business-choose-card-shadow: 8, 16, 26, 0.4; /* for rgba() */
+    --business-choose-card-shadow-popular: 122, 59, 255, 0.3; /* for rgba() */
+    --business-choose-popular-badge: 122 59 255; /* #7a3bff - for rgb() */
+    --business-choose-discount-badge: 16 185 129; /* #10b981 - for rgb() */
+    --business-choose-text-white-40: 255, 255, 255, 0.4; /* white/40 - for rgba() */
+    --business-choose-text-white-50: 255, 255, 255, 0.5; /* white/50 - for rgba() */
+    --business-choose-text-white-60: 255, 255, 255, 0.6; /* white/60 - for rgba() */
+    --business-choose-text-white-80: 255, 255, 255, 0.8; /* white/80 - for rgba() */
+    --business-choose-border-white-10: 255, 255, 255, 0.1; /* white/10 - for rgba() */
+    --business-choose-border-white-20: 255, 255, 255, 0.2; /* white/20 - for rgba() */
+    --business-choose-button-white-bg: 255 255 255; /* white */
+    --business-choose-button-white-text: 31 41 55; /* gray-800 - Tailwind default */
+    --business-choose-button-white-hover: 243 244 246; /* gray-100 - Tailwind default */
+    --business-choose-compare-bg: 31 41 55; /* #1f2937 - gray-800 - for rgb() */
+    --business-choose-compare-text: 167 139 250; /* #a78bfa - violet-300 - for rgb() */
+    --business-choose-compare-hover-bg: 55 65 81; /* #374151 - gray-700 - for rgb() */
+    --business-choose-compare-hover-text: 196 181 253; /* #c4b5fd - violet-200 - for rgb() */
+    
+    /* MakeEmail Component Colors */
+    --business-make-dot-active: 122 59 255; /* #7a3bff - for rgb() */
+    --business-make-dot-inactive: 55 65 81; /* gray-700 - Tailwind default */
+    --business-make-gradient-from: 122, 59, 255, 0.2; /* #7a3bff/20 - for rgba() */
+    --business-make-gradient-to: 122, 59, 255, 0.1; /* #7a3bff/10 - for rgba() */
+    --business-make-image-shadow: 122, 59, 255, 0.3; /* for rgba() */
+    
+    /* BringYourEmails Component Colors */
+    --business-bring-gradient-from: 122 59 255; /* #7a3bff - for rgb() */
+    --business-bring-gradient-to: 109 59 255; /* #6d3bff - for rgb() */
+    --business-bring-button-bg: 255 255 255; /* white */
+    --business-bring-button-text: 122 59 255; /* #7a3bff - for rgb() */
+    --business-bring-button-hover: 243 244 246; /* gray-100 - Tailwind default */
+    
+    /* ComparePlan Component Colors */
+    --business-compare-button-bg: 59 130 246; /* #3B82F6 - blue-500 - for rgb() */
+    --business-compare-button-hover: 37 99 235; /* #2563EB - blue-600 - for rgb() */
+    --business-compare-border-gray-600: 75 85 99; /* gray-600 - Tailwind default */
+    --business-compare-border-gray-800: 31 41 55; /* #1f2937 - gray-800 - for rgb() */
+    --business-compare-text-purple-300: 196 181 253; /* purple-300 - Tailwind default */
+    
+    /* Domain Page Colors */
+    --domain-hero-text-gray-300: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-hero-text-gray-400: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-hero-text-gray-100-50: 243, 244, 246, 0.5; /* gray-100/50 - for rgba() */
+    --domain-hero-section-bg: 25 28 28; /* #191c1c - for rgb() */
+    
+    /* DomainExtensions Component Colors */
+    --domain-extensions-text-gray-200: 229 231 235; /* gray-200 - Tailwind default */
+    --domain-extensions-text-gray-300: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-extensions-button-bg: 255 255 255; /* white */
+    --domain-extensions-button-text: 31 41 55; /* gray-800 - Tailwind default */
+    --domain-extensions-button-hover: 243 244 246; /* gray-100 - Tailwind default */
+    
+    /* DomainTransferHero Component Colors */
+    --domain-transfer-bg: 26 26 26; /* #1A1A1A - for rgb() */
+    --domain-transfer-border-gray-700-50: 55, 65, 81, 0.5; /* gray-700/50 - for rgba() */
+    --domain-transfer-input-bg: 31, 41, 55, 0.5; /* gray-800/50 - for rgba() */
+    --domain-transfer-input-border: 55 65 81; /* gray-700 - Tailwind default */
+    --domain-transfer-input-placeholder: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-transfer-button-bulk-hover: 96 165 250; /* blue-400 - Tailwind default */
+    --domain-transfer-button-bg: 37 99 235; /* blue-600 - Tailwind default */
+    --domain-transfer-button-hover: 29 78 216; /* blue-700 - Tailwind default */
+    --domain-transfer-text-white-90: 255, 255, 255, 0.9; /* white/90 - for rgba() */
+    
+    /* DomainGuide4 Component Colors */
+    --domain-guide4-card-bg: 31 41 55; /* gray-800 - Tailwind default */
+    --domain-guide4-gradient-from: 74 222 128; /* green-400 - Tailwind default */
+    --domain-guide4-gradient-to: 13 148 136; /* teal-600 - Tailwind default */
+    --domain-guide4-badge-bg: 134 239 172; /* green-300 - Tailwind default */
+    --domain-guide4-badge-text: 20 83 45; /* green-900 - Tailwind default */
+    --domain-guide4-button-bg: 255, 255, 255, 0.2; /* white/20 - for rgba() */
+    --domain-guide4-button-hover: 255, 255, 255, 0.3; /* white/30 - for rgba() */
+    
+    /* DomainGuide3 Component Colors */
+    --domain-guide3-card-bg: 31 41 55; /* gray-800 - Tailwind default */
+    --domain-guide3-glow-green: 34, 197, 94, 0.2; /* green-500/20 - for rgba() */
+    --domain-guide3-available-bg: 34, 197, 94, 0.2; /* green-500/20 - for rgba() */
+    --domain-guide3-available-border: 34, 197, 94, 0.3; /* green-500/30 - for rgba() */
+    --domain-guide3-available-icon: 74 222 128; /* green-400 - Tailwind default */
+    --domain-guide3-button-blue-bg: 59 130 246; /* blue-500 - Tailwind default */
+    --domain-guide3-button-blue-hover: 37 99 235; /* blue-600 - Tailwind default */
+    
+    /* DomainGuide1 Component Colors */
+    --domain-guide1-gradient-from: 45 212 191; /* teal-400 - Tailwind default */
+    --domain-guide1-gradient-via: 20 184 166; /* teal-500 - Tailwind default */
+    --domain-guide1-gradient-to: 22 163 74; /* green-600 - Tailwind default */
+    --domain-guide1-glow-teal-300: 94, 234, 212, 0.3; /* teal-300/30 - for rgba() */
+    --domain-guide1-glow-green-500: 34, 197, 94, 0.2; /* green-500/20 - for rgba() */
+    --domain-guide1-glow-teal-400: 45, 212, 191, 0.2; /* teal-400/20 - for rgba() */
+    --domain-guide1-search-bg: 17 24 39; /* gray-900 - Tailwind default */
+    --domain-guide1-search-placeholder: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-guide1-search-button-bg: 59 130 246; /* blue-500 - Tailwind default */
+    --domain-guide1-search-button-hover: 37 99 235; /* blue-600 - Tailwind default */
+    
+    /* DomainPricingNavbar Component Colors */
+    --domain-pricing-navbar-bg: 26 26 26; /* #1A1A1A - for rgb() - same as domain-transfer-bg */
+    --domain-pricing-navbar-border: 55 65 81; /* gray-700 - Tailwind default */
+    --domain-pricing-navbar-search-button-bg: 37 99 235; /* blue-600 - Tailwind default */
+    --domain-pricing-navbar-search-button-hover: 29 78 216; /* blue-700 - Tailwind default */
+    
+    /* DomainPricingTable Component Colors */
+    --domain-pricing-table-search-bg: 15 15 17; /* #0F0F11 - for rgb() */
+    --domain-pricing-table-search-border: 55 65 81; /* gray-700 - Tailwind default */
+    --domain-pricing-table-filter-button-bg: 31 41 55; /* gray-800 - Tailwind default */
+    --domain-pricing-table-filter-button-text: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-pricing-table-filter-button-hover: 55 65 81; /* gray-700 - Tailwind default */
+    --domain-pricing-table-dropdown-bg: 31 41 55; /* gray-800 - Tailwind default */
+    --domain-pricing-table-dropdown-border: 75 85 99; /* gray-600 - Tailwind default */
+    --domain-pricing-table-divider: 74 74 74; /* #4A4A4A - for rgb() */
+    --domain-pricing-table-input-bg: 31 41 55; /* gray-800 - Tailwind default */
+    --domain-pricing-table-input-border-default: 74 74 74; /* #4A4A4A - for rgb() */
+    --domain-pricing-table-input-border-focus: 58 74 203; /* #3A4ACB - for rgb() */
+    --domain-pricing-table-input-placeholder: 255 255 255; /* white - for rgb() */
+    --domain-pricing-table-button-hover-bg: 55 65 81; /* gray-700 - Tailwind default */
+    --domain-pricing-table-button-icon: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-pricing-table-button-icon-hover: 255 255 255; /* white - for rgb() */
+    --domain-pricing-table-clear-button-text: 96 165 250; /* blue-400 - Tailwind default */
+    --domain-pricing-table-clear-button-hover-text: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-pricing-table-apply-button-bg: 58 74 203; /* #3A4ACB - for rgb() */
+    --domain-pricing-table-header-text: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-pricing-table-row-hover: 31 41 55; /* gray-800 - Tailwind default (hover:bg-gray-750 is invalid, using gray-800) */
+    --domain-pricing-table-divider-row: 55 65 81; /* gray-700 - Tailwind default */
+    --domain-pricing-table-tld-text: 96 165 250; /* blue-400 - Tailwind default */
+    --domain-pricing-table-tld-hover: 147 197 253; /* blue-300 - Tailwind default */
+    --domain-pricing-table-heart-hover: 239 68 68; /* red-500 - Tailwind default */
+    --domain-pricing-table-sale-original: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-pricing-table-sale-price: 74 222 128; /* green-400 - Tailwind default */
+    --domain-pricing-table-sale-badge: 22 163 74; /* green-600 - Tailwind default */
+    --domain-pricing-table-cta-button-bg: 37 99 235; /* blue-600 - Tailwind default */
+    --domain-pricing-table-cta-button-hover: 29 78 216; /* blue-700 - Tailwind default */
+    
+    /* RelatedProducts Component Colors */
+    --related-products-bg: 25 28 28; /* #191c1c - for rgb() - same as domain-hero-section-bg */
+    --related-products-heading: 255 255 255; /* white - for rgb() */
+    --related-products-description: 156 163 175; /* gray-400 - Tailwind default */
+    --related-products-link: 37 99 235; /* blue-600 - Tailwind default */
+    --related-products-link-hover: 59 130 246; /* blue-500 - Tailwind default */
+    --related-products-card-1-gradient-from: 94, 234, 212, 0.4; /* teal-300/40 - for rgba() */
+    --related-products-card-1-gradient-via: 96, 165, 250, 0.5; /* blue-400/50 - for rgba() */
+    --related-products-card-1-gradient-to: 255, 255, 255, 0.3; /* white/30 - for rgba() */
+    --related-products-card-1-shape-1: 94, 234, 212, 0.4; /* teal-300/40 - for rgba() */
+    --related-products-card-1-shape-2: 96, 165, 250, 0.5; /* blue-400/50 - for rgba() */
+    --related-products-card-1-shape-3: 255, 255, 255, 0.6; /* white/60 - for rgba() */
+    --related-products-card-2-gradient-from: 31, 41, 55, 0.6; /* gray-800/60 - for rgba() */
+    --related-products-card-2-gradient-via: 147, 51, 234, 0.5; /* purple-600/50 - for rgba() */
+    --related-products-card-2-gradient-to: 192, 132, 252, 0.4; /* purple-400/40 - for rgba() */
+    --related-products-card-2-shape-1: 31, 41, 55, 0.6; /* gray-800/60 - for rgba() */
+    --related-products-card-2-shape-2: 147, 51, 234, 0.5; /* purple-600/50 - for rgba() */
+    --related-products-card-2-shape-3: 192, 132, 252, 0.4; /* purple-400/40 - for rgba() */
+    
+    /* DomainFAQ Component Colors */
+    --domain-faq-bg: 25 28 28; /* #191c1c - for rgb() - same as domain-hero-section-bg */
+    --domain-faq-heading: 255 255 255; /* white - for rgb() */
+    --domain-faq-description: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-faq-border: 75 85 99; /* gray-600 - Tailwind default */
+    --domain-faq-question: 255 255 255; /* white - for rgb() */
+    --domain-faq-answer: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-faq-link: 255 255 255; /* white - for rgb() */
+    
+    /* WordPressHero Component Colors */
+    --wp-hero-gradient-1-from: 10, 126, 76, 0.7; /* #0a7e4c/70 - for rgba() */
+    --wp-hero-gradient-1-via: 10, 88, 112, 0.6; /* #0a5870/60 - for rgba() */
+    --wp-hero-gradient-1-to: 2, 23, 66, 0.85; /* #021742/85 - for rgba() */
+    --wp-hero-gradient-2-from: 0, 0, 0, 0.25; /* black/25 - for rgba() */
+    --wp-hero-gradient-2-to: 0, 0, 0, 0.3; /* black/30 - for rgba() */
+    --wp-hero-badge-text: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --wp-hero-heading: 255 255 255; /* white - for rgb() */
+    --wp-hero-description: 255, 255, 255, 0.85; /* white/85 - for rgba() */
+    --wp-hero-button-white-bg: 255 255 255; /* white - for rgb() */
+    --wp-hero-button-white-text: 0 0 0; /* black - for rgb() */
+    --wp-hero-button-white-shadow: 0, 0, 0, 0.25; /* rgba(0,0,0,0.25) - for rgba() */
+    --wp-hero-button-white-shadow-hover: 0, 0, 0, 0.35; /* rgba(0,0,0,0.35) - for rgba() */
+    --wp-hero-button-green-bg: 15 127 89; /* #0f7f59 - for rgb() */
+    --wp-hero-button-green-text: 255, 255, 255, 0.95; /* white/95 - for rgba() */
+    --wp-hero-button-green-shadow: 14, 122, 86, 0.35; /* rgba(14,122,86,0.35) - for rgba() */
+    --wp-hero-button-green-hover: 13 109 77; /* #0d6d4d - for rgb() */
+    --wp-hero-button-green-shadow-hover: 14, 122, 86, 0.45; /* rgba(14,122,86,0.45) - for rgba() */
+    
+    /* NoStress Component Colors */
+    --wp-nostress-heading: 255 255 255; /* white - for rgb() */
+    --wp-nostress-description: 226 232 240; /* slate-200 - Tailwind default */
+    
+    /* ReadySet Component Colors */
+    --wp-readyset-bg: 23 25 29; /* #17191d - for rgb() */
+    --wp-readyset-heading: 255 255 255; /* white - for rgb() */
+    --wp-readyset-description: 226 232 240; /* slate-200 - Tailwind default */
+    --wp-readyset-button-active: 255 255 255; /* white - for rgb() */
+    --wp-readyset-button-inactive: 148 163 184; /* slate-400 - Tailwind default */
+    --wp-readyset-icon: 255 255 255; /* white - for rgb() */
+    --wp-readyset-active-desc: 203 213 225; /* slate-300 - Tailwind default */
+    --wp-readyset-dot-active: 255 255 255; /* white - for rgb() */
+    --wp-readyset-dot-inactive: 255, 255, 255, 0.25; /* white/25 - for rgba() */
+    --wp-readyset-image-border: 255, 255, 255, 0.1; /* white/10 - for rgba() */
+    --wp-readyset-image-bg: 15 17 20; /* #0f1114 - for rgb() */
+    --wp-readyset-image-shadow: 0, 0, 0, 0.45; /* rgba(0,0,0,0.45) - for rgba() */
+    
+    /* CloudHosting Component Colors */
+    --wp-cloudhosting-overlay: 0, 0, 0, 0.4; /* black/40 - for rgba() */
+    --wp-cloudhosting-bg: 23 25 29; /* #17191d - for rgb() - same as readyset-bg */
+    --wp-cloudhosting-badge: 255, 255, 255, 0.8; /* white/80 - for rgba() */
+    --wp-cloudhosting-heading: 255 255 255; /* white - for rgb() */
+    --wp-cloudhosting-description: 241 245 249; /* slate-100 - Tailwind default */
+    --wp-cloudhosting-toggle-bg: 255, 255, 255, 0.1; /* white/10 - for rgba() */
+    --wp-cloudhosting-button-active-bg: 255 255 255; /* white - for rgb() */
+    --wp-cloudhosting-button-active-text: 17 24 39; /* #111827 - gray-900 - for rgb() */
+    --wp-cloudhosting-button-inactive: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    
+    /* AllInOne Component Colors */
+    --wp-allinone-bg: 23 25 29; /* #17191d - for rgb() - same as readyset-bg */
+    --wp-allinone-heading: 255 255 255; /* white - for rgb() */
+    --wp-allinone-description: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --wp-allinone-feature-heading: 255 255 255; /* white - for rgb() */
+    --wp-allinone-feature-text: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    
+    /* EasyWp Component Colors */
+    --wp-easywp-bg: 23 25 29; /* #17191d - for rgb() - same as readyset-bg */
+    --wp-easywp-heading: 255 255 255; /* white - for rgb() */
+    --wp-easywp-description: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --wp-easywp-button-active: 255 255 255; /* white - for rgb() */
+    --wp-easywp-button-inactive: 255, 255, 255, 0.4; /* white/40 - for rgba() */
+    --wp-easywp-button-text: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --wp-easywp-dot-active: 255 255 255; /* white - for rgb() */
+    --wp-easywp-dot-inactive: 255, 255, 255, 0.2; /* white/20 - for rgba() */
+    --wp-easywp-image-border: 255, 255, 255, 0.1; /* white/10 - for rgba() */
+    --wp-easywp-image-bg: 15 17 20; /* #0f1114 - for rgb() - same as readyset-image-bg */
+    --wp-easywp-image-shadow: 0, 0, 0, 0.45; /* rgba(0,0,0,0.45) - for rgba() - same as readyset-image-shadow */
+    --wp-easywp-badge-new: 122 255 192; /* #7affc0 - for rgb() */
+    
+    /* UniqueLayers Component Colors */
+    --wp-uniquelayers-bg: 23 25 29; /* #17191d - for rgb() - same as readyset-bg */
+    --wp-uniquelayers-heading: 255 255 255; /* white - for rgb() */
+    --wp-uniquelayers-description: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --wp-uniquelayers-feature-heading: 255 255 255; /* white - for rgb() */
+    --wp-uniquelayers-feature-text: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --wp-uniquelayers-button-bg: 255 255 255; /* white - for rgb() */
+    --wp-uniquelayers-button-text: 0 0 0; /* black - for rgb() */
+    --wp-uniquelayers-button-hover: 255, 255, 255, 0.9; /* white/90 - for rgba() */
+    
+    /* FreeWebsite Component Colors */
+    --wp-freewebsite-bg: 23 25 29; /* #17191d - for rgb() - same as readyset-bg */
+    --wp-freewebsite-heading: 255 255 255; /* white - for rgb() */
+    --wp-freewebsite-description: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --wp-freewebsite-feature-heading-1: 255, 255, 255, 0.9; /* white/90 - for rgba() */
+    --wp-freewebsite-feature-heading-2: 255 255 255; /* white - for rgb() */
+    --wp-freewebsite-feature-text: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --wp-freewebsite-link: 91 167 255; /* #5ba7ff - for rgb() */
+    
+    /* HighlyRated Component Colors */
+    --wp-highlyrated-bg: 23 25 29; /* #17191d - for rgb() - same as readyset-bg */
+    --wp-highlyrated-heading: 255 255 255; /* white - for rgb() */
+    --wp-highlyrated-description: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --wp-highlyrated-subheading: 255 255 255; /* white - for rgb() */
+    --wp-highlyrated-subdescription: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    
+    /* ChooseWP Component Colors */
+    --wp-choosewp-bg: 23 25 29; /* #17191d - for rgb() - same as readyset-bg */
+    --wp-choosewp-heading: 255 255 255; /* white - for rgb() */
+    --wp-choosewp-description: 255, 255, 255, 0.6; /* white/60 - for rgba() */
+    --wp-choosewp-plan-name: 255 255 255; /* white - for rgb() */
+    --wp-choosewp-price: 255 255 255; /* white - for rgb() */
+    --wp-choosewp-price-suffix: 255, 255, 255, 0.5; /* white/50 - for rgba() */
+    --wp-choosewp-button-bg: 255 255 255; /* white - for rgb() */
+    --wp-choosewp-button-text: 0 0 0; /* black - for rgb() */
+    --wp-choosewp-button-hover: 255, 255, 255, 0.9; /* white/90 - for rgba() */
+    --wp-choosewp-feature-label: 255 255 255; /* white - for rgb() */
+    --wp-choosewp-feature-text: 255, 255, 255, 0.6; /* white/60 - for rgba() */
+    --wp-choosewp-feature-border: 255, 255, 255, 0.2; /* white/20 - for rgba() */
+    --wp-choosewp-feature-icon: 255, 255, 255, 0.5; /* white/50 - for rgba() */
+    --wp-choosewp-feature-divider: 255, 255, 255, 0.1; /* white/10 - for rgba() */
+    --wp-choosewp-helper-text: 255, 255, 255, 0.45; /* white/45 - for rgba() */
+    --wp-choosewp-helper-highlight: 91 167 255; /* #5ba7ff - for rgb() - same as freewebsite-link */
+    --wp-choosewp-plan-label: 255, 255, 255, 0.4; /* white/40 - for rgba() */
+    --wp-choosewp-plan-value: 255 255 255; /* white - for rgb() */
+    --wp-choosewp-plan-secondary: 255, 255, 255, 0.45; /* white/45 - for rgba() */
+    --wp-choosewp-section-text: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --wp-choosewp-section-label: 255 255 255; /* white - for rgb() */
+    --wp-choosewp-section-item: 255, 255, 255, 0.5; /* white/50 - for rgba() */
+    --wp-choosewp-showmore-text: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --wp-choosewp-showmore-hover-text: 255 255 255; /* white - for rgb() */
+    --wp-choosewp-showmore-hover-bg: 255, 255, 255, 0.1; /* white/10 - for rgba() */
+    --wp-choosewp-disclaimer: 255, 255, 255, 0.4; /* white/40 - for rgba() */
+    
+    /* FrequentlyBTWP Component Colors */
+    --wp-frequentlybtwp-bg: 23 25 29; /* #17191d - for rgb() - same as readyset-bg */
+    --wp-frequentlybtwp-heading: 255 255 255; /* white - for rgb() */
+    --wp-frequentlybtwp-description: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --wp-frequentlybtwp-card-bg: 16 17 25; /* #101119 - for rgb() */
+    --wp-frequentlybtwp-card-border: 255, 255, 255, 0.08; /* white/8 - for rgba() */
+    --wp-frequentlybtwp-card-shadow: 0, 0, 0, 0.32; /* rgba(0,0,0,0.32) - for rgba() */
+    --wp-frequentlybtwp-card-shadow-hover: 0, 0, 0, 0.45; /* rgba(0,0,0,0.45) - for rgba() */
+    --wp-frequentlybtwp-gradient-purple-from: 112 75 255; /* #704bff - for rgb() */
+    --wp-frequentlybtwp-gradient-purple-via: 133 86 255; /* #8556ff - for rgb() */
+    --wp-frequentlybtwp-gradient-purple-to: 158 99 255; /* #9e63ff - for rgb() */
+    --wp-frequentlybtwp-gradient-green-from: 2 156 101; /* #029c65 - for rgb() */
+    --wp-frequentlybtwp-gradient-green-via: 7 168 108; /* #07a86c - for rgb() */
+    --wp-frequentlybtwp-gradient-green-to: 13 189 112; /* #0dbd70 - for rgb() */
+    --wp-frequentlybtwp-icon: 255, 255, 255, 0.9; /* white/90 - for rgba() */
+    --wp-frequentlybtwp-card-name: 255 255 255; /* white - for rgb() */
+    --wp-frequentlybtwp-card-subtitle: 255, 255, 255, 0.5; /* white/50 - for rgba() */
+    --wp-frequentlybtwp-card-feature: 255, 255, 255, 0.6; /* white/60 - for rgba() */
+    --wp-frequentlybtwp-card-original-price: 255, 255, 255, 0.4; /* white/40 - for rgba() */
+    --wp-frequentlybtwp-card-price: 255 255 255; /* white - for rgb() */
+    --wp-frequentlybtwp-button-bg: 45 92 255; /* #2d5cff - for rgb() */
+    --wp-frequentlybtwp-button-hover: 40 79 204; /* #284fcc - for rgb() */
+    --wp-frequentlybtwp-button-text: 255 255 255; /* white - for rgb() */
+    --wp-frequentlybtwp-button-arrow: 255, 255, 255, 0.9; /* white/90 - for rgba() */
+    --wp-frequentlybtwp-button-shadow: 0, 0, 0, 0.25; /* rgba(0,0,0,0.25) - for rgba() */
+    
+    /* FAQWP Component Colors */
+    --wp-faqwp-bg: 23 25 29; /* #17191d - for rgb() - same as readyset-bg */
+    --wp-faqwp-heading: 255 255 255; /* white - for rgb() */
+    --wp-faqwp-question: 255 255 255; /* white - for rgb() */
+    --wp-faqwp-answer: 255, 255, 255, 0.75; /* white/75 - for rgba() */
+    --wp-faqwp-icon: 255 255 255; /* white - for rgb() */
+    
+    /* TransferHeroSection Component Colors */
+    --transfer-hero-tab-bg: 55, 65, 81, 0.5; /* gray-700/50 - for rgba() */
+    --transfer-hero-icon: 156 163 175; /* gray-400 - Tailwind default */
+    --transfer-hero-button-bg: 37 99 235; /* blue-600 - Tailwind default */
+    --transfer-hero-button-hover: 29 78 216; /* blue-700 - Tailwind default */
+    --transfer-hero-button-text: 255 255 255; /* white - for rgb() */
+    --transfer-hero-button-active-bg: 37 99 235; /* blue-600 - Tailwind default */
+    --transfer-hero-button-active-text: 255 255 255; /* white - for rgb() */
+    --transfer-hero-button-inactive-hover-bg: 255, 255, 255, 0.1; /* white/10 - for rgba() */
+    
+    /* TransferHeroFeatures Component Colors */
+    --transfer-hero-features-bg: 27 29 28; /* #1b1d1c - for rgb() */
+    --transfer-hero-features-heading: 255 255 255; /* white - for rgb() */
+    --transfer-hero-features-description: 156 163 175; /* gray-400 - Tailwind default */
+    --transfer-hero-features-title: 255 255 255; /* white - for rgb() */
+    --transfer-hero-features-icon: 255 255 255; /* white - for rgb() */
+    
+    /* TransferPricing Component Colors */
+    --transfer-pricing-bg: 27 29 28; /* #1b1d1c - for rgb() - same as hero-features-bg */
+    --transfer-pricing-heading: 255 255 255; /* white - for rgb() */
+    --transfer-pricing-description: 209 213 219; /* gray-300 - Tailwind default */
+    --transfer-pricing-note: 209 213 219; /* gray-300 - Tailwind default */
+    --transfer-pricing-search-bg: 15 15 17; /* #0F0F11 - for rgb() */
+    --transfer-pricing-search-border: 55 65 81; /* #374151 - gray-700 - Tailwind default */
+    --transfer-pricing-search-text: 255 255 255; /* white - for rgb() */
+    --transfer-pricing-search-placeholder: 156 163 175; /* gray-400 - Tailwind default */
+    --transfer-pricing-recommended-bg: 39 42 42; /* #272a2a - for rgb() */
+    --transfer-pricing-recommended-hover: 47 51 51; /* #2f3333 - for rgb() */
+    --transfer-pricing-recommended-text: 255 255 255; /* white - for rgb() */
+    --transfer-pricing-tld-text: 96 165 250; /* blue-400 - Tailwind default */
+    --transfer-pricing-icon: 255 255 255; /* white - for rgb() */
+    --transfer-pricing-label: 255 255 255; /* white - for rgb() */
+    --transfer-pricing-sale-badge-bg: 5 150 105; /* emerald-600 - Tailwind default */
+    --transfer-pricing-sale-badge-text: 255 255 255; /* white - for rgb() */
+    --transfer-pricing-price: 255 255 255; /* white - for rgb() */
+    --transfer-pricing-original-price: 156 163 175; /* gray-400 - Tailwind default */
+    --transfer-pricing-divider: 75 85 99; /* gray-600 - #4b5563 - Tailwind default */
+    
+    /* TransferFAQ Component Colors */
+    --transfer-faq-bg: 27 29 28; /* #1b1d1c - for rgb() - same as hero-features-bg */
+    --transfer-faq-heading: 255 255 255; /* white - for rgb() */
+    --transfer-faq-icon-bg: 31 41 55; /* gray-800 - Tailwind default */
+    --transfer-faq-icon-border: 55 65 81; /* gray-700 - Tailwind default */
+    --transfer-faq-icon: 255 255 255; /* white - for rgb() */
+    --transfer-faq-question: 255 255 255; /* white - for rgb() */
+    --transfer-faq-answer: 209 213 219; /* gray-300 - Tailwind default */
+    --transfer-faq-separator: 55 65 81; /* gray-700 - Tailwind default */
+    
+    /* TransferStart Component Colors */
+    --transfer-start-bg: 27 29 28; /* #1b1d1c - for rgb() - same as hero-features-bg */
+    --transfer-start-heading: 255 255 255; /* white - for rgb() */
+    --transfer-start-description: 156 163 175; /* gray-400 - Tailwind default */
+    
+    /* TransferUnlock Component Colors */
+    --transfer-unlock-bg: 27 29 28; /* #1b1d1c - for rgb() - same as hero-features-bg */
+    --transfer-unlock-heading: 255 255 255; /* white - for rgb() */
+    --transfer-unlock-description: 156 163 175; /* gray-400 - Tailwind default */
+    --transfer-unlock-inner-highlight: 255, 255, 255, 0.6; /* white/60 - for rgba() */
+    
+    /* TransferInstructions Component Colors */
+    --transfer-instructions-bg: 27 29 28; /* #1b1d1c - for rgb() - same as hero-features-bg */
+    --transfer-instructions-heading: 255 255 255; /* white - for rgb() */
+    --transfer-instructions-description: 156 163 175; /* gray-400 - Tailwind default */
+    --transfer-instructions-inner-box-bg: 0, 0, 0, 0.5; /* black/50 - for rgba() */
+    --transfer-instructions-inner-box-border: 94, 234, 212, 0.5; /* teal-400/50 - for rgba() */
+    --transfer-instructions-asterisks: 94 234 212; /* teal-300 - Tailwind default */
+    --transfer-instructions-shadow: 0, 0, 0, 0.5; /* black/50 - for rgba() */
+    
+    /* Migration Page Colors */
+    --migration-page-bg: 16 19 22; /* #101316 - for rgb() */
+    
+    /* MigrateHero Component Colors */
+    --migration-hero-bg: 11 17 22; /* #0b1116 - for rgb() */
+    --migration-hero-text: 255 255 255; /* white - for rgb() */
+    --migration-hero-text-85: 255, 255, 255, 0.85; /* white/85 - for rgba() */
+    --migration-hero-overlay-from: 0, 0, 0, 0.6; /* black/60 - for rgba() */
+    --migration-hero-overlay-via: 0, 0, 0, 0.4; /* black/40 - for rgba() */
+    --migration-hero-overlay-to: 0, 0, 0, 0.6; /* black/60 - for rgba() */
+    --migration-hero-divider: 16 19 22; /* #101316 - for rgb() */
+    
+    /* KeepMigration Component Colors */
+    --migration-keep-bg: 16 19 22; /* #101316 - for rgb() - same as migration-page-bg */
+    --migration-keep-text: 255 255 255; /* white - for rgb() */
+    --migration-keep-heading: 255 255 255; /* white - for rgb() */
+    --migration-keep-description: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --migration-keep-step-title: 255 255 255; /* white - for rgb() */
+    --migration-keep-step-description: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    
+    /* HowToGet Component Colors */
+    --migration-howtoget-bg: 16 19 22; /* #101316 - for rgb() - same as migration-page-bg */
+    --migration-howtoget-text: 255 255 255; /* white - for rgb() */
+    --migration-howtoget-heading: 255 255 255; /* white - for rgb() */
+    --migration-howtoget-description: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --migration-howtoget-subheading: 255 255 255; /* white - for rgb() */
+    --migration-howtoget-list: 255, 255, 255, 0.8; /* white/80 - for rgba() */
+    --migration-howtoget-link: 45 140 255; /* #2d8cff - for rgb() */
+    --migration-howtoget-link-hover: 31 111 204; /* #1f6fcc - for rgb() */
+    
+    /* WhatYouNeed Component Colors */
+    --migration-whatyouneed-bg: 16 19 22; /* #101316 - for rgb() - same as migration-page-bg */
+    --migration-whatyouneed-text: 255 255 255; /* white - for rgb() */
+    --migration-whatyouneed-heading: 255 255 255; /* white - for rgb() */
+    --migration-whatyouneed-icon: 45 140 255; /* #2d8cff - for rgb() */
+    --migration-whatyouneed-title: 255 255 255; /* white - for rgb() */
+    --migration-whatyouneed-description: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --migration-whatyouneed-link: 45 140 255; /* #2d8cff - for rgb() */
+    --migration-whatyouneed-link-hover: 31 111 204; /* #1f6fcc - for rgb() */
+    --migration-whatyouneed-border: 255, 255, 255, 0.08; /* white/8 - for rgba() */
+    
+    /* ChooseYourHosting Component Colors */
+    --migration-choose-bg: 16 19 22; /* #101316 - for rgb() - same as migration-page-bg */
+    --migration-choose-text: 255 255 255; /* white - for rgb() */
+    --migration-choose-heading: 255 255 255; /* white - for rgb() */
+    --migration-choose-card-bg: 22 27 33; /* #161b21 - for rgb() */
+    --migration-choose-card-shadow: 8, 16, 26, 0.35; /* rgba(8,16,26,0.35) - for rgba() */
+    --migration-choose-card-popular-shadow: 45, 140, 255, 0.18; /* rgba(45,140,255,0.18) - for rgba() */
+    --migration-choose-popular-badge: 45 140 255; /* #2d8cff - for rgb() */
+    --migration-choose-plan-name: 255 255 255; /* white - for rgb() */
+    --migration-choose-description: 255, 255, 255, 0.6; /* white/60 - for rgba() */
+    --migration-choose-original-price: 255, 255, 255, 0.3; /* white/30 - for rgba() */
+    --migration-choose-discount-bg: 45, 140, 255, 0.1; /* #2d8cff1a - for rgba() */
+    --migration-choose-discount-text: 45 140 255; /* #2d8cff - for rgb() */
+    --migration-choose-price: 255 255 255; /* white - for rgb() */
+    --migration-choose-price-suffix: 255, 255, 255, 0.5; /* white/50 - for rgba() */
+    --migration-choose-permonth: 255, 255, 255, 0.6; /* white/60 - for rgba() */
+    --migration-choose-features: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --migration-choose-feature-highlight: 255 255 255; /* white - for rgb() */
+    --migration-choose-ssl: 76 175 80; /* #4caf50 - for rgb() */
+    --migration-choose-spacemail: 156 39 176; /* #9c27b0 - for rgb() */
+    --migration-choose-button-bg: 45 140 255; /* #2d8cff - for rgb() */
+    --migration-choose-button-hover: 31 111 204; /* #1f6fcc - for rgb() */
+    --migration-choose-button-text: 255 255 255; /* white - for rgb() */
+    --migration-choose-disclaimer: 255, 255, 255, 0.6; /* white/60 - for rgba() */
+    --migration-choose-bottom-button-bg: 27 36 49; /* #1b2431 - for rgb() */
+    --migration-choose-bottom-button-hover-bg: 34 45 61; /* #222d3d - for rgb() */
+    --migration-choose-bottom-button-text: 45 140 255; /* #2d8cff - for rgb() */
+    --migration-choose-bottom-button-hover-text: 255 255 255; /* white - for rgb() */
+    --migration-choose-note: 255, 255, 255, 0.5; /* white/50 - for rgba() */
+    
+    /* NotSure Component Colors */
+    --migration-notsure-bg: 16 19 22; /* #101316 - for rgb() - same as migration-page-bg */
+    --migration-notsure-text: 255 255 255; /* white - for rgb() */
+    --migration-notsure-gradient-from: 199 247 246; /* #c7f7f6 - for rgb() */
+    --migration-notsure-gradient-via: 124 211 247; /* #7cd3f7 - for rgb() */
+    --migration-notsure-gradient-to: 184 240 255; /* #b8f0ff - for rgb() */
+    --migration-notsure-heading: 22 27 33; /* #161b21 - for rgb() */
+    --migration-notsure-description: 43 56 72; /* #2b3848 - for rgb() */
+    --migration-notsure-button-bg: 22 27 33; /* #161b21 - for rgb() */
+    --migration-notsure-button-hover: 16 22 29; /* #10161d - for rgb() */
+    --migration-notsure-button-text: 255 255 255; /* white - for rgb() */
+    --migration-notsure-button-shadow: 16, 27, 33, 0.25; /* rgba(16,27,33,0.25) - for rgba() */
+    --migration-notsure-border: 255, 255, 255, 0.3; /* white/30 - for rgba() */
+    
+    /* GetMore Component Colors */
+    --migration-getmore-bg: 16 19 22; /* #101316 - for rgb() - same as migration-page-bg */
+    
+    /* FAQMigration Component Colors */
+    --migration-faq-bg: 16 19 22; /* #101316 - for rgb() - same as migration-page-bg */
+    
+    /* DomainSearch Page Colors */
+    --domain-search-bg: 25 28 28; /* #191c1c - for rgb() */
+    --domain-search-text: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-search-tab-border: 74 74 74; /* #4A4A4A - for rgb() */
+    --domain-search-tab-active-dot: 74 222 128; /* green-400 - Tailwind default */
+    --domain-search-tab-inactive-dot: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-search-tab-active-text: 255 255 255; /* white - for rgb() */
+    --domain-search-tab-inactive-text: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-search-tab-indicator: 59 130 246; /* blue-500 - Tailwind default */
+    --domain-search-input-icon: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-search-input-border: 74 74 74; /* #4A4A4A - for rgb() */
+    --domain-search-input-border-focus: 58 74 203; /* #3A4ACB - for rgb() */
+    --domain-search-input-text: 255 255 255; /* white - for rgb() */
+    --domain-search-input-placeholder: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-search-input-focus-ring: 59, 130, 246, 0.2; /* blue-500/20 - for rgba() */
+    --domain-search-info-bg: 30, 58, 138, 0.3; /* blue-900/30 - for rgba() */
+    --domain-search-info-border: 59, 130, 246, 0.3; /* blue-500/30 - for rgba() */
+    --domain-search-info-icon-bg: 75 85 99; /* gray-600 - Tailwind default */
+    --domain-search-info-icon-text: 255 255 255; /* white - for rgb() */
+    --domain-search-info-text: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-search-heading: 255 255 255; /* white - for rgb() */
+    --domain-search-card-bg: 31, 41, 55, 0.3; /* gray-800/30 - for rgba() */
+    --domain-search-card-border: 75 85 99; /* gray-600 - Tailwind default */
+    --domain-search-card-border-hover: 59, 130, 246, 0.5; /* blue-500/50 - for rgba() */
+    --domain-search-card-shadow-hover: 59, 130, 246, 0.1; /* blue-500/10 - for rgba() */
+    --domain-search-card-name: 255 255 255; /* white - for rgb() */
+    --domain-search-popular-icon: 250 204 21; /* yellow-400 - Tailwind default */
+    --domain-search-popular-text: 250 204 21; /* yellow-400 - Tailwind default */
+    --domain-search-premium-bg: 168, 85, 247, 0.2; /* purple-500/20 - for rgba() */
+    --domain-search-premium-text: 196 181 253; /* purple-400 - Tailwind default */
+    --domain-search-available-icon: 74 222 128; /* green-400 - Tailwind default */
+    --domain-search-available-text: 74 222 128; /* green-400 - Tailwind default */
+    --domain-search-unavailable-icon: 248 113 113; /* red-400 - Tailwind default */
+    --domain-search-unavailable-text: 248 113 113; /* red-400 - Tailwind default */
+    --domain-search-price: 255 255 255; /* white - for rgb() */
+    --domain-search-original-price: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-search-price-label: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-search-button-bg: 59 130 246; /* blue-500 - Tailwind default */
+    --domain-search-button-hover: 37 99 235; /* blue-600 - Tailwind default */
+    --domain-search-button-text: 255 255 255; /* white - for rgb() */
+    
+    /* DomainTransferSubmit Page Colors */
+    --domain-transfer-submit-bg: 25 28 28; /* #191c1c - for rgb() - same as domain-search-bg */
+    --domain-transfer-submit-text: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-transfer-submit-heading: 255 255 255; /* white - for rgb() */
+    --domain-transfer-submit-description: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-transfer-submit-input-icon: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-transfer-submit-input-bg: 31, 41, 55, 0.5; /* gray-800/50 - for rgba() */
+    --domain-transfer-submit-input-border: 75 85 99; /* gray-600 - Tailwind default */
+    --domain-transfer-submit-input-text: 255 255 255; /* white - for rgb() */
+    --domain-transfer-submit-input-placeholder: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-transfer-submit-button-bg: 45 140 255; /* #2d8cff - for rgb() - using gradient-teal equivalent */
+    --domain-transfer-submit-button-hover: 45, 140, 255, 0.8; /* gradient-teal/80 - for rgba() */
+    --domain-transfer-submit-button-text: 255 255 255; /* white - for rgb() */
+    --domain-transfer-submit-card-bg: 31, 41, 55, 0.3; /* gray-800/30 - for rgba() */
+    --domain-transfer-submit-card-border: 75 85 99; /* gray-600 - Tailwind default */
+    --domain-transfer-submit-card-title: 255 255 255; /* white - for rgb() */
+    --domain-transfer-submit-item-bg: 55, 65, 81, 0.5; /* gray-700/50 - for rgba() */
+    --domain-transfer-submit-item-name: 255 255 255; /* white - for rgb() */
+    --domain-transfer-submit-item-price: 255 255 255; /* white - for rgb() */
+    --domain-transfer-submit-item-label: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-transfer-submit-auth-input-bg: 75, 85, 99, 0.5; /* gray-600/50 - for rgba() */
+    --domain-transfer-submit-auth-input-border: 107 114 128; /* gray-500 - Tailwind default */
+    --domain-transfer-submit-toggle-active: 45 140 255; /* #2d8cff - for rgb() */
+    --domain-transfer-submit-toggle-inactive: 107 114 128; /* gray-500 - Tailwind default */
+    --domain-transfer-submit-toggle-thumb: 255 255 255; /* white - for rgb() */
+    --domain-transfer-submit-remove-text: 248 113 113; /* red-400 - Tailwind default */
+    --domain-transfer-submit-remove-hover: 239 68 68; /* red-300 - Tailwind default */
+    --domain-transfer-submit-step-bg: 45 140 255; /* #2d8cff - for rgb() */
+    --domain-transfer-submit-step-text: 255 255 255; /* white - for rgb() */
+    --domain-transfer-submit-step-title: 255 255 255; /* white - for rgb() */
+    --domain-transfer-submit-step-description: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-transfer-submit-warning-bg: 113, 63, 18, 0.2; /* yellow-900/20 - for rgba() */
+    --domain-transfer-submit-warning-border: 234, 179, 8, 0.3; /* yellow-600/30 - for rgba() */
+    --domain-transfer-submit-warning-icon: 250 204 21; /* yellow-400 - Tailwind default */
+    --domain-transfer-submit-warning-title: 250 204 21; /* yellow-400 - Tailwind default */
+    --domain-transfer-submit-warning-text: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-transfer-submit-summary-border: 75 85 99; /* gray-600 - Tailwind default */
+    --domain-transfer-submit-summary-item: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-transfer-submit-summary-total: 255 255 255; /* white - for rgb() */
+    
+    /* UI Components Colors */
+    --ui-tld-search-icon: 209 213 219; /* gray-300 - Tailwind default */
+    --ui-migration-icon-text: 255 255 255; /* white - for rgb() */
+    --ui-migration-icon-shadow: 0, 0, 0, 0.4; /* rgba(0,0,0,0.4) - for rgba() */
+    --ui-faq-section-bg: 22, 24, 29, 0.6; /* #16181d/60 - for rgba() */
+    --ui-faq-section-border: 255, 255, 255, 0.1; /* white/10 - for rgba() */
+    --ui-learn-more-button-bg: 255 255 255; /* white - for rgb() */
+    --ui-learn-more-button-text: 26 29 33; /* #1a1d21 - for rgb() */
+    --ui-learn-more-button-shadow: 0, 0, 0, 0.25; /* rgba(0,0,0,0.25) - for rgba() */
+    --ui-learn-more-button-shadow-hover: 0, 0, 0, 0.32; /* rgba(0,0,0,0.32) - for rgba() */
+    --ui-learn-more-button-ring: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --ui-learn-more-button-ring-offset: 0 0 0; /* black - for rgb() */
+    --ui-cta-button-bg: 255 255 255; /* white - for rgb() */
+    --ui-cta-button-text: 0 0 0; /* black - for rgb() */
+    --ui-cta-button-hover: 249 250 251; /* gray-50 - Tailwind default */
+    --ui-cta-button-border: 229 231 235; /* gray-200 - Tailwind default */
+    --ui-white-button-bg: 255 255 255; /* white - for rgb() */
+    --ui-white-button-text: 31 41 55; /* gray-800 - Tailwind default */
+    --ui-white-button-hover: 243 244 246; /* gray-100 - Tailwind default */
+    
+    /* BackToTopButton Colors */
+    --back-to-top-bg: 255 255 255; /* white - for rgb() */
+    --back-to-top-text: 75 85 99; /* gray-600 - Tailwind default */
+    --back-to-top-text-hover: 31 41 55; /* gray-800 - Tailwind default */
+    --back-to-top-bg-hover: 249 250 251; /* gray-50 - Tailwind default */
+    
+    /* FeatureRequestModal Colors */
+    --feature-modal-label: 209 213 219; /* gray-300 - Tailwind default */
+    --feature-modal-label-optional: 107 114 128; /* gray-500 - Tailwind default */
+    --feature-modal-input-border: 55 65 81; /* gray-700 - Tailwind default */
+    --feature-modal-input-border-focus: 59 130 246; /* blue-500 - Tailwind default */
+    --feature-modal-checkbox-accent: 37 99 235; /* blue-600 - Tailwind default */
+    --feature-modal-checkbox-label: 156 163 175; /* gray-400 - Tailwind default */
+    --feature-modal-cancel-text: 96 165 250; /* blue-400 - Tailwind default */
+    --feature-modal-cancel-hover: 147 197 253; /* blue-300 - Tailwind default */
+    --feature-modal-submit-bg: 37 99 235; /* blue-600 - Tailwind default */
+    --feature-modal-submit-hover: 29 78 216; /* blue-700 - Tailwind default */
+    --feature-modal-submit-text: 255 255 255; /* white - for rgb() */
+    --feature-modal-link: 96 165 250; /* blue-400 - Tailwind default */
+    
+    /* Logo Colors */
+    --logo-icon-bg: 255 255 255; /* white - for rgb() */
+    --logo-icon-inner: 37 99 235; /* blue-600 - Tailwind default */
+    --logo-text: 255 255 255; /* white - for rgb() */
+    
+    /* Navbar RightIcons Colors */
+    --navbar-right-icons-text: 226 232 240; /* slate-200 - Tailwind default */
+    --navbar-right-icons-hover-text: 255 255 255; /* white - for rgb() */
+    --navbar-right-icons-hover-bg: 75, 85, 99, 0.5; /* gray-600/50 - for rgba() */
+    
+    /* Navbar MobileMenu Colors */
+    --navbar-mobile-menu-text: 255 255 255; /* white - for rgb() */
+    --navbar-mobile-menu-hover-text: 156 163 175; /* gray-400 - Tailwind default */
+    --navbar-mobile-menu-hover-bg: 31, 41, 55, 0.5; /* gray-800/50 - for rgba() */
+    --navbar-mobile-menu-active-bg: 31, 41, 55, 0.5; /* gray-800/50 - for rgba() */
+    
+    /* Navbar DesktopMenu Colors */
+    --navbar-desktop-menu-text: 255 255 255; /* white - for rgb() */
+    --navbar-desktop-menu-hover-bg: 31, 41, 55, 0.5; /* gray-800/50 - for rgba() */
+    --navbar-desktop-menu-active-bg: 31, 41, 55, 0.5; /* gray-800/50 - for rgba() */
+    
+    /* Navbar DynamicDropdown Colors */
+    --dropdown-login-gradient-from: 59, 130, 246, 0.2; /* blue-500/20 - for rgba() */
+    --dropdown-login-gradient-to: 168, 85, 247, 0.2; /* purple-500/20 - for rgba() */
+    --dropdown-login-border: 96, 165, 250, 0.3; /* blue-400/30 - for rgba() */
+    --dropdown-login-icon: 96 165 250; /* blue-400 - Tailwind default */
+    --dropdown-login-link: 96 165 250; /* blue-400 - Tailwind default */
+    --dropdown-item-hover-bg: 55, 65, 81, 0.5; /* gray-700/50 - for rgba() */
+    --dropdown-active-gradient-from: 59, 130, 246, 0.3; /* blue-500/30 - for rgba() */
+    --dropdown-active-gradient-to: 168, 85, 247, 0.3; /* purple-500/30 - for rgba() */
+    --dropdown-active-text: 191 219 254; /* blue-200 - Tailwind default */
+    --dropdown-active-border: 96, 165, 250, 0.6; /* blue-400/60 - for rgba() */
+    --dropdown-slate-text: 203 213 225; /* slate-300 - Tailwind default */
+    --dropdown-accent-blur: 59, 130, 246, 0.1; /* blue-500/10 - for rgba() */
+    
+    /* DomainGuide Colors */
+    --domain-guide-bg: 25 28 28; /* #191c1c - for rgb() */
+    --domain-guide-text-white: 255 255 255; /* white - for rgb() */
+    --domain-guide-text-gray-300: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-guide-text-gray-400: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-guide-teal-500: 20 184 166; /* teal-500 - Tailwind default */
+    --domain-guide-teal-500-opacity: 20, 184, 166, 0.2; /* teal-500/20 - for rgba() */
+    --domain-guide-teal-400: 45 212 191; /* teal-400 - Tailwind default */
+    --domain-guide-teal-400-opacity: 45, 212, 191, 0.2; /* teal-400/20 - for rgba() */
+    --domain-guide-teal-300-opacity: 94, 234, 212, 0.3; /* teal-300/30 - for rgba() */
+    --domain-guide-green-600: 22 163 74; /* green-600 - Tailwind default */
+    --domain-guide-green-500-opacity: 34, 197, 94, 0.2; /* green-500/20 - for rgba() */
+    --domain-guide-green-400: 74 222 128; /* green-400 - Tailwind default */
+    --domain-guide-green-400-opacity: 74, 222, 128, 0.2; /* green-400/20 - for rgba() */
+    --domain-guide-green-500-border: 34, 197, 94, 0.3; /* green-500/30 - for rgba() */
+    --domain-guide-green-300: 134 239 172; /* green-300 - Tailwind default */
+    --domain-guide-green-900: 20 83 45; /* green-900 - Tailwind default */
+    --domain-guide-blue-500: 59 130 246; /* blue-500 - Tailwind default */
+    --domain-guide-blue-600: 37 99 235; /* blue-600 - Tailwind default */
+    --domain-guide-gray-900: 17 24 39; /* gray-900 - Tailwind default */
+    --domain-guide-gray-800: 31 41 55; /* gray-800 - Tailwind default */
+    --domain-guide-white-opacity-20: 255, 255, 255, 0.2; /* white/20 - for rgba() */
+    --domain-guide-white-opacity-30: 255, 255, 255, 0.3; /* white/30 - for rgba() */
+    
+    /* ChooseHosting Additional Colors */
+    --hosting-choose-divider-border: 31 41 55; /* #1f2937 - gray-800 - for rgb() */
+    --hosting-choose-showmore-hover: 37, 99, 235, 0.3; /* blue-600/30 - for rgba() */
+    
+    /* CloudHostingPlans Colors */
+    --cloud-hosting-subnote: 141 122 255; /* #8d7aff - for rgb() */
+    --cloud-hosting-button-bg: 29 61 122; /* #1d3d7a - for rgb() */
+    --cloud-hosting-button-hover: 37 77 151; /* #254d97 - for rgb() */
+    --cloud-hosting-card-bg: 28 31 38; /* #1c1f26 - for rgb() */
+    --cloud-hosting-card-featured-bg: 32 36 45; /* #20242d - for rgb() */
+    --cloud-hosting-badge: 31 143 91; /* #1f8f5b - for rgb() */
+    --cloud-hosting-badge-text: 120 255 198; /* #78ffc6 - for rgb() */
+    
+    /* InsideTransferManager Colors */
+    --transfer-manager-bg: 27 29 28; /* #1b1d1c - for rgb() */
+    
+    /* HeaderBanner Colors */
+    --header-banner-bg: 0 27 85; /* #001b55 - for rgb() */
+    --header-banner-text: 255 255 255; /* white - for rgb() */
+    
+    /* Common Domain Component Colors */
+    --domain-common-bg-overlay: 17, 24, 39, 0.2; /* gray-900/20 - for rgba() */
+    --domain-common-text-white: 255 255 255; /* white - for rgb() */
+    --domain-common-text-gray-300: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-common-text-gray-400: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-common-text-gray-500: 107 114 128; /* gray-500 - Tailwind default */
+    --domain-common-bg-gray-800-30: 31, 41, 55, 0.3; /* gray-800/30 - for rgba() */
+    --domain-common-bg-gray-800-20: 31, 41, 55, 0.2; /* gray-800/20 - for rgba() */
+    --domain-common-border-gray-600: 75 85 99; /* gray-600 - Tailwind default */
+    --domain-common-bg-gray-700-50: 55, 65, 81, 0.5; /* gray-700/50 - for rgba() */
+    --domain-common-bg-gray-700: 55 65 81; /* gray-700 - Tailwind default */
+    --domain-common-bg-gray-600: 75 85 99; /* gray-600 - Tailwind default */
+    --domain-common-text-green-400: 74 222 128; /* green-400 - Tailwind default */
+    --domain-common-text-red-400: 248 113 113; /* red-400 - Tailwind default */
+    --domain-common-text-yellow-400: 250 204 21; /* yellow-400 - Tailwind default */
+    --domain-common-bg-red-900-20: 127, 29, 29, 0.2; /* red-900/20 - for rgba() */
+    --domain-common-border-red-600-30: 220, 38, 38, 0.3; /* red-600/30 - for rgba() */
+    --domain-common-bg-green-900-20: 20, 83, 45, 0.2; /* green-900/20 - for rgba() */
+    --domain-common-border-green-600-30: 22, 163, 74, 0.3; /* green-600/30 - for rgba() */
+    --domain-common-text-blue-400: 96 165 250; /* blue-400 - Tailwind default */
+    --domain-common-bg-yellow-900-20: 113, 63, 18, 0.2; /* yellow-900/20 - for rgba() */
+    --domain-common-border-yellow-600-30: 202, 138, 4, 0.3; /* yellow-600/30 - for rgba() */
+    --domain-common-gradient-gray-600: 75 85 99; /* gray-600 - Tailwind default */
+    --domain-common-gradient-gray-700: 55 65 81; /* gray-700 - Tailwind default */
+    
+    /* Domain Transfer Page Colors */
+    --domain-transfer-page-bg: 45 46 46; /* #2d2e2e - for rgb() */
+    --domain-transfer-page-text: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-transfer-page-breadcrumb-active: 229 231 235; /* gray-200 - Tailwind default */
+    --domain-transfer-page-breadcrumb-inactive: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-transfer-page-search-bg: 27 29 28; /* #1b1d1c - for rgb() */
+    --domain-transfer-page-button-bg: 37 99 235; /* blue-600 - Tailwind default */
+    --domain-transfer-page-button-hover: 29 78 216; /* blue-700 - Tailwind default */
+    --domain-transfer-page-button-text: 255 255 255; /* white - for rgb() */
+    --domain-transfer-page-divider: 27 29 28; /* #1b1d1c - for rgb() */
+    
+    /* Domain Name Privacy Page Colors */
+    --domain-name-privacy-hero-description: 180 70% 60%; /* teal - hsl format */
+    --domain-name-privacy-breadcrumb-active: 229 231 235; /* gray-200 - Tailwind default */
+    --domain-name-privacy-breadcrumb-inactive: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-name-privacy-private-bg: 26 26 26; /* #1a1a1a - dark background */
+    
+    /* Domain Name Privacy Component Colors */
+    --domain-name-privacy-text-white: 255 255 255; /* white - for rgb() */
+    --domain-name-privacy-text-gray: 211 211 211; /* #D3D3D3 - for rgb() */
+    --domain-name-privacy-link-blue: 217 91% 60%; /* hsl(217, 91%, 60%) - blue-500 - for hsl() */
+    --domain-name-privacy-card-unprotected-bg: 40 40 40; /* #282828 - for rgb() */
+    --domain-name-privacy-card-protected-bg: 26 26 26; /* #1a1a1a - for rgb() */
+    --domain-name-privacy-gradient-gray-90: 26, 26, 26, 0.9; /* rgba(26, 26, 26, 0.9) - for rgba() */
+    --domain-name-privacy-gradient-gray-75: 26, 26, 26, 0.75; /* rgba(26, 26, 26, 0.75) - for rgba() */
+    --domain-name-privacy-gradient-gray-50: 26, 26, 26, 0.5; /* rgba(26, 26, 26, 0.5) - for rgba() */
+    --domain-name-privacy-gradient-gray-30: 26, 26, 26, 0.3; /* rgba(26, 26, 26, 0.3) - for rgba() */
+    --domain-name-privacy-gradient-gray-15: 26, 26, 26, 0.15; /* rgba(26, 26, 26, 0.15) - for rgba() */
+    --domain-name-privacy-register-gradient-teal-1: 20, 184, 166, 0.85; /* rgba(20, 184, 166, 0.85) - for rgba() */
+    --domain-name-privacy-register-gradient-teal-2: 5, 150, 105, 0.9; /* rgba(5, 150, 105, 0.9) - for rgba() */
+    --domain-name-privacy-register-gradient-teal-3: 6, 95, 70, 0.95; /* rgba(6, 95, 70, 0.95) - for rgba() */
+    --domain-name-privacy-register-input-bg: 31, 41, 55, 0.8; /* rgba(31, 41, 55, 0.8) - gray-800/80 - for rgba() */
+    --domain-name-privacy-register-button-bg: 37 99 235; /* rgb(37, 99, 235) - blue-600 - for rgb() */
+    
+    /* Pop Page Colors */
+    --pop-page-bg: 17 24 39; /* gray-900 - Tailwind default */
+    
+    /* Migrate Email Hero Colors */
+    --migrate-email-hero-bg: 16 19 21; /* #101315 - for rgb() */
+    --migrate-email-hero-text: 255 255 255; /* white - for rgb() */
+    --migrate-email-hero-text-85: 255, 255, 255, 0.85; /* white/85 - for rgba() */
+    
+    /* Virtual Machine Hero Colors */
+    --virtual-machine-hero-bg: 17 24 39; /* gray-900 - for rgb() */
+    --virtual-machine-section-bg: 0 0 0; /* black - for rgb() */
+    
+    /* Migration Icon Component Colors */
+    --ui-migration-icon-upload-from: 26 133 255; /* #1a85ff - for rgb() */
+    --ui-migration-icon-upload-via: 12 90 163; /* #0c5aa3 - for rgb() */
+    --ui-migration-icon-upload-to: 5 46 88; /* #052e58 - for rgb() */
+    --ui-migration-icon-check-from: 34 163 255; /* #22a3ff - for rgb() */
+    --ui-migration-icon-check-via: 14 111 182; /* #0e6fb6 - for rgb() */
+    --ui-migration-icon-check-to: 6 61 111; /* #063d6f - for rgb() */
+    --ui-migration-icon-connect-from: 31 179 255; /* #1fb3ff - for rgb() */
+    --ui-migration-icon-connect-via: 12 126 198; /* #0c7ec6 - for rgb() */
+    --ui-migration-icon-connect-to: 5 67 119; /* #054377 - for rgb() */
+    --ui-migration-icon-blur-from: 31, 179, 255, 0.2; /* #1fb3ff33 - rgba(31, 179, 255, 0.2) - for rgba() */
+    --ui-migration-icon-shadow: 3, 63, 110, 0.45; /* rgba(3, 63, 110, 0.45) - for rgba() */
+    --ui-migration-icon-text: 255 255 255; /* white - for rgb() */
+    
+    /* Transfer FAQ Component Colors */
+    --transfer-faq-bg: 27 29 28; /* #1b1d1c - for rgb() */
+    
+    /* WordPress EasyWP Component Colors */
+    --wp-easywp-badge-new: 122 255 192; /* #7affc0 - for rgb() */
+    
+    /* WordPress CloudHosting Component Colors */
+    --cloud-hosting-card-shadow: 0, 0, 0, 0.55; /* rgba(0, 0, 0, 0.55) - for rgba() */
+    --cloud-hosting-card-shadow-hover: 0, 0, 0, 0.6; /* rgba(0, 0, 0, 0.6) - for rgba() */
+    --cloud-hosting-subnote-default: 255, 255, 255, 0.5; /* rgba(255, 255, 255, 0.5) - for rgba() */
+    
+    /* Security Page Colors - Common Background */
+    --security-bg: 26 26 26; /* #1a1a1a - deep charcoal/off-black - for rgb() */
+    
+    /* Security Page Hero Colors */
+    --security-hero-bg: 40 44 52; /* #282c34 - dark gray - for rgb() */
+    --security-hero-heading-green: 60 200 100; /* #3cc864 - vibrant green - for rgb() */
+    --security-hero-heading-teal: 60 200 200; /* #3cc8c8 - teal/light blue - for rgb() */
+    --security-hero-description-text: 255 255 255; /* white - for rgb() */
+    --security-hero-scroll-text: 255 255 255; /* white - for rgb() */
+    
+    /* Security Safeguarded Component Colors */
+    --security-safeguarded-bg: 26 26 26; /* #1a1a1a - deep charcoal/off-black - for rgb() */
+    --security-safeguarded-heading-text: 255 255 255; /* white - for rgb() */
+    --security-safeguarded-description-text: 255 255 255; /* white - for rgb() */
+    --security-safeguarded-card-bg: 31 41 55; /* gray-800 - for rgb() */
+    --security-safeguarded-card-pattern: 55, 65, 81, 0.3; /* gray-700/30 - for rgba() */
+    --security-safeguarded-icon-green: 60 200 100; /* #3cc864 - vibrant green - for rgb() */
+    --security-safeguarded-icon-glow: 60, 200, 100, 0.3; /* green/30 - for rgba() */
+    --security-safeguarded-card-title-text: 255 255 255; /* white - for rgb() */
+    --security-safeguarded-card-description-text: 255 255 255; /* white - for rgb() */
+    --security-safeguarded-link-blue: 59 130 246; /* blue-500 - for rgb() */
+
+    /* Security Protected Component Colors */
+    --security-protected-bg: 26 26 26; /* #1a1a1a - deep charcoal/off-black - for rgb() */
+    --security-protected-gradient-green: 34, 197, 94, 0.3; /* green-500/30 - for rgba() */
+    --security-protected-heading-text: 255 255 255; /* white - for rgb() */
+    --security-protected-description-text: 255 255 255; /* white - for rgb() */
+    --security-protected-card-bg: 31 41 55; /* gray-800 - for rgb() */
+    --security-protected-icon-color: 255 255 255; /* white - for rgb() */
+    --security-protected-card-title-text: 255 255 255; /* white - for rgb() */
+    --security-protected-card-description-text: 255 255 255; /* white - for rgb() */
+    --security-protected-button-bg: 255 255 255; /* white - for rgb() */
+    --security-protected-button-text: 31 41 55; /* gray-800 - for rgb() */
+
+    /* Security BuiltIn Component Colors */
+    --security-builtin-bg: 26 26 26; /* #1a1a1a - deep charcoal/off-black - for rgb() */
+    --security-builtin-heading-text: 255 255 255; /* white - for rgb() */
+
+    /* Security WebHosting Component Colors */
+    --security-webhosting-bg: 26 26 26; /* #1a1a1a - deep charcoal/off-black - for rgb() */
+    --security-webhosting-tagline-text: 65 217 191; /* #41d9bf - teal/cyan - for rgb() */
+    --security-webhosting-heading-text: 255 255 255; /* white - for rgb() */
+    --security-webhosting-description-text: 255 255 255; /* white - for rgb() */
+    --security-webhosting-feature-title-text: 255 255 255; /* white - for rgb() */
+    --security-webhosting-feature-description-text: 255 255 255; /* white - for rgb() */
+    --security-webhosting-link-text: 65 217 191; /* #41d9bf - teal/cyan - for rgb() */
+
+    /* Security Spacemail Component Colors */
+    --security-spacemail-bg: 26 26 26; /* #1a1a1a - deep charcoal/off-black - for rgb() */
+    --security-spacemail-tagline-text: 138 43 226; /* #8a2be2 - blueviolet/purple - for rgb() */
+    --security-spacemail-heading-text: 255 255 255; /* white - for rgb() */
+    --security-spacemail-description-text: 255 255 255; /* white - for rgb() */
+    --security-spacemail-feature-title-text: 255 255 255; /* white - for rgb() */
+    --security-spacemail-feature-description-text: 255 255 255; /* white - for rgb() */
+    --security-spacemail-link-text: 65 217 191; /* #41d9bf - teal/cyan - for rgb() */
+
+    /* Security FAQ Component Colors */
+    --security-faq-bg: 26 26 26; /* #1a1a1a - deep charcoal/off-black - for rgb() */
+    --security-faq-heading-text: 255 255 255; /* white - for rgb() */
+    --security-faq-border: 255, 255, 255, 0.1; /* white/10 - for rgba() */
+    --security-faq-question-text: 255 255 255; /* white - for rgb() */
+    --security-faq-answer-text: 255, 255, 255, 0.8; /* white/80 - for rgba() */
+
+    /* Roadmap Hero Component Colors */
+    --roadmap-hero-bg: 26 26 26; /* #1a1a1a - deep charcoal/off-black - for rgb() */
+    --roadmap-hero-heading-text: 255 255 255; /* white - for rgb() */
+    --roadmap-hero-description-text: 255, 255, 255, 0.8; /* white/80 - for rgba() */
+    --virtual-machine-hero-text: 255 255 255; /* white - for rgb() */
+    --virtual-machine-hero-text-70: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --virtual-machine-hero-text-85: 255, 255, 255, 0.85; /* white/85 - for rgba() */
+    --virtual-machine-button-bg: 31 41 55; /* gray-800 - for rgb() */
+    --virtual-machine-button-hover-bg: 55 65 81; /* gray-700 - for rgb() */
+    --virtual-machine-button-text: 255 255 255; /* white - for rgb() */
+    --virtual-machine-text-deep-gray: 31 41 55; /* gray-800 - deep gray for rgb() */
+    --virtual-machine-text-gray: 75 85 99; /* gray-600 - darker gray for rgb() */
+    --virtual-machine-billing-bg: 0 0 0 0; /* transparent - no bg for rgb() */
+    --virtual-machine-billing-text: 255 255 255; /* white - text for rgb() */
+    --virtual-machine-billing-selected-bg: 0 0 0; /* black - selected bg for rgb() */
+    --virtual-machine-billing-selected-text: 255 255 255; /* white - selected text for rgb() */
+    --virtual-machine-billing-container-bg: 255, 255, 255, 0.1; /* very light gray transparent - for rgba() */
+    --virtual-machine-card-bg: 31, 41, 55; /* gray-800 - dark card bg for rgb() */
+    --virtual-machine-card-text: 255, 255, 255; /* white - card text for rgb() */
+    --virtual-machine-card-text-gray: 156, 163, 175; /* gray-400 - card gray text for rgb() */
+    --virtual-machine-card-button-bg: 255, 255, 255; /* white - button bg for rgb() */
+    --virtual-machine-card-button-text: 0, 0, 0; /* black - button text for rgb() */
+    --virtual-machine-popular-badge-bg: 59, 130, 246; /* blue-500 - popular badge bg for rgb() */
+    --virtual-machine-popular-badge-text: 59, 130, 246; /* blue-500 - popular badge text for rgb() */
+    --virtual-machine-table-row-bg: 31, 32, 34; /* #1F2022 - table row highlight bg for rgb() */
+    --virtual-machine-border-color: 255, 255, 255, 0.1; /* rgba white border for rgba() */
+    --virtual-machine-link-blue: 59, 130, 246; /* blue-500 - link color for rgb() */
+    --migrate-email-hero-brand-text: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --migrate-email-hero-overlay-from: 16, 19, 21, 0.4; /* bg/40 - for rgba() */
+    --migrate-email-hero-overlay-via: 16, 19, 21, 0.6; /* bg/60 - for rgba() */
+    --migrate-email-hero-overlay-to: 16, 19, 21, 0.8; /* bg/80 - for rgba() */
+    --migrate-email-hero-purple-gradient-from: 139, 92, 246, 0.8; /* purple-500/80 - for rgba() */
+    --migrate-email-hero-purple-gradient-to: 168, 85, 247, 0.6; /* purple-500/60 - for rgba() */
+    
+    /* Migrate Email Simple Component Colors */
+    --migrate-email-simple-bg: 16 19 21; /* #101315 - for rgb() */
+    --migrate-email-simple-text-white: 255 255 255; /* white - for rgb() */
+    --migrate-email-simple-text-gray: 156 163 175; /* gray-400 - Tailwind default */
+    --migrate-email-simple-icon-purple: 139 92 246; /* purple-500 - Tailwind default */
+    
+    /* Email You Pricing Component Colors */
+    --email-you-card-bg: 23 27 30; /* slightly lighter than page bg (16 19 21) - for rgb() */
+    --email-you-card-bg-highlight: 139 92 246; /* purple-500 - for rgb() */
+    --email-you-save-text: 22 163 74; /* green-600 - dark green - for rgb() */
+    --email-you-disclaimer-text: 156 163 175; /* gray-400 - for rgb() */
+    --email-you-button-bg: 255 255 255; /* white - for rgb() */
+    --email-you-button-text: 0 0 0; /* black - for rgb() */
+    
+    /* Choose Email Pricing Component Colors */
+    --choose-email-card-bg: 23 27 30; /* dark gray - for rgb() */
+    --choose-email-card-border: 75 85 99; /* gray-600 - for rgb() */
+    --choose-email-selector-active-bg: 0 0 0; /* black - for rgb() */
+    --choose-email-selector-inactive-bg: transparent; /* transparent */
+    --choose-email-selector-border: 255 255 255; /* white - for rgb() */
+    --choose-email-discount-bg: 34 197 94; /* green-500 - for rgb() */
+    --choose-email-popular-badge: 59 130 246; /* blue-500 - for rgb() */
+    --choose-email-button-gray-bg: 55 65 81; /* gray-700 - for rgb() */
+    --choose-email-button-white-bg: 255 255 255; /* white - for rgb() */
+    --choose-email-button-white-text: 0 0 0; /* black - for rgb() */
+    --choose-email-explore-button-bg: 139 92 246; /* purple-500 - for rgb() */
+    --choose-email-card-shadow-popular: 0 0 0 0.3; /* black/30 - for rgba() */
+    --choose-email-card-shadow-regular: 0 0 0 0.2; /* black/20 - for rgba() */
+    --choose-email-border-white-10: 255 255 255 0.1; /* white/10 - for rgba() */
+    --choose-email-border-white-20: 255 255 255 0.2; /* white/20 - for rgba() */
+    --choose-email-button-hover-white: 255 255 255 0.9; /* white/90 - for rgba() */
+
+    /* About Page Colors */
+    /* About Hero Component Colors */
+    --about-hero-gradient-blue-500-25: 59, 130, 246, 0.25; /* blue-500/25 - for rgba() */
+    --about-hero-gradient-blue-500-18: 59, 130, 246, 0.18; /* blue-500/18 - for rgba() */
+    --about-hero-gradient-blue-500-10: 59, 130, 246, 0.10; /* blue-500/10 - for rgba() */
+    --about-hero-gradient-cyan-500-22: 6, 182, 212, 0.22; /* cyan-500/22 - for rgba() */
+    --about-hero-gradient-cyan-500-20: 6, 182, 212, 0.20; /* cyan-500/20 - for rgba() */
+    --about-hero-gradient-cyan-500-15: 6, 182, 212, 0.15; /* cyan-500/15 - for rgba() */
+    --about-hero-gradient-cyan-500-12: 6, 182, 212, 0.12; /* cyan-500/12 - for rgba() */
+    --about-hero-gradient-sky-500-20: 14, 165, 233, 0.20; /* sky-500/20 - for rgba() */
+    --about-hero-gradient-sky-500-15: 14, 165, 233, 0.15; /* sky-500/15 - for rgba() */
+    --about-hero-gradient-sky-500-12: 14, 165, 233, 0.12; /* sky-500/12 - for rgba() */
+    
+    /* Shoot Component Colors */
+    --about-shoot-bg: 30 64 175; /* blue-900 - #1e40af - for rgb() */
+    --about-shoot-gradient-blue-900-50: 30, 58, 138, 0.5; /* blue-900/50 - for rgba() */
+    --about-shoot-gradient-blue-900-45: 30, 58, 138, 0.45; /* blue-900/45 - for rgba() */
+    --about-shoot-gradient-blue-900-40: 30, 58, 138, 0.4; /* blue-900/40 - for rgba() */
+    --about-shoot-gradient-blue-900-35: 30, 58, 138, 0.35; /* blue-900/35 - for rgba() */
+    --about-shoot-gradient-blue-900-30: 30, 58, 138, 0.3; /* blue-900/30 - for rgba() */
+    --about-shoot-gradient-blue-900-25: 30, 58, 138, 0.25; /* blue-900/25 - for rgba() */
+    --about-shoot-gradient-blue-900-18: 30, 58, 138, 0.18; /* blue-900/18 - for rgba() */
+    --about-shoot-gradient-blue-900-15: 30, 58, 138, 0.15; /* blue-900/15 - for rgba() */
+    --about-shoot-gradient-blue-900-12: 30, 58, 138, 0.12; /* blue-900/12 - for rgba() */
+    --about-shoot-button-bg: 0 0 0; /* black - for rgb() */
+    --about-shoot-button-bg-hover: 26 26 26; /* gray-900 - #1a1a1a - for rgb() */
+    --about-shoot-button-text: 96 165 250; /* blue-400 - #60a5fa - for rgb() */
+    --about-shoot-text: 255 255 255; /* white - for rgb() */
+    
+    /* Rated Component Colors */
+    --about-rated-trustpilot-bg: 255 255 255; /* white - for rgb() */
+    --about-rated-trustpilot-text: 17 24 39; /* gray-900 - for rgb() */
+    --about-rated-trustpilot-star: 34 197 94; /* green-500 - for rgb() */
+
+    /* CDN Page Colors */
+    /* CDN Hero Component Colors */
+    --cdn-hero-bg: 26 26 26; /* gray-900 - #1a1a1a - for rgb() */
+    --cdn-hero-gradient-blue-500-03: 59, 130, 246, 0.03; /* blue-500/3 - for rgba() */
+    --cdn-hero-gradient-blue-500-08: 59, 130, 246, 0.08; /* blue-500/8 - for rgba() */
+    --cdn-hero-gradient-cyan-500-02: 6, 182, 212, 0.02; /* cyan-500/2 - for rgba() */
+    --cdn-hero-gradient-cyan-500-05: 6, 182, 212, 0.05; /* cyan-500/5 - for rgba() */
+    --cdn-hero-button-bg: 255 255 255; /* white - for rgb() */
+    --cdn-hero-button-text: 0 0 0; /* black - for rgb() */
+    --cdn-hero-button-hover: 243 244 246; /* gray-100 - #F3F4F6 - for rgb() */
+    
+    /* CDN Section Colors (Accelerate, Amp, Access, Reliability, FAQcdn, SuperSonicCard) */
+    --cdn-section-bg: 16 20 24; /* #101418 - for rgb() */
+    
+    /* SuperSonic Component Colors */
+    --cdn-supersonic-gradient-from: 5, 46, 58, 0.95; /* teal-900/95 - for rgba() */
+    --cdn-supersonic-gradient-to: 16, 185, 129, 0.8; /* green-500/80 - for rgba() */
+    --cdn-supersonic-pattern-white-10: 255, 255, 255, 0.1; /* white/10 - for rgba() */
+    
+    /* SuperSonicCard Component Colors */
+    --cdn-card-bg: 31, 41, 55, 0.6; /* gray-800/60 - for rgba() */
+    --cdn-card-text: 255 255 255; /* white - for rgb() */
+    --cdn-card-text-gray: 156, 163, 175, 1; /* gray-400 - for rgba() */
+    --cdn-card-text-gray-70: 156, 163, 175, 0.7; /* gray-400/70 - for rgba() */
+    --cdn-card-button-bg: 59, 130, 246, 1; /* blue-500 - for rgba() */
+    --cdn-card-button-bg-hover: 59, 130, 246, 0.9; /* blue-500/90 - for rgba() */
+    --cdn-card-checkmark: 16, 185, 129, 1; /* green-500 - for rgba() */
+    --cdn-card-checkmark-disabled: 156, 163, 175, 0.5; /* gray-400/50 - for rgba() */
+    
+    /* Reliability Component Colors */
+    --cdn-reliability-icon-text: 255 255 255; /* white - for rgb() */
+    --cdn-reliability-title-text: 255 255 255; /* white - for rgb() */
+    --cdn-reliability-description-text: 156, 163, 175, 0.9; /* gray-400/90 - for rgba() */
+    
+    /* FAQcdn Component Colors */
+    --cdn-faq-border: 156, 163, 175, 0.2; /* gray-400/20 - for rgba() */
+    --cdn-faq-question-text: 255 255 255; /* white - for rgb() */
+    --cdn-faq-answer-text: 156, 163, 175, 0.9; /* gray-400/90 - for rgba() */
+
+    /* VPN Page Colors */
+    /* VPN Section Background (common across most components) */
+    --vpn-section-bg: 15 20 25; /* #0F1419 - for rgb() */
+    
+    /* VPN Hero Component Colors */
+    --vpn-hero-subtitle-text: 55 65 81; /* gray-700 - #374151 - for rgb() */
+    --vpn-hero-heading-text: 31 41 55; /* gray-800 - #1F2937 - for rgb() */
+    --vpn-hero-description-text: 55 65 81; /* gray-700 - #374151 - for rgb() */
+    --vpn-hero-button-primary-bg: 55 65 81; /* gray-700 - #374151 - for rgb() */
+    --vpn-hero-button-primary-text: 255 255 255; /* white - for rgb() */
+    --vpn-hero-button-primary-hover: 75 85 99; /* gray-600 - #4B5563 - for rgb() */
+    --vpn-hero-button-secondary-bg: 229 231 235; /* gray-200 - #E5E7EB - for rgb() */
+    --vpn-hero-button-secondary-text: 55 65 81; /* gray-700 - #374151 - for rgb() */
+    --vpn-hero-button-secondary-hover: 209 213 219; /* gray-300 - #D1D5DB - for rgb() */
+    
+    /* SetYourself Component Colors */
+    --vpn-set-yourself-button-bg: 31 41 55; /* gray-800 - #1F2937 - for rgb() */
+    --vpn-set-yourself-button-text: 255 255 255; /* white - for rgb() */
+    --vpn-set-yourself-button-border: 55 65 81; /* gray-700 - #374151 - for rgb() */
+    --vpn-set-yourself-button-hover: 55 65 81; /* gray-700 - #374151 - for rgb() */
+    
+    /* Choose Component Colors */
+    --vpn-choose-gradient-brown-from: 107, 68, 35; /* brown - #6b4423 - for rgba() */
+    --vpn-choose-gradient-brown-1: 139, 69, 19; /* #8b4513 - for rgba() */
+    --vpn-choose-gradient-brown-2: 160, 82, 45; /* #a0522d - for rgba() */
+    --vpn-choose-gradient-brown-3: 205, 133, 63; /* #cd853f - for rgba() */
+    --vpn-choose-gradient-brown-4: 92, 58, 31; /* #5c3a1f - for rgba() */
+    --vpn-choose-card-bg: 31 41 55; /* gray-800 - #1F2937 - for rgb() */
+    --vpn-choose-card-border: 55 65 81; /* gray-700 - #374151 - for rgb() */
+    
+    /* Freedom Component Colors */
+    --vpn-freedom-border: 31 41 55; /* gray-800 - for rgb() */
+    --vpn-freedom-image-bg: 26 31 46; /* #1a1f2e - for rgb() */
+    
+    /* More Component Colors */
+    --vpn-more-table-highlight-bg: 42 58 74; /* #2a3a4a - for rgb() */
+    --vpn-more-button-bg: 255 255 255; /* white - for rgb() */
+    --vpn-more-button-text: 17 24 39; /* gray-900 - for rgb() */
+    --vpn-more-button-hover: 243 244 246; /* gray-100 - #f3f4f6 - for rgb() */
+    
+    /* YourTrusted Component Colors */
+    --vpn-your-trusted-gradient-teal-1: 13, 148, 136; /* teal-600 - #0d9488 - for rgba() */
+    --vpn-your-trusted-gradient-teal-2: 20, 184, 166; /* teal-500 - #14b8a6 - for rgba() */
+    --vpn-your-trusted-gradient-teal-3: 45, 212, 191; /* teal-400 - #2dd4bf - for rgba() */
+    --vpn-your-trusted-gradient-teal-4: 15, 118, 110; /* teal-700 - #0f766e - for rgba() */
+    --vpn-your-trusted-card-bg: 31 41 55; /* gray-800 - #1F2937 - for rgb() */
+    --vpn-your-trusted-card-border: 55 65 81; /* gray-700 - #374151 - for rgb() */
+    --vpn-your-trusted-button-bg: 255 255 255; /* white - for rgb() */
+    --vpn-your-trusted-button-text: 17 24 39; /* gray-900 - for rgb() */
+    --vpn-your-trusted-button-hover: 243 244 246; /* gray-100 - #f3f4f6 - for rgb() */
+    
+    /* FAQvpn Component Colors */
+    --vpn-faq-border: 255, 255, 255, 0.2; /* white/20 - for rgba() */
+    --vpn-faq-question-text: 255 255 255; /* white - for rgb() */
+    --vpn-faq-answer-text: 255, 255, 255, 0.7; /* white/70 - for rgba() */
   }
 
   .dark {
@@ -291,6 +1568,8 @@
 
   html {
     scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
   }
 
   body {
@@ -299,6 +1578,8 @@
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
   }
 
   /* Links */
@@ -330,6 +1611,27 @@
 
   footer .border {
     border-color: hsl(var(--footer-border));
+  }
+
+  /* HostingPlanControls Select Options Styling */
+  select option {
+    background-color: rgb(var(--hosting-controls-select-bg));
+    color: rgb(var(--hosting-text-white));
+  }
+
+  select option:checked {
+    background-color: rgb(var(--hosting-controls-select-bg));
+    color: rgb(var(--hosting-text-white));
+  }
+
+  /* PickYourHosting Select Element - Remove White Background on Hover */
+  .rounded-xl select:hover,
+  .rounded-xl select:focus,
+  .rounded-xl select:active {
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
   }
 
 

@@ -36,7 +36,7 @@ const TransferFrequentlyAskedQuestions = () => {
   };
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 lg:py-28" style={{ backgroundColor: '#1b1d1c' }}>
+    <section className="py-16 sm:py-20 md:py-24 lg:py-28" style={{ backgroundColor: 'rgb(var(--transfer-faq-bg))' }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24">
         {/* Heading */}
         <div className="mb-6 sm:mb-16 md:mb-10">

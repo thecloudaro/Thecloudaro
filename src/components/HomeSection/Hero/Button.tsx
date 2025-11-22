@@ -18,8 +18,8 @@ export default function Button({ label, isActive, onClick }: ButtonProps) {
                   font-medium transition-colors duration-200
                   ${
                     isActive
-                      ? "bg-blue-600 text-white shadow-sm hover:bg-blue-700"
-                      : "text-gray-400 hover:text-white hover:bg-gray-700/50"
+                      ? "bg-[hsl(var(--hero-button-active-bg))] text-[hsl(var(--hero-button-active-text))] shadow-sm hover:bg-[hsl(var(--hero-button-active-hover-bg))]"
+                      : "text-[hsl(var(--hero-button-inactive-text))] hover:text-[hsl(var(--hero-button-inactive-hover-text))] hover:bg-[hsl(var(--hero-button-inactive-hover-bg))]"
                   }`}
     >
       {label}

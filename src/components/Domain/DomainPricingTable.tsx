@@ -226,16 +226,26 @@ const DomainPricingTable = () => {
               value={searchTerm}
               onChange={setSearchTerm}
               containerClassName="p-2"
-              inputClassName="text-white placeholder-gray-400"
-              bgColor="#0F0F11"
-              borderColor="#374151"
+              inputClassName="text-[rgb(var(--hosting-text-white))] placeholder:text-[rgb(var(--domain-pricing-table-button-icon))]"
+              bgColor={`rgb(var(--domain-pricing-table-search-bg))`}
+              borderColor={`rgb(var(--domain-pricing-table-search-border))`}
             />
           </div>
 
           {/* Price Range Button - Right side */}
           <div className="relative flex items-center" ref={dropdownRef}>
             <button 
-              className="flex items-center bg-gray-800 text-gray-300 px-3 py-2 rounded-full transition-colors duration-200 text-sm hover:bg-gray-700"
+              className="flex items-center px-3 py-2 rounded-full transition-colors duration-200 text-sm"
+              style={{ 
+                backgroundColor: 'rgb(var(--domain-pricing-table-filter-button-bg))',
+                color: 'rgb(var(--domain-pricing-table-filter-button-text))'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-filter-button-hover))';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-filter-button-bg))';
+              }}
               onClick={() => setShowPriceRange(!showPriceRange)}
             >
               <Filter className="w-3 h-3 mr-2" />
@@ -249,19 +259,25 @@ const DomainPricingTable = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="absolute top-full right-0 mt-2 w-72 bg-gray-800 border border-gray-600 rounded-md shadow-lg z-50"
+                className="absolute top-full right-0 mt-2 w-72 rounded-md shadow-lg z-50"
+                style={{ 
+                  backgroundColor: 'rgb(var(--domain-pricing-table-dropdown-bg))',
+                  borderColor: 'rgb(var(--domain-pricing-table-dropdown-border))',
+                  borderWidth: '1px',
+                  borderStyle: 'solid'
+                }}
               >
                 <div className="p-4">
                   {/* Heading */}
-                  <h3 className="text-white font-bold text-sm mb-4">Price Range</h3>
+                  <h3 className="font-bold text-sm mb-4" style={{ color: 'rgb(var(--hosting-text-white))' }}>Price Range</h3>
                   
                   {/* Line before Min to Max */}
-                  <div className="border-t -mx-4 mb-4" style={{ borderColor: '#4A4A4A' }}></div>
+                  <div className="border-t -mx-4 mb-4" style={{ borderColor: 'rgb(var(--domain-pricing-table-divider))' }}></div>
                   
                   {/* Min to Max Input */}
                   <div className="flex items-center gap-3 mb-4">
                     <div className="flex-1">
-                      <label className="block text-white text-xs mb-1">Min</label>
+                      <label className="block text-xs mb-1" style={{ color: 'rgb(var(--hosting-text-white))' }}>Min</label>
                       <div className="relative">
                         <input
                           type="number"
@@ -270,28 +286,46 @@ const DomainPricingTable = () => {
                           onChange={(e) => setMinPrice(e.target.value)}
                           onFocus={() => setMinPriceFocused(true)}
                           onBlur={() => setMinPriceFocused(false)}
-                          className="w-full px-3 py-2 pr-12 bg-gray-800 border rounded-md text-white placeholder-white text-sm focus:outline-none transition-colors duration-200 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                          style={{ borderColor: minPriceFocused ? '#3A4ACB' : '#4A4A4A' }}
+                          className="w-full px-3 py-2 pr-12 border rounded-md text-sm focus:outline-none transition-colors duration-200 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none placeholder:text-[rgb(var(--domain-pricing-table-input-placeholder))]"
+                          style={{ 
+                            backgroundColor: 'rgb(var(--domain-pricing-table-input-bg))',
+                            borderColor: minPriceFocused ? 'rgb(var(--domain-pricing-table-input-border-focus))' : 'rgb(var(--domain-pricing-table-input-border-default))',
+                            color: 'rgb(var(--hosting-text-white))'
+                          }}
                         />
                         <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex flex-col">
                           <button
                             onClick={handleIncrementMin}
-                            className="p-1 hover:bg-gray-700 rounded transition-colors duration-200"
+                            className="p-1 rounded transition-colors duration-200"
+                            style={{ backgroundColor: 'transparent' }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-button-hover-bg))';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor = 'transparent';
+                            }}
                           >
-                            <ChevronUp className="w-3 h-3 text-gray-400 hover:text-white" />
+                            <ChevronUp className="w-3 h-3" style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-button-icon-hover))'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-button-icon))'; }} />
                           </button>
                           <button
                             onClick={handleDecrementMin}
-                            className="p-1 hover:bg-gray-700 rounded transition-colors duration-200"
+                            className="p-1 rounded transition-colors duration-200"
+                            style={{ backgroundColor: 'transparent' }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-button-hover-bg))';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor = 'transparent';
+                            }}
                           >
-                            <ChevronDown className="w-3 h-3 text-gray-400 hover:text-white" />
+                            <ChevronDown className="w-3 h-3" style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-button-icon-hover))'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-button-icon))'; }} />
                           </button>
                         </div>
                       </div>
                     </div>
-                    <span className="text-gray-400 text-sm mt-6">to</span>
+                    <span className="text-sm mt-6" style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }}>to</span>
                     <div className="flex-1">
-                      <label className="block text-white text-xs mb-1">Max</label>
+                      <label className="block text-xs mb-1" style={{ color: 'rgb(var(--hosting-text-white))' }}>Max</label>
                       <div className="relative">
                         <input
                           type="number"
@@ -300,21 +334,39 @@ const DomainPricingTable = () => {
                           onChange={(e) => setMaxPrice(e.target.value)}
                           onFocus={() => setMaxPriceFocused(true)}
                           onBlur={() => setMaxPriceFocused(false)}
-                          className="w-full px-3 py-2 pr-12 bg-gray-800 border rounded-md text-white placeholder-white text-sm focus:outline-none transition-colors duration-200 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                          style={{ borderColor: maxPriceFocused ? '#3A4ACB' : '#4A4A4A' }}
+                          className="w-full px-3 py-2 pr-12 border rounded-md text-sm focus:outline-none transition-colors duration-200 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none placeholder:text-[rgb(var(--domain-pricing-table-input-placeholder))]"
+                          style={{ 
+                            backgroundColor: 'rgb(var(--domain-pricing-table-input-bg))',
+                            borderColor: maxPriceFocused ? 'rgb(var(--domain-pricing-table-input-border-focus))' : 'rgb(var(--domain-pricing-table-input-border-default))',
+                            color: 'rgb(var(--hosting-text-white))'
+                          }}
                         />
                         <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex flex-col">
                           <button
                             onClick={handleIncrementMax}
-                            className="p-1 hover:bg-gray-700 rounded transition-colors duration-200"
+                            className="p-1 rounded transition-colors duration-200"
+                            style={{ backgroundColor: 'transparent' }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-button-hover-bg))';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor = 'transparent';
+                            }}
                           >
-                            <ChevronUp className="w-3 h-3 text-gray-400 hover:text-white" />
+                            <ChevronUp className="w-3 h-3" style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-button-icon-hover))'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-button-icon))'; }} />
                           </button>
                           <button
                             onClick={handleDecrementMax}
-                            className="p-1 hover:bg-gray-700 rounded transition-colors duration-200"
+                            className="p-1 rounded transition-colors duration-200"
+                            style={{ backgroundColor: 'transparent' }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-button-hover-bg))';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor = 'transparent';
+                            }}
                           >
-                            <ChevronDown className="w-3 h-3 text-gray-400 hover:text-white" />
+                            <ChevronDown className="w-3 h-3" style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-button-icon-hover))'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-button-icon))'; }} />
                           </button>
                         </div>
                       </div>
@@ -322,20 +374,38 @@ const DomainPricingTable = () => {
                   </div>
 
                   {/* Line after Min to Max */}
-                  <div className="border-t -mx-4 mb-4" style={{ borderColor: '#4A4A4A' }}></div>
+                  <div className="border-t -mx-4 mb-4" style={{ borderColor: 'rgb(var(--domain-pricing-table-divider))' }}></div>
 
                   {/* Action Buttons */}
                   <div className="flex gap-2 justify-end">
                     <button
                       onClick={handleClearPriceRange}
-                      className="px-3 py-1.5 text-blue-400 hover:text-gray-300 hover:bg-gray-700 rounded-full transition-colors duration-200 text-xs font-medium"
+                      className="px-3 py-1.5 rounded-full transition-colors duration-200 text-xs font-medium"
+                      style={{ color: 'rgb(var(--domain-pricing-table-clear-button-text))' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-clear-button-hover-text))';
+                        e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-button-hover-bg))';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-clear-button-text))';
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }}
                     >
                       Clear
                     </button>
                     <button
                       onClick={handleApplyPriceRange}
-                      className="px-4 py-1.5 text-white rounded-full hover:bg-gray-700 transition-colors duration-200 text-xs font-medium"
-                      style={{ backgroundColor: '#3A4ACB' }}
+                      className="px-4 py-1.5 rounded-full transition-colors duration-200 text-xs font-medium"
+                      style={{ 
+                        backgroundColor: 'rgb(var(--domain-pricing-table-apply-button-bg))',
+                        color: 'rgb(var(--hosting-text-white))'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-button-hover-bg))';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-apply-button-bg))';
+                      }}
                     >
                       Apply
                     </button>
@@ -351,7 +421,7 @@ const DomainPricingTable = () => {
       <div className="overflow-hidden">
         {/* Table Header */}
         <div className="px-6 py-4">
-          <div className="grid grid-cols-5 gap-8 text-lg font-semibold text-gray-300">
+          <div className="grid grid-cols-5 gap-8 text-lg font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>
             <div>TLD</div>
             <div>Register</div>
             <div>Renew</div>
@@ -361,40 +431,72 @@ const DomainPricingTable = () => {
         </div>
 
         {/* Table Body */}
-        <div className="divide-y divide-gray-700">
+        <div className="divide-y" style={{ borderColor: 'rgb(var(--domain-pricing-table-divider-row))' }}>
           {filteredDomains.map((domain, index) => (
             <motion.div
               key={domain.tld}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="px-6 py-4 hover:bg-gray-750 transition-colors duration-200"
+              className="px-6 py-4 transition-colors duration-200"
+              style={{ backgroundColor: 'transparent' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-row-hover))';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
             >
               <div className="grid grid-cols-5 gap-8 items-center py-4">
                 {/* TLD */}
                 <div className="flex items-center">
                   <button 
                     onClick={() => handleDomainClick(domain.tld)}
-                    className="text-blue-400 font-semibold text-lg hover:text-blue-300 transition-colors duration-200 cursor-pointer"
+                    className="font-semibold text-lg transition-colors duration-200 cursor-pointer"
+                    style={{ color: 'rgb(var(--domain-pricing-table-tld-text))' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-tld-hover))';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-tld-text))';
+                    }}
                   >
                     {domain.tld}
                   </button>
-                  <button className="ml-2 p-1 hover:bg-gray-600 rounded transition-colors duration-200">
-                    <Heart className="w-3 h-3 text-gray-400 hover:text-red-500" />
+                  <button 
+                    className="ml-2 p-1 rounded transition-colors duration-200"
+                    style={{ backgroundColor: 'transparent' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-button-hover-bg))';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
+                  >
+                    <Heart 
+                      className="w-3 h-3" 
+                      style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-heart-hover))';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-button-icon))';
+                      }}
+                    />
                   </button>
                 </div>
 
                 {/* Register */}
-                <div className="text-white text-lg">
+                <div className="text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
                   {domain.register.isSale ? (
                     <div>
-                      <span className="line-through text-gray-400 text-sm mr-2">
+                      <span className="line-through text-sm mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>
                         {domain.register.original}
                       </span>
-                      <span className="text-green-400 font-semibold">
+                      <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>
                         {domain.register.sale} /yr
                       </span>
-                      <span className="ml-2 bg-green-600 text-white text-xs px-2 py-1 rounded">
+                      <span className="ml-2 text-white text-xs px-2 py-1 rounded" style={{ backgroundColor: 'rgb(var(--domain-pricing-table-sale-badge))' }}>
                         SALE
                       </span>
                     </div>
@@ -404,21 +506,21 @@ const DomainPricingTable = () => {
                 </div>
 
                 {/* Renew */}
-                <div className="text-white font-semibold text-lg">
+                <div className="font-semibold text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
                   {domain.renew} /yr
                 </div>
 
                 {/* Transfer */}
-                <div className="text-white text-lg">
+                <div className="text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
                   {domain.transfer.isSale ? (
                     <div>
-                      <span className="line-through text-gray-400 text-sm mr-2">
+                      <span className="line-through text-sm mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>
                         {domain.transfer.original}
                       </span>
-                      <span className="text-green-400 font-semibold">
+                      <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>
                         {domain.transfer.sale} /yr
                       </span>
-                      <span className="ml-2 bg-green-600 text-white text-xs px-2 py-1 rounded">
+                      <span className="ml-2 text-white text-xs px-2 py-1 rounded" style={{ backgroundColor: 'rgb(var(--domain-pricing-table-sale-badge))' }}>
                         SALE
                       </span>
                     </div>
@@ -428,7 +530,7 @@ const DomainPricingTable = () => {
                 </div>
 
                 {/* ICANN Fee */}
-                <div className="text-gray-400 font-semibold text-lg">
+                <div className="font-semibold text-lg" style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }}>
                   {domain.icannFee} /yr
                 </div>
               </div>
@@ -442,7 +544,17 @@ const DomainPricingTable = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300"
+          className="px-8 py-4 rounded-full font-semibold transition-all duration-300"
+          style={{ 
+            backgroundColor: 'rgb(var(--domain-pricing-table-cta-button-bg))',
+            color: 'rgb(var(--hosting-text-white))'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-cta-button-hover))';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-cta-button-bg))';
+          }}
         >
           See More
         </motion.button>

@@ -8,7 +8,7 @@ import SectionHeading from "@/components/ui/section-heading";
 const TransferPricing = () => {
   const [tldSearchTerm, setTldSearchTerm] = useState("");
   return (
-    <div className="px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36 pb-20 sm:pb-24 md:pb-28 lg:pb-32 xl:pb-36 relative" style={{ backgroundColor: '#1b1d1c' }}>
+    <div className="px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36 pb-20 sm:pb-24 md:pb-28 lg:pb-32 xl:pb-36 relative" style={{ backgroundColor: 'rgb(var(--transfer-pricing-bg))' }}>
       {/* Teal gradient at bottom */}
       <div
         aria-hidden
@@ -26,13 +26,13 @@ const TransferPricing = () => {
             heading="Domain transfer prices"
             description="Lower rates, higher savings."
             headingTag="h2"
-            headingClassName="text-[3.2rem] sm:text-[3.5rem] md:text-[4rem] font-bold text-white leading-tight"
-            descriptionClassName="text-gray-300 text-xl sm:text-2xl md:text-3xl max-w-4xl mx-auto mt-2"
+            headingClassName="text-[3.2rem] sm:text-[3.5rem] md:text-[4rem] font-bold leading-tight !text-[rgb(var(--transfer-pricing-heading))]"
+            descriptionClassName="text-xl sm:text-2xl md:text-3xl max-w-4xl mx-auto mt-2 !text-[rgb(var(--transfer-pricing-description))]"
           />
         </div>
 
         {/* Get 1-year renewal note */}
-        <p className="text-gray-300 text-xs sm:text-base md:text-md text-center mb-6 mt-30">
+        <p className="text-xs sm:text-base md:text-md text-center mb-6 mt-30 !text-[rgb(var(--transfer-pricing-note))]">
           Get 1-year renewal with every transfer.
         </p>
 
@@ -44,13 +44,26 @@ const TransferPricing = () => {
                 value={tldSearchTerm}
                 onChange={setTldSearchTerm}
                 containerClassName="!p-0 !py-1 !px-2 !pl-3 h-full"
-                inputClassName="text-white placeholder-gray-400 text-xs h-full"
-                bgColor="#0F0F11"
-                borderColor="#374151"
+                inputClassName="text-xs h-full !text-[rgb(var(--transfer-pricing-search-text))] placeholder:!text-[rgb(var(--transfer-pricing-search-placeholder))]"
+                bgColor="rgb(var(--transfer-pricing-search-bg))"
+                borderColor="rgb(var(--transfer-pricing-search-border))"
               />
             </div>
             <div>
-              <button className="inline-flex ml-60 gap-1.5 bg-[#272a2a] hover:bg-[#2f3333] text-white px-3 py-1.5 rounded-full text-[10px]" style={{ border: 'none' }}>
+              <button 
+                className="inline-flex ml-60 gap-1.5 px-3 py-1.5 rounded-full text-[10px]"
+                style={{ 
+                  border: 'none',
+                  backgroundColor: 'rgb(var(--transfer-pricing-recommended-bg))',
+                  color: 'rgb(var(--transfer-pricing-recommended-text))'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgb(var(--transfer-pricing-recommended-hover))';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgb(var(--transfer-pricing-recommended-bg))';
+                }}
+              >
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7l4-4 4 4M8 17l4 4 4-4"/></svg>
                 Recommended
               </button>
@@ -93,26 +106,26 @@ const TransferPricing = () => {
               return filteredTlds.map((row, idx) => (
                 <div key={idx} className="grid grid-cols-12 gap-20 items-center px-4 py-4 relative">
                   <div className="col-span-12 md:col-span-5 flex items-center justify-center md:justify-start gap-3">
-                    <span className="text-blue-400 font-semibold text-2xl">{row.tld}</span>
-                    <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <span className="font-semibold text-2xl !text-[rgb(var(--transfer-pricing-tld-text))]">{row.tld}</span>
+                    <svg className="w-4 h-4 !text-[rgb(var(--transfer-pricing-icon))]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     </svg>
                   </div>
                   <div className="col-span-12 md:col-span-7 flex flex-col items-center md:items-start">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-white text-sm">Transfer and renew</span>
-                      {row.sale && <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-600 text-white">SALE</span>}
+                      <span className="text-sm !text-[rgb(var(--transfer-pricing-label))]">Transfer and renew</span>
+                      {row.sale && <span className="text-[10px] px-2 py-0.5 rounded !bg-[rgb(var(--transfer-pricing-sale-badge-bg))] !text-[rgb(var(--transfer-pricing-sale-badge-text))]">SALE</span>}
                     </div>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-white font-semibold">{row.price}</span>
-                      {row.original && <span className="text-gray-400 line-through text-sm">{row.original}</span>}
+                      <span className="font-semibold !text-[rgb(var(--transfer-pricing-price))]">{row.price}</span>
+                      {row.original && <span className="line-through text-sm !text-[rgb(var(--transfer-pricing-original-price))]">{row.original}</span>}
                     </div>
                   </div>
                   {idx < filteredTlds.length - 1 && (
                     <div className="absolute bottom-0 left-4 md:left-4" style={{ 
                       width: 'calc(41.67% + 5rem + 18% - 1rem)', 
                       height: '1px', 
-                      background: '#4b5563' 
+                      background: 'rgb(var(--transfer-pricing-divider))' 
                     }}></div>
                   )}
                 </div>

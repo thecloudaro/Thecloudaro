@@ -50,7 +50,7 @@ const DomainExtensions = () => {
   ];
 
   return (
-    <section className="relative bg-[#191c1c]">
+    <section className="relative" style={{ backgroundColor: 'rgb(var(--domain-hero-section-bg))' }}>
       <div className="px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
@@ -59,8 +59,8 @@ const DomainExtensions = () => {
               heading="Register a domain"
               description="Discover the perfect match for your needs."
               headingTag="h2"
-              headingClassName="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-6"
-              descriptionClassName="text-gray-400 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl max-w-3xl mx-auto leading-relaxed"
+              headingClassName="text-5xl sm:text-6xl md:text-7xl font-bold text-[rgb(var(--hosting-text-white))] mb-6"
+              descriptionClassName="text-[rgb(var(--domain-hero-text-gray-400))] text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl max-w-3xl mx-auto leading-relaxed"
             />
           </div>
 {/* Domain Extensions Grid */}
@@ -82,10 +82,10 @@ const DomainExtensions = () => {
 
       {/* Domain Extension */}
       <div className="text-center">
-        <h3 className="text-2xl font-bold text-white mb-1">
+        <h3 className="text-2xl font-bold text-[rgb(var(--hosting-text-white))] mb-1">
           {domain.extension}
         </h3>
-        <p className="text-gray-200 text-sm leading-snug">
+        <p className="text-sm leading-snug" style={{ color: 'rgb(var(--domain-extensions-text-gray-200))' }}>
           {domain.description}
         </p>
       </div>
@@ -93,13 +93,13 @@ const DomainExtensions = () => {
       {/* Pricing */}
       <div className="text-center">
         <div className="flex justify-center items-baseline mb-1">
-          <span className="text-3xl font-bold text-white">
+          <span className="text-3xl font-bold text-[rgb(var(--hosting-text-white))]">
             ${domain.price}
           </span>
-          <span className="text-gray-300 ml-1 text-sm">/yr</span>
+          <span className="ml-1 text-sm" style={{ color: 'rgb(var(--domain-extensions-text-gray-300))' }}>/yr</span>
         </div>
         {domain.originalPrice && (
-          <div className="text-gray-400 line-through text-sm">
+          <div className="line-through text-sm" style={{ color: 'rgb(var(--domain-hero-text-gray-400))' }}>
             ${domain.originalPrice}/yr
           </div>
         )}
@@ -113,7 +113,17 @@ const DomainExtensions = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-gray-800 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:bg-gray-100"
+            className="px-8 py-4 rounded-full font-semibold transition-all duration-300"
+            style={{
+              backgroundColor: 'rgb(var(--domain-extensions-button-bg))',
+              color: 'rgb(var(--domain-extensions-button-text))'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgb(var(--domain-extensions-button-hover))';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgb(var(--domain-extensions-button-bg))';
+            }}
           >
             See all domains
           </motion.button>
@@ -121,6 +131,8 @@ const DomainExtensions = () => {
 
         </div>
       </div>
+
+      
     </section>
   );
 };

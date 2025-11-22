@@ -87,7 +87,7 @@ const HeroSection = () => {
          {/* Tabs */}
          <div className="flex justify-center mb-4 sm:mb-6 md:mb-8">
   <div className="bg-hero-tab-bg backdrop-blur-md transition 
-                  rounded-full p-1 flex shadow-md ">
+                  rounded-full p-1 flex shadow-md border border-hero-search-border">
     {["register", "transfer"].map((tab) => (
       <Button
         key={tab}
@@ -105,7 +105,7 @@ const HeroSection = () => {
             <div className="flex items-stretch bg-hero-search-bg backdrop-blur-md rounded-full p-1.5 sm:p-2 border border-hero-search-border shadow-lg">
               <div className="flex items-center flex-1 px-3 sm:px-4">
                 <svg
-                  className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 mr-2 sm:mr-3"
+                  className="w-4 h-4 sm:w-5 sm:h-5 text-[hsl(var(--hero-section-search-icon))] mr-2 sm:mr-3"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -125,7 +125,7 @@ const HeroSection = () => {
                   className="flex-1 bg-transparent text-hero-text placeholder-hero-text-muted text-sm sm:text-base focus:outline-none"
                 />
               </div>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-sm sm:text-base transition">
+              <button className="bg-[hsl(var(--hero-section-search-button-bg))] hover:bg-[hsl(var(--hero-section-search-button-hover-bg))] text-[hsl(var(--hero-section-search-button-text))] px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-sm sm:text-base transition">
                 Search
               </button>
             </div>

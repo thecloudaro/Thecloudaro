@@ -33,6 +33,7 @@ export default function UniversalDropdown({
   onMenuSelect
 }: UniversalDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const isHostingPage = currentPath?.includes('/hosting');
   
   // Map navbar menu names to dropdown keys
   const mapMenuToKey = (menu: string | null): string => {
@@ -102,34 +103,34 @@ export default function UniversalDropdown({
       title: "Hosting",
       sections: [
         { title: "Web Hosting", desc: "Fast and reliable hosting for any site.", href: "/web-hosting" },
-        { title: "WordPress Hosting", desc: "Optimized hosting for WP sites." },
-        { title: "Business Hosting", desc: "Powerful hosting for growing teams." },
-        { title: "Ecommerce Hosting", desc: "Secure hosting for online stores." },
-        { title: "Transfer Hosting", desc: "Make your move to better hosting." }
+        { title: "WordPress Hosting", desc: "Optimized hosting for WP sites.", href: "/hosting-for-wordpress" },
+        { title: "Business Hosting", desc: "Powerful hosting for growing teams.", href: "/web-hosting" },
+        { title: "Ecommerce Hosting", desc: "Secure hosting for online stores.", href: "/web-hosting" },
+        { title: "Transfer Hosting", desc: "Make your move to better hosting.", href: "/migration-to-thecloudaro" }
       ]
     },
     email: {
       title: "Email",
       sections: [
-        { title: "Business Email", desc: "Professional email for your domain." },
+        { title: "Business Email", desc: "Professional email for your domain.", href: "/business-email" },
         { title: "Business Email Login", desc: "Access your business email." },
-        { title: "Migrate Email", desc: "Move your email with ease." }
+        { title: "Migrate Email", desc: "Move your email with ease.", href: "/migrate-business-email" }
       ]
     },
     cloud: {
       title: "Cloud",
       sections: [
-        { title: "Virtual Machines", desc: "Scale your cloud infrastructure." },
-        { title: "VM Manager", desc: "Manage your virtual machines easily." }
+        { title: "Virtual Machines", desc: "Scale your cloud infrastructure.", href: "/virtual-machine" },
+        { title: "VM Manager", desc: "Manage your virtual machines easily.", href: "/virtual-machine" }
       ]
     },
     security: {
       title: "Security",
       sections: [
         { title: "Security", desc: "See how Thecloudaro keeps you secure." },
-        { title: "Domain Privacy", desc: "Keep your domain info private." },
-        { title: "CDN", desc: "Speed up your site worldwide." },
-        { title: "VPN", desc: "Secure your online presence." }
+        { title: "Domain Privacy", desc: "Keep your domain info private.", href: "/domain-name-privacy" },
+        { title: "CDN", desc: "Speed up your site worldwide.", href: "/cdn" },
+        { title: "VPN", desc: "Secure your online presence.", href: "/vpn" }
       ]
     }
   };
@@ -184,7 +185,7 @@ export default function UniversalDropdown({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -20, scale: 0.98 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="z-40 border-t border-dropdown-border overflow-hidden bg-dropdown-bg-primary md:absolute md:top-full md:left-0 md:w-full md:h-[75vh] fixed inset-0 md:inset-auto"
+      className={`z-40 ${isHostingPage ? '' : 'border-t border-dropdown-border'} overflow-hidden bg-dropdown-bg-primary md:absolute md:top-full md:left-0 md:w-full md:h-[75vh] fixed inset-0 md:inset-auto`}
       style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}
       onClick={(e) => e.stopPropagation()}
     >
@@ -201,7 +202,7 @@ export default function UniversalDropdown({
       >
         {/* Logo & Close/Back Button */}
 <div className="flex items-center justify-between mb-6 px-4">
-  <Logo showText={true} />
+  <Logo />
 
   <button
     onClick={onClose}
@@ -213,11 +214,17 @@ export default function UniversalDropdown({
 
 
         {/* Login Section */}
-        <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg p-4 mb-6 border border-blue-400/30">
+        <div 
+          className="rounded-lg p-4 mb-6 border"
+          style={{
+            background: `linear-gradient(to right, rgba(var(--dropdown-login-gradient-from)), rgba(var(--dropdown-login-gradient-to)))`,
+            borderColor: 'rgba(var(--dropdown-login-border))'
+          }}
+        >
           <div className="flex items-start gap-3 mb-3">
-            <User className="text-blue-400 mt-1" size={20} />
+            <User className="mt-1" size={20} style={{ color: 'rgb(var(--dropdown-login-icon))' }} />
             <div>
-              <h3 className="text-white font-semibold text-sm">
+              <h3 className="font-semibold text-sm" style={{ color: 'rgb(var(--navbar-mobile-menu-text))' }}>
                 Log in to TheCloudaro
               </h3>
               <p className="text-dropdown-text-muted text-xs mt-1">
@@ -229,7 +236,8 @@ export default function UniversalDropdown({
 <span className="text-dropdown-text-muted">Don&apos;t have an account?</span>
             <Link
               href="/signup"
-              className="text-blue-400 font-medium hover:underline"
+              className="font-medium hover:underline"
+              style={{ color: 'rgb(var(--dropdown-login-link))' }}
             >
               Sign up
             </Link>
@@ -249,7 +257,13 @@ export default function UniversalDropdown({
                     const navbarMenuName = mapKeyToMenu(item.key);
                     onMenuSelect?.(navbarMenuName);
                   }}
-                  className="w-full text-left flex items-center justify-between gap-3 px-3 py-3 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:bg-gray-700/50 hover:scale-105"
+                  className="w-full text-left flex items-center justify-between gap-3 px-3 py-3 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:scale-105"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
                 >
                   <div className="flex items-center gap-3">
                     {item.icon}
@@ -270,7 +284,13 @@ export default function UniversalDropdown({
               <li key={idx}>
                 <Link
                   href={item.href}
-                  className="flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:bg-gray-700/50 hover:scale-105"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:scale-105"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
                 >
                   {item.icon}
                   <span className="text-sm font-medium">{item.label}</span>
@@ -282,13 +302,19 @@ export default function UniversalDropdown({
 
         {/* TheCloudaro Universe */}
         <div className="mb-6">
-          <SectionHeading title="THECLOUDARO UNIVERSE" />
+          <SectionHeading title="AROVERSE" />
           <ul className="space-y-2">
             {universeItems.map((item, idx) => (
               <li key={idx}>
                 <Link
                   href={item.href}
-                  className="flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:bg-gray-700/50 hover:scale-105"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:scale-105"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
                 >
                   {item.icon}
                   <span className="text-sm font-medium">{item.label}</span>
@@ -339,7 +365,14 @@ export default function UniversalDropdown({
             <Link
               key={idx}
               href={item.href || "#"}
-              className="group hover:bg-gray-700/50 p-4 rounded-lg transition-all cursor-pointer border border-dropdown-border block"
+              onClick={onClose}
+              className="group p-4 rounded-lg transition-all cursor-pointer border border-dropdown-border block"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
             >
               <h3 className="text-white font-semibold text-base mb-1">
                 {item.title}
@@ -367,11 +400,29 @@ export default function UniversalDropdown({
                   <li key={idx}>
                     <Link
                       href={item.href}
+                      onClick={onClose}
                       className={`flex items-center gap-2 px-0 py-1.5 rounded-md transition-all duration-300 text-sm ${
                         isPathActive(item.href)
-                          ? "bg-dropdown-active-bg text-dropdown-active-text border border-dropdown-active-border shadow"
-                          : "text-dropdown-text-secondary hover:text-white hover:bg-gray-700/50 hover:scale-105"
+                          ? "hover:scale-105"
+                          : "hover:scale-105"
                       }`}
+                      style={isPathActive(item.href) ? {
+                        backgroundColor: 'rgba(var(--dropdown-item-hover-bg))',
+                        color: 'rgb(var(--navbar-mobile-menu-text))',
+                        border: 'none'
+                      } : {}}
+                      onMouseEnter={(e) => {
+                        if (!isPathActive(item.href)) {
+                          e.currentTarget.style.color = 'rgb(var(--navbar-mobile-menu-text))';
+                          e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isPathActive(item.href)) {
+                          e.currentTarget.style.color = '';
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }
+                      }}
                     >
                       {item.icon}
                       <span className="font-medium">{item.label}</span>
@@ -396,9 +447,28 @@ export default function UniversalDropdown({
                       }}
                       className={`w-full text-left flex items-center gap-2 px-0 py-1.5 rounded-md transition-all duration-300 text-sm ${
                         selectedMenu === item.key
-                          ? "bg-gradient-to-r from-blue-500/30 to-purple-500/30 text-blue-200 border border-blue-400/60 shadow"
-                          : "text-slate-300 hover:text-white hover:bg-gray-700/50 hover:scale-105"
+                          ? "border shadow hover:scale-105"
+                          : "hover:scale-105"
                       }`}
+                      style={selectedMenu === item.key ? {
+                        background: `linear-gradient(to right, rgba(var(--dropdown-active-gradient-from)), rgba(var(--dropdown-active-gradient-to)))`,
+                        color: 'rgb(var(--dropdown-active-text))',
+                        borderColor: 'rgba(var(--dropdown-active-border))'
+                      } : {
+                        color: 'rgb(var(--dropdown-slate-text))'
+                      }}
+                      onMouseEnter={(e) => {
+                        if (selectedMenu !== item.key) {
+                          e.currentTarget.style.color = 'rgb(var(--navbar-mobile-menu-text))';
+                          e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (selectedMenu !== item.key) {
+                          e.currentTarget.style.color = 'rgb(var(--dropdown-slate-text))';
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }
+                      }}
                     >
                       {item.icon}
                       <span className="font-medium">{item.label}</span>
@@ -410,17 +480,35 @@ export default function UniversalDropdown({
 
             {/* TheCloudaro Universe */}
             <div className="mb-4">
-              <SectionHeading title="THECLOUDARO UNIVERSE" />
+              <SectionHeading title="AROVERSE" />
               <ul className="space-y-1">
                 {universeItems.map((item, idx) => (
                   <li key={idx}>
                     <Link
                       href={item.href}
+                      onClick={onClose}
                       className={`flex items-center gap-2 px-0 py-1.5 rounded-md transition-all duration-300 text-sm ${
                         isPathActive(item.href)
-                          ? "bg-dropdown-active-bg text-dropdown-active-text border border-dropdown-active-border shadow"
-                          : "text-dropdown-text-secondary hover:text-white hover:bg-gray-700/50 hover:scale-105"
+                          ? "hover:scale-105"
+                          : "hover:scale-105"
                       }`}
+                      style={isPathActive(item.href) ? {
+                        backgroundColor: 'rgba(var(--dropdown-item-hover-bg))',
+                        color: 'rgb(var(--navbar-mobile-menu-text))',
+                        border: 'none'
+                      } : {}}
+                      onMouseEnter={(e) => {
+                        if (!isPathActive(item.href)) {
+                          e.currentTarget.style.color = 'rgb(var(--navbar-mobile-menu-text))';
+                          e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isPathActive(item.href)) {
+                          e.currentTarget.style.color = '';
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }
+                      }}
                     >
                       {item.icon}
                       <span className="font-medium">{item.label}</span>
@@ -441,7 +529,14 @@ export default function UniversalDropdown({
               <Link
                 key={idx}
                 href={item.href || "#"}
-                className="group hover:bg-gray-700/50 p-3 rounded-lg transition-all cursor-pointer block"
+                onClick={onClose}
+                className="group p-3 rounded-lg transition-all cursor-pointer block"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                }}
               >
                 <h3 className="text-white font-semibold text-sm group-hover:text-white">
                   {item.title}
@@ -452,7 +547,10 @@ export default function UniversalDropdown({
           </div>
 
           {/* Light blue blur accent */}
-          <div className="absolute bottom-0 right-0 w-[180px] h-[180px] bg-blue-500/10 blur-3xl rounded-full" />
+          <div 
+            className="absolute bottom-0 right-0 w-[180px] h-[180px] blur-3xl rounded-full"
+            style={{ backgroundColor: 'rgba(var(--dropdown-accent-blur))' }}
+          />
         </div>
       </div>
     </motion.div>

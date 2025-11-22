@@ -11,7 +11,12 @@ interface WhiteButtonProps {
 }
 
 const WhiteButton = ({ children, onClick, href, className = "" }: WhiteButtonProps) => {
-  const buttonClasses = `bg-white text-gray-800 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:bg-gray-100 ${className}`;
+  const buttonClasses = `px-8 py-4 rounded-full font-semibold transition-all duration-300 ${className}`;
+  
+  const buttonStyle = {
+    backgroundColor: 'rgb(var(--ui-white-button-bg))',
+    color: 'rgb(var(--ui-white-button-text))'
+  } as React.CSSProperties;
 
   if (href) {
     return (
@@ -19,6 +24,13 @@ const WhiteButton = ({ children, onClick, href, className = "" }: WhiteButtonPro
         <Link
           href={href}
           className={buttonClasses}
+          style={buttonStyle}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgb(var(--ui-white-button-hover))';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgb(var(--ui-white-button-bg))';
+          }}
         >
           {children}
         </Link>
@@ -32,6 +44,13 @@ const WhiteButton = ({ children, onClick, href, className = "" }: WhiteButtonPro
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       className={buttonClasses}
+      style={buttonStyle}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.backgroundColor = 'rgb(var(--ui-white-button-hover))';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = 'rgb(var(--ui-white-button-bg))';
+      }}
     >
       {children}
     </motion.button>

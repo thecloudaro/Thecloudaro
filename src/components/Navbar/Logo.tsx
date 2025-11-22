@@ -1,28 +1,27 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
-interface LogoProps {
-  showText?: boolean; // default true
-}
-
-const Logo = ({ showText = true }: LogoProps) => {
+const Logo = () => {
   return (
     <div className="flex items-center">
-      {/* Icon */}
-      <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-sm mr-2 flex items-center justify-center">
-        <div className="w-3 h-3 sm:w-4 sm:h-4 bg-blue-600 transform rotate-45"></div>
-      </div>
+      <Link href="/" className="flex items-center">
+        {/* Logo Image - matches navbar height */}
+        <div className="relative h-20 sm:h-24 md:h-28 mr-2" style={{ width: 'auto' }}>
+          <Image
+            src="/logo/logo.png"
+            alt="TheCloudaro Logo"
+            width={280}
+            height={112}
+            className="h-full w-auto object-contain pr-4"
+            priority
+          />
+        </div>
 
-      {/* Text */}
-      {showText && (
-        <Link
-          href="/"
-          className="text-white text-xl sm:text-2xl font-light font-nunito"
-        >
-          TheCloudaro
-        </Link>
-      )}
+      
+        
+      </Link>
     </div>
   );
 };

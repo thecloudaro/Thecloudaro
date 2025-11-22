@@ -9,6 +9,7 @@ interface ProductData {
   title: string;
   description: string;
   gradientColors: string;
+  gradientStyle?: React.CSSProperties;
   shapes: Array<{
     position: string;
     size: string;
@@ -16,6 +17,7 @@ interface ProductData {
     shape: string;
     blur?: string;
     rotate?: string;
+    style?: React.CSSProperties;
   }>;
 }
 
@@ -25,9 +27,9 @@ interface ProductCardProps {
 }
 
 // Custom Paragraph Component for RelatedProducts
-const CustomParagraph: React.FC<{ text: string; className?: string }> = ({ text, className }) => {
+const CustomParagraph: React.FC<{ text: string; className?: string; style?: React.CSSProperties }> = ({ text, className, style }) => {
   return (
-    <p className={className}>
+    <p className={className} style={style}>
       {text.split('<br/>').map((line, index) => (
         <span key={index}>
           {line}
@@ -48,31 +50,52 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
     >
         {/* Square Color Div */}
         <div className="mb-8 w-[420px] h-[280px] relative overflow-hidden rounded-md shadow-2xl">
-        <div className={`absolute inset-0 ${product.gradientColors} rounded-md`}>
+        <div 
+          className="absolute inset-0 rounded-md"
+          style={product.gradientStyle || {
+            background: product.id === "web-hosting" 
+              ? `linear-gradient(to bottom right, rgba(var(--related-products-card-1-gradient-from)), rgba(var(--related-products-card-1-gradient-via)), rgba(var(--related-products-card-1-gradient-to)))`
+              : `linear-gradient(to bottom right, rgba(var(--related-products-card-2-gradient-from)), rgba(var(--related-products-card-2-gradient-via)), rgba(var(--related-products-card-2-gradient-to)))`
+          }}
+        >
           {product.shapes.map((shape, shapeIndex) => (
             <div
               key={shapeIndex}
-              className={`absolute ${shape.position} ${shape.size} ${shape.color} ${shape.shape} ${
+              className={`absolute ${shape.position} ${shape.size} ${shape.shape} ${
                 shape.blur || ""
               } ${shape.rotate || ""}`}
+              style={shape.style}
             />
           ))}
         </div>
       </div>
 
       {/* Title */}
-      <h3 className="text-[1.75rem] font-semibold text-white mb-4 text-left">{product.title}</h3>
+      <h3 className="text-[1.75rem] font-semibold mb-4 text-left" style={{ color: 'rgb(var(--related-products-heading))' }}>{product.title}</h3>
 
         {/* Description */}
         <CustomParagraph 
           text={product.description}
-          className="text-gray-400 text-lg sm:text-xl max-w-2xl mb-6 text-left"
+          className="text-lg sm:text-xl max-w-2xl mb-6 text-left"
+          style={{ color: 'rgb(var(--related-products-description))' }}
         />
 
       {/* Link */}
       <Link
         href="#"
-        className="inline-flex items-center text-blue-600 hover:text-blue-500 transition-colors duration-200 font-medium mt-4 underline decoration-blue-600 hover:decoration-blue-500"
+        className="inline-flex items-center transition-colors duration-200 font-medium mt-4 underline"
+        style={{ 
+          color: 'rgb(var(--related-products-link))',
+          textDecorationColor: 'rgb(var(--related-products-link))'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.color = 'rgb(var(--related-products-link-hover))';
+          e.currentTarget.style.textDecorationColor = 'rgb(var(--related-products-link-hover))';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.color = 'rgb(var(--related-products-link))';
+          e.currentTarget.style.textDecorationColor = 'rgb(var(--related-products-link))';
+        }}
       >
         Choose your plan
         <ArrowRight className="w-4 h-4 ml-2" />
@@ -88,12 +111,11 @@ const RelatedProducts = () => {
       title: "Web Hosting",
       description:
         "Get unparalleled speed, security, and<br/>stability with Spaceship Web Hosting.<br/>Choose a suitable plan for your needs<br/>and get your idea online in under an hour.",
-      gradientColors:
-        "bg-gradient-to-br from-teal-300/40 via-blue-400/50 to-white/30",
+      gradientColors: "",
       shapes: [
-        { position: "top-0 left-0", size: "w-full h-3/5", color: "bg-teal-300/40", shape: "rounded-tl-2xl rounded-bl-2xl", blur: "" },
-        { position: "top-0 right-0", size: "w-4/5 h-full", color: "bg-blue-400/50", shape: "rounded-tr-2xl rounded-br-2xl", blur: "" },
-        { position: "top-4 right-4", size: "w-16 h-16", color: "bg-white/60", shape: "rounded-lg", blur: "" },
+        { position: "top-0 left-0", size: "w-full h-3/5", color: "", shape: "rounded-tl-2xl rounded-bl-2xl", blur: "", style: { backgroundColor: 'rgba(var(--related-products-card-1-shape-1))' } },
+        { position: "top-0 right-0", size: "w-4/5 h-full", color: "", shape: "rounded-tr-2xl rounded-br-2xl", blur: "", style: { backgroundColor: 'rgba(var(--related-products-card-1-shape-2))' } },
+        { position: "top-4 right-4", size: "w-16 h-16", color: "", shape: "rounded-lg", blur: "", style: { backgroundColor: 'rgba(var(--related-products-card-1-shape-3))' } },
       ],
     },
     {
@@ -101,23 +123,23 @@ const RelatedProducts = () => {
       title: "Spacemail",
       description:
         "Build trust from the first email. Create a<br/>business email address that matches<br/>your domain and easily add credibility to<br/>any message you send.",
-      gradientColors:
-        "bg-gradient-to-br from-gray-800/60 via-purple-600/50 to-purple-400/40",
+      gradientColors: "",
       shapes: [
-        { position: "top-0 left-0", size: "w-2/5 h-full", color: "bg-gray-800/60", shape: "rounded-tl-2xl rounded-bl-2xl", blur: "" },
-        { position: "top-0 right-0", size: "w-3/5 h-3/5", color: "bg-purple-600/50", shape: "rounded-tr-2xl", blur: "" },
-        { position: "bottom-0 right-0", size: "w-3/5 h-2/5", color: "bg-purple-400/40", shape: "rounded-br-2xl", blur: "" },
+        { position: "top-0 left-0", size: "w-2/5 h-full", color: "", shape: "rounded-tl-2xl rounded-bl-2xl", blur: "", style: { backgroundColor: 'rgba(var(--related-products-card-2-shape-1))' } },
+        { position: "top-0 right-0", size: "w-3/5 h-3/5", color: "", shape: "rounded-tr-2xl", blur: "", style: { backgroundColor: 'rgba(var(--related-products-card-2-shape-2))' } },
+        { position: "bottom-0 right-0", size: "w-3/5 h-2/5", color: "", shape: "rounded-br-2xl", blur: "", style: { backgroundColor: 'rgba(var(--related-products-card-2-shape-3))' } },
       ],
     },
   ];
 
   return (
     <section
-      className="py-12 sm:py-16 md:py-20 lg:py-24 px-6 lg:px-10 min-h-screen flex flex-col justify-center bg-[#191c1c]"
+      className="py-12 sm:py-16 md:py-20 lg:py-24 px-6 lg:px-10 min-h-screen flex flex-col justify-center"
+      style={{ backgroundColor: 'rgb(var(--related-products-bg))' }}
     >
       <div className="max-w-7xl mx-auto text-center mb-16">
-        <h2 className="text-5xl font-bold text-white mb-6">Related products</h2>
-        <p className="text-gray-400 text-md sm:text-lg max-w-2xl mx-auto">
+        <h2 className="text-5xl font-bold mb-6" style={{ color: 'rgb(var(--related-products-heading))' }}>Related products</h2>
+        <p className="text-md sm:text-lg max-w-2xl mx-auto" style={{ color: 'rgb(var(--related-products-description))' }}>
           Configure and connect the tools you need to grow.
         </p>
       </div>

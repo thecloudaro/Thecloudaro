@@ -82,8 +82,8 @@ export default function Customer() {
 
           {/* Review Cards */}
           <div className="overflow-hidden relative w-full">
-            <div className="absolute left-0 top-0 h-full w-10 sm:w-14 md:w-16 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 h-full w-10 sm:w-14 md:w-16 bg-gradient-to-l from-black/80 via-black/40 to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 h-full w-10 sm:w-14 md:w-16 bg-gradient-to-r from-[hsl(var(--customer-gradient-from))] via-[hsl(var(--customer-gradient-via))] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 h-full w-10 sm:w-14 md:w-16 bg-gradient-to-l from-[hsl(var(--customer-gradient-from))] via-[hsl(var(--customer-gradient-via))] to-transparent z-10 pointer-events-none" />
 
             <motion.div
               animate={controls}

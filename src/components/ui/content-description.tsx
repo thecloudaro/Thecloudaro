@@ -1,18 +1,45 @@
 "use client";
 
-import { FC } from "react";
+import React, { FC } from "react";
 
 interface ContentDescriptionProps {
-  text: string;
+  text?: string;
   className?: string;
+  size?: "sm" | "md" | "lg" | "xl";
+  children?: React.ReactNode;
 }
 
-const ContentDescription: FC<ContentDescriptionProps> = ({ text, className = "" }) => {
+const sizeClasses: Record<NonNullable<ContentDescriptionProps["size"]>, string> = {
+  sm: "text-sm sm:text-base",
+  md: "text-base sm:text-lg",
+  lg: "text-lg sm:text-xl md:text-2xl lg:text-2xl",
+  xl: "text-xl sm:text-2xl md:text-3xl lg:text-3xl"
+};
+
+const ContentDescription: FC<ContentDescriptionProps> = ({
+  text,
+  className = "",
+  size = "lg",
+  children
+}) => {
+  const renderedContent = children
+    ? children
+    : typeof text === "string"
+      ? text
+          .split(/<br\s*\/?>/i)
+          .map((line, index, arr) => (
+            <React.Fragment key={index}>
+              {line}
+              {index !== arr.length - 1 && <br />}
+            </React.Fragment>
+          ))
+      : text;
+
   return (
     <p
-      className={`text-gray-300 text-base sm:text-lg md:text-xl leading-relaxed ${className}`}
+      className={`text-[rgb(var(--hosting-text-gray-300))] ${sizeClasses[size]} leading-relaxed ${className}`}
     >
-      {text}
+      {renderedContent}
     </p>
   );
 };

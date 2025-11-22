@@ -2,14 +2,27 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface QuestionAnswerProps {
   question: string;
   answer: string;
   index: number;
+  className?: string;
+  questionClassName?: string;
+  answerClassName?: string;
+  iconClassName?: string;
 }
 
-const QuestionAnswer = ({ question, answer, index }: QuestionAnswerProps) => {
+const QuestionAnswer = ({
+  question,
+  answer,
+  index,
+  className,
+  questionClassName,
+  answerClassName,
+  iconClassName
+}: QuestionAnswerProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -18,14 +31,19 @@ const QuestionAnswer = ({ question, answer, index }: QuestionAnswerProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="border-b border-[hsl(var(--faq-border))]"
+      className={cn("border-b border-[hsl(var(--faq-border))]", className)}
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-6 flex items-center justify-between text-left group transition-all duration-300 hover:opacity-80"
+        className="flex w-full items-center justify-between py-6 text-left transition-all duration-300 hover:opacity-80"
         aria-expanded={isOpen}
       >
-        <h3 className="text-lg md:text-xl font-semibold text-[hsl(var(--faq-text))] pr-8">
+        <h3
+          className={cn(
+            "pr-8 text-lg font-semibold text-[hsl(var(--faq-text))] md:text-xl",
+            questionClassName
+          )}
+        >
           {question}
         </h3>
         <motion.div
@@ -33,7 +51,9 @@ const QuestionAnswer = ({ question, answer, index }: QuestionAnswerProps) => {
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="flex-shrink-0"
         >
-          <ChevronDown className="w-6 h-6 text-[hsl(var(--faq-text))]" />
+          <ChevronDown
+            className={cn("h-6 w-6 text-[hsl(var(--faq-text))]", iconClassName)}
+          />
         </motion.div>
       </button>
 
@@ -51,7 +71,10 @@ const QuestionAnswer = ({ question, answer, index }: QuestionAnswerProps) => {
               animate={{ y: 0 }}
               exit={{ y: -10 }}
               transition={{ duration: 0.3 }}
-              className="pb-6 text-[hsl(var(--faq-text-muted))] leading-relaxed text-base md:text-lg"
+              className={cn(
+                "pb-6 text-base leading-relaxed text-[hsl(var(--faq-text-muted))] md:text-lg",
+                answerClassName
+              )}
             >
               {answer}
             </motion.p>

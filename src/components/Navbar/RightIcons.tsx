@@ -8,7 +8,16 @@ const RightIcons = () => {
       {[Globe, ShoppingCart, User].map((Icon, i) => (
         <button
           key={i}
-          className="text-slate-200 hover:text-white font-medium transition-all hover:bg-gray-600/50 px-2 py-2 rounded-full"
+          className="font-medium transition-all px-2 py-2 rounded-full"
+          style={{ color: 'rgb(var(--navbar-right-icons-text))' }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = 'rgb(var(--navbar-right-icons-hover-text))';
+            e.currentTarget.style.backgroundColor = 'rgba(var(--navbar-right-icons-hover-bg))';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = 'rgb(var(--navbar-right-icons-text))';
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }}
         >
           <Icon size={16} className="sm:w-5 sm:h-5" />
         </button>

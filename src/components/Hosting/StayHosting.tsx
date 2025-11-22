@@ -21,11 +21,11 @@ const StayHosting = ({
   buttonText = "See my options",
   buttonHref,
   buttonOnClick,
-  imageSrc = "/HostingSvg/stayup.svg",
+  imageSrc = "/Hosting/stayup.svg",
   imageAlt = "Stay up and open"
 }: StayHostingProps) => {
   return (
-    <section className="relative w-full bg-[#1a1a1a] py-8 lg:py-12">
+    <section className="relative w-full py-8 lg:py-12" style={{ backgroundColor: 'rgb(var(--hosting-section-bg))' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
           
