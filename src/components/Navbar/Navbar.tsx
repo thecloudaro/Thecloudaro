@@ -194,7 +194,17 @@ const Navbar: React.FC = () => {
 
               {/* Hamburger */}
               <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onClick={() => {
+                  if (activeDropdown) {
+                    // If dropdown is open, close it
+                    setActiveDropdown(null);
+                    setIsMenuOpen(false);
+                  } else {
+                    // Open mobile menu by setting activeDropdown
+                    setIsMenuOpen(true);
+                    setActiveDropdown("Explore all");
+                  }
+                }}
                 className={`p-2 ${
                   (isHostingPage)
                     ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))]'
@@ -203,7 +213,14 @@ const Navbar: React.FC = () => {
                     : 'text-[hsl(var(--navbar-text))] hover:text-[hsl(var(--navbar-text-hover))]'
                 }`}
               >
-                <Menu size={24} />
+                {(isMenuOpen || activeDropdown) ? (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                ) : (
+                  <Menu size={24} />
+                )}
               </button>
             </div>
 
@@ -211,12 +228,15 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Dropdown */}
+      {/* Dropdown - Shows on desktop and mobile */}
       <AnimatePresence>
         {activeDropdown && (
           <UniversalDropdown
             activeMenu={activeDropdown}
-            onClose={() => setActiveDropdown(null)}
+            onClose={() => {
+              setActiveDropdown(null);
+              setIsMenuOpen(false);
+            }}
             currentPath={pathname}
             onMenuSelect={(menuName) => {
               // Update activeDropdown when sidebar item is selected

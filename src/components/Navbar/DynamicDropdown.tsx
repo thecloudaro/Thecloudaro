@@ -185,12 +185,12 @@ export default function UniversalDropdown({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -20, scale: 0.98 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className={`z-40 ${isHostingPage ? '' : 'border-t border-dropdown-border'} overflow-hidden bg-dropdown-bg-primary md:absolute md:top-full md:left-0 md:w-full md:h-[75vh] fixed inset-0 md:inset-auto`}
+      className={`z-[200] md:z-40 ${isHostingPage ? '' : 'border-t border-dropdown-border'} overflow-hidden bg-dropdown-bg-primary md:absolute md:top-full md:left-0 md:w-full md:h-[75vh] fixed inset-0 md:inset-auto`}
       style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}
       onClick={(e) => e.stopPropagation()}
     >
 {/* Mobile View */}
-<div className="md:hidden fixed top-0 left-0 right-0 h-screen overflow-y-auto z-50 bg-dropdown-bg-primary" style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}>
+<div className="md:hidden fixed top-0 left-0 right-0 h-screen overflow-y-auto z-[200] bg-dropdown-bg-primary" style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}>
   <AnimatePresence mode="wait">
     {!showMobileDetail ? (
       <motion.div
