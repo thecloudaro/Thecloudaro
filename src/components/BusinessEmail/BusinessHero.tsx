@@ -53,9 +53,9 @@ const BusinessHero = () => {
         <div className="absolute left-[-15%] bottom-[-10%] h-[380px] w-[380px] rounded-[45%] blur-[120px]" style={{ backgroundColor: 'rgba(var(--business-hero-blur-2))' }} />
       </motion.div>
 
-      <div className="relative z-10 flex min-h-[65vh] flex-col">
+      <div className="relative z-10 flex min-h-[50vh] sm:min-h-[55vh] md:min-h-[60vh] lg:min-h-[65vh] flex-col">
         <div className="flex flex-1 items-center">
-          <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-5 pt-28 sm:px-8 sm:pt-32 lg:items-start lg:gap-16 lg:pt-40 ml-20">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 sm:gap-10 md:gap-12 lg:gap-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-40 lg:items-start">
             <div className="max-w-3xl space-y-6 lg:max-w-2xl">
               <span className="text-sm font-semibold uppercase tracking-[0.35em]" style={{ color: 'rgba(var(--business-hero-text-white-70))' }}>
                 Spacemail™

@@ -40,7 +40,7 @@ const Reliability = () => {
     >
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         {/* Header Section */}
-        <div className="text-center mb-20 sm:mb-24 md:mb-28 lg:mb-32">
+        <div className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -5,10 +5,10 @@ import { Search, CheckCircle, ShoppingCart, MessageCircle, Shield, RotateCcw, Li
 
 const DomainGuide = () => {
   return (
-    <section className="py-20" style={{ backgroundColor: 'rgb(var(--domain-guide-bg))' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--domain-guide-bg))' }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* First Section - Domain Name Guide */}
-        <div className="mb-32">
+          <div className="mb-16 sm:mb-20 md:mb-24 lg:mb-32">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6" style={{ color: 'rgb(var(--domain-guide-text-white))' }}>
               Find a domain name that&apos;s right for you
@@ -31,7 +31,7 @@ const DomainGuide = () => {
         </div>
 
         {/* Second Section - Keep it Simple */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center mb-16 sm:mb-20 md:mb-24 lg:mb-32">
           {/* Left - Search Card */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -105,7 +105,7 @@ const DomainGuide = () => {
         </div>
 
         {/* Third Section - Check Availability */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center mb-16 sm:mb-20 md:mb-24 lg:mb-32">
           {/* Left - Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -215,7 +215,7 @@ const DomainGuide = () => {
         </div>
 
         {/* Fourth Section - Protect Your Future */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center mb-16 sm:mb-20 md:mb-24 lg:mb-32">
           {/* Left - Domain Cards */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}

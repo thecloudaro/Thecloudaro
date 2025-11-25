@@ -19,7 +19,7 @@ const Flexible = () => {
     <section className="relative overflow-hidden" style={{ backgroundColor: virtualMachineStyles.sectionBg }}>
       <div className="relative z-10 flex min-h-[75vh] flex-col">
         <div className="flex flex-1 items-start">
-          <div className="mx-auto flex w-full max-w-7xl flex-col pl-0 sm:pl-0 lg:pl-0 pr-4 sm:pr-6 lg:pr-8 pt-16 sm:pt-20 lg:flex-row lg:items-center lg:gap-4 lg:pt-24">
+          <div className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16 md:pt-20 lg:flex-row lg:items-center lg:gap-4 lg:pt-24">
             {/* Left Side - Image */}
             <div className="flex-1 relative w-full lg:w-auto h-[350px] sm:h-[450px] lg:h-[520px] xl:h-[620px]">
               <motion.div
@@ -40,7 +40,7 @@ const Flexible = () => {
             </div>
 
             {/* Right Side - Text Content */}
-            <div className="max-w-3xl space-y-4 lg:max-w-2xl mt-16">
+            <div className="max-w-3xl space-y-4 lg:max-w-2xl mt-8 sm:mt-12 md:mt-16">
               <ContentHeading
                 title="Flexible payments,<br/>your way"
                 className="text-left !text-[2.5rem] sm:!text-[3.35rem] md:!text-[4.05rem] lg:!text-[3.5rem] font-bold leading-[1.08] !text-[rgb(var(--virtual-machine-hero-text))]"

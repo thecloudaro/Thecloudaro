@@ -18,12 +18,12 @@ export default function DomainHeroSection() {
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[hsl(var(--footer-bg-primary))]
      via-[hsl(var(--footer-bg-secondary))] to-[hsl(var(--footer-bg-secondary))] 
-     overflow-hidden pt-14"
+     overflow-hidden pt-12 sm:pt-14 md:pt-16"
      style={{ color: 'rgb(var(--domain-hero-text-gray-300))' }}>
       <div className="">
 
       {/* Hero Section */}
-      <div className="flex flex-col lg:flex-row items-center justify-between px-2 sm:px-4 md:px-6 lg:px-14 xl:px-22 pt-20 sm:pt-22 md:pt-24 lg:pt-26 xl:pt-28 pb-1 gap-2 sm:gap-3 md:gap-4 lg:gap-5">
+      <div className="flex flex-col lg:flex-row items-center justify-between px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-16 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32 pb-4 sm:pb-6 md:pb-8 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
         {/* Left Content */}
         <motion.div 
           initial={{ opacity: 0, x: -50 }}

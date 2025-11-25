@@ -44,8 +44,8 @@ const EasyWp = () => {
   const current = useMemo(() => tools[active], [active]);
 
   return (
-    <section className="py-24" style={{ backgroundColor: 'rgb(var(--wp-easywp-bg))', color: 'rgb(var(--wp-easywp-heading))' }}>
-      <div className="mx-auto max-w-[82rem] px-6 sm:px-12 lg:px-18">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--wp-easywp-bg))', color: 'rgb(var(--wp-easywp-heading))' }}>
+      <div className="mx-auto max-w-[82rem] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="text-center">
           <ContentHeading
             title="EasyWP Guardian security<br/>tools"

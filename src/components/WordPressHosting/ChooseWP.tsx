@@ -192,8 +192,8 @@ const ChooseWP = () => {
   );
 
   return (
-    <section className="py-24" style={{ backgroundColor: 'rgb(var(--wp-choosewp-bg))', color: 'rgb(var(--wp-choosewp-heading))' }}>
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-12">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--wp-choosewp-bg))', color: 'rgb(var(--wp-choosewp-heading))' }}>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 space-y-8 sm:space-y-10 md:space-y-12">
         <div className="space-y-6 text-center">
           <ContentHeading
             title="Choose your plan"

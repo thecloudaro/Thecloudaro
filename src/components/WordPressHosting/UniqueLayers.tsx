@@ -6,8 +6,8 @@ import Image from "next/image";
 
 const UniqueLayers = () => {
   return (
-    <section className="py-24" style={{ backgroundColor: 'rgb(var(--wp-uniquelayers-bg))', color: 'rgb(var(--wp-uniquelayers-heading))' }}>
-      <div className="mx-auto max-w-6xl px-6 text-center sm:px-8">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--wp-uniquelayers-bg))', color: 'rgb(var(--wp-uniquelayers-heading))' }}>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 text-center">
         <ContentHeading
           title="3 unique layers of<br/>caching"
           className="!text-[2.75rem] sm:!text-[3rem] md:!text-[3.75rem] font-bold !text-[rgb(var(--wp-uniquelayers-heading))]"
@@ -21,7 +21,7 @@ const UniqueLayers = () => {
         </ContentDescription>
       </div>
 
-      <div className="mx-auto mt-16 flex max-w-6xl flex-col gap-16 px-6 sm:px-8 lg:flex-row lg:items-center lg:gap-24">
+      <div className="mx-auto mt-8 sm:mt-12 md:mt-16 flex max-w-6xl flex-col gap-8 sm:gap-12 md:gap-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 lg:flex-row lg:items-center lg:gap-20 xl:gap-24">
         <div className="flex w-full justify-center lg:w-1/2">
           <Image
             src="/WordPress/3unique.png"

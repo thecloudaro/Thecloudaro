@@ -45,7 +45,7 @@ const GetStarted = () => {
 
         {/* Content */}
         <div className="relative z-10 w-full">
-          <div className="mx-auto flex w-full max-w-7xl flex-col items-center px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 lg:pt-20">
+          <div className="mx-auto flex w-full max-w-7xl flex-col items-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-8 sm:pt-12 md:pt-16 lg:pt-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 30 }}

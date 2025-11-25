@@ -6,8 +6,8 @@ import WhiteButton from "@/components/ui/white-button";
 
 const AllInOne = () => {
   return (
-    <section className="py-24" style={{ backgroundColor: 'rgb(var(--wp-allinone-bg))', color: 'rgb(var(--wp-allinone-heading))' }}>
-      <div className="mx-auto max-w-6xl px-6 sm:px-10">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--wp-allinone-bg))', color: 'rgb(var(--wp-allinone-heading))' }}>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="text-center">
           <ContentHeading
             title="All-in-one EasyWP<br/>Dashboard"
@@ -22,7 +22,7 @@ const AllInOne = () => {
           </ContentDescription>
         </div>
 
-        <div className="mt-24 grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-start">
+        <div className="mt-12 sm:mt-16 md:mt-20 lg:mt-24 grid gap-8 sm:gap-10 md:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-start">
           <div className="hidden h-[360px] lg:block" />
 
           <div className="space-y-10 lg:mt-12">

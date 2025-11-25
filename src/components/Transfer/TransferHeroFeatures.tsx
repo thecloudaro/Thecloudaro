@@ -25,7 +25,7 @@ const TransferHeroFeatures = () => {
 
   return (
     <section className="py-16 sm:py-20 md:py-24 lg:py-28" style={{ backgroundColor: 'rgb(var(--transfer-hero-features-bg))' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Heading and Description */}
         <div className="mb-20 sm:mb-24 md:mb-28 lg:mb-32">
           <SectionHeading

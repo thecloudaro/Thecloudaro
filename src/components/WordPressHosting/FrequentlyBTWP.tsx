@@ -118,8 +118,8 @@ const SvgIcon = ({ card }: { card: ProductCard }) => {
 
 const FrequentlyBTWP = () => {
   return (
-    <section className="py-24 pt-48" style={{ backgroundColor: 'rgb(var(--wp-frequentlybtwp-bg))', color: 'rgb(var(--wp-frequentlybtwp-heading))' }}>
-      <div className="mx-auto max-w-6xl px-6 sm:px-8">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 pt-16 sm:pt-24 md:pt-32 lg:pt-40 xl:pt-48" style={{ backgroundColor: 'rgb(var(--wp-frequentlybtwp-bg))', color: 'rgb(var(--wp-frequentlybtwp-heading))' }}>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="text-center space-y-6">
           <ContentHeading
             title="Frequently bought together"

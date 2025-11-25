@@ -5,9 +5,9 @@ import { Search } from "lucide-react";
 
 const DomainGuide2 = () => {
   return (
-    <section className="py-20 min-h-screen flex items-center" style={{ backgroundColor: 'rgb(var(--domain-guide-bg))' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 min-h-[70vh] sm:min-h-screen flex items-center" style={{ backgroundColor: 'rgb(var(--domain-guide-bg))' }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
           {/* Left - Search Card */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}

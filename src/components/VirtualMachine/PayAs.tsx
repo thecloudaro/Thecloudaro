@@ -18,7 +18,7 @@ const PayAs = () => {
   return (
     <section className="relative overflow-hidden" style={{ backgroundColor: virtualMachineStyles.sectionBg }}>
       <div className="relative z-10 py-16 sm:py-20 lg:py-24">
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           {/* Heading Section */}
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <motion.div

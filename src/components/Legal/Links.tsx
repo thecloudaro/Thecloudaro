@@ -70,8 +70,8 @@ const Links = () => {
       className="w-full py-12 sm:py-16 md:py-20 lg:py-24"
       style={{ backgroundColor: '#1a1a1a' }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 ml-4 sm:ml-6 md:ml-8 lg:ml-54">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 sm:gap-16 md:gap-20 lg:gap-40">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 md:gap-16 lg:gap-20 xl:gap-24">
           {/* Left Column - Hosting and SSL Certificates */}
           <div className="md:col-span-1 space-y-8 sm:space-y-10 md:space-y-12">
             {/* Hosting Section */}
@@ -157,7 +157,7 @@ const Links = () => {
         </div>
 
         {/* Second Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 md:gap-12 lg:gap-16 mt-12 sm:mt-16 md:mt-20 lg:mt-24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 md:gap-12 lg:gap-16 mt-8 sm:mt-12 md:mt-16 lg:mt-20">
           {/* Left Column - Domains, VPN, Spacemail */}
           <div className="md:col-span-1 space-y-8 sm:space-y-10 md:space-y-12">
             {/* Domains Section */}

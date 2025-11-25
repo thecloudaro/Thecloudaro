@@ -13,10 +13,10 @@ const BuildAtHosting = () => {
 
   return (
     <section
-      className="relative w-full py-24"
+      className="relative w-full py-12 sm:py-16 md:py-20 lg:py-24"
       style={{ backgroundColor: "rgb(var(--hosting-section-bg))" }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-36">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 space-y-12 sm:space-y-16 md:space-y-20 lg:space-y-24 xl:space-y-28">
         <div className="text-center space-y-8">
           <ContentHeading
             title="Build at speed with AI"
@@ -30,8 +30,8 @@ const BuildAtHosting = () => {
         </div>
 
         <div className="grid gap-10 lg:gap-4 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] items-start">
-          <div className="flex items-start gap-8 mt-8">
-            <div className="flex flex-col gap-3 pt-2 mt-40">
+          <div className="flex items-start gap-4 sm:gap-6 md:gap-8 mt-4 sm:mt-6 md:mt-8">
+            <div className="flex flex-col gap-3 pt-2 mt-8 sm:mt-12 md:mt-20 lg:mt-32 xl:mt-40">
               {carouselSteps.map((_, index) => (
                 <span
                   key={index}

@@ -60,8 +60,8 @@ const ReadySet = () => {
   const current = useMemo(() => templates[active], [active]);
 
   return (
-    <section className="py-24" style={{ backgroundColor: 'rgb(var(--wp-readyset-bg))', color: 'rgb(var(--wp-readyset-heading))' }}>
-      <div className="mx-auto max-w-6xl px-6 sm:px-10">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--wp-readyset-bg))', color: 'rgb(var(--wp-readyset-heading))' }}>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="text-center">
           <ContentHeading
             title="Ready, set, go with pre-<br/>made WordPress themes"
@@ -79,7 +79,7 @@ const ReadySet = () => {
           </div>
         </div>
 
-        <div className="mt-24 flex flex-col gap-12 lg:flex-row lg:items-stretch">
+        <div className="mt-12 sm:mt-16 md:mt-20 lg:mt-24 flex flex-col gap-8 sm:gap-10 md:gap-12 lg:flex-row lg:items-stretch">
           <div className="flex w-full flex-col justify-between lg:max-w-lg lg:pt-16 mr-20">
             <div className="space-y-6">
               {categories.map((key) => {

@@ -44,7 +44,7 @@ const More = () => {
       className="relative w-full py-12 sm:py-16"
       style={{ backgroundColor: 'rgb(var(--vpn-section-bg))' }}
     >
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Header Section */}
         <div className="text-center space-y-6 sm:space-y-8 mb-20 sm:mb-24">
           <motion.div

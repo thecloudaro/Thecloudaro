@@ -25,16 +25,16 @@ const SetUpHosting = ({
   imageAlt = "WordPress Setup"
 }: SetUpHostingProps) => {
   return (
-    <section className="relative w-full py-8 lg:py-12" style={{ backgroundColor: 'rgb(var(--hosting-section-bg))' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+    <section className="relative w-full py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--hosting-section-bg))' }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
           
           {/* Left Side - Image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="relative w-full h-[600px] lg:h-[700px] xl:h-[800px] flex items-center justify-center"
+            className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] flex items-center justify-center"
           >
             <div className="relative w-full h-full max-w-xl lg:max-w-2xl xl:max-w-3xl flex items-center justify-center">
               <motion.img

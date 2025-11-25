@@ -249,10 +249,10 @@ const ChooseHosting = () => {
 
   return (
     <section
-      className="relative w-full py-24"
+      className="relative w-full py-12 sm:py-16 md:py-20 lg:py-24"
       style={{ backgroundColor: "rgb(var(--hosting-section-bg))" }}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 space-y-8 sm:space-y-10 md:space-y-12">
         <div className="space-y-6 text-center">
           <ContentHeading
             title="Choose your Web Hosting plan"
@@ -273,7 +273,7 @@ const ChooseHosting = () => {
         </div>
 
         <div className="pt-6">
-          <div className="flex flex-col items-center gap-6 md:flex-row md:justify-end md:gap-12 md:w-[726px] md:ml-auto md:mr-24">
+          <div className="flex flex-col items-center gap-6 md:flex-row md:justify-end md:gap-8 lg:gap-12 md:w-full lg:w-[726px] md:ml-auto md:mr-0 lg:mr-24">
             {plans.map((plan) => (
               <div key={plan.name} className="w-[210px] text-center space-y-4">
                 <div className="space-y-1 leading-tight">
@@ -307,7 +307,7 @@ const ChooseHosting = () => {
 
         <div className="space-y-12 pt-2">
           {featureRows.map((row) => (
-            <div key={row.label} className="text-sm text-[rgb(var(--hosting-choose-text-gray-300))] md:mr-24">
+            <div key={row.label} className="text-sm text-[rgb(var(--hosting-choose-text-gray-300))] md:mr-0 lg:mr-24">
               <div className="space-y-3 md:space-y-4">
                 <div className="flex items-center gap-2 text-[rgb(var(--hosting-text-white))] font-semibold text-base md:text-lg whitespace-nowrap">
                   {row.label}
@@ -329,7 +329,7 @@ const ChooseHosting = () => {
                   </div>
                 )}
 
-                <div className="flex flex-col items-center gap-6 md:flex-row md:justify-end md:gap-12 md:ml-auto md:w-[726px]">
+                <div className="flex flex-col items-center gap-6 md:flex-row md:justify-end md:gap-8 lg:gap-12 md:ml-auto md:w-full lg:w-[726px]">
                   {row.values.map((value, idx) => {
                     const isCheck = value.stat === "✓";
                     const isCross = value.stat === "×";
@@ -355,7 +355,7 @@ const ChooseHosting = () => {
           ))}
         </div>
 
-        <div className="space-y-10 pt-10 md:mr-24">
+        <div className="space-y-8 sm:space-y-10 pt-8 sm:pt-10 md:mr-0 lg:mr-24">
           <div className="flex items-center gap-2 text-white font-semibold text-base md:text-lg whitespace-nowrap">
             All plans include
             <span className="hidden md:block flex-1 border-t" style={{ borderColor: 'rgb(var(--hosting-choose-divider-border))' }} />

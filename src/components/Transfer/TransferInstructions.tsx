@@ -6,7 +6,7 @@ import SectionHeading from "@/components/ui/section-heading";
 const TransferInstructions = () => {
   return (
     <section className="py-16 sm:py-20 md:py-24 lg:py-28" style={{ backgroundColor: 'rgb(var(--transfer-instructions-bg))' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Heading and Description */}
         <div className="mb-16 sm:mb-20 md:mb-24">
           <SectionHeading

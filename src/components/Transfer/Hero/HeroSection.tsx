@@ -63,7 +63,7 @@ const TransferHeroSection = () => {
 
       {/* Main Content */}
       <motion.div
-        className="relative z-30 flex flex-col items-center justify-center min-h-[80vh] px-4 sm:px-6 md:px-8 lg:px-10 text-center"
+        className="relative z-30 flex flex-col items-center justify-center min-h-[70vh] sm:min-h-[80vh] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 text-center"
         style={{ scale }}
       >
         {/* Heading */}

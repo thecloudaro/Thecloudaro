@@ -74,10 +74,10 @@ const DomainPricing = () => {
   ];
 
   return (
-    <section className="py-16 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24" style={{ backgroundColor: 'rgba(var(--domain-common-bg-overlay))' }}>
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16" style={{ backgroundColor: 'rgba(var(--domain-common-bg-overlay))' }}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-12 sm:mb-16">
           <SectionHeading
             heading="Transparent Domain Pricing"
             description="No hidden fees, no surprises. Choose the perfect plan for your domain needs with our competitive pricing."
@@ -90,7 +90,7 @@ const DomainPricing = () => {
         </div>
 
         {/* Pricing Tiers */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
           {pricingTiers.map((tier, index) => (
             <motion.div
               key={tier.name}

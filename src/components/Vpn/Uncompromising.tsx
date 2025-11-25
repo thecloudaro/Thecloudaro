@@ -35,7 +35,7 @@ const Uncompromising = () => {
       className="relative w-full py-12 sm:py-16"
       style={{ backgroundColor: 'rgb(var(--vpn-section-bg))' }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Header Section */}
         <div className="text-center space-y-4 sm:space-y-5 mb-12 sm:mb-16">
           <motion.div

@@ -116,7 +116,7 @@ const PickYourHosting = () => {
   return (
     <section className="relative w-full min-h-screen overflow-hidden" style={{ backgroundColor: 'rgb(var(--hosting-bg))' }}>
       {/* Upper Half - Circular Gradient Background */}
-      <div className="relative w-full h-[50vh] min-h-[500px] flex items-center justify-center" style={{ backgroundColor: 'rgb(var(--hosting-bg))' }}>
+      <div className="relative w-full h-[40vh] sm:h-[45vh] md:h-[50vh] min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex items-center justify-center" style={{ backgroundColor: 'rgb(var(--hosting-bg))' }}>
         {/* Spotlight Gradient Effect - #4dd0e1 color only in center, gray sides */}
         <div 
           className="absolute inset-0 flex items-center justify-center"
@@ -127,7 +127,7 @@ const PickYourHosting = () => {
         />
         
         {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full -mt-20 sm:-mt-24 md:-mt-32">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 w-full -mt-12 sm:-mt-16 md:-mt-20 lg:-mt-24 xl:-mt-32">
           <div className="text-center mb-12 pt-24">
             {/* Heading - Using Reusable Component */}
             <motion.div
@@ -174,9 +174,9 @@ const PickYourHosting = () => {
       </div>
 
       {/* Lower Half - Pricing Cards */}
-      <div className="relative w-full pb-16 pt-16" style={{ backgroundColor: 'rgb(var(--hosting-section-bg))' }}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:[grid-template-columns:repeat(3,320px)] justify-center gap-10 -mt-32 relative z-20">
+      <div className="relative w-full pb-12 sm:pb-16 pt-12 sm:pt-16" style={{ backgroundColor: 'rgb(var(--hosting-section-bg))' }}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-6 sm:gap-8 md:gap-10 -mt-16 sm:-mt-20 md:-mt-24 lg:-mt-32 relative z-20">
             {plans.map((plan, index) => {
               const pricing = getPricing(plan);
               const addonKey = `${plan.name}-autobackup`;
@@ -195,7 +195,7 @@ const PickYourHosting = () => {
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                  className={`relative rounded-2xl p-8 w-full md:w-[320px] md:mx-1 ${
+                  className={`relative rounded-2xl p-6 sm:p-8 w-full max-w-sm mx-auto md:max-w-none md:w-[320px] md:mx-1 ${
                     plan.popular ? 'md:scale-105 md:-mt-4 shadow-[0px_20px_80px_rgba(77,208,225,0.15)]' : ''
                   }`}
                   style={{ 

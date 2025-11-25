@@ -34,14 +34,14 @@ const VpnHero = () => {
         className="absolute inset-0 bg-white/10 pointer-events-none"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 pt-12 sm:pt-16 md:pt-20 lg:pt-16 pb-4 sm:pb-6 md:pb-4">
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-8 sm:pb-12 md:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-start">
           {/* Left Side - Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: isLoaded ? 1 : 0, x: isLoaded ? 0 : -50 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex flex-col justify-start mt-32 sm:mt-36 md:mt-40 lg:mt-32"
+            className="flex flex-col justify-start mt-8 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24"
           >
             {/* Subtitle */}
             <p 
@@ -112,7 +112,7 @@ const VpnHero = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: isLoaded ? 1 : 0, x: isLoaded ? 0 : 50 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="relative w-full h-[350px] sm:h-[450px] md:h-[500px] lg:h-[550px] xl:h-[600px] flex items-start justify-center -mt-4 sm:-mt-6 md:-mt-8 lg:-mt-4"
+            className="relative w-full h-[250px] sm:h-[350px] md:h-[450px] lg:h-[550px] xl:h-[600px] flex items-start justify-center -mt-4 sm:-mt-6 md:-mt-8 lg:-mt-12"
           >
             <div className="relative w-full h-full">
               <Image

@@ -73,7 +73,7 @@ const EasyStep = () => {
             </div>
 
             {/* Right Side - First Content */}
-            <div className="flex flex-col justify-center space-y-4 sm:space-y-6 mt-60">
+            <div className="flex flex-col justify-center space-y-4 sm:space-y-6 mt-8 sm:mt-12 md:mt-16 lg:mt-60">
               <ContentDescription
                 text="1. Set up your EasyWP"
                 size="xl"

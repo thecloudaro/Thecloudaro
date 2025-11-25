@@ -8,7 +8,7 @@ import SectionHeading from "@/components/ui/section-heading";
 const TransferPricing = () => {
   const [tldSearchTerm, setTldSearchTerm] = useState("");
   return (
-    <div className="px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36 pb-20 sm:pb-24 md:pb-28 lg:pb-32 xl:pb-36 relative" style={{ backgroundColor: 'rgb(var(--transfer-pricing-bg))' }}>
+    <div className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16 md:pt-20 lg:pt-24 xl:pt-32 pb-12 sm:pb-16 md:pb-20 lg:pb-24 xl:pb-32 relative" style={{ backgroundColor: 'rgb(var(--transfer-pricing-bg))' }}>
       {/* Teal gradient at bottom */}
       <div
         aria-hidden

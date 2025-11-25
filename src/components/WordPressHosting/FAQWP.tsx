@@ -59,8 +59,8 @@ const faqItems: FAQItem[] = [
 
 const FAQWP = () => {
   return (
-    <section className="py-24 pt-48" style={{ backgroundColor: 'rgb(var(--wp-faqwp-bg))', color: 'rgb(var(--wp-faqwp-heading))' }}>
-      <div className="mx-auto max-w-5xl px-6 sm:px-8">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 pt-16 sm:pt-24 md:pt-32 lg:pt-40 xl:pt-48" style={{ backgroundColor: 'rgb(var(--wp-faqwp-bg))', color: 'rgb(var(--wp-faqwp-heading))' }}>
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="text-center">
           <ContentHeading
             title="Frequently asked questions"
@@ -68,7 +68,7 @@ const FAQWP = () => {
           />
         </div>
 
-        <div className="mt-30 w-[70%] mx-auto space-y-2">
+        <div className="mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-30 w-full sm:w-[90%] md:w-[80%] lg:w-[70%] mx-auto space-y-2 sm:space-y-3 md:space-y-4">
           {faqItems.map((item, index) => (
             <QuestionAnswer
               key={item.question}

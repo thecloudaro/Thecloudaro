@@ -47,8 +47,8 @@ const WordPressHero = () => {
 
       <div className="relative z-10 flex min-h-screen flex-col">
         <div className="flex flex-1 items-center">
-          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-4">
-            <div className="max-w-3xl space-y-6 pb-16 pt-20 sm:pt-24 lg:pb-20 lg:pt-28">
+          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+            <div className="max-w-3xl space-y-4 sm:space-y-6 pb-12 sm:pb-16 md:pb-20 pt-16 sm:pt-20 md:pt-24 lg:pt-28">
               <span className="text-xs font-semibold uppercase tracking-[0.4em]" style={{ color: 'rgba(var(--wp-hero-badge-text))' }}>
                 EasyWP™
               </span>

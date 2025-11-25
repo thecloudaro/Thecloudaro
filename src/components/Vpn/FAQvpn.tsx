@@ -62,7 +62,7 @@ const FAQvpn = () => {
 
   return (
     <section 
-      className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24"
+      className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16"
       style={{ backgroundColor: 'rgb(var(--vpn-section-bg))' }}
     >
       <div className="max-w-4xl mx-auto">

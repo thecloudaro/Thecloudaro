@@ -32,17 +32,18 @@ const Protected = () => {
 
   return (
     <section 
-      className="relative min-h-screen overflow-hidden flex flex-col"
+      className="relative min-h-[80vh] sm:min-h-screen overflow-hidden flex flex-col"
     >
       {/* Top 60% - Gradient Background */}
       <div 
         className="relative"
         style={{ 
-          height: '60%',
+          minHeight: '50vh',
+          height: 'auto',
           background: 'linear-gradient(to bottom, transparent, rgba(var(--security-protected-gradient-green)))'
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pt-8 sm:pt-12 md:pt-16 lg:pt-20 h-full flex items-start">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-8 sm:pb-12 h-full flex items-start">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -68,11 +69,11 @@ const Protected = () => {
       <div 
         className="relative"
         style={{ 
-          minHeight: '40%',
+          minHeight: 'auto',
           backgroundColor: 'rgb(var(--security-protected-bg))'
         }}
       >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pb-12 sm:pb-16 md:pb-20 -mt-20 sm:-mt-24 md:-mt-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pb-12 sm:pb-16 md:pb-20 -mt-12 sm:-mt-16 md:-mt-20 lg:-mt-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 sm:gap-y-8">
             {features.map((feature, index) => (
               <motion.div

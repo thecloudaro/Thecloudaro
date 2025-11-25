@@ -6,8 +6,8 @@ import Link from "next/link";
 
 const FreeWebsite = () => {
   return (
-    <section className="py-24" style={{ backgroundColor: 'rgb(var(--wp-freewebsite-bg))', color: 'rgb(var(--wp-freewebsite-heading))' }}>
-      <div className="mx-auto max-w-4xl px-6 text-center sm:px-8">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--wp-freewebsite-bg))', color: 'rgb(var(--wp-freewebsite-heading))' }}>
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 text-center">
         <ContentHeading
           title="Free website migration"
           className="!text-[2.75rem] sm:!text-[3.25rem] md:!text-[3.75rem] font-bold !text-[rgb(var(--wp-freewebsite-heading))]"
@@ -20,7 +20,7 @@ const FreeWebsite = () => {
         </ContentDescription>
       </div>
 
-      <div className="mx-auto mt-40 flex max-w-6xl flex-col gap-12 px-6 sm:px-8 lg:flex-row lg:justify-end lg:gap-24">
+      <div className="mx-auto mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-32 flex max-w-6xl flex-col gap-8 sm:gap-10 md:gap-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 lg:flex-row lg:justify-end lg:gap-20 xl:gap-24">
         <div className="w-full lg:w-1/2 lg:pl-8">
           <div className="space-y-8 text-left">
             <div className="space-y-2">

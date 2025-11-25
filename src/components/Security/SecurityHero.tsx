@@ -19,7 +19,7 @@ const SecurityHero = () => {
       style={{ backgroundColor: 'rgb(var(--security-hero-bg))' }}
     >
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 pt-4 sm:pt-6 md:pt-8 lg:pt-10 pb-20">
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-16 sm:pb-20">
         {/* Heading with Typewriter Effect */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

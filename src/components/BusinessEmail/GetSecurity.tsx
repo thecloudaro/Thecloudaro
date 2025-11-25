@@ -6,9 +6,9 @@ import ContentDescription from "@/components/ui/content-description";
 
 const GetSecurity = () => {
   return (
-    <section className="pt-12 pb-24 text-[rgb(var(--hosting-text-white))]" style={{ backgroundColor: 'rgb(var(--business-productivity-bg))' }}>
-      <div className="mx-auto max-w-7xl px-6 sm:px-10">
-        <div className="grid gap-12 items-center lg:grid-cols-2">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 text-[rgb(var(--hosting-text-white))]" style={{ backgroundColor: 'rgb(var(--business-productivity-bg))' }}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+        <div className="grid gap-8 sm:gap-10 md:gap-12 items-center lg:grid-cols-2">
           {/* Left Side - Image */}
           <div className="flex justify-center lg:justify-start">
             <div className="relative w-full max-w-[650px]">

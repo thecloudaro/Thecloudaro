@@ -19,7 +19,7 @@ const HeaderBanner = ({
 }: HeaderBannerProps) => {
   return (
     <motion.div
-      className="text-center py-2 text-sm font-medium tracking-wide"
+      className="text-center py-2 px-4 sm:px-6 text-xs sm:text-sm font-medium tracking-wide"
       style={{ 
         backgroundColor: backgroundColor || 'rgb(var(--header-banner-bg))',
         color: 'rgb(var(--header-banner-text))',
@@ -33,9 +33,10 @@ const HeaderBanner = ({
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
-      {text}
-      {' '}
-      <ArrowRight className="inline-block w-4 h-4 ml-1" />
+      <div className="flex items-center justify-center gap-1 sm:gap-2 flex-wrap">
+        {text}
+        <ArrowRight className="inline-block w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+      </div>
     </motion.div>
   );
 };

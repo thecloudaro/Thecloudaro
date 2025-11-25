@@ -7,7 +7,7 @@ import ContentHeading from "@/components/ui/content-heading";
 const BuiltIn = () => {
   return (
     <section 
-      className="py-24 sm:py-32 md:py-40 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24"
+      className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16"
       style={{ backgroundColor: 'rgb(var(--security-builtin-bg))' }}
     >
       <div className="max-w-7xl mx-auto">

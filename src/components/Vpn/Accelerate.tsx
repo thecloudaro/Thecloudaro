@@ -53,7 +53,7 @@ const Accelerate = () => {
       className="relative w-full pt-12 sm:pt-24 pb-12 sm:pb-16"
       style={{ backgroundColor: 'rgb(var(--vpn-section-bg))' }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Header Section */}
         <div className="text-center space-y-4 sm:space-y-5 mb-16 sm:mb-20 md:mb-24 lg:mb-28">
           <motion.div
@@ -90,7 +90,7 @@ const Accelerate = () => {
         </div>
 
         {/* Features Grid - 2 rows, 3 columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-14 sm:gap-x-16 sm:gap-y-16 lg:gap-x-20 lg:gap-y-20 mb-12 sm:mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 sm:gap-x-8 md:gap-x-12 gap-y-8 sm:gap-y-10 md:gap-y-12 lg:gap-x-16 lg:gap-y-16 mb-12 sm:mb-16">
           {features.map(({ Icon, title, description }, index) => (
             <motion.div
               key={title}

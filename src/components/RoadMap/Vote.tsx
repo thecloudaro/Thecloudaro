@@ -205,10 +205,10 @@ const Vote = () => {
         <div className="flex flex-col gap-4 mb-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             {/* Tabs */}
-            <div className="flex items-center gap-6 border-b flex-1 pb-3" style={{ borderColor: 'rgb(55 65 81)' }}>
+            <div className="flex items-center gap-3 sm:gap-4 md:gap-6 border-b flex-1 pb-3 overflow-x-auto" style={{ borderColor: 'rgb(55 65 81)' }}>
               <button
                 onClick={() => setActiveTab("under-review")}
-                className="pb-3 px-1 text-sm font-medium transition-colors relative"
+                className="pb-3 px-1 text-xs sm:text-sm font-medium transition-colors relative whitespace-nowrap"
                 style={{
                   color: activeTab === "under-review" 
                     ? 'rgb(37 99 235)' 
@@ -237,7 +237,7 @@ const Vote = () => {
               </button>
               <button
                 onClick={() => setActiveTab("upcoming")}
-                className="pb-3 px-1 text-sm font-medium transition-colors relative"
+                className="pb-3 px-1 text-xs sm:text-sm font-medium transition-colors relative whitespace-nowrap"
                 style={{
                   color: activeTab === "upcoming" 
                     ? 'rgb(37 99 235)' 
@@ -266,7 +266,7 @@ const Vote = () => {
               </button>
               <button
                 onClick={() => setActiveTab("released")}
-                className="pb-3 px-1 text-sm font-medium transition-colors relative"
+                className="pb-3 px-1 text-xs sm:text-sm font-medium transition-colors relative whitespace-nowrap"
                 style={{
                   color: activeTab === "released" 
                     ? 'rgb(37 99 235)' 
@@ -297,7 +297,7 @@ const Vote = () => {
           </div>
 
           {/* Filter and Votes Buttons - Under Review tab ke neeche */}
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-2">
             <div className="flex items-center gap-2">
             <button
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors"

@@ -84,10 +84,10 @@ const DomainFeatures = () => {
   ];
 
   return (
-    <section className="py-16 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
             Powerful Domain Features
           </h2>
@@ -97,7 +97,7 @@ const DomainFeatures = () => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}

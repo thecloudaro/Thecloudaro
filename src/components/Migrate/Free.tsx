@@ -31,8 +31,8 @@ const Free = () => {
       className="w-full py-8 sm:py-10 md:py-12 lg:py-14"
       style={{ backgroundColor: '#17181a' }}
     >
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 sm:gap-20 md:gap-24 lg:gap-28 xl:gap-40">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 md:gap-16 lg:gap-20 xl:gap-24">
           {features.map((feature, index) => (
             <motion.div
               key={feature.id}
@@ -42,7 +42,7 @@ const Free = () => {
               className="flex flex-col items-center text-center"
             >
               {/* Icon */}
-              <div className="mb-4 w-15 h-15 sm:w-16 sm:h-16 md:w-20 md:h-20 relative">
+              <div className="mb-4 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 relative">
                 <Image
                   src={feature.icon}
                   alt={feature.title}

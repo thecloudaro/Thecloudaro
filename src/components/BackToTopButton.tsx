@@ -34,7 +34,7 @@ const BackToTopButton = () => {
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 rounded-full p-3 shadow-lg transition-all duration-300 hover:shadow-xl"
+          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 rounded-full p-2.5 sm:p-3 shadow-lg transition-all duration-300 hover:shadow-xl"
           style={{
             backgroundColor: 'rgb(var(--back-to-top-bg))',
             color: 'rgb(var(--back-to-top-text))'
@@ -49,7 +49,7 @@ const BackToTopButton = () => {
           }}
           aria-label="Back to top"
         >
-          <ChevronUp className="w-6 h-6" />
+          <ChevronUp className="w-5 h-5 sm:w-6 sm:h-6" />
         </motion.button>
       )}
     </AnimatePresence>

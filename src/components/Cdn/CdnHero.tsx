@@ -84,7 +84,7 @@ const CdnHero = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: isLoaded ? 1 : 0, x: isLoaded ? 0 : 50 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="relative w-full h-[450px] sm:h-[550px] md:h-[650px] lg:h-[750px] xl:h-[800px] flex items-start justify-center -mt-24 sm:-mt-28 md:-mt-32 lg:-mt-50"
+            className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] flex items-start justify-center -mt-8 sm:-mt-12 md:-mt-16 lg:-mt-20"
           >
             <div className="relative w-full h-full">
               <Image

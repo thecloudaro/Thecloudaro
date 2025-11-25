@@ -51,7 +51,7 @@ const MigrateEmailFAQ = () => {
 
   return (
     <section className="py-12 sm:py-16 md:py-24" style={{ backgroundColor: migrateEmailStyles.bg }}>
-      <div className="mx-auto max-w-4xl px-6 sm:px-10">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <ContentHeading

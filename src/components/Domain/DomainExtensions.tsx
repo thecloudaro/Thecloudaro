@@ -64,14 +64,14 @@ const DomainExtensions = () => {
             />
           </div>
 {/* Domain Extensions Grid */}
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-[70%] max-w-6xl mx-auto min-h-[650px] place-items-center">
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full sm:w-[90%] md:w-[80%] lg:w-[70%] max-w-6xl mx-auto min-h-[400px] sm:min-h-[500px] md:min-h-[600px] place-items-center">
   {domainExtensions.map((domain, index) => (
     <motion.div
       key={domain.extension}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="bg-gradient-to-br from-[hsl(var(--gradient-dark-teal))] to-[hsl(var(--gradient-teal))] rounded-2xl p-6 hover:scale-105 transition-all duration-300 relative overflow-hidden group flex flex-col justify-between h-[280px] w-full shadow-lg"
+      className="bg-gradient-to-br from-[hsl(var(--gradient-dark-teal))] to-[hsl(var(--gradient-teal))] rounded-2xl p-4 sm:p-6 hover:scale-105 transition-all duration-300 relative overflow-hidden group flex flex-col justify-between h-[240px] sm:h-[260px] md:h-[280px] w-full shadow-lg"
     >
       {/* Discount Badge */}
       {domain.discount && (

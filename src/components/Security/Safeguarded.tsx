@@ -33,7 +33,7 @@ const Safeguarded = () => {
 
   return (
     <section 
-      className="py-24 sm:py-32 md:py-40 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24"
+      className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16"
       style={{ backgroundColor: 'rgb(var(--security-safeguarded-bg))' }}
     >
       <div className="max-w-7xl mx-auto">
@@ -57,7 +57,7 @@ const Safeguarded = () => {
         </motion.div>
 
         {/* Feature Cards - 4 cards in 2 columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-6 md:gap-x-8 gap-y-6 sm:gap-y-8 md:gap-y-10 mx-60">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-6 md:gap-x-8 gap-y-6 sm:gap-y-8 md:gap-y-10 max-w-5xl mx-auto">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}

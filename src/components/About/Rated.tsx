@@ -48,8 +48,8 @@ export default function Rated() {
     });
 
   return (
-    <section className="bg-customer-bg text-customer-text py-24 sm:py-32 md:py-40 lg:py-52 px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto flex flex-col space-y-28 sm:space-y-32 md:space-y-40">
+    <section className="bg-customer-bg text-customer-text py-12 sm:py-16 md:py-24 lg:py-32 xl:py-40 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto flex flex-col space-y-12 sm:space-y-16 md:space-y-20 lg:space-y-24 xl:space-y-28">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
