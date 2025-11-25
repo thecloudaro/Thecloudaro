@@ -23,6 +23,12 @@ const Navbar: React.FC = () => {
   const isMigrationPage = pathname?.includes('/migration-to-thecloudaro');
   const isRoadmapPage = pathname?.includes('/roadmap');
   const isHomepage = pathname === '/';
+  const isSecurityPage = pathname?.includes('/security');
+  const isVpnPage = pathname?.includes('/vpn');
+  const isWordPressPage = pathname?.includes('/hosting-for-wordpress');
+  const isVirtualMachinePage = pathname?.includes('/virtual-machine');
+  const isCdnPage = pathname?.includes('/cdn');
+  const isBusinessEmailPage = pathname?.includes('/business-email');
 
   const menuItems = ["Domains", "Hosting", "Email", "Cloud", "Security", "Explore all"];
 
@@ -81,7 +87,7 @@ const Navbar: React.FC = () => {
     return null; // Hide navbar when pricing navbar is visible
   }
 
-  const navClassName = `left-0 right-0 relative ${isDomainPage || isHomepage || isTransferPage || isHostingPage || isRoadmapPage ? "" : "transition-all duration-500"} ${
+  const navClassName = `left-0 right-0 absolute top-0 ${isDomainPage || isHomepage || isTransferPage || isHostingPage || isRoadmapPage ? "" : "transition-all duration-500"} ${
     isDomainPage || isTransferPage || isHostingPage || isMigrationPage || isRoadmapPage
       ? "z-[120]"
       : isScrollingUp
@@ -89,9 +95,28 @@ const Navbar: React.FC = () => {
       : "z-50"
   }`;
 
+  // Get page background color for navbar area to prevent body background showing through
+  // Navbar is position:relative, so it's in document flow and shows html/body background
+  // We need to match the page's main background color or first section background
+  const getNavbarBackground = () => {
+    if (activeDropdown) return 'hsl(var(--dropdown-bg-primary))';
+    if (isHomepage) return 'transparent';
+    if (isSecurityPage) return 'rgb(var(--security-bg))';
+    if (isVpnPage) return 'rgb(var(--vpn-section-bg))';
+    if (isHostingPage || isWordPressPage) return 'rgb(var(--hosting-bg))';
+    if (isVirtualMachinePage) return 'rgb(var(--virtual-machine-hero-bg))';
+    if (isCdnPage) return 'rgb(var(--cdn-hero-bg))';
+    if (isBusinessEmailPage) return 'rgb(var(--business-email-page-bg))';
+    if (isDomainPage || isTransferPage) return 'transparent'; // These pages handle their own navbar
+    if (isRoadmapPage) return 'rgb(17 24 39)'; // Roadmap page background
+    if (isMigrationPage) return 'rgb(var(--migration-page-bg))';
+    return 'transparent';
+  };
+
   // Consistent transparent style for all pages like homepage
+  // On non-homepage pages, use page background to prevent body background showing through
   const navStyle: React.CSSProperties = {
-    backgroundColor: activeDropdown ? 'hsl(var(--dropdown-bg-primary))' : 'transparent',
+    backgroundColor: getNavbarBackground(),
     transform: 'translateY(0)',
     willChange: 'transform, opacity',
     boxShadow: 'none',
@@ -105,7 +130,7 @@ const Navbar: React.FC = () => {
       <div
         className={`${isDomainPage || isHomepage || isTransferPage || isHostingPage ? "" : "transition-all duration-500"}`}
         style={{
-          backgroundColor: activeDropdown ? "hsl(var(--dropdown-bg-primary))" : "transparent",
+          backgroundColor: getNavbarBackground(),
           boxShadow: "none",
           border: "none",
           borderTop: "none",

@@ -23,6 +23,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body
         className={`${inter.variable} font-sans antialiased`}
+        style={{ backgroundColor: 'transparent' }}
       >
         <NavbarWrapper />
         {children}

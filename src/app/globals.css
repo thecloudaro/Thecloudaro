@@ -1573,13 +1573,18 @@
   }
 
   body {
-    background-color: hsl(var(--background));
+    background-color: transparent;
     color: hsl(var(--foreground));
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
     padding: 0;
+  }
+  
+  /* Set background on html element instead */
+  html {
+    background-color: hsl(var(--background));
   }
 
   /* Links */
