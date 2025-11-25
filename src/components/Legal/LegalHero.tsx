@@ -6,7 +6,7 @@ import Image from "next/image";
 import ContentHeading from "@/components/ui/content-heading";
 import ContentDescription from "@/components/ui/content-description";
 
-const RoadmapHero = () => {
+const LegalHero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -30,15 +30,15 @@ const RoadmapHero = () => {
           >
             {/* Main Heading */}
             <ContentHeading
-              title="The Cloud Aro Roadmap"
-              className="text-4xl sm:text-4xl md:text-4xl lg:text-4xl xl:text-5xl text-left !whitespace-nowrap !text-white"
+              title="The Cloud Aro Legal"
+              className="text-4xl sm:text-4xl md:text-4xl lg:text-4xl xl:text-4xl text-left !text-white"
             />
 
             {/* Description */}
             <ContentDescription
-              text="See what we have planned and what is already here for you to explore."
+              text="Here you will find the documentation regarding terms of use, acceptable use policy, registration agreement, privacy policy and other product agreements. If you have any further questions, please, contact us."
               size="md"
-              className="!text-md text-left max-w-2xl !whitespace-nowrap !text-white"
+              className="!text-md text-left max-w-2xl !text-white"
             />
           </motion.div>
 
@@ -51,8 +51,8 @@ const RoadmapHero = () => {
           >
             <div className="relative w-full max-w-[450px] h-[150px] sm:h-[200px] md:h-[250px] lg:h-[280px]">
               <Image
-                src="/Roadmap/Hero.svg"
-                alt="Spaceship Roadmap"
+                src="/Legal/Hero.svg"
+                alt="Spaceship Legal"
                 width={450}
                 height={280}
                 className="w-full h-full object-contain"
@@ -67,7 +67,7 @@ const RoadmapHero = () => {
       <div className="relative w-full">
         <svg className="w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path d="M0,120L1200,5L1200,120L0,120Z" 
-            fill="#17181a" 
+            fill="#1a1a1a" 
             opacity="1" />
         </svg>
       </div>
@@ -75,5 +75,5 @@ const RoadmapHero = () => {
   );
 };
 
-export default RoadmapHero;
+export default LegalHero;
 

@@ -1,4 +1,4 @@
-import MigrateHero from "@/components/Migration/MigrateHero";
+import MigrateHero from "@/components/Migrate/MigrateHero";
 import HowToGet from "@/components/Migration/HowToGet";
 import WhatYouNeed from "@/components/Migration/WhatYouNeed";
 import ChooseYourHosting from "@/components/Migration/ChooseYourHosting";

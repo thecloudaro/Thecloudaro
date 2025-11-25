@@ -8,7 +8,12 @@ import CloudHostingPlans from "./CloudHostingPlans";
 
 type BillingCycle = "monthly" | "yearly";
 
-const CloudHosting = () => {
+interface CloudHostingProps {
+  heading?: string;
+  subtitle?: string;
+}
+
+const CloudHosting = ({ heading = "Cloud hosting for<br/>WordPress price plans", subtitle = "Skip over cost barriers with the most affordable hosting for WordPress around." }: CloudHostingProps) => {
   const [billing, setBilling] = useState<BillingCycle>("monthly");
 
   return (
@@ -33,17 +38,15 @@ const CloudHosting = () => {
         </div>
 
         <ContentHeading
-          title="Cloud hosting for<br/>WordPress price plans"
+          title={heading}
           className="!text-[2.75rem] sm:!text-[3.5rem] md:!text-[4.5rem] font-bold !text-[rgb(var(--wp-cloudhosting-heading))]"
         />
 
         <ContentDescription
           size="lg"
+          text={subtitle}
           className="mt-6 max-w-3xl sm:text-xl leading-relaxed !text-[rgb(var(--wp-cloudhosting-description))]"
-        >
-          Skip over cost barriers with the most affordable hosting for WordPress
-          around.
-        </ContentDescription>
+        />
 
         <div className="mt-10 inline-flex items-center gap-2 rounded-full p-2 backdrop-blur" style={{ backgroundColor: 'rgba(var(--wp-cloudhosting-toggle-bg))' }}>
           {(["monthly", "yearly"] as BillingCycle[]).map((cycle) => {

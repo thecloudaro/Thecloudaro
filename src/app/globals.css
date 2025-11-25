@@ -1634,5 +1634,15 @@
     box-shadow: none !important;
   }
 
+  /* Hide scrollbar for Policy component */
+  .hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
 
 
