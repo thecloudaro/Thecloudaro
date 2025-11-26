@@ -42,8 +42,8 @@ export default function HostingPage() {
       <HostingHeroSection />
 
       {/* Diagonal Section Divider */}
-      <div className="relative z-20" style={{ backgroundColor: 'rgb(var(--hosting-section-bg))', marginTop: '-40px' }}>
-        <svg className="w-full h-24 sm:h-28 md:h-32" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ display: 'block' }}>
+      <div className="relative" style={{ zIndex: 20, backgroundColor: 'rgb(var(--hosting-bg))' }}>
+        <svg className="w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path d="M0,120L1200,5L1200,120L0,120Z" 
                 fill="rgb(var(--hosting-section-bg))" 
                 opacity="1" />

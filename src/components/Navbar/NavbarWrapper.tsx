@@ -3,11 +3,13 @@
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 import HeaderBanner from "@/components/HeaderBanner";
+import { DropdownProvider, useDropdown } from "./DropdownContext";
 
-const NavbarWrapper = () => {
+const NavbarContent = () => {
   const pathname = usePathname();
   const isHomepage = pathname === '/';
   const isVirtualMachine = pathname === '/virtual-machine';
+  const { activeDropdown } = useDropdown();
   
   // HeaderBanner content for virtual-machine page
   const virtualMachineBannerText = (
@@ -45,10 +47,19 @@ const NavbarWrapper = () => {
   
   return (
     <div style={{ backgroundColor: getWrapperBackground() }}>
-      {isHomepage && <HeaderBanner />}
-      {isVirtualMachine && <HeaderBanner text={virtualMachineBannerText} />}
+      {/* Hide HeaderBanner when dropdown is open */}
+      {!activeDropdown && isHomepage && <HeaderBanner />}
+      {!activeDropdown && isVirtualMachine && <HeaderBanner text={virtualMachineBannerText} />}
       <Navbar />
     </div>
+  );
+};
+
+const NavbarWrapper = () => {
+  return (
+    <DropdownProvider>
+      <NavbarContent />
+    </DropdownProvider>
   );
 };
 

@@ -101,25 +101,14 @@ export default function DomainHeroSection() {
       </div>
       </div>
 
-      {/* Diagonal Section Divider
+      {/* Diagonal Section Divider */}
       <div className="relative">
         <svg className="w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,125L1200,5V120H0Z" 
-                fill="hsl(var(--domain-pages-bg))" 
+          <path d="M0,120L1200,5L1200,120L0,120Z" 
+                fill="rgb(var(--domain-hero-section-bg))" 
                 opacity="1" />
         </svg>
-      </div> */}
-
-    
-      {/* <div style={{ backgroundColor: 'rgb(var(--domain-hero-section-bg))' }}> */}
-{/* Diagonal Section Divider */}
-<div className="relative">
-          <svg className="w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M0,120L1200,5L1200,120L0,120Z" 
-                fill="hsl(var(--domain-pages-bg))" 
-                opacity="1" />
-          </svg>
-        </div>
+      </div>
         {/* Transfer Pricing Section */}
         <div style={{ backgroundColor: 'rgb(var(--domain-hero-section-bg))', position: 'relative' }}>
                 

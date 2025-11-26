@@ -3,6 +3,11 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import NavbarWrapper from "@/components/Navbar/NavbarWrapper";
+import Preloader from "@/components/Preloader";
+import { CartProvider } from "@/components/Cart/CartContext";
+import CartSidebar from "@/components/Cart/CartSidebar";
+import { LoginProvider } from "@/components/Login/LoginContext";
+import LoginModalWrapper from "@/components/Login/LoginModalWrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,9 +30,16 @@ export default function RootLayout({
         className={`${inter.variable} font-sans antialiased`}
         style={{ backgroundColor: 'transparent' }}
       >
-        <NavbarWrapper />
-        {children}
-        <Footer/>
+        <CartProvider>
+          <LoginProvider>
+            <Preloader />
+            <NavbarWrapper />
+            {children}
+            <Footer/>
+            <CartSidebar />
+            <LoginModalWrapper />
+          </LoginProvider>
+        </CartProvider>
       </body>
     </html>
   );

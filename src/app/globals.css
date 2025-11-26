@@ -310,7 +310,7 @@
     --gradient-near-black: 195 25% 8%;
 
     /* ====== Hosting Page Colors (RGB format) ====== */
-    --hosting-bg: 31 32 33; /* #1f2021 */
+    --hosting-bg: 42 43 44; /* #2a2b2c - lighter gray */
     --hosting-bg-dark: 26 26 26; /* #1a1a1a */
     --hosting-text-white: 255 255 255;
     --hosting-text-gray-300: 209 213 219; /* gray-300 - Tailwind default */

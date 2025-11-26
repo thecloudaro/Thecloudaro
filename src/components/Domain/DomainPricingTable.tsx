@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Heart, Filter, ChevronUp, ChevronDown } from "lucide-react";
+import Link from "next/link";
 import TLDSearchBar from "@/components/ui/tld-search-bar";
 
 const DomainPricingTable = () => {
@@ -175,10 +176,6 @@ const DomainPricingTable = () => {
     domain.tld.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleDomainClick = (tld: string) => {
-    // Handle domain click - you can add your logic here
-    console.log(`Clicked on ${tld}`);
-  };
 
   const handleClearPriceRange = () => {
     setMinPrice("");
@@ -450,8 +447,8 @@ const DomainPricingTable = () => {
               <div className="grid grid-cols-5 gap-8 items-center py-4">
                 {/* TLD */}
                 <div className="flex items-center">
-                  <button 
-                    onClick={() => handleDomainClick(domain.tld)}
+                  <Link 
+                    href={`/domain-search?tld=${domain.tld}`}
                     className="font-semibold text-lg transition-colors duration-200 cursor-pointer"
                     style={{ color: 'rgb(var(--domain-pricing-table-tld-text))' }}
                     onMouseEnter={(e) => {
@@ -462,7 +459,7 @@ const DomainPricingTable = () => {
                     }}
                   >
                     {domain.tld}
-                  </button>
+                  </Link>
                   <button 
                     className="ml-2 p-1 rounded transition-colors duration-200"
                     style={{ backgroundColor: 'transparent' }}

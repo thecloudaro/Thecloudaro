@@ -64,7 +64,7 @@ const HeroSection = () => {
 
       {/* Main Content */}
       <motion.div
-        className="relative z-30 flex flex-col items-center justify-start pt-2 sm:pt-6 md:pt-10 lg:pt-14 px-4 sm:px-6 md:px-8 lg:px-10 text-center"
+        className="relative z-30 flex flex-col items-center justify-start pt-20 sm:pt-24 md:pt-28 lg:pt-40 px-4 sm:px-6 md:px-8 lg:px-10 text-center"
         style={{ scale }}
       >
         {/* Heading */}

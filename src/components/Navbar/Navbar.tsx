@@ -6,10 +6,15 @@ import { usePathname } from "next/navigation";
 import UniversalDropdown from "@/components/Navbar/DynamicDropdown";
 import Logo from "./Logo";
 import { Globe, ShoppingCart, User, Menu } from "lucide-react";
+import { useDropdown } from "./DropdownContext";
+import { useCart } from "@/components/Cart/CartContext";
+import { useLogin } from "@/components/Login/LoginContext";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const { activeDropdown, setActiveDropdown } = useDropdown();
+  const { openCart } = useCart();
+  const { openLogin } = useLogin();
   const [isPricingNavbarVisible, setIsPricingNavbarVisible] = useState(false);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -87,7 +92,7 @@ const Navbar: React.FC = () => {
     return null; // Hide navbar when pricing navbar is visible
   }
 
-  const navClassName = `left-0 right-0 absolute top-0 ${isDomainPage || isHomepage || isTransferPage || isHostingPage || isRoadmapPage ? "" : "transition-all duration-500"} ${
+  const navClassName = `left-0 right-0 absolute ${isHomepage ? "top-8" : "top-0"} ${isDomainPage || isHomepage || isTransferPage || isHostingPage || isRoadmapPage ? "" : "transition-all duration-500"} ${
     isDomainPage || isTransferPage || isHostingPage || isMigrationPage || isRoadmapPage
       ? "z-[120]"
       : isScrollingUp
@@ -95,22 +100,10 @@ const Navbar: React.FC = () => {
       : "z-50"
   }`;
 
-  // Get page background color for navbar area to prevent body background showing through
-  // Navbar is position:relative, so it's in document flow and shows html/body background
-  // We need to match the page's main background color or first section background
+  // Get page background color for navbar area - always transparent for all pages
   const getNavbarBackground = () => {
     if (activeDropdown) return 'hsl(var(--dropdown-bg-primary))';
-    if (isHomepage) return 'transparent';
-    if (isSecurityPage) return 'rgb(var(--security-bg))';
-    if (isVpnPage) return 'rgb(var(--vpn-section-bg))';
-    if (isHostingPage || isWordPressPage) return 'rgb(var(--hosting-bg))';
-    if (isVirtualMachinePage) return 'rgb(var(--virtual-machine-hero-bg))';
-    if (isCdnPage) return 'rgb(var(--cdn-hero-bg))';
-    if (isBusinessEmailPage) return 'rgb(var(--business-email-page-bg))';
-    if (isDomainPage || isTransferPage) return 'transparent'; // These pages handle their own navbar
-    if (isRoadmapPage) return 'rgb(17 24 39)'; // Roadmap page background
-    if (isMigrationPage) return 'rgb(var(--migration-page-bg))';
-    return 'transparent';
+    return 'transparent'; // Always transparent for all pages
   };
 
   // Consistent transparent style for all pages like homepage
@@ -176,20 +169,25 @@ const Navbar: React.FC = () => {
 
             {/* Right Icons */}
             <div className="hidden md:flex items-center space-x-2">
-              {[Globe, ShoppingCart, User].map((Icon, i) => (
-                <button
-                  key={i}
-                  className={`font-medium transition-all duration-300 px-3 py-2 rounded-full ${
-                    (isHostingPage)
-                      ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
-                      : (isDomainPage || isHomepage) 
-                      ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
-                      : 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
-                  }`}
-                >
-                  <Icon size={16} />
-                </button>
-              ))}
+              {[Globe, ShoppingCart, User].map((Icon, i) => {
+                const isCart = Icon === ShoppingCart;
+                const isUser = Icon === User;
+                return (
+                  <button
+                    key={i}
+                    onClick={isCart ? openCart : isUser ? openLogin : undefined}
+                    className={`font-medium transition-all duration-300 px-3 py-2 rounded-full ${
+                      (isHostingPage)
+                        ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
+                        : (isDomainPage || isHomepage) 
+                        ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
+                        : 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
+                    }`}
+                  >
+                    <Icon size={16} />
+                  </button>
+                );
+              })}
             </div>
 
             {/* Mobile Header */}
@@ -201,20 +199,25 @@ const Navbar: React.FC = () => {
 
               {/* Icons */}
               <div className="flex-1 flex justify-center items-center space-x-1">
-                {[Globe, ShoppingCart, User].map((Icon, i) => (
-                  <button
-                    key={i}
-                    className={`font-medium transition-all duration-300 px-2 py-2 rounded-full ${
-                      (isHostingPage)
-                        ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
-                        : (isDomainPage || isHomepage) 
-                        ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
-                        : 'text-[hsl(var(--navbar-text))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
-                    }`}
-                  >
-                    <Icon size={16} />
-                  </button>
-                ))}
+                {[Globe, ShoppingCart, User].map((Icon, i) => {
+                  const isCart = Icon === ShoppingCart;
+                  const isUser = Icon === User;
+                  return (
+                    <button
+                      key={i}
+                      onClick={isCart ? openCart : isUser ? openLogin : undefined}
+                      className={`font-medium transition-all duration-300 px-2 py-2 rounded-full ${
+                        (isHostingPage)
+                          ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
+                          : (isDomainPage || isHomepage) 
+                          ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
+                          : 'text-[hsl(var(--navbar-text))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
+                      }`}
+                    >
+                      <Icon size={16} />
+                    </button>
+                  );
+                })}
               </div>
 
               {/* Hamburger */}

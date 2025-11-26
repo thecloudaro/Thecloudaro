@@ -89,7 +89,7 @@ const DomainTransferPage = () => {
       {/* Content wrapper above gradient */}
       <div className="relative z-10">
         {/* Breadcrumb under navbar (aligned to logo) */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 md:pt-28">
           <div className="py-4 text-sm" style={{ color: 'rgb(var(--domain-transfer-page-breadcrumb-inactive))' }}>
             <span className="opacity-80">Domains</span>
             <span className="mx-2">›</span>
@@ -97,9 +97,9 @@ const DomainTransferPage = () => {
           </div>
         </div>
         {/* Hero Section */}
-        <div className="px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36 pb-4">
+        <div className="px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36 pb-2">
           <div className="max-w-7xl mx-auto">
-            <div className="relative text-center mb-12">
+            <div className="relative text-center mb-8">
               {/* Center glow behind the main heading */}
               <div
                 aria-hidden
@@ -124,7 +124,7 @@ const DomainTransferPage = () => {
 
             {/* Search Section */}
             <div className="max-w-2xl mx-auto w-full">
-              <div className="relative w-full mb-4 sm:mb-6 md:mb-8">
+              <div className="relative w-full mb-2 sm:mb-3 md:mb-4">
                 <div className="flex items-stretch bg-hero-search-bg backdrop-blur-md rounded-full p-1.5 sm:p-2 border border-hero-search-border shadow-lg" style={{ backgroundColor: 'rgb(var(--domain-transfer-page-search-bg))' }}>
                   <div className="flex items-center flex-1 px-3 sm:px-4">
                     <Search className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }} />
