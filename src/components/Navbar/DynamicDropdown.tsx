@@ -186,11 +186,10 @@ export default function UniversalDropdown({
       exit={{ opacity: 0, y: -20, scale: 0.98 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
       className={`z-[200] md:z-40 ${isHostingPage ? '' : 'border-t border-dropdown-border'} overflow-hidden bg-dropdown-bg-primary md:absolute md:top-0 md:left-0 md:w-full md:h-[75vh] fixed inset-0 md:inset-auto`}
-      style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}
       onClick={(e) => e.stopPropagation()}
     >
 {/* Mobile View */}
-<div className="md:hidden fixed top-0 left-0 right-0 h-screen overflow-y-auto z-[200] bg-dropdown-bg-primary" style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}>
+<div className="md:hidden fixed top-0 left-0 right-0 h-screen overflow-y-auto z-[200] bg-dropdown-bg-primary">
   <AnimatePresence mode="wait">
     {!showMobileDetail ? (
       <motion.div
@@ -390,7 +389,7 @@ export default function UniversalDropdown({
       {/* Desktop View */}
       <div className="hidden md:flex h-full max-h-[80vh]">
         {/* Sidebar */}
-        <div className="bg-dropdown-bg-secondary border-r border-dropdown-border p-6 w-[18rem] flex flex-col" style={{ backgroundColor: 'hsl(210, 20%, 8%)' }}>
+        <div className="bg-dropdown-bg-secondary border-r border-dropdown-border p-6 w-[18rem] flex flex-col">
           <div className="flex-1 ml-[40px]">
             {/* What's Hot */}
             <div className="mb-4">
