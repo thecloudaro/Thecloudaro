@@ -93,7 +93,7 @@ const Navbar: React.FC = () => {
     return null; // Hide navbar when pricing navbar is visible
   }
 
-  const navClassName = `left-0 right-0 absolute ${isHomepage && !isLegalPage ? "top-8" : "top-0"} ${isDomainPage || isHomepage || isTransferPage || isHostingPage || isRoadmapPage ? "" : "transition-all duration-500"} ${
+  const navClassName = `left-0 right-0 absolute ${activeDropdown ? "top-0" : (isHomepage && !isLegalPage ? "top-8" : "top-0")} ${isDomainPage || isHomepage || isTransferPage || isHostingPage || isRoadmapPage ? "" : "transition-all duration-500"} ${
     isDomainPage || isTransferPage || isHostingPage || isMigrationPage || isRoadmapPage
       ? "z-[120]"
       : isScrollingUp
