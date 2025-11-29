@@ -33,7 +33,6 @@ const Navbar: React.FC = () => {
   const isWordPressPage = pathname?.includes('/hosting-for-wordpress');
   const isVirtualMachinePage = pathname?.includes('/virtual-machine');
   const isCdnPage = pathname?.includes('/cdn');
-  const isCdnPage = pathname?.includes('/cdn');
   const isBusinessEmailPage = pathname?.includes('/business-email');
   const isLegalPage = pathname?.includes('/legal');
 

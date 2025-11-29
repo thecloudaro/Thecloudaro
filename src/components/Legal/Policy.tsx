@@ -138,7 +138,7 @@ const Policy = () => {
 
   return (
     <div 
-      className="relative w-full min-h-screen"
+      className="relative w-full min-h-screen pt-20"
       style={{ backgroundColor: '#1a1a1a' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 py-8 sm:py-12 md:py-16 lg:py-20">

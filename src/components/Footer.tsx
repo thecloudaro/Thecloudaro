@@ -110,7 +110,10 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               {section.links?.map((link) => (
                 <li key={link}>
-                  <Link href="#" className="hover:text-footer-accent transition-colors text-sm">
+                  <Link 
+                    href={link === "Contact Us" ? "/contactus" : "#"} 
+                    className="hover:text-footer-accent transition-colors text-sm"
+                  >
                     {link}
                   </Link>
                 </li>
