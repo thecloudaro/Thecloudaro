@@ -33,7 +33,9 @@ const Navbar: React.FC = () => {
   const isWordPressPage = pathname?.includes('/hosting-for-wordpress');
   const isVirtualMachinePage = pathname?.includes('/virtual-machine');
   const isCdnPage = pathname?.includes('/cdn');
+  const isCdnPage = pathname?.includes('/cdn');
   const isBusinessEmailPage = pathname?.includes('/business-email');
+  const isLegalPage = pathname?.includes('/legal');
 
   const menuItems = ["Domains", "Hosting", "Email", "Cloud", "Security", "Explore all"];
 
@@ -92,7 +94,7 @@ const Navbar: React.FC = () => {
     return null; // Hide navbar when pricing navbar is visible
   }
 
-  const navClassName = `left-0 right-0 absolute ${isHomepage ? "top-8" : "top-0"} ${isDomainPage || isHomepage || isTransferPage || isHostingPage || isRoadmapPage ? "" : "transition-all duration-500"} ${
+  const navClassName = `left-0 right-0 absolute ${isHomepage && !isLegalPage ? "top-8" : "top-0"} ${isDomainPage || isHomepage || isTransferPage || isHostingPage || isRoadmapPage ? "" : "transition-all duration-500"} ${
     isDomainPage || isTransferPage || isHostingPage || isMigrationPage || isRoadmapPage
       ? "z-[120]"
       : isScrollingUp

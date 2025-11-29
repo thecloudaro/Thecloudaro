@@ -19,7 +19,7 @@ const LegalHero = () => {
       style={{ backgroundColor: '#252626' }}
     >
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pt-1 sm:pt-2 md:pt-2 lg:pt-3 pb-6 sm:pb-8 md:pb-12 lg:pb-16">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pt-24 sm:pt-32 md:pt-40 lg:pt-48 pb-6 sm:pb-8 md:pb-12 lg:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 sm:gap-2 md:gap-2 lg:gap-4 items-center">
           {/* Left Side - Text Content */}
           <motion.div
