@@ -10,7 +10,11 @@ import { useDropdown } from "./DropdownContext";
 import { useCart } from "@/components/Cart/CartContext";
 import { useLogin } from "@/components/Login/LoginContext";
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  hasHeaderBanner: boolean;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { activeDropdown, setActiveDropdown } = useDropdown();
   const { openCart } = useCart();
@@ -25,7 +29,6 @@ const Navbar: React.FC = () => {
   const isTransferPage = pathname?.includes('/transfer');
   const isHostingPage = pathname?.includes('/hosting') && !pathname?.includes('/migration-to-thecloudaro');
   const isHomepage = pathname === '/';
-  const isLegalPage = pathname?.includes('/legal');
 
   const menuItems = ["Domains", "Hosting", "Email", "Cloud", "Security", "Explore all"];
 
@@ -62,7 +65,9 @@ const Navbar: React.FC = () => {
 
   const navClassName = activeDropdown
     ? "left-0 right-0 absolute top-0 z-[120]"
-    : `fixed left-0 right-0 ${isHomepage && !isLegalPage ? "top-8" : "top-0"} z-50`;
+    : `fixed left-0 right-0 ${
+        hasHeaderBanner && !isBeyondHero ? "top-8" : "top-0"
+      } z-50`;
 
   const navStyle: React.CSSProperties = {
     backgroundColor: activeDropdown
@@ -70,7 +75,7 @@ const Navbar: React.FC = () => {
       : isScrollingUp && isBeyondHero
         ? 'hsl(var(--navbar-bg-scrolled))'
         : 'transparent',
-    transform: isScrollingUp ? 'translateY(0)' : 'translateY(-150%)',
+    transform: activeDropdown || isScrollingUp ? 'translateY(0)' : 'translateY(-150%)',
     transition: 'transform 0.3s ease-in-out, background-color 0.3s ease-in-out',
     willChange: 'transform, opacity, background-color',
     boxShadow: 'none',

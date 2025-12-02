@@ -37,8 +37,9 @@ const SignUpPage = () => {
 
       alert('Account created successfully!');
       router.push('/login'); // ya next step page
-    } catch (err: any) {
-      alert(err.message || 'Network error');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Network error';
+      alert(errorMessage);
     } finally {
       setLoading(false);
     }

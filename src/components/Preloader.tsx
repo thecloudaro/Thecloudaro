@@ -23,7 +23,8 @@ const Preloader = () => {
             // Show preloader immediately on click
             setIsLoading(true);
           }
-        } catch (err) {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (_err) {
           // Invalid URL, ignore
         }
       }

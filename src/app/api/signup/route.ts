@@ -35,6 +35,7 @@ export async function POST(req: NextRequest) {
     let data;
     try {
       data = JSON.parse(text);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_err: unknown) {
       // Agar JSON parse nahi ho paya to error return karo
       return NextResponse.json(

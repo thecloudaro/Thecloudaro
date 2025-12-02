@@ -185,7 +185,7 @@ export default function UniversalDropdown({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -20, scale: 0.98 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className={`z-[200] md:z-40 ${isHostingPage ? '' : 'border-t border-dropdown-border'} overflow-hidden bg-dropdown-bg-primary md:absolute md:top-0 md:left-0 md:w-full md:h-[75vh] fixed inset-0 md:inset-auto`}
+      className={`z-[200] md:z-40 ${isHostingPage ? '' : 'border-t border-dropdown-border'} overflow-hidden bg-dropdown-bg-primary md:absolute md:top-20 md:left-0 md:w-full md:h-[75vh] fixed inset-0 md:inset-auto`}
       style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}
       onClick={(e) => e.stopPropagation()}
     >
