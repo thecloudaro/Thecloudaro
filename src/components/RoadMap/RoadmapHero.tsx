@@ -19,7 +19,7 @@ const RoadmapHero = () => {
       style={{ backgroundColor: '#252626' }}
     >
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pt-1 sm:pt-2 md:pt-2 lg:pt-3 pb-6 sm:pb-8 md:pb-12 lg:pb-16">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pt-1 sm:pt-6 md:pt-12 lg:pt-20 pb-6 sm:pb-8 md:pb-12 lg:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 sm:gap-2 md:gap-2 lg:gap-4 items-center">
           {/* Left Side - Text Content */}
           <motion.div
@@ -31,14 +31,14 @@ const RoadmapHero = () => {
             {/* Main Heading */}
             <ContentHeading
               title="The Cloud Aro Roadmap"
-              className="text-4xl sm:text-4xl md:text-4xl lg:text-4xl xl:text-5xl text-left !whitespace-nowrap !text-white"
+              className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl text-left !text-white"
             />
 
             {/* Description */}
             <ContentDescription
               text="See what we have planned and what is already here for you to explore."
               size="md"
-              className="!text-md text-left max-w-2xl !whitespace-nowrap !text-white"
+              className="!text-sm sm:!text-base md:!text-lg text-left max-w-2xl !text-white"
             />
           </motion.div>
 

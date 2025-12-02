@@ -110,10 +110,9 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               {section.links?.map((link) => (
                 <li key={link}>
-                  <Link 
-                    href={link === "Contact Us" ? "/contactus" : "#"} 
-                    className="hover:text-footer-accent transition-colors text-sm"
-                  >
+                  <Link
+                    href={link === "Contact Us" ? "/contactus" : link === "About Us" ? "/about" : link === "Roadmap" ? "/roadmap" : link === "Privacy Policy" ? "/privacy-policy" : link === "Domain Registration Data Disclosure Policy" ? "/domain-registration-data-disclosure-policy" : "#"} 
+                    className="hover:text-footer-accent transition-colors text-sm" >
                     {link}
                   </Link>
                 </li>
@@ -134,7 +133,7 @@ const Footer: React.FC = () => {
           <div className="flex gap-4">
             {socialIcons.map((icon) => (
               <Link key={icon.name} href="#" className="w-10 h-10 rounded-full bg-footer-social-bg flex items-center justify-center hover:bg-footer-social-hover transition-colors overflow-hidden">
-                <Image src={icon.src} alt={icon.name} width={40} height={40} className="object-cover" />
+                <Image src={icon.src} alt={icon.name} width={40} height={40} className="object-cover"/>
               </Link>
             ))}
           </div>

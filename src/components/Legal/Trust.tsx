@@ -46,7 +46,7 @@ const Trust = () => {
           <ContentDescription
             text="Trust. Truth. Transparency."
             size="xl"
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight !text-white"
+            className="text-3xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl leading-tight !text-white"
           />
         </motion.div>
       </div>
