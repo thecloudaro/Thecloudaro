@@ -11,7 +11,7 @@ import { DropdownProvider, useDropdown } from "./DropdownContext";
   const isVirtualMachine = pathname === '/virtual-machine';
   const { activeDropdown } = useDropdown();
   
-  const hasHeaderBanner = !activeDropdown && isHomepage;
+  const hasHeaderBanner = !activeDropdown && (isHomepage || isVirtualMachine);
 
   // HeaderBanner content for virtual-machine page
   const virtualMachineBannerText = (
@@ -50,8 +50,9 @@ import { DropdownProvider, useDropdown } from "./DropdownContext";
   return (
     <div style={{ backgroundColor: getWrapperBackground() }}>
       {/* Hide HeaderBanner when dropdown is open */}
-      {hasHeaderBanner && <HeaderBanner />}
-      {!activeDropdown && isVirtualMachine && <HeaderBanner text={virtualMachineBannerText} />}
+      {hasHeaderBanner && (
+        <HeaderBanner text={isVirtualMachine ? virtualMachineBannerText : undefined} />
+      )}
       <Navbar hasHeaderBanner={hasHeaderBanner} />
     </div>
   );

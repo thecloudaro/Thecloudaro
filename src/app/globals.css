@@ -1034,6 +1034,17 @@
     --domain-transfer-submit-summary-border: 75 85 99; /* gray-600 - Tailwind default */
     --domain-transfer-submit-summary-item: 209 213 219; /* gray-300 - Tailwind default */
     --domain-transfer-submit-summary-total: 255 255 255; /* white - for rgb() */
+    --domain-transfer-submit-bulk-button-bg: transparent; /* transparent */
+    --domain-transfer-submit-bulk-button-text: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-transfer-submit-bulk-button-border: 75 85 99; /* gray-600 - Tailwind default */
+    --domain-transfer-submit-bulk-button-hover-bg: 31, 41, 55, 0.5; /* gray-800/50 - for rgba() */
+    --domain-transfer-submit-instruction-card-bg: 31, 41, 55, 0.3; /* gray-800/30 - for rgba() */
+    --domain-transfer-submit-instruction-card-border: 75 85 99; /* gray-600 - Tailwind default */
+    --domain-transfer-submit-instruction-card-title: 255 255 255; /* white - for rgb() */
+    --domain-transfer-submit-instruction-card-text: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-transfer-submit-empty-state-icon: 156 163 175; /* gray-400 - Tailwind default */
+    --domain-transfer-submit-empty-state-text: 255 255 255; /* white - for rgb() */
+    --domain-transfer-submit-empty-state-description: 156 163 175; /* gray-400 - Tailwind default */
     
     /* UI Components Colors */
     --ui-tld-search-icon: 209 213 219; /* gray-300 - Tailwind default */
@@ -1647,6 +1658,12 @@
 
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Domain Transfer Submit Input Placeholder */
+  input[type="text"]::placeholder {
+    color: rgb(var(--domain-transfer-submit-input-placeholder));
+    opacity: 1;
   }
 
 

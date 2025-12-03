@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { X, Eye, EyeOff, Key } from 'lucide-react';
 import Link from 'next/link';
+import { useSignup } from '@/components/Signup/SignupContext';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -11,6 +12,7 @@ interface LoginModalProps {
 }
 
 const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
+  const { openSignup } = useSignup();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -19,6 +21,12 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
     e.preventDefault();
     // Handle login logic here
     console.log({ username, password });
+  };
+
+  const handleSignUpClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onClose();
+    openSignup();
   };
 
   return (
@@ -130,9 +138,12 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
               <div className="mt-5 flex items-center justify-between text-xs">
                 <div className="text-gray-400">
                   Don&apos;t have an account?{' '}
-                  <Link href="#" className="text-blue-500 hover:text-blue-400 transition-colors font-medium">
+                  <button
+                    onClick={handleSignUpClick}
+                    className="text-blue-500 hover:text-blue-400 transition-colors font-medium"
+                  >
                     Sign up
-                  </Link>
+                  </button>
                 </div>
                 <Link
                   href="#"

@@ -14,13 +14,15 @@ export default function SecurityPage() {
       className="min-h-screen"
       style={{ backgroundColor: 'rgb(var(--security-bg))' }}
     >
-      <SecurityHero />
-      <Safeguarded />
-      <Protected />
-      <BuiltIn />
-      <WebHostingSecurity />
-      <SpacemailSecurity />
-      <FAQSecurity />
+      <div className="overflow-x-hidden">
+        <SecurityHero />
+        <Safeguarded />
+        <Protected />
+        <BuiltIn />
+        <WebHostingSecurity />
+        <SpacemailSecurity />
+        <FAQSecurity />
+      </div>
     </div>
   );
 }

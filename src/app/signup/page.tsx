@@ -50,7 +50,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-8" style={{ backgroundColor: 'rgb(var(--signup-page-bg))' }}>
+    <div className="min-h-screen flex items-center justify-center px-4 py-8 backdrop-blur-sm" style={{ backgroundColor: 'rgb(var(--signup-page-bg))' }}>
       <motion.div
         initial={{ scale: 0.9, opacity: 0, y: 40 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}

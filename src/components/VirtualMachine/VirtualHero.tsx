@@ -23,7 +23,7 @@ const VirtualHero = () => {
     <section className="relative overflow-hidden" style={{ backgroundColor: virtualMachineStyles.heroBg }}>
       <div className="relative z-10 flex min-h-[65vh] flex-col">
         <div className="flex flex-1 items-start">
-          <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 sm:gap-10 md:gap-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16 md:pt-20 lg:flex-row lg:items-start lg:gap-16 lg:pt-24">
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 sm:gap-10 md:gap-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-16 sm:pt-20 md:pt-24 lg:flex-row lg:items-start lg:gap-16 lg:pt-36">
             {/* Left Side - Text Content */}
             <div className="max-w-3xl space-y-4 sm:space-y-6 lg:max-w-2xl">
               <span className="text-sm font-semibold uppercase tracking-[0.35em]" style={{ color: virtualMachineStyles.heroText70 }}>

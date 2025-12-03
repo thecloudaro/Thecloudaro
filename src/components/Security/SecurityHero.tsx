@@ -19,7 +19,7 @@ const SecurityHero = () => {
       style={{ backgroundColor: 'rgb(var(--security-hero-bg))' }}
     >
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-16 sm:pb-20">
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-8 sm:pb-12">
         {/* Heading with Typewriter Effect */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -68,7 +68,13 @@ const SecurityHero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
         transition={{ duration: 0.8, delay: 1 }}
-        className="absolute bottom-16 sm:bottom-20 md:bottom-24 lg:bottom-28 flex flex-col items-center gap-2"
+        className="absolute bottom-16 sm:bottom-20 md:bottom-24 lg:bottom-28 flex flex-col items-center gap-2 cursor-pointer" // Add cursor-pointer for UX
+        onClick={() => {
+          window.scrollTo({
+            top: window.innerHeight,
+            behavior: 'smooth',
+          });
+        }}
       >
         <p 
           className="text-xs sm:text-xs"

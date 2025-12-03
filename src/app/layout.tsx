@@ -8,6 +8,8 @@ import { CartProvider } from "@/components/Cart/CartContext";
 import CartSidebar from "@/components/Cart/CartSidebar";
 import { LoginProvider } from "@/components/Login/LoginContext";
 import LoginModalWrapper from "@/components/Login/LoginModalWrapper";
+import { SignupProvider } from "@/components/Signup/SignupContext";
+import SignupModalWrapper from "@/components/Signup/SignupModalWrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,12 +34,15 @@ export default function RootLayout({
       >
         <CartProvider>
           <LoginProvider>
-            <Preloader />
-            <NavbarWrapper />
-            {children}
-            <Footer/>
-            <CartSidebar />
-            <LoginModalWrapper />
+            <SignupProvider>
+              <Preloader />
+              <NavbarWrapper />
+              {children}
+              <Footer/>
+              <CartSidebar />
+              <LoginModalWrapper />
+              <SignupModalWrapper />
+            </SignupProvider>
           </LoginProvider>
         </CartProvider>
       </body>
