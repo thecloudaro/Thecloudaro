@@ -56,7 +56,7 @@ const SecurityHero = () => {
           className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 md:mb-20"
         >
           <ContentDescription
-            text="Grow your online presence with Spaceship, where secure<br>is the default setting."
+            text="Grow your online presence with TheCloudAro, where secure<br>is the default setting."
             size="lg"
             className="!text-[rgb(var(--security-hero-description-text))]"
           />

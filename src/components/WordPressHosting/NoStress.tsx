@@ -2,7 +2,6 @@
 
 import ContentHeading from "@/components/ui/content-heading";
 import ContentDescription from "@/components/ui/content-description";
-import LearnMoreButton from "@/components/ui/learn-more-button";
 
 const NoStress = () => {
   return (
@@ -32,7 +31,7 @@ const NoStress = () => {
             interface and go live in<br/>under 15 seconds.
           </ContentDescription>
 
-          <LearnMoreButton className="mt-1" />
+         
         </div>
       </div>
     </section>

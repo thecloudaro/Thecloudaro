@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { forwardRef, useMemo, useState } from "react";
 import { ChevronDown, Info, ShoppingCart } from "lucide-react";
 import ContentHeading from "@/components/ui/content-heading";
 import HostingPlanControls, {
@@ -176,7 +176,7 @@ const priceSuffix: Record<BillingCycle, string> = {
   biyearly: "/mo"
 };
 
-const ChooseWP = () => {
+const ChooseWP = forwardRef<HTMLElement>((props, ref) => {
   const [billing, setBilling] = useState<BillingCycle>("monthly");
   const [dataCenter, setDataCenter] = useState("US");
   const [showAllServerFeatures, setShowAllServerFeatures] = useState(false);
@@ -192,7 +192,7 @@ const ChooseWP = () => {
   );
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--wp-choosewp-bg))', color: 'rgb(var(--wp-choosewp-heading))' }}>
+    <section ref={ref} className="py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--wp-choosewp-bg))', color: 'rgb(var(--wp-choosewp-heading))' }}>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 space-y-8 sm:space-y-10 md:space-y-12">
         <div className="space-y-6 text-center">
           <ContentHeading
@@ -398,8 +398,8 @@ const ChooseWP = () => {
       </div>
     </section>
   );
-};
+});
 
-export default ChooseWP;
+ChooseWP.displayName = 'ChooseWP';
 
-
+export { ChooseWP };

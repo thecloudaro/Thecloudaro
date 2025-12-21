@@ -69,23 +69,7 @@ const UniqueLayers = () => {
         </div>
       </div>
 
-      <div className="mt-12 flex justify-center">
-        <button 
-          className="rounded-full px-6 py-3 text-sm font-semibold transition"
-          style={{ 
-            backgroundColor: 'rgb(var(--wp-uniquelayers-button-bg))',
-            color: 'rgb(var(--wp-uniquelayers-button-text))'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgba(var(--wp-uniquelayers-button-hover))';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgb(var(--wp-uniquelayers-button-bg))';
-          }}
-        >
-          Choose your plan
-        </button>
-      </div>
+     
     </section>
   );
 };

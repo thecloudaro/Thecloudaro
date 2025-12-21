@@ -2,7 +2,6 @@
 
 import ContentHeading from "@/components/ui/content-heading";
 import ContentDescription from "@/components/ui/content-description";
-import WhiteButton from "@/components/ui/white-button";
 
 const AllInOne = () => {
   return (
@@ -57,11 +56,7 @@ const AllInOne = () => {
           </div>
         </div>
 
-        <div className="mt-30 flex justify-center">
-          <WhiteButton className="text-xs sm:text-sm !px-4 !py-2">
-            Choose your plan
-          </WhiteButton>
-        </div>
+
       </div>
     </section>
   );

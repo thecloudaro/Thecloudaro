@@ -49,12 +49,7 @@ const MigrateHosting = () => {
               size="lg"
               className="text-[rgb(var(--hosting-choose-text-gray-300))] whitespace-pre-line max-w-xl"
             />
-            <Link
-              href="#"
-              className="!text-[rgb(var(--hosting-migrate-link))] text-lg font-semibold hover:!underline hover:!decoration-[rgb(var(--hosting-migrate-link))]"
-            >
-              Choose your plan
-            </Link>
+           
           </div>
         </div>
 
@@ -70,7 +65,7 @@ const MigrateHosting = () => {
               className="text-[rgb(var(--hosting-choose-text-gray-300))] max-w-xl"
             />
             <Link
-              href="#"
+              href="/migration-to-thecloudaro"
               className="!text-[rgb(var(--hosting-migrate-link))] text-lg font-semibold hover:!underline hover:!decoration-[rgb(var(--hosting-migrate-link))] inline-flex items-center gap-2"
             >
               Learn about migration

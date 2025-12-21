@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, forwardRef, ForwardedRef } from "react";
 import { motion } from "framer-motion";
 import { Minus, Plus } from "lucide-react";
 import ContentHeading from "@/components/ui/content-heading";
@@ -150,41 +150,78 @@ const plans: EmailPlan[] = [
   }
 ];
 
-const ChooseYourBusiness = () => {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface ChooseYourBusinessProps {}
+
+const ChooseYourBusiness = forwardRef<HTMLElement, ChooseYourBusinessProps>(({ }, ref: ForwardedRef<HTMLElement>) => {
+
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
+
   const [mailboxCounts, setMailboxCounts] = useState<Record<string, number>>(
+
     plans.reduce((acc, plan) => ({ ...acc, [plan.name]: plan.defaultMailboxes }), {})
+
   );
 
+
+
   const billingSuffix = useMemo(() => {
+
     switch (billingCycle) {
+
       case "monthly":
+
         return "/mo";
+
       case "biyearly":
+
         return "/2yr";
+
       default:
+
         return "/yr";
+
     }
+
   }, [billingCycle]);
 
+
+
   const updateMailboxCount = (planName: string, delta: number) => {
+
     setMailboxCounts((prev) => {
+
       const current = prev[planName] || 0;
+
       const newCount = Math.max(0, current + delta);
+
       return { ...prev, [planName]: newCount };
+
     });
+
   };
+
+
 
   const calculateTotalPrice = (plan: EmailPlan, mailboxCount: number) => {
+
     const pricing = plan.pricing[billingCycle];
+
     const extraMailboxes = Math.max(0, mailboxCount - plan.defaultMailboxes);
+
     const extraCost =
+
       extraMailboxes * plan.extraMailboxPrice * (billingCycle === "yearly" ? 12 : billingCycle === "biyearly" ? 24 : 1);
+
     return pricing.price + extraCost;
+
   };
 
+
+
   return (
-    <section className="relative overflow-hidden py-24 text-[rgb(var(--hosting-text-white))]" style={{ backgroundColor: 'rgb(var(--business-productivity-bg))' }}>
+
+    <section ref={ref} id="choose-your-plan-section" className="relative overflow-hidden py-24 text-[rgb(var(--hosting-text-white))]" style={{ backgroundColor: 'rgb(var(--business-productivity-bg))' }}>
       {/* Purple Gradient Background */}
       <div className="absolute inset-0 -z-10">
         <div 
@@ -401,7 +438,8 @@ const ChooseYourBusiness = () => {
       </div>
     </section>
   );
-};
+});
+
+ChooseYourBusiness.displayName = 'ChooseYourBusiness';
 
 export default ChooseYourBusiness;
-

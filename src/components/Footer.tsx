@@ -111,7 +111,7 @@ const Footer: React.FC = () => {
               {section.links?.map((link) => (
                 <li key={link}>
                   <Link
-                    href={link === "Contact Us" ? "/contactus" : link === "About Us" ? "/about" : link === "Roadmap" ? "/roadmap" : link === "Privacy Policy" ? "/privacy-policy" : link === "Domain Registration Data Disclosure Policy" ? "/domain-registration-data-disclosure-policy" : "#"} 
+                    href={link === "Contact Us" ? "/contactus" : link === "About Us" ? "/about" : link === "Roadmap" ? "/roadmap" : link === "Privacy Policy" ? "/privacy-policy" : link === "Domain Registration Data Disclosure Policy" ? "/domain-registration-data-disclosure-policy" : link === "Request New Feature" ? "/request-new-feature" : "#"} 
                     className="hover:text-footer-accent transition-colors text-sm" >
                     {link}
                   </Link>
@@ -120,9 +120,11 @@ const Footer: React.FC = () => {
             </ul>
 
             {section.hasButton && (
-              <Button className="mt-4 border border-footer-border text-footer-text-secondary hover:bg-footer-bg-secondary hover:text-footer-accent">
-                Request New Feature
-              </Button>
+              <Link href="/request-new-feature">
+                <Button className="mt-4 border border-footer-border text-footer-text-secondary hover:bg-footer-bg-secondary hover:text-footer-accent">
+                  Request New Feature
+                </Button>
+              </Link>
             )}
           </div>
         ))}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, forwardRef, ForwardedRef } from "react";
 import Image from "next/image";
 import ContentHeading from "@/components/ui/content-heading";
 import ContentDescription from "@/components/ui/content-description";
@@ -11,13 +11,14 @@ type BillingCycle = "monthly" | "yearly";
 interface CloudHostingProps {
   heading?: string;
   subtitle?: string;
+  onCompareClick?: () => void;
 }
 
-const CloudHosting = ({ heading = "Cloud hosting for<br/>WordPress price plans", subtitle = "Skip over cost barriers with the most affordable hosting for WordPress around." }: CloudHostingProps) => {
+const CloudHosting = forwardRef<HTMLElement, CloudHostingProps>(({ heading = "Cloud hosting for<br/>WordPress price plans", subtitle = "Skip over cost barriers with the most affordable hosting for WordPress around.", onCompareClick }, ref: ForwardedRef<HTMLElement>) => {
   const [billing, setBilling] = useState<BillingCycle>("monthly");
 
   return (
-    <section className="relative overflow-hidden" style={{ color: 'rgb(var(--wp-cloudhosting-heading))' }}>
+    <section ref={ref} className="relative overflow-hidden" style={{ color: 'rgb(var(--wp-cloudhosting-heading))' }}>
       <div className="absolute inset-0">
         <div className="absolute inset-x-0 top-0 h-[500px] overflow-hidden sm:h-[540px] lg:h-[600px]">
           <Image
@@ -33,9 +34,7 @@ const CloudHosting = ({ heading = "Cloud hosting for<br/>WordPress price plans",
       </div>
 
       <div className="relative mx-auto flex max-w-6xl flex-col items-center px-6 pb-20 pt-12 text-center sm:px-10 sm:pt-16 lg:pb-[56px] lg:pt-[64px]">
-        <div className="mb-6 text-sm uppercase tracking-[0.35em]" style={{ color: 'rgba(var(--wp-cloudhosting-badge))' }}>
-          easywp
-        </div>
+       
 
         <ContentHeading
           title={heading}
@@ -70,10 +69,13 @@ const CloudHosting = ({ heading = "Cloud hosting for<br/>WordPress price plans",
 
       <CloudHostingPlans
         billing={billing}
+        onCompareClick={onCompareClick}
       />
     </section>
   );
-};
+});
+
+CloudHosting.displayName = 'CloudHosting';
 
 export default CloudHosting;
 

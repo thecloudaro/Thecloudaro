@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/section-heading";
 
 const DomainExtensions = () => {
+  const handleScrollToPricing = () => {
+    document.getElementById('domain-pricing-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
   const domainExtensions = [
     {
       extension: ".com",
@@ -124,6 +127,7 @@ const DomainExtensions = () => {
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'rgb(var(--domain-extensions-button-bg))';
             }}
+            onClick={handleScrollToPricing}
           >
             See all domains
           </motion.button>

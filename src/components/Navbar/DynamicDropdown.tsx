@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import type { JSX } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
@@ -18,6 +20,22 @@ import {
 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import Logo from "./Logo";
+
+// Portal component to render dropdown at the body level
+const PortalWrapper = ({ children }: { children: React.ReactNode }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  if (typeof window === "undefined" || !mounted) {
+    return null;
+  }
+
+  return createPortal(children, document.body);
+};
 
 interface UniversalDropdownProps {
   activeMenu: string;
@@ -45,6 +63,8 @@ export default function UniversalDropdown({
       "email": "email",
       "cloud": "cloud",
       "security": "security",
+      "why thecloudaro": "why-thecloudaro",
+      "about us": "about-us",
       "explore all": "domains"
     };
     return menuMap[menuLower] || "domains";
@@ -57,7 +77,9 @@ export default function UniversalDropdown({
       "hosting": "Hosting",
       "email": "Email",
       "cloud": "Cloud",
-      "security": "Security"
+      "security": "Security",
+      "why-thecloudaro": "Why TheCloudaro",
+      "about-us": "About Us"
     };
     return keyMap[key] || "Domains";
   };
@@ -104,8 +126,8 @@ export default function UniversalDropdown({
       sections: [
         { title: "Web Hosting", desc: "Fast and reliable hosting for any site.", href: "/web-hosting" },
         { title: "WordPress Hosting", desc: "Optimized hosting for WP sites.", href: "/hosting-for-wordpress" },
-        { title: "Business Hosting", desc: "Powerful hosting for growing teams.", href: "/web-hosting" },
-        { title: "Ecommerce Hosting", desc: "Secure hosting for online stores.", href: "/web-hosting" },
+        { title: "Business Hosting", desc: "Powerful hosting for growing teams.", href: "/business-hosting" },
+        { title: "Ecommerce Hosting", desc: "Secure hosting for online stores.", href: "/ecommerce-hosting" },
         { title: "Transfer Hosting", desc: "Make your move to better hosting.", href: "/migration-to-thecloudaro" }
       ]
     },
@@ -121,21 +143,36 @@ export default function UniversalDropdown({
       title: "Cloud",
       sections: [
         { title: "Virtual Machines", desc: "Scale your cloud infrastructure.", href: "/virtual-machine" },
-        { title: "VM Manager", desc: "Manage your virtual machines easily.", href: "/virtual-machine" }
+        { title: "VM Manager", desc: "Manage your virtual machines easily.", href: "/vm-manager" }
       ]
     },
     security: {
       title: "Security",
       sections: [
-        { title: "Security", desc: "See how Thecloudaro keeps you secure." },
+        { title: "Security", desc: "See how Thecloudaro keeps you secure.", href: "/security" },
         { title: "Domain Privacy", desc: "Keep your domain info private.", href: "/domain-name-privacy" },
         { title: "CDN", desc: "Speed up your site worldwide.", href: "/cdn" },
         { title: "VPN", desc: "Secure your online presence.", href: "/vpn" }
       ]
+    },
+    "why-thecloudaro": {
+      title: "Why TheCloudaro",
+      sections: [
+        { title: "Security", desc: "See how Thecloudaro keeps you secure.", href: "/security" },
+        { title: "Request New Feature", desc: "Help us improve by suggesting new features.", href: "/request-new-feature" }
+      ]
+    },
+    "about-us": {
+      title: "About Us",
+      sections: [
+        { title: "About Us", desc: "Learn more about our company and mission.", href: "/about" },
+        { title: "Roadmap", desc: "See what we're working on next.", href: "/roadmap" },
+        { title: "Contact Us", desc: "Get in touch with our team.", href: "/contact-us" }
+      ]
     }
   };
 
-  const currentMenu: MenuCategory = menuData[selectedMenu as keyof typeof menuData] || menuData.domains;
+  const currentMenu: MenuCategory = menuData[selectedMenu as keyof typeof menuData];
 
   const isPathActive = (path: string) => currentPath?.startsWith(path);
 
@@ -155,16 +192,20 @@ export default function UniversalDropdown({
     { key: "security", icon: <Shield size={18} />, label: "Security" }
   ];
 
-  const hotItems = [
-    { href: "/domain-search", icon: <Globe size={14} />, label: "Domain Name Search" },
-    { href: "/domain/transfer", icon: <Mail size={14} />, label: "Transfer Domains" },
-    { href: "/web-hosting", icon: <Cloud size={14} />, label: "Web Hosting" }
-  ];
 
-  const universeItems = [
-    { href: "/transfer-to-us", icon: <ArrowRight size={14} />, label: "Transfer to Us" },
-    { href: "/why-thecloudaro", icon: <Star size={14} />, label: "Why TheCloudaro" },
-    { href: "/about", icon: <HelpCircle size={14} />, label: "About Us" }
+
+  type UniverseItem = {
+    href?: string;
+    icon: JSX.Element;
+    label: string;
+    subItems?: { href: string; label: string }[];
+    key?: string;
+  };
+
+  const universeItems: UniverseItem[] = [
+    { href: "/migration-to-thecloudaro", icon: <ArrowRight size={14} />, label: "Transfer to Us", },
+    { key: "why-thecloudaro", icon: <Star size={14} />, label: "Why TheCloudaro" },
+    { key: "about-us", icon: <HelpCircle size={14} />, label: "About Us" }
   ];
 
   const getMenuIcon = (menu: string) => {
@@ -179,16 +220,17 @@ export default function UniversalDropdown({
   };
 
   return (
-    <motion.div
-      ref={dropdownRef}
-      initial={{ opacity: 0, y: -20, scale: 0.98 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -20, scale: 0.98 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-      className={`z-[200] md:z-40 ${isHostingPage ? '' : 'border-t border-dropdown-border'} overflow-hidden bg-dropdown-bg-primary md:absolute md:top-20 md:left-0 md:w-full md:h-[75vh] fixed inset-0 md:inset-auto`}
-      style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}
-      onClick={(e) => e.stopPropagation()}
-    >
+    <PortalWrapper>
+      <motion.div
+        ref={dropdownRef}
+        initial={{ opacity: 0, y: -20, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: -20, scale: 0.98 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className={`z-[9999] ${isHostingPage ? '' : 'border-t border-dropdown-border'} overflow-hidden bg-dropdown-bg-primary md:absolute md:top-20 md:left-0 md:w-full md:h-[75vh] fixed inset-0 md:inset-auto`}
+        style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}
+        onClick={(e) => e.stopPropagation()}
+      >
 {/* Mobile View */}
 <div className="md:hidden fixed top-0 left-0 right-0 h-screen overflow-y-auto z-[200] bg-dropdown-bg-primary" style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}>
   <AnimatePresence mode="wait">
@@ -276,51 +318,52 @@ export default function UniversalDropdown({
           </ul>
         </div>
 
-        {/* What's Hot */}
-        <div className="mb-6">
-          <SectionHeading title="WHAT'S HOT" />
-          <ul className="space-y-2">
-            {hotItems.map((item, idx) => (
-              <li key={idx}>
-                <Link
-                  href={item.href}
-                  className="flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:scale-105"
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'transparent';
-                  }}
-                >
-                  {item.icon}
-                  <span className="text-sm font-medium">{item.label}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+
 
         {/* TheCloudaro Universe */}
         <div className="mb-6">
           <SectionHeading title="AROVERSE" />
-          <ul className="space-y-2">
-            {universeItems.map((item, idx) => (
-              <li key={idx}>
-                <Link
-                  href={item.href}
-                  className="flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:scale-105"
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'transparent';
-                  }}
-                >
-                  {item.icon}
-                  <span className="text-sm font-medium">{item.label}</span>
-                </Link>
-              </li>
-            ))}
+                    <ul className="space-y-2">
+            {universeItems.map((item, idx) => {
+              return (
+                <li key={idx}>
+                  {item.key ? (
+                    <button
+                      onClick={() => {
+                        handleMenuSelect(item.key!);
+                        const navbarMenuName = mapKeyToMenu(item.key!);
+                        onMenuSelect?.(navbarMenuName);
+                      }}
+                      className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:scale-105"
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }}
+                    >
+                      {item.icon}
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </button>
+                  ) : (
+                    <Link
+                      href={item.href || "#"}
+                      onClick={onClose}
+                      className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:scale-105"
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }}
+                    >
+                      {item.icon}
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
 
@@ -353,34 +396,38 @@ export default function UniversalDropdown({
           <span className="font-medium">Back</span>
         </div>
 
-        {/* Category Header */}
-        <div className="flex items-center gap-3 mb-6">
-          {getMenuIcon(selectedMenu)}
-          <h2 className="text-white text-xl font-bold">{currentMenu.title}</h2>
-        </div>
+        {currentMenu && (
+          <>
+            {/* Category Header */}
+            <div className="flex items-center gap-3 mb-6">
+              {getMenuIcon(selectedMenu)}
+              <h2 className="text-white text-xl font-bold">{currentMenu.title}</h2>
+            </div>
 
-        {/* Items List */}
-        <div className="space-y-3">
-          {currentMenu.sections.map((item, idx) => (
-            <Link
-              key={idx}
-              href={item.href || "#"}
-              onClick={onClose}
-              className="group p-4 rounded-lg transition-all cursor-pointer border border-dropdown-border block"
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}
-            >
-              <h3 className="text-white font-semibold text-base mb-1">
-                {item.title}
-              </h3>
-              <p className="text-dropdown-text-muted text-sm">{item.desc}</p>
-            </Link>
-          ))}
-        </div>
+            {/* Items List */}
+            <div className="space-y-3">
+              {currentMenu.sections.map((item, idx) => (
+                <Link
+                  key={idx}
+                  href={item.href || "#"}
+                  onClick={onClose}
+                  className="group p-4 rounded-lg transition-all cursor-pointer border border-dropdown-border block"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
+                >
+                  <h3 className="text-white font-semibold text-base mb-1">
+                    {item.title}
+                  </h3>
+                  <p className="text-dropdown-text-muted text-sm">{item.desc}</p>
+                </Link>
+              ))}
+            </div>
+          </>
+        )}
       </motion.div>
     )}
   </AnimatePresence>
@@ -392,45 +439,7 @@ export default function UniversalDropdown({
         {/* Sidebar */}
         <div className="bg-dropdown-bg-secondary border-r border-dropdown-border p-6 w-[18rem] flex flex-col" style={{ backgroundColor: 'hsl(210, 20%, 8%)' }}>
           <div className="flex-1 ml-[40px]">
-            {/* What's Hot */}
-            <div className="mb-4">
-              <SectionHeading title="WHAT'S HOT" />
-              <ul className="space-y-1">
-                {hotItems.map((item, idx) => (
-                  <li key={idx}>
-                    <Link
-                      href={item.href}
-                      onClick={onClose}
-                      className={`flex items-center gap-2 px-0 py-1.5 rounded-md transition-all duration-300 text-sm ${
-                        isPathActive(item.href)
-                          ? "hover:scale-105"
-                          : "hover:scale-105"
-                      }`}
-                      style={isPathActive(item.href) ? {
-                        backgroundColor: 'rgba(var(--dropdown-item-hover-bg))',
-                        color: 'rgb(var(--navbar-mobile-menu-text))',
-                        border: 'none'
-                      } : {}}
-                      onMouseEnter={(e) => {
-                        if (!isPathActive(item.href)) {
-                          e.currentTarget.style.color = 'rgb(var(--navbar-mobile-menu-text))';
-                          e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isPathActive(item.href)) {
-                          e.currentTarget.style.color = '';
-                          e.currentTarget.style.backgroundColor = 'transparent';
-                        }
-                      }}
-                    >
-                      {item.icon}
-                      <span className="font-medium">{item.label}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+
 
             {/* All Products */}
             <div className="mb-4">
@@ -482,77 +491,119 @@ export default function UniversalDropdown({
             <div className="mb-4">
               <SectionHeading title="AROVERSE" />
               <ul className="space-y-1">
-                {universeItems.map((item, idx) => (
-                  <li key={idx}>
-                    <Link
-                      href={item.href}
-                      onClick={onClose}
-                      className={`flex items-center gap-2 px-0 py-1.5 rounded-md transition-all duration-300 text-sm ${
-                        isPathActive(item.href)
-                          ? "hover:scale-105"
-                          : "hover:scale-105"
-                      }`}
-                      style={isPathActive(item.href) ? {
-                        backgroundColor: 'rgba(var(--dropdown-item-hover-bg))',
-                        color: 'rgb(var(--navbar-mobile-menu-text))',
-                        border: 'none'
-                      } : {}}
-                      onMouseEnter={(e) => {
-                        if (!isPathActive(item.href)) {
-                          e.currentTarget.style.color = 'rgb(var(--navbar-mobile-menu-text))';
-                          e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isPathActive(item.href)) {
-                          e.currentTarget.style.color = '';
-                          e.currentTarget.style.backgroundColor = 'transparent';
-                        }
-                      }}
-                    >
-                      {item.icon}
-                      <span className="font-medium">{item.label}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+  {universeItems.map((item, idx) => {
+    return (
+      <li key={idx}>
+        {item.key ? (
+          <button
+            onClick={() => {
+              setSelectedMenu(item.key!);
+              const navbarMenuName = mapKeyToMenu(item.key!);
+              onMenuSelect?.(navbarMenuName);
+            }}
+            className={`w-full text-left flex items-center gap-2 px-0 py-1.5 rounded-md transition-all duration-300 text-sm hover:scale-105`}
+            style={selectedMenu === item.key ? {
+              backgroundColor: 'rgba(var(--dropdown-item-hover-bg))',
+              color: 'rgb(var(--navbar-mobile-menu-text))',
+              border: 'none'
+            } : {
+              color: 'rgb(var(--dropdown-slate-text))'
+            }}
+            onMouseEnter={(e) => {
+              if (selectedMenu !== item.key) {
+                e.currentTarget.style.color = 'rgb(var(--navbar-mobile-menu-text))';
+                e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (selectedMenu !== item.key) {
+                e.currentTarget.style.color = 'rgb(var(--dropdown-slate-text))';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }
+            }}
+          >
+            {item.icon}
+            <span className="font-medium">{item.label}</span>
+          </button>
+        ) : (
+          <Link
+            href={item.href || "#"}
+            onClick={onClose}
+            className={`w-full text-left flex items-center gap-2 px-0 py-1.5 rounded-md transition-all duration-300 text-sm ${
+              isPathActive(item.href || "")
+                ? "hover:scale-105"
+                : "hover:scale-105"
+            }`}
+            style={isPathActive(item.href || "") ? {
+              backgroundColor: 'rgba(var(--dropdown-item-hover-bg))',
+              color: 'rgb(var(--navbar-mobile-menu-text))',
+              border: 'none'
+            } : {
+              color: 'rgb(var(--dropdown-slate-text))'
+            }}
+            onMouseEnter={(e) => {
+              if (!isPathActive(item.href || "")) {
+                e.currentTarget.style.color = 'rgb(var(--navbar-mobile-menu-text))';
+                e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isPathActive(item.href || "")) {
+                e.currentTarget.style.color = 'rgb(var(--dropdown-slate-text))';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }
+            }}
+          >
+            {item.icon}
+            <span className="font-medium">{item.label}</span>
+          </Link>
+        )}
+      </li>
+    );
+  })}
+</ul>
             </div>
           </div>
         </div>
 
         {/* Main Content */}
         <div className="flex-1 p-6 bg-dropdown-bg-primary relative overflow-y-auto max-h-[80vh]">
-          <SectionHeading title={currentMenu.title} showLine lineWidth="700px" />
+          {currentMenu && (
+            <>
+              <SectionHeading title={currentMenu.title} showLine lineWidth="700px" />
 
-          <div className="grid grid-cols-2 gap-4 mt-4 w-full sm:w-[80%] lg:w-[70%] xl:w-[60%]">
-            {currentMenu.sections.map((item, idx) => (
-              <Link
-                key={idx}
-                href={item.href || "#"}
-                onClick={onClose}
-                className="group p-3 rounded-lg transition-all cursor-pointer block"
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'transparent';
-                }}
-              >
-                <h3 className="text-white font-semibold text-sm group-hover:text-white">
-                  {item.title}
-                </h3>
-                <p className="text-dropdown-text-muted text-xs mt-1 leading-relaxed group-hover:text-white">{item.desc}</p>
-              </Link>
-            ))}
-          </div>
+              <div className="grid grid-cols-2 gap-4 mt-4 w-full sm:w-[80%] lg:w-[70%] xl:w-[60%]">
+                {currentMenu.sections.map((item, idx) => (
+                  <Link
+                    key={idx}
+                    href={item.href || "#"}
+                    onClick={onClose}
+                    className="group p-3 rounded-lg transition-all cursor-pointer block"
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
+                  >
+                    <h3 className="text-white font-semibold text-sm group-hover:text-white">
+                      {item.title}
+                    </h3>
+                    <p className="text-dropdown-text-muted text-xs mt-1 leading-relaxed group-hover:text-white">{item.desc}</p>
+                  </Link>
+                ))}
+              </div>
 
-          {/* Light blue blur accent */}
-          <div 
-            className="absolute bottom-0 right-0 w-[180px] h-[180px] blur-3xl rounded-full"
-            style={{ backgroundColor: 'rgba(var(--dropdown-accent-blur))' }}
-          />
+              {/* Light blue blur accent */}
+              <div 
+                className="absolute bottom-0 right-0 w-[180px] h-[180px] blur-3xl rounded-full"
+                style={{ backgroundColor: 'rgba(var(--dropdown-accent-blur))' }}
+              />
+            </>
+          )}
         </div>
       </div>
     </motion.div>
+    </PortalWrapper>
   );
 }

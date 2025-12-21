@@ -19,7 +19,7 @@ const StayHosting = ({
   heading = "Stay up and open",
   description = "Keep your site up, business open, and visitors happy with 99.99% uptime.",
   buttonText = "See my options",
-  buttonHref,
+  buttonHref = "/business-hosting",
   buttonOnClick,
   imageSrc = "/Hosting/stayup.svg",
   imageAlt = "Stay up and open"

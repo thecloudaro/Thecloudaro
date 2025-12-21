@@ -68,7 +68,7 @@ const featureRows = [
   {
     label: "Email accounts",
     helper: "5 free mailboxes per domain",
-    sideNote: "Powered by SPACEMAIL®",
+    sideNote: "",
     values: [
       { stat: "25", description: "free mailboxes for 1 year" },
       { stat: "∞", description: "free mailboxes for 1 year" },

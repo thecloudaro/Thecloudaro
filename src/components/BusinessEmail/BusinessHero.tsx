@@ -57,9 +57,7 @@ const BusinessHero = () => {
         <div className="flex flex-1 items-center">
           <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 sm:gap-10 md:gap-12 lg:gap-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-40 lg:items-start">
             <div className="max-w-3xl space-y-6 lg:max-w-2xl">
-              <span className="text-sm font-semibold uppercase tracking-[0.35em]" style={{ color: 'rgba(var(--business-hero-text-white-70))' }}>
-                Spacemail™
-              </span>
+             
 
               <ContentHeading
                 title="Business email<br/>made effortless"
@@ -80,6 +78,12 @@ const BusinessHero = () => {
                     backgroundColor: 'rgb(var(--business-hero-button-white-bg))',
                     color: 'rgb(var(--business-hero-button-white-text))',
                     boxShadow: '0 12px 28px rgba(var(--business-hero-button-white-shadow))'
+                  }}
+                  onClick={() => {
+                    const element = document.getElementById('choose-your-plan-section');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.boxShadow = '0 16px 32px rgba(var(--business-hero-button-white-shadow-hover))';

@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import Heading from "@/components/HomeSection/BuildAround/Heading";
 import ContentDescription from "@/components/ui/content-description";
 
-const WordPressHero = () => {
+interface WordPressHeroProps {
+  onPickPlanClick: () => void;
+}
+
+const WordPressHero = ({ onPickPlanClick }: WordPressHeroProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -49,9 +53,7 @@ const WordPressHero = () => {
         <div className="flex flex-1 items-center">
           <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
             <div className="max-w-3xl space-y-4 sm:space-y-6 pb-12 sm:pb-16 md:pb-20 pt-16 sm:pt-20 md:pt-24 lg:pt-28">
-              <span className="text-xs font-semibold uppercase tracking-[0.4em]" style={{ color: 'rgba(var(--wp-hero-badge-text))' }}>
-                EasyWP™
-              </span>
+             
 
               <Heading
                 title="Speedy, simplified<br/>hosting for<br/>WordPress"
@@ -77,27 +79,11 @@ const WordPressHero = () => {
                   onMouseLeave={(e) => {
                     e.currentTarget.style.boxShadow = `0 12px 30px rgba(var(--wp-hero-button-white-shadow))`;
                   }}
+                  onClick={onPickPlanClick}
                 >
                   Pick plan
                 </button>
-                <button 
-                  className="rounded-full px-8 py-3 text-base font-semibold transition duration-300 hover:translate-y-[-2px]"
-                  style={{ 
-                    backgroundColor: 'rgb(var(--wp-hero-button-green-bg))',
-                    color: 'rgba(var(--wp-hero-button-green-text))',
-                    boxShadow: `0 12px 30px rgba(var(--wp-hero-button-green-shadow))`
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgb(var(--wp-hero-button-green-hover))';
-                    e.currentTarget.style.boxShadow = `0 18px 36px rgba(var(--wp-hero-button-green-shadow-hover))`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgb(var(--wp-hero-button-green-bg))';
-                    e.currentTarget.style.boxShadow = `0 12px 30px rgba(var(--wp-hero-button-green-shadow))`;
-                  }}
-                >
-                  Explore features
-                </button>
+               
               </div>
             </div>
           </div>

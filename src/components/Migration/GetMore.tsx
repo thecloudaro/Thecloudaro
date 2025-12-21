@@ -35,7 +35,7 @@ const GetMore = () => {
   return (
     <DomainTransferHero
       showHeader={false}
-      heroTitle="Get more with Spaceship"
+      heroTitle="Get more with TheCloudAro"
       heroSubtitle="Move your website to us and enjoy hosting with extra benefits."
       features={features}
       sectionClassName=""

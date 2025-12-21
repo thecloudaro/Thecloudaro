@@ -2,7 +2,6 @@
 
 import ContentHeading from "@/components/ui/content-heading";
 import ContentDescription from "@/components/ui/content-description";
-import LearnMoreButton from "@/components/ui/learn-more-button";
 
 const Optimized = () => {
   return (
@@ -33,7 +32,7 @@ const Optimized = () => {
             that&apos;s regularly monitored by our technical team.
           </ContentDescription>
 
-          <LearnMoreButton className="mt-1" />
+          
         </div>
       </div>
     </section>

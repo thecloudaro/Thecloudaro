@@ -7,6 +7,7 @@ type BillingCycle = "monthly" | "yearly";
 
 interface CloudHostingPlansProps {
   billing: BillingCycle;
+  onCompareClick?: () => void;
 }
 
 type PlanKey = "starter" | "turbo" | "supersonic";
@@ -126,7 +127,7 @@ const formatPrice = (basePrice: string, billing: BillingCycle) => {
   return basePrice;
 };
 
-const CloudHostingPlans = ({ billing }: CloudHostingPlansProps) => {
+const CloudHostingPlans = ({ billing, onCompareClick }: CloudHostingPlansProps) => {
   const plans = useMemo(() => {
     return (Object.keys(planContent) as PlanKey[]).map((key) => {
       const defaultPlan = planContent[key];
@@ -163,6 +164,7 @@ const CloudHostingPlans = ({ billing }: CloudHostingPlansProps) => {
 
       <div className="mt-6 flex justify-center">
         <button 
+          onClick={onCompareClick}
           className="rounded-full px-7 py-3 text-sm font-semibold transition"
           style={{
             backgroundColor: 'rgb(var(--cloud-hosting-button-bg))',
@@ -289,5 +291,3 @@ const PlanCard = ({ plan, billing }: PlanCardProps) => {
     </div>
   );
 };
-
-

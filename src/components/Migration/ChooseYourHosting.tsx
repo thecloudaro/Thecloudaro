@@ -6,6 +6,8 @@ import HostingPlanControls, {
   type BillingCycle
 } from "@/components/Hosting/HostingPlanControls";
 import { motion } from "framer-motion";
+import Link from "next/link";
+
 
 type HostingPlan = {
   name: string;
@@ -302,23 +304,30 @@ const ChooseYourHosting = () => {
           <p className="text-xs !text-[rgba(var(--migration-choose-note))]">
             *Prices reflect discount on the first billing cycle.
           </p>
-          <button 
-            className="rounded-full px-7 py-3 text-sm font-semibold transition"
-            style={{ 
-              backgroundColor: 'rgb(var(--migration-choose-bottom-button-bg))',
-              color: 'rgb(var(--migration-choose-bottom-button-text))'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgb(var(--migration-choose-bottom-button-hover-bg))';
-              e.currentTarget.style.color = 'rgb(var(--migration-choose-bottom-button-hover-text))';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgb(var(--migration-choose-bottom-button-bg))';
-              e.currentTarget.style.color = 'rgb(var(--migration-choose-bottom-button-text))';
-            }}
-          >
-            Go to Web Hosting
-          </button>
+          <Link href="/web-hosting">
+  <button 
+    className="rounded-full px-7 py-3 text-sm font-semibold transition"
+    style={{ 
+      backgroundColor: 'rgb(var(--migration-choose-bottom-button-bg))',
+      color: 'rgb(var(--migration-choose-bottom-button-text))'
+    }}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.backgroundColor =
+        'rgb(var(--migration-choose-bottom-button-hover-bg))';
+      e.currentTarget.style.color =
+        'rgb(var(--migration-choose-bottom-button-hover-text))';
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.backgroundColor =
+        'rgb(var(--migration-choose-bottom-button-bg))';
+      e.currentTarget.style.color =
+        'rgb(var(--migration-choose-bottom-button-text))';
+    }}
+  >
+    Go to Web Hosting
+  </button>
+</Link>
+
         </div>
       </div>
     </section>

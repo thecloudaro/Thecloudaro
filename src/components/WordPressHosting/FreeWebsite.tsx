@@ -54,7 +54,7 @@ const FreeWebsite = () => {
 
           <div className="mt-10">
             <Link
-              href="#"
+              href="/migration-to-thecloudaro"
               className="text-xs font-semibold transition-colors hover:underline hover:underline-offset-4"
               style={{ color: 'rgb(var(--wp-freewebsite-link))', textDecorationColor: 'rgb(var(--wp-freewebsite-link))' }}
               onMouseEnter={(e) => {

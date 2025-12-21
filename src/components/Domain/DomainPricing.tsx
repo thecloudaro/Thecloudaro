@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 import { Check, Star, Zap, Shield, Globe } from "lucide-react";
 import SectionHeading from "@/components/ui/section-heading";
+import React, { useState, useEffect } from "react";
 
-const DomainPricing = () => {
-  const pricingTiers = [
+const pricingTiers = [
     {
       name: "Basic",
       price: 12.99,
@@ -73,8 +73,26 @@ const DomainPricing = () => {
     { extension: ".xyz", price: 1.99, description: "Creative" }
   ];
 
+const DomainPricing = () => {
+
+  const [maxPrice, setMaxPrice] = useState(100);
+  const [currentPrice, setCurrentPrice] = useState(100);
+
+  useEffect(() => {
+    const allPrices = [
+      ...pricingTiers.map(p => p.price),
+      ...domainExtensions.map(p => p.price)
+    ].filter(p => p !== null) as number[];
+    const newMaxPrice = Math.ceil(Math.max(...allPrices));
+    setMaxPrice(newMaxPrice);
+    setCurrentPrice(newMaxPrice);
+  }, []);
+
+  const filteredTiers = pricingTiers.filter(tier => tier.price <= currentPrice);
+  const filteredExtensions = domainExtensions.filter(ext => ext.price <= currentPrice);
+
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16" style={{ backgroundColor: 'rgba(var(--domain-common-bg-overlay))' }}>
+    <section id="domain-pricing-section" className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16" style={{ backgroundColor: 'rgba(var(--domain-common-bg-overlay))' }}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-12 sm:mb-16">
@@ -89,9 +107,33 @@ const DomainPricing = () => {
           />
         </div>
 
+        {/* Price Range Slider */}
+        <div className="mb-12 sm:mb-16 text-white text-center">
+            <label htmlFor="price-range" className="block mb-4 text-lg font-medium">
+                Filter by Price: {currentPrice === maxPrice ? 'All Prices' : `Up to $${currentPrice}`}
+            </label>
+            <div className="flex items-center justify-center space-x-4">
+                <input
+                    id="price-range"
+                    type="range"
+                    min="0"
+                    max={maxPrice}
+                    value={currentPrice}
+                    onChange={(e) => setCurrentPrice(Number(e.target.value))}
+                    className="w-full sm:w-2/3 md:w-1/2 mx-auto"
+                />
+                <button
+                    onClick={() => setCurrentPrice(maxPrice)}
+                    className="px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 transition-colors"
+                >
+                    Reset
+                </button>
+            </div>
+        </div>
+
         {/* Pricing Tiers */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
-          {pricingTiers.map((tier, index) => (
+          {filteredTiers.map((tier, index) => (
             <motion.div
               key={tier.name}
               initial={{ opacity: 0, y: 20 }}
@@ -171,7 +213,7 @@ const DomainPricing = () => {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {domainExtensions.map((domain, index) => (
+          {filteredExtensions.map((domain, index) => (
             <motion.div
               key={domain.extension}
               initial={{ opacity: 0, scale: 0.9 }}

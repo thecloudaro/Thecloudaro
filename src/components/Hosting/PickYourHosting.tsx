@@ -1,13 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { Info, Plus } from 'lucide-react';
 import ContentHeading from '@/components/ui/content-heading';
 import ContentDescription from '@/components/ui/content-description';
 import HostingPlanControls, { BillingCycle } from './HostingPlanControls';
 
-const PickYourHosting = () => {
+const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>('yearly');
   const [dataCenter, setDataCenter] = useState('US');
   const [selectedAddons, setSelectedAddons] = useState<{ [key: string]: { storage: string; price: number } }>({});
@@ -114,7 +114,7 @@ const PickYourHosting = () => {
   };
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden" style={{ backgroundColor: 'rgb(var(--hosting-bg))' }}>
+    <section ref={ref} className="relative w-full min-h-screen overflow-hidden" style={{ backgroundColor: 'rgb(var(--hosting-bg))' }}>
       {/* Upper Half - Circular Gradient Background */}
       <div className="relative w-full h-[40vh] sm:h-[45vh] md:h-[50vh] min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex items-center justify-center" style={{ backgroundColor: 'rgb(var(--hosting-bg))' }}>
         {/* Spotlight Gradient Effect - #4dd0e1 color only in center, gray sides */}
@@ -403,6 +403,8 @@ const PickYourHosting = () => {
       </div>
     </section>
   );
-};
+});
 
-export default PickYourHosting;
+PickYourHosting.displayName = 'PickYourHosting';
+
+export { PickYourHosting };

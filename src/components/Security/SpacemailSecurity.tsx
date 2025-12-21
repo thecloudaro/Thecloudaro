@@ -49,13 +49,13 @@ const SpacemailSecurity = () => {
                 className="text-sm sm:text-base font-medium uppercase tracking-wide"
                 style={{ color: 'rgb(var(--security-spacemail-tagline-text))' }}
               >
-                SPACEMAIL
+                Business Email
               </span>
             </div>
 
             {/* Main Heading */}
             <ContentHeading
-              title="Spacemail"
+              title="Business Email"
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl !text-[rgb(var(--security-spacemail-heading-text))] text-left"
             />
 
@@ -105,7 +105,7 @@ const SpacemailSecurity = () => {
                 className="inline-flex items-center gap-2 group font-medium text-base sm:text-lg"
                 style={{ color: 'rgb(var(--security-spacemail-link-text))' }}
               >
-                <span>More about Spacemail</span>
+                <span>More about Business Email</span>
                 <ArrowRight 
                   className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" 
                 />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 
@@ -8,12 +8,18 @@ const DomainPricingNavbar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const heroHeight = window.innerHeight; // Full viewport height
       
+      // Clear timeout on new scroll event
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+
       // Detect scroll direction with threshold to avoid flickering
       const scrollThreshold = 5; // Minimum scroll distance to trigger direction change
       if (Math.abs(scrollY - lastScrollY) > scrollThreshold) {
@@ -27,13 +33,23 @@ const DomainPricingNavbar = () => {
       
       // Show navbar when scrolled past domain hero section (when domain extensions start)
       setIsVisible(scrollY > heroHeight);
+
+      // Set timeout to reset scroll direction when scrolling stops
+      scrollTimeout.current = setTimeout(() => {
+        setIsScrollingUp(false);
+      }, 150); // After 150ms, assume scrolling has stopped
     };
 
     // Check initial scroll position
     handleScroll();
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
   }, [lastScrollY]);
 
   // Always show navbar when visible (don't hide on scroll up)

@@ -24,7 +24,7 @@ const GetStarted = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden">
+    <section id="get-started-section" className="relative overflow-hidden">
       {/* Background Image Section - Half Page */}
       <div className="relative min-h-[60vh] flex items-center pb-32 sm:pb-40 lg:pb-48">
         <motion.div

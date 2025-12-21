@@ -26,13 +26,7 @@ const MigrateHero = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="text-center space-y-4 sm:space-y-2"
         >
-          {/* EASYWP™ Label */}
-          <ContentDescription
-            text="EASYWP™"
-            size="sm"
-            className="!text-sm sm:!text-base md:!text-lg !text-white font-medium uppercase tracking-wider"
-          />
-
+         
           {/* Main Heading */}
           <ContentDescription
             text="Migrate your<br/>WordPress website"

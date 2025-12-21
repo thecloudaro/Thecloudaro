@@ -5,13 +5,27 @@ import { motion } from "framer-motion";
 import { Folder } from "lucide-react";
 import ContentHeading from "@/components/ui/content-heading";
 import ContentDescription from "@/components/ui/content-description";
+import VideoModal from "@/components/ui/VideoModal";
+import { Button } from "@/components/ui/button";
 
 const WhatYou = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isModalOpen]);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div 
@@ -31,6 +45,22 @@ const WhatYou = () => {
             title="What you need for<br/>migration to EasyWP"
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl !text-white font-bold leading-tight"
           />
+        </motion.div>
+
+        {/* Video Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 30 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-12 sm:mt-16 md:mt-20 lg:mt-24 text-center"
+        >
+          <ContentHeading
+            title="Watch our video guide"
+            className="text-2xl sm:text-3xl !text-white font-bold leading-tight mb-6"
+          />
+          <Button onClick={openModal} className="bg-blue-600 hover:bg-blue-700 text-white">
+            Watch Video
+          </Button>
         </motion.div>
 
         {/* Content Sections */}
@@ -109,6 +139,11 @@ const WhatYou = () => {
           <div className="border-t mt-6 sm:mt-8 md:mt-10 block max-w-2xl" style={{ borderColor: 'rgb(55 65 81)' }}></div>
         </motion.div>
       </div>
+      <VideoModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        videoUrl="https://www.youtube.com/embed/dQw4w9WgXcQ" // Placeholder video
+      />
     </div>
   );
 };

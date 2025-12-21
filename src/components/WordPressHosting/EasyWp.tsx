@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import ContentHeading from "@/components/ui/content-heading";
 import ContentDescription from "@/components/ui/content-description";
-import WhiteButton from "@/components/ui/white-button";
 
 type ToolKey = "hack" | "malware" | "updates";
 
@@ -145,11 +144,7 @@ const EasyWp = () => {
           </div>
         </div>
 
-        <div className="mt-24 flex justify-center">
-          <WhiteButton className="text-xs sm:text-sm !px-4 !py-2">
-            Choose your plan
-          </WhiteButton>
-        </div>
+       
       </div>
     </section>
   );

@@ -5,7 +5,7 @@ import SectionHeading from "@/components/ui/section-heading";
 
 const DomainPricingPage = () => {
   return (
-    <section className="min-h-screen py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--domain-hero-section-bg))' }}>
+    <section id="domain-pricing-section" className="min-h-screen py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--domain-hero-section-bg))' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Heading */}
         <div className="mb-28">

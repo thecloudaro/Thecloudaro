@@ -50,9 +50,9 @@ const Policy = () => {
       }
     }, observerOptions);
 
-    // Observe all sections after a delay to ensure refs are set
+    const sections = sectionRefs.current;
     const timeoutId = setTimeout(() => {
-      Object.values(sectionRefs.current).forEach((section) => {
+      Object.values(sections).forEach((section) => {
         if (section) {
           observer.observe(section);
         }
@@ -61,7 +61,6 @@ const Policy = () => {
 
     return () => {
       clearTimeout(timeoutId);
-      const sections = sectionRefs.current;
       Object.values(sections).forEach((section) => {
         if (section) {
           observer.unobserve(section);

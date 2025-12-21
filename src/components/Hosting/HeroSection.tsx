@@ -4,7 +4,11 @@ import { motion } from 'framer-motion';
 import SectionHeading from '@/components/ui/section-heading';
 import HostingButton from '@/components/ui/hosting-button';
 
-const HostingHeroSection = () => {
+interface HostingHeroSectionProps {
+  onChoosePlanClick: () => void;
+}
+
+const HostingHeroSection = ({ onChoosePlanClick }: HostingHeroSectionProps) => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden" style={{ boxShadow: 'none', zIndex: 1 }}>
       {/* Background Gradient - Soft teal in top-right corner, blending into deep gray */}
@@ -41,7 +45,7 @@ const HostingHeroSection = () => {
 
             {/* CTA Button */}
             <div className="mt-8">
-              <HostingButton variant="default" size="md">
+              <HostingButton variant="default" size="md" onClick={onChoosePlanClick}>
                 Choose a plan
               </HostingButton>
             </div>
