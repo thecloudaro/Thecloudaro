@@ -7,7 +7,7 @@ import { Search } from "lucide-react";
 const DomainPricingNavbar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -22,14 +22,14 @@ const DomainPricingNavbar = () => {
 
       // Detect scroll direction with threshold to avoid flickering
       const scrollThreshold = 5; // Minimum scroll distance to trigger direction change
-      if (Math.abs(scrollY - lastScrollY) > scrollThreshold) {
-        if (scrollY > lastScrollY) {
+      if (Math.abs(scrollY - lastScrollY.current) > scrollThreshold) {
+        if (scrollY > lastScrollY.current) {
           setIsScrollingUp(false); // Scrolling down
         } else {
           setIsScrollingUp(true); // Scrolling up
         }
-        setLastScrollY(scrollY);
       }
+      lastScrollY.current = scrollY;
       
       // Show navbar when scrolled past domain hero section (when domain extensions start)
       setIsVisible(scrollY > heroHeight);
@@ -50,7 +50,7 @@ const DomainPricingNavbar = () => {
         clearTimeout(scrollTimeout.current);
       }
     };
-  }, [lastScrollY]);
+  }, []);
 
   // Always show navbar when visible (don't hide on scroll up)
   if (!isVisible) return null;
@@ -70,7 +70,7 @@ const DomainPricingNavbar = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -100, opacity: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
       className={`fixed left-0 right-0 transition-all duration-300 ease-out shadow-lg ${topOffsetClass} ${zIndexClass}`}
       style={{ 
         backgroundColor: 'rgb(var(--domain-pricing-navbar-bg))',
