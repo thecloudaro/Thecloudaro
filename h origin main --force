@@ -1,0 +1,29 @@
+[33m285396e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m update
+[33m4fefee1[m update sidebar options
+[33med70320[m update
+[33m39a39bb[m update
+[33m9a3c2f6[m update navbar setting and link completed pages
+[33mafc1093[m Refactor: Remove hardcoded background colors from dropdown
+[33m7c52719[m Feat: Ensure navbar is visible at top when dropdown is active
+[33m183ae3a[m Feat: Implement Contact Us link in footer, apply top padding to Policy page, and fix Navbar useEffect dependency
+[33m910f5fd[m Feat: Update navbar for legal pages and adjust legal hero padding
+[33m1fc0ebc[m login and cart page completed
+[33m7503f1e[m navbar update
+[33maf4e703[m update
+[33mfd6552d[m update
+[33macb8c1d[m update
+[33m7d9019f[m create new pages
+[33m0ccc13b[m create new page
+[33m38669fc[m Responsivness updated
+[33m291da5a[m Updated
+[33m0debe3f[m Update
+[33m6338a89[m update
+[33mef566f7[m navbar update
+[33mc1e0abf[m update navbar
+[33me29507d[m update
+[33m5e8bf92[m navbar and other changes
+[33m66113dd[m Refactor: Improve UniversalLayout section handling and Navbar Link import (#1)
+[33maa24e91[m Update DynamicSection and Footer fixes
+[33m655cf53[m Update
+[33ma34f0b2[m first commit
+[33mfe9ec59[m Initial commit from Create Next App
