@@ -75,15 +75,36 @@ const Register = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchTerm)}
                 placeholder="Enter a domain name"
-                className="w-full pl-4 pr-16 py-4 text-lg bg-gray-800/70 border border-gray-700 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-gray-600 focus:ring-2 focus:ring-gray-600/20 transition-all duration-300"
-                style={{ backgroundColor: 'rgba(var(--domain-name-privacy-register-input-bg))' }}
+                className="w-full pl-4 pr-16 py-4 text-lg rounded-full text-white placeholder-gray-400 focus:outline-none transition-all duration-300"
+                style={{ 
+                  backgroundColor: 'rgba(var(--domain-name-privacy-register-input-bg))',
+                  borderColor: 'hsl(var(--cart-border-light))',
+                  color: 'rgb(var(--hosting-text-white))'
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = 'hsl(var(--cart-border-lighter))';
+                  e.currentTarget.style.boxShadow = '0 0 0 2px hsla(var(--cart-border-lighter), 0.2)';
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = 'hsl(var(--cart-border-light))';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               />
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleSearch(searchTerm)}
-                className="absolute right-2 w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 shadow-lg"
-                style={{ backgroundColor: 'rgb(var(--domain-name-privacy-register-button-bg))' }}
+                className="absolute right-2 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg"
+                style={{ 
+                  backgroundColor: 'rgb(var(--hosting-blue-600))',
+                  color: 'rgb(var(--hosting-text-white))'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgb(var(--domain-transfer-button-hover))';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgb(var(--hosting-blue-600))';
+                }}
               >
                 <Search className="w-5 h-5" />
               </motion.button>

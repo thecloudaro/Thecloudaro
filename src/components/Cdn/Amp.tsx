@@ -27,7 +27,8 @@ const Amp = () => {
             />
             <ContentDescription 
               size="lg"
-              className="max-w-2xl text-white"
+              className="max-w-2xl"
+              style={{ color: 'rgb(var(--hosting-text-white))' }}
             >
               Increase your cybersecurity defenses against <br /> threats like DDoS attacks by caching site content
               <br />

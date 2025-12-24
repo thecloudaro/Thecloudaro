@@ -166,7 +166,7 @@ const DomainFeatures = () => {
                   <h4 className="text-2xl font-bold mb-4" style={{ color: 'rgb(var(--domain-common-text-white))' }}>
                     Trusted by Millions
                   </h4>
-                  <div className="grid grid-cols-2 gap-6 text-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-center">
                     <div>
                       <div className="text-3xl font-bold mb-2" style={{ color: 'hsl(var(--gradient-teal))' }}>
                         10M+

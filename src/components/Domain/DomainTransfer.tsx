@@ -91,9 +91,9 @@ const DomainTransfer = () => {
             </h3>
             
             {/* Progress Steps */}
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex flex-col sm:flex-row items-center justify-between mb-8">
               {transferSteps.map((step, index) => (
-                <div key={step.step} className="flex items-center">
+                <div key={step.step} className="flex items-center w-full mb-4 sm:mb-0">
                   <div 
                     className="w-10 h-10 rounded-full flex items-center justify-center"
                     style={{
@@ -112,7 +112,7 @@ const DomainTransfer = () => {
                     </div>
                   </div>
                   {index < transferSteps.length - 1 && (
-                    <ArrowRight className="w-5 h-5 mx-4" style={{ color: 'rgb(var(--domain-common-text-gray-500))' }} />
+                    <ArrowRight className="w-5 h-5 mx-4 hidden sm:block" style={{ color: 'rgb(var(--domain-common-text-gray-500))' }} />
                   )}
                 </div>
               ))}

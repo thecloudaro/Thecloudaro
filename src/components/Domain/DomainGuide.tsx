@@ -260,7 +260,7 @@ const DomainGuide = () => {
                 </div>
 
                 {/* Bottom Row */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* myidea.shop */}
                   <div 
                     className="rounded-xl p-4 relative"

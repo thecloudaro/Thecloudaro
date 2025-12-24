@@ -11,25 +11,25 @@ const Reliability = () => {
       icon: Globe,
       title: "Secure global network",
       description: "Protect your site from cyber attacks\nlike DDoS and SQL injections with\nSupersonic CDN's worldwide\nnetwork of secure servers.",
-      color: "from-blue-500 to-cyan-500"
+      color: "from-[rgb(var(--hosting-blue-500))] to-[rgb(var(--wp-freewebsite-gradient-2-from))]"
     },
     {
       icon: RefreshCw,
       title: "Fast caching",
       description: "Prevent service interruption and\naccelerate streaming and media\ndelivery capabilities, including\nvideo, music, and images.",
-      color: "from-teal-500 to-cyan-500"
+      color: "from-[rgb(var(--domain-guide-teal-500))] to-[rgb(var(--wp-freewebsite-gradient-2-from))]"
     },
     {
       icon: SlidersHorizontal,
       title: "Handy management tools",
       description: "Easily manage everything with\nfeatures like static and dynamic\ncache options, instant file purge,\nand whitelist/blacklist tools.",
-      color: "from-blue-500 to-teal-500"
+      color: "from-[rgb(var(--hosting-blue-500))] to-[rgb(var(--domain-guide-teal-500))]"
     },
     {
       icon: Square,
       title: "SSL and CMS integration",
       description: "Use it with any Content\nManagement System and enjoy the\noption of adding custom SSL\ncertificates to enhance security in\nmoments.",
-      color: "from-cyan-500 to-teal-500"
+      color: "from-[rgb(var(--wp-freewebsite-gradient-2-from))] to-[rgb(var(--domain-guide-teal-500))]"
     }
   ];
 

@@ -19,7 +19,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
   title,
 }) => {
   return (
-    <div className="bg-review-card-bg text-review-card-text rounded-2xl p-5 w-[320px] h-[250px] flex-shrink-0 border border-review-card-border hover:border-review-card-border-hover transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-review-card-shadow flex flex-col justify-between">
+    <div className="bg-review-card-bg text-review-card-text rounded-2xl p-5 w-full flex-shrink-0 border border-review-card-border hover:border-review-card-border-hover transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-review-card-shadow flex flex-col justify-between">
       {/* Top Content */}
       <div>
         {/* Rating + Verified */}

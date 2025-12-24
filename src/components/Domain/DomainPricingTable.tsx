@@ -417,14 +417,12 @@ const DomainPricingTable = () => {
       {/* Pricing Table */}
       <div className="overflow-hidden">
         {/* Table Header */}
-        <div className="px-6 py-4">
-          <div className="grid grid-cols-5 gap-8 text-lg font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>
-            <div>TLD</div>
-            <div>Register</div>
-            <div>Renew</div>
-            <div>Transfer</div>
-            <div>ICANN fee</div>
-          </div>
+        <div className="hidden md:grid grid-cols-5 gap-8 text-lg font-semibold px-6 py-4" style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>
+          <div>TLD</div>
+          <div>Register</div>
+          <div>Renew</div>
+          <div>Transfer</div>
+          <div>ICANN fee</div>
         </div>
 
         {/* Table Body */}
@@ -435,7 +433,7 @@ const DomainPricingTable = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="px-6 py-4 transition-colors duration-200"
+              className="px-6 py-4 transition-colors duration-200 block md:grid md:grid-cols-5 md:gap-8 md:items-center"
               style={{ backgroundColor: 'transparent' }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-row-hover))';
@@ -444,92 +442,105 @@ const DomainPricingTable = () => {
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}
             >
-              <div className="grid grid-cols-5 gap-8 items-center py-4">
-                {/* TLD */}
+              {/* --- TLD (Visible on all screens) --- */}
+              <div className="flex items-center justify-between mb-4 md:mb-0">
                 <div className="flex items-center">
                   <Link 
                     href={`/domain-search?tld=${domain.tld}`}
                     className="font-semibold text-lg transition-colors duration-200 cursor-pointer"
                     style={{ color: 'rgb(var(--domain-pricing-table-tld-text))' }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-tld-hover))';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-tld-text))';
-                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-tld-hover))'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-tld-text))'; }}
                   >
                     {domain.tld}
                   </Link>
                   <button 
                     className="ml-2 p-1 rounded transition-colors duration-200"
                     style={{ backgroundColor: 'transparent' }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-button-hover-bg))';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-button-hover-bg))'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
                   >
                     <Heart 
                       className="w-3 h-3" 
                       style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-heart-hover))';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-button-icon))';
-                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-heart-hover))'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-button-icon))'; }}
                     />
                   </button>
                 </div>
-
-                {/* Register */}
-                <div className="text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
-                  {domain.register.isSale ? (
-                    <div>
-                      <span className="line-through text-sm mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>
-                        {domain.register.original}
-                      </span>
-                      <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>
-                        {domain.register.sale} /yr
-                      </span>
-                      <span className="ml-2 text-white text-xs px-2 py-1 rounded" style={{ backgroundColor: 'rgb(var(--domain-pricing-table-sale-badge))' }}>
-                        SALE
-                      </span>
-                    </div>
-                  ) : (
-                    <span className="font-semibold">{domain.register.price} /yr</span>
-                  )}
+                <div className="md:hidden text-lg font-semibold" style={{ color: 'rgb(var(--hosting-text-white))' }}>
+                  {domain.register.isSale ? domain.register.sale : domain.register.price} /yr
                 </div>
+              </div>
 
-                {/* Renew */}
-                <div className="font-semibold text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
-                  {domain.renew} /yr
+              {/* --- Mobile Layout (Card format) --- */}
+              <div className="md:hidden space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>Register:</span>
+                  <div style={{ color: 'rgb(var(--hosting-text-white))' }}>
+                    {domain.register.isSale ? (
+                      <div>
+                        <span className="line-through text-xs mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>{domain.register.original}</span>
+                        <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>{domain.register.sale} /yr</span>
+                      </div>
+                    ) : (
+                      <span className="font-semibold">{domain.register.price} /yr</span>
+                    )}
+                  </div>
                 </div>
+                <div className="flex justify-between">
+                  <span style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>Renew:</span>
+                  <span className="font-semibold" style={{ color: 'rgb(var(--hosting-text-white))' }}>{domain.renew} /yr</span>
+                </div>
+                <div className="flex justify-between">
+                  <span style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>Transfer:</span>
+                  <div style={{ color: 'rgb(var(--hosting-text-white))' }}>
+                    {domain.transfer.isSale ? (
+                      <div>
+                        <span className="line-through text-xs mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>{domain.transfer.original}</span>
+                        <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>{domain.transfer.sale} /yr</span>
+                      </div>
+                    ) : (
+                      <span className="font-semibold">{domain.transfer.price} /yr</span>
+                    )}
+                  </div>
+                </div>
+                <div className="flex justify-between">
+                  <span style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>ICANN fee:</span>
+                  <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }}>{domain.icannFee} /yr</span>
+                </div>
+              </div>
 
-                {/* Transfer */}
-                <div className="text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
-                  {domain.transfer.isSale ? (
-                    <div>
-                      <span className="line-through text-sm mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>
-                        {domain.transfer.original}
-                      </span>
-                      <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>
-                        {domain.transfer.sale} /yr
-                      </span>
-                      <span className="ml-2 text-white text-xs px-2 py-1 rounded" style={{ backgroundColor: 'rgb(var(--domain-pricing-table-sale-badge))' }}>
-                        SALE
-                      </span>
-                    </div>
-                  ) : (
-                    <span className="font-semibold">{domain.transfer.price} /yr</span>
-                  )}
-                </div>
-
-                {/* ICANN Fee */}
-                <div className="font-semibold text-lg" style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }}>
-                  {domain.icannFee} /yr
-                </div>
+              {/* --- Desktop Layout (Grid columns) --- */}
+              {/* Register */}
+              <div className="hidden md:block text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
+                {domain.register.isSale ? (
+                  <div>
+                    <span className="line-through text-sm mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>{domain.register.original}</span>
+                    <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>{domain.register.sale} /yr</span>
+                  </div>
+                ) : (
+                  <span className="font-semibold">{domain.register.price} /yr</span>
+                )}
+              </div>
+              {/* Renew */}
+              <div className="hidden md:block font-semibold text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
+                {domain.renew} /yr
+              </div>
+              {/* Transfer */}
+              <div className="hidden md:block text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
+                {domain.transfer.isSale ? (
+                  <div>
+                    <span className="line-through text-sm mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>{domain.transfer.original}</span>
+                    <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>{domain.transfer.sale} /yr</span>
+                  </div>
+                ) : (
+                  <span className="font-semibold">{domain.transfer.price} /yr</span>
+                )}
+              </div>
+              {/* ICANN Fee */}
+              <div className="hidden md:block font-semibold text-lg" style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }}>
+                {domain.icannFee} /yr
               </div>
             </motion.div>
           ))}

@@ -375,8 +375,8 @@ const ChooseHosting = () => {
                 <div key={section.label} className="space-y-4">
                   <div className="flex items-center gap-2 text-white font-semibold text-base md:text-lg whitespace-nowrap">
                     {section.label}
-                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full border border-gray-600">
-                      <Info className="w-3 h-3 text-gray-400" strokeWidth={1.8} />
+                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full border" style={{ borderColor: 'rgb(var(--hosting-choose-border-gray-600))' }}>
+                      <Info className="w-3 h-3" style={{ color: 'rgb(var(--hosting-choose-text-gray-400))' }} strokeWidth={1.8} />
                     </span>
                   </div>
 

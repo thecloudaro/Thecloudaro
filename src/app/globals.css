@@ -40,6 +40,25 @@
 
     --link-blue: 217 91% 60%; /* blue-500 */
 
+    /* Cart Sidebar Colors */
+    --cart-bg: 0 0% 10%; /* #1a1a1a */
+    --cart-backdrop: 0 0% 0% / 0.5;
+    --cart-border: 240 4% 16%; /* gray-800 */
+    --cart-border-light: 240 4% 26%; /* gray-700 */
+    --cart-border-lighter: 240 5% 34%; /* gray-600 */
+    --cart-header-bg: 0 0% 13%; /* #222222 */
+    --cart-text-primary: 0 0% 98%; /* white */
+    --cart-text-secondary: 240 5% 65%; /* gray-400 */
+    --cart-text-placeholder: 240 4% 46%; /* gray-500 */
+    --cart-item-bg: 240 6% 10%; /* gray-900 */
+    --cart-button-hover-bg: 240 4% 16%; /* gray-800 */
+    --cart-link: 217 91% 60%; /* blue-500 */
+    --cart-link-hover: 217 91% 70%; /* blue-400 */
+
+    /* Domain Transfer Submit Page Colors */
+    --domain-transfer-card-bg: 29 31 29; /* #1d1f1d */
+    --domain-transfer-lock-locked-bg: 25 94% 53%; /* #f97316 */
+
     /* Footer */
     --footer-bg: 215 20% 15%;
     --footer-bg-dark: 215 20% 10%;

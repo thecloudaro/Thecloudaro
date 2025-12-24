@@ -24,7 +24,7 @@ const EligibleDomainCard: React.FC<EligibleDomainCardProps> = ({
     <div
       className="rounded-lg p-4 sm:p-5 pt-4 sm:pt-5 border"
       style={{
-        backgroundColor: "#1d1f1d",
+        backgroundColor: 'rgb(var(--domain-transfer-card-bg))',
         borderColor: "rgb(var(--domain-transfer-submit-card-border))",
       }}
     >
@@ -41,7 +41,7 @@ const EligibleDomainCard: React.FC<EligibleDomainCardProps> = ({
           >
             <svg
               className="w-4 h-4"
-              style={{ color: "rgb(255, 255, 255)" }}
+              style={{ color: 'rgb(var(--hosting-text-white))' }}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -142,7 +142,7 @@ const EligibleDomainCard: React.FC<EligibleDomainCardProps> = ({
                 <>
                   <div
                     className="flex items-center gap-1 px-2 py-0.5 rounded-full"
-                    style={{ backgroundColor: "#f97316", color: "rgb(255, 255, 255)" }}
+                    style={{ backgroundColor: 'hsl(var(--domain-transfer-lock-locked-bg))', color: 'rgb(var(--hosting-text-white))' }}
                   >
                     <svg
                       className="w-3 h-3"

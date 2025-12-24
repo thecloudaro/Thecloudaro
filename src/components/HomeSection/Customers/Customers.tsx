@@ -116,7 +116,7 @@ export default function Customer() {
   whileInView={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.6 }}
   viewport={{ once: true }}
-  className="flex items-center justify-center gap-2 sm:gap-3 bg-customer-trustpilot-bg py-3 sm:py-4 px-4 sm:px-6 w-auto max-w-[200px] sm:max-w-[240px] h-14 sm:h-18 mx-auto"
+  className="flex items-center justify-center gap-2 sm:gap-3 bg-customer-trustpilot-bg py-3 sm:py-4 px-4 sm:px-6 w-auto max-w-[200px] sm:max-w-[240px] h-14 sm:h-16 mx-auto"
 >
   <p className="text-customer-trustpilot-text text-md sm:text-lg font-medium whitespace-nowrap">Review us</p>
   <div className="flex">

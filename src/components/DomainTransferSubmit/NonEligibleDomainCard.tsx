@@ -17,7 +17,7 @@ const NonEligibleDomainCard: React.FC<NonEligibleDomainCardProps> = ({
     <div
       className="rounded-lg p-4 sm:p-5 border flex items-center justify-between gap-2.5"
       style={{
-        backgroundColor: "#1d1f1d",
+        backgroundColor: 'rgb(var(--domain-transfer-card-bg))',
         borderColor: "rgb(var(--domain-transfer-submit-card-border))",
       }}
     >

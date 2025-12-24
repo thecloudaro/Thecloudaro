@@ -44,7 +44,7 @@ const DomainGuide4 = () => {
                 </div>
 
                 {/* Bottom Row */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* myidea.shop */}
                   <div className="rounded-xl p-4 relative" style={{ background: 'linear-gradient(to bottom right, rgb(var(--domain-guide4-gradient-from)), rgb(var(--domain-guide4-gradient-to)))' }}>
                     <div className="absolute top-2 left-2 text-xs font-bold px-2 py-1 rounded" style={{ backgroundColor: 'rgb(var(--domain-guide4-badge-bg))', color: 'rgb(var(--domain-guide4-badge-text))' }}>

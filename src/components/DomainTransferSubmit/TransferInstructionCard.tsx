@@ -15,7 +15,7 @@ const TransferInstructionCard: React.FC<TransferInstructionCardProps> = ({
     <div
       className="rounded-lg p-3 sm:p-4 border transition-all duration-300 hover:border-opacity-70 relative overflow-hidden"
       style={{
-        backgroundColor: "#1d1f1d",
+        backgroundColor: 'rgb(var(--domain-transfer-card-bg))',
         borderColor: "rgb(var(--domain-transfer-submit-instruction-card-border))",
       }}
     >
