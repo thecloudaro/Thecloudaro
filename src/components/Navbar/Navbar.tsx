@@ -36,7 +36,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
   const isHostingPage = pathname?.includes('/hosting') && !pathname?.includes('/migration-to-thecloudaro');
   const isHomepage = pathname === '/';
 
-  const menuItems = ["Domains", "Hosting", "Email", "Cloud", "Security", "Explore all"];
+  const menuItems = ["Domains", "Hosting", "Email", /* "Cloud", */ "Security", "Explore all"];
 
   useEffect(() => {
     if (typeof window === "undefined") return;

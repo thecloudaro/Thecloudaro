@@ -61,7 +61,7 @@ export default function UniversalDropdown({
       "domains": "domains",
       "hosting": "hosting",
       "email": "email",
-      "cloud": "cloud",
+      // "cloud": "cloud",
       "security": "security",
       "why thecloudaro": "why-thecloudaro",
       "about us": "about-us",
@@ -76,7 +76,7 @@ export default function UniversalDropdown({
       "domains": "Domains",
       "hosting": "Hosting",
       "email": "Email",
-      "cloud": "Cloud",
+      // "cloud": "Cloud",
       "security": "Security",
       "why-thecloudaro": "Why TheCloudaro",
       "about-us": "About Us"
@@ -139,13 +139,13 @@ export default function UniversalDropdown({
         // { title: "Migrate Email", desc: "Move your email with ease.", href: "/migrate-business-email" }
       ]
     },
-    cloud: {
-      title: "Cloud",
-      sections: [
-        { title: "Virtual Machines", desc: "Scale your cloud infrastructure.", href: "/virtual-machine" },
-        { title: "VM Manager", desc: "Manage your virtual machines easily.", href: "/vm-manager" }
-      ]
-    },
+    // cloud: {
+    //   title: "Cloud",
+    //   sections: [
+    //     { title: "Virtual Machines", desc: "Scale your cloud infrastructure.", href: "/virtual-machine" },
+    //     { title: "VM Manager", desc: "Manage your virtual machines easily.", href: "/vm-manager" }
+    //   ]
+    // },
     security: {
       title: "Security",
       sections: [
@@ -188,7 +188,7 @@ export default function UniversalDropdown({
     { key: "domains", icon: <Globe size={18} />, label: "Domains" },
     { key: "hosting", icon: <Server size={18} />, label: "Hosting" },
     { key: "email", icon: <Mail size={18} />, label: "Email" },
-    { key: "cloud", icon: <Cloud size={18} />, label: "Cloud" },
+    // { key: "cloud", icon: <Cloud size={18} />, label: "Cloud" },
     { key: "security", icon: <Shield size={18} />, label: "Security" }
   ];
 
@@ -213,7 +213,7 @@ export default function UniversalDropdown({
       domains: <Globe size={24} />,
       hosting: <Server size={24} />,
       email: <Mail size={24} />,
-      cloud: <Cloud size={24} />,
+      // cloud: <Cloud size={24} />,
       security: <Shield size={24} />
     };
     return icons[menu as keyof typeof icons] || <Globe size={24} />;
