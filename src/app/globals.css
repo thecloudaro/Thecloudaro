@@ -38,6 +38,8 @@
 
     --radius: 0.5rem;
 
+    --link-blue: 217 91% 60%; /* blue-500 */
+
     /* Footer */
     --footer-bg: 215 20% 15%;
     --footer-bg-dark: 215 20% 10%;
@@ -1328,6 +1330,41 @@
     --roadmap-hero-bg: 26 26 26; /* #1a1a1a - deep charcoal/off-black - for rgb() */
     --roadmap-hero-heading-text: 255 255 255; /* white - for rgb() */
     --roadmap-hero-description-text: 255, 255, 255, 0.8; /* white/80 - for rgba() */
+    
+    /* Knowledge Base Hero Component Colors */
+    --knowledge-hero-overlay-from: 17, 24, 39, 0.85; /* gray-900/85 - for rgba() */
+    --knowledge-hero-overlay-via: 17, 24, 39, 0.75; /* gray-900/75 - for rgba() */
+    --knowledge-hero-overlay-to: 3, 7, 18, 0.95; /* gray-950/95 - for rgba() */
+    --knowledge-hero-shape-blue-500: 59, 130, 246, 0.3; /* blue-500/30 - for rgba() */
+    --knowledge-hero-shape-blue-400: 96, 165, 250, 0.2; /* blue-400/20 - for rgba() */
+    --knowledge-hero-shape-purple-500: 168, 85, 247, 0.3; /* purple-500/30 - for rgba() */
+    --knowledge-hero-shape-purple-400: 192, 132, 252, 0.2; /* purple-400/20 - for rgba() */
+    --knowledge-hero-shape-purple-400-15: 192, 132, 252, 0.15; /* purple-400/15 - for rgba() */
+    --knowledge-hero-title-text: 255 255 255; /* white - for rgb() */
+    --knowledge-hero-subtitle-text: 255, 255, 255, 0.9; /* white/90 - for rgba() */
+    --knowledge-hero-search-bg: 31, 41, 55, 0.4; /* gray-800/40 - for rgba() */
+    --knowledge-hero-search-border: 55, 65, 81, 0.5; /* gray-700/50 - for rgba() */
+    --knowledge-hero-search-border-hover: 75, 85, 99, 0.5; /* gray-600/50 - for rgba() */
+    --knowledge-hero-search-icon: 156, 163, 175; /* gray-400 - for rgba() */
+    --knowledge-hero-search-input-text: 255 255 255; /* white - for rgb() */
+    --knowledge-hero-search-placeholder: 156, 163, 175; /* gray-400 - for rgba() */
+    
+    /* Knowledge Base Categories Component Colors */
+    --knowledge-categories-bg: 23 25 29; /* #17191d - dark gray background - for rgb() */
+    --knowledge-categories-card-bg: 31 41 55; /* gray-800 - card background - for rgb() */
+    --knowledge-categories-card-border: 55, 65, 81, 0.5; /* gray-700/50 - card border - for rgba() */
+    --knowledge-categories-card-border-hover: 75, 85, 99, 0.7; /* gray-600/70 - card border hover - for rgba() */
+    --knowledge-categories-title-text: 255 255 255; /* white - title text - for rgb() */
+    --knowledge-categories-count-text: 209, 213, 219, 0.8; /* gray-300/80 - article count text - for rgba() */
+    --knowledge-categories-link-text: 59 130 246; /* blue-500 - link text - for rgb() */
+    
+    /* Knowledge Base Recent Articles Component Colors */
+    --knowledge-recent-articles-bg: 23 25 29; /* #17191d - dark gray background - for rgb() */
+    --knowledge-recent-articles-heading-text: 255 255 255; /* white - heading text - for rgb() */
+    --knowledge-recent-articles-title-text: 255 255 255; /* white - article title text - for rgb() */
+    --knowledge-recent-articles-category-text: 160, 160, 160, 0.9; /* light gray/90 - category text - for rgba() */
+    --knowledge-recent-articles-divider: 160, 160, 160, 0.3; /* light gray/30 - divider line - for rgba() */
+    --knowledge-recent-articles-show-more-text: 59 130 246; /* blue-500 - show more link - for rgb() */
     --virtual-machine-hero-text: 255 255 255; /* white - for rgb() */
     --virtual-machine-hero-text-70: 255, 255, 255, 0.7; /* white/70 - for rgba() */
     --virtual-machine-hero-text-85: 255, 255, 255, 0.85; /* white/85 - for rgba() */
@@ -1663,6 +1700,12 @@
   /* Domain Transfer Submit Input Placeholder */
   input[type="text"]::placeholder {
     color: rgb(var(--domain-transfer-submit-input-placeholder));
+    opacity: 1;
+  }
+
+  /* Knowledge Base Hero Search Input Placeholder */
+  .knowledge-hero-search-input::placeholder {
+    color: rgba(var(--knowledge-hero-search-placeholder));
     opacity: 1;
   }
 

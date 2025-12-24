@@ -43,16 +43,8 @@ const Footer: React.FC = () => {
   const paymentMethods = [
     { name: "Visa", src: "/Footer/visa.webp" },
     { name: "Mastercard", src: "/Footer/master.png" },
-    { name: "Amex", src: "/Footer/amex.png" },
-    { name: "Discover", src: "/Footer/discover.jpeg" },
-    { name: "Diners", src: "/Footer/diner.png" },
-    { name: "JCB", src: "/Footer/jcb.png" },
-    { name: "UnionPay", src: "/Footer/union.png" },
-    { name: "Bitcoin", src: "/Footer/bitcoin.jpeg" },
     { name: "PayPal", src: "/Footer/paypal.png" },
-    { name: "GPay", src: "/Footer/gpay.png" },
-    { name: "Apple Pay", src: "/Footer/apple.jpeg" },
-    { name: "Alipay", src: "/Footer/alipay.png" },
+   
   ];
 
   return (
@@ -111,7 +103,7 @@ const Footer: React.FC = () => {
               {section.links?.map((link) => (
                 <li key={link}>
                   <Link
-                    href={link === "Contact Us" ? "/contactus" : link === "About Us" ? "/about" : link === "Roadmap" ? "/roadmap" : link === "Privacy Policy" ? "/privacy-policy" : link === "Domain Registration Data Disclosure Policy" ? "/domain-registration-data-disclosure-policy" : link === "Request New Feature" ? "/request-new-feature" : "#"} 
+                    href={link === "Contact Us" ? "/about/contactus" : link === "About Us" ? "/about" : link === "Roadmap" ? "/roadmap" : link === "Privacy Policy" ? "/privacy-policy" : link === "Domain Registration Data Disclosure Policy" ? "/domain-registration-data-disclosure-policy" : link === "Request New Feature" ? "/request-new-feature" : link === "Status Updates" ? "https://twitter.com/cloudaro" : link === "Knowledge Base" ? "/knowledge-base" : link === "Terms & Conditions" ? "/terms-and-conditions" : "#"} 
                     className="hover:text-footer-accent transition-colors text-sm" >
                     {link}
                   </Link>
@@ -134,7 +126,7 @@ const Footer: React.FC = () => {
           <h4 className="text-footer-text-primary font-semibold text-lg mb-4">Follow Us</h4>
           <div className="flex gap-4">
             {socialIcons.map((icon) => (
-              <Link key={icon.name} href="#" className="w-10 h-10 rounded-full bg-footer-social-bg flex items-center justify-center hover:bg-footer-social-hover transition-colors overflow-hidden">
+              <Link key={icon.name} href={icon.name === "Facebook" ? "https://facebook.com/thecloudaro" : icon.name === "LinkedIn" ? "https://linkedin.com/company/thecloudaro" : icon.name === "Instagram" ? "https://instagram.com/thecloudaro" : "#"}>
                 <Image src={icon.src} alt={icon.name} width={40} height={40} className="object-cover"/>
               </Link>
             ))}
@@ -154,12 +146,12 @@ const Footer: React.FC = () => {
                 </div>
               ))}
             </div>
-            <p className="text-xs text-footer-text-muted">We protect and save your data.</p>
+            
           </div>
 
           <div className="text-footer-text-muted text-sm mt-4 lg:mt-0">
-            <p>© 2019–2025 The Cloudaro</p>
-            <p className="mt-1">4600 East Washington Street, Suite 300, Phoenix, AZ 85034, USA</p>
+            <p>©2025 The Cloud Aro</p>
+          
           </div>
         </div>
       </div>

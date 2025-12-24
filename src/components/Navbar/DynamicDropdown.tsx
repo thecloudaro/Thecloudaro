@@ -134,9 +134,9 @@ export default function UniversalDropdown({
     email: {
       title: "Email",
       sections: [
-        { title: "Business Email", desc: "Professional email for your domain.", href: "/business-email" },
-        { title: "Business Email Login", desc: "Access your business email." },
-        { title: "Migrate Email", desc: "Move your email with ease.", href: "/migrate-business-email" }
+        // { title: "Business Email", desc: "Professional email for your domain.", href: "/business-email" },
+        { title: "Business Email Login", desc: "Access your business email.", href: "/404" },
+        // { title: "Migrate Email", desc: "Move your email with ease.", href: "/migrate-business-email" }
       ]
     },
     cloud: {
@@ -151,8 +151,8 @@ export default function UniversalDropdown({
       sections: [
         { title: "Security", desc: "See how Thecloudaro keeps you secure.", href: "/security" },
         { title: "Domain Privacy", desc: "Keep your domain info private.", href: "/domain-name-privacy" },
-        { title: "CDN", desc: "Speed up your site worldwide.", href: "/cdn" },
-        { title: "VPN", desc: "Secure your online presence.", href: "/vpn" }
+        // { title: "CDN", desc: "Speed up your site worldwide.", href: "/cdn" },
+        // { title: "VPN", desc: "Secure your online presence.", href: "/vpn" }
       ]
     },
     "why-thecloudaro": {
@@ -227,7 +227,7 @@ export default function UniversalDropdown({
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: -20, scale: 0.98 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className={`z-[9999] ${isHostingPage ? '' : 'border-t border-dropdown-border'} overflow-hidden bg-dropdown-bg-primary md:absolute md:top-20 md:left-0 md:w-full md:h-[75vh] fixed inset-0 md:inset-auto`}
+        className={`z-[9999] ${isHostingPage ? '' : 'border-t border-dropdown-border'} overflow-hidden bg-dropdown-bg-primary md:fixed md:top-14 sm:top-16 md:top-20 md:left-0 md:w-full md:h-[75vh] fixed inset-0 md:inset-auto`}
         style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}
         onClick={(e) => e.stopPropagation()}
       >

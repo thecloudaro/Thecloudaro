@@ -35,11 +35,17 @@ export default function ContactUsPage() {
             />
 
             {/* Description */}
-            <ContentDescription
-              text="If you have any questions or need some help, please email us at support@thecloudaro.com or start a chat."
-              size="sm"
-              className="!text-sm sm:!text-base md:!text-base text-left max-w-2xl !text-white"
-            />
+            <p className="!text-sm sm:!text-base md:!text-base text-left max-w-2xl !text-white">
+              If you have any questions or need some help, please email us at{" "}
+              <a
+                href="mailto:support@thecloudaro.com"
+                className="hover:!underline"
+                style={{ color: 'hsl(var(--link-blue))' }}
+              >
+                support@thecloudaro.com
+              </a>{" "}
+              or start a chat.
+            </p>
           </motion.div>
 
           {/* Right Side - Image */}

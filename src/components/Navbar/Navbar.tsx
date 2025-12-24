@@ -77,11 +77,9 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
   const toggleDropdown = (menu: string) =>
     setActiveDropdown(activeDropdown === menu ? null : menu);
 
-  const navClassName = activeDropdown
-    ? "left-0 right-0 absolute top-0 z-[120]"
-    : `fixed left-0 right-0 ${
-        hasHeaderBanner && !isBeyondHero ? "top-8" : "top-0"
-      } z-50`;
+  const navClassName = `fixed left-0 right-0 ${
+    hasHeaderBanner && !isBeyondHero ? "top-8" : "top-0"
+  } ${activeDropdown ? 'z-[120]' : 'z-50'}`;
 
   const navStyle: React.CSSProperties = {
     backgroundColor: activeDropdown
@@ -89,7 +87,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
       : isScrollingUp && isBeyondHero
         ? 'hsl(var(--navbar-bg-scrolled))'
         : 'transparent',
-    transform: activeDropdown || isScrollingUp ? 'translateY(0)' : 'translateY(-150%)',
+    transform: activeDropdown || !isBeyondHero || isScrollingUp ? 'translateY(0)' : 'translateY(-150%)',
     transition: 'transform 0.3s ease-in-out, background-color 0.3s ease-in-out',
     willChange: 'transform, opacity, background-color',
     boxShadow: 'none',
