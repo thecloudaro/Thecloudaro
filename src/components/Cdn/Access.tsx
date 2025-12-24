@@ -47,8 +47,7 @@ const Access = () => {
             />
             <ContentDescription 
               size="lg"
-              className="max-w-5xl"
-              style={{ color: 'rgb(var(--hosting-text-white))' }}
+              className="max-w-5xl text-[rgb(var(--hosting-text-white))]"
             >
               Manage Spaceship CDN effortlessly with a variety<br /> of tools and features that let you optimize your<br /> whole setup.
             </ContentDescription>

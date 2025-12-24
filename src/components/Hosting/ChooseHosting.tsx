@@ -396,8 +396,8 @@ const ChooseHosting = () => {
                           >
                             <span>{item.label}</span>
                             {item.info && (
-                              <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-gray-600">
-                                <Info className="w-3 h-3 text-gray-400" strokeWidth={1.8} />
+                              <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border" style={{ borderColor: 'rgb(var(--hosting-choose-border-gray-600))' }}>
+                                <Info className="w-3 h-3" style={{ color: 'rgb(var(--hosting-choose-text-gray-400))' }} strokeWidth={1.8} />
                               </span>
                             )}
                           </div>

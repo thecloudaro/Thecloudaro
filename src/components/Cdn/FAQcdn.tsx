@@ -54,11 +54,10 @@ const FAQcdn = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 sm:mb-16"
         >
-                      <ContentHeading
-                        title="Frequently asked questions"
-                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
-                        style={{ color: 'rgb(var(--hosting-text-white))' }}
-                      />        </motion.div>
+                                <ContentHeading
+                                  title="Frequently asked questions"
+                                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[rgb(var(--hosting-text-white))] font-bold mb-4"
+                                />        </motion.div>
 
         {/* FAQ Items */}
         <div className="space-y-0">

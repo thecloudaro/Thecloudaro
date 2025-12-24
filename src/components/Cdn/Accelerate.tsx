@@ -47,8 +47,7 @@ const Accelerate = () => {
             />
             <ContentDescription 
               size="lg"
-              className="max-w-5xl"
-              style={{ color: 'rgb(var(--hosting-text-white))' }}
+              className="max-w-5xl text-[rgb(var(--hosting-text-white))]"
             >
               Storing content across a global CDN instead of one
               <br />

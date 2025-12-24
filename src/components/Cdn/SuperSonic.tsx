@@ -40,19 +40,16 @@ const SuperSonic = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="flex flex-col items-center gap-6 sm:gap-8"
         >
-          {/* Heading */}
           <ContentHeading 
             title="Supersonic CDN Plans"
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold"
-            style={{ color: 'rgb(var(--hosting-text-white))' }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-[rgb(var(--hosting-text-white))] font-bold"
           />
 
           {/* Description */}
           <ContentDescription 
             text="Get enterprise-level performance and security at lower prices with Supersonic CDN, no hidden charges."
             size="lg"
-            className="max-w-3xl"
-            style={{ color: 'rgb(var(--hosting-text-white))' }}
+            className="max-w-3xl text-[rgb(var(--hosting-text-white))]"
           />
 
           {/* Billing Cycle Toggle */}

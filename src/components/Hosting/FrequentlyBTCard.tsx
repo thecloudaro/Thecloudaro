@@ -28,7 +28,7 @@ const FrequentlyBTCard = ({
   return (
     <div
       data-card
-      className={`relative flex h-[340px] w-[352px] min-w-[352px] flex-col justify-between overflow-hidden rounded-md px-9 pb-9 pt-9 text-[rgb(var(--hosting-text-white))] transition-transform duration-300 hover:-translate-y-1 sm:h-[340px] sm:min-w-[368px] sm:max-w-[368px] ${gradient} ${className}`}
+      className={`relative flex h-[340px] w-full max-w-[352px] sm:max-w-[368px] flex-col justify-between overflow-hidden rounded-md px-9 pb-9 pt-9 text-[rgb(var(--hosting-text-white))] transition-transform duration-300 hover:-translate-y-1 ${gradient} ${className}`}
       style={{ 
         scrollSnapAlign: "start",
         boxShadow: '0 18px 40px rgba(var(--hosting-frequently-card-shadow))'
