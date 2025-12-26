@@ -16,7 +16,8 @@ import {
   ChevronLeft,
   User,
   HelpCircle,
-  ChevronDown
+  ChevronDown,
+  X
 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import Logo from "./Logo";
@@ -248,9 +249,9 @@ export default function UniversalDropdown({
 
   <button
     onClick={onClose}
-    className="text-dropdown-text-secondary hover:text-dropdown-text-primary transition-colors text-2xl font-bold"
+    className="text-dropdown-text-secondary hover:text-dropdown-text-primary transition-colors"
   >
-    ✕
+    <X size={24} />
   </button>
 </div>
 
@@ -572,7 +573,7 @@ export default function UniversalDropdown({
             <>
               <SectionHeading title={currentMenu.title} showLine lineWidth="700px" />
 
-              <div className="grid grid-cols-2 gap-4 mt-4 w-full sm:w-[80%] lg:w-[70%] xl:w-[60%]">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 w-full sm:w-[80%] lg:w-[70%] xl:w-[60%]">
                 {currentMenu.sections.map((item, idx) => (
                   <Link
                     key={idx}

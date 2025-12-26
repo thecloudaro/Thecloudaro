@@ -32,12 +32,7 @@ const Footer: React.FC = () => {
     { title: "Transfer to Us", links: ["Transfer Domains","Migrate Hosting","Migrate Email","Transfer WordPress"] },
     { title: "Customer Service", links: ["Contact Us","Status Updates","Knowledge Base"], hasButton: true },
     { title: "About Cloud Aro", links: ["About Us","Roadmap","Terms & Conditions","Privacy Policy","Domain Registration Data Disclosure Policy","Cookies Preferences"] },
-  ];
-
-  const socialIcons = [
-    { name: "Facebook", src: "/Footer/fb.webp" },
-    { name: "LinkedIn", src: "/Footer/linkedin.png" },
-    { name: "Instagram", src: "/Footer/insta.jpeg" },
+    { title: "Follow Us", links: ["Facebook", "LinkedIn", "Instagram"] },
   ];
 
   const paymentMethods = [
@@ -76,7 +71,7 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Footer Links */}
-      <div className="container mx-auto max-w-screen-xl px-8 lg:px-10 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <div className="container mx-auto max-w-screen-xl px-8 lg:px-10 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
         {/* FIRST COLUMN */}
         <div>
           {footerSections[0].subSections?.map((sub) => (
@@ -99,17 +94,31 @@ const Footer: React.FC = () => {
         {footerSections.slice(1).map((section) => (
           <div key={section.title}>
             <h4 className="text-footer-text-primary font-semibold text-lg mb-4">{section.title}</h4>
-            <ul className="space-y-2">
-              {section.links?.map((link) => (
-                <li key={link}>
-                  <Link
-                    href={link === "Contact Us" ? "/about/contactus" : link === "About Us" ? "/about" : link === "Roadmap" ? "/roadmap" : link === "Privacy Policy" ? "/privacy-policy" : link === "Domain Registration Data Disclosure Policy" ? "/domain-registration-data-disclosure-policy" : link === "Request New Feature" ? "/request-new-feature" : link === "Status Updates" ? "https://twitter.com/cloudaro" : link === "Knowledge Base" ? "/knowledge-base" : link === "Terms & Conditions" ? "/terms-and-conditions" : "#"} 
-                    className="hover:text-footer-accent transition-colors text-sm" >
-                    {link}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {section.title === "Follow Us" ? (
+              <div className="flex gap-4">
+                <Link href="https://facebook.com/thecloudaro">
+                  <Image src="/Footer/fb.webp" alt="Facebook" width={40} height={40} className="object-cover"/>
+                </Link>
+                <Link href="https://linkedin.com/company/thecloudaro">
+                  <Image src="/Footer/linkedin.png" alt="LinkedIn" width={40} height={40} className="object-cover"/>
+                </Link>
+                <Link href="https://instagram.com/thecloudaro">
+                  <Image src="/Footer/insta.jpeg" alt="Instagram" width={40} height={40} className="object-cover"/>
+                </Link>
+              </div>
+            ) : (
+              <ul className="space-y-2">
+                {section.links?.map((link) => (
+                  <li key={link}>
+                    <Link
+                      href={link === "Contact Us" ? "/about/contactus" : link === "About Us" ? "/about" : link === "Roadmap" ? "/roadmap" : link === "Privacy Policy" ? "/privacy-policy" : link === "Domain Registration Data Disclosure Policy" ? "/domain-registration-data-disclosure-policy" : link === "Request New Feature" ? "/request-new-feature" : link === "Status Updates" ? "https://twitter.com/cloudaro" : link === "Knowledge Base" ? "/knowledge-base" : link === "Terms & Conditions" ? "/terms-and-conditions" : "#"} 
+                      className="hover:text-footer-accent transition-colors text-sm" >
+                      {link}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
 
             {section.hasButton && (
               <Link href="/request-new-feature">
@@ -120,18 +129,6 @@ const Footer: React.FC = () => {
             )}
           </div>
         ))}
-
-        {/* FOLLOW US */}
-        <div>
-          <h4 className="text-footer-text-primary font-semibold text-lg mb-4">Follow Us</h4>
-          <div className="flex gap-4">
-            {socialIcons.map((icon) => (
-              <Link key={icon.name} href={icon.name === "Facebook" ? "https://facebook.com/thecloudaro" : icon.name === "LinkedIn" ? "https://linkedin.com/company/thecloudaro" : icon.name === "Instagram" ? "https://instagram.com/thecloudaro" : "#"}>
-                <Image src={icon.src} alt={icon.name} width={40} height={40} className="object-cover"/>
-              </Link>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* Payment & Copyright */}
