@@ -12,7 +12,7 @@ const ChatButton: React.FC<ChatButtonProps> = ({ onClick, isLoaded }) => {
   return (
     <motion.button
       onClick={onClick}
-      className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg z-50 transition-colors duration-300"
+      className="fixed bottom-6 right-6 bg-chat-button hover:bg-chat-button-hover text-chat-button p-4 rounded-full shadow-lg z-50 transition-colors duration-300"
       initial={{ opacity: 0, scale: 0 }}
       animate={{ 
         opacity: isLoaded ? 1 : 0, 

@@ -36,7 +36,7 @@ const TransferFrequentlyAskedQuestions = () => {
   };
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 lg:py-28" style={{ backgroundColor: 'rgb(var(--transfer-faq-bg))' }}>
+    <section className="py-16 sm:py-20 md:py-24 lg:py-28 bg-transfer-faq">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Heading */}
         <div className="mb-6 sm:mb-16 md:mb-10">
@@ -56,14 +56,14 @@ const TransferFrequentlyAskedQuestions = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="border-b border-gray-700"
+              className="border-b border-transfer-faq-separator"
             >
               <button
                 onClick={() => toggleFAQ(index)}
                 className="w-full py-6 flex items-center justify-between text-left group transition-all duration-300 hover:opacity-80"
                 aria-expanded={openIndex === index}
               >
-                <h3 className="text-lg font-bold text-white pr-8">
+                <h3 className="text-lg font-bold text-transfer-faq-question pr-8">
                   {faq.question}
                 </h3>
                 <motion.div
@@ -71,7 +71,7 @@ const TransferFrequentlyAskedQuestions = () => {
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="flex-shrink-0"
                 >
-                  <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                  <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-transfer-faq-question" />
                 </motion.div>
               </button>
 
@@ -89,7 +89,7 @@ const TransferFrequentlyAskedQuestions = () => {
                       animate={{ y: 0 }}
                       exit={{ y: -10 }}
                       transition={{ duration: 0.3 }}
-                      className="pb-6 text-gray-300 leading-relaxed text-sm sm:text-sm md:text-base"
+                      className="pb-6 text-transfer-faq-answer leading-relaxed text-sm sm:text-sm md:text-base"
                     >
                       {faq.answer}
                     </motion.p>

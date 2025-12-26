@@ -36,11 +36,10 @@ const Protected = () => {
     >
       {/* Top 60% - Gradient Background */}
       <div 
-        className="relative"
+        className="relative bg-security-protected-gradient"
         style={{ 
           minHeight: '50vh',
           height: 'auto',
-          background: 'linear-gradient(to bottom, transparent, rgba(var(--security-protected-gradient-green)))'
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-8 sm:pb-12 h-full flex items-start">
@@ -54,12 +53,12 @@ const Protected = () => {
           >
             <ContentHeading
               title="Protected accounts"
-              className="mb-8 sm:mb-10 md:mb-12 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl !text-[rgb(var(--security-protected-heading-text))]"
+              className="mb-8 sm:mb-10 md:mb-12 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-security-protected-heading"
             />
             <ContentDescription
               text="Strong security features ensure your account stays protected<br/>at all times."
               size="lg"
-              className="mb-8 sm:mb-10 md:mb-12 !text-[rgb(var(--security-protected-description-text))]"
+              className="mb-8 sm:mb-10 md:mb-12 text-security-protected-description"
             />
           </motion.div>
         </div>
@@ -67,10 +66,9 @@ const Protected = () => {
 
       {/* Bottom 40% - Solid Background with Cards */}
       <div 
-        className="relative"
+        className="relative bg-security-protected"
         style={{ 
           minHeight: 'auto',
-          backgroundColor: 'rgb(var(--security-protected-bg))'
         }}
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pb-12 sm:pb-16 md:pb-20 -mt-12 sm:-mt-16 md:-mt-20 lg:-mt-24">
@@ -86,9 +84,8 @@ const Protected = () => {
               >
                 {/* Card - Smaller size */}
                 <div
-                  className="relative rounded-lg p-3 sm:p-4 md:p-5 overflow-hidden w-full max-w-md mx-auto flex flex-col"
+                  className="relative rounded-lg p-3 sm:p-4 md:p-5 overflow-hidden w-full max-w-md mx-auto flex flex-col bg-security-protected-card"
                   style={{ 
-                    backgroundColor: 'rgb(var(--security-protected-card-bg))',
                     height: '220px',
                     width: '100%'
                   }}
@@ -96,23 +93,20 @@ const Protected = () => {
                   {/* Icon - Smaller */}
                   <div className="flex justify-center mb-2 sm:mb-3">
                     <feature.icon 
-                      className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8"
-                      style={{ color: 'rgb(var(--security-protected-icon-color))' }}
+                      className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-security-protected-icon"
                     />
                   </div>
 
                   {/* Title - Smaller */}
                   <h3 
-                    className="text-sm sm:text-base md:text-lg font-bold mb-2"
-                    style={{ color: 'rgb(var(--security-protected-card-title-text))' }}
+                    className="text-sm sm:text-base md:text-lg font-bold mb-2 text-security-protected-card-title"
                   >
                     {feature.title}
                   </h3>
 
                   {/* Description - Smaller */}
                   <p 
-                    className="text-xs sm:text-sm leading-relaxed flex-1 overflow-hidden"
-                    style={{ color: 'rgb(var(--security-protected-card-description-text))' }}
+                    className="text-xs sm:text-sm leading-relaxed flex-1 overflow-hidden text-security-protected-card-description"
                   >
                     {feature.description}
                   </p>
@@ -130,11 +124,7 @@ const Protected = () => {
             className="text-center mt-12 sm:mt-16 md:mt-20"
           >
             <button
-              className="px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-full font-medium text-xs sm:text-xs md:text-sm transition-all duration-300 hover:opacity-90"
-              style={{
-                backgroundColor: 'rgb(var(--security-protected-button-bg))',
-                color: 'rgb(var(--security-protected-button-text))'
-              }}
+              className="px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-full font-medium text-xs sm:text-xs md:text-sm transition-all duration-300 hover:opacity-90 bg-security-protected-button text-security-protected-button"
             >
               Open your secure account
             </button>

@@ -33,8 +33,7 @@ const Safeguarded = () => {
 
   return (
     <section 
-      className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16"
-      style={{ backgroundColor: 'rgb(var(--security-safeguarded-bg))' }}
+      className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-security-safeguarded"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -47,12 +46,12 @@ const Safeguarded = () => {
         >
           <ContentHeading
             title="Safeguarded domains"
-            className="mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl !text-[rgb(var(--security-safeguarded-heading-text))]"
+            className="mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-security-safeguarded-heading"
           />
           <ContentDescription
             text="Your domain is the centerpiece of your digital life, and we've<br/>got what you need to keep it attack proof."
             size="lg"
-            className="!text-[rgb(var(--security-safeguarded-description-text))]"
+            className="text-security-safeguarded-description"
           />
         </motion.div>
 
@@ -69,9 +68,8 @@ const Safeguarded = () => {
             >
               {/* Card - Only contains icon with animations */}
               <div
-                className="relative rounded-lg p-6 sm:p-7 md:p-8 overflow-hidden mb-4 sm:mb-5"
+                className="relative rounded-lg p-6 sm:p-7 md:p-8 overflow-hidden mb-4 sm:mb-5 bg-security-safeguarded-card"
                 style={{ 
-                  backgroundColor: 'rgb(var(--security-safeguarded-card-bg))',
                   width: '100%',
                   minHeight: '220px',
                   maxWidth: '380px'
@@ -79,11 +77,7 @@ const Safeguarded = () => {
               >
                 {/* Background Pattern with Animation */}
                 <motion.div 
-                  className="absolute inset-0 opacity-30"
-                  style={{
-                    backgroundImage: `radial-gradient(circle at 2px 2px, rgba(var(--security-safeguarded-card-pattern)) 1px, transparent 0)`,
-                    backgroundSize: '20px 20px'
-                  }}
+                  className="absolute inset-0 opacity-30 bg-security-safeguarded-card-pattern"
                   animate={{
                     backgroundPosition: ['0% 0%', '100% 100%'],
                   }}
@@ -97,9 +91,8 @@ const Safeguarded = () => {
 
                 {/* Animated Pulsing Circles - Behind icon */}
                 <motion.div
-                  className="absolute top-1/2 left-1/2 w-28 h-28 rounded-full"
+                  className="absolute top-1/2 left-1/2 w-28 h-28 rounded-full bg-security-safeguarded-icon-glow"
                   style={{
-                    backgroundColor: 'rgba(var(--security-safeguarded-icon-glow))',
                     transform: 'translate(-50%, -50%)'
                   }}
                   animate={{
@@ -113,9 +106,8 @@ const Safeguarded = () => {
                   }}
                 />
                 <motion.div
-                  className="absolute top-1/2 left-1/2 w-20 h-20 rounded-full"
+                  className="absolute top-1/2 left-1/2 w-20 h-20 rounded-full bg-security-safeguarded-icon-glow"
                   style={{
-                    backgroundColor: 'rgba(var(--security-safeguarded-icon-glow))',
                     transform: 'translate(-50%, -50%)'
                   }}
                   animate={{
@@ -133,10 +125,7 @@ const Safeguarded = () => {
                 {/* Icon with Glow Animation */}
                 <div className="relative z-10 flex justify-center items-center h-full">
                   <motion.div 
-                    className="relative w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center rounded-full"
-                    style={{
-                      backgroundColor: 'rgba(var(--security-safeguarded-icon-glow))',
-                    }}
+                    className="relative w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center rounded-full bg-security-safeguarded-icon-glow"
                     animate={{
                       boxShadow: [
                         '0 0 20px rgba(var(--security-safeguarded-icon-glow))',
@@ -152,8 +141,7 @@ const Safeguarded = () => {
                     }}
                   >
                     <feature.icon 
-                      className="w-8 h-8 sm:w-9 sm:h-9"
-                      style={{ color: 'rgb(var(--security-safeguarded-icon-green))' }}
+                      className="w-8 h-8 sm:w-9 sm:h-9 text-security-safeguarded-icon-green"
                     />
                   </motion.div>
                 </div>
@@ -161,16 +149,14 @@ const Safeguarded = () => {
 
               {/* Title - Outside card, bottom */}
               <h3 
-                className="text-base sm:text-lg md:text-2xl font-bold mb-2 sm:mb-3"
-                style={{ color: 'rgb(var(--security-safeguarded-card-title-text))' }}
+                className="text-base sm:text-lg md:text-2xl font-bold mb-2 sm:mb-3 text-security-safeguarded-card-title"
               >
                 {feature.title}
               </h3>
 
               {/* Description - Outside card, bottom */}
               <p 
-                className="text-xs sm:text-sm md:text-lg leading-relaxed"
-                style={{ color: 'rgb(var(--security-safeguarded-card-description-text))' }}
+                className="text-xs sm:text-sm md:text-lg leading-relaxed text-security-safeguarded-card-description"
               >
                 {feature.description.split(/<br\s*\/?>/i).map((line, index, arr) => (
                   <React.Fragment key={index}>
@@ -193,8 +179,7 @@ const Safeguarded = () => {
         >
           <Link
             href="/domain"
-            className="inline-flex items-center gap-2 text-base sm:text-lg md:text-md font-medium hover:gap-3 transition-all duration-300"
-            style={{ color: 'rgb(var(--security-safeguarded-link-blue))' }}
+            className="inline-flex items-center gap-2 text-base sm:text-lg md:text-md font-medium hover:gap-3 transition-all duration-300 text-security-safeguarded-link-blue"
           >
             Register your secure domain
             <ArrowRight className="w-5 h-5" />

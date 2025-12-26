@@ -21,14 +21,14 @@ const TransferFAQ = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 lg:py-28" style={{ backgroundColor: 'rgb(var(--transfer-faq-bg))' }}>
+    <section className="py-16 sm:py-20 md:py-24 lg:py-28 bg-transfer-faq">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Heading */}
         <div className="mb-16 sm:mb-20 md:mb-24">
           <SectionHeading
             heading="What you need to know"
             headingTag="h2"
-            headingClassName="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-center !text-[rgb(var(--transfer-faq-heading))]"
+            headingClassName="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-center text-transfer-faq-heading"
           />
         </div>
 
@@ -46,22 +46,18 @@ const TransferFAQ = () => {
                 <div className="flex items-start gap-4">
                   {/* Circled question mark icon */}
                   <div 
-                    className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
-                    style={{
-                      backgroundColor: 'rgb(var(--transfer-faq-icon-bg))',
-                      border: '1px solid rgb(var(--transfer-faq-icon-border))'
-                    }}
+                    className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-transfer-faq-icon border border-transfer-faq-icon"
                   >
-                    <HelpCircle className="w-5 h-5 !text-[rgb(var(--transfer-faq-icon))]" />
+                    <HelpCircle className="w-5 h-5 text-transfer-faq-icon" />
                   </div>
                   
                   <div className="flex-1">
                     {/* Question */}
-                    <h3 className="text-xs sm:text-sm font-bold mb-2 !text-[rgb(var(--transfer-faq-question))]">
+                    <h3 className="text-xs sm:text-sm font-bold mb-2 text-transfer-faq-question">
                       {faq.question}
                     </h3>
                     {/* Answer */}
-                    <p className="text-xs sm:text-sm leading-relaxed !text-[rgb(var(--transfer-faq-answer))]">
+                    <p className="text-xs sm:text-sm leading-relaxed text-transfer-faq-answer">
                       {faq.answer}
                     </p>
                   </div>
@@ -70,7 +66,7 @@ const TransferFAQ = () => {
               
               {/* Separator line (except for last item) */}
               {index < faqs.length - 1 && (
-                <div className="h-px" style={{ backgroundColor: 'rgb(var(--transfer-faq-separator))' }}></div>
+                <div className="h-px bg-transfer-faq-separator"></div>
               )}
             </div>
           ))}

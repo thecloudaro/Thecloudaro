@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import cn from 'clsx';
 
 interface ButtonProps {
   label: string;
@@ -9,25 +10,18 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ label, isActive = false, onClick }) => {
+  const buttonClasses = cn(
+    "px-4 py-2 rounded-full font-medium text-sm transition-all duration-300",
+    {
+      'bg-transfer-hero-button-active text-transfer-hero-button-active shadow-lg': isActive,
+      'hover:bg-transfer-hero-button-inactive': !isActive,
+    }
+  );
+
   return (
     <button
       onClick={onClick}
-      className="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300"
-      style={{
-        backgroundColor: isActive ? 'rgb(var(--transfer-hero-button-active-bg))' : 'transparent',
-        color: isActive ? 'rgb(var(--transfer-hero-button-active-text))' : undefined,
-        boxShadow: isActive ? '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)' : undefined
-      }}
-      onMouseEnter={(e) => {
-        if (!isActive) {
-          e.currentTarget.style.backgroundColor = 'rgba(var(--transfer-hero-button-inactive-hover-bg))';
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (!isActive) {
-          e.currentTarget.style.backgroundColor = 'transparent';
-        }
-      }}
+      className={buttonClasses}
     >
       {label}
     </button>

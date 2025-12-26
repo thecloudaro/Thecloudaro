@@ -7,8 +7,7 @@ import ContentHeading from "@/components/ui/content-heading";
 const BuiltIn = () => {
   return (
     <section 
-      className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16"
-      style={{ backgroundColor: 'rgb(var(--security-builtin-bg))' }}
+      className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-security-builtin"
     >
       <div className="max-w-7xl mx-auto">
         <motion.div
@@ -20,7 +19,7 @@ const BuiltIn = () => {
         >
           <ContentHeading
             title="Built-in security<br/>everywhere"
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl !text-[rgb(var(--security-builtin-heading-text))]"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-security-builtin-heading"
           />
         </motion.div>
       </div>

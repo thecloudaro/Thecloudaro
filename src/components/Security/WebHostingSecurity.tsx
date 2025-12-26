@@ -26,8 +26,7 @@ const WebHostingSecurity = () => {
 
   return (
     <section 
-      className="pt-4 sm:pt-6 md:pt-8 lg:pt-10 pb-16 sm:pb-24 md:pb-32 lg:pb-40 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24"
-      style={{ backgroundColor: 'rgb(var(--security-webhosting-bg))' }}
+      className="pt-4 sm:pt-6 md:pt-8 lg:pt-10 pb-16 sm:pb-24 md:pb-32 lg:pb-40 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 bg-security-webhosting"
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-20 items-center">
@@ -60,12 +59,10 @@ const WebHostingSecurity = () => {
             {/* Tagline with Icon */}
             <div className="flex items-center gap-2">
               <Link2 
-                className="w-5 h-5" 
-                style={{ color: 'rgb(var(--security-webhosting-tagline-text))' }} 
+                className="w-5 h-5 text-security-webhosting-tagline" 
               />
               <span 
-                className="text-sm sm:text-base font-medium uppercase tracking-wide"
-                style={{ color: 'rgb(var(--security-webhosting-tagline-text))' }}
+                className="text-sm sm:text-base font-medium uppercase tracking-wide text-security-webhosting-tagline"
               >
                 WEB HOSTING
               </span>
@@ -74,13 +71,13 @@ const WebHostingSecurity = () => {
             {/* Main Heading */}
             <ContentHeading
               title="Web Hosting"
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl !text-[rgb(var(--security-webhosting-heading-text))] text-left"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-security-webhosting-heading text-left"
             />
 
             {/* Main Description */}
             <ContentDescription
               text="Fast, stable, and scalable with powerful protection included."
-              className="text-base sm:text-lg md:text-xl !text-[rgb(var(--security-webhosting-description-text))] text-left max-w-2xl"
+              className="text-base sm:text-lg md:text-xl text-security-webhosting-description text-left max-w-2xl"
             />
 
             {/* Feature List */}
@@ -95,14 +92,12 @@ const WebHostingSecurity = () => {
                   className="space-y-2"
                 >
                   <h3 
-                    className="text-lg sm:text-xl md:text-2xl font-bold"
-                    style={{ color: 'rgb(var(--security-webhosting-feature-title-text))' }}
+                    className="text-lg sm:text-xl md:text-2xl font-bold text-security-webhosting-feature-title"
                   >
                     {feature.title}
                   </h3>
                   <p 
-                    className="text-sm sm:text-base md:text-lg"
-                    style={{ color: 'rgb(var(--security-webhosting-feature-description-text))' }}
+                    className="text-sm sm:text-base md:text-lg text-security-webhosting-feature-description"
                   >
                     {feature.description}
                   </p>
@@ -120,8 +115,7 @@ const WebHostingSecurity = () => {
             >
               <Link
                 href="/web-hosting"
-                className="inline-flex items-center gap-2 group font-medium text-base sm:text-lg"
-                style={{ color: 'rgb(var(--security-webhosting-link-text))' }}
+                className="inline-flex items-center gap-2 group font-medium text-base sm:text-lg text-security-webhosting-link"
               >
                 <span>More about Web Hosting</span>
                 <ArrowRight 

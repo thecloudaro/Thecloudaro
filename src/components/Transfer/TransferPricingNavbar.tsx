@@ -50,9 +50,8 @@ const TransferPricingNavbar = () => {
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -100, opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className={`fixed left-0 right-0 transition-all duration-300 ease-out shadow-lg ${topOffsetClass} ${zIndexClass}`}
+      className={`fixed left-0 right-0 transition-all duration-300 ease-out shadow-lg ${topOffsetClass} ${zIndexClass} bg-domain-new-navbar-bg`}
       style={{ 
-        backgroundColor: 'hsl(var(--domain-new-navbar-bg))',
         top: isScrollingUp ? undefined : 0, // Force 0px when scrolling down
         left: 0,
         right: 0,
@@ -71,8 +70,7 @@ const TransferPricingNavbar = () => {
             <div className="flex items-stretch bg-hero-search-bg backdrop-blur-md rounded-full p-2 border border-hero-search-border shadow-lg">
               <div className="flex items-center flex-1 px-4">
                 <svg
-                  className="w-5 h-5 mr-3"
-                  style={{ color: 'rgb(var(--transfer-hero-icon))' }}
+                  className="w-5 h-5 mr-3 text-transfer-hero-icon"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -91,17 +89,7 @@ const TransferPricingNavbar = () => {
                 />
               </div>
               <button 
-                className="px-6 py-3 rounded-full font-medium text-base transition"
-                style={{ 
-                  backgroundColor: 'rgb(var(--transfer-hero-button-bg))',
-                  color: 'rgb(var(--transfer-hero-button-text))'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgb(var(--transfer-hero-button-hover))';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgb(var(--transfer-hero-button-bg))';
-                }}
+                className="px-6 py-3 rounded-full font-medium text-base transition bg-transfer-hero-button text-transfer-hero-button-text hover:bg-transfer-hero-button-hover"
               >
                 Transfer Domain
               </button>

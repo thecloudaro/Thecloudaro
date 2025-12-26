@@ -29,7 +29,7 @@ const TransferHeroSection = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-hero-bg transition-colors duration-500">
+    <div className="relative min-h-screen overflow-hidden bg-transfer-hero transition-colors duration-500">
       {/* Background Image - Fixed to cover entire viewport from top */}
       <motion.div
         className="fixed inset-0 bg-cover bg-center bg-no-repeat"
@@ -51,13 +51,13 @@ const TransferHeroSection = () => {
 
       {/* Base Overlay */}
       <motion.div
-        className="absolute inset-0 bg-hero-bg z-10 pointer-events-none transition-colors duration-500"
+        className="absolute inset-0 bg-transfer-hero z-10 pointer-events-none transition-colors duration-500"
         style={{ opacity: baseShadow }}
       />
 
       {/* Scroll Transition Overlay */}
       <motion.div
-        className="absolute inset-0 bg-hero-bg z-20 pointer-events-none transition-colors duration-500"
+        className="absolute inset-0 bg-transfer-hero z-20 pointer-events-none transition-colors duration-500"
         style={{ opacity: transitionShadow }}
       />
 
@@ -68,7 +68,7 @@ const TransferHeroSection = () => {
       >
         {/* Heading */}
         <motion.h1
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-hero-text mb-4 sm:mb-6 md:mb-8 leading-tight"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transfer-hero mb-4 sm:mb-6 md:mb-8 leading-tight"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 50 }}
           transition={{ duration: 0.8, delay: 1 }}
@@ -85,7 +85,7 @@ const TransferHeroSection = () => {
         >
           {/* Tabs */}
           <div className="flex justify-center mb-4 sm:mb-6 md:mb-8">
-            <div className="transition rounded-full p-1 flex shadow-md" style={{ backgroundColor: 'rgba(var(--transfer-hero-tab-bg))' }}>
+            <div className="transition rounded-full p-1 flex shadow-md bg-transfer-hero-tab">
               {['register', 'transfer'].map((tab) => (
                 <Button
                   key={tab}
@@ -99,11 +99,10 @@ const TransferHeroSection = () => {
 
           {/* Search Bar */}
           <div className="relative w-full mb-4 sm:mb-6 md:mb-8">
-            <div className="flex items-stretch bg-hero-search-bg backdrop-blur-md rounded-full p-1.5 sm:p-2 border border-hero-search-border shadow-lg">
+            <div className="flex items-stretch bg-transfer-hero-search backdrop-blur-md rounded-full p-1.5 sm:p-2 border border-transfer-hero-search shadow-lg">
               <div className="flex items-center flex-1 px-3 sm:px-4">
                 <svg
-                  className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3"
-                  style={{ color: 'rgb(var(--transfer-hero-icon))' }}
+                  className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-transfer-hero-icon"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -120,21 +119,11 @@ const TransferHeroSection = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Enter domain name to transfer..."
-                  className="flex-1 bg-transparent text-hero-text placeholder-hero-text-muted text-sm sm:text-base focus:outline-none"
+                  className="flex-1 bg-transparent text-transfer-hero placeholder-transfer-hero-text-muted text-sm sm:text-base focus:outline-none"
                 />
               </div>
               <button 
-                className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-sm sm:text-base transition"
-                style={{ 
-                  backgroundColor: 'rgb(var(--transfer-hero-button-bg))',
-                  color: 'rgb(var(--transfer-hero-button-text))'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgb(var(--transfer-hero-button-hover))';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgb(var(--transfer-hero-button-bg))';
-                }}
+                className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-sm sm:text-base transition bg-transfer-hero-button text-transfer-hero-button hover:bg-transfer-hero-button-hover"
               >
                 Transfer
               </button>
@@ -151,7 +140,7 @@ const TransferHeroSection = () => {
             {[{ label: '.com transfer $8.88' }, { label: '.net transfer $11.20' }].map((item, idx) => (
               <div
                 key={idx}
-                className="bg-hero-price-bg hover:bg-hero-price-bg backdrop-blur-md transition border border-hero-price-border rounded-2xl shadow-md"
+                className="bg-transfer-hero-price hover:bg-transfer-hero-price backdrop-blur-md transition border border-transfer-hero-price rounded-2xl shadow-md"
               >
                 <Button label={item.label} />
               </div>

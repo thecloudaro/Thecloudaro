@@ -1345,6 +1345,13 @@
     --security-faq-question-text: 255 255 255; /* white - for rgb() */
     --security-faq-answer-text: 255, 255, 255, 0.8; /* white/80 - for rgba() */
 
+    /* Security FAQ Component Colors */
+    --security-faq-bg: 26 26 26; /* #1a1a1a - deep charcoal/off-black - for rgb() */
+    --security-faq-heading-text: 255 255 255; /* white - for rgb() */
+    --security-faq-border: 255, 255, 255, 0.1; /* white/10 - for rgba() */
+    --security-faq-question-text: 255 255 255; /* white - for rgb() */
+    --security-faq-answer-text: 255, 255, 255, 0.8; /* white/80 - for rgba() */
+
     /* Roadmap Hero Component Colors */
     --roadmap-hero-bg: 26 26 26; /* #1a1a1a - deep charcoal/off-black - for rgb() */
     --roadmap-hero-heading-text: 255 255 255; /* white - for rgb() */
@@ -1574,6 +1581,28 @@
     --vpn-faq-border: 255, 255, 255, 0.2; /* white/20 - for rgba() */
     --vpn-faq-question-text: 255 255 255; /* white - for rgb() */
     --vpn-faq-answer-text: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    
+    /* Signup Modal Colors */
+    --signup-modal-backdrop: 0, 0, 0, 0.7;
+    --signup-modal-bg: 26 26 26; /* #1a1a1a */
+    --signup-modal-border: 31 41 55; /* gray-800 */
+    --signup-modal-close-icon: 156 163 175; /* gray-400 */
+    --signup-modal-close-icon-hover: 255 255 255; /* white */
+    --signup-modal-title-text: 255 255 255; /* white */
+    --signup-modal-label-text: 209 213 219; /* gray-300 */
+    --signup-modal-input-bg: 42 42 42; /* #2a2a2a */
+    --signup-modal-input-border: 55 65 81; /* gray-700 */
+    --signup-modal-input-text: 255 255 255; /* white */
+    --signup-modal-input-placeholder: 107 114 128; /* gray-500 */
+    --signup-modal-input-focus-border: 59 130 246; /* blue-500 */
+    --signup-modal-helper-text: 156 163 175; /* gray-400 */
+    --signup-modal-button-gradient-from: 37 99 235; /* blue-600 */
+    --signup-modal-button-gradient-to: 29 78 216; /* blue-700 */
+    --signup-modal-button-gradient-from-hover: 29 78 216; /* blue-700 */
+    --signup-modal-button-gradient-to-hover: 30 58 138; /* blue-800 */
+    --signup-modal-button-text: 255 255 255; /* white */
+    --signup-modal-link: 59 130 246; /* blue-500 */
+    --signup-modal-link-hover: 96 165 250; /* blue-400 */
   }
 
   .dark {
@@ -1729,4 +1758,201 @@
   }
 
 
+/* ===============================
+   Security Page Component Styles
+   =============================== */
+.bg-security-hero { background-color: rgb(var(--security-hero-bg)); }
+.text-security-hero-heading-green { color: rgb(var(--security-hero-heading-green)); }
+.text-gradient-security-hero {
+  background: linear-gradient(to right, rgb(var(--security-hero-heading-green)), rgb(var(--security-hero-heading-teal)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-security-hero-description { color: rgb(var(--security-hero-description-text)); }
+.text-security-hero-scroll { color: rgb(var(--security-hero-scroll-text)); }
 
+/* Safeguarded Component */
+.bg-security-safeguarded { background-color: rgb(var(--security-safeguarded-bg)); }
+.text-security-safeguarded-heading { color: rgb(var(--security-safeguarded-heading-text)); }
+.text-security-safeguarded-description { color: rgb(var(--security-safeguarded-description-text)); }
+.bg-security-safeguarded-card { background-color: rgb(var(--security-safeguarded-card-bg)); }
+.bg-security-safeguarded-card-pattern {
+  background-image: radial-gradient(circle at 2px 2px, rgba(var(--security-safeguarded-card-pattern)) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+.bg-security-safeguarded-icon-glow { background-color: rgba(var(--security-safeguarded-icon-glow)); }
+.shadow-security-safeguarded-icon-glow {
+  box-shadow: 0 0 20px rgba(var(--security-safeguarded-icon-glow)), 0 0 35px rgba(var(--security-safeguarded-icon-glow)), 0 0 20px rgba(var(--security-safeguarded-icon-glow));
+}
+.text-security-safeguarded-icon-green { color: rgb(var(--security-safeguarded-icon-green)); }
+.text-security-safeguarded-card-title { color: rgb(var(--security-safeguarded-card-title-text)); }
+.text-security-safeguarded-card-description { color: rgb(var(--security-safeguarded-card-description-text)); }
+.text-security-safeguarded-link-blue { color: rgb(var(--security-safeguarded-link-blue)); }
+
+/* Protected Component */
+.bg-security-protected-gradient { background: linear-gradient(to bottom, transparent, rgba(var(--security-protected-gradient-green))); }
+.text-security-protected-heading { color: rgb(var(--security-protected-heading-text)); }
+.text-security-protected-description { color: rgb(var(--security-protected-description-text)); }
+.bg-security-protected { background-color: rgb(var(--security-protected-bg)); }
+.bg-security-protected-card { background-color: rgb(var(--security-protected-card-bg)); }
+.text-security-protected-icon { color: rgb(var(--security-protected-icon-color)); }
+.text-security-protected-card-title { color: rgb(var(--security-protected-card-title-text)); }
+.text-security-protected-card-description { color: rgb(var(--security-protected-card-description-text)); }
+.bg-security-protected-button { background-color: rgb(var(--security-protected-button-bg)); }
+.text-security-protected-button { color: rgb(var(--security-protected-button-text)); }
+
+/* BuiltIn Component */
+.bg-security-builtin { background-color: rgb(var(--security-builtin-bg)); }
+.text-security-builtin-heading { color: rgb(var(--security-builtin-heading-text)); }
+
+/* WebHostingSecurity Component */
+.bg-security-webhosting { background-color: rgb(var(--security-webhosting-bg)); }
+.text-security-webhosting-tagline { color: rgb(var(--security-webhosting-tagline-text)); }
+.text-security-webhosting-heading { color: rgb(var(--security-webhosting-heading-text)); }
+.text-security-webhosting-description { color: rgb(var(--security-webhosting-description-text)); }
+.text-security-webhosting-feature-title { color: rgb(var(--security-webhosting-feature-title-text)); }
+.text-security-webhosting-feature-description { color: rgb(var(--security-webhosting-feature-description-text)); }
+.text-security-webhosting-link { color: rgb(var(--security-webhosting-link-text)); }
+
+/* SpacemailSecurity Component */
+.bg-security-spacemail { background-color: rgb(var(--security-spacemail-bg)); }
+.text-security-spacemail-tagline { color: rgb(var(--security-spacemail-tagline-text)); }
+.text-security-spacemail-heading { color: rgb(var(--security-spacemail-heading-text)); }
+.text-security-spacemail-description { color: rgb(var(--security-spacemail-description-text)); }
+.text-security-spacemail-feature-title { color: rgb(var(--security-spacemail-feature-title-text)); }
+.text-security-spacemail-feature-description { color: rgb(var(--security-spacemail-feature-description-text)); }
+.text-security-spacemail-link { color: rgb(var(--security-spacemail-link-text)); }
+
+/* FAQSecurity Component */
+.bg-security-faq { background-color: rgb(var(--security-faq-bg)); }
+.text-security-faq-heading { color: rgb(var(--security-faq-heading-text)); }
+.border-security-faq { border-color: rgba(var(--security-faq-border)); }
+.text-security-faq-question { color: rgb(var(--security-faq-question-text)); }
+.text-security-faq-answer { color: rgba(var(--security-faq-answer-text)); }
+
+
+/* ===============================
+   Signup Modal Styles
+   =============================== */
+.bg-signup-modal-backdrop { background-color: rgba(var(--signup-modal-backdrop)); }
+.bg-signup-modal { background-color: rgb(var(--signup-modal-bg)); }
+.border-signup-modal { border-color: rgb(var(--signup-modal-border)); }
+.text-signup-modal-close-icon { color: rgb(var(--signup-modal-close-icon)); }
+.hover-text-signup-modal-close-icon { color: rgb(var(--signup-modal-close-icon-hover)); }
+.text-signup-modal-title { color: rgb(var(--signup-modal-title-text)); }
+.text-signup-modal-label { color: rgb(var(--signup-modal-label-text)); }
+.bg-signup-modal-input { background-color: rgb(var(--signup-modal-input-bg)); }
+.border-signup-modal-input { border-color: rgb(var(--signup-modal-input-border)); }
+.text-signup-modal-input { color: rgb(var(--signup-modal-input-text)); }
+.placeholder-signup-modal-input { color: rgb(var(--signup-modal-input-placeholder)); }
+.focus-border-signup-modal-input { border-color: rgb(var(--signup-modal-input-focus-border)); }
+.text-signup-modal-helper { color: rgb(var(--signup-modal-helper-text)); }
+.bg-gradient-signup-modal-button {
+  background-image: linear-gradient(to right, rgb(var(--signup-modal-button-gradient-from)), rgb(var(--signup-modal-button-gradient-to)));
+}
+.hover-bg-gradient-signup-modal-button {
+  background-image: linear-gradient(to right, rgb(var(--signup-modal-button-gradient-from-hover)), rgb(var(--signup-modal-button-gradient-to-hover)));
+}
+.text-signup-modal-button { color: rgb(var(--signup-modal-button-text)); }
+.text-signup-modal-link { color: rgb(var(--signup-modal-link)); }
+.hover-text-signup-modal-link { color: rgb(var(--signup-modal-link-hover)); }
+
+/* ===============================
+   Transfer Page Component Styles
+   =============================== */
+
+/* ChatButton Component */
+.bg-chat-button { background-color: rgb(var(--chat-button-bg)); }
+.hover\:bg-chat-button-hover:hover { background-color: rgb(var(--chat-button-hover-bg)); }
+.text-chat-button { color: rgb(var(--chat-button-text)); }
+
+/* Hero/Button Component */
+.bg-transfer-hero-button-active { background-color: rgb(var(--transfer-hero-button-active-bg)); }
+.text-transfer-hero-button-active { color: rgb(var(--transfer-hero-button-active-text)); }
+.hover\:bg-transfer-hero-button-inactive:hover { background-color: rgba(var(--transfer-hero-button-inactive-hover-bg)); }
+
+/* Hero/HeroSection Component */
+.bg-transfer-hero { background-color: rgb(var(--transfer-hero-bg)); }
+.text-transfer-hero { color: rgb(var(--transfer-hero-text)); }
+.bg-transfer-hero-tab { background-color: rgba(var(--transfer-hero-tab-bg)); }
+.text-transfer-hero-icon { color: rgb(var(--transfer-hero-icon)); }
+.bg-transfer-hero-search { background-color: rgb(var(--hero-search-bg)); }
+.border-transfer-hero-search { border-color: rgb(var(--hero-search-border)); }
+.placeholder-transfer-hero-text-muted::placeholder { color: rgb(var(--hero-text-muted)); }
+.bg-transfer-hero-button { background-color: rgb(var(--transfer-hero-button-bg)); }
+.text-transfer-hero-button { color: rgb(var(--transfer-hero-button-text)); }
+.hover\:bg-transfer-hero-button-hover:hover { background-color: rgb(var(--transfer-hero-button-hover)); }
+.bg-transfer-hero-price { background-color: rgba(var(--hero-price-bg)); }
+.border-transfer-hero-price { border-color: rgb(var(--hero-price-border)); }
+
+/* InsideTransferManager Component */
+.bg-transfer-manager { background-color: rgb(var(--transfer-manager-bg)); }
+.text-white { color: #fff; }
+.text-gray-400 { color: #9ca3af; }
+.bg-gray-800\/50 { background-color: rgba(31, 41, 55, 0.5); }
+.border-gray-700 { border-color: #374151; }
+.bg-gradient-to-r.from-teal-600.to-teal-700 { background-image: linear-gradient(to right, #0d9488, #0f766e); }
+.bg-white\/20 { background-color: rgba(255, 255, 255, 0.2); }
+.text-teal-400 { color: #2dd4bf; }
+.bg-gray-900\/50 { background-color: rgba(17, 24, 39, 0.5); }
+.border-teal-500 { border-color: #14b8a6; }
+.bg-white { background-color: #fff; }
+.bg-gray-900 { background-color: #111827; }
+.text-red-400 { color: #f87171; }
+.hover\:text-red-300:hover { color: #fca5a5; }
+.bg-blue-600 { background-color: #2563eb; }
+.hover\:bg-blue-700:hover { background-color: #1d4ed8; }
+
+/* TransferFAQ Component */
+.bg-transfer-faq { background-color: rgb(var(--transfer-faq-bg)); }
+.text-transfer-faq-heading { color: rgb(var(--transfer-faq-heading)); }
+.bg-transfer-faq-icon { background-color: rgb(var(--transfer-faq-icon-bg)); }
+.border-transfer-faq-icon { border-color: rgb(var(--transfer-faq-icon-border)); }
+.text-transfer-faq-icon { color: rgb(var(--transfer-faq-icon)); }
+.text-transfer-faq-question { color: rgb(var(--transfer-faq-question)); }
+.text-transfer-faq-answer { color: rgb(var(--transfer-faq-answer)); }
+.bg-transfer-faq-separator { background-color: rgb(var(--transfer-faq-separator)); }
+
+/* TransferHeroFeatures Component */
+.bg-transfer-hero-features { background-color: rgb(var(--transfer-hero-features-bg)); }
+.text-transfer-hero-features-heading { color: rgb(var(--transfer-hero-features-heading)); }
+.text-transfer-hero-features-description { color: rgb(var(--transfer-hero-features-description)); }
+.text-transfer-hero-features-icon { color: rgb(var(--transfer-hero-features-icon)); }
+.text-transfer-hero-features-title { color: rgb(var(--transfer-hero-features-title)); }
+
+/* TransferInstructions Component */
+.bg-transfer-instructions { background-color: rgb(var(--transfer-instructions-bg)); }
+.text-transfer-instructions-heading { color: rgb(var(--transfer-instructions-heading)); }
+.text-transfer-instructions-description { color: rgb(var(--transfer-instructions-description)); }
+.shadow-transfer-instructions { box-shadow: 0 4px 20px rgba(var(--transfer-instructions-shadow)); }
+.bg-transfer-instructions-inner-box { background-color: rgba(var(--transfer-instructions-inner-box-bg)); }
+.border-transfer-instructions-inner-box { border-color: rgba(var(--transfer-instructions-inner-box-border)); }
+.text-transfer-instructions-asterisks { color: rgb(var(--transfer-instructions-asterisks)); }
+
+/* TransferPricing Component */
+.bg-transfer-pricing { background-color: rgb(var(--transfer-pricing-bg)); }
+.text-transfer-pricing-heading { color: rgb(var(--transfer-pricing-heading)); }
+.text-transfer-pricing-description { color: rgb(var(--transfer-pricing-description)); }
+.text-transfer-pricing-note { color: rgb(var(--transfer-pricing-note)); }
+.text-transfer-pricing-search-text { color: rgb(var(--transfer-pricing-search-text)); }
+.placeholder-transfer-pricing-search::placeholder { color: rgb(var(--transfer-pricing-search-placeholder)); }
+.bg-transfer-pricing-search { background-color: rgb(var(--transfer-pricing-search-bg)); }
+.border-transfer-pricing-search { border-color: rgb(var(--transfer-pricing-search-border)); }
+.bg-transfer-pricing-recommended { background-color: rgb(var(--transfer-pricing-recommended-bg)); }
+.text-transfer-pricing-recommended { color: rgb(var(--transfer-pricing-recommended-text)); }
+.hover\:bg-transfer-pricing-recommended-hover:hover { background-color: rgb(var(--transfer-pricing-recommended-hover)); }
+.text-transfer-pricing-tld { color: rgb(var(--transfer-pricing-tld-text)); }
+.text-transfer-pricing-icon { color: rgb(var(--transfer-pricing-icon)); }
+.text-transfer-pricing-label { color: rgb(var(--transfer-pricing-label)); }
+.bg-transfer-pricing-sale-badge { background-color: rgb(var(--transfer-pricing-sale-badge-bg)); }
+.text-transfer-pricing-sale-badge { color: rgb(var(--transfer-pricing-sale-badge-text)); }
+.text-transfer-pricing-price { color: rgb(var(--transfer-pricing-price)); }
+.text-transfer-pricing-original-price { color: rgb(var(--transfer-pricing-original-price)); }
+.bg-transfer-pricing-divider { background-color: rgb(var(--transfer-pricing-divider)); }
+
+/* TransferUnlock Component */
+.bg-transfer-unlock { background-color: rgb(var(--transfer-unlock-bg)); }
+.text-transfer-unlock-heading { color: rgb(var(--transfer-unlock-heading)); }
+.text-transfer-unlock-description { color: rgb(var(--transfer-unlock-description)); }
+.bg-transfer-unlock-inner-highlight { background: radial-gradient(circle, rgba(var(--transfer-unlock-inner-highlight)) 0%, transparent 70%); }

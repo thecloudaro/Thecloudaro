@@ -5,7 +5,7 @@ import { ArrowDown } from "lucide-react";
 
 const TransferStart = () => {
   return (
-    <section className="py-16 sm:py-20 md:py-24 lg:py-28" style={{ backgroundColor: 'rgb(var(--transfer-start-bg))' }}>
+    <section className="py-16 sm:py-20 md:py-24 lg:py-28 bg-transfer-start">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Two-Column Content Area */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
@@ -93,17 +93,17 @@ const TransferStart = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-left"
           >
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 whitespace-nowrap !text-[rgb(var(--transfer-start-heading))]">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 whitespace-nowrap text-transfer-start-heading">
               Start your transfer
             </h3>
             <div className="space-y-3">
-              <p className="text-xl sm:text-2xl leading-relaxed !text-[rgb(var(--transfer-start-description))]">
+              <p className="text-xl sm:text-2xl leading-relaxed text-transfer-start-description">
                 Use the search bar to find your domain.
               </p>
-              <p className="text-xl sm:text-2xl leading-relaxed !text-[rgb(var(--transfer-start-description))]">
+              <p className="text-xl sm:text-2xl leading-relaxed text-transfer-start-description">
                 Enter your auth code and check out.
               </p>
-              <p className="text-xl sm:text-2xl leading-relaxed !text-[rgb(var(--transfer-start-description))]">
+              <p className="text-xl sm:text-2xl leading-relaxed text-transfer-start-description">
                 Normally, transfers autocomplete in 30 minutes, but no longer than 5 days max.
               </p>
             </div>

@@ -15,8 +15,7 @@ const SecurityHero = () => {
 
   return (
     <div 
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
-      style={{ backgroundColor: 'rgb(var(--security-hero-bg))' }}
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-security-hero"
     >
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-8 sm:pb-12">
@@ -32,7 +31,7 @@ const SecurityHero = () => {
               <Typewriter
                 onInit={(typewriter) => {
                   typewriter
-                    .typeString('<span style="color: rgb(var(--security-hero-heading-green))">Security</span> <span style="background: linear-gradient(to right, rgb(var(--security-hero-heading-green)), rgb(var(--security-hero-heading-teal))); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">as standard</span>')
+                    .typeString('<span class="text-security-hero-heading-green">Security</span> <span class="text-gradient-security-hero">as standard</span>')
                     .start();
                 }}
                 options={{
@@ -58,7 +57,7 @@ const SecurityHero = () => {
           <ContentDescription
             text="Grow your online presence with TheCloudAro, where secure<br>is the default setting."
             size="lg"
-            className="!text-[rgb(var(--security-hero-description-text))]"
+            className="text-security-hero-description"
           />
         </motion.div>
       </div>
@@ -77,8 +76,7 @@ const SecurityHero = () => {
         }}
       >
         <p 
-          className="text-xs sm:text-xs"
-          style={{ color: 'rgb(var(--security-hero-scroll-text))' }}
+          className="text-xs sm:text-xs text-security-hero-scroll"
         >
           Scroll to explore
         </p>
@@ -91,8 +89,7 @@ const SecurityHero = () => {
           }}
         >
           <ChevronDown 
-            className="w-5 h-5 sm:w-6 sm:h-6"
-            style={{ color: 'rgb(var(--security-hero-scroll-text))' }}
+            className="w-5 h-5 sm:w-6 sm:h-6 text-security-hero-scroll"
           />
         </motion.div>
       </motion.div>

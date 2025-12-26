@@ -24,7 +24,7 @@ const InsideTransferManager = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 lg:py-28" style={{ backgroundColor: 'rgb(var(--transfer-manager-bg))' }}>
+    <section className="py-16 sm:py-20 md:py-24 lg:py-28 bg-transfer-manager">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Heading and Description */}
         <div className="mb-24 sm:mb-28 md:mb-32 lg:mb-36">

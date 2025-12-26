@@ -66,7 +66,7 @@ const SignupModal = ({ isOpen, onClose }: SignupModalProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[10000]"
+            className="fixed inset-0 bg-signup-modal-backdrop backdrop-blur-sm z-[10000]"
             onClick={onClose}
           />
 
@@ -79,63 +79,63 @@ const SignupModal = ({ isOpen, onClose }: SignupModalProps) => {
             className="fixed inset-0 z-[10001] flex items-center justify-center px-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative w-full max-w-md bg-[#1a1a1a] rounded-lg shadow-2xl border border-gray-800 p-6">
+            <div className="relative w-full max-w-md bg-signup-modal rounded-lg shadow-2xl border border-signup-modal p-6">
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="absolute right-3 top-3 text-gray-400 hover:text-white transition-colors"
+                className="absolute right-3 top-3 text-signup-modal-close-icon hover-text-signup-modal-close-icon transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
 
               {/* Title */}
-              <h2 className="text-xl font-bold text-white mb-6">
+              <h2 className="text-xl font-bold text-signup-modal-title mb-6">
                 Create an account
               </h2>
 
               {/* Form */}
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-medium text-gray-300 mb-1.5">First name</label>
+                  <label className="block text-xs font-medium text-signup-modal-label mb-1.5">First name</label>
                   <input
                     type="text"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     placeholder="First name"
                     required
-                    className="w-full px-3 py-2.5 text-sm bg-[#2a2a2a] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full px-3 py-2.5 text-sm bg-signup-modal-input border border-signup-modal-input rounded-lg text-signup-modal-input placeholder-signup-modal-input focus:outline-none focus-border-signup-modal-input transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-300 mb-1.5">Last name</label>
+                  <label className="block text-xs font-medium text-signup-modal-label mb-1.5">Last name</label>
                   <input
                     type="text"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     placeholder="Last name"
                     required
-                    className="w-full px-3 py-2.5 text-sm bg-[#2a2a2a] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full px-3 py-2.5 text-sm bg-signup-modal-input border border-signup-modal-input rounded-lg text-signup-modal-input placeholder-signup-modal-input focus:outline-none focus-border-signup-modal-input transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-300 mb-1.5">Email</label>
+                  <label className="block text-xs font-medium text-signup-modal-label mb-1.5">Email</label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"
                     required
-                    className="w-full px-3 py-2.5 text-sm bg-[#2a2a2a] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full px-3 py-2.5 text-sm bg-signup-modal-input border border-signup-modal-input rounded-lg text-signup-modal-input placeholder-signup-modal-input focus:outline-none focus-border-signup-modal-input transition-colors"
                   />
-                  <p className="mt-1.5 text-xs text-gray-400">
+                  <p className="mt-1.5 text-xs text-signup-modal-helper">
                     Please use a valid email and proceed with email verification promptly to avoid account issues.
                   </p>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-300 mb-1.5">Username</label>
+                  <label className="block text-xs font-medium text-signup-modal-label mb-1.5">Username</label>
                   <input
                     type="text"
                     value={username}
@@ -143,9 +143,9 @@ const SignupModal = ({ isOpen, onClose }: SignupModalProps) => {
                     placeholder="Enter your username"
                     required
                     pattern="[a-zA-Z0-9]+"
-                    className="w-full px-3 py-2.5 text-sm bg-[#2a2a2a] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full px-3 py-2.5 text-sm bg-signup-modal-input border border-signup-modal-input rounded-lg text-signup-modal-input placeholder-signup-modal-input focus:outline-none focus-border-signup-modal-input transition-colors"
                   />
-                  <p className="mt-1.5 text-xs text-gray-400">
+                  <p className="mt-1.5 text-xs text-signup-modal-helper">
                     Your username must contain only letters (a-z) and numbers (0-9).
                   </p>
                 </div>
@@ -153,7 +153,7 @@ const SignupModal = ({ isOpen, onClose }: SignupModalProps) => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`w-full py-2.5 text-sm bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg transition-all duration-300 ${
+                  className={`w-full py-2.5 text-sm bg-gradient-signup-modal-button hover-bg-gradient-signup-modal-button text-signup-modal-button font-medium rounded-lg transition-all duration-300 ${
                     loading ? 'opacity-70 cursor-not-allowed' : ''
                   }`}
                 >
@@ -162,11 +162,11 @@ const SignupModal = ({ isOpen, onClose }: SignupModalProps) => {
               </form>
 
               {/* Footer Links */}
-              <div className="mt-5 text-center text-xs text-gray-400">
+              <div className="mt-5 text-center text-xs text-signup-modal-helper">
                 Already have an account?{' '}
                 <button
                   onClick={handleLoginClick}
-                  className="text-blue-500 hover:text-blue-400 transition-colors font-medium"
+                  className="text-signup-modal-link hover-text-signup-modal-link transition-colors font-medium"
                 >
                   Log in
                 </button>

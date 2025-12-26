@@ -45,8 +45,7 @@ const FAQSecurity = () => {
 
   return (
     <section 
-      className="py-16 sm:py-24 md:py-32 lg:py-40 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24"
-      style={{ backgroundColor: 'rgb(var(--security-faq-bg))' }}
+      className="py-16 sm:py-24 md:py-32 lg:py-40 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 bg-security-faq"
     >
       <div className="max-w-4xl mx-auto">
         {/* Header */}
@@ -59,7 +58,7 @@ const FAQSecurity = () => {
         >
           <ContentHeading
             title="Frequently asked questions"
-            className="text-4xl sm:text-5xl md:text-6xl !text-[rgb(var(--security-faq-heading-text))]"
+            className="text-4xl sm:text-5xl md:text-6xl text-security-faq-heading"
           />
         </motion.div>
 
@@ -72,8 +71,7 @@ const FAQSecurity = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="border-b"
-              style={{ borderColor: 'rgba(var(--security-faq-border))' }}
+              className="border-b border-security-faq"
             >
               <button
                 onClick={() => toggleFAQ(index)}
@@ -81,8 +79,7 @@ const FAQSecurity = () => {
                 aria-expanded={openIndex === index}
               >
                 <h3 
-                  className="text-lg md:text-xl font-semibold pr-8"
-                  style={{ color: 'rgb(var(--security-faq-question-text))' }}
+                  className="text-lg md:text-xl font-semibold pr-8 text-security-faq-question"
                 >
                   {faq.question}
                 </h3>
@@ -92,8 +89,7 @@ const FAQSecurity = () => {
                   className="flex-shrink-0"
                 >
                   <ChevronDown 
-                    className="w-6 h-6" 
-                    style={{ color: 'rgb(var(--security-faq-question-text))' }} 
+                    className="w-6 h-6 text-security-faq-question" 
                   />
                 </motion.div>
               </button>
@@ -108,8 +104,7 @@ const FAQSecurity = () => {
                     className="overflow-hidden"
                   >
                     <div 
-                      className="pb-6 text-base md:text-lg"
-                      style={{ color: 'rgba(var(--security-faq-answer-text))' }}
+                      className="pb-6 text-base md:text-lg text-security-faq-answer"
                     >
                       {faq.answer}
                     </div>

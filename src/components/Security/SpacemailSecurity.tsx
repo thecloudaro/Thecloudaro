@@ -26,8 +26,7 @@ const SpacemailSecurity = () => {
 
   return (
     <section 
-      className="py-16 sm:py-24 md:py-32 lg:py-40 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24"
-      style={{ backgroundColor: 'rgb(var(--security-spacemail-bg))' }}
+      className="py-16 sm:py-24 md:py-32 lg:py-40 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 bg-security-spacemail"
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-20 items-center">
@@ -42,12 +41,10 @@ const SpacemailSecurity = () => {
             {/* Tagline with Icon */}
             <div className="flex items-center gap-2">
               <Mail 
-                className="w-5 h-5" 
-                style={{ color: 'rgb(var(--security-spacemail-tagline-text))' }} 
+                className="w-5 h-5 text-security-spacemail-tagline" 
               />
               <span 
-                className="text-sm sm:text-base font-medium uppercase tracking-wide"
-                style={{ color: 'rgb(var(--security-spacemail-tagline-text))' }}
+                className="text-sm sm:text-base font-medium uppercase tracking-wide text-security-spacemail-tagline"
               >
                 Business Email
               </span>
@@ -56,13 +53,13 @@ const SpacemailSecurity = () => {
             {/* Main Heading */}
             <ContentHeading
               title="Business Email"
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl !text-[rgb(var(--security-spacemail-heading-text))] text-left"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-security-spacemail-heading text-left"
             />
 
             {/* Main Description */}
             <ContentDescription
               text="Effortless professional email that keeps your communications safe."
-              className="text-base sm:text-lg md:text-xl !text-[rgb(var(--security-spacemail-description-text))] text-left max-w-2xl"
+              className="text-base sm:text-lg md:text-xl text-security-spacemail-description text-left max-w-2xl"
             />
 
             {/* Feature List */}
@@ -77,14 +74,12 @@ const SpacemailSecurity = () => {
                   className="space-y-2"
                 >
                   <h3 
-                    className="text-lg sm:text-xl md:text-2xl font-bold"
-                    style={{ color: 'rgb(var(--security-spacemail-feature-title-text))' }}
+                    className="text-lg sm:text-xl md:text-2xl font-bold text-security-spacemail-feature-title"
                   >
                     {feature.title}
                   </h3>
                   <p 
-                    className="text-sm sm:text-base md:text-lg"
-                    style={{ color: 'rgb(var(--security-spacemail-feature-description-text))' }}
+                    className="text-sm sm:text-base md:text-lg text-security-spacemail-feature-description"
                   >
                     {feature.description}
                   </p>
@@ -102,8 +97,7 @@ const SpacemailSecurity = () => {
             >
               <Link
                 href="/business-email"
-                className="inline-flex items-center gap-2 group font-medium text-base sm:text-lg"
-                style={{ color: 'rgb(var(--security-spacemail-link-text))' }}
+                className="inline-flex items-center gap-2 group font-medium text-base sm:text-lg text-security-spacemail-link"
               >
                 <span>More about Business Email</span>
                 <ArrowRight 

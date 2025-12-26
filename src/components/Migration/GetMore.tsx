@@ -38,8 +38,7 @@ const GetMore = () => {
       heroTitle="Get more with TheCloudAro"
       heroSubtitle="Move your website to us and enjoy hosting with extra benefits."
       features={features}
-      sectionClassName=""
-      sectionStyle={{ backgroundColor: 'rgb(var(--migration-getmore-bg))' }}
+      sectionClassName="bg-migration-getmore"
       featureContainerClassName="max-w-4xl mx-auto"
       featureGridClassName="grid grid-cols-1 gap-16 md:grid-cols-2 md:gap-y-20 md:gap-x-16"
     />
@@ -47,5 +46,6 @@ const GetMore = () => {
 };
 
 export default GetMore;
+
 
 
