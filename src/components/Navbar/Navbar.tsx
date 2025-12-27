@@ -78,7 +78,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
     setActiveDropdown(activeDropdown === menu ? null : menu);
 
   const navClassName = `fixed left-0 right-0 ${
-    hasHeaderBanner && !isBeyondHero ? "top-8" : "top-0"
+    hasHeaderBanner && !isBeyondHero ? "top-12" : "top-0"
   } ${activeDropdown ? 'z-[120]' : 'z-50'}`;
 
   const navStyle: React.CSSProperties = {
@@ -163,12 +163,12 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
             })}
           </div>
 
-          <div className="flex md:hidden items-center justify-between flex-1 px-2">
-            <div className="flex-shrink-0">
+          <div className="grid grid-cols-3 md:hidden items-center w-full">
+            <div className="flex justify-start">
               <Logo />
             </div>
 
-            <div className="flex-1 flex justify-center items-center space-x-1">
+            <div className="flex justify-center space-x-1">
               {[Globe, ShoppingCart, User].map((Icon, i) => {
                 const isCart = Icon === ShoppingCart;
                 const isUser = Icon === User;
@@ -178,9 +178,9 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
                     onClick={isCart ? openCart : isUser ? openLogin : undefined}
                     className={`font-medium transition-all duration-300 px-2 py-2 rounded-full ${
                       (isHostingPage)
-                        ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
-                        : (isDomainPage || isHomepage) 
-                        ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
+                        ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
+                        : (isDomainPage || isHomepage)
+                        ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
                         : 'text-[hsl(var(--navbar-text))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
                     }`}
                   >
@@ -190,33 +190,35 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
               })}
             </div>
 
-            <button
-              onClick={() => {
-                if (activeDropdown) {
-                  setActiveDropdown(null);
-                  setIsMenuOpen(false);
-                } else {
-                  setIsMenuOpen(true);
-                  setActiveDropdown("Explore all");
-                }
-              }}
-              className={`p-2 ${
-                (isHostingPage)
-                  ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))]'
-                  : (isDomainPage || isHomepage)
-                  ? 'text-[hsl(var(--navbar-text-slate))] hover:text-[hsl(var(--navbar-text-hover))]'
-                  : 'text-[hsl(var(--navbar-text))] hover:text-[hsl(var(--navbar-text-hover))]'
-              }`}
-            >
-              {(isMenuOpen || activeDropdown) ? (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              ) : (
-                <Menu size={24} />
-              )}
-            </button>
+            <div className="flex justify-end">
+              <button
+                onClick={() => {
+                  if (activeDropdown) {
+                    setActiveDropdown(null);
+                    setIsMenuOpen(false);
+                  } else {
+                    setIsMenuOpen(true);
+                    setActiveDropdown("Explore all");
+                  }
+                }}
+                className={`p-2 ${
+                  (isHostingPage)
+                    ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))]'
+                    : (isDomainPage || isHomepage)
+                    ? 'text-[hsl(var(--navbar-text-slate))] hover:text-[hsl(var(--navbar-text-hover))]'
+                    : 'text-[hsl(var(--navbar-text))] hover:text-[hsl(var(--navbar-text-hover))]'
+                }`}
+              >
+                {(isMenuOpen || activeDropdown) ? (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                ) : (
+                  <Menu size={24} />
+                )}
+              </button>
+            </div>
           </div>
 
         </div>

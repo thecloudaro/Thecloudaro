@@ -102,8 +102,8 @@ const HeroSection = () => {
 
           {/* Search Bar */}
           <div className="relative w-full mb-4 sm:mb-6 md:mb-8">
-            <div className="flex items-stretch bg-hero-search-bg backdrop-blur-md rounded-full p-1.5 sm:p-2 border border-hero-search-border shadow-lg">
-              <div className="flex items-center flex-1 px-3 sm:px-4">
+            <div className="flex items-stretch bg-hero-search-bg backdrop-blur-md rounded-full p-1 sm:p-2 border border-hero-search-border shadow-lg">
+              <div className="flex items-center flex-1 px-2 sm:px-4">
                 <svg
                   className="w-4 h-4 sm:w-5 sm:h-5 text-[hsl(var(--hero-section-search-icon))] mr-2 sm:mr-3"
                   fill="none"
@@ -122,10 +122,10 @@ const HeroSection = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search for a domain name..."
-                  className="flex-1 bg-transparent text-hero-text placeholder-hero-text-muted text-sm sm:text-base focus:outline-none"
+                  className="flex-1 bg-transparent text-hero-text placeholder-hero-text-muted text-sm sm:text-base focus:outline-none placeholder:text-xs sm:placeholder:text-sm"
                 />
               </div>
-              <button className="bg-[hsl(var(--hero-section-search-button-bg))] hover:bg-[hsl(var(--hero-section-search-button-hover-bg))] text-[hsl(var(--hero-section-search-button-text))] px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-sm sm:text-base transition">
+              <button className="bg-[hsl(var(--hero-section-search-button-bg))] hover:bg-[hsl(var(--hero-section-search-button-hover-bg))] text-[hsl(var(--hero-section-search-button-text))] px-3 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-xs sm:text-base transition">
                 Search
               </button>
             </div>

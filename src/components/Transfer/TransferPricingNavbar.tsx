@@ -64,7 +64,7 @@ const TransferPricingNavbar = () => {
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="h-24 flex items-center justify-center">
+        <div className="h-20 sm:h-24 flex items-center justify-center">
           {/* Only Search Bar - Wider */}
           <div className="w-full max-w-6xl">
             <div className="flex items-stretch bg-hero-search-bg backdrop-blur-md rounded-full p-2 border border-hero-search-border shadow-lg">

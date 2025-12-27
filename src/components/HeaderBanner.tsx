@@ -12,22 +12,17 @@ const HeaderBanner = ({
   text = (
     <>
       Create your site using <span className="font-semibold">AI</span>, included with{' '}
-      <span className="font-semibold">Spaceship Web Hosting</span>
+      <span className="font-semibold">The Cloud Aro Web Hosting</span>
     </>
   ),
   backgroundColor
 }: HeaderBannerProps) => {
   return (
     <motion.div
-      className="text-center py-2 px-4 sm:px-6 text-xs sm:text-sm font-medium tracking-wide"
+      className="text-center py-2 px-4 sm:px-6 text-xs sm:text-sm font-medium tracking-wide sticky top-0 z-[60]"
       style={{ 
         backgroundColor: backgroundColor || 'rgb(var(--header-banner-bg))',
         color: 'rgb(var(--header-banner-text))',
-        boxShadow: 'none', 
-        border: 'none', 
-        borderTop: 'none', 
-        borderBottom: 'none', 
-        marginTop: 0 
       }}
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}

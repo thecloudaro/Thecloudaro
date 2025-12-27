@@ -94,7 +94,7 @@ export default function Customer() {
               {reviews.map((review, i) => (
                 <div
                   key={`first-${i}`}
-                  className="min-w-[60%] xs:min-w-[55%] sm:min-w-[220px] md:min-w-[280px] lg:min-w-[340px] flex-shrink-0"
+                  className="min-w-[55%] sm:min-w-[200px] md:min-w-[200px] lg:min-w-[200px] flex-shrink-0"
                 >
                   <ReviewCard {...review} />
                 </div>
@@ -102,7 +102,7 @@ export default function Customer() {
               {reviews.map((review, i) => (
                 <div
                   key={`second-${i}`}
-                  className="min-w-[60%] xs:min-w-[55%] sm:min-w-[220px] md:min-w-[280px] lg:min-w-[340px] flex-shrink-0"
+                  className="min-w-[55%] sm:min-w-[200px] md:min-w-[200px] lg:min-w-[200px] flex-shrink-0"
                 >
                   <ReviewCard {...review} />
                 </div>

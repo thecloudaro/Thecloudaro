@@ -38,8 +38,8 @@ const TransferPricing = () => {
 
         {/* Controls row: TLD search + Recommended button */}
         <div className="mb-12">
-          <div className="flex flex-col sm:flex-row items-center sm:items-start justify-start gap-4 sm:gap-6 ml-78 mt-10">
-            <div className="relative w-54" style={{ height: '32px' }}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-10">
+            <div className="relative w-full sm:w-54" style={{ height: '32px' }}>
               <TLDSearchBar
                 value={tldSearchTerm}
                 onChange={setTldSearchTerm}
@@ -51,7 +51,7 @@ const TransferPricing = () => {
             </div>
             <div>
               <button 
-                className="inline-flex ml-60 gap-1.5 px-3 py-1.5 rounded-full text-[10px] bg-transfer-pricing-recommended text-transfer-pricing-recommended hover:bg-transfer-pricing-recommended-hover"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] bg-transfer-pricing-recommended text-transfer-pricing-recommended hover:bg-transfer-pricing-recommended-hover"
                 style={{ 
                   border: 'none',
                 }}
@@ -65,7 +65,7 @@ const TransferPricing = () => {
 
         {/* TLD Pricing table-like list */}
         <div className="flex justify-center mt-2">
-          <div className="w-fit rounded-lg overflow-hidden ml-60" style={{ backgroundColor: 'transparent', border: 'none' }}>
+          <div className="w-fit rounded-lg overflow-hidden" style={{ backgroundColor: 'transparent', border: 'none' }}>
           {
             (() => {
               const tlds: { tld: string; price: string; original?: string; sale?: boolean }[] = [
@@ -96,14 +96,14 @@ const TransferPricing = () => {
                 tld.tld.toLowerCase().includes(tldSearchTerm.toLowerCase())
               );
               return filteredTlds.map((row, idx) => (
-                <div key={idx} className="grid grid-cols-12 gap-20 items-center px-4 py-4 relative">
-                  <div className="col-span-12 md:col-span-5 flex items-center justify-center md:justify-start gap-3">
+                <div key={idx} className="flex flex-col md:flex-row md:gap-4 items-center px-4 py-4 relative">
+                  <div className="w-full md:w-5/12 flex items-center justify-center md:justify-start gap-3">
                     <span className="font-semibold text-2xl text-transfer-pricing-tld">{row.tld}</span>
                     <svg className="w-4 h-4 text-transfer-pricing-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     </svg>
                   </div>
-                  <div className="col-span-12 md:col-span-7 flex flex-col items-center md:items-start">
+                  <div className="w-full md:w-7/12 flex flex-col items-center md:items-start mt-4 md:mt-0">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-sm text-transfer-pricing-label">Transfer and renew</span>
                       {row.sale && <span className="text-[10px] px-2 py-0.5 rounded bg-transfer-pricing-sale-badge text-transfer-pricing-sale-badge-text">SALE</span>}
@@ -114,8 +114,7 @@ const TransferPricing = () => {
                     </div>
                   </div>
                   {idx < filteredTlds.length - 1 && (
-                    <div className="absolute bottom-0 left-4 md:left-4" style={{ 
-                      width: 'calc(41.67% + 5rem + 18% - 1rem)', 
+                    <div className="absolute bottom-0 left-4 right-4" style={{ 
                       height: '1px', 
                       background: 'rgb(var(--transfer-pricing-divider))' 
                     }}></div>

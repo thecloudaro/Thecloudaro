@@ -229,5 +229,3 @@ const HostingPlanControls = ({
 };
 
 export default HostingPlanControls;
-
-

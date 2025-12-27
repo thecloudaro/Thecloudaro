@@ -49,7 +49,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
         )}
 
         {/* Review Text */}
-        <p className="text-[14px] text-[hsl(var(--review-card-review-text))] leading-snug line-clamp-4">
+        <p className="text-[14px] text-[hsl(var(--review-card-review-text))] leading-snug">
           {review}
         </p>
       </div>

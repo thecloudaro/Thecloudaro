@@ -135,7 +135,7 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
               </form>
 
               {/* Footer Links */}
-              <div className="mt-5 flex items-center justify-between text-xs">
+              <div className="mt-5 flex flex-col sm:flex-row items-center justify-between text-xs gap-2">
                 <div className="text-gray-400">
                   Don&apos;t have an account?{' '}
                   <button

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, useViewportScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Button from './Button';
 import ChatButton from '../ChatButton';
 
@@ -10,7 +10,7 @@ const TransferHeroSection = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
 
   // Zoom-out animation for hero
   const rawScale = useTransform(scrollY, [0, 500], [1, 0.8]);
@@ -99,8 +99,8 @@ const TransferHeroSection = () => {
 
           {/* Search Bar */}
           <div className="relative w-full mb-4 sm:mb-6 md:mb-8">
-            <div className="flex items-stretch bg-transfer-hero-search backdrop-blur-md rounded-full p-1.5 sm:p-2 border border-transfer-hero-search shadow-lg">
-              <div className="flex items-center flex-1 px-3 sm:px-4">
+            <div className="flex items-stretch bg-transfer-hero-search backdrop-blur-md rounded-full p-1 sm:p-2 border border-transfer-hero-search shadow-lg">
+              <div className="flex items-center flex-1 px-2 sm:px-4">
                 <svg
                   className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-transfer-hero-icon"
                   fill="none"
@@ -118,12 +118,12 @@ const TransferHeroSection = () => {
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Enter domain name to transfer..."
-                  className="flex-1 bg-transparent text-transfer-hero placeholder-transfer-hero-text-muted text-sm sm:text-base focus:outline-none"
+                  placeholder="Enter domain to transfer"
+                  className="flex-1 bg-transparent text-transfer-hero placeholder-transfer-hero-text-muted text-sm sm:text-base focus:outline-none placeholder:text-xs sm:placeholder:text-sm"
                 />
               </div>
               <button 
-                className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-sm sm:text-base transition bg-transfer-hero-button text-transfer-hero-button hover:bg-transfer-hero-button-hover"
+                className="px-3 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-xs sm:text-base transition bg-transfer-hero-button text-transfer-hero-button hover:bg-transfer-hero-button-hover"
               >
                 Transfer
               </button>

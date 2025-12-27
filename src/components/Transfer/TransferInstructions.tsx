@@ -41,7 +41,7 @@ const TransferInstructions = () => {
             
              {/* 3D-style rounded teal gradient card - Square (same as reference) */}
              <div
-               className="relative rounded-2xl p-5 sm:p-6 md:p-8 w-full aspect-square max-w-[240px] shadow-transfer-instructions"
+               className="relative rounded-2xl p-5 sm:p-6 md:p-8 w-full max-w-[200px] sm:max-w-[240px] aspect-square shadow-transfer-instructions"
                style={{
                  background: 'linear-gradient(135deg, hsl(var(--gradient-teal)) 0%, hsl(var(--gradient-dark-teal)) 100%)',
                  transform: 'perspective(1000px) rotateY(-5deg) rotateX(5deg)',
@@ -76,10 +76,10 @@ const TransferInstructions = () => {
              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 whitespace-nowrap text-transfer-instructions-heading">
                Get your authorization code
              </h3>
-             <p className="text-xl sm:text-2xl leading-relaxed whitespace-pre-line text-transfer-instructions-description">
-               <span className="whitespace-nowrap">First, you need an authorization code (also</span><br /><span className="whitespace-nowrap">
-                 known as an EPP, auth code, or transfer</span><br /><span className="whitespace-nowrap">
-                   code).You can find it with your existing </span><br /><span className="whitespace-nowrap">registrar.</span>
+             <p className="text-xl sm:text-2xl leading-relaxed text-transfer-instructions-description">
+               <span>First, you need an authorization code (also</span><br /><span>
+                 known as an EPP, auth code, or transfer</span><br /><span>
+                   code).You can find it with your existing </span><br /><span>registrar.</span>
              </p>
           </motion.div>
         </div>
