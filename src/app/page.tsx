@@ -1,9 +1,10 @@
+const comingSoon = true;   // false karogi to real homepage live ho jayega
+
 import HeroSection from '@/components/HomeSection/Hero/HeroSection';
-import DynamicSection from '@/components/HomeSection//DynamicSections/DynamicSections';
+import DynamicSection from '@/components/HomeSection/DynamicSections/DynamicSections';
 import BuildAround from '@/components/HomeSection/BuildAround/BuildAround';
 import Customer from '@/components/HomeSection/Customers/Customers';
 import FAQ from '@/components/HomeSection/FAQ/FAQ';
-
 
 const sectionsData = [
   { heading: 'Section 1', text: 'This is the first cinematic section.', bgImage: '/BgPics/black.jpg' },
@@ -12,15 +13,34 @@ const sectionsData = [
 ];
 
 export default function Home() {
+
+  // 👉 Coming Soon Screen
+  if (comingSoon) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-slate-950 text-white text-center px-6">
+        <h1 className="text-5xl font-bold mb-4">TheCloudaro</h1>
+
+        <p className="text-xl opacity-80 mb-2">
+          We are building something powerful for websites, apps and digital growth.
+        </p>
+
+        <p className="opacity-60">Website coming soon…</p>
+
+        <div className="mt-8 text-sm opacity-70">
+          Contact: info@thecloudaro.com
+        </div>
+      </div>
+    );
+  }
+
+  // 👉 Real Homepage (tumhara existing code)
   return (
     <div className="min-h-screen bg-background">
 
-      {/* Hero Section */}
       <section>
         <HeroSection />
       </section>
 
-      {/* Dynamic Sections */}
       <section>
         {sectionsData.map((section, index) => (
           <DynamicSection
@@ -31,35 +51,29 @@ export default function Home() {
           />
         ))}
       </section>
+
       <div className="min-h-screen bg-[hsl(var(--faq-bg-default))]">
-      <BuildAround/>
+        <BuildAround />
       </div>
-      {/* Single Dynamic Section render */}
-<section>
-  <DynamicSection
-    heading="Security as Standard"
-    text="This page will be developed later,
-    once the pictures are available and animations are added."
 
-    bgImage="/BgPics/black.jpg"
-  />
-</section>
+      <section>
+        <DynamicSection
+          heading="Security as Standard"
+          text="This page will be developed later once the pictures are available and animations are added."
+          bgImage="/BgPics/black.jpg"
+        />
+      </section>
 
-<section>
-  <div className="min-h-screen bg-[hsl(var(--faq-bg-default))]">
-  <Customer/>
-  </div>
-</section>
-<div className="min-h-screen bg-[hsl(var(--faq-bg-default))]">
-<FAQ/>
-</div>
-<section>
-  
-</section>
+      <section>
+        <div className="min-h-screen bg-[hsl(var(--faq-bg-default))]">
+          <Customer />
+        </div>
+      </section>
 
+      <div className="min-h-screen bg-[hsl(var(--faq-bg-default))]">
+        <FAQ />
+      </div>
 
-
-      {/* Footer rendered in root layout */}
     </div>
   );
 }
