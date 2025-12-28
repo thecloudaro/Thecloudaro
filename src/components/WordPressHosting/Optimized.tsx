@@ -16,7 +16,7 @@ const Optimized = () => {
         color: 'rgb(var(--wp-nostress-heading))'
       }}
     >
-      <div className="mx-auto flex w-full max-w-6xl justify-start mr-20">
+      <div className="mx-auto flex w-full max-w-6xl justify-start px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="w-full max-w-2xl space-y-3">
           <ContentHeading
             title="Optimized for WordPress"
@@ -27,8 +27,8 @@ const Optimized = () => {
             size="lg"
             className="sm:text-xl leading-relaxed !text-[rgb(var(--wp-nostress-description))]"
           >
-            Have a smoother WordPress experience<br />
-            with 3 caching layers and a cloud platform<br />
+            Have a smoother WordPress experience
+            with 3 caching layers and a cloud platform
             that&apos;s regularly monitored by our technical team.
           </ContentDescription>
 

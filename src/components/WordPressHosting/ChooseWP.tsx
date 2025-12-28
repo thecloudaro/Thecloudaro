@@ -219,10 +219,10 @@ const ChooseWP = forwardRef<HTMLElement>((props, ref) => {
           </div>
         </div>
 
-        <div className="pt-4 ml-26">
+        <div className="pt-4">
           <div className="flex flex-col items-center gap-8 md:flex-row md:justify-center md:gap-14">
             {formattedPlans.map((plan) => (
-              <div key={plan.key} className="w-[200px] text-center space-y-3">
+              <div key={plan.key} className="w-full max-w-[200px] text-center space-y-3">
                 <h3 className="text-[1.6rem] font-semibold" style={{ color: 'rgb(var(--wp-choosewp-plan-name))' }}>
                   {plan.name}
                 </h3>
@@ -253,7 +253,7 @@ const ChooseWP = forwardRef<HTMLElement>((props, ref) => {
           </div>
         </div>
 
-        <div className="space-y-12 pt-2 ml-20">
+        <div className="space-y-12 pt-2">
           {featureRows.map((row) => (
             <div key={row.label} className="text-xs sm:text-sm" style={{ color: 'rgba(var(--wp-choosewp-feature-text))' }}>
               <div className="space-y-4">
@@ -299,7 +299,7 @@ const ChooseWP = forwardRef<HTMLElement>((props, ref) => {
                   {formattedPlans.map((plan) => (
                     <div
                       key={`${row.label}-${plan.key}-desktop`}
-                      className="w-[200px] text-center"
+                      className="w-full max-w-[200px] text-center"
                     >
                       <div className="space-y-1">
                         <div className="text-xl font-semibold" style={{ color: 'rgb(var(--wp-choosewp-plan-value))' }}>
@@ -319,7 +319,7 @@ const ChooseWP = forwardRef<HTMLElement>((props, ref) => {
           ))}
         </div>
 
-        <div className="space-y-10 pt-10 ml-20">
+        <div className="space-y-10 pt-10">
           <div className="flex items-center gap-2 font-semibold text-sm md:text-base" style={{ color: 'rgb(var(--wp-choosewp-section-label))' }}>
             All plans include
             <span className="hidden flex-1 border-t md:block" style={{ borderColor: 'rgba(var(--wp-choosewp-feature-divider))' }} />

@@ -56,12 +56,12 @@ const WordPressHero = ({ onPickPlanClick }: WordPressHeroProps) => {
              
 
               <Heading
-                title="Speedy, simplified<br/>hosting for<br/>WordPress"
+                title="Speedy, simplified hosting for WordPress"
                 className="text-left !text-[2.75rem] sm:!text-[3.5rem] md:!text-[4.25rem] lg:!text-[5rem] leading-[1.15] font-[650] !text-[rgb(var(--wp-hero-heading))]"
               />
 
               <ContentDescription size="xl" className="max-w-4xl !text-[rgba(var(--wp-hero-description))]">
-                Give your website a head start with cloud hosting for<br />
+                Give your website a head start with cloud hosting for
                 WordPress and hassle-free management.
               </ContentDescription>
 

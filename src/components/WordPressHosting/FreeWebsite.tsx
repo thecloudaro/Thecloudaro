@@ -32,7 +32,7 @@ const FreeWebsite = () => {
                 size="md"
                 className="text-base leading-relaxed !text-[rgba(var(--wp-freewebsite-feature-text))]"
               >
-                Save money and hassle by not relying on external<br/>services or
+                Save money and hassle by not relying on external services or
                 paid plugins.
               </ContentDescription>
             </div>
@@ -46,7 +46,7 @@ const FreeWebsite = () => {
                 size="md"
                 className="text-base leading-relaxed !text-[rgba(var(--wp-freewebsite-feature-text))]"
               >
-                Get on with other tasks while your WordPress website<br/>migrates
+                Get on with other tasks while your WordPress website migrates
                 automatically.
               </ContentDescription>
             </div>

@@ -9,7 +9,7 @@ const AllInOne = () => {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="text-center">
           <ContentHeading
-            title="All-in-one EasyWP<br/>Dashboard"
+            title="All-in-one EasyWP Dashboard"
             className="text-4xl font-bold sm:text-5xl md:text-6xl !text-[rgb(var(--wp-allinone-heading))]"
           />
 
@@ -28,28 +28,28 @@ const AllInOne = () => {
             <div>
               <h3 className="text-3xl font-semibold" style={{ color: 'rgb(var(--wp-allinone-feature-heading))' }}>Simple backups</h3>
               <p className="mt-3 text-lg" style={{ color: 'rgba(var(--wp-allinone-feature-text))' }}>
-                Have peace of mind with an easy backup and restore<br/> tool.
+                Have peace of mind with an easy backup and restore tool.
               </p>
             </div>
 
             <div>
               <h3 className="text-3xl font-semibold" style={{ color: 'rgb(var(--wp-allinone-feature-heading))' }}>File and database access</h3>
               <p className="mt-3 text-lg" style={{ color: 'rgba(var(--wp-allinone-feature-text))' }}>
-                Securely access your website files and folders with<br/> SFTP.
+                Securely access your website files and folders with SFTP.
               </p>
             </div>
 
             <div>
               <h3 className="text-3xl font-semibold" style={{ color: 'rgb(var(--wp-allinone-feature-heading))' }}>Analytics</h3>
               <p className="mt-3 text-lg" style={{ color: 'rgba(var(--wp-allinone-feature-text))' }}>
-                Check the health of your site with simplified reports<br/> and graphs.
+                Check the health of your site with simplified reports and graphs.
               </p>
             </div>
 
             <div>
               <h3 className="text-3xl font-semibold" style={{ color: 'rgb(var(--wp-allinone-feature-heading))' }}>Security</h3>
               <p className="mt-3 text-lg" style={{ color: 'rgba(var(--wp-allinone-feature-text))' }}>
-                Shield your online project from threats with EasyWP&apos;s <br/>exclusive
+                Shield your online project from threats with EasyWP&apos;s exclusive
                 security tools.
               </p>
             </div>

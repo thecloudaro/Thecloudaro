@@ -18,19 +18,19 @@ const tools: Record<
   hack: {
     title: "HackGuardian",
     description:
-      "Shield your website from cybercriminals with a free tool built by<br/>EasyWP. Easily toggle your WordPress file system to a partial,<br/>read-only mode from the EasyWP Dashboard. Your website will<br/> be protected without impacting file permissions or ownership.",
+      "Shield your website from cybercriminals with a free tool built by EasyWP. Easily toggle your WordPress file system to a partial, read-only mode from the EasyWP Dashboard. Your website will be protected without impacting file permissions or ownership.",
     image: "/WordPress/HackGuardian.png"
   },
   malware: {
     title: "MalwareGuardian",
     description:
-      "Protect your website 24/7 from malicious activity. Get detailed<br/>reports to clearly understand your website’s security status. Plus,<br/> EasyWP Turbo and Supersonic plans get Autoclean protection,<br/>which cleans files automatically.",
+      "Protect your website 24/7 from malicious activity. Get detailed reports to clearly understand your website’s security status. Plus, EasyWP Turbo and Supersonic plans get Autoclean protection, which cleans files automatically.",
     image: "/WordPress/MalwareGuardian.png"
   },
   updates: {
     title: "Automatic WordPress Updates <span class='uppercase text-[#7affc0]'>New</span>",
     description:
-      "Keep your WordPress site safe with automatic updates. If<br/>automatic updates are deactivated, they may need to be<br/> manuallyupdated.",
+      "Keep your WordPress site safe with automatic updates. If automatic updates are deactivated, they may need to be manuallyupdated.",
     image: "/WordPress/AutomaticWP.png"
   }
 };
@@ -47,7 +47,7 @@ const EasyWp = () => {
       <div className="mx-auto max-w-[82rem] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="text-center">
           <ContentHeading
-            title="EasyWP Guardian security<br/>tools"
+            title="EasyWP Guardian security tools"
             className="text-4xl font-bold sm:text-5xl md:text-6xl !text-[rgb(var(--wp-easywp-heading))]"
           />
 
@@ -76,7 +76,7 @@ const EasyWp = () => {
               })}
             </div>
 
-            <div className="space-y-6 ml-8">
+            <div className="space-y-6">
               {items.map((key) => {
                 const tool = tools[key];
                 const isActive = key === active;

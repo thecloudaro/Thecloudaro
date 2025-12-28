@@ -127,7 +127,7 @@ const FrequentlyBTWP = () => {
           />
           <ContentDescription
             size="md"
-            className="text-xs sm:text-base pt-20 !text-[rgba(var(--wp-frequentlybtwp-description))]"
+            className="text-xs sm:text-base pt-8 !text-[rgba(var(--wp-frequentlybtwp-description))]"
           >
             Products that other customers buy with EasyWP hosting for WordPress
             and we also recommend for you.
@@ -138,7 +138,7 @@ const FrequentlyBTWP = () => {
           {products.map((product) => (
             <div
               key={`${product.name}-${product.subtitle}`}
-              className="group relative flex h-[300px] w-[380px] min-w-[380px] flex-col justify-between overflow-hidden rounded-lg border transition hover:-translate-y-1"
+              className="group relative flex h-[300px] w-full max-w-[380px] flex-col justify-between overflow-hidden rounded-lg border transition hover:-translate-y-1"
               style={{
                 borderColor: 'rgba(var(--wp-frequentlybtwp-card-border))',
                 backgroundColor: 'rgb(var(--wp-frequentlybtwp-card-bg))',

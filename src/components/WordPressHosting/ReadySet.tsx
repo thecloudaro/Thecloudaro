@@ -25,28 +25,28 @@ const templates: Record<
   blog: {
     title: "Blog",
     description:
-      "Easily share your ideas, thoughts, and experiences with the<br/>world. Increase your visibility without the technical know-how.",
+      "Easily share your ideas, thoughts, and experiences with the world. Increase your visibility without the technical know-how.",
     image: "/WordPress/blog.png",
     Icon: PenSquare
   },
   ecommerce: {
     title: "E-commerce",
     description:
-      "Enter the digital marketplace with ease and without<br/>breaking the bank. Add new products and features as your business grows.",
+      "Enter the digital marketplace with ease and without breaking the bank. Add new products and features as your business grows.",
     image: "/WordPress/Ecommerce.png",
     Icon: ShoppingBag
   },
   portfolio: {
     title: "Portfolio & CV",
     description:
-      "Highlight your skills with polished templates designed to<br/>impress clients and recruiters alike.",
+      "Highlight your skills with polished templates designed to impress clients and recruiters alike.",
     image: "/WordPress/Portfolio.png",
     Icon: ContactRound
   },
   business: {
     title: "Business & Services",
     description:
-      "Build authority for your services with ready-to-launch<br/>layouts that keep your audience informed and engaged.",
+      "Build authority for your services with ready-to-launch layouts that keep your audience informed and engaged.",
     image: "/WordPress/Business.png",
     Icon: BriefcaseBusiness
   }
@@ -64,7 +64,7 @@ const ReadySet = () => {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="text-center">
           <ContentHeading
-            title="Ready, set, go with pre-<br/>made WordPress themes"
+            title="Ready, set, go with pre-made WordPress themes"
             className="!text-[2.75rem] sm:!text-[3.5rem] md:!text-[4.5rem] font-[600] !text-[rgb(var(--wp-readyset-heading))]"
           />
 
@@ -80,7 +80,7 @@ const ReadySet = () => {
         </div>
 
         <div className="mt-12 sm:mt-16 md:mt-20 lg:mt-24 flex flex-col gap-8 sm:gap-10 md:gap-12 lg:flex-row lg:items-stretch">
-          <div className="flex w-full flex-col justify-between lg:max-w-lg lg:pt-16 mr-20">
+          <div className="flex w-full flex-col justify-between lg:max-w-lg lg:pt-16">
             <div className="space-y-6">
               {categories.map((key) => {
                 const { title, description, Icon } = templates[key];

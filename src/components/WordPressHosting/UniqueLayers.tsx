@@ -9,14 +9,14 @@ const UniqueLayers = () => {
     <section className="py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--wp-uniquelayers-bg))', color: 'rgb(var(--wp-uniquelayers-heading))' }}>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 text-center">
         <ContentHeading
-          title="3 unique layers of<br/>caching"
+          title="3 unique layers of caching"
           className="!text-[2.75rem] sm:!text-[3rem] md:!text-[3.75rem] font-bold !text-[rgb(var(--wp-uniquelayers-heading))]"
         />
         <ContentDescription
           size="lg"
           className="mt-6 text-base sm:text-lg !text-[rgba(var(--wp-uniquelayers-description))]"
         >
-          The EasyWP WordPress integration plugin manages three different<br/>layers
+          The EasyWP WordPress integration plugin manages three different layers
           of caching for your website.
         </ContentDescription>
       </div>

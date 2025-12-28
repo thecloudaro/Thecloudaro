@@ -9,7 +9,7 @@ const HighlyRated = () => {
     <section className="py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--wp-highlyrated-bg))', color: 'rgb(var(--wp-highlyrated-heading))' }}>
       <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 text-center">
         <ContentHeading
-          title="Highly rated hosting for<br/>WordPress"
+          title="Highly rated hosting for WordPress"
           className="!text-[2.5rem] sm:!text-[3rem] md:!text-[3.5rem] font-bold !text-[rgb(var(--wp-highlyrated-heading))]"
         />
         <ContentDescription
@@ -39,7 +39,7 @@ const HighlyRated = () => {
             size="sm"
             className="mt-4 text-sm sm:text-xs !text-[rgba(var(--wp-highlyrated-subdescription))]"
           >
-            EasyWP ranked a Top Tier WordPress<br/>Provider for 3 years in a row
+            EasyWP ranked a Top Tier WordPress Provider for 3 years in a row
           </ContentDescription>
         </div>
       </div>

@@ -142,7 +142,7 @@ const CloudHostingPlans = ({ billing, onCompareClick }: CloudHostingPlansProps) 
   }, [billing]);
 
   return (
-    <div className="relative z-10 mx-auto max-w-6xl -mt-6 px-6 pb-24 pt-10 sm:-mt-20 sm:px-10 sm:pt-12 lg:-mt-30 lg:pt-16">
+    <div className="relative z-10 mx-auto max-w-6xl -mt-6 px-6 pb-24 pt-10 sm:-mt-16 sm:px-10 sm:pt-12 lg:-mt-24 lg:pt-16">
       
       <div className="mt-12 grid gap-8 lg:grid-cols-[repeat(3,max-content)] lg:justify-center">
         {plans.map((plan) => (

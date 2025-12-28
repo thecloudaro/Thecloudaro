@@ -16,7 +16,7 @@ const SuperSecure = () => {
         color: 'rgb(var(--wp-nostress-heading))'
       }}
     >
-      <div className="mx-auto flex w-full max-w-6xl justify-end mr-20">
+      <div className="mx-auto flex w-full max-w-6xl justify-end px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="w-full max-w-2xl space-y-3 text-left">
           <ContentHeading
             title="Super secure"
@@ -27,8 +27,8 @@ const SuperSecure = () => {
             size="lg"
             className="sm:text-xl leading-relaxed !text-[rgb(var(--wp-nostress-description))]"
           >
-            Enjoy worry-free hosting for WordPress with<br />
-            our Guardian suite of security tools like<br />
+            Enjoy worry-free hosting for WordPress with
+            our Guardian suite of security tools like
             HackGuardian and MalwareGuardian.
           </ContentDescription>
 
