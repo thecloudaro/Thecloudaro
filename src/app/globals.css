@@ -39,6 +39,7 @@
     --radius: 0.5rem;
 
     --link-blue: 217 91% 60%; /* blue-500 */
+    --global-black: 0 0% 0%; /* Black color for global use */
 
     /* Cart Sidebar Colors */
     --cart-bg: 0 0% 10%; /* #1a1a1a */

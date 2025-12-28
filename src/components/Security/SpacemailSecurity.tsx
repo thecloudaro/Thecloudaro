@@ -117,7 +117,7 @@ const SpacemailSecurity = () => {
           >
             <div className="relative w-full h-[600px] sm:h-[700px] md:h-[800px]">
               <Image
-                src="https://spaceship-cdn.com/security-ui/assets/spacemail-dark.77ee62aa0ab75bf46e9f.svg"
+                src="https://thecloudaro-cdn.com/security-ui/assets/spacemail-dark.77ee62aa0ab75bf46e9f.svg"
                 alt="Spacemail Security"
                 fill
                 className="object-contain scale-125 sm:scale-150 md:scale-[1.75] lg:scale-[2]"

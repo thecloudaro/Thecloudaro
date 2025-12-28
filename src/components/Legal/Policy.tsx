@@ -172,10 +172,10 @@ const Policy = () => {
               {/* Body Content */}
               <div className="space-y-4 sm:space-y-6 text-xs leading-relaxed" style={{ color: 'rgb(255 255 255)' }}>
                 <p>
-                  Spaceship is committed to our customer&apos;s privacy, including domain registration data. We also understand that there may be legitimate reasons for requesting domain registration data. To navigate these requests, we comply with laws governing what must, can and/or cannot be shared and the compliance requirements surrounding each request and resulting decision.
+                  The Cloud Aro is committed to our customer&apos;s privacy, including domain registration data. We also understand that there may be legitimate reasons for requesting domain registration data. To navigate these requests, we comply with laws governing what must, can and/or cannot be shared and the compliance requirements surrounding each request and resulting decision.
                 </p>
                 <p>
-                  We have put together this policy as a guide for you if you are seeking domain registration data, formerly known as Whois data. This guide incorporates the various legal requirements that apply to Spaceship.
+                  We have put together this policy as a guide for you if you are seeking domain registration data, formerly known as Whois data. This guide incorporates the various legal requirements that apply to The Cloud Aro.
                 </p>
               </div>
 
@@ -203,7 +203,7 @@ const Policy = () => {
                   className="text-base sm:text-lg md:text-xl text-left !text-white font-bold"
                 />
                 <p className="text-xs leading-relaxed" style={{ color: 'rgb(255 255 255)' }}>
-                  Spaceship will comply with all disclosure requests issued via a US court order or subpoena. If you have a US court order or subpoena, you may submit it directly to{" "}
+                  The Cloud Aro will comply with all disclosure requests issued via a US court order or subpoena. If you have a US court order or subpoena, you may submit it directly to{" "}
                   <Link href="mailto:legal@spaceship.com" className="underline" style={{ color: 'rgb(59 130 246)' }}>
                     legal@spaceship.com
                   </Link>
@@ -214,7 +214,7 @@ const Policy = () => {
                   .
                 </p>
                 <div className="text-xs leading-relaxed mt-4" style={{ color: 'rgb(156 163 175)' }}>
-                  <strong className="font-semibold" style={{ color: 'rgb(255 255 255)' }}>Please note:</strong> Domain registration data is not required in order to file a lawsuit against a domain registrant. You may file a lawsuit using the domain name and then, once filed, submit a subpoena in relation to the case which requests domain registrant data. You do not need to name Spaceship as a defendant in the lawsuit.
+                  <strong className="font-semibold" style={{ color: 'rgb(255 255 255)' }}>Please note:</strong> Domain registration data is not required in order to file a lawsuit against a domain registrant. You may file a lawsuit using the domain name and then, once filed, submit a subpoena in relation to the case which requests domain registrant data. You do not need to name The Cloud Aro as a defendant in the lawsuit.
                 </div>
               </div>
 
@@ -230,7 +230,7 @@ const Policy = () => {
                   className="text-base sm:text-lg md:text-xl text-left !text-white font-bold"
                 />
                 <p className="text-xs leading-relaxed" style={{ color: 'rgb(255 255 255)' }}>
-                  Spaceship complies with the UDRP. Disclosure of domain registration data is part of the UDRP process. This information is not needed in order to file a UDRP complaint. Therefore, Spaceship provides this information once a UDRP has been filed and a disclosure request is made by the assigned mediator. Disclosure is made directly to the mediator. Also see:{" "}
+                  The Cloud Aro complies with the UDRP. Disclosure of domain registration data is part of the UDRP process. This information is not needed in order to file a UDRP complaint. Therefore, The Cloud Aro provides this information once a UDRP has been filed and a disclosure request is made by the assigned mediator. Disclosure is made directly to the mediator. Also see:{" "}
                   <Link href="https://www.spaceship.com/legal/uniform-domain-name-dispute-resolution-policy/" className="underline" style={{ color: 'rgb(59 130 246)' }}>
                     https://www.spaceship.com/legal/uniform-domain-name-dispute-resolution-policy/
                   </Link>
@@ -250,7 +250,7 @@ const Policy = () => {
                   className="text-base sm:text-lg md:text-xl text-left !text-white font-bold"
                 />
                 <p className="text-xs leading-relaxed" style={{ color: 'rgb(255 255 255)' }}>
-                  Spaceship reviews non-US court orders on a case by case basis to determine our obligations for disclosure and/or prohibitions against disclosure. If you are seeking domain registration data pursuant to a non-US court order, please submit your request along with the certified copy of the court order to{" "}
+                  The Cloud Aro reviews non-US court orders on a case by case basis to determine our obligations for disclosure and/or prohibitions against disclosure. If you are seeking domain registration data pursuant to a non-US court order, please submit your request along with the certified copy of the court order to{" "}
                   <Link href="mailto:legal@spaceship.com" className="underline" style={{ color: 'rgb(59 130 246)' }}>
                     legal@spaceship.com
                   </Link>

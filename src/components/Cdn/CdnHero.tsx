@@ -54,7 +54,7 @@ const CdnHero = () => {
               className="mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-left"
             />
             <ContentDescription 
-              text="Get a secure and efficient content delivery network (CDN) fully integrated into Spaceship."
+              text="Get a secure and efficient content delivery network (CDN) fully integrated into The Cloud Aro."
               size="md"
               className="mb-6 sm:mb-8 text-left text-white"
             />

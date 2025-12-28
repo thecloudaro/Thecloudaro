@@ -22,8 +22,8 @@ const TransferFrequentlyAskedQuestions = () => {
       answer: "The cost of transferring a domain varies by extension, but typically ranges from $8 to $15 per year. This includes a one-year renewal added to your current expiration date, so you don't lose any registration time. Privacy protection is included free with all transfers."
     },
     {
-      question: "How do I transfer a domain name out of Spaceship?",
-      answer: "To transfer a domain away from Spaceship, unlock the domain in your account settings, disable privacy protection temporarily, and obtain your authorization code. Then provide this code to your new registrar, who will initiate the transfer request."
+      question: "How do I transfer a domain name out of The Cloud Aro?",
+      answer: "To transfer a domain away from The Cloud Aro, unlock the domain in your account settings, disable privacy protection temporarily, and obtain your authorization code. Then provide this code to your new registrar, who will initiate the transfer request."
     },
     {
       question: "How do I transfer domain ownership?",

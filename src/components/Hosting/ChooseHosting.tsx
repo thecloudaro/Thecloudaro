@@ -163,7 +163,7 @@ const allPlansSections: AllPlansSection[] = [
   {
     label: "Websites",
     helper: "Unlimited number of websites",
-    items: []
+    items: [],
   },
   {
     label: "Control panel features",
@@ -192,8 +192,8 @@ const allPlansSections: AllPlansSection[] = [
       { label: "Change Language", info: true },
       { label: "Web Disk", info: true },
       { label: "PHP PEAR Packages", info: true },
-      { label: "Perl Modules", info: true }
-    ]
+      { label: "Perl Modules", info: true },
+    ],
   },
   {
     label: "Server features",
@@ -207,8 +207,8 @@ const allPlansSections: AllPlansSection[] = [
       { label: "Firewall", info: true },
       { label: "Virus Protection", info: true },
       { label: "Web Application Firewall", info: true },
-      { label: "Website Brute Force Protection", info: true }
-    ]
+      { label: "Website Brute Force Protection", info: true },
+    ],
   },
   {
     label: "Web development tools",
@@ -225,21 +225,21 @@ const allPlansSections: AllPlansSection[] = [
       { label: "Javascript", info: true },
       { label: "SSI", info: true },
       { label: "SSH Access (Jailed)", info: true },
-      { label: "PHP MyAdmin", info: true }
-    ]
+      { label: "PHP MyAdmin", info: true },
+    ],
   },
   {
     label: "Security",
-    items: [
-      { label: "Imunify360 protection included", info: true },
-    ]
-  }
+    items: [{ label: "Imunify360 protection included", info: true }],
+  },
 ];
 
 const ChooseHosting = () => {
   const [billing, setBilling] = useState<BillingCycle>("yearly");
   const [dataCenter, setDataCenter] = useState("US");
-  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
+  const [expandedSections, setExpandedSections] = useState<
+    Record<string, boolean>
+  >({});
 
   const suffixMap: Record<BillingCycle, string> = {
     monthly: "/mo",
@@ -259,7 +259,7 @@ const ChooseHosting = () => {
             className="!text-4xl sm:!text-[3rem] md:!text-[3.75rem]"
           />
 
-          <div className="flex justify-center">
+          <div className="mt-12 flex w-full flex-col items-center gap-10 sm:flex-row sm:justify-center sm:gap-14">
             <HostingPlanControls
               billing={billing}
               onBillingChange={setBilling}
@@ -277,7 +277,9 @@ const ChooseHosting = () => {
             {plans.map((plan) => (
               <div key={plan.name} className="w-[210px] text-center space-y-4">
                 <div className="space-y-1 leading-tight">
-                  <h3 className="text-[1.9rem] font-semibold text-[rgb(var(--hosting-text-white))]">{plan.name}</h3>
+                  <h3 className="text-[1.9rem] font-semibold text-[rgb(var(--hosting-text-white))]">
+                    {plan.name}
+                  </h3>
                   <div className="text-[rgb(var(--hosting-text-white))] text-xl font-semibold tracking-tight">
                     ${plan.pricing[billing].toFixed(2)}
                     <span className="text-sm text-[rgb(var(--hosting-choose-text-gray-400))] ml-1">
@@ -285,17 +287,19 @@ const ChooseHosting = () => {
                     </span>
                   </div>
                 </div>
-                <button 
+                <button
                   className="px-5 py-2.5 rounded-full text-xs font-semibold transition md:ml-auto"
                   style={{
-                    backgroundColor: 'rgb(var(--hosting-choose-button-bg))',
-                    color: 'rgb(var(--hosting-text-white))'
+                    backgroundColor: "rgb(var(--hosting-choose-button-bg))",
+                    color: "rgb(var(--hosting-text-white))",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgb(var(--hosting-choose-button-hover))';
+                    e.currentTarget.style.backgroundColor =
+                      "rgb(var(--hosting-choose-button-hover))";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgb(var(--hosting-choose-button-bg))';
+                    e.currentTarget.style.backgroundColor =
+                      "rgb(var(--hosting-choose-button-bg))";
                   }}
                 >
                   Add to cart
@@ -307,19 +311,27 @@ const ChooseHosting = () => {
 
         <div className="space-y-12 pt-2">
           {featureRows.map((row) => (
-            <div key={row.label} className="text-sm text-[rgb(var(--hosting-choose-text-gray-300))] md:mr-0 lg:mr-24">
+            <div
+              key={row.label}
+              className="text-sm text-[rgb(var(--hosting-choose-text-gray-300))] md:mr-0 lg:mr-24"
+            >
               <div className="space-y-3 md:space-y-4">
                 <div className="flex items-center gap-2 text-[rgb(var(--hosting-text-white))] font-semibold text-base md:text-lg whitespace-nowrap">
                   {row.label}
                   <span className="inline-flex items-center justify-center w-5 h-5 rounded-full border border-[rgb(var(--hosting-choose-border-gray-600))]">
-                    <Info className="w-3 h-3 text-[rgb(var(--hosting-choose-text-gray-400))]" strokeWidth={1.8} />
+                    <Info
+                      className="w-3 h-3 text-[rgb(var(--hosting-choose-text-gray-400))]"
+                      strokeWidth={1.8}
+                    />
                   </span>
                   <span className="hidden md:block flex-1 border-t border-[rgb(var(--hosting-choose-border-gray-800))]" />
                 </div>
 
                 {row.helper && (
                   <div className="pl-7 text-xs uppercase tracking-wide text-[rgb(var(--hosting-choose-text-gray-400))]">
-                    <span className="font-semibold text-[rgb(var(--hosting-text-white))]">{row.helper.split(" ")[0]}</span>{" "}
+                    <span className="font-semibold text-[rgb(var(--hosting-text-white))]">
+                      {row.helper.split(" ")[0]}
+                    </span>{" "}
                     {row.helper.replace(row.helper.split(" ")[0], "").trim()}
                   </div>
                 )}
@@ -336,11 +348,16 @@ const ChooseHosting = () => {
                     const statClass = isCheck
                       ? "text-[rgb(var(--hosting-choose-text-green))]"
                       : isCross
-                      ? "text-[rgb(var(--hosting-choose-text-gray-500))]"
-                      : "text-[rgb(var(--hosting-text-white))]";
+                        ? "text-[rgb(var(--hosting-choose-text-gray-500))]"
+                        : "text-[rgb(var(--hosting-text-white))]";
                     return (
-                      <div key={`${row.label}-${idx}`} className="w-[210px] text-center space-y-2">
-                        <div className={`text-2xl font-semibold ${statClass}`}>{value.stat}</div>
+                      <div
+                        key={`${row.label}-${idx}`}
+                        className="w-[210px] text-center space-y-2"
+                      >
+                        <div className={`text-2xl font-semibold ${statClass}`}>
+                          {value.stat}
+                        </div>
                         {value.description && (
                           <div className="text-[rgb(var(--hosting-choose-text-gray-400))] text-sm leading-relaxed">
                             {value.description}
@@ -358,12 +375,18 @@ const ChooseHosting = () => {
         <div className="space-y-8 sm:space-y-10 pt-8 sm:pt-10 md:mr-0 lg:mr-24">
           <div className="flex items-center gap-2 text-white font-semibold text-base md:text-lg whitespace-nowrap">
             All plans include
-            <span className="hidden md:block flex-1 border-t" style={{ borderColor: 'rgb(var(--hosting-choose-divider-border))' }} />
+            <span
+              className="hidden md:block flex-1 border-t"
+              style={{
+                borderColor: "rgb(var(--hosting-choose-divider-border))",
+              }}
+            />
           </div>
 
           <div className="space-y-12">
             {allPlansSections.map((section) => {
-              const initialCount = section.initialVisible ?? section.items.length;
+              const initialCount =
+                section.initialVisible ?? section.items.length;
               const isExpandable = section.items.length > initialCount;
               const isExpanded = expandedSections[section.label] ?? false;
               const visibleItems =
@@ -375,8 +398,20 @@ const ChooseHosting = () => {
                 <div key={section.label} className="space-y-4">
                   <div className="flex items-center gap-2 text-white font-semibold text-base md:text-lg whitespace-nowrap">
                     {section.label}
-                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full border" style={{ borderColor: 'rgb(var(--hosting-choose-border-gray-600))' }}>
-                      <Info className="w-3 h-3" style={{ color: 'rgb(var(--hosting-choose-text-gray-400))' }} strokeWidth={1.8} />
+                    <span
+                      className="inline-flex items-center justify-center w-5 h-5 rounded-full border"
+                      style={{
+                        borderColor:
+                          "rgb(var(--hosting-choose-border-gray-600))",
+                      }}
+                    >
+                      <Info
+                        className="w-3 h-3"
+                        style={{
+                          color: "rgb(var(--hosting-choose-text-gray-400))",
+                        }}
+                        strokeWidth={1.8}
+                      />
                     </span>
                   </div>
 
@@ -396,8 +431,21 @@ const ChooseHosting = () => {
                           >
                             <span>{item.label}</span>
                             {item.info && (
-                              <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border" style={{ borderColor: 'rgb(var(--hosting-choose-border-gray-600))' }}>
-                                <Info className="w-3 h-3" style={{ color: 'rgb(var(--hosting-choose-text-gray-400))' }} strokeWidth={1.8} />
+                              <span
+                                className="inline-flex items-center justify-center w-4 h-4 rounded-full border"
+                                style={{
+                                  borderColor:
+                                    "rgb(var(--hosting-choose-border-gray-600))",
+                                }}
+                              >
+                                <Info
+                                  className="w-3 h-3"
+                                  style={{
+                                    color:
+                                      "rgb(var(--hosting-choose-text-gray-400))",
+                                  }}
+                                  strokeWidth={1.8}
+                                />
                               </span>
                             )}
                           </div>
@@ -410,16 +458,18 @@ const ChooseHosting = () => {
                           onClick={() =>
                             setExpandedSections((prev) => ({
                               ...prev,
-                              [section.label]: !isExpanded
+                              [section.label]: !isExpanded,
                             }))
                           }
                           className="inline-flex items-center gap-1 rounded-full px-5 py-1.5 text-xs font-semibold text-white transition"
-                          style={{ color: 'rgb(var(--hosting-text-white))' }}
+                          style={{ color: "rgb(var(--hosting-text-white))" }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = 'rgba(var(--hosting-choose-showmore-hover))';
+                            e.currentTarget.style.backgroundColor =
+                              "rgba(var(--hosting-choose-showmore-hover))";
                           }}
                           onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = 'transparent';
+                            e.currentTarget.style.backgroundColor =
+                              "transparent";
                           }}
                         >
                           {isExpanded ? "Show less" : "Show more"}

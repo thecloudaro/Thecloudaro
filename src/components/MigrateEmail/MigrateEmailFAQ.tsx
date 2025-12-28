@@ -33,7 +33,7 @@ const MigrateEmailFAQ = () => {
     },
     {
       question: "How can I get Spacemail free for 1 year?",
-      answer: "You can get Spacemail free for 1 year by migrating a domain into Spaceship. When you transfer your domain to Spaceship hosting, you'll automatically receive a complimentary year of Spacemail service. This offer applies to new domain migrations and is a great way to try our email service at no cost."
+      answer: "You can get Spacemail free for 1 year by migrating a domain into The Cloud Aro. When you transfer your domain to The Cloud Aro hosting, you'll automatically receive a complimentary year of Spacemail service. This offer applies to new domain migrations and is a great way to try our email service at no cost."
     },
     {
       question: "Can I migrate my calendar/contacts?",

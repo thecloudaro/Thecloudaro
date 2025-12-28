@@ -6,7 +6,7 @@ const faqItems = [
   {
     question: "What do you need for your migration?",
     answer:
-      "You’ll need a full cPanel backup of your existing website, including files, databases, and configuration settings. Our team will use this to restore your site on Spaceship hosting."
+      "You’ll need a full cPanel backup of your existing website, including files, databases, and configuration settings. Our team will use this to restore your site on The Cloud Aro hosting."
   },
   {
     question: "What cannot be migrated?",
@@ -19,9 +19,9 @@ const faqItems = [
       "You can migrate as many websites as your hosting plan supports. Submit a backup for each site, and we’ll schedule the migrations one by one to ensure everything transfers smoothly."
   },
   {
-    question: "How can I transfer my emails to Spaceship?",
+    question: "How can I transfer my emails to The Cloud Aro?",
     answer:
-      "Download an email backup from your current provider or use IMAP sync tools. Our support documentation walks you through importing email data to Spacemail step by step."
+      "Download an email backup from your current provider or use IMAP sync tools. Our support documentation walks you through importing email data to Business Email step by step."
   }
 ];
 

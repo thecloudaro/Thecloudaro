@@ -55,7 +55,7 @@ const DomainPricingNavbar = () => {
   // Always show navbar when visible (don't hide on scroll up)
   if (!isVisible) return null;
 
-  // Match Spaceship behavior exactly:
+      {/* Match The Cloud Aro behavior exactly: */}
   // - Scroll up: pricing navbar below main navbar (responsive heights)
   // - Scroll down: pricing navbar at very top (0px, no margins)
   const topOffsetClass = isScrollingUp 

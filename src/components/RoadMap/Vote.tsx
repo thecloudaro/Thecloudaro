@@ -22,7 +22,7 @@ const underReviewFeatures: Feature[] = [
   { id: "8", category: "DOMAINS", title: "Shared domain management", votes: 158 },
   { id: "9", category: "DOMAINS", title: "Domain Portfolio: Multiple categories", votes: 151 },
   { id: "10", category: "DOMAINS", title: "Bulk transfer out functionality", votes: 144 },
-  { id: "11", category: "DOMAINS", title: "Transfer connected products together with a domain name to another Spaceship account", votes: 122 },
+  { id: "11", category: "DOMAINS", title: "Transfer connected products together with a domain name to another The Cloud Aro account", votes: 122 },
   { id: "12", category: "DOMAINS", title: ".is domain registration", votes: 106 },
   { id: "13", category: "DOMAINS", title: "Domain ownership transfer: Contact info", votes: 103 },
   { id: "14", category: "DOMAINS", title: "Domain ownership transfer: Moving products", votes: 94 },

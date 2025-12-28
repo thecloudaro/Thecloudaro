@@ -10,9 +10,9 @@ type FAQItem = {
 
 const faqItems: FAQItem[] = [
   {
-    question: "Why Spaceship hosting for WordPress?",
+    question: "Why The Cloud Aro hosting for WordPress?",
     answer:
-      "Spaceship delivers a managed WordPress experience with performance optimizations, automated maintenance, and a dashboard designed to keep your sites running smoothly without the overhead."
+      "The Cloud Aro delivers a managed WordPress experience with performance optimizations, automated maintenance, and a dashboard designed to keep your sites running smoothly without the overhead."
   },
   {
     question: "What are the key benefits of Managed WordPress Hosting?",

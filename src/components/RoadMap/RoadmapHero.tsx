@@ -52,7 +52,7 @@ const RoadmapHero = () => {
             <div className="relative w-full max-w-[450px] h-[150px] sm:h-[200px] md:h-[250px] lg:h-[280px]">
               <Image
                 src="/Roadmap/Hero.svg"
-                alt="Spaceship Roadmap"
+                alt="The Cloud Aro Roadmap"
                 width={450}
                 height={280}
                 className="w-full h-full object-contain"

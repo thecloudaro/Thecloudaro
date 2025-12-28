@@ -12,10 +12,10 @@ const MigrateHero = () => {
   }, []);
 
   return (
-    <div 
+    <div
       className="relative flex flex-col items-center justify-center overflow-hidden min-h-screen"
-      style={{ 
-        background: 'linear-gradient(to right, #16a34a 0%, #2563eb 100%)'
+      style={{
+        background: "linear-gradient(to right, #16a34a 0%, #2563eb 100%)",
       }}
     >
       {/* Main Content */}
@@ -26,19 +26,18 @@ const MigrateHero = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="text-center space-y-4 sm:space-y-2"
         >
-         
           {/* Main Heading */}
           <ContentDescription
-            text="Migrate your<br/>WordPress website"
+            text="Migrate your WordPress website"
             size="xl"
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl !text-white font-bold leading-tight"
+            className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl !text-white font-bold leading-tight"
           />
 
           {/* Description */}
           <ContentDescription
             text="Move your website and files in a few simple steps."
             size="lg"
-            className="!text-lg sm:!text-xl md:!text-2xl lg:!text-2xl !text-white max-w-2xl mx-auto"
+            className="!text-xl sm:!text-xl md:!text-2xl lg:!text-2xl !text-white max-w-2xl mx-auto"
           />
         </motion.div>
       </div>

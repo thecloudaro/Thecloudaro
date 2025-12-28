@@ -52,7 +52,7 @@ const LegalHero = () => {
             <div className="relative w-full max-w-[450px] h-[150px] sm:h-[200px] md:h-[250px] lg:h-[280px]">
               <Image
                 src="/Legal/Hero.svg"
-                alt="Spaceship Legal"
+                alt="The Cloud Aro Legal"
                 width={450}
                 height={280}
                 className="w-full h-full object-contain"

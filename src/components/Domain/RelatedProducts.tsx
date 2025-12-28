@@ -135,7 +135,7 @@ const RelatedProducts = () => {
       id: "web-hosting",
       title: "Web Hosting",
       description:
-        "Get unparalleled speed, security, and<br/>stability with Spaceship Web Hosting.<br/>Choose a suitable plan for your needs<br/>and get your idea online in under an hour.",
+        "Get unparalleled speed, security, and<br/>stability with The Cloud Aro Web Hosting.<br/>Choose a suitable plan for your needs<br/>and get your idea online in under an hour.",
       link: "/web-hosting",
       gradientColors: "",
       shapes: [

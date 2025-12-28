@@ -55,17 +55,7 @@ const Footer: React.FC = () => {
       links: ["Contact Us", "Status Updates", "Knowledge Base"],
       hasButton: true,
     },
-    {
-      title: "About Cloud Aro",
-      links: [
-        "About Us",
-        "Roadmap",
-        "Terms & Conditions",
-        "Privacy Policy",
-        "Domain Registration Data Disclosure Policy",
-        "Cookies Preferences",
-      ],
-    },
+    { title: "About The Cloud Aro", links: ["About Us","Roadmap","Terms & Conditions","Privacy Policy","Domain Registration Data Disclosure Policy","Cookies Preferences"] },
     { title: "Follow Us", links: ["Facebook", "LinkedIn", "Instagram"] },
   ];
 
@@ -85,7 +75,7 @@ const Footer: React.FC = () => {
               Join our universe
             </h1>
             <p className="text-footer-text-muted text-sm md:text-base">
-              Subscribe to keep up with everything happening on Spaceship, from
+              Subscribe to keep up with everything happening on The Cloud Aro, from
               deals and promotions to product launches.
             </p>
           </div>

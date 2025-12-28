@@ -20,12 +20,12 @@ const Links = () => {
   const generalLinks = [
     "Refund Policy",
     "Privacy Policy",
-    "Spaceship Cookie Policy",
+    "The Cloud Aro Cookie Policy",
     "CCPA Privacy Notice",
     "Copyright and Trademark Policies",
     "Domain Registration Data Disclosure Policy + Guide",
-    "How to Report Abuse Incidents in Spaceship",
-    "Spaceship Court Order & Subpoena Policy",
+    "How to Report Abuse Incidents in The Cloud Aro",
+    "The Cloud Aro Court Order & Subpoena Policy",
     "LGPD Privacy Notice",
     "India: Reporting Grievances",
     "Notice and Removal of Non-Consensual Intimate Visual Depictions"
@@ -62,7 +62,7 @@ const Links = () => {
 
   const universalLinks = [
     "Data Processing Addendum",
-    "Spaceship Universal Terms of Service Agreement"
+    "The Cloud Aro Universal Terms of Service Agreement"
   ];
 
   return (

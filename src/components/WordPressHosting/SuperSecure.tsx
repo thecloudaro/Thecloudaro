@@ -2,37 +2,45 @@
 
 import ContentHeading from "@/components/ui/content-heading";
 import ContentDescription from "@/components/ui/content-description";
+import Image from "next/image"; // Added Image import
 
 const SuperSecure = () => {
   return (
     <section
-      className="relative overflow-hidden py-32"
+      className="py-16 sm:py-24 md:py-32"
       style={{
-        backgroundImage: "url('/WordPress/NoStressBg.webp')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        minHeight: "520px",
-        color: 'rgb(var(--wp-nostress-heading))'
+        backgroundColor: "rgb(var(--global-black))", // Set background color using global variable
       }}
     >
-      <div className="mx-auto flex w-full max-w-6xl justify-end px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-        <div className="w-full max-w-2xl space-y-3 text-left">
-          <ContentHeading
-            title="Super secure"
-            className="!text-[2.75rem] sm:!text-[3rem] font-bold !text-[rgb(var(--wp-nostress-heading))]"
+      <div className="mx-auto flex flex-col-reverse lg:flex-row items-center w-full max-w-6xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+        {/* Image Section - Appears first on mobile due to flex-col-reverse */}
+        <div className="w-full lg:w-1/2 flex items-center justify-center py-10 lg:py-0">
+          <Image
+            src="/WordPress/NoStressBg.webp" // Image source
+            alt="Super secure Background"
+            width={800}
+            height={600}
+            className="w-full h-auto object-cover rounded-lg shadow-lg" // Responsive image styling
           />
+        </div>
 
-          <ContentDescription
-            size="lg"
-            className="sm:text-xl leading-relaxed !text-[rgb(var(--wp-nostress-description))]"
-          >
-            Enjoy worry-free hosting for WordPress with
-            our Guardian suite of security tools like
-            HackGuardian and MalwareGuardian.
-          </ContentDescription>
+        {/* Content Section - Appears second on mobile due to flex-col-reverse */}
+        <div className="w-full lg:w-1/2 flex items-center justify-center lg:justify-end py-10 lg:py-0"> {/* Changed justify-start */}
+          <div className="w-full max-w-2xl space-y-3 text-center lg:text-left">
+            <ContentHeading
+              title="Super secure"
+              className="!text-[2.75rem] sm:!text-[3rem] font-bold !text-[rgb(var(--wp-nostress-heading))]"
+            />
 
-          
+            <ContentDescription
+              size="lg"
+              className="sm:text-xl leading-relaxed !text-[rgb(var(--wp-nostress-description))]"
+            >
+              Enjoy worry-free hosting for WordPress with
+              our Guardian suite of security tools like
+              HackGuardian and MalwareGuardian.
+            </ContentDescription>
+          </div>
         </div>
       </div>
     </section>
@@ -40,5 +48,4 @@ const SuperSecure = () => {
 };
 
 export default SuperSecure;
-
 
