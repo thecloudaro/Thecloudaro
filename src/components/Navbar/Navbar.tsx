@@ -17,7 +17,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { activeDropdown, setActiveDropdown } = useDropdown();
-  const { openCart } = useCart();
+  const { openCart, items } = useCart();
   const { openLogin } = useLogin();
   const [isScrollingUp, setIsScrollingUp] = useState(true);
   const [isBeyondHero, setIsBeyondHero] = useState(false);
@@ -146,19 +146,25 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
               const isCart = Icon === ShoppingCart;
               const isUser = Icon === User;
               return (
-                <button
-                  key={i}
-                  onClick={isCart ? openCart : isUser ? openLogin : undefined}
-                  className={`font-medium transition-all duration-300 px-3 py-2 rounded-full ${
-                    (isHostingPage)
-                      ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
-                      : (isDomainPage || isHomepage) 
-                      ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
-                      : 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
-                  }`}
-                >
-                  <Icon size={16} />
-                </button>
+                <div key={i} className="relative">
+                  <button
+                    onClick={isCart ? openCart : isUser ? openLogin : undefined}
+                    className={`font-medium transition-all duration-300 px-3 py-2 rounded-full ${
+                      (isHostingPage)
+                        ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
+                        : (isDomainPage || isHomepage) 
+                        ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
+                        : 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
+                    }`}
+                  >
+                    <Icon size={16} />
+                  </button>
+                  {isCart && items.length > 0 && (
+                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                      {items.length}
+                    </span>
+                  )}
+                </div>
               );
             })}
           </div>
@@ -173,19 +179,25 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
                 const isCart = Icon === ShoppingCart;
                 const isUser = Icon === User;
                 return (
-                  <button
-                    key={i}
-                    onClick={isCart ? openCart : isUser ? openLogin : undefined}
-                    className={`font-medium transition-all duration-300 px-2 py-2 rounded-full ${
-                      (isHostingPage)
-                        ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
-                        : (isDomainPage || isHomepage)
-                        ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
-                        : 'text-[hsl(var(--navbar-text))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
-                    }`}
-                  >
-                    <Icon size={16} />
-                  </button>
+                  <div key={i} className="relative">
+                    <button
+                      onClick={isCart ? openCart : isUser ? openLogin : undefined}
+                      className={`font-medium transition-all duration-300 px-2 py-2 rounded-full ${
+                        (isHostingPage)
+                          ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
+                          : (isDomainPage || isHomepage)
+                          ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
+                          : 'text-[hsl(var(--navbar-text))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
+                      }`}
+                    >
+                      <Icon size={16} />
+                    </button>
+                    {isCart && items.length > 0 && (
+                      <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                        {items.length}
+                      </span>
+                    )}
+                  </div>
                 );
               })}
             </div>

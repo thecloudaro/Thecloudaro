@@ -2,14 +2,28 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, X } from 'lucide-react';
+import { ShoppingCart, X, Plus, Minus } from 'lucide-react';
 import { useCart } from './CartContext';
+import { useRouter } from 'next/navigation';
 
 const CartSidebar = () => {
-  const { isOpen, closeCart, items } = useCart();
+  const { 
+    isOpen, 
+    closeCart, 
+    items, 
+    removeItem, 
+    increaseQuantity, 
+    decreaseQuantity, 
+    getCartTotal 
+  } = useCart();
   const [showPromoInput, setShowPromoInput] = useState(false);
   const [promoCode, setPromoCode] = useState('');
   const [isPromoFocused, setIsPromoFocused] = useState(false);
+  const router = useRouter();
+
+  const handleCheckout = () => {
+    router.push('/checkout');
+  };
 
   return (
     <AnimatePresence>
@@ -70,11 +84,26 @@ const CartSidebar = () => {
             <div className="flex-1 overflow-y-auto px-6 py-6" style={{ backgroundColor: 'hsl(var(--cart-header-bg))' }}>
               {items.length > 0 && (
                 <div className="space-y-4">
-                  {/* Cart items will go here */}
                   {items.map((item, index) => (
                     <div key={index} className="p-4 rounded-lg" style={{ backgroundColor: 'hsl(var(--cart-item-bg))' }}>
-                      <p style={{ color: 'hsl(var(--cart-text-primary))' }}>{item.name}</p>
-                      <p className="text-sm" style={{ color: 'hsl(var(--cart-text-secondary))' }}>${item.price}</p>
+                      <div className="flex justify-between">
+                        <div>
+                          <p style={{ color: 'hsl(var(--cart-text-primary))' }}>{item.name}</p>
+                          <p className="text-sm" style={{ color: 'hsl(var(--cart-text-secondary))' }}>${item.price}</p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button onClick={() => decreaseQuantity(index)} className="p-1 rounded-full hover:bg-[hsl(var(--cart-button-hover-bg))]">
+                            <Minus size={16} />
+                          </button>
+                          <span>{item.quantity}</span>
+                          <button onClick={() => increaseQuantity(index)} className="p-1 rounded-full hover:bg-[hsl(var(--cart-button-hover-bg))]">
+                            <Plus size={16} />
+                          </button>
+                          <button onClick={() => removeItem(index)} className="p-1 rounded-full hover:bg-[hsl(var(--cart-button-hover-bg))]">
+                            <X size={16} />
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -138,10 +167,17 @@ const CartSidebar = () => {
               <div className={`flex items-center justify-between pt-3 pb-4 ${showPromoInput ? 'mb-2' : 'mb-0'}`}>
                 <span className="text-lg font-bold" style={{ color: 'hsl(var(--cart-text-primary))' }}>Total</span>
                 <span className="text-lg font-bold" style={{ color: 'hsl(var(--cart-text-primary))' }}>
-                  ${items.reduce((sum, item) => sum + item.price, 0).toFixed(2)}
+                  ${getCartTotal().toFixed(2)}
                 </span>
               </div>
 
+              {/* Checkout Button */}
+              <button
+                onClick={handleCheckout}
+                className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              >
+                Checkout
+              </button>
             </div>
           </motion.div>
         </>

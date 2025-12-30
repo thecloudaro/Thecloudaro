@@ -10,6 +10,7 @@ import { LoginProvider } from "@/components/Login/LoginContext";
 import LoginModalWrapper from "@/components/Login/LoginModalWrapper";
 import { SignupProvider } from "@/components/Signup/SignupContext";
 import SignupModalWrapper from "@/components/Signup/SignupModalWrapper";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
           <LoginProvider>
             <SignupProvider>
               <Preloader />
+              <Toaster />
               <NavbarWrapper />
               {children}
               <Footer/>

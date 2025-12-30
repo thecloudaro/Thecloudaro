@@ -1,4 +1,4 @@
-const comingSoon = true;   // false karogi to real homepage live ho jayega
+const comingSoon = true; 
 
 import HeroSection from '@/components/HomeSection/Hero/HeroSection';
 import DynamicSection from '@/components/HomeSection/DynamicSections/DynamicSections';

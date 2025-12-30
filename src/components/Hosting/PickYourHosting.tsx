@@ -6,6 +6,7 @@ import { Info, Plus } from "lucide-react";
 import ContentHeading from "@/components/ui/content-heading";
 import ContentDescription from "@/components/ui/content-description";
 import HostingPlanControls, { BillingCycle } from "./HostingPlanControls";
+import { useCart } from "@/components/Cart/CartContext";
 
 const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
@@ -13,6 +14,7 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
   const [selectedAddons, setSelectedAddons] = useState<{
     [key: string]: { storage: string; price: number };
   }>({});
+  const { addItem } = useCart();
 
   const plans = [
     {
@@ -511,6 +513,7 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
                     {/* Buttons */}
                     <div>
                       <button
+                        onClick={() => addItem({ name: plan.name, price: getPricing(plan).price })}
                         className="w-full py-3 rounded-full text-sm font-semibold transition-all"
                         style={{
                           backgroundColor: "rgb(var(--hosting-pick-button-bg))",
