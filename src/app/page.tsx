@@ -1,4 +1,4 @@
-const comingSoon = true; 
+const comingSoon = false; 
 
 import HeroSection from '@/components/HomeSection/Hero/HeroSection';
 import DynamicSection from '@/components/HomeSection/DynamicSections/DynamicSections';
