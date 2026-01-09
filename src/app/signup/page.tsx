@@ -22,7 +22,26 @@ const SignUpPage = () => {
     setLoading(true);
     setError(null);
 
-    if (password !== confirmPassword) {
+    // 🔐 MOBILE-SAFE SANITIZATION
+    const cleanFirstName = firstName.trim();
+    const cleanLastName = lastName.trim();
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanPassword = password.trim();
+    const cleanConfirmPassword = confirmPassword.trim();
+
+    if (
+      !cleanFirstName ||
+      !cleanLastName ||
+      !cleanEmail ||
+      !cleanPassword ||
+      !cleanConfirmPassword
+    ) {
+      setError('Please fill out all fields.');
+      setLoading(false);
+      return;
+    }
+
+    if (cleanPassword !== cleanConfirmPassword) {
       setError("Passwords don't match.");
       setLoading(false);
       return;
@@ -33,26 +52,31 @@ const SignUpPage = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          firstname: firstName,
-          lastname: lastName,
-          email,
-          password,
-          password_confirmation: confirmPassword, // included
+          firstname: cleanFirstName,
+          lastname: cleanLastName,
+          email: cleanEmail,
+          password: cleanPassword,
+          password_confirmation: cleanConfirmPassword,
         }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || 'Signup failed');
+        const errorMessage =
+          typeof data.error === 'object'
+            ? JSON.stringify(data.error)
+            : data.error;
+        setError(errorMessage || 'Signup failed');
         setLoading(false);
         return;
       }
 
       alert('Account created successfully!');
       router.push('/login');
-    } catch {
-      setError('Network error. Try again.');
+    } catch (err) {
+      console.error('Signup failed:', err);
+      setError('An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -93,6 +117,7 @@ const SignUpPage = () => {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
+            autoCapitalize="words"
             className="w-full px-3 py-2 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white"
           />
 
@@ -102,6 +127,7 @@ const SignUpPage = () => {
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
+            autoCapitalize="words"
             className="w-full px-3 py-2 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white"
           />
 
@@ -111,6 +137,8 @@ const SignUpPage = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            autoCapitalize="none"
+            autoCorrect="off"
             className="w-full px-3 py-2 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white"
           />
 
