@@ -9,7 +9,6 @@ import {
   Globe,
   Server,
   Mail,
-  Cloud,
   ArrowRight,
   Star,
   Shield,

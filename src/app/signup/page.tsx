@@ -8,142 +8,146 @@ import { useRouter } from 'next/navigation';
 
 const SignUpPage = () => {
   const router = useRouter();
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
+
+    if (password !== confirmPassword) {
+      setError("Passwords don't match.");
+      setLoading(false);
+      return;
+    }
 
     try {
-      const res = await fetch('/signup', {
+      const res = await fetch('/api/signup', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ firstName, lastName, email, username }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstname: firstName,
+          lastname: lastName,
+          email,
+          password,
+          password_confirmation: confirmPassword, // included
+        }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.error || 'Something went wrong');
+        setError(data.error || 'Signup failed');
         setLoading(false);
         return;
       }
 
       alert('Account created successfully!');
-      router.push('/login'); // ya next step page
-    } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? err.message : 'Network error';
-      alert(errorMessage);
+      router.push('/login');
+    } catch {
+      setError('Network error. Try again.');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleClose = () => {
-    router.push('/');
-  };
-
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-8 backdrop-blur-sm" style={{ backgroundColor: 'rgb(var(--signup-page-bg))' }}>
+    <div className="min-h-screen flex items-center justify-center px-4 py-8 backdrop-blur-sm">
       <motion.div
         initial={{ scale: 0.9, opacity: 0, y: 40 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, ease: 'easeOut' }}
-        className="relative w-full max-w-md bg-[#1a1a1a] rounded-lg shadow-2xl border border-gray-800 p-4 sm:p-6"
+        transition={{ duration: 0.3 }}
+        className="relative w-full max-w-md bg-[#1a1a1a] rounded-lg shadow-2xl border border-gray-800 p-6"
       >
         <button
-          onClick={handleClose}
-          className="absolute right-2 sm:right-3 top-2 sm:top-3 text-gray-400 hover:text-white transition-colors"
+          onClick={() => router.push('/')}
+          className="absolute right-3 top-3 text-gray-400 hover:text-white"
         >
-          <X className="w-4 h-4 sm:w-5 sm:h-5" />
+          <X className="w-5 h-5" />
         </button>
 
-        <h2 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6">
-          Create an account
+        <h2 className="text-xl font-bold text-white mb-2">
+          Create your account
         </h2>
+        <p className="text-sm text-gray-400 mb-6">
+          Enter your details to get started. You’ll verify your email when logging in.
+        </p>
 
-        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
-          <div>
-            <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5">First name</label>
-            <input
-              type="text"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder="First name"
-              required
-              className="w-full px-3 py-2 sm:py-2.5 text-sm bg-[#2a2a2a] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-            />
+        {error && (
+          <div className="bg-red-500/20 border border-red-500 text-red-400 p-3 rounded-lg mb-4 text-sm">
+            {error}
           </div>
+        )}
 
-          <div>
-            <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5">Last name</label>
-            <input
-              type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              placeholder="Last name"
-              required
-              className="w-full px-3 py-2 sm:py-2.5 text-sm bg-[#2a2a2a] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-            />
-          </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            placeholder="First name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+            className="w-full px-3 py-2 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white"
+          />
 
-          <div>
-            <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email address"
-              required
-              className="w-full px-3 py-2 sm:py-2.5 text-sm bg-[#2a2a2a] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-            />
-            <p className="mt-1.5 text-xs text-gray-400">
-              Please use a valid email and proceed with email verification promptly to avoid account issues.
-            </p>
-          </div>
+          <input
+            type="text"
+            placeholder="Last name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+            className="w-full px-3 py-2 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white"
+          />
 
-          <div>
-            <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5">Username</label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your username"
-              required
-              pattern="[a-zA-Z0-9]+"
-              className="w-full px-3 py-2 sm:py-2.5 text-sm bg-[#2a2a2a] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-            />
-            <p className="mt-1.5 text-xs text-gray-400">
-              Your username must contain only letters (a-z) and numbers (0-9).
-            </p>
-          </div>
+          <input
+            type="email"
+            placeholder="Email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full px-3 py-2 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white"
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="w-full px-3 py-2 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white"
+          />
+
+          <input
+            type="password"
+            placeholder="Confirm password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            className="w-full px-3 py-2 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white"
+          />
 
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-2.5 text-sm sm:text-base bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg transition-all duration-300 ${
-              loading ? 'opacity-70 cursor-not-allowed' : ''
-            }`}
+            className="w-full py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-medium"
           >
-            {loading ? 'Creating Account...' : 'Next'}
+            {loading ? 'Creating...' : 'Continue'}
           </button>
         </form>
 
-        <div className="mt-4 sm:mt-5 text-center text-xs text-gray-400">
+        <p className="mt-5 text-center text-sm text-gray-400">
           Already have an account?{' '}
-          <Link href="/login" className="text-blue-500 hover:text-blue-400 transition-colors font-medium">
+          <Link href="/login" className="text-blue-500">
             Log in
           </Link>
-        </div>
+        </p>
       </motion.div>
-
-      
     </div>
   );
 };

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { X, Eye, EyeOff, Key } from 'lucide-react';
+import { X, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -11,12 +11,40 @@ const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log({ username, password });
-    // Navigate to dashboard or home after login
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // 🔹 Store token
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('refresh_token', data.refresh_token);
+        localStorage.setItem('client_id', data.client_id);
+
+        // 🔹 Redirect to dashboard
+        router.push('/dashboard');
+      } else {
+        setError(data.message || 'Login failed');
+      }
+    } catch (err) {
+      console.error('Login request failed:', err);
+      setError('An unexpected error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleClose = () => {
@@ -32,10 +60,7 @@ const LoginPage = () => {
         className="relative w-full max-w-sm bg-[#1a1a1a] rounded-lg shadow-2xl border border-gray-800 p-4 sm:p-6"
       >
         {/* Close Button */}
-        <button
-          onClick={handleClose}
-          className="absolute right-2 sm:right-3 top-2 sm:top-3 text-gray-400 hover:text-white transition-colors"
-        >
+        <button onClick={handleClose} className="absolute right-2 sm:right-3 top-2 sm:top-3 text-gray-400 hover:text-white transition-colors">
           <X className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
 
@@ -80,37 +105,20 @@ const LoginPage = () => {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
               >
-                {showPassword ? (
-                  <EyeOff className="w-4 h-4" />
-                ) : (
-                  <Eye className="w-4 h-4" />
-                )}
+                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
           </div>
 
-          {/* Log in with password button */}
+          {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+
+          {/* Login Button */}
           <button
             type="submit"
-            className="w-full py-2.5 text-sm sm:text-base bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+            disabled={loading}
+            className={`w-full py-2.5 text-sm sm:text-base bg-blue-600 text-white font-medium rounded-lg transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
           >
-            Log in with password
-          </button>
-
-          {/* OR separator */}
-          <div className="flex items-center justify-center my-3">
-            <div className="flex-1 border-t border-gray-700"></div>
-            <span className="px-3 text-xs text-gray-400">OR</span>
-            <div className="flex-1 border-t border-gray-700"></div>
-          </div>
-
-          {/* Log in with passkey button */}
-          <button
-            type="button"
-            className="w-full py-2.5 text-sm sm:text-base bg-[#2a2a2a] border border-gray-700 hover:border-gray-600 text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
-          >
-            <Key className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            Log in with passkey
+            {loading ? 'Logging in...' : 'Log in with password'}
           </button>
         </form>
 
@@ -135,4 +143,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-

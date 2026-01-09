@@ -3,12 +3,12 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import UniversalDropdown from "@/components/Navbar/DynamicDropdown";
 import Logo from "./Logo";
 import { Globe, ShoppingCart, User, Menu } from "lucide-react";
 import { useDropdown } from "./DropdownContext";
 import { useCart } from "@/components/Cart/CartContext";
-import { useLogin } from "@/components/Login/LoginContext";
 
 interface NavbarProps {
   hasHeaderBanner: boolean;
@@ -18,7 +18,6 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { activeDropdown, setActiveDropdown } = useDropdown();
   const { openCart, items } = useCart();
-  const { openLogin } = useLogin();
   const [isScrollingUp, setIsScrollingUp] = useState(true);
   const [isBeyondHero, setIsBeyondHero] = useState(false);
   const lastScrollY = useRef(0);
@@ -147,18 +146,30 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
               const isUser = Icon === User;
               return (
                 <div key={i} className="relative">
-                  <button
-                    onClick={isCart ? openCart : isUser ? openLogin : undefined}
-                    className={`font-medium transition-all duration-300 px-3 py-2 rounded-full ${
+                  {isUser ? (
+                    <Link href="/login" className={`font-medium transition-all duration-300 px-3 py-2 rounded-full ${
                       (isHostingPage)
                         ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
                         : (isDomainPage || isHomepage) 
                         ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
                         : 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
-                    }`}
-                  >
-                    <Icon size={16} />
-                  </button>
+                    }`}>
+                      <Icon size={16} />
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={isCart ? openCart : undefined}
+                      className={`font-medium transition-all duration-300 px-3 py-2 rounded-full ${
+                        (isHostingPage)
+                          ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
+                          : (isDomainPage || isHomepage) 
+                          ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
+                          : 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
+                      }`}
+                    >
+                      <Icon size={16} />
+                    </button>
+                  )}
                   {isCart && items.length > 0 && (
                     <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
                       {items.length}
@@ -180,18 +191,30 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
                 const isUser = Icon === User;
                 return (
                   <div key={i} className="relative">
-                    <button
-                      onClick={isCart ? openCart : isUser ? openLogin : undefined}
-                      className={`font-medium transition-all duration-300 px-2 py-2 rounded-full ${
+                    {isUser ? (
+                      <Link href="/login" className={`font-medium transition-all duration-300 px-2 py-2 rounded-full ${
                         (isHostingPage)
                           ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
                           : (isDomainPage || isHomepage)
                           ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
                           : 'text-[hsl(var(--navbar-text))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
-                      }`}
-                    >
-                      <Icon size={16} />
-                    </button>
+                      }`}>
+                        <Icon size={16} />
+                      </Link>
+                    ) : (
+                      <button
+                        onClick={isCart ? openCart : undefined}
+                        className={`font-medium transition-all duration-300 px-2 py-2 rounded-full ${
+                          (isHostingPage)
+                            ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
+                            : (isDomainPage || isHomepage)
+                            ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
+                            : 'text-[hsl(var(--navbar-text))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
+                        }`}
+                      >
+                        <Icon size={16} />
+                      </button>
+                    )}
                     {isCart && items.length > 0 && (
                       <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
                         {items.length}
