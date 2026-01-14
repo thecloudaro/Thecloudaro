@@ -1,8 +1,8 @@
 "use client";
 
-import LegalHero from "@/components/Legal/LegalHero";
-import Links from "@/components/Legal/Links";
-import Trust from "@/components/Legal/Trust";
+import LegalHero from "@/components/TermsAndConditions/LegalHero";
+import Links from "@/components/TermsAndConditions/Links";
+import Trust from "@/components/TermsAndConditions/Trust";
 
 export default function LegalPage() {
   return (

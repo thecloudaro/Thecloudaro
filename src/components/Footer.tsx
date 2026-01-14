@@ -206,7 +206,7 @@ const Footer: React.FC = () => {
                             : link === "Roadmap"
                               ? "/roadmap"
                               : link === "Privacy Policy"
-                                ? "/privacy-policy"
+                                ? "/legal/policy"
                                 : link ===
                                     "Domain Registration Data Disclosure Policy"
                                   ? "/legal/domain-registration-data-disclosure-policy"
