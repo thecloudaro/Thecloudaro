@@ -166,16 +166,16 @@ const Policy = () => {
 
               {/* Last Update */}
               <p className="text-xs" style={{ color: 'rgb(156 163 175)' }}>
-                Last Update: July 16, 2025
+              Last updated: 01-January-2026
               </p>
 
               {/* Body Content */}
               <div className="space-y-4 sm:space-y-6 text-xs leading-relaxed" style={{ color: 'rgb(255 255 255)' }}>
                 <p>
-                  The Cloud Aro is committed to our customer&apos;s privacy, including domain registration data. We also understand that there may be legitimate reasons for requesting domain registration data. To navigate these requests, we comply with laws governing what must, can and/or cannot be shared and the compliance requirements surrounding each request and resulting decision.
+                This Domain Registration Data Disclosure Policy & Guide explains how The Cloud Aro collects, processes, protects, and discloses domain registration data (also known as WHOIS or Registration Data) in compliance with ICANN policies, applicable registrar requirements, GDPR, Pakistan data protection principles, and relevant US laws.
                 </p>
                 <p>
-                  We have put together this policy as a guide for you if you are seeking domain registration data, formerly known as Whois data. This guide incorporates the various legal requirements that apply to The Cloud Aro.
+                This document is intended for domain registrants, resellers, law enforcement authorities, intellectual property holders, and other legitimate requestors.
                 </p>
               </div>
 

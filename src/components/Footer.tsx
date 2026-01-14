@@ -209,7 +209,7 @@ const Footer: React.FC = () => {
                                 ? "/privacy-policy"
                                 : link ===
                                     "Domain Registration Data Disclosure Policy"
-                                  ? "/domain-registration-data-disclosure-policy"
+                                  ? "/legal/domain-registration-data-disclosure-policy"
                                   : link === "Request New Feature"
                                     ? "/request-new-feature"
                                     : link === "Status Updates"
@@ -217,7 +217,7 @@ const Footer: React.FC = () => {
                                       : link === "Knowledge Base"
                                         ? "/knowledge-base"
                                         : link === "Terms & Conditions"
-                                          ? "/terms-and-conditions"
+                                          ? "/legal"
                                           : link === "Transfer Domains"
                                             ? "/domain/transfer"
                                             : link === "Migrate Hosting"

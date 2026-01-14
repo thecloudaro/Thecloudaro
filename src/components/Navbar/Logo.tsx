@@ -10,7 +10,7 @@ const Logo = () => {
         {/* Logo Image - matches navbar height */}
         <div className="relative h-20 sm:h-24 md:h-28 mr-2" style={{ width: 'auto' }}>
           <Image
-            src="/logo/logo.png"
+            src="/logo/logo1.png"
             alt="TheCloudaro Logo"
             width={280}
             height={112}
