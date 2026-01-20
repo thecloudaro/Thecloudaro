@@ -114,6 +114,11 @@
     /* Header Banner */
     --header-banner-bg: 217 91% 55%; /* Blue background */
     --header-banner-text: 0 0% 100%;
+    --header-banner-gradient-1: 222 47% 4%;   /* #020617 */
+    --header-banner-gradient-2: 222 47% 11%;  /* #0f172a */
+    --header-banner-gradient-3: 225 72% 56%;  /* #1d4ed8 */
+    --header-banner-gradient-4: 222 47% 11%;  /* #0f172a */
+    --header-banner-gradient-5: 222 47% 4%;   /* #020617 */
 
     /* Feature Request Modal */
     --modal-bg: 240 20% 4%;
@@ -296,6 +301,21 @@
     --footer-social-bg: 210 20% 10%;
     --footer-social-hover: 217 91% 60%;
     --footer-payment-bg: 210 20% 15%;
+    --footer-facebook-bg: 24 119 242; /* #1877F2 */
+
+    /* Navbar Promotions Button Colors */
+    --nav-promotions-gradient-1: 37 99 235;  /* #2563EB */
+    --nav-promotions-gradient-2: 79 70 229;  /* #4F46E5 */
+    --nav-promotions-gradient-3: 34 197 94;  /* #22C55E */
+    --nav-promotions-gradient-4: 14 165 233; /* #0EA5E9 */
+    
+    /* Domain Button Animated Gradient */
+    --domain-button-gradient-1: 37 99 235;  /* #2563EB - blue */
+    --domain-button-gradient-2: 79 70 229;  /* #4F46E5 - indigo */
+    --domain-button-gradient-3: 34 197 94;  /* #22C55E - green */
+    --domain-button-gradient-4: 14 165 233; /* #0EA5E9 - sky */
+    --domain-button-shadow: 37, 99, 235, 0.3; /* blue shadow - for rgba() */
+    --nav-promotions-shadow: 15, 23, 42, 0.45; /* rgba for box shadow */
 
 
 
@@ -1956,6 +1976,91 @@
 .bg-transfer-instructions-inner-box { background-color: rgba(var(--transfer-instructions-inner-box-bg)); }
 .border-transfer-instructions-inner-box { border-color: rgba(var(--transfer-instructions-inner-box-border)); }
 .text-transfer-instructions-asterisks { color: rgb(var(--transfer-instructions-asterisks)); }
+
+/* ===============================
+   Header Banner Animated Gradient
+   =============================== */
+@keyframes header-banner-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.header-banner-animated-gradient {
+  background-image: linear-gradient(
+    90deg,
+    hsl(var(--header-banner-gradient-1)),
+    hsl(var(--header-banner-gradient-2)),
+    hsl(var(--header-banner-gradient-3)),
+    hsl(var(--header-banner-gradient-4)),
+    hsl(var(--header-banner-gradient-5))
+  );
+  background-size: 200% 100%;
+  animation: header-banner-gradient 10s ease-in-out infinite;
+}
+
+/* ===============================
+   Navbar Promotions Button Gradient
+   =============================== */
+@keyframes nav-promotions-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.nav-promotions-gradient {
+  background-image: linear-gradient(
+    90deg,
+    rgb(var(--nav-promotions-gradient-1)),
+    rgb(var(--nav-promotions-gradient-2)),
+    rgb(var(--nav-promotions-gradient-3)),
+    rgb(var(--nav-promotions-gradient-4))
+  );
+  background-size: 250% 100%;
+  animation: nav-promotions-gradient 8s ease-in-out infinite;
+  box-shadow: 0 8px 20px rgba(var(--nav-promotions-shadow));
+}
+
+/* ===============================
+   Domain Button Animated Gradient
+   =============================== */
+@keyframes domain-button-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.domain-button-gradient {
+  background-image: linear-gradient(
+    90deg,
+    rgb(var(--domain-button-gradient-1)),
+    rgb(var(--domain-button-gradient-2)),
+    rgb(var(--domain-button-gradient-3)),
+    rgb(var(--domain-button-gradient-4)),
+    rgb(var(--domain-button-gradient-1))
+  );
+  background-size: 300% 100%;
+  animation: domain-button-gradient 6s ease-in-out infinite;
+  box-shadow: 0 4px 12px rgba(var(--domain-button-shadow));
+}
 
 /* TransferPricing Component */
 .bg-transfer-pricing { background-color: rgb(var(--transfer-pricing-bg)); }

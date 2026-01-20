@@ -188,6 +188,7 @@ const ChooseYourHosting = () => {
             dataCenter={dataCenter}
             onDataCenterChange={setDataCenter}
             variant="plain"
+            hideDataCenter={true}
           />
         </div>
 

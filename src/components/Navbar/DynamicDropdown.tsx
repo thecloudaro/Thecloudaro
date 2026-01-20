@@ -151,6 +151,7 @@ export default function UniversalDropdown({
       sections: [
         { title: "Security", desc: "See how Thecloudaro keeps you secure.", href: "/security" },
         { title: "Domain Privacy", desc: "Keep your domain info private.", href: "/domain-name-privacy" },
+        { title: "SSL Certificates", desc: "Secure your website with SSL certificates.", href: "/ssl-certificates" },
         // { title: "CDN", desc: "Speed up your site worldwide.", href: "/cdn" },
         // { title: "VPN", desc: "Secure your online presence.", href: "/vpn" }
       ]

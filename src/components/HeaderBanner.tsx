@@ -1,11 +1,13 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 interface HeaderBannerProps {
   text?: string | React.ReactNode;
   backgroundColor?: string;
+  href?: string;
 }
 
 const HeaderBanner = ({ 
@@ -15,13 +17,18 @@ const HeaderBanner = ({
       <span className="font-semibold">The Cloud Aro Web Hosting</span>
     </>
   ),
-  backgroundColor
+  backgroundColor,
+  href = '/web-hosting',
 }: HeaderBannerProps) => {
-  return (
+  const hasCustomBackground = Boolean(backgroundColor);
+
+  const bannerContent = (
     <motion.div
-      className="text-center py-2 px-4 sm:px-6 text-xs sm:text-sm font-medium tracking-wide sticky top-0 z-[60]"
+      className={`text-center py-2 px-4 sm:px-6 text-xs sm:text-sm font-medium tracking-wide sticky top-0 z-[60] cursor-pointer ${
+        hasCustomBackground ? '' : 'header-banner-animated-gradient'
+      }`}
       style={{ 
-        backgroundColor: backgroundColor || 'rgb(var(--header-banner-bg))',
+        backgroundColor: hasCustomBackground ? backgroundColor : undefined,
         color: 'rgb(var(--header-banner-text))',
       }}
       initial={{ y: -20, opacity: 0 }}
@@ -34,6 +41,17 @@ const HeaderBanner = ({
       </div>
     </motion.div>
   );
+
+  // Make the entire top bar clickable to highlight latest offers
+  if (href) {
+    return (
+      <Link href={href} className="block">
+        {bannerContent}
+      </Link>
+    );
+  }
+
+  return bannerContent;
 };
 
 export default HeaderBanner;

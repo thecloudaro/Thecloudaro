@@ -53,7 +53,6 @@ const planContent: Record<PlanKey, PlanConfig> = {
       },
       { emphasis: "HackGuardian" }
     ],
-    coupon: "EASYWPDEAL",
     ctaLabel: "Add to cart",
     renewsLabel: "Renews for $9.88/mo",
     showPromoNote: true
@@ -117,14 +116,26 @@ const emptyOverrides: Record<PlanKey, Partial<PlanConfig>> = {
 
 const billingCopy: Record<BillingCycle, Record<PlanKey, Partial<PlanConfig>>> = {
   monthly: emptyOverrides,
-  yearly: emptyOverrides
-};
-
-const formatPrice = (basePrice: string, billing: BillingCycle) => {
-  if (billing === "yearly") {
-    return basePrice.replace("/mo", "/mo (yearly)");
+  yearly: {
+    starter: {
+      regularPrice: "$118.56/yr",
+      promoLabel: "50% OFF*",
+      promoPrice: "$59.88",
+      renewsLabel: "Renews for $118.56/yr",
+    },
+    turbo: {
+      regularPrice: "$226.56/yr",
+      promoLabel: "56% OFF*",
+      promoPrice: "$99.88",
+      renewsLabel: "Renews for $226.56/yr",
+    },
+    supersonic: {
+      regularPrice: "$322.56/yr",
+      promoLabel: "60% OFF*",
+      promoPrice: "$129.88",
+      renewsLabel: "Renews for $322.56/yr",
+    }
   }
-  return basePrice;
 };
 
 const CloudHostingPlans = ({ billing, onCompareClick }: CloudHostingPlansProps) => {
@@ -235,9 +246,14 @@ const PlanCard = ({ plan, billing }: PlanCardProps) => {
             {plan.promoPrice}
           </span>
             <span className="text-xs font-semibold text-white/70">
-            {billing === "yearly" ? "/mo* billed yearly" : "/mo"}
+            {billing === "yearly" ? "/yr" : "/mo"}
           </span>
         </div>
+        {billing === "yearly" && (
+          <p className="text-xs text-white/50">
+            ${(parseFloat(plan.promoPrice.replace('$', '')) / 12).toFixed(2)}/mo billed yearly
+          </p>
+        )}
         {plan.showPromoNote ? (
           <p className="text-xs text-white/50">First month free with promo code</p>
         ) : null}
@@ -284,9 +300,7 @@ const PlanCard = ({ plan, billing }: PlanCardProps) => {
         {plan.ctaLabel}
       </button>
       <p className="mt-2 text-center text-[10px] text-white/40">
-        {billing === "yearly"
-          ? formatPrice(plan.renewsLabel, billing)
-          : plan.renewsLabel}
+        {plan.renewsLabel}
       </p>
     </div>
   );

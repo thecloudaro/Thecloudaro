@@ -81,7 +81,7 @@ export default function FeatureRequestModal({
   <p className="text-modal-text-secondary text-xs mt-1">
     Need help instead?{" "}
     <Link 
-      href="#" 
+      href="/about/contactus" 
       className="hover:underline"
       style={{ color: 'rgb(var(--feature-modal-link))' }}
     >

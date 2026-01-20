@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import UniversalDropdown from "@/components/Navbar/DynamicDropdown";
 import Logo from "./Logo";
-import { Globe, ShoppingCart, User, Menu } from "lucide-react";
+import { ShoppingCart, User, Menu } from "lucide-react";
 import { useDropdown } from "./DropdownContext";
 import { useCart } from "@/components/Cart/CartContext";
 
@@ -120,7 +120,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
             <Logo />
           </div>
 
-          <div className="hidden md:flex flex-1 justify-center space-x-4">
+          <div className="hidden md:flex flex-1 justify-center space-x-4 items-center">
             {menuItems.map((item) => (
               <button
                 key={item}
@@ -138,10 +138,21 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
                 {item}
               </button>
             ))}
+
+            {/* Promotions Button - animated gradient CTA */}
+            <Link
+              href="/promotions"
+              className="ml-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide nav-promotions-gradient border border-white/10"
+              style={{
+                color: "#ffffff",
+              }}
+            >
+              Promotions
+            </Link>
           </div>
 
-          <div className="hidden md:flex items-center space-x-2">
-            {[Globe, ShoppingCart, User].map((Icon, i) => {
+          <div className="hidden md:flex items-center space-x-3">
+            {[ShoppingCart, User].map((Icon, i) => {
               const isCart = Icon === ShoppingCart;
               const isUser = Icon === User;
               return (
@@ -180,13 +191,13 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
             })}
           </div>
 
-          <div className="grid grid-cols-3 md:hidden items-center w-full">
+          <div className="grid grid-cols-3 md:hidden items-center w-full gap-2">
             <div className="flex justify-start">
               <Logo />
             </div>
 
-            <div className="flex justify-center space-x-1">
-              {[Globe, ShoppingCart, User].map((Icon, i) => {
+            <div className="flex justify-center space-x-3">
+              {[ShoppingCart, User].map((Icon, i) => {
                 const isCart = Icon === ShoppingCart;
                 const isUser = Icon === User;
                 return (

@@ -1,15 +1,41 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import ContentHeading from "@/components/ui/content-heading";
 import HostingPlanControls, { BillingCycle } from "./HostingPlanControls";
 import { Info, ChevronDown } from "lucide-react";
 import { hostingPlanProductIds } from "@/config/hosting-plans";
 
+interface PricingInfo {
+  price: number;
+  original: number;
+  renewal: number;
+  discountLabel: string;
+  perMonth: number;
+}
+
+interface PlanPricing {
+  monthly?: PricingInfo;
+  yearly?: PricingInfo;
+  biyearly?: PricingInfo;
+}
+
+interface HostingPlan {
+  name: string;
+  description: string;
+  popular?: boolean;
+  pricing: PlanPricing;
+  features: {
+    disk: string;
+    domains: string;
+  };
+}
+
 // Default plans structure (pricing will come from Upmind API only)
-const defaultPlans = [
+const defaultPlans: HostingPlan[] = [
   {
     name: "Essential",
+    description: "Perfect for starting out",
     pricing: {
       monthly: undefined,
       yearly: undefined,
@@ -22,6 +48,8 @@ const defaultPlans = [
   },
   {
     name: "Pro",
+    description: "Ideal for taking ideas further",
+    popular: true,
     pricing: {
       monthly: undefined,
       yearly: undefined,
@@ -34,6 +62,7 @@ const defaultPlans = [
   },
   {
     name: "Supreme",
+    description: "Best for boosting businesses",
     pricing: {
       monthly: undefined,
       yearly: undefined,
@@ -236,13 +265,13 @@ const allPlansSections: AllPlansSection[] = [
   },
 ];
 
-const ChooseHosting = () => {
+const ChooseHosting = forwardRef<HTMLElement>((props, ref) => {
   const [billing, setBilling] = useState<BillingCycle>("yearly");
   const [dataCenter, setDataCenter] = useState("US");
   const [expandedSections, setExpandedSections] = useState<
     Record<string, boolean>
   >({});
-  const [plans, setPlans] = useState(defaultPlans);
+  const [plans, setPlans] = useState<HostingPlan[]>(defaultPlans);
   const [loading, setLoading] = useState(true);
   const [pricingLoaded, setPricingLoaded] = useState(false);
 
@@ -318,10 +347,34 @@ const ChooseHosting = () => {
             };
           }
 
-          // Extract valid pricing values (non-null, non-zero)
-          const monthly = fetchedPricing.monthly && fetchedPricing.monthly > 0 ? fetchedPricing.monthly : undefined;
-          const yearly = fetchedPricing.yearly && fetchedPricing.yearly > 0 ? fetchedPricing.yearly : undefined;
-          const biyearly = fetchedPricing.biyearly && fetchedPricing.biyearly > 0 ? fetchedPricing.biyearly : undefined;
+          // Extract pricing values - API may return simple numbers or full pricing objects
+          // For now, if API returns simple numbers, we'll structure them with calculated original/renewal
+          // When backend is ready, API should return: { price, original, renewal, discountLabel }
+          const processPricing = (price: number | null | undefined, cycle: string): PricingInfo | undefined => {
+            if (!price || price <= 0) return undefined;
+            
+            // If API returns full pricing object, use it (when backend is ready)
+            if (typeof price === 'object' && price !== null && 'price' in price) {
+              return price as PricingInfo;
+            }
+            
+            // Otherwise, calculate from current price (temporary until API provides full data)
+            const currentPrice = typeof price === 'number' ? price : parseFloat(String(price));
+            const originalPrice = currentPrice * 1.5; // Temporary calculation
+            const discountPercent = Math.round(((originalPrice - currentPrice) / originalPrice) * 100);
+            
+            return {
+              price: currentPrice,
+              original: originalPrice,
+              renewal: currentPrice,
+              discountLabel: `${discountPercent}% OFF*`,
+              perMonth: cycle === 'yearly' ? currentPrice / 12 : cycle === 'biyearly' ? currentPrice / 24 : currentPrice,
+            };
+          };
+
+          const monthly = processPricing(fetchedPricing.monthly, 'monthly');
+          const yearly = processPricing(fetchedPricing.yearly, 'yearly');
+          const biyearly = processPricing(fetchedPricing.biyearly, 'biyearly');
 
           // Only update if at least one pricing value exists
           if (monthly || yearly || biyearly) {
@@ -368,6 +421,7 @@ const ChooseHosting = () => {
 
   return (
     <section
+      ref={ref}
       className="relative w-full py-12 sm:py-16 md:py-20 lg:py-24"
       style={{ backgroundColor: "rgb(var(--hosting-section-bg))" }}
     >
@@ -387,6 +441,7 @@ const ChooseHosting = () => {
               variant="flat"
               className="gap-10"
               showDivider={false}
+              hideDataCenter={true}
             />
           </div>
         </div>
@@ -394,25 +449,63 @@ const ChooseHosting = () => {
         <div className="pt-6">
           <div className="flex flex-col items-center gap-6 md:flex-row md:justify-end md:gap-8 lg:gap-12 md:w-full lg:w-[726px] md:ml-auto md:mr-0 lg:mr-24">
             {plans.map((plan) => {
-              const currentPrice = plan.pricing[billing];
-              const hasPricing = currentPrice !== undefined && currentPrice !== null;
+              const pricing = plan.pricing[billing];
+              const hasPricing = pricing !== undefined && pricing !== null;
+              
+              const originalSuffix = billing === "monthly" ? "/mo" : billing === "biyearly" ? "/2yr" : "/yr";
+              const renewalSuffix = suffixMap[billing];
               
               return (
                 <div key={plan.name} className="w-[210px] text-center space-y-4">
+                  {plan.popular && (
+                    <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'rgb(var(--hosting-pick-popular-badge))' }}>
+                      MOST POPULAR
+                    </div>
+                  )}
                   <div className="space-y-1 leading-tight">
                     <h3 className="text-[1.9rem] font-semibold text-[rgb(var(--hosting-text-white))]">
                       {plan.name}
                     </h3>
+                    {plan.description && (
+                      <p className="text-sm text-[rgb(var(--hosting-choose-text-gray-400))]">
+                        {plan.description}
+                      </p>
+                    )}
                     {loading ? (
                       <div className="text-[rgb(var(--hosting-choose-text-gray-400))] text-sm">
                         Loading...
                       </div>
                     ) : hasPricing ? (
-                      <div className="text-[rgb(var(--hosting-text-white))] text-xl font-semibold tracking-tight">
-                        ${currentPrice.toFixed(2)}
-                        <span className="text-sm text-[rgb(var(--hosting-choose-text-gray-400))] ml-1">
-                          {suffixMap[billing]}
-                        </span>
+                      <div className="space-y-2">
+                        {pricing.original && (
+                          <div className="flex items-center justify-center gap-2 text-xs font-semibold">
+                            <span className="line-through text-[rgb(var(--hosting-choose-text-gray-500))]">
+                              ${pricing.original.toFixed(2)}{originalSuffix}
+                            </span>
+                            {pricing.discountLabel && (
+                              <span
+                                className="px-2 py-0.5 rounded-full text-[11px]"
+                                style={{
+                                  backgroundColor: "rgba(var(--hosting-pick-discount-bg))",
+                                  color: "rgb(var(--hosting-accent-cyan))",
+                                }}
+                              >
+                                {pricing.discountLabel}
+                              </span>
+                            )}
+                          </div>
+                        )}
+                        <div className="text-[rgb(var(--hosting-text-white))] text-xl font-semibold tracking-tight">
+                          ${pricing.price.toFixed(2)}
+                          <span className="text-sm text-[rgb(var(--hosting-choose-text-gray-400))] ml-1">
+                            {suffixMap[billing]}
+                          </span>
+                        </div>
+                        {pricing.renewal && (
+                          <div className="text-xs text-[rgb(var(--hosting-choose-text-gray-400))]">
+                            Renews for ${pricing.renewal.toFixed(2)}{renewalSuffix}
+                          </div>
+                        )}
                       </div>
                     ) : (
                       <div className="text-[rgb(var(--hosting-choose-text-gray-400))] text-xs space-y-1">
@@ -625,6 +718,8 @@ const ChooseHosting = () => {
       </div>
     </section>
   );
-};
+});
+
+ChooseHosting.displayName = "ChooseHosting";
 
 export default ChooseHosting;

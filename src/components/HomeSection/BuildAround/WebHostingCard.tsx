@@ -61,7 +61,7 @@ const WebHostingCard = () => {
 
           {/* See Plan Button - always visible on mobile, animated on desktop */}
           <div className="mt-1.5 block lg:hidden">
-            <SeePlanButton href="/pricing" className="px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm" />
+            <SeePlanButton href="/hosting-for-wordpress" className="px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm" />
           </div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -72,7 +72,7 @@ const WebHostingCard = () => {
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="mt-2 hidden lg:block"
           >
-            <SeePlanButton href="/pricing" className="px-4 py-2 text-sm" />
+            <SeePlanButton href="/hosting-for-wordpress" className="px-4 py-2 text-sm" />
           </motion.div>
         </div>
       </div>

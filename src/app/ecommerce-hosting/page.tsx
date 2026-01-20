@@ -9,17 +9,23 @@ import BeSecureHosting from '@/components/Hosting/BeSecureHosting';
 import MigrateHosting from '@/components/Hosting/MigrateHosting';
 import ToolHosting from '@/components/Hosting/ToolHosting';
 import AutoBackupSection from '@/components/Hosting/AutoBackupSection';
-import FrequentlyBT from '@/components/Hosting/FrequentlyBT';
 import ChooseHosting from '@/components/Hosting/ChooseHosting';
 import FAQWebHosting from '@/components/Hosting/FAQWebHosting';
 import Disclaimers from '@/components/Hosting/Disclaimers';
 
 export default function HostingPage() {
   const pickYourHostingRef = useRef<HTMLElement>(null);
+  const chooseHostingRef = useRef<HTMLElement>(null);
 
   const handleChoosePlanClick = useCallback(() => {
     if (pickYourHostingRef.current) {
       pickYourHostingRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
+  const handleCompareClick = useCallback(() => {
+    if (chooseHostingRef.current) {
+      chooseHostingRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, []);
 
@@ -63,10 +69,11 @@ export default function HostingPage() {
       <StayHosting 
         imageSrc="/Hosting/stayup.svg"
         imageAlt="Stay up and open"
+        buttonOnClick={handleChoosePlanClick}
       />
 
       {/* Pick Your Hosting Section */}
-      <PickYourHosting ref={pickYourHostingRef} />
+      <PickYourHosting ref={pickYourHostingRef} onCompareClick={handleCompareClick} />
 
       {/* Build At Hosting Section */}
       <BuildAtHosting />
@@ -81,13 +88,10 @@ export default function HostingPage() {
       <ToolHosting />
 
       {/* Choose Hosting Section */}
-      <ChooseHosting />
+      <ChooseHosting ref={chooseHostingRef} />
 
       {/* AutoBackup Section */}
       <AutoBackupSection />
-
-      {/* Frequently Bought Together Section */}
-      <FrequentlyBT />
 
       {/* FAQ Section */}
       <FAQWebHosting />

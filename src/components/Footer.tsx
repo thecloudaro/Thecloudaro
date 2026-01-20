@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+// Social icons for Instagram/LinkedIn are served from /public/Footer assets
 
 interface SubSection {
   heading: string;
@@ -26,6 +27,11 @@ const Footer: React.FC = () => {
     cdn: true,             // Set to false to show CDN
     vpn: true,             // Set to false to show VPN
     roadmap: true,         // Set to false to show Roadmap
+    transferWordpress: true, // Set to false to show Transfer WordPress
+    migrateEmail: true,     // Set to false to show Migrate Email
+    cookiesPreferences: true, // Set to false to show Cookies Preferences
+    virtualMachines: true,  // Set to false to show Virtual Machines
+    statusUpdates: true,    // Set to false to show Status Updates (will be removed completely)
   };
 
   const footerSections: FooterSection[] = [
@@ -47,7 +53,7 @@ const Footer: React.FC = () => {
         },
         { heading: "Email", links: ["Business Email", "Business Email Login"] },
         { heading: "Cloud", links: ["Virtual Machines", "VM Manager"] },
-        { heading: "Security", links: ["Domain Privacy", "CDN", "VPN"] },
+        { heading: "Security", links: ["Domain Privacy", "CDN", "VPN", "SSL Certificates"] },
       ],
     },
     {
@@ -61,7 +67,7 @@ const Footer: React.FC = () => {
     },
     {
       title: "Customer Service",
-      links: ["Contact Us", "Status Updates", "Knowledge Base"],
+      links: ["Contact Us", ...(hiddenItems.statusUpdates ? [] : ["Status Updates"]), "Knowledge Base"],
       hasButton: true,
     },
     { title: "About The Cloud Aro", links: ["About Us","Roadmap","Terms & Conditions","Privacy Policy","Domain Registration Data Disclosure Policy","Cookies Preferences"] },
@@ -76,41 +82,6 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-footer-bg-primary text-footer-text-secondary">
-      {/* Newsletter */}
-      <div className="border-b border-footer-border">
-        <div className="container mx-auto max-w-screen-xl px-8 lg:px-10 py-12 md:py-16 flex flex-col md:flex-row items-center justify-center gap-6">
-          <div className="text-center md:text-left max-w-lg">
-            <h1 className="text-footer-text-primary text-2xl font-bold mb-2">
-              Join our universe
-            </h1>
-            <p className="text-footer-text-muted text-sm md:text-base">
-              Subscribe to keep up with everything happening on The Cloud Aro, from
-              deals and promotions to product launches.
-            </p>
-          </div>
-
-          <div className="relative w-full md:w-auto min-w-[300px]">
-            <Input
-              type="email"
-              placeholder="Enter your email here"
-              className="bg-footer-bg-secondary text-footer-text-primary placeholder-footer-text-muted pr-12 h-12 rounded-full border border-footer-border"
-            />
-            <Button
-              size="icon"
-              className="absolute right-1 top-1 h-10 w-10 rounded-full bg-primary hover:bg-primaryHover"
-            >
-              <Image
-                src="/Footer/search.png"
-                alt="Send"
-                width={24}
-                height={24}
-                className="object-contain"
-              />
-            </Button>
-          </div>
-        </div>
-      </div>
-
       {/* Footer Links */}
       <div className="container mx-auto max-w-screen-xl px-8 lg:px-10 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
         {/* FIRST COLUMN */}
@@ -157,7 +128,9 @@ const Footer: React.FC = () => {
                                                       ? "/cdn"
                                                       : link === "VPN"
                                                         ? "/vpn"
-                                                        : "#"
+                                                        : link === "SSL Certificates"
+                                                          ? "/ssl-certificates"
+                                                          : "#"
                           }
                           className="hover:text-footer-accent transition-colors text-sm"
                         >
@@ -179,39 +152,81 @@ const Footer: React.FC = () => {
               {section.title}
             </h4>
             {section.title === "Follow Us" ? (
-              <div className="flex gap-4">
-                <Link href="https://facebook.com/thecloudaro">
-                  <Image
-                    src="/Footer/fb.webp"
-                    alt="Facebook"
-                    width={40}
-                    height={40}
-                    className="object-cover"
-                  />
+              <div className="flex gap-3">
+                {/* Facebook - use asset from public/Footer */}
+                <Link
+                  href="https://facebook.com/thecloudaro"
+                  aria-label="The Cloud Aro on Facebook"
+                  className="w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center bg-footer-payment-bg transition-transform"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.05)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
+                >
+                  <div
+                    className="w-full h-full flex items-center justify-center"
+                    style={{ backgroundColor: "rgb(var(--footer-facebook-bg))" }}
+                  >
+                    <Image
+                      src="/Footer/facebook.svg"
+                      alt="Facebook"
+                      width={36}
+                      height={36}
+                      className="object-contain"
+                    />
+                  </div>
                 </Link>
-                <Link href="https://linkedin.com/company/thecloudaro">
+                {/* LinkedIn */}
+                <Link
+                  href="https://linkedin.com/company/thecloudaro"
+                  aria-label="The Cloud Aro on LinkedIn"
+                  className="w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center bg-footer-payment-bg transition-transform"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.05)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
+                >
                   <Image
                     src="/Footer/linkedin.png"
                     alt="LinkedIn"
-                    width={40}
-                    height={40}
-                    className="object-cover"
+                    width={36}
+                    height={36}
+                    className="object-contain"
                   />
                 </Link>
-                <Link href="https://instagram.com/thecloudaro">
+                {/* Instagram */}
+                <Link
+                  href="https://instagram.com/thecloudaro"
+                  aria-label="The Cloud Aro on Instagram"
+                  className="w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center bg-footer-payment-bg transition-transform"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.05)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
+                >
                   <Image
                     src="/Footer/insta.jpeg"
                     alt="Instagram"
-                    width={40}
-                    height={40}
-                    className="object-cover"
+                    width={36}
+                    height={36}
+                    className="object-contain"
                   />
                 </Link>
               </div>
             ) : (
               <ul className="space-y-2">
                 {section.links?.map((link) => (
-                  (link === "Roadmap" && hiddenItems.roadmap) ? null : (
+                  ((link === "Roadmap" && hiddenItems.roadmap) ||
+                   (link === "Status Updates" && hiddenItems.statusUpdates) ||
+                   (link === "Migrate Email" && hiddenItems.migrateEmail) ||
+                   (link === "Transfer WordPress" && hiddenItems.transferWordpress) ||
+                   (link === "Cookies Preferences" && hiddenItems.cookiesPreferences)) ? null : (
                     <li key={link}>
                       <Link
                         href={

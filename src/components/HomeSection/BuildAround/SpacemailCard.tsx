@@ -32,31 +32,13 @@ const SpacemailCard = () => {
       <div className="bg-[hsl(var(--spacemail-card-bg))] rounded-2xl sm:rounded-3xl overflow-hidden h-auto lg:h-[500px] flex flex-col lg:flex-row gap-4 transition-all duration-500 ease-in-out touch-manipulation">
         {/* Left side - Content */}
         <div className="w-full lg:w-1/2 lg:h-full p-4 sm:p-6 md:p-8 lg:pl-16 flex flex-col justify-center items-start text-left font-sans">
-          <div className="flex items-center justify-center mb-3 sm:mb-4">
-            <div className="w-4 h-4 sm:w-5 sm:h-5 bg-[hsl(var(--spacemail-card-badge))] rounded mr-2 sm:mr-3"></div>
-            <p className="text-xs sm:text-sm md:text-base uppercase tracking-widest text-[hsl(var(--spacemail-card-text))] font-normal">spacemail</p>
-          </div>
           <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 sm:mb-3 leading-tight">Effortless email</h3>
           <p className="text-[hsl(var(--spacemail-card-text-muted))] text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed items-start text-left max-w-xl mb-4 sm:mb-6">
             Send the right message with ultra-simple and <br/>
             full-service business email for your<br/> Domain.
           </p>
           
-          {/* See Plan Button - always visible on mobile, animated on desktop */}
-          <div className="mt-2 block lg:hidden">
-            <SeePlanButton href="/pricing" />
-          </div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ 
-              opacity: hoveredCard ? 1 : 0,
-              y: hoveredCard ? 0 : 20
-            }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="mt-2 hidden lg:block"
-          >
-            <SeePlanButton href="/pricing" />
-          </motion.div>
+          {/* See Plan button and SPACEMAIL badge intentionally removed from this (Spacemail) card */}
         </div>
 
         {/* Right side - Image */}

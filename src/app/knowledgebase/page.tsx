@@ -5,6 +5,8 @@ import KnowledgeCategories from "@/components/KnowledgeBase/KnowledgeCategories"
 import RecentArticles from "@/components/KnowledgeBase/RecentArticles";
 
 export default function KnowledgeBasePage() {
+  const showRecentArticles = false;
+
   return (
     <div className="min-h-screen">
       <KnowledgeHero />
@@ -21,7 +23,7 @@ export default function KnowledgeBasePage() {
       </div>
       
       <KnowledgeCategories />
-      <RecentArticles />
+      {showRecentArticles && <RecentArticles />}
     </div>
   );
 }

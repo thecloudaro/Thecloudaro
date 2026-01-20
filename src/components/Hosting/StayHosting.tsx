@@ -24,6 +24,8 @@ const StayHosting = ({
   imageSrc = "/Hosting/stayup.svg",
   imageAlt = "Stay up and open"
 }: StayHostingProps) => {
+  const resolvedHref = buttonOnClick ? undefined : buttonHref;
+
   return (
     <section className="relative w-full py-8 lg:py-12" style={{ backgroundColor: 'rgb(var(--hosting-section-bg))' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,7 +63,7 @@ const StayHosting = ({
               <HostingButton 
                 variant="white"
                 size="md"
-                href={buttonHref}
+                href={resolvedHref}
                 onClick={buttonOnClick}
               >
                 {buttonText}

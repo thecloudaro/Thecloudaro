@@ -28,7 +28,7 @@ const MigrateHero = () => {
         >
           {/* Main Heading */}
           <ContentDescription
-            text="Migrate your WordPress website"
+            text="Migrate your website"
             size="xl"
             className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl !text-white font-bold leading-tight"
           />

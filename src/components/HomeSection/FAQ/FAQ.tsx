@@ -146,7 +146,7 @@ const FAQ = ({
             <p className="text-[hsl(var(--faq-text-muted))] text-base md:text-lg">
               Still have questions?{" "}
               <Link
-                href="#contact"
+                href="/about/contactus"
                 className="text-[hsl(var(--faq-text))] hover:underline font-semibold transition-all duration-300"
               >
                 Contact our support team

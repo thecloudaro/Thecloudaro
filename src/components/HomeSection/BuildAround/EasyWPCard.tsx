@@ -45,10 +45,6 @@ const EasyWPCard = () => {
         
         {/* Bottom - Content */}
         <div className="h-2/3 sm:h-3/5 p-3 sm:p-5 md:p-6 lg:pl-12 flex flex-col justify-center items-start text-left font-sans">
-          <div className="flex items-center justify-center mb-3 sm:mb-4">
-            <div className="w-4 h-4 sm:w-5 sm:h-5 bg-[hsl(var(--easywp-card-badge))] rounded mr-2 sm:mr-3"></div>
-            <p className="text-xs sm:text-sm md:text-base uppercase tracking-widest text-[hsl(var(--easywp-card-text))] font-normal">easywp</p>
-          </div>
           <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-1.5 sm:mb-2 leading-tight">No stress hosting <br/> for WordPress</h3>
           <p className="text-[hsl(var(--easywp-card-text-muted))] text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed items-start text-left max-w-xl">
             Give your site a head start with the fastest <br/> 
@@ -58,7 +54,7 @@ const EasyWPCard = () => {
 
           {/* See Plan Button - always visible on mobile, animated on desktop */}
           <div className="mt-2 block lg:hidden">
-            <SeePlanButton href="/pricing" className="px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm" />
+            <SeePlanButton href="/hosting-for-wordpress" className="px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm" />
           </div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -69,7 +65,7 @@ const EasyWPCard = () => {
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="mt-2 hidden lg:block"
           >
-            <SeePlanButton href="/pricing" className="px-4 py-2 text-sm" />
+            <SeePlanButton href="/hosting-for-wordpress" className="px-4 py-2 text-sm" />
           </motion.div>
         </div>
       </div>

@@ -109,15 +109,15 @@ const featureRows: FeatureRow[] = [
     values: {
       starter: {
         primary: "1",
-        secondary: "Free mailbox · first subscription period"
+        secondary: "Free mailbox"
       },
       turbo: {
         primary: "1",
-        secondary: "Free mailbox · first subscription period"
+        secondary: "Free mailbox"
       },
       supersonic: {
         primary: "1",
-        secondary: "Free mailbox · first subscription period"
+        secondary: "Free mailbox"
       }
     },
     helper: {
@@ -131,39 +131,15 @@ const featureRows: FeatureRow[] = [
     values: {
       starter: {
         primary: "1",
-        secondary: "Free SSL certificate · first subscription period"
+        secondary: "Free SSL certificate"
       },
       turbo: {
         primary: "1",
-        secondary: "Free SSL certificate · first subscription period"
+        secondary: "Free SSL certificate"
       },
       supersonic: {
         primary: "1",
-        secondary: "Free SSL certificate · first subscription period"
-      }
-    },
-    showInfo: true
-  },
-  {
-    label: "HackGuardian",
-    values: {
-      starter: { primary: "Free site protection" },
-      turbo: { primary: "Free site protection" },
-      supersonic: { primary: "Free site protection" }
-    },
-    showInfo: true
-  },
-  {
-    label: "MalwareGuardian",
-    values: {
-      starter: { primary: "Free 24/7 malware scanning" },
-      turbo: {
-        primary: "Free 24/7 malware scanning",
-        secondary: "Automatic cleaning"
-      },
-      supersonic: {
-        primary: "Free 24/7 malware scanning",
-        secondary: "Automatic cleaning"
+        secondary: "Free SSL certificate"
       }
     },
     showInfo: true

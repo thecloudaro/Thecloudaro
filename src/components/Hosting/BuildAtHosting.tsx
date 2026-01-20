@@ -21,14 +21,6 @@ customize.`,
       imageSrc: "/Hosting/buildAtHosting.webp",
     },
     {
-      title: "Customize text and images",
-      description: `Easily modify your site's content, upload your own
-images, and adjust the color palette to match your brand's
-identity perfectly. Our intuitive editor makes customization
-a breeze.`,
-      imageSrc: "/Hosting/savetime.png",
-    },
-    {
       title: "Add ready-made pages in a few clicks",
       description: `Expand your website effortlessly by adding pre-designed,
 fully functional pages like 'About Us', 'Contact', or a

@@ -10,7 +10,6 @@ import TransferUnlock from "@/components/Transfer/TransferUnlock";
 import TransferStart from "@/components/Transfer/TransferStart";
 import TransferFAQ from "@/components/Transfer/TransferFAQ";
 import TransferGetMore from "@/components/Transfer/TransferGetMore";
-import InsideTransferManager from "@/components/Transfer/InsideTransferManager";
 import TransferFrequentlyAskedQuestions from "@/components/Transfer/TransferFrequentlyAskedQuestions";
 import SectionHeading from "@/components/ui/section-heading";
 
@@ -196,9 +195,6 @@ const DomainTransferPage = () => {
 
         {/* Get More With Spaceship Section */}
         <TransferGetMore />
-
-        {/* Inside Transfer Manager Section */}
-        <InsideTransferManager />
 
         {/* Frequently Asked Questions Section */}
         <TransferFrequentlyAskedQuestions />

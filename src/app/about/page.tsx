@@ -7,9 +7,10 @@ import Building from "@/components/About/Building";
 import Integrity from "@/components/About/Integrity";
 import Privacy from "@/components/About/Privacy";
 import Rated from "@/components/About/Rated";
-import Shoot from "@/components/About/Shoot";
 
 export default function AboutPage() {
+  const showRatedSection = false;
+
   return (
     <div className="min-h-screen">
       <AboutHero />
@@ -18,8 +19,7 @@ export default function AboutPage() {
       <Building />
       <Integrity />
       <Privacy />
-      <Rated />
-      <Shoot />
+      {showRatedSection && <Rated />}
     </div>
   );
 }

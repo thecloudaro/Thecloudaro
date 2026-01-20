@@ -9,7 +9,44 @@ import HostingPlanControls, { BillingCycle } from "./HostingPlanControls";
 import { useCart } from "@/components/Cart/CartContext";
 import { hostingPlanProductIds } from "@/config/hosting-plans";
 
-const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
+interface PickYourHostingProps {
+  onCompareClick?: () => void;
+}
+
+interface PricingInfo {
+  price: number;
+  renewal: number;
+  original: number;
+  discountLabel: string;
+  perMonth: number;
+}
+
+interface PlanPricing {
+  monthly?: PricingInfo;
+  yearly?: PricingInfo;
+  biyearly?: PricingInfo;
+}
+
+interface HostingPlan {
+  name: string;
+  description: string;
+  pricing: PlanPricing;
+  popular: boolean;
+  features: {
+    cpu: string;
+    storage: string;
+    domains: string;
+    websites: string;
+    ssl: boolean;
+    mailboxes: string;
+    spacemail: boolean;
+    imunify360: boolean;
+    websiteBuilder: boolean;
+    wordpressAI: boolean;
+  };
+}
+
+const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompareClick }, ref) => {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
   const [dataCenter, setDataCenter] = useState("US");
   const [selectedAddons, setSelectedAddons] = useState<{
@@ -19,7 +56,7 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
   const { addItem } = useCart();
 
   // Default plans structure (pricing will come from Upmind API only)
-  const defaultPlans = [
+  const defaultPlans: HostingPlan[] = [
     {
       name: "Essential",
       description: "Perfect for starting out",
@@ -88,7 +125,7 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
     },
   ];
 
-  const [plans, setPlans] = useState(defaultPlans);
+  const [plans, setPlans] = useState<HostingPlan[]>(defaultPlans);
 
   // Fetch pricing from API
   useEffect(() => {
@@ -305,6 +342,7 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
                 dataCenter={dataCenter}
                 onDataCenterChange={setDataCenter}
                 variant="plain" // Changed from "blur" to "plain" to match ChooseYourHosting
+                hideDataCenter={true}
               />
             </div>
           </div>
@@ -452,12 +490,6 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
                       <div className="text-[rgb(var(--hosting-choose-text-gray-300))]">
                         {plan.features.mailboxes}
                       </div>
-                      <div className="text-[rgb(var(--hosting-choose-text-gray-300))]">
-                        Powered by{" "}
-                        <span className="text-[rgb(var(--hosting-pick-text-purple))]">
-                          SPACEMAIL®
-                        </span>
-                      </div>
                       <div className="flex items-center gap-2 text-[rgb(var(--hosting-choose-text-gray-300))]">
                         Imunify360 Protection
                         <span
@@ -505,103 +537,105 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
                     <div className="border-t border-[rgb(var(--hosting-choose-border-gray-800))] mt-15" />
 
                     {/* Suggested Add-ons Section */}
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-center text-xs font-semibold uppercase tracking-wide text-[rgb(var(--hosting-choose-text-gray-400))]">
-                        <span>Suggested add-ons</span>
-                      </div>
-                      <div className="rounded-xl p-4 border border-[rgb(var(--hosting-choose-border-gray-800))]">
-                        <div className="flex items-center justify-between text-sm font-medium text-[rgb(var(--hosting-text-white))]">
-                          <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-lg flex items-center justify-center border border-[rgb(var(--hosting-choose-border-gray-800))]">
-                              <svg
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                fill="none"
-                              >
-                                <path
-                                  d="M8 2L2 6V14H14V6L8 2Z"
-                                  stroke="currentColor"
-                                  strokeWidth="1.5"
+                    {false && (
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-center text-xs font-semibold uppercase tracking-wide text-[rgb(var(--hosting-choose-text-gray-400))]">
+                          <span>Suggested add-ons</span>
+                        </div>
+                        <div className="rounded-xl p-4 border border-[rgb(var(--hosting-choose-border-gray-800))]">
+                          <div className="flex items-center justify-between text-sm font-medium text-[rgb(var(--hosting-text-white))]">
+                            <div className="flex items-center gap-3">
+                              <div className="w-9 h-9 rounded-lg flex items-center justify-center border border-[rgb(var(--hosting-choose-border-gray-800))]">
+                                <svg
+                                  width="16"
+                                  height="16"
+                                  viewBox="0 0 16 16"
                                   fill="none"
-                                />
-                                <path
-                                  d="M6 10L8 12L10 10"
-                                  stroke="currentColor"
-                                  strokeWidth="1.5"
-                                  fill="none"
-                                />
-                              </svg>
-                            </div>
-                            <div>
-                              <div className="flex items-center gap-2">
-                                <span>AutoBackup</span>
-                                <Info className="w-3 h-3 text-[rgb(var(--hosting-choose-text-gray-400))]" />
-                              </div>
-
-                              <div className="flex items-center gap-2 mt-1">
-                                <select
-                                  className="text-md rounded px-2 py-1 focus:outline-none focus:ring-0 focus:border-none hover:border-none hover:bg-transparent"
-                                  style={{
-                                    color: "rgb(var(--hosting-text-white))",
-                                    border: "none",
-                                    outline: "none",
-                                    backgroundColor: "transparent",
-                                  }}
-                                  onFocus={(e) => {
-                                    e.target.style.outline = "none";
-                                    e.target.style.border = "none";
-                                    e.target.style.boxShadow = "none";
-                                    e.target.style.backgroundColor =
-                                      "transparent";
-                                  }}
-                                  onMouseEnter={(e) => {
-                                    e.currentTarget.style.border = "none";
-                                    e.currentTarget.style.outline = "none";
-                                    e.currentTarget.style.backgroundColor =
-                                      "transparent";
-                                    e.currentTarget.style.background =
-                                      "transparent";
-                                  }}
-                                  onMouseLeave={(e) => {
-                                    e.currentTarget.style.backgroundColor =
-                                      "transparent";
-                                    e.currentTarget.style.background =
-                                      "transparent";
-                                  }}
-                                  onMouseDown={(e) => {
-                                    e.currentTarget.style.backgroundColor =
-                                      "transparent";
-                                    e.currentTarget.style.background =
-                                      "transparent";
-                                  }}
-                                  defaultValue="5 GB"
                                 >
-                                  <option>5 GB</option>
-                                  <option>10 GB</option>
-                                  <option>20 GB</option>
-                                </select>
-                                <span className="text-md text-[rgb(var(--hosting-choose-text-gray-400))]">
-                                  +$0.88
-                                </span>
+                                  <path
+                                    d="M8 2L2 6V14H14V6L8 2Z"
+                                    stroke="currentColor"
+                                    strokeWidth="1.5"
+                                    fill="none"
+                                  />
+                                  <path
+                                    d="M6 10L8 12L10 10"
+                                    stroke="currentColor"
+                                    strokeWidth="1.5"
+                                    fill="none"
+                                  />
+                                </svg>
+                              </div>
+                              <div>
+                                <div className="flex items-center gap-2">
+                                  <span>AutoBackup</span>
+                                  <Info className="w-3 h-3 text-[rgb(var(--hosting-choose-text-gray-400))]" />
+                                </div>
+
+                                <div className="flex items-center gap-2 mt-1">
+                                  <select
+                                    className="text-md rounded px-2 py-1 focus:outline-none focus:ring-0 focus:border-none hover:border-none hover:bg-transparent"
+                                    style={{
+                                      color: "rgb(var(--hosting-text-white))",
+                                      border: "none",
+                                      outline: "none",
+                                      backgroundColor: "transparent",
+                                    }}
+                                    onFocus={(e) => {
+                                      e.target.style.outline = "none";
+                                      e.target.style.border = "none";
+                                      e.target.style.boxShadow = "none";
+                                      e.target.style.backgroundColor =
+                                        "transparent";
+                                    }}
+                                    onMouseEnter={(e) => {
+                                      e.currentTarget.style.border = "none";
+                                      e.currentTarget.style.outline = "none";
+                                      e.currentTarget.style.backgroundColor =
+                                        "transparent";
+                                      e.currentTarget.style.background =
+                                        "transparent";
+                                    }}
+                                    onMouseLeave={(e) => {
+                                      e.currentTarget.style.backgroundColor =
+                                        "transparent";
+                                      e.currentTarget.style.background =
+                                        "transparent";
+                                    }}
+                                    onMouseDown={(e) => {
+                                      e.currentTarget.style.backgroundColor =
+                                        "transparent";
+                                      e.currentTarget.style.background =
+                                        "transparent";
+                                    }}
+                                    defaultValue="5 GB"
+                                  >
+                                    <option>5 GB</option>
+                                    <option>10 GB</option>
+                                    <option>20 GB</option>
+                                  </select>
+                                  <span className="text-md text-[rgb(var(--hosting-choose-text-gray-400))]">
+                                    +$0.88
+                                  </span>
+                                </div>
                               </div>
                             </div>
+                            <button
+                              onClick={() => toggleAddon(plan.name, "5 GB", 0.88)}
+                              className="w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                              style={{
+                                backgroundColor: selectedAddon
+                                  ? "rgb(var(--hosting-pick-addon-button-active))"
+                                  : "rgb(var(--hosting-pick-addon-button-bg))",
+                                color: "rgb(var(--hosting-pick-button-text))",
+                              }}
+                            >
+                              <Plus className="w-4 h-4" />
+                            </button>
                           </div>
-                          <button
-                            onClick={() => toggleAddon(plan.name, "5 GB", 0.88)}
-                            className="w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-                            style={{
-                              backgroundColor: selectedAddon
-                                ? "rgb(var(--hosting-pick-addon-button-active))"
-                                : "rgb(var(--hosting-pick-addon-button-bg))",
-                              color: "rgb(var(--hosting-pick-button-text))",
-                            }}
-                          >
-                            <Plus className="w-4 h-4" />
-                          </button>
                         </div>
                       </div>
-                    </div>
+                    )}
 
                     {/* Buttons */}
                     <div>
@@ -633,15 +667,6 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
                         Add to cart
                       </button>
                     </div>
-
-                    {/* Renewal Information */}
-                    {hasPricing && (
-                      <div className="text-xs text-center text-[rgb(var(--hosting-choose-text-gray-400))]">
-                        You pay ${pricing.price.toFixed(2)} — renews for $
-                        {pricing.renewal.toFixed(2)}
-                        {renewalSuffix}
-                      </div>
-                    )}
                   </div>
                 </motion.div>
               );
@@ -657,6 +682,7 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
               *Prices reflect discount on the first billing cycle.
             </p>
             <button
+              onClick={onCompareClick}
               className="px-6 py-3 rounded-full text-sm font-medium transition-all"
               style={{
                 backgroundColor: "rgb(var(--hosting-bg))",

@@ -6,6 +6,32 @@ import { Heart, Filter, ChevronUp, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import TLDSearchBar from "@/components/ui/tld-search-bar";
 
+type RegisterTransferPricing =
+  | { original: string; sale: string; isSale: true }
+  | { price: string; isSale: false };
+
+interface DomainPricingRow {
+  tld: string;
+  register: RegisterTransferPricing;
+  renew: string;
+  transfer: RegisterTransferPricing;
+}
+
+const initialDomainPricing: DomainPricingRow[] = [
+  {
+    tld: ".com",
+    register: { original: "$9.66", sale: "$8.88", isSale: true },
+    renew: "$9.98",
+    transfer: { original: "$9.66", sale: "$8.88", isSale: true },
+  },
+  {
+    tld: ".org",
+    register: { original: "$12.98", sale: "$11.88", isSale: true },
+    renew: "$12.98",
+    transfer: { original: "$12.98", sale: "$11.88", isSale: true },
+  },
+];
+
 const DomainPricingTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showPriceRange, setShowPriceRange] = useState(false);
@@ -13,6 +39,9 @@ const DomainPricingTable = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [minPriceFocused, setMinPriceFocused] = useState(false);
   const [maxPriceFocused, setMaxPriceFocused] = useState(false);
+  const [domainPricing, setDomainPricing] = useState<DomainPricingRow[]>(initialDomainPricing);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
@@ -23,156 +52,68 @@ const DomainPricingTable = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
-  const domainPricing = [
-    {
-      tld: ".com",
-      register: { original: "$9.66", sale: "$8.88", isSale: true },
-      renew: "$9.98",
-      transfer: { original: "$9.66", sale: "$8.88", isSale: true },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".org",
-      register: { original: "$12.98", sale: "$11.88", isSale: true },
-      renew: "$12.98",
-      transfer: { original: "$12.98", sale: "$11.88", isSale: true },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".net",
-      register: { price: "$12.98", isSale: false },
-      renew: "$12.98",
-      transfer: { price: "$12.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".co",
-      register: { price: "$29.98", isSale: false },
-      renew: "$29.98",
-      transfer: { price: "$29.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".io",
-      register: { price: "$39.98", isSale: false },
-      renew: "$39.98",
-      transfer: { price: "$39.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".app",
-      register: { price: "$19.98", isSale: false },
-      renew: "$19.98",
-      transfer: { price: "$19.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".info",
-      register: { price: "$15.98", isSale: false },
-      renew: "$15.98",
-      transfer: { price: "$15.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".biz",
-      register: { price: "$18.98", isSale: false },
-      renew: "$18.98",
-      transfer: { price: "$18.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".me",
-      register: { price: "$24.98", isSale: false },
-      renew: "$24.98",
-      transfer: { price: "$24.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".tv",
-      register: { price: "$29.98", isSale: false },
-      renew: "$29.98",
-      transfer: { price: "$29.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".cc",
-      register: { price: "$25.98", isSale: false },
-      renew: "$25.98",
-      transfer: { price: "$25.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".name",
-      register: { price: "$12.98", isSale: false },
-      renew: "$12.98",
-      transfer: { price: "$12.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".pro",
-      register: { price: "$19.98", isSale: false },
-      renew: "$19.98",
-      transfer: { price: "$19.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".mobi",
-      register: { price: "$22.98", isSale: false },
-      renew: "$22.98",
-      transfer: { price: "$22.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".asia",
-      register: { price: "$18.98", isSale: false },
-      renew: "$18.98",
-      transfer: { price: "$18.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".tel",
-      register: { price: "$15.98", isSale: false },
-      renew: "$15.98",
-      transfer: { price: "$15.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".travel",
-      register: { price: "$35.98", isSale: false },
-      renew: "$35.98",
-      transfer: { price: "$35.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".jobs",
-      register: { price: "$45.98", isSale: false },
-      renew: "$45.98",
-      transfer: { price: "$45.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".museum",
-      register: { price: "$55.98", isSale: false },
-      renew: "$55.98",
-      transfer: { price: "$55.98", isSale: false },
-      icannFee: "$0.20"
-    },
-    {
-      tld: ".aero",
-      register: { price: "$65.98", isSale: false },
-      renew: "$65.98",
-      transfer: { price: "$65.98", isSale: false },
-      icannFee: "$0.20"
-    }
-  ];
+  // Load pricing from API (Upmind-backed, with fallback)
+  useEffect(() => {
+    const fetchPricing = async () => {
+      setIsLoading(true);
+      setLoadError(null);
 
-  const filteredDomains = domainPricing.filter(domain =>
+      try {
+        const response = await fetch("/api/domain-tld-pricing?tlds=.com,.org");
+        const data = await response.json();
+
+        if (!response.ok || !Array.isArray(data?.tlds)) {
+          setLoadError("Unable to load live domain pricing. Showing default values.");
+          return;
+        }
+
+        const rows: DomainPricingRow[] = data.tlds.map((item: any) => {
+          const tld = String(item.tld || "").toLowerCase();
+
+          const formatPrice = (value: unknown): string => {
+            if (typeof value === "number") return `$${value.toFixed(2)}`;
+            if (typeof value === "string") return value.startsWith("$") ? value : `$${value}`;
+            return "-";
+          };
+
+          const registerPrice = item.registerPrice ?? item.register ?? null;
+          const renewPrice = item.renewPrice ?? item.renew ?? null;
+          const transferPrice = item.transferPrice ?? item.transfer ?? null;
+
+          return {
+            tld,
+            register:
+              typeof registerPrice === "number"
+                ? { price: formatPrice(registerPrice), isSale: false }
+                : { price: formatPrice(registerPrice), isSale: false },
+            renew: formatPrice(renewPrice),
+            transfer:
+              typeof transferPrice === "number"
+                ? { price: formatPrice(transferPrice), isSale: false }
+                : { price: formatPrice(transferPrice), isSale: false },
+          } as DomainPricingRow;
+        });
+
+        if (rows.length > 0) {
+          setDomainPricing(rows);
+        }
+      } catch {
+        setLoadError("Unable to load live domain pricing. Showing default values.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPricing();
+  }, []);
+
+  const filteredDomains = domainPricing.filter((domain) =>
     domain.tld.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -416,13 +357,22 @@ const DomainPricingTable = () => {
 
       {/* Pricing Table */}
       <div className="overflow-hidden">
+        {isLoading && (
+          <p className="px-6 pb-4 text-sm" style={{ color: "rgb(var(--domain-pricing-table-header-text))" }}>
+            Loading latest domain pricing...
+          </p>
+        )}
+        {loadError && !isLoading && (
+          <p className="px-6 pb-4 text-xs" style={{ color: "rgb(var(--domain-pricing-table-button-icon))" }}>
+            {loadError}
+          </p>
+        )}
         {/* Table Header */}
-        <div className="hidden md:grid grid-cols-5 gap-8 text-lg font-semibold px-6 py-4" style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>
+        <div className="hidden md:grid grid-cols-4 gap-8 text-lg font-semibold px-6 py-4" style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>
           <div>TLD</div>
           <div>Register</div>
           <div>Renew</div>
           <div>Transfer</div>
-          <div>ICANN fee</div>
         </div>
 
         {/* Table Body */}
@@ -433,7 +383,7 @@ const DomainPricingTable = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="px-6 py-4 transition-colors duration-200 block md:grid md:grid-cols-5 md:gap-8 md:items-center"
+              className="px-6 py-4 transition-colors duration-200 block md:grid md:grid-cols-4 md:gap-8 md:items-center"
               style={{ backgroundColor: 'transparent' }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-row-hover))';
@@ -505,10 +455,6 @@ const DomainPricingTable = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex justify-between">
-                  <span style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>ICANN fee:</span>
-                  <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }}>{domain.icannFee} /yr</span>
-                </div>
               </div>
 
               {/* --- Desktop Layout (Grid columns) --- */}
@@ -537,10 +483,6 @@ const DomainPricingTable = () => {
                 ) : (
                   <span className="font-semibold">{domain.transfer.price} /yr</span>
                 )}
-              </div>
-              {/* ICANN Fee */}
-              <div className="hidden md:block font-semibold text-lg" style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }}>
-                {domain.icannFee} /yr
               </div>
             </motion.div>
           ))}

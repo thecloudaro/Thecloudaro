@@ -154,7 +154,7 @@ const DomainFAQ = () => {
           <p className="text-base md:text-lg" style={{ color: 'rgb(var(--domain-faq-description))' }}>
             Still have questions?{" "}
             <Link
-              href="#contact"
+              href="/about/contactus"
               className="hover:underline font-semibold transition-all duration-300"
               style={{ color: 'rgb(var(--domain-faq-link))' }}
             >

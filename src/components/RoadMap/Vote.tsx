@@ -362,21 +362,18 @@ const Vote = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="p-5 rounded-lg transition-all h-full flex flex-col"
-                className="bg-[rgb(var(--roadmap-vote-card-bg))] border border-[rgb(var(--roadmap-vote-border))] hover:border-[rgb(var(--roadmap-vote-border-hover))]"
+                className="p-5 rounded-lg transition-all h-full flex flex-col bg-[rgb(var(--roadmap-vote-card-bg))] border border-[rgb(var(--roadmap-vote-border))] hover:border-[rgb(var(--roadmap-vote-border-hover))]"
               >
                 {/* Category Tag */}
                 <div
-                  className="inline-block px-2 py-1 rounded-full text-[10px] font-semibold mb-4 w-fit"
-                  className="bg-[rgb(var(--roadmap-vote-category-bg))] text-[rgb(var(--roadmap-vote-text-white))]"
+                  className="inline-block px-2 py-1 rounded-full text-[10px] font-semibold mb-4 w-fit bg-[rgb(var(--roadmap-vote-category-bg))] text-[rgb(var(--roadmap-vote-text-white))]"
                 >
                   {feature.category}
                 </div>
 
                 {/* Feature Title */}
                 <h3 
-                  className="text-sm font-semibold mb-4 flex-1"
-                  className="text-[rgb(var(--roadmap-vote-text-white))]"
+                  className="text-sm font-semibold mb-4 flex-1 text-[rgb(var(--roadmap-vote-text-white))]"
                 >
                   {feature.title}
                 </h3>
@@ -390,8 +387,7 @@ const Vote = () => {
                   </span>
                   <button
                     onClick={() => handleVote(feature.id)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all"
-                    className={`bg-[rgb(var(--roadmap-vote-card-bg))] ${isVoted ? 'text-[rgb(var(--roadmap-vote-text-white))]' : 'text-[rgb(var(--roadmap-vote-text-gray-light))]'}`}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all bg-[rgb(var(--roadmap-vote-card-bg))] ${isVoted ? 'text-[rgb(var(--roadmap-vote-text-white))]' : 'text-[rgb(var(--roadmap-vote-text-gray-light))]'}`}
                   >
                     <ThumbsUp className="w-3.5 h-3.5" />
                     {isVoted ? 'Voted' : 'Add vote'}
