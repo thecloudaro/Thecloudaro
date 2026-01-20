@@ -16,11 +16,69 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log({ username, password });
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // 🔹 Store token
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('refresh_token', data.refresh_token);
+        localStorage.setItem('client_id', data.client_id);
+
+        // Close modal
+        onClose();
+
+        // 🔹 Immediately redirect to Upmind client dashboard with SSO
+        try {
+          const ssoResponse = await fetch('/api/dashboard-sso', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              access_token: data.access_token,
+              client_id: data.client_id,
+            }),
+          });
+
+          const ssoData = await ssoResponse.json();
+
+          if (ssoResponse.ok && ssoData.dashboard_url) {
+            // Redirect directly to Upmind client dashboard with SSO token
+            window.location.href = ssoData.dashboard_url;
+          } else {
+            // Fallback: Direct redirect with access token to dashboard
+            const upmindClientUrl = 'https://my.thecloudaro.com/dashboard';
+            window.location.href = `${upmindClientUrl}?access_token=${data.access_token}`;
+          }
+        } catch (ssoErr) {
+          // Fallback: Direct redirect if SSO fails to dashboard
+          const upmindClientUrl = 'https://my.thecloudaro.com/dashboard';
+          window.location.href = `${upmindClientUrl}?access_token=${data.access_token}`;
+        }
+      } else {
+        setError(data.message || 'Login failed');
+        setLoading(false);
+      }
+    } catch (err) {
+      console.error('Login request failed:', err);
+      setError('An unexpected error occurred. Please try again.');
+      setLoading(false);
+    }
   };
 
   const handleSignUpClick = (e: React.MouseEvent) => {
@@ -109,12 +167,15 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
                   </div>
                 </div>
 
+                {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+
                 {/* Log in with password button */}
                 <button
                   type="submit"
-                  className="w-full py-2.5 text-sm bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+                  disabled={loading}
+                  className={`w-full py-2.5 text-sm bg-blue-600 text-white font-medium rounded-lg transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
                 >
-                  Log in with password
+                  {loading ? 'Logging in...' : 'Log in with password'}
                 </button>
 
                 {/* OR separator */}

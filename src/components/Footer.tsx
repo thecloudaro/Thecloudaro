@@ -19,6 +19,15 @@ interface FooterSection {
 }
 
 const Footer: React.FC = () => {
+  // Simple config to hide/show items - Change false to true to show them
+  const hiddenItems = {
+    cloud: true,           // Set to false to show Cloud section
+    businessEmail: true,    // Set to false to show Business Email
+    cdn: true,             // Set to false to show CDN
+    vpn: true,             // Set to false to show VPN
+    roadmap: true,         // Set to false to show Roadmap
+  };
+
   const footerSections: FooterSection[] = [
     {
       subSections: [
@@ -107,53 +116,59 @@ const Footer: React.FC = () => {
         {/* FIRST COLUMN */}
         <div>
           {footerSections[0].subSections?.map((sub) => (
-            <div key={sub.heading} className="mb-6">
-              <h4 className="text-footer-text-primary font-semibold text-lg mb-3">
-                {sub.heading}
-              </h4>
-              <ul className="space-y-2">
-                {sub.links.map((link) => (
-                  <li key={link}>
-                    <Link
-                      href={
-                        link === "Domain Name Search"
-                          ? "/domain-search"
-                          : link === "Domain Pricing"
-                            ? "/domain-search"
-                            : link === "Web Hosting"
-                              ? "/web-hosting"
-                              : link === "WordPress Hosting"
-                                ? "/hosting-for-wordpress"
-                                : link === "Business Hosting"
-                                  ? "/business-hosting"
-                                  : link === "Ecommerce Hosting"
-                                    ? "/ecommerce-hosting"
-                                    : link === "Transfer Hosting"
-                                      ? "/transfer"
-                                      : link === "Business Email"
-                                        ? "/business-email"
-                                        : link === "Business Email Login"
-                                          ? "/login"
-                                          : link === "Virtual Machines"
-                                            ? "/virtual-machine"
-                                            : link === "VM Manager"
-                                              ? "/vm-manager"
-                                              : link === "Domain Privacy"
-                                                ? "/domain-name-privacy"
-                                                : link === "CDN"
-                                                  ? "/cdn"
-                                                  : link === "VPN"
-                                                    ? "/vpn"
-                                                    : "#"
-                      }
-                      className="hover:text-footer-accent transition-colors text-sm"
-                    >
-                      {link}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            (sub.heading === "Cloud" && hiddenItems.cloud) ? null : (
+              <div key={sub.heading} className="mb-6">
+                <h4 className="text-footer-text-primary font-semibold text-lg mb-3">
+                  {sub.heading}
+                </h4>
+                <ul className="space-y-2">
+                  {sub.links.map((link) => (
+                    ((link === "Business Email" && hiddenItems.businessEmail) || 
+                     (link === "CDN" && hiddenItems.cdn) || 
+                     (link === "VPN" && hiddenItems.vpn)) ? null : (
+                      <li key={link}>
+                        <Link
+                          href={
+                            link === "Domain Name Search"
+                              ? "/domain-search"
+                              : link === "Domain Pricing"
+                                ? "/domain-search"
+                                : link === "Web Hosting"
+                                  ? "/web-hosting"
+                                  : link === "WordPress Hosting"
+                                    ? "/hosting-for-wordpress"
+                                    : link === "Business Hosting"
+                                      ? "/business-hosting"
+                                      : link === "Ecommerce Hosting"
+                                        ? "/ecommerce-hosting"
+                                        : link === "Transfer Hosting"
+                                          ? "/transfer"
+                                          : link === "Business Email"
+                                            ? "/business-email"
+                                            : link === "Business Email Login"
+                                              ? "/login"
+                                              : link === "Virtual Machines"
+                                                ? "/virtual-machine"
+                                                : link === "VM Manager"
+                                                  ? "/vm-manager"
+                                                  : link === "Domain Privacy"
+                                                    ? "/domain-name-privacy"
+                                                    : link === "CDN"
+                                                      ? "/cdn"
+                                                      : link === "VPN"
+                                                        ? "/vpn"
+                                                        : "#"
+                          }
+                          className="hover:text-footer-accent transition-colors text-sm"
+                        >
+                          {link}
+                        </Link>
+                      </li>
+                    )
+                  ))}
+                </ul>
+              </div>
+            )
           ))}
         </div>
 
@@ -196,43 +211,45 @@ const Footer: React.FC = () => {
             ) : (
               <ul className="space-y-2">
                 {section.links?.map((link) => (
-                  <li key={link}>
-                    <Link
-                      href={
-                        link === "Contact Us"
-                          ? "/about/contactus"
-                          : link === "About Us"
-                            ? "/about"
-                            : link === "Roadmap"
-                              ? "/roadmap"
-                              : link === "Privacy Policy"
-                                ? "/legal/policy"
-                                : link ===
-                                    "Domain Registration Data Disclosure Policy"
-                                  ? "/legal/domain-registration-data-disclosure-policy"
-                                  : link === "Request New Feature"
-                                    ? "/request-new-feature"
-                                    : link === "Status Updates"
-                                      ? "https://twitter.com/cloudaro"
-                                      : link === "Knowledge Base"
-                                        ? "/knowledge-base"
-                                        : link === "Terms & Conditions"
-                                          ? "/legal"
-                                          : link === "Transfer Domains"
-                                            ? "/domain/transfer"
-                                            : link === "Migrate Hosting"
-                                              ? "/migration-to-thecloudaro"
-                                              : link === "Migrate Email"
-                                                ? "/migrate-business-email"
-                                                : link === "Transfer WordPress"
-                                                  ? "/hosting-for-wordpress/migrate"
-                                                  : "#"
-                      }
-                      className="hover:text-footer-accent transition-colors text-sm"
-                    >
-                      {link}
-                    </Link>
-                  </li>
+                  (link === "Roadmap" && hiddenItems.roadmap) ? null : (
+                    <li key={link}>
+                      <Link
+                        href={
+                          link === "Contact Us"
+                            ? "/about/contactus"
+                            : link === "About Us"
+                              ? "/about"
+                              : link === "Roadmap"
+                                ? "/roadmap"
+                                : link === "Privacy Policy"
+                                  ? "/legal/policy"
+                                  : link ===
+                                      "Domain Registration Data Disclosure Policy"
+                                    ? "/legal/domain-registration-data-disclosure-policy"
+                                    : link === "Request New Feature"
+                                      ? "/request-new-feature"
+                                      : link === "Status Updates"
+                                        ? "https://twitter.com/cloudaro"
+                                    : link === "Knowledge Base"
+                                      ? "/knowledgebase"
+                                      : link === "Terms & Conditions"
+                                            ? "/legal"
+                                            : link === "Transfer Domains"
+                                              ? "/domain/transfer"
+                                              : link === "Migrate Hosting"
+                                                ? "/migration-to-thecloudaro"
+                                                : link === "Migrate Email"
+                                                  ? "/migrate-business-email"
+                                                  : link === "Transfer WordPress"
+                                                    ? "/hosting-for-wordpress/migrate"
+                                                    : "#"
+                        }
+                        className="hover:text-footer-accent transition-colors text-sm"
+                      >
+                        {link}
+                      </Link>
+                    </li>
+                  )
                 ))}
               </ul>
             )}

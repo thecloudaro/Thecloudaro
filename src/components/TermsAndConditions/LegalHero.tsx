@@ -15,8 +15,7 @@ const LegalHero = () => {
 
   return (
     <div 
-      className="relative flex flex-col items-center justify-center overflow-hidden"
-      style={{ backgroundColor: '#252626' }}
+      className="relative flex flex-col items-center justify-center overflow-hidden bg-[rgb(var(--legal-hero-bg))]"
     >
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pt-24 sm:pt-32 md:pt-40 lg:pt-48 pb-6 sm:pb-8 md:pb-12 lg:pb-16">
@@ -30,15 +29,15 @@ const LegalHero = () => {
           >
             {/* Main Heading */}
             <ContentHeading
-              title="The Cloud Aro Legal"
-              className="text-4xl sm:text-4xl md:text-4xl lg:text-4xl xl:text-4xl text-left !text-white"
+              title="Terms & Conditions"
+              className="text-4xl sm:text-4xl md:text-4xl lg:text-4xl xl:text-4xl text-left text-[rgb(var(--legal-hero-text-white))]"
             />
 
             {/* Description */}
             <ContentDescription
               text="Here you will find the documentation regarding terms of use, acceptable use policy, registration agreement, privacy policy and other product agreements. If you have any further questions, please, contact us."
               size="md"
-              className="!text-md text-left max-w-2xl !text-white"
+              className="text-md text-left max-w-2xl text-[rgb(var(--legal-hero-text-white))]"
             />
           </motion.div>
 
@@ -67,7 +66,7 @@ const LegalHero = () => {
       <div className="relative w-full">
         <svg className="w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path d="M0,120L1200,5L1200,120L0,120Z" 
-            fill="#1a1a1a" 
+            fill="rgb(var(--legal-hero-divider-fill))" 
             opacity="1" />
         </svg>
       </div>

@@ -15,8 +15,7 @@ const RoadmapHero = () => {
 
   return (
     <div 
-      className="relative flex flex-col items-center justify-center overflow-hidden"
-      style={{ backgroundColor: '#252626' }}
+      className="relative flex flex-col items-center justify-center overflow-hidden bg-[rgb(var(--legal-hero-bg))]"
     >
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pt-1 sm:pt-6 md:pt-12 lg:pt-20 pb-6 sm:pb-8 md:pb-12 lg:pb-16">
@@ -31,14 +30,14 @@ const RoadmapHero = () => {
             {/* Main Heading */}
             <ContentHeading
               title="The Cloud Aro Roadmap"
-              className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl text-left !text-white"
+              className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl text-left text-[rgb(var(--roadmap-hero-heading-text))]"
             />
 
             {/* Description */}
             <ContentDescription
               text="See what we have planned and what is already here for you to explore."
               size="md"
-              className="!text-sm sm:!text-base md:!text-lg text-left max-w-2xl !text-white"
+              className="text-sm sm:text-base md:text-lg text-left max-w-2xl text-[rgb(var(--roadmap-hero-heading-text))]"
             />
           </motion.div>
 
@@ -67,7 +66,7 @@ const RoadmapHero = () => {
       <div className="relative w-full">
         <svg className="w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path d="M0,120L1200,5L1200,120L0,120Z" 
-            fill="#17181a" 
+            fill="rgb(var(--roadmap-hero-divider-fill))" 
             opacity="1" />
         </svg>
       </div>

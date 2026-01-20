@@ -1,17 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ContentHeading from "@/components/ui/content-heading";
 import HostingPlanControls, { BillingCycle } from "./HostingPlanControls";
 import { Info, ChevronDown } from "lucide-react";
+import { hostingPlanProductIds } from "@/config/hosting-plans";
 
-const plans = [
+// Default plans structure (pricing will come from Upmind API only)
+const defaultPlans = [
   {
     name: "Essential",
     pricing: {
-      monthly: 3.88,
-      yearly: 19.88,
-      biyearly: 34.88,
+      monthly: undefined,
+      yearly: undefined,
+      biyearly: undefined,
     },
     features: {
       disk: "20 GB NVMe SSD cloud storage",
@@ -21,9 +23,9 @@ const plans = [
   {
     name: "Pro",
     pricing: {
-      monthly: 4.88,
-      yearly: 28.88,
-      biyearly: 54.88,
+      monthly: undefined,
+      yearly: undefined,
+      biyearly: undefined,
     },
     features: {
       disk: "50 GB NVMe SSD cloud storage",
@@ -33,9 +35,9 @@ const plans = [
   {
     name: "Supreme",
     pricing: {
-      monthly: 6.88,
-      yearly: 38.88,
-      biyearly: 72.88,
+      monthly: undefined,
+      yearly: undefined,
+      biyearly: undefined,
     },
     features: {
       disk: "Unmetered NVMe SSD cloud storage",
@@ -240,6 +242,123 @@ const ChooseHosting = () => {
   const [expandedSections, setExpandedSections] = useState<
     Record<string, boolean>
   >({});
+  const [plans, setPlans] = useState(defaultPlans);
+  const [loading, setLoading] = useState(true);
+  const [pricingLoaded, setPricingLoaded] = useState(false);
+
+  // Fetch pricing from API
+  useEffect(() => {
+    const fetchPricing = async () => {
+      try {
+        // Get product IDs from config file
+        const essentialProductId = hostingPlanProductIds.Essential;
+        const proProductId = hostingPlanProductIds.Pro;
+        const supremeProductId = hostingPlanProductIds.Supreme;
+
+        // Only fetch if all product IDs are provided
+        if (!essentialProductId || !proProductId || !supremeProductId) {
+          console.error('❌ Product IDs not configured in hosting-plans.ts');
+          setPricingLoaded(false);
+          setLoading(false);
+          return;
+        }
+
+        console.log('🚀 Fetching pricing from Upmind API...', {
+          essential: essentialProductId,
+          pro: proProductId,
+          supreme: supremeProductId,
+        });
+
+        const response = await fetch(
+          `/api/hosting-pricing?essential=${essentialProductId}&pro=${proProductId}&supreme=${supremeProductId}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+          // Handle error response - log the actual error message
+          const errorMessage = responseData.error || responseData.message || `HTTP ${response.status}: ${response.statusText}`;
+          console.error('❌ API Error:', errorMessage);
+          console.error('❌ Full error response:', JSON.stringify(responseData, null, 2));
+          setPricingLoaded(false);
+          setLoading(false);
+          return;
+        }
+
+        // Check if pricing data exists
+        if (!responseData.pricing) {
+          console.error('❌ No pricing data in response');
+          console.error('❌ Full response:', JSON.stringify(responseData, null, 2));
+          setPricingLoaded(false);
+          setLoading(false);
+          return;
+        }
+
+        console.log('✅ Pricing data received:', responseData.pricing);
+
+        // Update plans with fetched pricing from Upmind API
+        const updatedPlans = defaultPlans.map((plan) => {
+          const fetchedPricing = responseData.pricing[plan.name];
+
+          if (!fetchedPricing) {
+            console.warn(`⚠️ No pricing found for ${plan.name} in API response`);
+            return {
+              ...plan,
+              pricing: {
+                monthly: undefined,
+                yearly: undefined,
+                biyearly: undefined,
+              },
+            };
+          }
+
+          // Extract valid pricing values (non-null, non-zero)
+          const monthly = fetchedPricing.monthly && fetchedPricing.monthly > 0 ? fetchedPricing.monthly : undefined;
+          const yearly = fetchedPricing.yearly && fetchedPricing.yearly > 0 ? fetchedPricing.yearly : undefined;
+          const biyearly = fetchedPricing.biyearly && fetchedPricing.biyearly > 0 ? fetchedPricing.biyearly : undefined;
+
+          // Only update if at least one pricing value exists
+          if (monthly || yearly || biyearly) {
+            console.log(`✅ Updated ${plan.name} pricing:`, { monthly, yearly, biyearly });
+            return {
+              ...plan,
+              pricing: { monthly, yearly, biyearly },
+            };
+          }
+
+          console.warn(`⚠️ No valid pricing values for ${plan.name}`);
+          return {
+            ...plan,
+            pricing: {
+              monthly: undefined,
+              yearly: undefined,
+              biyearly: undefined,
+            },
+          };
+        });
+
+        setPlans(updatedPlans);
+        setPricingLoaded(true);
+        console.log('✅ All plans updated with Upmind pricing');
+      } catch (error) {
+        // Handle network errors or JSON parsing errors
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        console.error('❌ Failed to fetch pricing:', errorMessage);
+        console.error('❌ Error details:', error);
+        setPricingLoaded(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPricing();
+  }, []);
 
   const suffixMap: Record<BillingCycle, string> = {
     monthly: "/mo",
@@ -274,19 +393,34 @@ const ChooseHosting = () => {
 
         <div className="pt-6">
           <div className="flex flex-col items-center gap-6 md:flex-row md:justify-end md:gap-8 lg:gap-12 md:w-full lg:w-[726px] md:ml-auto md:mr-0 lg:mr-24">
-            {plans.map((plan) => (
-              <div key={plan.name} className="w-[210px] text-center space-y-4">
-                <div className="space-y-1 leading-tight">
-                  <h3 className="text-[1.9rem] font-semibold text-[rgb(var(--hosting-text-white))]">
-                    {plan.name}
-                  </h3>
-                  <div className="text-[rgb(var(--hosting-text-white))] text-xl font-semibold tracking-tight">
-                    ${plan.pricing[billing].toFixed(2)}
-                    <span className="text-sm text-[rgb(var(--hosting-choose-text-gray-400))] ml-1">
-                      {suffixMap[billing]}
-                    </span>
+            {plans.map((plan) => {
+              const currentPrice = plan.pricing[billing];
+              const hasPricing = currentPrice !== undefined && currentPrice !== null;
+              
+              return (
+                <div key={plan.name} className="w-[210px] text-center space-y-4">
+                  <div className="space-y-1 leading-tight">
+                    <h3 className="text-[1.9rem] font-semibold text-[rgb(var(--hosting-text-white))]">
+                      {plan.name}
+                    </h3>
+                    {loading ? (
+                      <div className="text-[rgb(var(--hosting-choose-text-gray-400))] text-sm">
+                        Loading...
+                      </div>
+                    ) : hasPricing ? (
+                      <div className="text-[rgb(var(--hosting-text-white))] text-xl font-semibold tracking-tight">
+                        ${currentPrice.toFixed(2)}
+                        <span className="text-sm text-[rgb(var(--hosting-choose-text-gray-400))] ml-1">
+                          {suffixMap[billing]}
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="text-[rgb(var(--hosting-choose-text-gray-400))] text-xs space-y-1">
+                        <div>Pricing unavailable</div>
+                        <div className="text-[10px] opacity-75">Check console for details</div>
+                      </div>
+                    )}
                   </div>
-                </div>
                 <button
                   className="px-5 py-2.5 rounded-full text-xs font-semibold transition md:ml-auto"
                   style={{
@@ -305,7 +439,8 @@ const ChooseHosting = () => {
                   Add to cart
                 </button>
               </div>
-            ))}
+            );
+            })}
           </div>
         </div>
 

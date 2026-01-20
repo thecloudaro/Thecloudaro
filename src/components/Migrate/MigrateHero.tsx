@@ -15,7 +15,7 @@ const MigrateHero = () => {
     <div
       className="relative flex flex-col items-center justify-center overflow-hidden min-h-screen"
       style={{
-        background: "linear-gradient(to right, #16a34a 0%, #2563eb 100%)",
+        background: `linear-gradient(to right, rgb(var(--migrate-hero-gradient-from)) 0%, rgb(var(--migrate-hero-gradient-to)) 100%)`,
       }}
     >
       {/* Main Content */}

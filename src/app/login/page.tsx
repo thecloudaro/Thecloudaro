@@ -34,8 +34,34 @@ const LoginPage = () => {
         localStorage.setItem('refresh_token', data.refresh_token);
         localStorage.setItem('client_id', data.client_id);
 
-        // 🔹 Redirect to dashboard
-        router.push('/dashboard');
+        // 🔹 Immediately redirect to Upmind client dashboard with SSO
+        try {
+          const ssoResponse = await fetch('/api/dashboard-sso', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              access_token: data.access_token,
+              client_id: data.client_id,
+            }),
+          });
+
+          const ssoData = await ssoResponse.json();
+
+          if (ssoResponse.ok && ssoData.dashboard_url) {
+            // Redirect directly to Upmind client dashboard with SSO token
+            window.location.href = ssoData.dashboard_url;
+          } else {
+            // Fallback: Direct redirect with access token to dashboard
+            const upmindClientUrl = 'https://my.thecloudaro.com/dashboard';
+            window.location.href = `${upmindClientUrl}?access_token=${data.access_token}`;
+          }
+        } catch (ssoErr) {
+          // Fallback: Direct redirect if SSO fails to dashboard
+          const upmindClientUrl = 'https://my.thecloudaro.com/dashboard';
+          window.location.href = `${upmindClientUrl}?access_token=${data.access_token}`;
+        }
       } else {
         setError(data.message || 'Login failed');
       }

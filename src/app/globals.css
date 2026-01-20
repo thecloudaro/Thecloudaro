@@ -1357,6 +1357,23 @@
     --roadmap-hero-bg: 26 26 26; /* #1a1a1a - deep charcoal/off-black - for rgb() */
     --roadmap-hero-heading-text: 255 255 255; /* white - for rgb() */
     --roadmap-hero-description-text: 255, 255, 255, 0.8; /* white/80 - for rgba() */
+    --roadmap-hero-divider-fill: 23 24 26; /* #17181a - for rgb() */
+    --roadmap-vote-bg: 23 24 26; /* #17181a - for rgb() */
+    --roadmap-vote-card-bg: 37 38 38; /* #252626 - for rgb() */
+    --roadmap-vote-border: 55 65 81; /* gray-700 - for rgb() */
+    --roadmap-vote-border-hover: 75 85 99; /* gray-600 - for rgb() */
+    --roadmap-vote-category-bg: 37 99 235; /* blue-600 - for rgb() */
+    --roadmap-vote-text-white: 255 255 255; /* white - for rgb() */
+    --roadmap-vote-text-gray: 156 163 175; /* gray-400 - for rgb() */
+    --roadmap-vote-text-gray-light: 209 213 219; /* gray-300 - for rgb() */
+    
+    /* Policy Component Colors */
+    --policy-bg: 26 26 26; /* #1a1a1a - for rgb() */
+    --policy-text-white: 255 255 255; /* white - for rgb() */
+    
+    /* Migrate Hero Component Colors */
+    --migrate-hero-gradient-from: 22 163 74; /* green-600 #16a34a - for rgb() */
+    --migrate-hero-gradient-to: 37 99 235; /* blue-600 #2563eb - for rgb() */
     
     /* Knowledge Base Hero Component Colors */
     --knowledge-hero-overlay-from: 17, 24, 39, 0.85; /* gray-900/85 - for rgba() */
@@ -1483,10 +1500,19 @@
     --about-shoot-button-text: 96 165 250; /* blue-400 - #60a5fa - for rgb() */
     --about-shoot-text: 255 255 255; /* white - for rgb() */
     
+    /* About Section Text Colors */
+    --about-text-white: 255 255 255; /* white - for rgb() */
+    --about-text-white-90: 255, 255, 255, 0.9; /* white/90 - for rgba() */
+    
     /* Rated Component Colors */
     --about-rated-trustpilot-bg: 255 255 255; /* white - for rgb() */
     --about-rated-trustpilot-text: 17 24 39; /* gray-900 - for rgb() */
     --about-rated-trustpilot-star: 34 197 94; /* green-500 - for rgb() */
+    
+    /* Legal/Terms Components Colors */
+    --legal-hero-bg: 37 38 38; /* #252626 - for rgb() */
+    --legal-hero-text-white: 255 255 255; /* white - for rgb() */
+    --legal-hero-divider-fill: 26 26 26; /* #1a1a1a - for rgb() */
 
     /* CDN Page Colors */
     /* CDN Hero Component Colors */

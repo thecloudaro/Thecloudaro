@@ -50,7 +50,7 @@ const Integrity = () => {
             >
               <ContentHeading
                 title="Integrity by<br/>design"
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl text-white font-bold leading-tight tracking-tight text-left"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl text-[rgb(var(--about-text-white))] font-bold leading-tight tracking-tight text-left"
               />
             </motion.div>
 
@@ -69,7 +69,7 @@ const Integrity = () => {
                 anywhere else that belongs to us. Everything is<br/>
                 upfront and where you need it."
                 size="md"
-                className="text-white/90 text-left"
+                className="text-[rgba(var(--about-text-white-90))] text-left"
               />
             </motion.div>
           </motion.div>

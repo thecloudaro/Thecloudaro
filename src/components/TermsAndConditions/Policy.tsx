@@ -154,13 +154,13 @@ const Policy: React.FC<PolicyProps> = ({ policyData }) => {
         className="text-base sm:text-lg md:text-xl text-left !text-white font-bold"
       />
       {typeof section.content === 'string' ? (
-        <p className="text-xs leading-relaxed" style={{ color: 'rgb(255 255 255)' }}>
+        <p className="text-xs leading-relaxed text-[rgb(var(--policy-text-white))]">
           {section.content.split('\n').map((line, index) => (
             <span key={index}>{line}<br/></span>
           ))}
         </p>
       ) : Array.isArray(section.content) ? (
-        <ul className="list-disc list-inside text-xs leading-relaxed" style={{ color: 'rgb(255 255 255)' }}>
+        <ul className="list-disc list-inside text-xs leading-relaxed text-[rgb(var(--policy-text-white))]">
           {section.content.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
@@ -174,8 +174,7 @@ const Policy: React.FC<PolicyProps> = ({ policyData }) => {
 
   return (
     <div 
-      className="relative w-full min-h-screen pt-20"
-      style={{ backgroundColor: '#1a1a1a' }}
+      className="relative w-full min-h-screen pt-20 bg-[rgb(var(--policy-bg))]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 py-8 sm:py-12 md:py-16 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 sm:gap-16 md:gap-20 lg:gap-40">

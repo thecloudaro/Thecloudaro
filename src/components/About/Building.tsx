@@ -30,7 +30,7 @@ const Building = () => {
             >
               <ContentHeading
                 title="Building digital<br/>harmony"
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl text-white font-bold leading-tight tracking-tight text-left"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl text-[rgb(var(--about-text-white))] font-bold leading-tight tracking-tight text-left"
               />
             </motion.div>
 
@@ -50,7 +50,7 @@ const Building = () => {
                 choose, connect, and launch what you need.<br/>
                 'Seamless' will never mean the same thing again."
                 size="md"
-                className="text-white/90 text-left"
+                className="text-[rgba(var(--about-text-white-90))] text-left"
               />
             </motion.div>
           </motion.div>

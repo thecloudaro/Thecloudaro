@@ -197,15 +197,14 @@ const Vote = () => {
 
   return (
     <div 
-      className="w-full py-8 sm:py-12 md:py-16"
-      style={{ backgroundColor: '#17181a' }}
+      className="w-full py-8 sm:py-12 md:py-16 bg-[rgb(var(--roadmap-vote-bg))]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pt-8 sm:pt-10 md:pt-12 lg:pt-16">
         {/* Tabs and Action Buttons */}
         <div className="flex flex-col gap-4 mb-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             {/* Tabs */}
-            <div className="flex items-center gap-3 sm:gap-4 md:gap-6 border-b flex-1 pb-3 overflow-x-auto" style={{ borderColor: 'rgb(55 65 81)' }}>
+            <div className="flex items-center gap-3 sm:gap-4 md:gap-6 border-b flex-1 pb-3 overflow-x-auto border-[rgb(var(--roadmap-vote-border))]">
               <button
                 onClick={() => setActiveTab("under-review")}
                 className="pb-3 px-1 text-xs sm:text-sm font-medium transition-colors relative whitespace-nowrap"
@@ -364,24 +363,12 @@ const Vote = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="p-5 rounded-lg transition-all h-full flex flex-col"
-                style={{
-                  backgroundColor: '#252626',
-                  border: `1px solid rgb(55 65 81)`,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'rgb(75 85 99)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgb(55 65 81)';
-                }}
+                className="bg-[rgb(var(--roadmap-vote-card-bg))] border border-[rgb(var(--roadmap-vote-border))] hover:border-[rgb(var(--roadmap-vote-border-hover))]"
               >
                 {/* Category Tag */}
                 <div
                   className="inline-block px-2 py-1 rounded-full text-[10px] font-semibold mb-4 w-fit"
-                  style={{
-                    backgroundColor: 'rgb(37 99 235)',
-                    color: 'rgb(255 255 255)',
-                  }}
+                  className="bg-[rgb(var(--roadmap-vote-category-bg))] text-[rgb(var(--roadmap-vote-text-white))]"
                 >
                   {feature.category}
                 </div>
@@ -389,28 +376,22 @@ const Vote = () => {
                 {/* Feature Title */}
                 <h3 
                   className="text-sm font-semibold mb-4 flex-1"
-                  style={{ color: 'rgb(255 255 255)' }}
+                  className="text-[rgb(var(--roadmap-vote-text-white))]"
                 >
                   {feature.title}
                 </h3>
 
                 {/* Votes and Add Vote Button */}
-                <div className="flex items-center justify-between mt-auto pt-4 border-t" style={{ borderColor: 'rgb(55 65 81)' }}>
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-[rgb(var(--roadmap-vote-border))]">
                   <span 
-                    className="text-[8px] font-medium"
-                    style={{ color: 'rgb(156 163 175)' }}
+                    className="text-[8px] font-medium text-[rgb(var(--roadmap-vote-text-gray))]"
                   >
                     {feature.votes} VOTES
                   </span>
                   <button
                     onClick={() => handleVote(feature.id)}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all"
-                    style={{
-                      backgroundColor: '#252626',
-                      color: isVoted 
-                        ? 'rgb(255 255 255)' 
-                        : 'rgb(209 213 219)',
-                    }}
+                    className={`bg-[rgb(var(--roadmap-vote-card-bg))] ${isVoted ? 'text-[rgb(var(--roadmap-vote-text-white))]' : 'text-[rgb(var(--roadmap-vote-text-gray-light))]'}`}
                   >
                     <ThumbsUp className="w-3.5 h-3.5" />
                     {isVoted ? 'Voted' : 'Add vote'}
@@ -425,7 +406,7 @@ const Vote = () => {
       <div className="relative w-full">
         <svg className="w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path d="M0,120L1200,5L1200,120L0,120Z" 
-            fill="#17181a" 
+            fill="rgb(var(--roadmap-hero-divider-fill))" 
             opacity="1" />
         </svg>
       </div>

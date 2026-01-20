@@ -22,7 +22,7 @@ const Primary = () => {
             <ContentDescription
               text="The Cloud Aro's primary mission is to redefine speed and simplicity so everyone, everywhere can do more, make more, and be more online."
               size="lg"
-              className="text-2xl sm:text-2xl md:text-3xl lg:text-3xl text-white font-bold leading-tight text-center"
+              className="text-2xl sm:text-2xl md:text-3xl lg:text-3xl text-[rgb(var(--about-text-white))] font-bold leading-tight text-center"
             />
           </motion.div>
 
@@ -39,7 +39,7 @@ const Primary = () => {
               ideas, and ambitions. You deserve an easier, faster, better way to get<br/>
               where you want to be online, no matter how close or far away it seems."
               size="md"
-              className="text-white/90 text-center"
+              className="text-[rgba(var(--about-text-white-90))] text-center"
             />
           </motion.div>
 
@@ -53,7 +53,7 @@ const Primary = () => {
             <ContentDescription
               text="Welcome to (your) The Cloud Aro..."
               size="md"
-              className="text-white/90 text-center"
+              className="text-[rgba(var(--about-text-white-90))] text-center"
             />
           </motion.div>
         </div>

@@ -22,29 +22,27 @@ export default function Customer() {
   const controls = useAnimation();
 
   useEffect(() => {
-    let animationFrameId: number;
-
-    const animate = () => {
-      controls
-        .start({
-          x: ["0%", "-50%"],
-          transition: { duration: 25, ease: "linear", repeat: Infinity },
-        })
-        .then(() => {
-          controls.set({ x: "0%" });
-          animationFrameId = requestAnimationFrame(animate);
-        });
-    };
-
-    animate();
-    return () => cancelAnimationFrame(animationFrameId);
+    controls.start({
+      x: ["0%", "-50%"],
+      transition: { 
+        duration: 25, 
+        ease: "linear", 
+        repeat: Infinity,
+        repeatType: "loop" as const
+      },
+    });
   }, [controls]);
 
   const handlePause = () => controls.stop();
   const handleResume = () =>
     controls.start({
       x: ["0%", "-50%"],
-      transition: { duration: 25, ease: "linear", repeat: Infinity },
+      transition: { 
+        duration: 25, 
+        ease: "linear", 
+        repeat: Infinity,
+        repeatType: "loop" as const
+      },
     });
 
   return (
@@ -87,14 +85,16 @@ export default function Customer() {
 
             <motion.div
               animate={controls}
-              className="flex gap-5 sm:gap-6 lg:gap-2"
+              className="flex gap-6 sm:gap-7 lg:gap-6"
               onMouseEnter={handlePause}
               onMouseLeave={handleResume}
+              onTouchStart={handlePause}
+              onTouchEnd={handleResume}
             >
               {reviews.map((review, i) => (
                 <div
                   key={`first-${i}`}
-                  className="min-w-[55%] sm:min-w-[200px] md:min-w-[200px] lg:min-w-[200px] flex-shrink-0"
+                  className="min-w-[240px] flex-shrink-0"
                 >
                   <ReviewCard {...review} />
                 </div>
@@ -102,7 +102,7 @@ export default function Customer() {
               {reviews.map((review, i) => (
                 <div
                   key={`second-${i}`}
-                  className="min-w-[55%] sm:min-w-[200px] md:min-w-[200px] lg:min-w-[200px] flex-shrink-0"
+                  className="min-w-[240px] flex-shrink-0"
                 >
                   <ReviewCard {...review} />
                 </div>

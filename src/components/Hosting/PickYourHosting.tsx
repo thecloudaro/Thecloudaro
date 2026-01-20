@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { forwardRef, useState } from "react";
+import { forwardRef, useState, useEffect } from "react";
 import { Info, Plus } from "lucide-react";
 import ContentHeading from "@/components/ui/content-heading";
 import ContentDescription from "@/components/ui/content-description";
 import HostingPlanControls, { BillingCycle } from "./HostingPlanControls";
 import { useCart } from "@/components/Cart/CartContext";
+import { hostingPlanProductIds } from "@/config/hosting-plans";
 
 const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
@@ -14,34 +15,18 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
   const [selectedAddons, setSelectedAddons] = useState<{
     [key: string]: { storage: string; price: number };
   }>({});
+  const [loading, setLoading] = useState(true);
   const { addItem } = useCart();
 
-  const plans = [
+  // Default plans structure (pricing will come from Upmind API only)
+  const defaultPlans = [
     {
       name: "Essential",
       description: "Perfect for starting out",
       pricing: {
-        monthly: {
-          price: 3.88,
-          renewal: 3.88,
-          original: 5.88,
-          discountLabel: "31% OFF*",
-          perMonth: 3.88,
-        },
-        yearly: {
-          price: 19.88,
-          renewal: 19.88,
-          original: 28.88,
-          discountLabel: "31% OFF*",
-          perMonth: 1.66,
-        },
-        biyearly: {
-          price: 34.88,
-          renewal: 34.88,
-          original: 48.88,
-          discountLabel: "29% OFF*",
-          perMonth: 1.45,
-        },
+        monthly: undefined,
+        yearly: undefined,
+        biyearly: undefined,
       },
       popular: false,
       features: {
@@ -61,27 +46,9 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
       name: "Pro",
       description: "Ideal for taking ideas further",
       pricing: {
-        monthly: {
-          price: 4.88,
-          renewal: 4.88,
-          original: 6.88,
-          discountLabel: "29% OFF*",
-          perMonth: 4.88,
-        },
-        yearly: {
-          price: 28.88,
-          renewal: 28.88,
-          original: 48.88,
-          discountLabel: "41% OFF*",
-          perMonth: 2.41,
-        },
-        biyearly: {
-          price: 54.88,
-          renewal: 54.88,
-          original: 88.88,
-          discountLabel: "38% OFF*",
-          perMonth: 2.29,
-        },
+        monthly: undefined,
+        yearly: undefined,
+        biyearly: undefined,
       },
       popular: true,
       features: {
@@ -101,27 +68,9 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
       name: "Supreme",
       description: "Best for boosting businesses",
       pricing: {
-        monthly: {
-          price: 6.88,
-          renewal: 6.88,
-          original: 9.88,
-          discountLabel: "30% OFF*",
-          perMonth: 6.88,
-        },
-        yearly: {
-          price: 38.88,
-          renewal: 38.88,
-          original: 68.88,
-          discountLabel: "44% OFF*",
-          perMonth: 3.24,
-        },
-        biyearly: {
-          price: 72.88,
-          renewal: 72.88,
-          original: 118.88,
-          discountLabel: "39% OFF*",
-          perMonth: 3.04,
-        },
+        monthly: undefined,
+        yearly: undefined,
+        biyearly: undefined,
       },
       popular: false,
       features: {
@@ -138,6 +87,134 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
       },
     },
   ];
+
+  const [plans, setPlans] = useState(defaultPlans);
+
+  // Fetch pricing from API
+  useEffect(() => {
+    const fetchPricing = async () => {
+      try {
+        const essentialProductId = hostingPlanProductIds.Essential;
+        const proProductId = hostingPlanProductIds.Pro;
+        const supremeProductId = hostingPlanProductIds.Supreme;
+
+        if (!essentialProductId || !proProductId || !supremeProductId) {
+          console.error('[PickYourHosting] ❌ Product IDs not configured');
+          setLoading(false);
+          return;
+        }
+
+        console.log('[PickYourHosting] 🚀 Fetching pricing from Upmind API...');
+
+        const response = await fetch(
+          `/api/hosting-pricing?essential=${essentialProductId}&pro=${proProductId}&supreme=${supremeProductId}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+          // Handle error response - log the actual error message
+          const errorMessage = responseData.error || responseData.message || `HTTP ${response.status}: ${response.statusText}`;
+          console.error('[PickYourHosting] ❌ API Error:', errorMessage);
+          console.error('[PickYourHosting] ❌ Full error response:', JSON.stringify(responseData, null, 2));
+          setLoading(false);
+          return;
+        }
+
+        if (!responseData.pricing) {
+          console.error('[PickYourHosting] ❌ No pricing data in response');
+          console.error('[PickYourHosting] ❌ Full response:', JSON.stringify(responseData, null, 2));
+          setLoading(false);
+          return;
+        }
+
+        console.log('[PickYourHosting] ✅ Pricing data received:', responseData.pricing);
+
+        // Update plans with fetched pricing from Upmind API
+        const updatedPlans = defaultPlans.map((plan) => {
+          const fetchedPricing = responseData.pricing[plan.name];
+
+          if (!fetchedPricing) {
+            console.warn(`[PickYourHosting] ⚠️ No pricing found for ${plan.name}`);
+            return {
+              ...plan,
+              pricing: {
+                monthly: undefined,
+                yearly: undefined,
+                biyearly: undefined,
+              },
+            };
+          }
+
+          // Extract valid pricing values
+          const monthlyPrice = fetchedPricing.monthly && fetchedPricing.monthly > 0 ? fetchedPricing.monthly : null;
+          const yearlyPrice = fetchedPricing.yearly && fetchedPricing.yearly > 0 ? fetchedPricing.yearly : null;
+          const biyearlyPrice = fetchedPricing.biyearly && fetchedPricing.biyearly > 0 ? fetchedPricing.biyearly : null;
+
+          // Only update if at least one pricing value exists
+          if (monthlyPrice || yearlyPrice || biyearlyPrice) {
+            const updatedPlan = {
+              ...plan,
+              pricing: {
+                monthly: monthlyPrice ? {
+                  price: monthlyPrice,
+                  renewal: monthlyPrice,
+                  original: monthlyPrice * 1.5,
+                  discountLabel: "33% OFF*",
+                  perMonth: monthlyPrice,
+                } : undefined,
+                yearly: yearlyPrice ? {
+                  price: yearlyPrice,
+                  renewal: yearlyPrice,
+                  original: yearlyPrice * 1.5,
+                  discountLabel: "33% OFF*",
+                  perMonth: yearlyPrice / 12,
+                } : undefined,
+                biyearly: biyearlyPrice ? {
+                  price: biyearlyPrice,
+                  renewal: biyearlyPrice,
+                  original: biyearlyPrice * 1.5,
+                  discountLabel: "33% OFF*",
+                  perMonth: biyearlyPrice / 24,
+                } : undefined,
+              },
+            };
+
+            console.log(`[PickYourHosting] ✅ Updated ${plan.name} pricing`);
+            return updatedPlan;
+          }
+
+          console.warn(`[PickYourHosting] ⚠️ No valid pricing values for ${plan.name}`);
+          return {
+            ...plan,
+            pricing: {
+              monthly: undefined,
+              yearly: undefined,
+              biyearly: undefined,
+            },
+          };
+        });
+
+        setPlans(updatedPlans);
+        console.log('[PickYourHosting] ✅ Plans updated with Upmind pricing');
+      } catch (error) {
+        // Handle network errors or JSON parsing errors
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        console.error('[PickYourHosting] ❌ Failed to fetch pricing:', errorMessage);
+        console.error('[PickYourHosting] ❌ Error details:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPricing();
+  }, []);
 
   const getPricing = (plan: (typeof plans)[0]) => {
     return plan.pricing[billingCycle];
@@ -246,16 +323,19 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
               const addonKey = `${plan.name}-autobackup`;
               const selectedAddon = selectedAddons[addonKey];
               const billingSuffix = getBillingSuffix();
+              const hasPricing = pricing !== undefined && pricing !== null;
+              
               const originalSuffix =
                 billingCycle === "monthly"
                   ? "/mo"
                   : billingCycle === "biyearly"
                     ? "/2yr"
                     : "/yr";
-              const perMonthLabel =
-                billingCycle === "monthly"
+              const perMonthLabel = hasPricing
+                ? billingCycle === "monthly"
                   ? `Renews for $${pricing.renewal.toFixed(2)}/mo`
-                  : `$${pricing.perMonth.toFixed(2)}/mo`;
+                  : `$${pricing.perMonth.toFixed(2)}/mo`
+                : "";
               const renewalSuffix =
                 billingCycle === "monthly" ? "/mo" : billingSuffix;
 
@@ -303,31 +383,44 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
 
                     {/* Pricing */}
                     <div className="text-center space-y-3 mb-8">
-                      <div className="flex items-center justify-center gap-2 text-xs font-semibold">
-                        <span className="line-through text-[rgb(var(--hosting-choose-text-gray-500))]">
-                          ${pricing.original.toFixed(2)}
-                          {originalSuffix}
-                        </span>
-                        <span
-                          className="px-2 py-0.5 rounded-full text-[11px]"
-                          style={{
-                            backgroundColor:
-                              "rgba(var(--hosting-pick-discount-bg))",
-                            color: "rgb(var(--hosting-accent-cyan))",
-                          }}
-                        >
-                          {pricing.discountLabel}
-                        </span>
-                      </div>
-                      <div className="text-[rgb(var(--hosting-text-white))] text-5xl font-bold tracking-tight">
-                        ${pricing.price.toFixed(2)}
-                        <span className="text-2xl font-semibold text-[rgb(var(--hosting-choose-text-gray-400))]">
-                          {billingSuffix}
-                        </span>
-                      </div>
-                      <div className="text-sm text-[rgb(var(--hosting-choose-text-gray-400))]">
-                        {perMonthLabel}
-                      </div>
+                      {loading ? (
+                        <div className="text-[rgb(var(--hosting-choose-text-gray-400))] text-sm">
+                          Loading pricing...
+                        </div>
+                      ) : hasPricing ? (
+                        <>
+                          <div className="flex items-center justify-center gap-2 text-xs font-semibold">
+                            <span className="line-through text-[rgb(var(--hosting-choose-text-gray-500))]">
+                              ${pricing.original.toFixed(2)}
+                              {originalSuffix}
+                            </span>
+                            <span
+                              className="px-2 py-0.5 rounded-full text-[11px]"
+                              style={{
+                                backgroundColor:
+                                  "rgba(var(--hosting-pick-discount-bg))",
+                                color: "rgb(var(--hosting-accent-cyan))",
+                              }}
+                            >
+                              {pricing.discountLabel}
+                            </span>
+                          </div>
+                          <div className="text-[rgb(var(--hosting-text-white))] text-5xl font-bold tracking-tight">
+                            ${pricing.price.toFixed(2)}
+                            <span className="text-2xl font-semibold text-[rgb(var(--hosting-choose-text-gray-400))]">
+                              {billingSuffix}
+                            </span>
+                          </div>
+                          <div className="text-sm text-[rgb(var(--hosting-choose-text-gray-400))]">
+                            {perMonthLabel}
+                          </div>
+                        </>
+                      ) : (
+                        <div className="text-[rgb(var(--hosting-choose-text-gray-400))] text-xs space-y-1">
+                          <div>Pricing unavailable</div>
+                          <div className="text-[10px] opacity-75">Check console for details</div>
+                        </div>
+                      )}
                     </div>
 
                     {/* Features List */}
@@ -513,19 +606,28 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
                     {/* Buttons */}
                     <div>
                       <button
-                        onClick={() => addItem({ name: plan.name, price: getPricing(plan).price })}
-                        className="w-full py-3 rounded-full text-sm font-semibold transition-all"
+                        onClick={() => {
+                          if (hasPricing) {
+                            addItem({ name: plan.name, price: pricing.price });
+                          }
+                        }}
+                        disabled={!hasPricing}
+                        className="w-full py-3 rounded-full text-sm font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                         style={{
                           backgroundColor: "rgb(var(--hosting-pick-button-bg))",
                           color: "rgb(var(--hosting-pick-button-text))",
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor =
-                            "rgb(var(--hosting-choose-button-hover))";
+                          if (hasPricing) {
+                            e.currentTarget.style.backgroundColor =
+                              "rgb(var(--hosting-choose-button-hover))";
+                          }
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor =
-                            "rgb(var(--hosting-pick-button-bg))";
+                          if (hasPricing) {
+                            e.currentTarget.style.backgroundColor =
+                              "rgb(var(--hosting-pick-button-bg))";
+                          }
                         }}
                       >
                         Add to cart
@@ -533,11 +635,13 @@ const PickYourHosting = forwardRef<HTMLElement>((props, ref) => {
                     </div>
 
                     {/* Renewal Information */}
-                    <div className="text-xs text-center text-[rgb(var(--hosting-choose-text-gray-400))]">
-                      You pay ${pricing.price.toFixed(2)} — renews for $
-                      {pricing.renewal.toFixed(2)}
-                      {renewalSuffix}
-                    </div>
+                    {hasPricing && (
+                      <div className="text-xs text-center text-[rgb(var(--hosting-choose-text-gray-400))]">
+                        You pay ${pricing.price.toFixed(2)} — renews for $
+                        {pricing.renewal.toFixed(2)}
+                        {renewalSuffix}
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               );

@@ -392,7 +392,7 @@ export default function UniversalDropdown({
           className="flex items-center gap-2 text-dropdown-text-secondary mb-6 cursor-pointer"
           onClick={handleBackToMenu}
         >
-          <ChevronLeft size={20} className="text-white" />
+          <ChevronLeft size={20} className="text-[hsl(var(--dropdown-text-primary))]" />
           <span className="font-medium">Back</span>
         </div>
 
