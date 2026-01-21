@@ -157,6 +157,8 @@ const Footer: React.FC = () => {
                 <Link
                   href="https://facebook.com/thecloudaro"
                   aria-label="The Cloud Aro on Facebook"
+                  target="_blank"
+                  rel="noreferrer noopener"
                   className="w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center bg-footer-payment-bg transition-transform"
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "scale(1.05)";
@@ -182,6 +184,8 @@ const Footer: React.FC = () => {
                 <Link
                   href="https://linkedin.com/company/thecloudaro"
                   aria-label="The Cloud Aro on LinkedIn"
+                  target="_blank"
+                  rel="noreferrer noopener"
                   className="w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center bg-footer-payment-bg transition-transform"
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "scale(1.05)";
@@ -202,6 +206,8 @@ const Footer: React.FC = () => {
                 <Link
                   href="https://instagram.com/thecloudaro"
                   aria-label="The Cloud Aro on Instagram"
+                  target="_blank"
+                  rel="noreferrer noopener"
                   className="w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center bg-footer-payment-bg transition-transform"
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "scale(1.05)";

@@ -204,7 +204,7 @@ export default function UniversalDropdown({
   };
 
   const universeItems: UniverseItem[] = [
-    { href: "/migration-to-thecloudaro", icon: <ArrowRight size={14} />, label: "Transfer to Us", },
+    { href: "/migration-to-thecloudaro", icon: <ArrowRight size={14} />, label: "Transfer to Us" },
     { key: "why-thecloudaro", icon: <Star size={14} />, label: "Why TheCloudaro" },
     { key: "about-us", icon: <HelpCircle size={14} />, label: "About Us" }
   ];
@@ -285,6 +285,18 @@ export default function UniversalDropdown({
               Sign up
             </Link>
           </div>
+        </div>
+
+        {/* Mobile Promotions Button (above ALL PRODUCTS) */}
+        <div className="mb-4 px-1">
+          <Link
+            href="/promotions"
+            onClick={onClose}
+            className="w-full block rounded-full px-5 py-3 text-center text-xs font-semibold uppercase tracking-wide nav-promotions-gradient border border-white/10"
+            style={{ color: "#ffffff" }}
+          >
+            Promotions
+          </Link>
         </div>
 
         {/* Sidebar Links (Domains, Hosting, etc.) */}

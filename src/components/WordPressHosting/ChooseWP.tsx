@@ -120,10 +120,6 @@ const featureRows: FeatureRow[] = [
         secondary: "Free mailbox"
       }
     },
-    helper: {
-      prefix: "1 free mailbox per domain ",
-      highlight: "SPACEMAIL®"
-    },
     showInfo: true
   },
   {

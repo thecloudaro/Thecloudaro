@@ -22,31 +22,11 @@ const WordPressHero = ({ onPickPlanClick }: WordPressHeroProps) => {
       <motion.div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat -z-20"
         style={{
-          backgroundImage: "url('/WordPressHosting/bg.jpg')"
+          backgroundImage: "url('/WordPress/HomeWordpress.png')"
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
         transition={{ duration: 1.1, ease: "easeOut" }}
-      />
-
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `linear-gradient(to bottom right, rgba(var(--wp-hero-gradient-1-from)), rgba(var(--wp-hero-gradient-1-via)), rgba(var(--wp-hero-gradient-1-to)))`
-        }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoaded ? 1 : 0.6 }}
-        transition={{ duration: 1, delay: 0.1 }}
-      />
-
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `linear-gradient(to bottom right, rgba(var(--wp-hero-gradient-2-from)), transparent, rgba(var(--wp-hero-gradient-2-to)))`
-        }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoaded ? 1 : 0 }}
-        transition={{ duration: 1, delay: 0.2 }}
       />
 
       <div className="relative z-10 flex min-h-screen flex-col">

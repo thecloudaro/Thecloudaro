@@ -120,7 +120,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
             <Logo />
           </div>
 
-          <div className="hidden md:flex flex-1 justify-center space-x-4 items-center">
+          <div className="hidden md:flex flex-1 justify-center items-center gap-4">
             {menuItems.map((item) => (
               <button
                 key={item}
@@ -142,7 +142,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
             {/* Promotions Button - animated gradient CTA */}
             <Link
               href="/promotions"
-              className="ml-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide nav-promotions-gradient border border-white/10"
+              className="px-4 py-2 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide nav-promotions-gradient border border-white/10"
               style={{
                 color: "#ffffff",
               }}
@@ -158,7 +158,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
               return (
                 <div key={i} className="relative">
                   {isUser ? (
-                    <Link href="/login" className={`font-medium transition-all duration-300 px-3 py-2 rounded-full ${
+                    <Link href="/login" className={`font-medium transition-all duration-300 w-9 h-9 flex items-center justify-center rounded-full ${
                       (isHostingPage)
                         ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
                         : (isDomainPage || isHomepage) 
@@ -170,7 +170,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
                   ) : (
                     <button
                       onClick={isCart ? openCart : undefined}
-                      className={`font-medium transition-all duration-300 px-3 py-2 rounded-full ${
+                      className={`font-medium transition-all duration-300 w-9 h-9 flex items-center justify-center rounded-full ${
                         (isHostingPage)
                           ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
                           : (isDomainPage || isHomepage) 
@@ -203,7 +203,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
                 return (
                   <div key={i} className="relative">
                     {isUser ? (
-                      <Link href="/login" className={`font-medium transition-all duration-300 p-1 rounded-full flex items-center justify-center ${
+                      <Link href="/login" className={`font-medium transition-all duration-300 w-9 h-9 rounded-full flex items-center justify-center ${
                         (isHostingPage)
                           ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
                           : (isDomainPage || isHomepage)
@@ -215,7 +215,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
                     ) : (
                       <button
                         onClick={isCart ? openCart : undefined}
-                        className={`font-medium transition-all duration-300 p-1 rounded-full flex items-center justify-center ${
+                        className={`font-medium transition-all duration-300 w-9 h-9 rounded-full flex items-center justify-center ${
                           (isHostingPage)
                             ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
                             : (isDomainPage || isHomepage)

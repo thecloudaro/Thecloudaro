@@ -7,10 +7,9 @@ import Easily from '@/components/WordPressHosting/Easily';
 import SuperSecure from '@/components/WordPressHosting/SuperSecure';
 import Optimized from '@/components/WordPressHosting/Optimized';
 import CloudHosting from '@/components/WordPressHosting/CloudHosting';
-import AllInOne from '@/components/WordPressHosting/All-in_one';
-import EasyWp from '@/components/WordPressHosting/EasyWp';
+// import AllInOne from '@/components/WordPressHosting/All-in_one';
+// import EasyWp from '@/components/WordPressHosting/EasyWp';
 import UniqueLayers from '@/components/WordPressHosting/UniqueLayers';
-import FreeWebsite from '@/components/WordPressHosting/FreeWebsite';
 import { ChooseWP } from '@/components/WordPressHosting/ChooseWP';
 import FAQWP from '@/components/WordPressHosting/FAQWP';
 
@@ -40,10 +39,7 @@ const WordPressHostingPage = () => {
       <SuperSecure />
       <Optimized />
       <CloudHosting ref={cloudHostingRef} onCompareClick={handleCompareClick} />
-      <AllInOne />
-      <EasyWp />
       <UniqueLayers />
-      <FreeWebsite />
       <ChooseWP ref={chooseWPRef} />
       <FAQWP/>
       

@@ -309,12 +309,12 @@
     --nav-promotions-gradient-3: 34 197 94;  /* #22C55E */
     --nav-promotions-gradient-4: 14 165 233; /* #0EA5E9 */
     
-    /* Domain Button Animated Gradient */
-    --domain-button-gradient-1: 37 99 235;  /* #2563EB - blue */
-    --domain-button-gradient-2: 79 70 229;  /* #4F46E5 - indigo */
-    --domain-button-gradient-3: 34 197 94;  /* #22C55E - green */
-    --domain-button-gradient-4: 14 165 233; /* #0EA5E9 - sky */
-    --domain-button-shadow: 37, 99, 235, 0.3; /* blue shadow - for rgba() */
+    /* Domain Button Animated Gradient - Dark Blue / Dark Purple */
+    --domain-button-gradient-1: 222 47% 16%; /* slightly lighter slate */
+    --domain-button-gradient-2: 234 82% 35%; /* deep blue */
+    --domain-button-gradient-3: 262 83% 45%; /* rich purple */
+    --domain-button-gradient-4: 244 75% 40%; /* indigo */
+    --domain-button-shadow: 49, 46, 129, 0.45; /* a bit brighter shadow */
     --nav-promotions-shadow: 15, 23, 42, 0.45; /* rgba for box shadow */
 
 
@@ -682,11 +682,11 @@
     --domain-faq-link: 255 255 255; /* white - for rgb() */
     
     /* WordPressHero Component Colors */
-    --wp-hero-gradient-1-from: 10, 126, 76, 0.7; /* #0a7e4c/70 - for rgba() */
-    --wp-hero-gradient-1-via: 10, 88, 112, 0.6; /* #0a5870/60 - for rgba() */
-    --wp-hero-gradient-1-to: 2, 23, 66, 0.85; /* #021742/85 - for rgba() */
-    --wp-hero-gradient-2-from: 0, 0, 0, 0.25; /* black/25 - for rgba() */
-    --wp-hero-gradient-2-to: 0, 0, 0, 0.3; /* black/30 - for rgba() */
+    --wp-hero-gradient-1-from: 10, 126, 76, 0.45; /* slightly lighter to show bg */
+    --wp-hero-gradient-1-via: 10, 88, 112, 0.35;
+    --wp-hero-gradient-1-to: 2, 23, 66, 0.6;
+    --wp-hero-gradient-2-from: 0, 0, 0, 0.15; /* more transparent so image is visible */
+    --wp-hero-gradient-to: 0, 0, 0, 0.25;
     --wp-hero-badge-text: 255, 255, 255, 0.7; /* white/70 - for rgba() */
     --wp-hero-heading: 255 255 255; /* white - for rgb() */
     --wp-hero-description: 255, 255, 255, 0.85; /* white/85 - for rgba() */
@@ -2034,7 +2034,7 @@
 }
 
 /* ===============================
-   Domain Button Animated Gradient
+   Home Hero Domain Pills (3 buttons)
    =============================== */
 @keyframes domain-button-gradient {
   0% {
@@ -2048,18 +2048,58 @@
   }
 }
 
-.domain-button-gradient {
+.domain-pill {
   background-image: linear-gradient(
     90deg,
-    rgb(var(--domain-button-gradient-1)),
-    rgb(var(--domain-button-gradient-2)),
-    rgb(var(--domain-button-gradient-3)),
-    rgb(var(--domain-button-gradient-4)),
-    rgb(var(--domain-button-gradient-1))
+    hsl(var(--domain-button-gradient-1)),
+    hsl(var(--domain-button-gradient-2)),
+    hsl(var(--domain-button-gradient-3)),
+    hsl(var(--domain-button-gradient-4)),
+    hsl(var(--domain-button-gradient-1))
   );
   background-size: 300% 100%;
   animation: domain-button-gradient 6s ease-in-out infinite;
   box-shadow: 0 4px 12px rgba(var(--domain-button-shadow));
+}
+
+/* Force white text inside the 3 hero domain pills */
+.domain-pill button {
+  color: #ffffff !important;
+}
+.domain-pill button:hover {
+  color: #ffffff !important;
+}
+
+/* Per-button color guides (red / green / purple) */
+.domain-pill--red {
+  background-image: linear-gradient(
+    90deg,
+    hsl(0 84% 45%),
+    hsl(350 90% 55%),
+    hsl(18 92% 52%),
+    hsl(0 84% 45%)
+  );
+}
+
+.domain-pill--green {
+  background-image: linear-gradient(
+    90deg,
+    hsl(160 84% 30%),
+    hsl(142 76% 36%),
+    hsl(174 70% 38%),
+    hsl(160 84% 30%)
+  );
+}
+
+.domain-pill--purple {
+  background-image: linear-gradient(
+    90deg,
+    hsl(236 72% 36%), /* deep blue */
+    hsl(248 80% 52%), /* vivid indigo/blue */
+    hsl(271 91% 50%), /* purple */
+    hsl(262 83% 42%), /* deep purple */
+    hsl(236 72% 36%)  /* deep blue */
+  );
 }
 
 /* TransferPricing Component */

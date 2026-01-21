@@ -266,10 +266,6 @@ const ChooseYourHosting = () => {
                     Secured by <span className="!text-[rgb(var(--migration-choose-ssl))]">SSL</span>
                   </li>
                   <li>{plan.features.mailboxes}</li>
-                  <li>
-                    Powered by{" "}
-                    <span className="!text-[rgb(var(--migration-choose-spacemail))]">SPACEMAIL®</span>
-                  </li>
                   {plan.features.imunify360 && <li>Imunify360 Protection</li>}
                   {plan.features.websiteBuilder && <li>Website Builder</li>}
                   {plan.features.wordpressAI && <li>WordPress AI Tools</li>}
@@ -290,12 +286,6 @@ const ChooseYourHosting = () => {
                 >
                   Add to cart
                 </button>
-
-                <p className="mt-4 text-center text-xs !text-[rgba(var(--migration-choose-disclaimer))]">
-                  You pay ${pricing.price.toFixed(2)} — renews for $
-                  {pricing.renewal.toFixed(2)}
-                  {billingCycle === "monthly" ? "/mo" : billingSuffix}
-                </p>
               </motion.article>
             );
           })}

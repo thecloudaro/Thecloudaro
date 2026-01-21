@@ -186,7 +186,7 @@ const Policy: React.FC<PolicyProps> = ({ policyData }) => {
               className="space-y-6 sm:space-y-8"
             >
               <div className="text-xs" style={{ color: 'rgb(156 163 175)' }}>
-                <Link href="/legal" className="hover:underline">Legal</Link>
+                <Link href="/legal" className="hover:underline">Terms &amp; Conditions</Link>
                 <span className="mx-2">›</span>
                 <span>{policyData.breadcrumb}</span>
               </div>

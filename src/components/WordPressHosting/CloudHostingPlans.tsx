@@ -48,7 +48,7 @@ const planContent: Record<PlanKey, PlanConfig> = {
       {
         label: "FREE",
         emphasis: "mailbox",
-        subNote: "Powered by SPACEMAIL®",
+        subNote: "",
         subNoteClassName: ""
       },
       { emphasis: "HackGuardian" }
@@ -73,7 +73,7 @@ const planContent: Record<PlanKey, PlanConfig> = {
       {
         label: "FREE",
         emphasis: "mailbox",
-        subNote: "Powered by SPACEMAIL®",
+        subNote: "",
         subNoteClassName: ""
       },
       { emphasis: "HackGuardian" },
@@ -97,7 +97,7 @@ const planContent: Record<PlanKey, PlanConfig> = {
       {
         label: "FREE",
         emphasis: "mailbox",
-        subNote: "Powered by SPACEMAIL®",
+        subNote: "",
         subNoteClassName: ""
       },
       { emphasis: "HackGuardian" },
@@ -234,12 +234,9 @@ const PlanCard = ({ plan, billing }: PlanCardProps) => {
         <p className="text-sm text-white/70">{plan.subtitle}</p>
       </div>
 
-        <div className="mt-6 space-y-2 text-xs text-white/60">
+      <div className="mt-6 space-y-2 text-xs text-white/60">
         <div className="flex items-center gap-3">
           <span className="text-base line-through">{plan.regularPrice}</span>
-          <span className="text-xs font-semibold uppercase tracking-[0.35em]" style={{ color: 'rgb(var(--cloud-hosting-badge-text))' }}>
-            {plan.promoLabel}
-          </span>
         </div>
           <div className="flex items-baseline gap-2">
             <span className="text-4xl font-semibold leading-none tracking-tight">
@@ -299,9 +296,6 @@ const PlanCard = ({ plan, billing }: PlanCardProps) => {
       <button className="mt-6 rounded-full bg-white px-5 py-2 text-xs font-semibold text-black transition hover:bg-white/90">
         {plan.ctaLabel}
       </button>
-      <p className="mt-2 text-center text-[10px] text-white/40">
-        {plan.renewsLabel}
-      </p>
     </div>
   );
 };

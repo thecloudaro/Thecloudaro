@@ -139,10 +139,14 @@ const HeroSection = () => {
   animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 30 }}
   transition={{ duration: 0.6, delay: 1.6 }}
 >
-  {[{ label: ".com only $8.88" }, { label: ".net only $11.20" }, { label: ".org only $9.88" }].map((item, idx) => (
+  {[
+    { label: ".com only $8.88", variant: "domain-pill--purple" },
+    { label: ".net only $11.20", variant: "domain-pill--purple" },
+    { label: ".org only $9.88", variant: "domain-pill--purple" },
+  ].map((item, idx) => (
     <div
       key={idx}
-      className="domain-button-gradient backdrop-blur-md border border-hero-price-border rounded-2xl shadow-md"
+      className={`domain-pill ${item.variant} backdrop-blur-md border border-hero-price-border rounded-2xl shadow-md`}
     >
       <Button label={item.label} />
     </div>
