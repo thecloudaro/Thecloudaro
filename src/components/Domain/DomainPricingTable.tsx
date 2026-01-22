@@ -17,21 +17,6 @@ interface DomainPricingRow {
   transfer: RegisterTransferPricing;
 }
 
-const initialDomainPricing: DomainPricingRow[] = [
-  {
-    tld: ".com",
-    register: { original: "$9.66", sale: "$8.88", isSale: true },
-    renew: "$9.98",
-    transfer: { original: "$9.66", sale: "$8.88", isSale: true },
-  },
-  {
-    tld: ".org",
-    register: { original: "$12.98", sale: "$11.88", isSale: true },
-    renew: "$12.98",
-    transfer: { original: "$12.98", sale: "$11.88", isSale: true },
-  },
-];
-
 const DomainPricingTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showPriceRange, setShowPriceRange] = useState(false);
@@ -39,8 +24,8 @@ const DomainPricingTable = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [minPriceFocused, setMinPriceFocused] = useState(false);
   const [maxPriceFocused, setMaxPriceFocused] = useState(false);
-  const [domainPricing, setDomainPricing] = useState<DomainPricingRow[]>(initialDomainPricing);
-  const [isLoading, setIsLoading] = useState(false);
+  const [domainPricing, setDomainPricing] = useState<DomainPricingRow[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -58,53 +43,64 @@ const DomainPricingTable = () => {
     };
   }, []);
 
-  // Load pricing from API (Upmind-backed, with fallback)
+  // Load pricing from API (Upmind-only, no static fallback)
   useEffect(() => {
     const fetchPricing = async () => {
       setIsLoading(true);
       setLoadError(null);
 
       try {
-        const response = await fetch("/api/domain-tld-pricing?tlds=.com,.org");
+        // Fetch all TLDs from Upmind (no filter - get all available)
+        const response = await fetch("/api/domain-tld-pricing");
         const data = await response.json();
 
-        if (!response.ok || !Array.isArray(data?.tlds)) {
-          setLoadError("Unable to load live domain pricing. Showing default values.");
+        if (!response.ok || !data.success || !Array.isArray(data?.tlds)) {
+          const errorMsg = data?.error || "Unable to load domain pricing from Upmind API.";
+          setLoadError(errorMsg);
+          setDomainPricing([]);
           return;
         }
+
+        if (data.tlds.length === 0) {
+          setLoadError("No domain pricing available from Upmind.");
+          setDomainPricing([]);
+          return;
+        }
+
+        const formatPrice = (value: unknown): string => {
+          if (typeof value === "number") return `$${value.toFixed(2)}`;
+          if (typeof value === "string") return value.startsWith("$") ? value : `$${value}`;
+          return "-";
+        };
 
         const rows: DomainPricingRow[] = data.tlds.map((item: any) => {
           const tld = String(item.tld || "").toLowerCase();
 
-          const formatPrice = (value: unknown): string => {
-            if (typeof value === "number") return `$${value.toFixed(2)}`;
-            if (typeof value === "string") return value.startsWith("$") ? value : `$${value}`;
-            return "-";
-          };
-
-          const registerPrice = item.registerPrice ?? item.register ?? null;
-          const renewPrice = item.renewPrice ?? item.renew ?? null;
-          const transferPrice = item.transferPrice ?? item.transfer ?? null;
+          const registerPrice = item.registerPrice ?? null;
+          const renewPrice = item.renewPrice ?? null;
+          const transferPrice = item.transferPrice ?? null;
 
           return {
             tld,
-            register:
-              typeof registerPrice === "number"
-                ? { price: formatPrice(registerPrice), isSale: false }
-                : { price: formatPrice(registerPrice), isSale: false },
+            register: {
+              price: formatPrice(registerPrice),
+              isSale: false,
+            },
             renew: formatPrice(renewPrice),
-            transfer:
-              typeof transferPrice === "number"
-                ? { price: formatPrice(transferPrice), isSale: false }
-                : { price: formatPrice(transferPrice), isSale: false },
+            transfer: {
+              price: formatPrice(transferPrice),
+              isSale: false,
+            },
           } as DomainPricingRow;
         });
 
-        if (rows.length > 0) {
-          setDomainPricing(rows);
-        }
-      } catch {
-        setLoadError("Unable to load live domain pricing. Showing default values.");
+        setDomainPricing(rows);
+        console.log(`✅ [DomainPricingTable] Loaded ${rows.length} TLDs from Upmind API`);
+      } catch (error) {
+        const errorMsg = error instanceof Error ? error.message : "Failed to fetch domain pricing.";
+        console.error('[DomainPricingTable] ❌ Error:', errorMsg);
+        setLoadError(errorMsg);
+        setDomainPricing([]);
       } finally {
         setIsLoading(false);
       }
@@ -363,8 +359,18 @@ const DomainPricingTable = () => {
           </p>
         )}
         {loadError && !isLoading && (
-          <p className="px-6 pb-4 text-xs" style={{ color: "rgb(var(--domain-pricing-table-button-icon))" }}>
-            {loadError}
+          <div className="px-6 pb-4">
+            <p className="text-xs mb-2" style={{ color: "rgb(var(--domain-pricing-table-button-icon))" }}>
+              {loadError}
+            </p>
+            <p className="text-xs" style={{ color: "rgb(var(--domain-pricing-table-button-icon))" }}>
+              Please check your Upmind API configuration or try refreshing the page.
+            </p>
+          </div>
+        )}
+        {!isLoading && !loadError && domainPricing.length === 0 && (
+          <p className="px-6 pb-4 text-sm" style={{ color: "rgb(var(--domain-pricing-table-header-text))" }}>
+            No domain pricing available at this time.
           </p>
         )}
         {/* Table Header */}
@@ -377,115 +383,123 @@ const DomainPricingTable = () => {
 
         {/* Table Body */}
         <div className="divide-y" style={{ borderColor: 'rgb(var(--domain-pricing-table-divider-row))' }}>
-          {filteredDomains.map((domain, index) => (
-            <motion.div
-              key={domain.tld}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="px-6 py-4 transition-colors duration-200 block md:grid md:grid-cols-4 md:gap-8 md:items-center"
-              style={{ backgroundColor: 'transparent' }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-row-hover))';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}
-            >
-              {/* --- TLD (Visible on all screens) --- */}
-              <div className="flex items-center justify-between mb-4 md:mb-0">
-                <div className="flex items-center">
-                  <Link 
-                    href={`/domain-search?tld=${domain.tld}`}
-                    className="font-semibold text-lg transition-colors duration-200 cursor-pointer"
-                    style={{ color: 'rgb(var(--domain-pricing-table-tld-text))' }}
-                    onMouseEnter={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-tld-hover))'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-tld-text))'; }}
-                  >
-                    {domain.tld}
-                  </Link>
-                  <button 
-                    className="ml-2 p-1 rounded transition-colors duration-200"
-                    style={{ backgroundColor: 'transparent' }}
-                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-button-hover-bg))'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
-                  >
-                    <Heart 
-                      className="w-3 h-3" 
-                      style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }}
-                      onMouseEnter={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-heart-hover))'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-button-icon))'; }}
-                    />
-                  </button>
+          {filteredDomains.length === 0 && !isLoading && !loadError ? (
+            <div className="px-6 py-8 text-center">
+              <p className="text-sm" style={{ color: "rgb(var(--domain-pricing-table-header-text))" }}>
+                No domains match your search criteria.
+              </p>
+            </div>
+          ) : (
+            filteredDomains.map((domain, index) => (
+              <motion.div
+                key={domain.tld}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="px-6 py-4 transition-colors duration-200 block md:grid md:grid-cols-4 md:gap-8 md:items-center"
+                style={{ backgroundColor: 'transparent' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-row-hover))';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                }}
+              >
+                {/* --- TLD (Visible on all screens) --- */}
+                <div className="flex items-center justify-between mb-4 md:mb-0">
+                  <div className="flex items-center">
+                    <Link 
+                      href={`/domain-search?tld=${domain.tld}`}
+                      className="font-semibold text-lg transition-colors duration-200 cursor-pointer"
+                      style={{ color: 'rgb(var(--domain-pricing-table-tld-text))' }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-tld-hover))'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-tld-text))'; }}
+                    >
+                      {domain.tld}
+                    </Link>
+                    <button 
+                      className="ml-2 p-1 rounded transition-colors duration-200"
+                      style={{ backgroundColor: 'transparent' }}
+                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-button-hover-bg))'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
+                    >
+                      <Heart 
+                        className="w-3 h-3" 
+                        style={{ color: 'rgb(var(--domain-pricing-table-button-icon))' }}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-heart-hover))'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.color = 'rgb(var(--domain-pricing-table-button-icon))'; }}
+                      />
+                    </button>
+                  </div>
+                  <div className="md:hidden text-lg font-semibold" style={{ color: 'rgb(var(--hosting-text-white))' }}>
+                    {domain.register.isSale ? domain.register.sale : domain.register.price} /yr
+                  </div>
                 </div>
-                <div className="md:hidden text-lg font-semibold" style={{ color: 'rgb(var(--hosting-text-white))' }}>
-                  {domain.register.isSale ? domain.register.sale : domain.register.price} /yr
-                </div>
-              </div>
 
-              {/* --- Mobile Layout (Card format) --- */}
-              <div className="md:hidden space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>Register:</span>
-                  <div style={{ color: 'rgb(var(--hosting-text-white))' }}>
-                    {domain.register.isSale ? (
-                      <div>
-                        <span className="line-through text-xs mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>{domain.register.original}</span>
-                        <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>{domain.register.sale} /yr</span>
-                      </div>
-                    ) : (
-                      <span className="font-semibold">{domain.register.price} /yr</span>
-                    )}
+                {/* --- Mobile Layout (Card format) --- */}
+                <div className="md:hidden space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>Register:</span>
+                    <div style={{ color: 'rgb(var(--hosting-text-white))' }}>
+                      {domain.register.isSale ? (
+                        <div>
+                          <span className="line-through text-xs mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>{domain.register.original}</span>
+                          <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>{domain.register.sale} /yr</span>
+                        </div>
+                      ) : (
+                        <span className="font-semibold">{domain.register.price} /yr</span>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex justify-between">
+                    <span style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>Renew:</span>
+                    <span className="font-semibold" style={{ color: 'rgb(var(--hosting-text-white))' }}>{domain.renew} /yr</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>Transfer:</span>
+                    <div style={{ color: 'rgb(var(--hosting-text-white))' }}>
+                      {domain.transfer.isSale ? (
+                        <div>
+                          <span className="line-through text-xs mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>{domain.transfer.original}</span>
+                          <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>{domain.transfer.sale} /yr</span>
+                        </div>
+                      ) : (
+                        <span className="font-semibold">{domain.transfer.price} /yr</span>
+                      )}
+                    </div>
                   </div>
                 </div>
-                <div className="flex justify-between">
-                  <span style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>Renew:</span>
-                  <span className="font-semibold" style={{ color: 'rgb(var(--hosting-text-white))' }}>{domain.renew} /yr</span>
-                </div>
-                <div className="flex justify-between">
-                  <span style={{ color: 'rgb(var(--domain-pricing-table-header-text))' }}>Transfer:</span>
-                  <div style={{ color: 'rgb(var(--hosting-text-white))' }}>
-                    {domain.transfer.isSale ? (
-                      <div>
-                        <span className="line-through text-xs mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>{domain.transfer.original}</span>
-                        <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>{domain.transfer.sale} /yr</span>
-                      </div>
-                    ) : (
-                      <span className="font-semibold">{domain.transfer.price} /yr</span>
-                    )}
-                  </div>
-                </div>
-              </div>
 
-              {/* --- Desktop Layout (Grid columns) --- */}
-              {/* Register */}
-              <div className="hidden md:block text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
-                {domain.register.isSale ? (
-                  <div>
-                    <span className="line-through text-sm mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>{domain.register.original}</span>
-                    <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>{domain.register.sale} /yr</span>
-                  </div>
-                ) : (
-                  <span className="font-semibold">{domain.register.price} /yr</span>
-                )}
-              </div>
-              {/* Renew */}
-              <div className="hidden md:block font-semibold text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
-                {domain.renew} /yr
-              </div>
-              {/* Transfer */}
-              <div className="hidden md:block text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
-                {domain.transfer.isSale ? (
-                  <div>
-                    <span className="line-through text-sm mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>{domain.transfer.original}</span>
-                    <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>{domain.transfer.sale} /yr</span>
-                  </div>
-                ) : (
-                  <span className="font-semibold">{domain.transfer.price} /yr</span>
-                )}
-              </div>
-            </motion.div>
-          ))}
+                {/* --- Desktop Layout (Grid columns) --- */}
+                {/* Register */}
+                <div className="hidden md:block text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
+                  {domain.register.isSale ? (
+                    <div>
+                      <span className="line-through text-sm mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>{domain.register.original}</span>
+                      <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>{domain.register.sale} /yr</span>
+                    </div>
+                  ) : (
+                    <span className="font-semibold">{domain.register.price} /yr</span>
+                  )}
+                </div>
+                {/* Renew */}
+                <div className="hidden md:block font-semibold text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
+                  {domain.renew} /yr
+                </div>
+                {/* Transfer */}
+                <div className="hidden md:block text-lg" style={{ color: 'rgb(var(--hosting-text-white))' }}>
+                  {domain.transfer.isSale ? (
+                    <div>
+                      <span className="line-through text-sm mr-2" style={{ color: 'rgb(var(--domain-pricing-table-sale-original))' }}>{domain.transfer.original}</span>
+                      <span className="font-semibold" style={{ color: 'rgb(var(--domain-pricing-table-sale-price))' }}>{domain.transfer.sale} /yr</span>
+                    </div>
+                  ) : (
+                    <span className="font-semibold">{domain.transfer.price} /yr</span>
+                  )}
+                </div>
+              </motion.div>
+            ))
+          )}
         </div>
       </div>
 

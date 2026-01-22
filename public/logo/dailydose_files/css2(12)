@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'Raleway';
+  font-style: italic;
+  font-weight: 200;
+  font-display: block;
+  src: url(https://static.parastorage.com/tag-bundler/api/v1/fonts-cache/googlefont/woff/l/font?kit=1Pt_g8zYS_SKggPNyCgSQamb1W0lwk4S4ejMPrcVIT9d0c-XbAFrxU1pv-_-HRj-62M&skey=bf44ee29381a37b0&v=v37) format('woff');
+}

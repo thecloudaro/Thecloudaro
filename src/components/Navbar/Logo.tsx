@@ -18,9 +18,6 @@ const Logo = () => {
             priority
           />
         </div>
-
-      
-        
       </Link>
     </div>
   );

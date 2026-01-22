@@ -34,7 +34,7 @@ const LoginPage = () => {
         localStorage.setItem('refresh_token', data.refresh_token);
         localStorage.setItem('client_id', data.client_id);
 
-        // 🔹 Immediately redirect to Upmind client dashboard with SSO
+        // 🔹 Get SSO URL and redirect to dashboard (not login page)
         try {
           const ssoResponse = await fetch('/api/dashboard-sso', {
             method: 'POST',
@@ -50,17 +50,15 @@ const LoginPage = () => {
           const ssoData = await ssoResponse.json();
 
           if (ssoResponse.ok && ssoData.dashboard_url) {
-            // Redirect directly to Upmind client dashboard with SSO token
+            // Redirect directly to dashboard with SSO token
             window.location.href = ssoData.dashboard_url;
           } else {
-            // Fallback: Direct redirect with access token to dashboard
-            const upmindClientUrl = 'https://my.thecloudaro.com/dashboard';
-            window.location.href = `${upmindClientUrl}?access_token=${data.access_token}`;
+            // Fallback: Redirect to dashboard with access_token
+            window.location.href = `https://my.thecloudaro.com/dashboard?access_token=${encodeURIComponent(data.access_token)}&client_id=${encodeURIComponent(data.client_id)}`;
           }
         } catch (ssoErr) {
-          // Fallback: Direct redirect if SSO fails to dashboard
-          const upmindClientUrl = 'https://my.thecloudaro.com/dashboard';
-          window.location.href = `${upmindClientUrl}?access_token=${data.access_token}`;
+          // Fallback: Direct redirect to dashboard
+          window.location.href = `https://my.thecloudaro.com/dashboard?access_token=${encodeURIComponent(data.access_token)}&client_id=${encodeURIComponent(data.client_id)}`;
         }
       } else {
         setError(data.message || 'Login failed');

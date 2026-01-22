@@ -32,7 +32,7 @@ const StarlightCard = () => {
       <div className="bg-[hsl(var(--starlight-card-bg))] rounded-2xl sm:rounded-3xl overflow-hidden h-[400px] sm:h-[450px] md:h-[550px] lg:h-[650px] xl:h-[720px] flex flex-col transition-all duration-500 ease-in-out touch-manipulation">
         <div className="h-1/3 sm:h-2/5 bg-[hsl(var(--starlight-card-header-bg))] relative overflow-hidden flex items-center justify-center">
           <Image 
-            src="/3d4.png" 
+            src="/Home/VirtualMachine.png" 
             alt="Profile Fan" 
             fill
             className="object-cover"

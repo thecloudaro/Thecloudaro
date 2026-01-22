@@ -266,7 +266,7 @@ const allPlansSections: AllPlansSection[] = [
 ];
 
 const ChooseHosting = forwardRef<HTMLElement>((props, ref) => {
-  const [billing, setBilling] = useState<BillingCycle>("yearly");
+  const [billing, setBilling] = useState<BillingCycle>("monthly");
   const [dataCenter, setDataCenter] = useState("US");
   const [expandedSections, setExpandedSections] = useState<
     Record<string, boolean>

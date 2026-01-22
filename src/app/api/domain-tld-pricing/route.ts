@@ -1,152 +1,202 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 
 interface TldPricing {
   tld: string;
-  registerPrice: number | null;
-  renewPrice: number | null;
-  transferPrice: number | null;
+  registerPrice: number;
+  renewPrice: number;
+  transferPrice: number;
   currency: string;
 }
 
-// Fallback pricing map used when Upmind is not configured or
-// when the upstream request fails. Mirrors the existing table.
-const FALLBACK_PRICING: Record<string, TldPricing> = {
-  ".com": { tld: ".com", registerPrice: 8.88, renewPrice: 9.98, transferPrice: 8.88, currency: "USD" },
-  ".org": { tld: ".org", registerPrice: 11.88, renewPrice: 12.98, transferPrice: 11.88, currency: "USD" },
-  ".net": { tld: ".net", registerPrice: 12.98, renewPrice: 12.98, transferPrice: 12.98, currency: "USD" },
-  ".co": { tld: ".co", registerPrice: 29.98, renewPrice: 29.98, transferPrice: 29.98, currency: "USD" },
-  ".io": { tld: ".io", registerPrice: 39.98, renewPrice: 39.98, transferPrice: 39.98, currency: "USD" },
-  ".app": { tld: ".app", registerPrice: 19.98, renewPrice: 19.98, transferPrice: 19.98, currency: "USD" },
-};
-
-function parseTldsParam(searchParams: URLSearchParams): string[] {
-  const tldsParam = searchParams.get("tlds");
-  if (!tldsParam) {
-    return [".com", ".org"];
-  }
-
-  return tldsParam
-    .split(",")
-    .map((t) => t.trim())
-    .filter(Boolean)
-    .map((t) => (t.startsWith(".") ? t : `.${t}`));
+interface DomainTldPricingResponse {
+  success: boolean;
+  tlds?: TldPricing[];
+  error?: string;
 }
 
-function mapFallbackTlds(tlds: string[]): TldPricing[] {
-  return tlds
-    .map((tld) => FALLBACK_PRICING[tld])
-    .filter((item): item is TldPricing => !!item);
-}
-
-// Best-effort mapper for the Upmind TLD response.
-// The exact shape can vary, so this function tries a few
-// common patterns and falls back to nulls when unknown.
-function extractPricingFromUpmind(data: any, tld: string): TldPricing {
-  const currency = "USD";
-
-  const root = data?.data ?? data;
-  const pricesArray =
-    root?.prices && Array.isArray(root.prices)
-      ? root.prices
-      : root?.prices?.prices && Array.isArray(root.prices.prices)
-      ? root.prices.prices
-      : null;
-
-  const firstPrice = pricesArray?.[0] ?? root?.prices ?? null;
-
-  const getPrice = (...keys: string[]): number | null => {
-    if (!firstPrice) return null;
-    for (const key of keys) {
-      const value = firstPrice[key];
-      if (value !== undefined && value !== null) {
-        const num = typeof value === "number" ? value : parseFloat(String(value));
-        if (!Number.isNaN(num)) return num;
-      }
-    }
-    return null;
-  };
-
-  const registerPrice = getPrice("register_price", "registration_price", "price", "amount");
-  const renewPrice = getPrice("renew_price", "renewal_price", "renew");
-  const transferPrice = getPrice("transfer_price", "transfer");
-
-  return {
-    tld,
-    registerPrice,
-    renewPrice,
-    transferPrice,
-    currency,
-  };
-}
-
+/**
+ * Fetch domain TLD pricing from Upmind API
+ * Uses product ID: 61e50989-73d2-4757-001a-745e610832d7
+ * Fetches domain names/TLDs from product details endpoint
+ */
 export async function GET(req: NextRequest) {
   try {
-    const url = new URL(req.url);
-    const tlds = parseTldsParam(url.searchParams);
+    const { searchParams } = new URL(req.url);
+    const tldsParam = searchParams.get('tlds'); // Optional: comma-separated TLDs to filter
 
+    // Validate API token
     const apiToken = process.env.UPMIND_API_TOKEN;
     if (!apiToken) {
-      // No Upmind token configured – return fallback data
-      return NextResponse.json({
-        source: "fallback",
-        tlds: mapFallbackTlds(tlds),
-      });
+      return NextResponse.json(
+        { 
+          success: false,
+          error: 'UPMIND_API_TOKEN environment variable is not set. Please set it in your .env.local file.',
+          tlds: []
+        },
+        { status: 500 }
+      );
     }
 
-    const endpointBase =
-      "https://api.upmind.io/api/admin/modules/web_hosting/domains/tlds";
+    // Domain product ID from Upmind
+    const domainProductId = '61e50989-73d2-4757-001a-745e610832d7';
 
-    const results: TldPricing[] = [];
+    // Fetch product details from Upmind API
+    // Using product details endpoint: /api/admin/products/{productId}
+    const productDetailsEndpoint = `https://api.upmind.io/api/admin/products/${domainProductId}?with=prices,costs`;
+    
+    console.log('🚀 [Domain TLD Pricing] Fetching product details from:', productDetailsEndpoint);
 
-    for (const tld of tlds) {
-      const endpoint = `${endpointBase}?tld=${encodeURIComponent(tld)}`;
+    const response = await fetch(productDetailsEndpoint, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${apiToken}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
 
-      try {
-        const response = await fetch(endpoint, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${apiToken}`,
-          },
-        });
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('❌ [Domain TLD Pricing] Upmind API error:', response.status, errorText);
+      return NextResponse.json(
+        { 
+          success: false,
+          error: `Upmind API returned ${response.status}: ${errorText.substring(0, 200)}`,
+          tlds: []
+        },
+        { status: response.status }
+      );
+    }
 
-        if (!response.ok) {
-          // If Upmind returns an error for this TLD, fall back for this TLD only
-          const fallback = FALLBACK_PRICING[tld];
-          if (fallback) {
-            results.push(fallback);
-          }
-          continue;
-        }
+    const productData = await response.json();
+    
+    // Extract product from response (could be direct object or nested in data)
+    const domainProduct = productData.data || productData.product || productData;
 
-        const data = await response.json();
-        results.push(extractPricingFromUpmind(data, tld));
-      } catch {
-        const fallback = FALLBACK_PRICING[tld];
-        if (fallback) {
-          results.push(fallback);
-        }
+    if (!domainProduct) {
+      console.error('❌ [Domain TLD Pricing] Invalid response structure. Product not found.');
+      return NextResponse.json(
+        { 
+          success: false,
+          error: 'Invalid response structure from Upmind API - product not found',
+          tlds: []
+        },
+        { status: 500 }
+      );
+    }
+
+    console.log(`✅ [Domain TLD Pricing] Found domain product:`, domainProduct.id || domainProduct.product_id || domainProduct.uuid);
+    console.log(`📦 [Domain TLD Pricing] Domain product structure:`, JSON.stringify(domainProduct, null, 2).substring(0, 2000));
+
+    // Fetch TLDs from Upmind TLDs endpoint
+    // GET /api/admin/modules/web_hosting/domains/tlds returns all configured TLDs
+    const tldsEndpoint = 'https://api.upmind.io/api/admin/modules/web_hosting/domains/tlds';
+    
+    console.log('🚀 [Domain TLD Pricing] Fetching TLDs from:', tldsEndpoint);
+
+    const tldsResponse = await fetch(tldsEndpoint, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${apiToken}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!tldsResponse.ok) {
+      const errorText = await tldsResponse.text();
+      console.error('❌ [Domain TLD Pricing] TLDs API error:', tldsResponse.status, errorText);
+      return NextResponse.json(
+        { 
+          success: false,
+          error: `Upmind TLDs API returned ${tldsResponse.status}: ${errorText.substring(0, 200)}`,
+          tlds: []
+        },
+        { status: tldsResponse.status }
+      );
+    }
+
+    const tldsData = await tldsResponse.json();
+    const tldsList = Array.isArray(tldsData) ? tldsData : (tldsData.data || tldsData.tlds || []);
+
+    console.log(`✅ [Domain TLD Pricing] Found ${tldsList.length} TLDs from Upmind`);
+
+    // Filter TLDs if tlds param provided
+    const requestedTlds = tldsParam ? tldsParam.split(',').map(t => t.trim().toLowerCase()) : null;
+
+    // Extract pricing for each TLD
+    const tldPricingList: TldPricing[] = [];
+
+    for (const tldItem of tldsList) {
+      const tld = String(tldItem.tld || tldItem.name || '').toLowerCase();
+      
+      if (!tld || !tld.startsWith('.')) continue;
+      
+      // Filter if specific TLDs requested
+      if (requestedTlds && !requestedTlds.includes(tld)) continue;
+
+      // Extract pricing from TLD item
+      // Upmind TLD structure: prices array with currency_code and billing_cycle_months
+      const prices = tldItem.prices || tldItem.pricing || [];
+      
+      if (!Array.isArray(prices) || prices.length === 0) {
+        console.warn(`⚠️ [Domain TLD Pricing] No pricing array found for ${tld}`);
+        continue;
       }
+
+      // Find USD pricing for 12 months (yearly) - domain pricing is typically yearly
+      const usdYearlyPrice = prices.find((p: any) => 
+        (p.currency_code === 'USD' || p.currency_code === 'usd') && 
+        (p.billing_cycle_months === 12 || p.billing_cycle_years === 1 || p.billing_cycle === 12)
+      );
+
+      if (!usdYearlyPrice) {
+        console.warn(`⚠️ [Domain TLD Pricing] No USD yearly pricing found for ${tld}. Available:`, 
+          prices.map((p: any) => ({ currency: p.currency_code, cycle: p.billing_cycle_months || p.billing_cycle_years })));
+        continue;
+      }
+
+      const price = usdYearlyPrice.price || usdYearlyPrice.amount || usdYearlyPrice.cost || null;
+
+      if (!price || price <= 0) {
+        console.warn(`⚠️ [Domain TLD Pricing] Invalid price for ${tld}:`, price);
+        continue;
+      }
+
+      // For domain pricing, register/renew/transfer may be the same or different
+      // Check if separate prices are provided, otherwise use the same price
+      const registerPrice = usdYearlyPrice.register_price || usdYearlyPrice.registration_price || price;
+      const renewPrice = usdYearlyPrice.renew_price || usdYearlyPrice.renewal_price || price;
+      const transferPrice = usdYearlyPrice.transfer_price || price;
+
+      tldPricingList.push({
+        tld,
+        registerPrice: typeof registerPrice === 'number' ? registerPrice : parseFloat(String(registerPrice)),
+        renewPrice: typeof renewPrice === 'number' ? renewPrice : parseFloat(String(renewPrice)),
+        transferPrice: typeof transferPrice === 'number' ? transferPrice : parseFloat(String(transferPrice)),
+        currency: 'USD',
+      });
+
+      console.log(`✅ [Domain TLD Pricing] Extracted pricing for ${tld}: register=$${registerPrice}, renew=$${renewPrice}, transfer=$${transferPrice}`);
     }
+
+    console.log(`✅ [Domain TLD Pricing] Extracted pricing for ${tldPricingList.length} TLDs`);
 
     return NextResponse.json({
-      source: "upmind",
-      tlds: results,
+      success: true,
+      tlds: tldPricingList,
     });
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Unexpected error while fetching TLD pricing.";
-
-    // On any unexpected error, respond with fallback data for the default TLDs
+    console.error('❌ [Domain TLD Pricing] API error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown server error';
+    
     return NextResponse.json(
-      {
-        source: "fallback",
-        error: message,
-        tlds: mapFallbackTlds([".com", ".org"]),
+      { 
+        success: false,
+        error: errorMessage,
+        tlds: []
       },
       { status: 500 }
     );
   }
 }
-

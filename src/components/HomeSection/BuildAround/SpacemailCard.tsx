@@ -44,7 +44,7 @@ const SpacemailCard = () => {
         {/* Right side - Image */}
         <div className="w-full lg:w-1/2 order-first lg:order-none lg:h-full min-h-40 sm:min-h-56 bg-gradient-to-br from-[hsl(var(--spacemail-card-gradient-from))] to-[hsl(var(--spacemail-card-gradient-to))] relative overflow-hidden">
           <Image
-            src="/3d5.jpeg"
+            src="/Home/Email.png"
             alt="Email Service"
             fill
             className="object-cover"

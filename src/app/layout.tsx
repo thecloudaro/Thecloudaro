@@ -20,6 +20,16 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Web Hosting - Professional Hosting Solutions",
   description: "Professional web hosting and domain services",
+  icons: {
+    icon: [
+      { url: '/logo/icon.png', sizes: '80x120', type: 'image/png' },
+      { url: '/logo/icon.png', sizes: '16x16', type: 'image/png' },
+    ],
+    shortcut: '/logo/icon.png',
+    apple: [
+      { url: '/logo/icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
 };
 
 export default function RootLayout({

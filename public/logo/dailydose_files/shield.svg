@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="35" viewBox="0 0 28 35">
+    <defs>
+        <linearGradient id="b" x1="14.676%" x2="80.501%" y1="14.864%" y2="76.57%">
+            <stop offset="0%" stop-color="#FFF" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#F8F8F9"/>
+        </linearGradient>
+        <path id="a" d="M13 33s13-6.6 13-16.5V3.3L13 0 0 3.3v13.2C0 26.4 13 33 13 33z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g transform="translate(1 1)">
+            <use fill="#60BC57" fill-opacity=".34" xlink:href="#a"/>
+            <use fill="url(#b)" xlink:href="#a"/>
+            <use stroke="#60BC57" stroke-width="2" xlink:href="#a"/>
+            <path stroke="#FFF" stroke-linejoin="square" stroke-width="2" d="M13 31.864l.069-.039c.429-.24.909-.527 1.426-.855a33.95 33.95 0 0 0 4.34-3.255C22.706 24.277 25 20.49 25 16.5V4.078L13 1.032 1 4.078V16.5c0 3.991 2.294 7.777 6.164 11.215A33.95 33.95 0 0 0 13 31.864z"/>
+            <path stroke-linejoin="square" d="M13 33s13-6.6 13-16.5V3.3L13 0 0 3.3v13.2C0 26.4 13 33 13 33z"/>
+        </g>
+        <path stroke="#61AD5A" stroke-width="2" d="M18 13l-4.375 7L11 17.429"/>
+    </g>
+</svg>

@@ -56,11 +56,11 @@ export async function POST(req: NextRequest) {
       console.log('SSO endpoint not available, using direct redirect');
     }
 
-    // Option 2: If SSO endpoint doesn't exist, redirect with access token
-    // Some Upmind setups allow passing token as query parameter
+    // Option 2: If SSO endpoint doesn't exist, redirect with access token to DASHBOARD (not login)
+    // Always redirect to /dashboard, never /login
     return NextResponse.json({
       success: true,
-      dashboard_url: `${upmindClientUrl}?access_token=${access_token}`,
+      dashboard_url: `${upmindClientUrl}?access_token=${encodeURIComponent(access_token)}&client_id=${encodeURIComponent(client_id)}`,
       access_token: access_token,
     });
   } catch (err: unknown) {

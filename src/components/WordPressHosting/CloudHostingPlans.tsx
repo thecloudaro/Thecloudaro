@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { wordpressPlanProductIds } from "@/config/hosting-plans";
 
 type BillingCycle = "monthly" | "yearly";
 
@@ -138,19 +139,113 @@ const billingCopy: Record<BillingCycle, Record<PlanKey, Partial<PlanConfig>>> = 
   }
 };
 
+interface ApiPricing {
+  monthly?: number | null;
+  yearly?: number | null;
+}
+
+interface ApiPricingData {
+  Starter?: ApiPricing;
+  Turbo?: ApiPricing;
+  Supersonic?: ApiPricing;
+}
+
 const CloudHostingPlans = ({ billing, onCompareClick }: CloudHostingPlansProps) => {
+  const [apiPricing, setApiPricing] = useState<ApiPricingData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch pricing from API
+  useEffect(() => {
+    const fetchPricing = async () => {
+      try {
+        const starterProductId = wordpressPlanProductIds.Starter;
+        const turboProductId = wordpressPlanProductIds.Turbo;
+        const supersonicProductId = wordpressPlanProductIds.Supersonic;
+
+        if (!starterProductId || !turboProductId || !supersonicProductId) {
+          console.error('[CloudHostingPlans] ❌ Product IDs not configured');
+          setLoading(false);
+          return;
+        }
+
+        console.log('[CloudHostingPlans] 🚀 Fetching pricing from Upmind API...');
+
+        const response = await fetch(
+          `/api/wordpress-pricing?starter=${starterProductId}&turbo=${turboProductId}&supersonic=${supersonicProductId}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        const responseData = await response.json();
+
+        if (!response.ok || !responseData.pricing) {
+          console.warn('[CloudHostingPlans] ⚠️ API error or no pricing data, using static pricing');
+          setApiPricing(null);
+        } else {
+          console.log('[CloudHostingPlans] ✅ Pricing data received:', responseData.pricing);
+          setApiPricing(responseData.pricing);
+        }
+      } catch (error) {
+        console.error('[CloudHostingPlans] ❌ Failed to fetch pricing:', error);
+        setApiPricing(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPricing();
+  }, []);
+
   const plans = useMemo(() => {
     return (Object.keys(planContent) as PlanKey[]).map((key) => {
       const defaultPlan = planContent[key];
       const cycleOverrides = billingCopy[billing][key] ?? {};
 
-      return {
+      // Map plan key to API pricing key
+      const apiKey = key === 'starter' ? 'Starter' : key === 'turbo' ? 'Turbo' : 'Supersonic';
+      const pricing = apiPricing?.[apiKey as keyof ApiPricingData];
+
+      // Use API pricing if available, otherwise use static pricing
+      let finalPlan = {
         key,
         ...defaultPlan,
         ...cycleOverrides
       } as PlanConfig & { key: PlanKey };
+
+      if (pricing && !loading) {
+        const price = billing === 'yearly' ? pricing.yearly : pricing.monthly;
+        
+        if (price && price > 0) {
+          // Use API price as the promo price (current discounted price)
+          // Calculate regular price as 1.5x for display (strikethrough)
+          const regularPrice = price * 1.5;
+          const discountPercent = Math.round(((regularPrice - price) / regularPrice) * 100);
+
+          // Format prices
+          const promoPriceFormatted = `$${price.toFixed(2)}`;
+          const regularPriceFormatted = billing === 'yearly' 
+            ? `$${regularPrice.toFixed(2)}/yr` 
+            : `$${regularPrice.toFixed(2)}/mo`;
+
+          finalPlan = {
+            ...finalPlan,
+            promoPrice: promoPriceFormatted,
+            regularPrice: regularPriceFormatted,
+            promoLabel: `${discountPercent}% OFF*`,
+            renewsLabel: billing === 'yearly' 
+              ? `Renews for $${price.toFixed(2)}/yr`
+              : `Renews for $${price.toFixed(2)}/mo`,
+          };
+        }
+      }
+
+      return finalPlan;
     });
-  }, [billing]);
+  }, [billing, apiPricing, loading]);
 
   return (
     <div className="relative z-10 mx-auto max-w-6xl -mt-6 px-6 pb-24 pt-10 sm:-mt-16 sm:px-10 sm:pt-12 lg:-mt-24 lg:pt-16">

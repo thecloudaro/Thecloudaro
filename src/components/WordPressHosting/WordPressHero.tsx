@@ -18,18 +18,22 @@ const WordPressHero = ({ onPickPlanClick }: WordPressHeroProps) => {
   }, []);
 
   return (
-    <section className="relative min-h-screen overflow-x-hidden text-white">
-      <motion.div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat -z-20"
-        style={{
-          backgroundImage: "url('/WordPress/HomeWordpress.png')"
-        }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoaded ? 1 : 0 }}
-        transition={{ duration: 1.1, ease: "easeOut" }}
-      />
+    <motion.section 
+      className="relative min-h-screen overflow-x-hidden text-white" 
+      style={{ 
+        backgroundImage: "url('')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundColor: 'transparent',
+        position: 'relative',
+      }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isLoaded ? 1 : 0 }}
+      transition={{ duration: 1.1, ease: "easeOut" }}
+    >
 
-      <div className="relative z-10 flex min-h-screen flex-col">
+      <div className="relative z-10 flex min-h-screen flex-col" style={{ backgroundColor: 'transparent' }}>
         <div className="flex flex-1 items-center">
           <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
             <div className="max-w-3xl space-y-4 sm:space-y-6 pb-12 sm:pb-16 md:pb-20 pt-16 sm:pt-20 md:pt-24 lg:pt-28">
@@ -69,7 +73,7 @@ const WordPressHero = ({ onPickPlanClick }: WordPressHeroProps) => {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

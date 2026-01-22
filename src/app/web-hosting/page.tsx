@@ -4,7 +4,6 @@ import { useRef, useCallback } from 'react';
 import HostingHeroSection from '@/components/Hosting/HeroSection';
 import StayHosting from '@/components/Hosting/StayHosting';
 import { PickYourHosting } from '@/components/Hosting/PickYourHosting';
-import BuildAtHosting from '@/components/Hosting/BuildAtHosting';
 import BeSecureHosting from '@/components/Hosting/BeSecureHosting';
 import MigrateHosting from '@/components/Hosting/MigrateHosting';
 import ToolHosting from '@/components/Hosting/ToolHosting';
@@ -74,9 +73,6 @@ export default function HostingPage() {
 
       {/* Pick Your Hosting Section */}
       <PickYourHosting ref={pickYourHostingRef} onCompareClick={handleCompareClick} />
-
-      {/* Build At Hosting Section */}
-      <BuildAtHosting />
 
       {/* Be Secure Hosting Section */}
       <BeSecureHosting />

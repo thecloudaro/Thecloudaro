@@ -168,7 +168,7 @@ export default function UniversalDropdown({
       sections: [
         { title: "About Us", desc: "Learn more about our company and mission.", href: "/about" },
         // { title: "Roadmap", desc: "See what we're working on next.", href: "/roadmap" },
-        { title: "Contact Us", desc: "Get in touch with our team.", href: "/contact-us" }
+        { title: "Contact Us", desc: "Get in touch with our team.", href: "/about/contactus" }
       ]
     }
   };

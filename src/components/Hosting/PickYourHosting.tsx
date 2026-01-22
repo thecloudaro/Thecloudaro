@@ -46,8 +46,35 @@ interface HostingPlan {
   };
 }
 
+// Fallback pricing used when Upmind API is unavailable or misconfigured
+// These numbers are temporary frontend-only values and should be replaced
+// by real pricing from Upmind in production environments.
+const FALLBACK_PRICING: Record<
+  HostingPlan["name"],
+  { monthly: number; yearly: number; biyearly: number }
+> = {
+  Essential: {
+    // Match current Upmind config: $5/mo, $60/yr, $120/2yr
+    monthly: 5,
+    yearly: 60,
+    biyearly: 120,
+  },
+  Pro: {
+    // Match current Upmind config: $10/mo, $120/yr, $240/2yr
+    monthly: 10,
+    yearly: 120,
+    biyearly: 240,
+  },
+  Supreme: {
+    // Match current Upmind config: $15/mo, $180/yr, $360/2yr
+    monthly: 15,
+    yearly: 180,
+    biyearly: 360,
+  },
+};
+
 const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompareClick }, ref) => {
-  const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
   const [dataCenter, setDataCenter] = useState("US");
   const [selectedAddons, setSelectedAddons] = useState<{
     [key: string]: { storage: string; price: number };
@@ -160,6 +187,41 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
           const errorMessage = responseData.error || responseData.message || `HTTP ${response.status}: ${response.statusText}`;
           console.error('[PickYourHosting] ❌ API Error:', errorMessage);
           console.error('[PickYourHosting] ❌ Full error response:', JSON.stringify(responseData, null, 2));
+          // Fall back to static pricing so UI still shows prices
+          console.warn('[PickYourHosting] ⚠️ Falling back to static pricing');
+          const fallbackPlans = defaultPlans.map((plan) => {
+            const fallback = FALLBACK_PRICING[plan.name];
+            if (!fallback) return plan;
+
+            return {
+              ...plan,
+              pricing: {
+                monthly: {
+                  price: fallback.monthly,
+                  renewal: fallback.monthly,
+                  original: fallback.monthly * 1.5,
+                  discountLabel: "33% OFF*",
+                  perMonth: fallback.monthly,
+                },
+                yearly: {
+                  price: fallback.yearly,
+                  renewal: fallback.yearly,
+                  original: fallback.yearly * 1.5,
+                  discountLabel: "33% OFF*",
+                  perMonth: fallback.yearly / 12,
+                },
+                biyearly: {
+                  price: fallback.biyearly,
+                  renewal: fallback.biyearly,
+                  original: fallback.biyearly * 1.5,
+                  discountLabel: "33% OFF*",
+                  perMonth: fallback.biyearly / 24,
+                },
+              },
+            };
+          });
+
+          setPlans(fallbackPlans);
           setLoading(false);
           return;
         }
@@ -167,6 +229,41 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
         if (!responseData.pricing) {
           console.error('[PickYourHosting] ❌ No pricing data in response');
           console.error('[PickYourHosting] ❌ Full response:', JSON.stringify(responseData, null, 2));
+          // Fall back to static pricing so UI still shows prices
+          console.warn('[PickYourHosting] ⚠️ Falling back to static pricing (no pricing field)');
+          const fallbackPlans = defaultPlans.map((plan) => {
+            const fallback = FALLBACK_PRICING[plan.name];
+            if (!fallback) return plan;
+
+            return {
+              ...plan,
+              pricing: {
+                monthly: {
+                  price: fallback.monthly,
+                  renewal: fallback.monthly,
+                  original: fallback.monthly * 1.5,
+                  discountLabel: "33% OFF*",
+                  perMonth: fallback.monthly,
+                },
+                yearly: {
+                  price: fallback.yearly,
+                  renewal: fallback.yearly,
+                  original: fallback.yearly * 1.5,
+                  discountLabel: "33% OFF*",
+                  perMonth: fallback.yearly / 12,
+                },
+                biyearly: {
+                  price: fallback.biyearly,
+                  renewal: fallback.biyearly,
+                  original: fallback.biyearly * 1.5,
+                  discountLabel: "33% OFF*",
+                  perMonth: fallback.biyearly / 24,
+                },
+              },
+            };
+          });
+
+          setPlans(fallbackPlans);
           setLoading(false);
           return;
         }
@@ -178,7 +275,96 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
           const fetchedPricing = responseData.pricing[plan.name];
 
           if (!fetchedPricing) {
-            console.warn(`[PickYourHosting] ⚠️ No pricing found for ${plan.name}`);
+            console.warn(`[PickYourHosting] ⚠️ No pricing found for ${plan.name} in API response, using fallback pricing.`);
+            const fallback = FALLBACK_PRICING[plan.name];
+            if (!fallback) {
+              return {
+                ...plan,
+                pricing: {
+                  monthly: undefined,
+                  yearly: undefined,
+                  biyearly: undefined,
+                },
+              };
+            }
+
+            return {
+              ...plan,
+              pricing: {
+                monthly: {
+                  price: fallback.monthly,
+                  renewal: fallback.monthly,
+                  original: fallback.monthly * 1.5,
+                  discountLabel: "33% OFF*",
+                  perMonth: fallback.monthly,
+                },
+                yearly: {
+                  price: fallback.yearly,
+                  renewal: fallback.yearly,
+                  original: fallback.yearly * 1.5,
+                  discountLabel: "33% OFF*",
+                  perMonth: fallback.yearly / 12,
+                },
+                biyearly: {
+                  price: fallback.biyearly,
+                  renewal: fallback.biyearly,
+                  original: fallback.biyearly * 1.5,
+                  discountLabel: "33% OFF*",
+                  perMonth: fallback.biyearly / 24,
+                },
+              },
+            };
+          }
+
+          // Extract valid pricing values
+          const monthlyPrice = fetchedPricing.monthly && fetchedPricing.monthly > 0 ? fetchedPricing.monthly : null;
+          const yearlyPrice = fetchedPricing.yearly && fetchedPricing.yearly > 0 ? fetchedPricing.yearly : null;
+          const biyearlyPrice = fetchedPricing.biyearly && fetchedPricing.biyearly > 0 ? fetchedPricing.biyearly : null;
+
+          // Only update if at least one pricing value exists, otherwise use fallback
+          if (monthlyPrice || yearlyPrice || biyearlyPrice) {
+            const updatedPlan = {
+              ...plan,
+              pricing: {
+                monthly: monthlyPrice
+                  ? {
+                      price: monthlyPrice,
+                      renewal: monthlyPrice,
+                      original: monthlyPrice * 1.5,
+                      discountLabel: "33% OFF*",
+                      perMonth: monthlyPrice,
+                    }
+                  : undefined,
+                yearly: yearlyPrice
+                  ? {
+                      price: yearlyPrice,
+                      renewal: yearlyPrice,
+                      original: yearlyPrice * 1.5,
+                      discountLabel: "33% OFF*",
+                      perMonth: yearlyPrice / 12,
+                    }
+                  : undefined,
+                biyearly: biyearlyPrice
+                  ? {
+                      price: biyearlyPrice,
+                      renewal: biyearlyPrice,
+                      original: biyearlyPrice * 1.5,
+                      discountLabel: "33% OFF*",
+                      perMonth: biyearlyPrice / 24,
+                    }
+                  : undefined,
+              },
+            };
+
+            console.log(`[PickYourHosting] ✅ Updated ${plan.name} pricing from API`);
+            return updatedPlan;
+          }
+
+          console.warn(
+            `[PickYourHosting] ⚠️ No valid pricing values for ${plan.name} in API response, using fallback pricing.`
+          );
+          const fallback = FALLBACK_PRICING[plan.name];
+          if (!fallback) {
             return {
               ...plan,
               pricing: {
@@ -189,51 +375,30 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
             };
           }
 
-          // Extract valid pricing values
-          const monthlyPrice = fetchedPricing.monthly && fetchedPricing.monthly > 0 ? fetchedPricing.monthly : null;
-          const yearlyPrice = fetchedPricing.yearly && fetchedPricing.yearly > 0 ? fetchedPricing.yearly : null;
-          const biyearlyPrice = fetchedPricing.biyearly && fetchedPricing.biyearly > 0 ? fetchedPricing.biyearly : null;
-
-          // Only update if at least one pricing value exists
-          if (monthlyPrice || yearlyPrice || biyearlyPrice) {
-            const updatedPlan = {
-              ...plan,
-              pricing: {
-                monthly: monthlyPrice ? {
-                  price: monthlyPrice,
-                  renewal: monthlyPrice,
-                  original: monthlyPrice * 1.5,
-                  discountLabel: "33% OFF*",
-                  perMonth: monthlyPrice,
-                } : undefined,
-                yearly: yearlyPrice ? {
-                  price: yearlyPrice,
-                  renewal: yearlyPrice,
-                  original: yearlyPrice * 1.5,
-                  discountLabel: "33% OFF*",
-                  perMonth: yearlyPrice / 12,
-                } : undefined,
-                biyearly: biyearlyPrice ? {
-                  price: biyearlyPrice,
-                  renewal: biyearlyPrice,
-                  original: biyearlyPrice * 1.5,
-                  discountLabel: "33% OFF*",
-                  perMonth: biyearlyPrice / 24,
-                } : undefined,
-              },
-            };
-
-            console.log(`[PickYourHosting] ✅ Updated ${plan.name} pricing`);
-            return updatedPlan;
-          }
-
-          console.warn(`[PickYourHosting] ⚠️ No valid pricing values for ${plan.name}`);
           return {
             ...plan,
             pricing: {
-              monthly: undefined,
-              yearly: undefined,
-              biyearly: undefined,
+              monthly: {
+                price: fallback.monthly,
+                renewal: fallback.monthly,
+                original: fallback.monthly * 1.5,
+                discountLabel: "33% OFF*",
+                perMonth: fallback.monthly,
+              },
+              yearly: {
+                price: fallback.yearly,
+                renewal: fallback.yearly,
+                original: fallback.yearly * 1.5,
+                discountLabel: "33% OFF*",
+                perMonth: fallback.yearly / 12,
+              },
+              biyearly: {
+                price: fallback.biyearly,
+                renewal: fallback.biyearly,
+                original: fallback.biyearly * 1.5,
+                discountLabel: "33% OFF*",
+                perMonth: fallback.biyearly / 24,
+              },
             },
           };
         });
@@ -245,6 +410,41 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
         const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
         console.error('[PickYourHosting] ❌ Failed to fetch pricing:', errorMessage);
         console.error('[PickYourHosting] ❌ Error details:', error);
+        // Fall back to static pricing so UI still shows prices
+        console.warn('[PickYourHosting] ⚠️ Falling back to static pricing due to fetch error');
+        const fallbackPlans = defaultPlans.map((plan) => {
+          const fallback = FALLBACK_PRICING[plan.name];
+          if (!fallback) return plan;
+
+          return {
+            ...plan,
+            pricing: {
+              monthly: {
+                price: fallback.monthly,
+                renewal: fallback.monthly,
+                original: fallback.monthly * 1.5,
+                discountLabel: "33% OFF*",
+                perMonth: fallback.monthly,
+              },
+              yearly: {
+                price: fallback.yearly,
+                renewal: fallback.yearly,
+                original: fallback.yearly * 1.5,
+                discountLabel: "33% OFF*",
+                perMonth: fallback.yearly / 12,
+              },
+              biyearly: {
+                price: fallback.biyearly,
+                renewal: fallback.biyearly,
+                original: fallback.biyearly * 1.5,
+                discountLabel: "33% OFF*",
+                perMonth: fallback.biyearly / 24,
+              },
+            },
+          };
+        });
+
+        setPlans(fallbackPlans);
       } finally {
         setLoading(false);
       }

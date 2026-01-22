@@ -34,7 +34,7 @@ const WebHostingCard = () => {
         <div className="w-full lg:w-1/2 lg:h-full min-h-36 sm:min-h-48 relative overflow-hidden bg-webhosting-card-bg">
           <div className="absolute inset-0 flex items-center justify-center">
             <Image 
-              src="/a.svg" 
+              src="/Home/WebHosting.png" 
               alt="Graphic" 
               fill
               className="object-cover opacity-90" 

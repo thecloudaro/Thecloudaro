@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Typewriter from "typewriter-effect";
 import { ChevronDown } from "lucide-react";
 import ContentDescription from "@/components/ui/content-description";
+import Image from "next/image";
 
 const SecurityHero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -17,6 +18,17 @@ const SecurityHero = () => {
     <div 
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-security-hero"
     >
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/Security/Security.png"
+          alt="Security Background"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-8 sm:pb-12">
         {/* Heading with Typewriter Effect */}

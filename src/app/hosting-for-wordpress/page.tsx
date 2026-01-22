@@ -32,7 +32,7 @@ const WordPressHostingPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'rgb(var(--hosting-bg))' }}>
+    <div className="min-h-screen">
       <WordPressHero onPickPlanClick={handlePickPlanClick} />
       <NoStress />
       <Easily />
