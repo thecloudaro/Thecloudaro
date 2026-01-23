@@ -156,33 +156,56 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
               const isCart = Icon === ShoppingCart;
               const isUser = Icon === User;
               return (
-                <div key={i} className="relative">
+                <div key={i} className="relative group">
                   {isUser ? (
-                    <Link href="/login" className={`font-medium transition-all duration-300 w-9 h-9 flex items-center justify-center rounded-full ${
-                      (isHostingPage)
-                        ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
-                        : (isDomainPage || isHomepage) 
-                        ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
-                        : 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
-                    }`}>
-                      <Icon size={16} />
+                    <Link 
+                      href="/login" 
+                      className={`font-medium w-9 h-9 flex items-center justify-center rounded-full relative overflow-hidden ${
+                        (isHostingPage)
+                          ? 'text-[hsl(var(--navbar-text-active))]' 
+                          : (isDomainPage || isHomepage) 
+                          ? 'text-[hsl(var(--navbar-text-default))]' 
+                          : 'text-[hsl(var(--navbar-text-default))]'
+                      }`}
+                    >
+                      {/* Hover background with smooth transition */}
+                      <span className="absolute inset-0 rounded-full bg-[hsl(var(--navbar-bg-hover))] opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out scale-90 group-hover:scale-100" />
+                      
+                      {/* Icon with scale and color transition */}
+                      <Icon 
+                        size={16} 
+                        className="relative z-10 transition-all duration-300 ease-out group-hover:scale-110 group-hover:text-[hsl(var(--navbar-text-hover))] group-hover:rotate-3" 
+                      />
+                      
+                      {/* Subtle glow effect on hover */}
+                      <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur-sm bg-[hsl(var(--navbar-text-hover))]" />
                     </Link>
                   ) : (
                     <button
                       onClick={isCart ? openCart : undefined}
-                      className={`font-medium transition-all duration-300 w-9 h-9 flex items-center justify-center rounded-full ${
+                      className={`font-medium w-9 h-9 flex items-center justify-center rounded-full relative overflow-hidden ${
                         (isHostingPage)
-                          ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
+                          ? 'text-[hsl(var(--navbar-text-active))]' 
                           : (isDomainPage || isHomepage) 
-                          ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]' 
-                          : 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
+                          ? 'text-[hsl(var(--navbar-text-default))]' 
+                          : 'text-[hsl(var(--navbar-text-default))]'
                       }`}
                     >
-                      <Icon size={16} />
+                      {/* Hover background with smooth transition */}
+                      <span className="absolute inset-0 rounded-full bg-[hsl(var(--navbar-bg-hover))] opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out scale-90 group-hover:scale-100" />
+                      
+                      {/* Icon with scale and color transition */}
+                      <Icon 
+                        size={16} 
+                        className="relative z-10 transition-all duration-300 ease-out group-hover:scale-110 group-hover:text-[hsl(var(--navbar-text-hover))] group-hover:rotate-3" 
+                      />
+                      
+                      {/* Subtle glow effect on hover */}
+                      <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur-sm bg-[hsl(var(--navbar-text-hover))]" />
                     </button>
                   )}
                   {isCart && items.length > 0 && (
-                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white z-20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
                       {items.length}
                     </span>
                   )}
@@ -201,33 +224,56 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
                 const isCart = Icon === ShoppingCart;
                 const isUser = Icon === User;
                 return (
-                  <div key={i} className="relative">
+                  <div key={i} className="relative group">
                     {isUser ? (
-                      <Link href="/login" className={`font-medium transition-all duration-300 w-9 h-9 rounded-full flex items-center justify-center ${
-                        (isHostingPage)
-                          ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
-                          : (isDomainPage || isHomepage)
-                          ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
-                          : 'text-[hsl(var(--navbar-text))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
-                      }`}>
-                        <Icon size={16} />
+                      <Link 
+                        href="/login" 
+                        className={`font-medium w-9 h-9 rounded-full flex items-center justify-center relative overflow-hidden ${
+                          (isHostingPage)
+                            ? 'text-[hsl(var(--navbar-text-active))]'
+                            : (isDomainPage || isHomepage)
+                            ? 'text-[hsl(var(--navbar-text-default))]'
+                            : 'text-[hsl(var(--navbar-text))]'
+                        }`}
+                      >
+                        {/* Hover background with smooth transition */}
+                        <span className="absolute inset-0 rounded-full bg-[hsl(var(--navbar-bg-hover))] opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out scale-90 group-hover:scale-100" />
+                        
+                        {/* Icon with scale and color transition */}
+                        <Icon 
+                          size={16} 
+                          className="relative z-10 transition-all duration-300 ease-out group-hover:scale-110 group-hover:text-[hsl(var(--navbar-text-hover))] group-hover:rotate-3" 
+                        />
+                        
+                        {/* Subtle glow effect on hover */}
+                        <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur-sm bg-[hsl(var(--navbar-text-hover))]" />
                       </Link>
                     ) : (
                       <button
                         onClick={isCart ? openCart : undefined}
-                        className={`font-medium transition-all duration-300 w-9 h-9 rounded-full flex items-center justify-center ${
+                        className={`font-medium w-9 h-9 rounded-full flex items-center justify-center relative overflow-hidden ${
                           (isHostingPage)
-                            ? 'text-[hsl(var(--navbar-text-active))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
+                            ? 'text-[hsl(var(--navbar-text-active))]'
                             : (isDomainPage || isHomepage)
-                            ? 'text-[hsl(var(--navbar-text-default))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
-                            : 'text-[hsl(var(--navbar-text))] hover:text-[hsl(var(--navbar-text-hover))] hover:bg-[hsl(var(--navbar-bg-hover))]'
+                            ? 'text-[hsl(var(--navbar-text-default))]'
+                            : 'text-[hsl(var(--navbar-text))]'
                         }`}
                       >
-                        <Icon size={16} />
+                        {/* Hover background with smooth transition */}
+                        <span className="absolute inset-0 rounded-full bg-[hsl(var(--navbar-bg-hover))] opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out scale-90 group-hover:scale-100" />
+                        
+                        {/* Icon with scale and color transition */}
+                        <Icon 
+                          size={16} 
+                          className="relative z-10 transition-all duration-300 ease-out group-hover:scale-110 group-hover:text-[hsl(var(--navbar-text-hover))] group-hover:rotate-3" 
+                        />
+                        
+                        {/* Subtle glow effect on hover */}
+                        <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur-sm bg-[hsl(var(--navbar-text-hover))]" />
                       </button>
                     )}
                     {isCart && items.length > 0 && (
-                      <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                      <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white z-20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
                         {items.length}
                       </span>
                     )}

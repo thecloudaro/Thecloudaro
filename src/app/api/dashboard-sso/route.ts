@@ -15,8 +15,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Upmind client dashboard URL - redirect to /dashboard
-    const upmindClientUrl = 'https://my.thecloudaro.com/dashboard';
+    // Upmind client dashboard URL - redirect to /dashboard/
+    const upmindClientUrl = 'https://my.thecloudaro.com/dashboard/';
 
     // Try to generate SSO token using Upmind API
     // Upmind typically has an SSO endpoint that accepts access_token
@@ -39,28 +39,42 @@ export async function POST(req: NextRequest) {
         }
       );
 
+      const ssoResponseText = await ssoResponse.text();
+      console.log('Upmind SSO Response Status:', ssoResponse.status);
+      console.log('Upmind SSO Response:', ssoResponseText);
+
       if (ssoResponse.ok) {
-        const ssoData = await ssoResponse.json();
-        
-        // If SSO token is returned, use it
-        if (ssoData.sso_token || ssoData.token) {
-          const ssoToken = ssoData.sso_token || ssoData.token;
-          return NextResponse.json({
-            success: true,
-            dashboard_url: `${upmindClientUrl}?sso_token=${ssoToken}`,
-            sso_token: ssoToken,
-          });
+        try {
+          const ssoData = ssoResponseText ? JSON.parse(ssoResponseText) : {};
+          
+          // If SSO token is returned, use it
+          if (ssoData.sso_token || ssoData.token) {
+            const ssoToken = ssoData.sso_token || ssoData.token;
+            return NextResponse.json({
+              success: true,
+              dashboard_url: `${upmindClientUrl}?sso_token=${ssoToken}`,
+              sso_token: ssoToken,
+            });
+          }
+        } catch (parseError) {
+          console.log('Failed to parse SSO response:', parseError);
         }
+      } else {
+        console.log('SSO endpoint returned error:', ssoResponse.status, ssoResponseText);
       }
     } catch (ssoError) {
-      console.log('SSO endpoint not available, using direct redirect');
+      console.log('SSO endpoint error:', ssoError);
     }
 
     // Option 2: If SSO endpoint doesn't exist, redirect with access token to DASHBOARD (not login)
-    // Always redirect to /dashboard, never /login
+    // Always redirect to /dashboard/, never /login
+    // Ensure URL format is correct: https://my.thecloudaro.com/dashboard/?access_token=...&client_id=...
+    const dashboardUrl = `${upmindClientUrl}?access_token=${encodeURIComponent(access_token)}&client_id=${encodeURIComponent(client_id)}`;
+    console.log('Dashboard redirect URL:', dashboardUrl);
+    
     return NextResponse.json({
       success: true,
-      dashboard_url: `${upmindClientUrl}?access_token=${encodeURIComponent(access_token)}&client_id=${encodeURIComponent(client_id)}`,
+      dashboard_url: dashboardUrl,
       access_token: access_token,
     });
   } catch (err: unknown) {

@@ -40,16 +40,16 @@ const DashboardPage = () => {
           window.location.href = data.dashboard_url;
         } else {
           // Fallback: Direct redirect if SSO fails to dashboard
-          const upmindClientUrl = 'https://my.thecloudaro.com/dashboard';
-          window.location.href = `${upmindClientUrl}?access_token=${accessToken}`;
+          const upmindClientUrl = 'https://my.thecloudaro.com/dashboard/';
+          window.location.href = `${upmindClientUrl}?access_token=${accessToken}&client_id=${clientId}`;
         }
       } catch (err) {
         console.error('Dashboard redirect error:', err);
         // Fallback: Direct redirect on error to dashboard
         const accessToken = localStorage.getItem('access_token');
-        const upmindClientUrl = 'https://my.thecloudaro.com/dashboard';
+        const upmindClientUrl = 'https://my.thecloudaro.com/dashboard/';
         if (accessToken) {
-          window.location.href = `${upmindClientUrl}?access_token=${accessToken}`;
+          window.location.href = `${upmindClientUrl}?access_token=${accessToken}&client_id=${clientId}`;
         } else {
           setError('Failed to redirect to dashboard');
           setLoading(false);

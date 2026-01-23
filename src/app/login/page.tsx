@@ -48,17 +48,29 @@ const LoginPage = () => {
           });
 
           const ssoData = await ssoResponse.json();
+          console.log('SSO Response:', ssoData);
 
-          if (ssoResponse.ok && ssoData.dashboard_url) {
-            // Redirect directly to dashboard with SSO token
-            window.location.href = ssoData.dashboard_url;
+          // Always redirect to dashboard, never to login
+          const dashboardUrl = ssoResponse.ok && ssoData.dashboard_url 
+            ? ssoData.dashboard_url 
+            : `https://my.thecloudaro.com/dashboard/?access_token=${encodeURIComponent(data.access_token)}&client_id=${encodeURIComponent(data.client_id)}`;
+          
+          console.log('Final redirect URL:', dashboardUrl);
+          
+          // Ensure we're redirecting to dashboard, not login
+          if (dashboardUrl.includes('/login')) {
+            console.error('ERROR: Redirect URL contains /login, fixing to /dashboard/');
+            const fixedUrl = dashboardUrl.replace('/login', '/dashboard/');
+            window.location.href = fixedUrl;
           } else {
-            // Fallback: Redirect to dashboard with access_token
-            window.location.href = `https://my.thecloudaro.com/dashboard?access_token=${encodeURIComponent(data.access_token)}&client_id=${encodeURIComponent(data.client_id)}`;
+            window.location.href = dashboardUrl;
           }
         } catch (ssoErr) {
           // Fallback: Direct redirect to dashboard
-          window.location.href = `https://my.thecloudaro.com/dashboard?access_token=${encodeURIComponent(data.access_token)}&client_id=${encodeURIComponent(data.client_id)}`;
+          console.error('SSO Error:', ssoErr);
+          const fallbackUrl = `https://my.thecloudaro.com/dashboard/?access_token=${encodeURIComponent(data.access_token)}&client_id=${encodeURIComponent(data.client_id)}`;
+          console.log('Error fallback URL:', fallbackUrl);
+          window.location.href = fallbackUrl;
         }
       } else {
         setError(data.message || 'Login failed');

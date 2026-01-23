@@ -125,8 +125,20 @@ const HeroSection = () => {
                   className="flex-1 bg-transparent text-hero-text placeholder-hero-text-muted text-sm sm:text-base focus:outline-none placeholder:text-xs sm:placeholder:text-sm"
                 />
               </div>
-              <button className="bg-[hsl(var(--hero-section-search-button-bg))] hover:bg-[hsl(var(--hero-section-search-button-hover-bg))] text-[hsl(var(--hero-section-search-button-text))] px-3 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-xs sm:text-base transition">
-                Search
+              <button 
+                className="text-white px-3 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-xs sm:text-base relative"
+                style={{
+                  background: `hsl(var(--header-banner-gradient-1))`,
+                  border: `1px solid hsl(var(--header-banner-gradient-3) / 0.4)`,
+                }}
+              >
+                <span 
+                  className="absolute inset-0 rounded-full opacity-40"
+                  style={{
+                    background: `radial-gradient(circle at top, hsl(var(--header-banner-gradient-3)) 0%, transparent 70%)`,
+                  }}
+                />
+                <span className="relative z-10">Search</span>
               </button>
             </div>
           </div>
