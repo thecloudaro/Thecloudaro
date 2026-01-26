@@ -34,44 +34,12 @@ const LoginPage = () => {
         localStorage.setItem('refresh_token', data.refresh_token);
         localStorage.setItem('client_id', data.client_id);
 
-        // 🔹 Get SSO URL and redirect to dashboard (not login page)
-        try {
-          const ssoResponse = await fetch('/api/dashboard-sso', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              access_token: data.access_token,
-              client_id: data.client_id,
-            }),
-          });
-
-          const ssoData = await ssoResponse.json();
-          console.log('SSO Response:', ssoData);
-
-          // Always redirect to dashboard, never to login
-          const dashboardUrl = ssoResponse.ok && ssoData.dashboard_url 
-            ? ssoData.dashboard_url 
-            : `https://my.thecloudaro.com/dashboard/?access_token=${encodeURIComponent(data.access_token)}&client_id=${encodeURIComponent(data.client_id)}`;
-          
-          console.log('Final redirect URL:', dashboardUrl);
-          
-          // Ensure we're redirecting to dashboard, not login
-          if (dashboardUrl.includes('/login')) {
-            console.error('ERROR: Redirect URL contains /login, fixing to /dashboard/');
-            const fixedUrl = dashboardUrl.replace('/login', '/dashboard/');
-            window.location.href = fixedUrl;
-          } else {
-            window.location.href = dashboardUrl;
-          }
-        } catch (ssoErr) {
-          // Fallback: Direct redirect to dashboard
-          console.error('SSO Error:', ssoErr);
-          const fallbackUrl = `https://my.thecloudaro.com/dashboard/?access_token=${encodeURIComponent(data.access_token)}&client_id=${encodeURIComponent(data.client_id)}`;
-          console.log('Error fallback URL:', fallbackUrl);
-          window.location.href = fallbackUrl;
-        }
+        // 🔹 Direct redirect to dashboard
+        const dashboardUrl = `https://my.thecloudaro.com/dashboard/?access_token=${encodeURIComponent(data.access_token)}&client_id=${encodeURIComponent(data.client_id)}`;
+        console.log('Redirecting to dashboard:', dashboardUrl);
+        
+        // Immediate redirect to dashboard
+        window.location.href = dashboardUrl;
       } else {
         setError(data.message || 'Login failed');
       }

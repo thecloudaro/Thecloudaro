@@ -20,41 +20,9 @@ const DashboardPage = () => {
         return;
       }
 
-      try {
-        // Generate SSO token and get dashboard URL
-        const response = await fetch('/api/dashboard-sso', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            access_token: accessToken,
-            client_id: clientId,
-          }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok && data.dashboard_url) {
-          // Redirect to Upmind client dashboard with SSO token
-          window.location.href = data.dashboard_url;
-        } else {
-          // Fallback: Direct redirect if SSO fails to dashboard
-          const upmindClientUrl = 'https://my.thecloudaro.com/dashboard/';
-          window.location.href = `${upmindClientUrl}?access_token=${accessToken}&client_id=${clientId}`;
-        }
-      } catch (err) {
-        console.error('Dashboard redirect error:', err);
-        // Fallback: Direct redirect on error to dashboard
-        const accessToken = localStorage.getItem('access_token');
-        const upmindClientUrl = 'https://my.thecloudaro.com/dashboard/';
-        if (accessToken) {
-          window.location.href = `${upmindClientUrl}?access_token=${accessToken}&client_id=${clientId}`;
-        } else {
-          setError('Failed to redirect to dashboard');
-          setLoading(false);
-        }
-      }
+      // Direct redirect to dashboard
+      const upmindClientUrl = 'https://my.thecloudaro.com/dashboard/';
+      window.location.href = `${upmindClientUrl}?access_token=${accessToken}&client_id=${clientId}`;
     };
 
     redirectToUpmindDashboard();
