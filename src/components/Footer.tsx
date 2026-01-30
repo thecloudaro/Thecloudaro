@@ -195,7 +195,7 @@ const Footer: React.FC = () => {
                   }}
                 >
                   <Image
-                    src="/Footer/linkedin.png"
+                    src="/Footer/linkedin.svg"
                     alt="LinkedIn"
                     width={36}
                     height={36}
@@ -217,7 +217,7 @@ const Footer: React.FC = () => {
                   }}
                 >
                   <Image
-                    src="/Footer/insta.jpeg"
+                    src="/Footer/instagram.svg"
                     alt="Instagram"
                     width={36}
                     height={36}

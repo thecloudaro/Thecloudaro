@@ -46,14 +46,14 @@ const plans: HostingPlan[] = [
         price: 3.88,
         renewal: 3.88,
         original: 5.88,
-        discountLabel: "31% OFF*",
+        discountLabel: "",
         perMonth: 3.88
       },
       yearly: {
         price: 19.88,
         renewal: 19.88,
         original: 28.88,
-        discountLabel: "31% OFF*",
+        discountLabel: "",
         perMonth: 1.66
       },
       biyearly: {
@@ -239,9 +239,6 @@ const ChooseYourHosting = () => {
                         : billingCycle === "biyearly"
                         ? "/2yr"
                         : "/yr"}
-                    </span>
-                    <span className="rounded-full px-2 py-0.5" style={{ backgroundColor: 'rgba(var(--migration-choose-discount-bg))', color: 'rgb(var(--migration-choose-discount-text))' }}>
-                      {pricing.discountLabel}
                     </span>
                   </div>
 

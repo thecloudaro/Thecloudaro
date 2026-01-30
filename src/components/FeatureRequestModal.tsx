@@ -2,11 +2,14 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState, FormEvent } from "react";
+import toast from "react-hot-toast";
 
 interface FeatureRequestModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+const CONTACT_PAGE_PATH = "/about/contactus";
 
 export default function FeatureRequestModal({
   isOpen,
@@ -16,12 +19,55 @@ export default function FeatureRequestModal({
   const [description, setDescription] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [agree, setAgree] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log({ title, description, email, name, agree });
-    onClose();
+
+    const trimmedDescription = description.trim();
+    const trimmedTitle = title.trim();
+    const trimmedEmail = email.trim();
+    const trimmedName = name.trim();
+
+    if (!trimmedDescription) {
+      toast.error("Please add a feature description.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/request-feature", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: trimmedTitle || undefined,
+          description: trimmedDescription,
+          email: trimmedEmail || undefined,
+          name: trimmedName || undefined,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        toast.error(
+          data?.error ||
+            "Email service is not configured yet. Please contact support."
+        );
+        return;
+      }
+
+      toast.success("Feature request sent successfully.");
+      setTitle("");
+      setDescription("");
+      setEmail("");
+      setName("");
+      onClose();
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -80,10 +126,11 @@ export default function FeatureRequestModal({
   </p>
   <p className="text-modal-text-secondary text-xs mt-1">
     Need help instead?{" "}
-    <Link 
-      href="/about/contactus" 
+    <Link
+      href={CONTACT_PAGE_PATH}
       className="hover:underline"
       style={{ color: 'rgb(var(--feature-modal-link))' }}
+      aria-label="Go to contact support page"
     >
       Contact Support
     </Link>
@@ -175,19 +222,6 @@ export default function FeatureRequestModal({
                 </div>
               </div>
 
-              <div className="flex items-start gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  checked={agree}
-                  onChange={(e) => setAgree(e.target.checked)}
-                  className="mt-1"
-                  style={{ accentColor: 'rgb(var(--feature-modal-checkbox-accent))' }}
-                />
-                <label className="leading-tight" style={{ color: 'rgb(var(--feature-modal-checkbox-label))' }}>
-                  I agree to be contacted about my feedback.
-                </label>
-              </div>
-
               <div className="flex justify-end gap-3 pt-2">
                 <button
                   type="button"
@@ -205,19 +239,22 @@ export default function FeatureRequestModal({
                 </button>
                 <button
                   type="submit"
-                  className="rounded-full px-5 py-2 text-sm transition-all"
+                  disabled={isSubmitting}
+                  className="rounded-full px-5 py-2 text-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                   style={{
                     backgroundColor: 'rgb(var(--feature-modal-submit-bg))',
                     color: 'rgb(var(--feature-modal-submit-text))'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgb(var(--feature-modal-submit-hover))';
+                    if (!isSubmitting) e.currentTarget.style.backgroundColor = 'rgb(var(--feature-modal-submit-hover))';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.backgroundColor = 'rgb(var(--feature-modal-submit-bg))';
                   }}
+                  aria-busy={isSubmitting}
+                  aria-live="polite"
                 >
-                  Submit Feature
+                  {isSubmitting ? "Sending…" : "Submit Feature"}
                 </button>
               </div>
             </form>

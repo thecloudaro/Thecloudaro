@@ -152,16 +152,44 @@ const HeroSection = () => {
   transition={{ duration: 0.6, delay: 1.6 }}
 >
   {[
-    { label: ".com only $8.88", variant: "domain-pill--purple" },
-    { label: ".net only $11.20", variant: "domain-pill--purple" },
-    { label: ".org only $9.88", variant: "domain-pill--purple" },
+    { label: ".com only $8.88", variant: "domain-pill--com", isCom: true },
+    { label: ".net only $11.20", variant: "domain-pill--purple", isCom: false },
+    { label: ".org only $9.88", variant: "domain-pill--purple", isCom: false },
   ].map((item, idx) => (
-    <div
-      key={idx}
-      className={`domain-pill ${item.variant} backdrop-blur-md border border-hero-price-border rounded-2xl shadow-md`}
-    >
-      <Button label={item.label} />
-    </div>
+    item.isCom ? (
+      <motion.div
+        key={idx}
+        className="domain-pill domain-pill--com backdrop-blur-md border border-hero-price-border rounded-2xl shadow-md"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{ duration: 0.5, delay: 1.8 }}
+      >
+        <motion.span
+          className="com-pill-inner block px-3 sm:px-3.5 md:px-4 py-1 sm:py-1.5 md:py-1.5 rounded-full text-[11px] sm:text-xs md:text-sm font-medium text-white cursor-pointer"
+          animate={{
+            opacity: [1, 0.88, 1],
+            y: [0, -4, 0],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            repeatType: 'reverse',
+          }}
+        >
+          {item.label}
+        </motion.span>
+      </motion.div>
+    ) : (
+      <div
+        key={idx}
+        className={`domain-pill ${item.variant} backdrop-blur-md border border-hero-price-border rounded-2xl shadow-md`}
+      >
+        <Button label={item.label} />
+      </div>
+    )
   ))}
         </motion.div>
       </motion.div>

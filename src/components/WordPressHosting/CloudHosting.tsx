@@ -19,7 +19,8 @@ const CloudHosting = forwardRef<HTMLElement, CloudHostingProps>(({ heading = "Cl
 
   return (
     <section ref={ref} className="relative overflow-hidden" style={{ color: 'rgb(var(--wp-cloudhosting-heading))' }}>
-      <div className="absolute inset-0">
+      {/* Background layers should not block clicks */}
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-x-0 top-0 h-[500px] overflow-hidden sm:h-[540px] lg:h-[600px]">
           <Image
             src="/WordPress/CloudHostingBg.jpeg"
@@ -33,7 +34,7 @@ const CloudHosting = forwardRef<HTMLElement, CloudHostingProps>(({ heading = "Cl
         <div className="absolute inset-0 top-[500px] sm:top-[540px] lg:top-[600px]" style={{ backgroundColor: 'rgb(var(--wp-cloudhosting-bg))' }} />
       </div>
 
-      <div className="relative mx-auto flex max-w-6xl flex-col items-center px-6 pb-20 pt-12 text-center sm:px-10 sm:pt-16 lg:pb-[56px] lg:pt-[64px]">
+      <div className="relative pointer-events-auto mx-auto flex max-w-6xl flex-col items-center px-6 pb-20 pt-12 text-center sm:px-10 sm:pt-16 lg:pb-[56px] lg:pt-[64px]">
        
 
         <ContentHeading
@@ -47,18 +48,28 @@ const CloudHosting = forwardRef<HTMLElement, CloudHostingProps>(({ heading = "Cl
           className="mt-6 max-w-3xl sm:text-xl leading-relaxed !text-[rgb(var(--wp-cloudhosting-description))]"
         />
 
-        <div className="mt-10 inline-flex items-center gap-2 rounded-full p-2 backdrop-blur" style={{ backgroundColor: 'rgba(var(--wp-cloudhosting-toggle-bg))' }}>
+        <div
+          className="relative isolate z-[9999] mt-10 inline-flex items-center gap-2 rounded-full p-2 backdrop-blur pointer-events-auto"
+          style={{ backgroundColor: 'rgba(var(--wp-cloudhosting-toggle-bg))' }}
+        >
           {(["monthly", "yearly"] as BillingCycle[]).map((cycle) => {
             const isActive = billing === cycle;
             return (
               <button
                 key={cycle}
-                onClick={() => setBilling(cycle)}
-                className="rounded-full px-6 py-2 text-sm font-semibold capitalize transition"
+                type="button"
+                onClick={() => {
+                  console.log('[CloudHosting] Toggle clicked:', cycle);
+                  setBilling(cycle);
+                }}
+                className="relative z-[9999] cursor-pointer rounded-full px-6 py-2 text-sm font-semibold capitalize transition-all duration-200 ease-in-out pointer-events-auto"
                 style={{
                   backgroundColor: isActive ? 'rgb(var(--wp-cloudhosting-button-active-bg))' : 'transparent',
-                  color: isActive ? 'rgb(var(--wp-cloudhosting-button-active-text))' : 'rgba(var(--wp-cloudhosting-button-inactive))'
+                  color: isActive ? 'rgb(var(--wp-cloudhosting-button-active-text))' : 'rgba(var(--wp-cloudhosting-button-inactive))',
+                  pointerEvents: 'auto',
                 }}
+                aria-pressed={isActive}
+                aria-label={`Switch to ${cycle} billing`}
               >
                 {cycle}
               </button>

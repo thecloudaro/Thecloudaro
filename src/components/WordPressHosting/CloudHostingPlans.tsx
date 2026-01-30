@@ -46,13 +46,7 @@ const planContent: Record<PlanKey, PlanConfig> = {
       { label: "Unlimited", emphasis: "bandwidth" },
       { label: "Unlimited", emphasis: "number of visitors" },
       { label: "FREE", emphasis: "SSL" },
-      {
-        label: "FREE",
-        emphasis: "mailbox",
-        subNote: "",
-        subNoteClassName: ""
-      },
-      { emphasis: "HackGuardian" }
+      // FREE mailbox + HackGuardian removed per design feedback
     ],
     ctaLabel: "Add to cart",
     renewsLabel: "Renews for $9.88/mo",
@@ -71,14 +65,7 @@ const planContent: Record<PlanKey, PlanConfig> = {
       { label: "Unlimited", emphasis: "number of visitors" },
       { label: "1.5x", emphasis: "more CPU & RAM" },
       { label: "FREE", emphasis: "SSL" },
-      {
-        label: "FREE",
-        emphasis: "mailbox",
-        subNote: "",
-        subNoteClassName: ""
-      },
-      { emphasis: "HackGuardian" },
-      { label: "MalwareGuardian", emphasis: "Autoclean protection" }
+      // FREE mailbox + HackGuardian + MalwareGuardian removed per design feedback
     ],
     ctaLabel: "Add to cart",
     renewsLabel: "Renews for $18.88/mo"
@@ -95,14 +82,7 @@ const planContent: Record<PlanKey, PlanConfig> = {
       { label: "Unlimited", emphasis: "number of visitors" },
       { label: "2x", emphasis: "more CPU & RAM" },
       { label: "FREE", emphasis: "SSL" },
-      {
-        label: "FREE",
-        emphasis: "mailbox",
-        subNote: "",
-        subNoteClassName: ""
-      },
-      { emphasis: "HackGuardian" },
-      { label: "MalwareGuardian", emphasis: "Autoclean protection" }
+      // FREE mailbox + HackGuardian + MalwareGuardian removed per design feedback
     ],
     ctaLabel: "Add to cart",
     renewsLabel: "Renews for $26.88/mo"
@@ -217,28 +197,41 @@ const CloudHostingPlans = ({ billing, onCompareClick }: CloudHostingPlansProps) 
       } as PlanConfig & { key: PlanKey };
 
       if (pricing && !loading) {
-        const price = billing === 'yearly' ? pricing.yearly : pricing.monthly;
-        
-        if (price && price > 0) {
-          // Use API price as the promo price (current discounted price)
-          // Calculate regular price as 1.5x for display (strikethrough)
-          const regularPrice = price * 1.5;
-          const discountPercent = Math.round(((regularPrice - price) / regularPrice) * 100);
+        // Prefer real Upmind yearly price if available.
+        // If yearly is missing, fall back to 12 × monthly so toggle always works.
+        const monthlyFromApi =
+          pricing.monthly && pricing.monthly > 0 ? pricing.monthly : null;
+        const yearlyFromApi =
+          pricing.yearly && pricing.yearly > 0
+            ? pricing.yearly
+            : monthlyFromApi
+            ? monthlyFromApi * 12
+            : null;
 
-          // Format prices
+        const price =
+          billing === "yearly" ? yearlyFromApi : monthlyFromApi;
+
+        if (price && price > 0) {
+          const regularPrice = price * 1.5;
+          const discountPercent = Math.round(
+            ((regularPrice - price) / regularPrice) * 100
+          );
+
           const promoPriceFormatted = `$${price.toFixed(2)}`;
-          const regularPriceFormatted = billing === 'yearly' 
-            ? `$${regularPrice.toFixed(2)}/yr` 
-            : `$${regularPrice.toFixed(2)}/mo`;
+          const regularPriceFormatted =
+            billing === "yearly"
+              ? `$${regularPrice.toFixed(2)}/yr`
+              : `$${regularPrice.toFixed(2)}/mo`;
 
           finalPlan = {
             ...finalPlan,
             promoPrice: promoPriceFormatted,
             regularPrice: regularPriceFormatted,
             promoLabel: `${discountPercent}% OFF*`,
-            renewsLabel: billing === 'yearly' 
-              ? `Renews for $${price.toFixed(2)}/yr`
-              : `Renews for $${price.toFixed(2)}/mo`,
+            renewsLabel:
+              billing === "yearly"
+                ? `Renews for $${price.toFixed(2)}/yr`
+                : `Renews for $${price.toFixed(2)}/mo`,
           };
         }
       }
@@ -356,7 +349,9 @@ const PlanCard = ({ plan, billing }: PlanCardProps) => {
           <div key={index} className="pb-3 last:pb-0">
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
               {feature.label ? (
-                <span className="font-semibold text-white text-sm">{feature.label}</span>
+                <span className="font-semibold text-white text-sm">
+                  {feature.label}
+                </span>
               ) : null}
               <span className="font-medium text-white underline decoration-dotted decoration-white/40 underline-offset-4 text-sm">
                 {feature.emphasis}
@@ -365,7 +360,11 @@ const PlanCard = ({ plan, billing }: PlanCardProps) => {
             {feature.subNote ? (
               <span
                 className="mt-1 block text-xs"
-                style={{ color: feature.subNoteClassName ? 'rgb(var(--cloud-hosting-subnote))' : 'rgba(var(--cloud-hosting-subnote-default))' }}
+                style={{
+                  color: feature.subNoteClassName
+                    ? "rgb(var(--cloud-hosting-subnote))"
+                    : "rgba(var(--cloud-hosting-subnote-default))",
+                }}
               >
                 {feature.subNote}
               </span>
@@ -374,19 +373,7 @@ const PlanCard = ({ plan, billing }: PlanCardProps) => {
         ))}
       </div>
 
-      {plan.coupon ? (
-        <div className="mt-6 rounded-2xl border border-white/5 bg-white/5 px-4 py-3">
-          <p className="text-[10px] uppercase tracking-[0.35em] text-white/50">
-            Use this to get 1 month free
-          </p>
-          <div className="mt-2 flex items-center justify-between text-xs font-semibold">
-            <span>{plan.coupon}</span>
-            <button className="rounded-full bg-white/20 px-3 py-1 text-xs uppercase tracking-wide text-white/90 transition hover:bg-white/30">
-              Copy
-            </button>
-          </div>
-        </div>
-      ) : null}
+      {/* Promo coupon block removed per design feedback */}
 
       <button className="mt-6 rounded-full bg-white px-5 py-2 text-xs font-semibold text-black transition hover:bg-white/90">
         {plan.ctaLabel}

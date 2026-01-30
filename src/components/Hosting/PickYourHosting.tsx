@@ -632,16 +632,6 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
                               ${pricing.original.toFixed(2)}
                               {originalSuffix}
                             </span>
-                            <span
-                              className="px-2 py-0.5 rounded-full text-[11px]"
-                              style={{
-                                backgroundColor:
-                                  "rgba(var(--hosting-pick-discount-bg))",
-                                color: "rgb(var(--hosting-accent-cyan))",
-                              }}
-                            >
-                              {pricing.discountLabel}
-                            </span>
                           </div>
                           <div className="text-[rgb(var(--hosting-text-white))] text-5xl font-bold tracking-tight">
                             ${pricing.price.toFixed(2)}

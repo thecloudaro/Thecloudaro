@@ -2102,6 +2102,21 @@
   );
 }
 
+/* .com pill: same blue as SSL Buy Now (bg-blue-600), no gradient */
+.domain-pill--com {
+  background: rgb(37 99 235);
+  background-image: none;
+  animation: none;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+.domain-pill--com:hover {
+  background: rgb(29 78 216);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+}
+.domain-pill--com .com-pill-inner {
+  background: transparent !important;
+}
+
 /* TransferPricing Component */
 .bg-transfer-pricing { background-color: rgb(var(--transfer-pricing-bg)); }
 .text-transfer-pricing-heading { color: rgb(var(--transfer-pricing-heading)); }
