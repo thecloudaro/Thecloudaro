@@ -379,36 +379,36 @@ export async function GET(req: NextRequest) {
       finalResults: limitedResults.length
     });
     
-    // If no results generated, try to create fallback results with common TLDs
+    // If no results generated from pricing, build results only from Store catalogue (tldsList)
     if (limitedResults.length === 0 && tldsList.length > 0) {
-      console.warn(`⚠️ [Domain Search] No domain results generated! Creating fallback results...`);
-      console.warn(`⚠️ [Domain Search] TLDs processed: ${processedCount}, Skipped: ${skippedCount}`);
-      
-      // Create fallback results with common TLDs and default pricing
-      const fallbackTlds = ['.com', '.net', '.org', '.io', '.co', '.xyz', '.app', '.dev'];
-      const defaultPrice = 10.99; // Default price if no pricing found
-      
-      for (const fallbackTld of fallbackTlds) {
-        // Check if this TLD exists in the fetched TLDs list
-        const tldExists = tldsList.some((item: any) => {
-          const itemTld = String(item.tld || item.name || '').toLowerCase();
-          return itemTld === fallbackTld || itemTld === fallbackTld.substring(1);
-        });
-        
-        if (tldExists || limitedResults.length < 10) {
-          limitedResults.push({
-            name: `${cleanSearchTerm}${fallbackTld}`,
-            available: true,
-            price: defaultPrice,
-            currency: 'USD',
-            popular: popularTlds.includes(fallbackTld),
-            premium: false,
-            tld: fallbackTld,
-          });
+      console.warn(`⚠️ [Domain Search] No domain results from pricing. Using Store catalogue TLDs only.`);
+      const defaultPrice = 10.99;
+
+      for (const tldItem of tldsList) {
+        let tld = '';
+        if (tldItem.tld) {
+          tld = String(tldItem.tld).toLowerCase();
+        } else if (tldItem.name) {
+          const nameStr = String(tldItem.name).toLowerCase().trim();
+          tld = nameStr.startsWith('.') ? nameStr : `.${nameStr}`;
+        } else {
+          const productName = String(tldItem.name || tldItem.title || tldItem.product_name || '').toLowerCase().trim();
+          if (productName.startsWith('.')) tld = productName;
+          else if (productName) tld = `.${productName}`;
         }
+        if (!tld || !tld.startsWith('.')) continue;
+
+        limitedResults.push({
+          name: `${cleanSearchTerm}${tld}`,
+          available: true,
+          price: defaultPrice,
+          currency: 'USD',
+          popular: popularTlds.includes(tld),
+          premium: false,
+          tld,
+        });
       }
-      
-      console.log(`✅ [Domain Search] Created ${limitedResults.length} fallback domain results`);
+      console.log(`✅ [Domain Search] Created ${limitedResults.length} results from Store catalogue only`);
     } else if (limitedResults.length > 0) {
       console.log(`📊 [Domain Search] Sample results:`, limitedResults.slice(0, 3).map(d => ({ name: d.name, price: d.price, tld: d.tld })));
     } else {

@@ -54,23 +54,28 @@ const DomainSearchPage = () => {
     return () => clearInterval(checkWidget);
   }, []);
 
-  // Fetch domain names (TLDs) from Upmind API for display when Domains tab is active
+  // Fetch domain names from Upmind Store catalogue (same as Admin → Store catalogue → Domain Names)
   useEffect(() => {
     if (activeTab !== "domains") return;
     const fetchDomainNames = async () => {
       setDomainNamesLoading(true);
       try {
-        const res = await fetch("/api/domain-tld-pricing", { cache: "no-store" });
+        const res = await fetch("/api/domain-search?term=example", { cache: "no-store" });
         const data = await res.json();
-        if (data?.success && Array.isArray(data.tlds) && data.tlds.length > 0) {
-          setDomainNames(
-            data.tlds.map((item: { tld: string; registerPrice?: number; renewPrice?: number; transferPrice?: number }) => ({
-              tld: item.tld,
-              registerPrice: item.registerPrice,
-              renewPrice: item.renewPrice,
-              transferPrice: item.transferPrice,
-            }))
-          );
+        if (data?.success && Array.isArray(data.domains) && data.domains.length > 0) {
+          const seen = new Set<string>();
+          const list: TldItem[] = [];
+          for (const d of data.domains as { tld: string; price?: number }[]) {
+            const tld = d.tld || "";
+            if (tld && !seen.has(tld)) {
+              seen.add(tld);
+              list.push({
+                tld,
+                registerPrice: typeof d.price === "number" ? d.price : undefined,
+              });
+            }
+          }
+          setDomainNames(list);
         }
       } catch {
         setDomainNames([]);
@@ -359,7 +364,9 @@ const DomainSearchPage = () => {
                   }}
                 >
                   <h3 className="text-base font-semibold mb-3" style={{ color: "rgb(var(--domain-search-heading))" }}>
-                    Domain names you can search
+                    {domainNames.length > 0
+                      ? `Domain names in your store (${domainNames.length})`
+                      : "Domain names in your store (Upmind Store catalogue)"}
                   </h3>
                   {domainNamesLoading ? (
                     <p className="text-sm" style={{ color: "rgb(var(--domain-search-info-text))" }}>
@@ -392,6 +399,21 @@ const DomainSearchPage = () => {
                     </p>
                   )}
                 </div>
+
+                {/* Localhost notice: widget needs a registered domain in Upmind */}
+                {typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") && (
+                  <div
+                    className="rounded-xl p-4 flex items-center gap-3"
+                    style={{
+                      backgroundColor: "rgba(var(--domain-search-info-bg))",
+                      border: "1px solid rgba(var(--domain-search-info-border))",
+                    }}
+                  >
+                    <span className="text-sm" style={{ color: "rgb(var(--domain-search-info-text))" }}>
+                      <strong>Local:</strong> Upmind widget sirf production domain pe chalega (Upmind → Settings → Domains me add karein). Yahan neeche <strong>custom search</strong> use karein.
+                    </span>
+                  </div>
+                )}
 
                 {/* Widget Error Message */}
                 {widgetError && (
