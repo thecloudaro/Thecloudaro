@@ -17,6 +17,13 @@ interface DomainResult {
   premium?: boolean;
 }
 
+interface TldItem {
+  tld: string;
+  registerPrice?: number;
+  renewPrice?: number;
+  transferPrice?: number;
+}
+
 const DomainSearchPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<DomainResult[]>([]);
@@ -25,6 +32,8 @@ const DomainSearchPage = () => {
   const [searchError, setSearchError] = useState<string | null>(null);
   const [widgetLoaded, setWidgetLoaded] = useState(false);
   const [widgetError, setWidgetError] = useState<string | null>(null);
+  const [domainNames, setDomainNames] = useState<TldItem[]>([]);
+  const [domainNamesLoading, setDomainNamesLoading] = useState(false);
 
   // Load Upmind Domain Availability Checker widget
   useEffect(() => {
@@ -44,6 +53,33 @@ const DomainSearchPage = () => {
 
     return () => clearInterval(checkWidget);
   }, []);
+
+  // Fetch domain names (TLDs) from Upmind API for display when Domains tab is active
+  useEffect(() => {
+    if (activeTab !== "domains") return;
+    const fetchDomainNames = async () => {
+      setDomainNamesLoading(true);
+      try {
+        const res = await fetch("/api/domain-tld-pricing", { cache: "no-store" });
+        const data = await res.json();
+        if (data?.success && Array.isArray(data.tlds) && data.tlds.length > 0) {
+          setDomainNames(
+            data.tlds.map((item: { tld: string; registerPrice?: number; renewPrice?: number; transferPrice?: number }) => ({
+              tld: item.tld,
+              registerPrice: item.registerPrice,
+              renewPrice: item.renewPrice,
+              transferPrice: item.transferPrice,
+            }))
+          );
+        }
+      } catch {
+        setDomainNames([]);
+      } finally {
+        setDomainNamesLoading(false);
+      }
+    };
+    fetchDomainNames();
+  }, [activeTab]);
 
   const handleSearch = async (term: string) => {
     // Allow empty search term - will show all available domains
@@ -314,6 +350,49 @@ const DomainSearchPage = () => {
             {/* Upmind Domain Availability Checker Widget - Main Interface */}
             {activeTab === "domains" && (
               <div className="w-full space-y-4">
+                {/* Domain names (TLDs) from Upmind - show above widget */}
+                <div
+                  className="rounded-xl p-5"
+                  style={{
+                    backgroundColor: "rgba(var(--domain-search-card-bg))",
+                    border: "1px solid rgb(var(--domain-search-card-border))",
+                  }}
+                >
+                  <h3 className="text-base font-semibold mb-3" style={{ color: "rgb(var(--domain-search-heading))" }}>
+                    Domain names you can search
+                  </h3>
+                  {domainNamesLoading ? (
+                    <p className="text-sm" style={{ color: "rgb(var(--domain-search-info-text))" }}>
+                      Loading domain names…
+                    </p>
+                  ) : domainNames.length > 0 ? (
+                    <div className="flex flex-wrap gap-2">
+                      {domainNames.map((item) => (
+                        <span
+                          key={item.tld}
+                          className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium"
+                          style={{
+                            backgroundColor: "rgba(var(--domain-search-info-bg))",
+                            border: "1px solid rgba(var(--domain-search-info-border))",
+                            color: "rgb(var(--domain-search-text))",
+                          }}
+                        >
+                          {item.tld}
+                          {item.registerPrice != null && (
+                            <span className="ml-2 opacity-80" style={{ color: "rgb(var(--domain-search-info-text))" }}>
+                              ${Number(item.registerPrice).toFixed(2)}/yr
+                            </span>
+                          )}
+                        </span>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-sm" style={{ color: "rgb(var(--domain-search-info-text))" }}>
+                      Domain list will appear when available.
+                    </p>
+                  )}
+                </div>
+
                 {/* Widget Error Message */}
                 {widgetError && (
                   <div 

@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-// NOTE: Using the Resend sandbox recipient email that your account allows.
-// If you later verify your own domain in Resend, you can change this.
-const FEATURE_REQUEST_TO_EMAIL = "thecloudaro3@gmail.com";
+// Feature requests are sent to this address.
+const FEATURE_REQUEST_TO_EMAIL = "support@thecloudaro.com";
 
 export async function POST(req: NextRequest) {
   try {

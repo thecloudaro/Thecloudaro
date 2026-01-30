@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(
         { 
           success: false,
-          error: 'UPMIND_API_TOKEN environment variable is not set. Please set it in your .env.local file.',
+          error: 'UPMIND_API_TOKEN is not set. Locally: add to .env.local. On Vercel: Project → Settings → Environment Variables → add UPMIND_API_TOKEN → Redeploy.',
           tlds: []
         },
         { status: 500 }
