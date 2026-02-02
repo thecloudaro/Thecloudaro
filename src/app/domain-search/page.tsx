@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Search, CheckCircle, XCircle, Star } from "lucide-react";
 import DomainPricingTable from "@/components/Domain/DomainPricingTable";
@@ -34,6 +34,7 @@ const DomainSearchPage = () => {
   const [widgetError, setWidgetError] = useState<string | null>(null);
   const [domainNames, setDomainNames] = useState<TldItem[]>([]);
   const [domainNamesLoading, setDomainNamesLoading] = useState(false);
+  const [domainNamesError, setDomainNamesError] = useState<string | null>(null);
 
   // Load Upmind Domain Availability Checker widget
   useEffect(() => {
@@ -55,36 +56,46 @@ const DomainSearchPage = () => {
   }, []);
 
   // Fetch domain names from Upmind Store catalogue (same as Admin → Store catalogue → Domain Names)
-  useEffect(() => {
-    if (activeTab !== "domains") return;
-    const fetchDomainNames = async () => {
-      setDomainNamesLoading(true);
-      try {
-        const res = await fetch("/api/domain-search?term=example", { cache: "no-store" });
-        const data = await res.json();
-        if (data?.success && Array.isArray(data.domains) && data.domains.length > 0) {
-          const seen = new Set<string>();
-          const list: TldItem[] = [];
-          for (const d of data.domains as { tld: string; price?: number }[]) {
-            const tld = d.tld || "";
-            if (tld && !seen.has(tld)) {
-              seen.add(tld);
-              list.push({
-                tld,
-                registerPrice: typeof d.price === "number" ? d.price : undefined,
-              });
-            }
-          }
-          setDomainNames(list);
-        }
-      } catch {
+  const fetchDomainNames = useCallback(async () => {
+    setDomainNamesLoading(true);
+    setDomainNamesError(null);
+    try {
+      const res = await fetch("/api/domain-search?term=example", { cache: "no-store" });
+      const data = await res.json();
+      if (!res.ok) {
+        setDomainNamesError(data?.error || `Request failed (${res.status}). Check Vercel env: UPMIND_API_TOKEN.`);
         setDomainNames([]);
-      } finally {
-        setDomainNamesLoading(false);
+        return;
       }
-    };
-    fetchDomainNames();
-  }, [activeTab]);
+      if (data?.success && Array.isArray(data.domains) && data.domains.length > 0) {
+        const seen = new Set<string>();
+        const list: TldItem[] = [];
+        for (const d of data.domains as { tld: string; price?: number }[]) {
+          const tld = d.tld || "";
+          if (tld && !seen.has(tld)) {
+            seen.add(tld);
+            list.push({
+              tld,
+              registerPrice: typeof d.price === "number" ? d.price : undefined,
+            });
+          }
+        }
+        setDomainNames(list);
+      } else {
+        setDomainNamesError(data?.error || "No domains returned. Check Upmind Store catalogue and UPMIND_API_TOKEN.");
+        setDomainNames([]);
+      }
+    } catch {
+      setDomainNamesError("Could not load domain list. Please try again.");
+      setDomainNames([]);
+    } finally {
+      setDomainNamesLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (activeTab === "domains") fetchDomainNames();
+  }, [activeTab, fetchDomainNames]);
 
   const handleSearch = async (term: string) => {
     // Allow empty search term - will show all available domains
@@ -372,6 +383,23 @@ const DomainSearchPage = () => {
                     <p className="text-sm" style={{ color: "rgb(var(--domain-search-info-text))" }}>
                       Loading domain names…
                     </p>
+                  ) : domainNamesError ? (
+                    <div className="space-y-2">
+                      <p className="text-sm" style={{ color: "rgb(var(--domain-search-unavailable-text))" }}>
+                        {domainNamesError}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => fetchDomainNames()}
+                        className="px-3 py-1.5 rounded-lg text-sm font-medium"
+                        style={{
+                          backgroundColor: "rgb(var(--domain-search-button-bg))",
+                          color: "rgb(var(--domain-search-button-text))",
+                        }}
+                      >
+                        Retry
+                      </button>
+                    </div>
                   ) : domainNames.length > 0 ? (
                     <div className="flex flex-wrap gap-2">
                       {domainNames.map((item) => (

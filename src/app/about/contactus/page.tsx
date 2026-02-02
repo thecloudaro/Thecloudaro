@@ -34,6 +34,10 @@ export default function ContactUsPage() {
               className="text-xl sm:text-2xl md:text-2xl lg:text-2xl text-left !text-white font-bold"
             />
 
+            <p className="!text-sm sm:!text-base md:!text-base text-left max-w-2xl !text-white/90 pt-1">
+              We are a remote-first web hosting company. All sales and technical support requests are handled via email and our ticketing system.
+            </p>
+
             {/* Description */}
             <p className="!text-sm sm:!text-base md:!text-base text-left max-w-2xl !text-white">
               If you have any questions or need some help, please email us at{" "}
@@ -43,8 +47,7 @@ export default function ContactUsPage() {
                 style={{ color: 'hsl(var(--link-blue))' }}
               >
                 support@thecloudaro.com
-              </a>{" "}
-              or start a chat.
+              </a>.
             </p>
           </motion.div>
 
