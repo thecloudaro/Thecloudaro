@@ -34,8 +34,8 @@ const EasyWPCard = () => {
         <div className="h-1/3 sm:h-2/5 bg-gradient-to-r from-[hsl(var(--easywp-card-gradient-from))] to-[hsl(var(--easywp-card-gradient-to))] relative overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">
             <Image 
-              src="/Home/Wordpress.png" 
-              alt="The Cloudaro" 
+              src="/Home/WordPress.png" 
+              alt="No stress hosting for WordPress" 
               fill
               className="object-cover opacity-90" 
             />

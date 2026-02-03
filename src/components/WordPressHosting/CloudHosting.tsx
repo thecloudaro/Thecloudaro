@@ -14,7 +14,7 @@ interface CloudHostingProps {
   onCompareClick?: () => void;
 }
 
-const CloudHosting = forwardRef<HTMLElement, CloudHostingProps>(({ heading = "Cloud hosting for WordPress price plans", subtitle = "Skip over cost barriers with the most affordable hosting for WordPress around.", onCompareClick }, ref: ForwardedRef<HTMLElement>) => {
+const CloudHosting = forwardRef<HTMLElement, CloudHostingProps>(({ heading = "Packages WordPress Hosting", subtitle = "Terms Monthly and Yearly.", onCompareClick }, ref: ForwardedRef<HTMLElement>) => {
   const [billing, setBilling] = useState<BillingCycle>("monthly");
 
   return (

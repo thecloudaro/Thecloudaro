@@ -34,59 +34,82 @@ interface PlanConfig {
   showPromoNote?: boolean;
 }
 
+// Buy Now URLs for WordPress hosting packages (order product page by plan)
+const BUY_NOW_URLS: Record<PlanKey, string> = {
+  starter: "https://my.thecloudaro.com/order/product?pid=93e8d569-d072-4568-03ea-64e853121607",
+  turbo: "https://my.thecloudaro.com/order/product?pid=5983e230-6e75-4003-7edc-d4981d210d76",
+  supersonic: "https://my.thecloudaro.com/order/product?pid=7831d635-0d82-490d-630a-049e176259e0",
+};
+
 const planContent: Record<PlanKey, PlanConfig> = {
   starter: {
-    name: "EasyWP Starter",
+    name: "WordPress Basic",
     subtitle: "Build your first website",
     regularPrice: "$9.88/mo",
-    promoLabel: "40% OFF*",
+    promoLabel: "",
     promoPrice: "$5.88",
     features: [
-      { label: "10 GB", emphasis: "SSD Storage" },
-      { label: "Unlimited", emphasis: "bandwidth" },
-      { label: "Unlimited", emphasis: "number of visitors" },
-      { label: "FREE", emphasis: "SSL" },
-      // FREE mailbox + HackGuardian removed per design feedback
+      { label: "5 GB", emphasis: "SSD Storage" },
+      { label: "Unlimited", emphasis: "Bandwidth" },
+      { label: "Unlimited", emphasis: "visitors" },
+      { label: "Free", emphasis: "SSL" },
+      { label: "5", emphasis: "Mailbox" },
+      { label: "Backups Retention", emphasis: "x3" },
+      { label: "1", emphasis: "Website" },
+      { label: "Standard", emphasis: "Support" },
+      { label: "WP", emphasis: "Staging" },
+      { label: "WP Basic", emphasis: "Optimization" },
     ],
-    ctaLabel: "Add to cart",
+    ctaLabel: "Buy Now",
     renewsLabel: "Renews for $9.88/mo",
-    showPromoNote: true
+    showPromoNote: false,
   },
   turbo: {
-    name: "EasyWP Turbo",
+    name: "WordPress Business",
     subtitle: "Propel your website to new places",
     regularPrice: "$18.88/mo",
-    promoLabel: "48% OFF*",
+    promoLabel: "",
     promoPrice: "$9.88",
     badge: "BEST CHOICE",
     features: [
-      { label: "50 GB", emphasis: "SSD Storage" },
-      { label: "Unlimited", emphasis: "bandwidth" },
-      { label: "Unlimited", emphasis: "number of visitors" },
-      { label: "1.5x", emphasis: "more CPU & RAM" },
-      { label: "FREE", emphasis: "SSL" },
-      // FREE mailbox + HackGuardian + MalwareGuardian removed per design feedback
+      { label: "10 GB", emphasis: "SSD Storage" },
+      { label: "Unlimited", emphasis: "Bandwidth" },
+      { label: "Unlimited", emphasis: "visitors" },
+      { label: "1x more", emphasis: "CPU & RAM" },
+      { label: "Free", emphasis: "SSL" },
+      { label: "10", emphasis: "Mailbox" },
+      { label: "Backups Retention", emphasis: "x5" },
+      { label: "3", emphasis: "Websites" },
+      { label: "Free Domain 1 Year", emphasis: "(.com, .org, .xyz)" },
+      { label: "WP", emphasis: "Staging" },
+      { label: "Priority", emphasis: "Support" },
     ],
-    ctaLabel: "Add to cart",
-    renewsLabel: "Renews for $18.88/mo"
+    ctaLabel: "Buy Now",
+    renewsLabel: "Renews for $18.88/mo",
   },
   supersonic: {
-    name: "EasyWP Supersonic",
+    name: "WordPress Business Pro",
     subtitle: "Innovate and scale up your website",
     regularPrice: "$26.88/mo",
-    promoLabel: "52% OFF*",
+    promoLabel: "",
     promoPrice: "$12.88",
     features: [
-      { label: "100 GB", emphasis: "SSD Storage" },
-      { label: "Unlimited", emphasis: "bandwidth" },
-      { label: "Unlimited", emphasis: "number of visitors" },
-      { label: "2x", emphasis: "more CPU & RAM" },
-      { label: "FREE", emphasis: "SSL" },
-      // FREE mailbox + HackGuardian + MalwareGuardian removed per design feedback
+      { label: "20 GB", emphasis: "SSD Storage" },
+      { label: "Unlimited", emphasis: "Bandwidth" },
+      { label: "Unlimited", emphasis: "visitors" },
+      { label: "2x more", emphasis: "CPU & RAM" },
+      { label: "Free", emphasis: "SSL" },
+      { label: "20", emphasis: "Mailbox" },
+      { label: "Backups Retention", emphasis: "x15" },
+      { label: "5", emphasis: "Websites" },
+      { label: "Free Domain 1 Year", emphasis: "(.com, .org, .xyz)" },
+      { label: "WP", emphasis: "Staging" },
+      { label: "Redis", emphasis: "Caching" },
+      { label: "Priority", emphasis: "Support" },
     ],
-    ctaLabel: "Add to cart",
-    renewsLabel: "Renews for $26.88/mo"
-  }
+    ctaLabel: "Buy Now",
+    renewsLabel: "Renews for $26.88/mo",
+  },
 };
 
 const emptyOverrides: Record<PlanKey, Partial<PlanConfig>> = {
@@ -373,11 +396,16 @@ const PlanCard = ({ plan, billing }: PlanCardProps) => {
         ))}
       </div>
 
-      {/* Promo coupon block removed per design feedback */}
-
-      <button className="mt-6 rounded-full bg-white px-5 py-2 text-xs font-semibold text-black transition hover:bg-white/90">
-        {plan.ctaLabel}
-      </button>
+      {/* Buy Now */}
+      <a
+        href={BUY_NOW_URLS[plan.key]}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-6 inline-block rounded-full bg-white px-5 py-2 text-xs font-semibold text-center transition hover:bg-white/90"
+        style={{ color: "#000" }}
+      >
+        Buy Now
+      </a>
     </div>
   );
 };

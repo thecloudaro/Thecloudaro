@@ -2,7 +2,7 @@ import MigrateHero from "@/components/Migrate/MigrateHero";
 import HowToGet from "@/components/Migrate/HowToGet";
 import WhatYouNeed from "@/components/Migration/WhatYouNeed";
 import ChooseYourHosting from "@/components/Migration/ChooseYourHosting";
-import AddonProducts from "@/components/Migration/AddonProducts";
+// import AddonProducts from "@/components/Migration/AddonProducts"; // Hidden – re-enable when needed
 // import NotSure from "@/components/Migration/NotSure";
 import GetMore from "@/components/Migration/GetMore";
 import FAQMigration from "@/components/Migration/FAQMigration";
@@ -14,7 +14,7 @@ const MigrationToTheCloudaroPage = () => {
       <HowToGet />
       <WhatYouNeed />
       <ChooseYourHosting />
-      <AddonProducts />
+      {/* <AddonProducts /> – Add-ons and Tools section hidden; re-enable when needed */}
       {/* <NotSure /> */}
       <GetMore/>
       <FAQMigration/>

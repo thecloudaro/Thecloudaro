@@ -6,8 +6,14 @@ import { Info, Plus } from "lucide-react";
 import ContentHeading from "@/components/ui/content-heading";
 import ContentDescription from "@/components/ui/content-description";
 import HostingPlanControls, { BillingCycle } from "./HostingPlanControls";
-import { useCart } from "@/components/Cart/CartContext";
 import { hostingPlanProductIds } from "@/config/hosting-plans";
+
+// Buy Now URLs for web hosting packages (order product page by plan)
+const BUY_NOW_URLS: Record<string, string> = {
+  Essential: "https://my.thecloudaro.com/order/product?pid=052d137e-08d2-410d-e07b-0495163789e6",
+  Pro: "https://my.thecloudaro.com/order/product?pid=2e071d93-1d5e-4687-100f-046028758396",
+  Supreme: "https://my.thecloudaro.com/order/product?pid=196e02e5-136d-4205-39dc-9429807875d3",
+};
 
 interface PickYourHostingProps {
   onCompareClick?: () => void;
@@ -29,20 +35,21 @@ interface PlanPricing {
 
 interface HostingPlan {
   name: string;
+  displayName: string;
   description: string;
   pricing: PlanPricing;
   popular: boolean;
   features: {
-    cpu: string;
     storage: string;
-    domains: string;
     websites: string;
-    ssl: boolean;
+    ssl: string;
+    backup: string;
     mailboxes: string;
-    spacemail: boolean;
-    imunify360: boolean;
-    websiteBuilder: boolean;
-    wordpressAI: boolean;
+    apps: string;
+    support: string;
+    bandwidth: string;
+    freeDomain?: string;
+    migration?: string;
   };
 }
 
@@ -51,22 +58,20 @@ interface HostingPlan {
 // by real pricing from Upmind in production environments.
 const FALLBACK_PRICING: Record<
   HostingPlan["name"],
-  { monthly: number; yearly: number; biyearly: number }
+  { monthly: number; yearly: number; biyearly: number; originalMonthly?: number }
 > = {
   Essential: {
-    // Match current Upmind config: $5/mo, $60/yr, $120/2yr
-    monthly: 5,
-    yearly: 60,
-    biyearly: 120,
+    monthly: 1,
+    yearly: 12,
+    biyearly: 24,
+    originalMonthly: 5,
   },
   Pro: {
-    // Match current Upmind config: $10/mo, $120/yr, $240/2yr
     monthly: 10,
     yearly: 120,
     biyearly: 240,
   },
   Supreme: {
-    // Match current Upmind config: $15/mo, $180/yr, $360/2yr
     monthly: 15,
     yearly: 180,
     biyearly: 360,
@@ -80,12 +85,12 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
     [key: string]: { storage: string; price: number };
   }>({});
   const [loading, setLoading] = useState(true);
-  const { addItem } = useCart();
 
-  // Default plans structure (pricing will come from Upmind API only)
+  // Default plans structure (pricing from Upmind API). Content: Packages Web Hosting — Terms Monthly, Yearly and Biennially.
   const defaultPlans: HostingPlan[] = [
     {
       name: "Essential",
+      displayName: "Shared Essential",
       description: "Perfect for starting out",
       pricing: {
         monthly: undefined,
@@ -94,20 +99,19 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
       },
       popular: false,
       features: {
-        cpu: "1x CPU",
-        storage: "20 GB SSD Cloud storage",
-        domains: "5 hosted domains",
-        websites: "Unlimited websites",
-        ssl: true,
-        mailboxes: "5 mailboxes per domain free for 1 year",
-        spacemail: true,
-        imunify360: true,
-        websiteBuilder: true,
-        wordpressAI: false,
+        storage: "5 GB SSD Storage",
+        websites: "1 website",
+        ssl: "Free SSL",
+        backup: "Manual Backup",
+        mailboxes: "5 Mailboxes",
+        apps: "Softaculous Apps",
+        support: "Standard Support",
+        bandwidth: "10 GB Bandwidth",
       },
     },
     {
       name: "Pro",
+      displayName: "Shared Professional",
       description: "Ideal for taking ideas further",
       pricing: {
         monthly: undefined,
@@ -116,20 +120,19 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
       },
       popular: true,
       features: {
-        cpu: "2x CPU",
-        storage: "50 GB SSD Cloud storage",
-        domains: "Unlimited hosted domains",
-        websites: "Unlimited websites",
-        ssl: true,
-        mailboxes: "5 mailboxes per domain free for 1 year",
-        spacemail: true,
-        imunify360: true,
-        websiteBuilder: true,
-        wordpressAI: true,
+        storage: "10 GB SSD Storage",
+        websites: "3 websites",
+        ssl: "Free SSL",
+        backup: "Backup - Weekly",
+        mailboxes: "10 Mailboxes",
+        apps: "Softaculous Apps",
+        support: "Standard Support",
+        bandwidth: "Unlimited Bandwidth",
       },
     },
     {
       name: "Supreme",
+      displayName: "Shared Premier",
       description: "Best for boosting businesses",
       pricing: {
         monthly: undefined,
@@ -138,16 +141,16 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
       },
       popular: false,
       features: {
-        cpu: "4x CPU",
-        storage: "Unmetered SSD Cloud storage",
-        domains: "Unlimited hosted domains",
-        websites: "Unlimited websites",
-        ssl: true,
-        mailboxes: "5 mailboxes per domain free for 1 year",
-        spacemail: true,
-        imunify360: true,
-        websiteBuilder: true,
-        wordpressAI: true,
+        storage: "15 GB SSD Storage",
+        websites: "5 websites",
+        ssl: "Free SSL",
+        backup: "Backup - Weekly",
+        mailboxes: "20 Mailboxes",
+        apps: "Softaculous Apps",
+        support: "Standard Support",
+        bandwidth: "Unlimited Bandwidth",
+        freeDomain: "Free Domain (.com, .org, .xyz)",
+        migration: "Free Migration",
       },
     },
   ];
@@ -199,22 +202,22 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
                 monthly: {
                   price: fallback.monthly,
                   renewal: fallback.monthly,
-                  original: fallback.monthly * 1.5,
-                  discountLabel: "33% OFF*",
+                  original: (fallback as { originalMonthly?: number }).originalMonthly ?? fallback.monthly * 1.5,
+                  discountLabel: "",
                   perMonth: fallback.monthly,
                 },
                 yearly: {
                   price: fallback.yearly,
                   renewal: fallback.yearly,
                   original: fallback.yearly * 1.5,
-                  discountLabel: "33% OFF*",
+                  discountLabel: "",
                   perMonth: fallback.yearly / 12,
                 },
                 biyearly: {
                   price: fallback.biyearly,
                   renewal: fallback.biyearly,
                   original: fallback.biyearly * 1.5,
-                  discountLabel: "33% OFF*",
+                  discountLabel: "",
                   perMonth: fallback.biyearly / 24,
                 },
               },
@@ -241,22 +244,22 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
                 monthly: {
                   price: fallback.monthly,
                   renewal: fallback.monthly,
-                  original: fallback.monthly * 1.5,
-                  discountLabel: "33% OFF*",
+                  original: (fallback as { originalMonthly?: number }).originalMonthly ?? fallback.monthly * 1.5,
+                  discountLabel: "",
                   perMonth: fallback.monthly,
                 },
                 yearly: {
                   price: fallback.yearly,
                   renewal: fallback.yearly,
                   original: fallback.yearly * 1.5,
-                  discountLabel: "33% OFF*",
+                  discountLabel: "",
                   perMonth: fallback.yearly / 12,
                 },
                 biyearly: {
                   price: fallback.biyearly,
                   renewal: fallback.biyearly,
                   original: fallback.biyearly * 1.5,
-                  discountLabel: "33% OFF*",
+                  discountLabel: "",
                   perMonth: fallback.biyearly / 24,
                 },
               },
@@ -294,22 +297,22 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
                 monthly: {
                   price: fallback.monthly,
                   renewal: fallback.monthly,
-                  original: fallback.monthly * 1.5,
-                  discountLabel: "33% OFF*",
+                  original: (fallback as { originalMonthly?: number }).originalMonthly ?? fallback.monthly * 1.5,
+                  discountLabel: "",
                   perMonth: fallback.monthly,
                 },
                 yearly: {
                   price: fallback.yearly,
                   renewal: fallback.yearly,
                   original: fallback.yearly * 1.5,
-                  discountLabel: "33% OFF*",
+                  discountLabel: "",
                   perMonth: fallback.yearly / 12,
                 },
                 biyearly: {
                   price: fallback.biyearly,
                   renewal: fallback.biyearly,
                   original: fallback.biyearly * 1.5,
-                  discountLabel: "33% OFF*",
+                  discountLabel: "",
                   perMonth: fallback.biyearly / 24,
                 },
               },
@@ -331,7 +334,7 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
                       price: monthlyPrice,
                       renewal: monthlyPrice,
                       original: monthlyPrice * 1.5,
-                      discountLabel: "33% OFF*",
+                      discountLabel: "",
                       perMonth: monthlyPrice,
                     }
                   : undefined,
@@ -340,7 +343,7 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
                       price: yearlyPrice,
                       renewal: yearlyPrice,
                       original: yearlyPrice * 1.5,
-                      discountLabel: "33% OFF*",
+                      discountLabel: "",
                       perMonth: yearlyPrice / 12,
                     }
                   : undefined,
@@ -349,7 +352,7 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
                       price: biyearlyPrice,
                       renewal: biyearlyPrice,
                       original: biyearlyPrice * 1.5,
-                      discountLabel: "33% OFF*",
+                      discountLabel: "",
                       perMonth: biyearlyPrice / 24,
                     }
                   : undefined,
@@ -381,22 +384,22 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
               monthly: {
                 price: fallback.monthly,
                 renewal: fallback.monthly,
-                original: fallback.monthly * 1.5,
-                discountLabel: "33% OFF*",
+                original: (fallback as { originalMonthly?: number }).originalMonthly ?? fallback.monthly * 1.5,
+                discountLabel: "",
                 perMonth: fallback.monthly,
               },
               yearly: {
                 price: fallback.yearly,
                 renewal: fallback.yearly,
                 original: fallback.yearly * 1.5,
-                discountLabel: "33% OFF*",
+                discountLabel: "",
                 perMonth: fallback.yearly / 12,
               },
               biyearly: {
                 price: fallback.biyearly,
                 renewal: fallback.biyearly,
                 original: fallback.biyearly * 1.5,
-                discountLabel: "33% OFF*",
+                discountLabel: "",
                 perMonth: fallback.biyearly / 24,
               },
             },
@@ -422,22 +425,22 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
               monthly: {
                 price: fallback.monthly,
                 renewal: fallback.monthly,
-                original: fallback.monthly * 1.5,
-                discountLabel: "33% OFF*",
+                original: (fallback as { originalMonthly?: number }).originalMonthly ?? fallback.monthly * 1.5,
+                discountLabel: "",
                 perMonth: fallback.monthly,
               },
               yearly: {
                 price: fallback.yearly,
                 renewal: fallback.yearly,
                 original: fallback.yearly * 1.5,
-                discountLabel: "33% OFF*",
+                discountLabel: "",
                 perMonth: fallback.yearly / 12,
               },
               biyearly: {
                 price: fallback.biyearly,
                 renewal: fallback.biyearly,
                 original: fallback.biyearly * 1.5,
-                discountLabel: "33% OFF*",
+                discountLabel: "",
                 perMonth: fallback.biyearly / 24,
               },
             },
@@ -516,7 +519,7 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
               className="mb-4"
             >
               <ContentHeading
-                title="Pick your Web Hosting"
+                title="Packages Web Hosting"
                 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white text-center"
               />
             </motion.div>
@@ -529,7 +532,7 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
               className="mb-8"
             >
               <ContentDescription
-                text="Start building your online presence."
+                text="Terms Monthly, Yearly and Biennially."
                 className="text-lg sm:text-xl md:text-2xl text-center text-white"
               />
             </motion.div>
@@ -612,7 +615,7 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
                     {/* Plan Heading */}
                     <div className="text-center space-y-2">
                       <h3 className="text-2xl font-bold text-[rgb(var(--hosting-text-white))]">
-                        {plan.name}
+                        {plan.displayName}
                       </h3>
                       <p className="text-sm text-[rgb(var(--hosting-choose-text-gray-400))]">
                         {plan.description}
@@ -654,72 +657,39 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
                     {/* Features List */}
                     <div className="space-y-3 text-sm mt-20">
                       <div className="text-[rgb(var(--hosting-choose-text-gray-300))]">
-                        {plan.features.cpu}
-                      </div>
-                      <div className="text-[rgb(var(--hosting-choose-text-gray-300))]">
                         {plan.features.storage}
-                      </div>
-                      <div className="text-[rgb(var(--hosting-choose-text-gray-300))]">
-                        {plan.features.domains.startsWith("Unlimited") ? (
-                          <strong className="text-[rgb(var(--hosting-text-white))]">
-                            {plan.features.domains}
-                          </strong>
-                        ) : (
-                          plan.features.domains
-                        )}
                       </div>
                       <div className="text-[rgb(var(--hosting-text-white))] font-semibold">
                         {plan.features.websites}
                       </div>
                       <div className="text-[rgb(var(--hosting-choose-text-gray-300))]">
-                        Secured by{" "}
                         <span className="text-[rgb(var(--hosting-pick-text-green))]">
-                          SSL
+                          {plan.features.ssl}
                         </span>
+                      </div>
+                      <div className="text-[rgb(var(--hosting-choose-text-gray-300))]">
+                        {plan.features.backup}
                       </div>
                       <div className="text-[rgb(var(--hosting-choose-text-gray-300))]">
                         {plan.features.mailboxes}
                       </div>
-                      <div className="flex items-center gap-2 text-[rgb(var(--hosting-choose-text-gray-300))]">
-                        Imunify360 Protection
-                        <span
-                          className="px-2 py-0.5 rounded-full text-[10px] font-semibold"
-                          style={{
-                            backgroundColor:
-                              "rgb(var(--hosting-pick-popular-badge))",
-                            color: "rgb(var(--hosting-pick-button-text))",
-                          }}
-                        >
-                          NEW
-                        </span>
+                      <div className="text-[rgb(var(--hosting-choose-text-gray-300))]">
+                        {plan.features.apps}
                       </div>
-                      <div className="flex items-center gap-2 text-[rgb(var(--hosting-choose-text-gray-300))]">
-                        Website Builder
-                        <span
-                          className="px-2 py-0.5 rounded-full text-[10px] font-semibold"
-                          style={{
-                            backgroundColor:
-                              "rgb(var(--hosting-pick-popular-badge))",
-                            color: "rgb(var(--hosting-pick-button-text))",
-                          }}
-                        >
-                          NEW
-                        </span>
+                      <div className="text-[rgb(var(--hosting-choose-text-gray-300))]">
+                        {plan.features.support}
                       </div>
-
-                      {plan.features.wordpressAI && (
-                        <div className="flex items-center gap-2 text-[rgb(var(--hosting-choose-text-gray-300))]">
-                          WordPress AI Tools
-                          <span
-                            className="px-2 py-0.5 rounded-full text-[10px] font-semibold"
-                            style={{
-                              backgroundColor:
-                                "rgb(var(--hosting-pick-popular-badge))",
-                              color: "rgb(var(--hosting-pick-button-text))",
-                            }}
-                          >
-                            NEW
-                          </span>
+                      <div className="text-[rgb(var(--hosting-choose-text-gray-300))]">
+                        {plan.features.bandwidth}
+                      </div>
+                      {plan.features.freeDomain && (
+                        <div className="text-[rgb(var(--hosting-choose-text-gray-300))]">
+                          {plan.features.freeDomain}
+                        </div>
+                      )}
+                      {plan.features.migration && (
+                        <div className="text-[rgb(var(--hosting-choose-text-gray-300))]">
+                          {plan.features.migration}
                         </div>
                       )}
                     </div>
@@ -827,35 +797,28 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
                       </div>
                     )}
 
-                    {/* Buttons */}
+                    {/* Buy Now */}
                     <div>
-                      <button
-                        onClick={() => {
-                          if (hasPricing) {
-                            addItem({ name: plan.name, price: pricing.price });
-                          }
-                        }}
-                        disabled={!hasPricing}
-                        className="w-full py-3 rounded-full text-sm font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      <a
+                        href={BUY_NOW_URLS[plan.name] ?? "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full py-3 rounded-full text-sm font-semibold transition-all text-center"
                         style={{
                           backgroundColor: "rgb(var(--hosting-pick-button-bg))",
                           color: "rgb(var(--hosting-pick-button-text))",
                         }}
                         onMouseEnter={(e) => {
-                          if (hasPricing) {
-                            e.currentTarget.style.backgroundColor =
-                              "rgb(var(--hosting-choose-button-hover))";
-                          }
+                          e.currentTarget.style.backgroundColor =
+                            "rgb(var(--hosting-choose-button-hover))";
                         }}
                         onMouseLeave={(e) => {
-                          if (hasPricing) {
-                            e.currentTarget.style.backgroundColor =
-                              "rgb(var(--hosting-pick-button-bg))";
-                          }
+                          e.currentTarget.style.backgroundColor =
+                            "rgb(var(--hosting-pick-button-bg))";
                         }}
                       >
-                        Add to cart
-                      </button>
+                        Buy Now
+                      </a>
                     </div>
                   </div>
                 </motion.div>

@@ -75,6 +75,13 @@ const defaultPlans: HostingPlan[] = [
   },
 ];
 
+// Buy Now URLs for web hosting packages (order product page by plan)
+const BUY_NOW_URLS: Record<string, string> = {
+  Essential: "https://my.thecloudaro.com/order/product?pid=052d137e-08d2-410d-e07b-0495163789e6",
+  Pro: "https://my.thecloudaro.com/order/product?pid=2e071d93-1d5e-4687-100f-046028758396",
+  Supreme: "https://my.thecloudaro.com/order/product?pid=196e02e5-136d-4205-39dc-9429807875d3",
+};
+
 const featureRows = [
   {
     label: "Disk space",
@@ -514,8 +521,11 @@ const ChooseHosting = forwardRef<HTMLElement>((props, ref) => {
                       </div>
                     )}
                   </div>
-                <button
-                  className="px-5 py-2.5 rounded-full text-xs font-semibold transition md:ml-auto"
+                <a
+                  href={BUY_NOW_URLS[plan.name] ?? "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-5 py-2.5 rounded-full text-xs font-semibold transition md:ml-auto text-center"
                   style={{
                     backgroundColor: "rgb(var(--hosting-choose-button-bg))",
                     color: "rgb(var(--hosting-text-white))",
@@ -529,8 +539,8 @@ const ChooseHosting = forwardRef<HTMLElement>((props, ref) => {
                       "rgb(var(--hosting-choose-button-bg))";
                   }}
                 >
-                  Add to cart
-                </button>
+                  Buy Now
+                </a>
               </div>
             );
             })}

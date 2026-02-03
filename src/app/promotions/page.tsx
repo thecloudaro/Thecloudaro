@@ -12,63 +12,38 @@ interface PromotionCard {
   promoCode: string;
 }
 
+// Active promos (4 visible). Other promos hidden for now – re-enable when more promos are ready.
 const promotions: PromotionCard[] = [
   {
     id: "1",
-    productName: "All Website Builder",
-    promoName: "Launch Deal",
-    promoDescription: "Applies to new website builder plans.",
-    promoCode: "LAUNCH10",
+    productName: "Domain Names",
+    promoName: "Pay what we Pay",
+    promoDescription: "Applies to New Registrations",
+    promoCode: "WelcomeCoupon",
   },
   {
     id: "2",
-    productName: "DNS",
-    promoName: "DNS Boost",
-    promoDescription: "Discount on premium DNS add-ons.",
-    promoCode: "DNSBOOST",
+    productName: "Shared Hosting",
+    promoName: "One-Time OFF",
+    promoDescription: "Applies to New Customers per month for 2 months",
+    promoCode: "LaunchH",
   },
   {
     id: "3",
-    productName: "Domains",
-    promoName: "Domain Starter",
-    promoDescription: "Applies to first-year domain registrations.",
-    promoCode: "STARTDOMAIN",
+    productName: "SSL Certificates",
+    promoName: "Pay what we Pay",
+    promoDescription: "Applies to New Registrations",
+    promoCode: "SecureNow",
   },
   {
     id: "4",
-    productName: "EasyWP",
-    promoName: "WordPress Launch",
-    promoDescription: "For EasyWP WordPress hosting plans.",
-    promoCode: "EASYYWP20",
+    productName: "WordPress Hosting",
+    promoName: "One-Time OFF",
+    promoDescription: "Applies to New Customers per month for 2 months",
+    promoCode: "LaunchWP",
   },
-  {
-    id: "5",
-    productName: "Spacemail",
-    promoName: "Inbox Upgrade",
-    promoDescription: "On new Spacemail business email accounts.",
-    promoCode: "SPACEINBOX",
-  },
-  {
-    id: "6",
-    productName: "Starlight™ Hyperlift",
-    promoName: "Performance Boost",
-    promoDescription: "Applies to Hyperlift performance add-ons.",
-    promoCode: "HYPERLIFT",
-  },
-  {
-    id: "7",
-    productName: "Starlight™ Virtual Machines",
-    promoName: "VM Starter",
-    promoDescription: "For new virtual machine deployments.",
-    promoCode: "VMSTART",
-  },
-  {
-    id: "8",
-    productName: "VPN",
-    promoName: "Secure Connect",
-    promoDescription: "VPN plans for secure remote access.",
-    promoCode: "SECUREVPN",
-  },
+  // Hidden promos (re-enable later when more promos are available):
+  // All Website Builder, DNS, Spacemail, Starlight™ Hyperlift, VM, VPN
 ];
 
 export default function PromotionsPage() {
