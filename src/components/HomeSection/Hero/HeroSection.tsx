@@ -74,7 +74,7 @@ const HeroSection = () => {
           animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 50 }}
           transition={{ duration: 0.8, delay: 1 }}
         >
-          A domain odyssey
+          Let’s get you online, Register your domain
         </motion.h1>
 
         {/* Domain Search Section */}
