@@ -13,8 +13,8 @@ interface HeaderBannerProps {
 const HeaderBanner = ({ 
   text = (
     <>
-      Create your site using <span className="font-semibold">AI</span>, included with{' '}
-      <span className="font-semibold">The Cloud Aro Web Hosting</span>
+      Get huge discounts on <span className="font-semibold">Web Hosting Packages</span> with{' '}
+      <span className="font-semibold">FREE SSL</span>
     </>
   ),
   backgroundColor,
