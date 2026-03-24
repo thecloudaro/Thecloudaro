@@ -19,7 +19,6 @@ interface PlanFeature {
   subNote?: string;
   subNoteClassName?: string;
 }
-
 interface PlanConfig {
   name: string;
   subtitle: string;
@@ -161,9 +160,9 @@ const CloudHostingPlans = ({ billing, onCompareClick }: CloudHostingPlansProps) 
   useEffect(() => {
     const fetchPricing = async () => {
       try {
-        const starterProductId = wordpressPlanProductIds.Starter;
-        const turboProductId = wordpressPlanProductIds.Turbo;
-        const supersonicProductId = wordpressPlanProductIds.Supersonic;
+        const starterProductId = wordpressPlanProductIds.wordpressBasic;
+        const turboProductId = wordpressPlanProductIds.wordpressBusiness;
+        const supersonicProductId = wordpressPlanProductIds.wordpressBusinessPro;
 
         if (!starterProductId || !turboProductId || !supersonicProductId) {
           console.error('[CloudHostingPlans] ❌ Product IDs not configured');
@@ -401,8 +400,17 @@ const PlanCard = ({ plan, billing }: PlanCardProps) => {
         href={BUY_NOW_URLS[plan.key]}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-6 inline-block rounded-full bg-white px-5 py-2 text-xs font-semibold text-center transition hover:bg-white/90"
-        style={{ color: "#000" }}
+        className="mt-6 inline-block rounded-full px-5 py-2 text-xs font-semibold text-center transition"
+        style={{ 
+          backgroundColor: 'rgb(var(--cloud-hosting-button-bg))',
+          color: 'rgb(var(--hosting-text-white))'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = 'rgb(var(--cloud-hosting-button-hover))';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = 'rgb(var(--cloud-hosting-button-bg))';
+        }}
       >
         Buy Now
       </a>

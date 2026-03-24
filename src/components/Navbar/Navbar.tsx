@@ -144,7 +144,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
               href="/promotions"
               className="px-4 py-2 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide nav-promotions-gradient border border-white/10"
               style={{
-                color: "#ffffff",
+              color: "hsl(var(--nav-promotions-text))",
               }}
             >
               Promotions

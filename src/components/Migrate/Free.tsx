@@ -29,7 +29,7 @@ const Free = () => {
   return (
     <div 
       className="w-full py-8 sm:py-10 md:py-12 lg:py-14"
-      style={{ backgroundColor: '#17181a' }}
+      style={{ backgroundColor: 'hsl(var(--migrate-panel-bg))' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 md:gap-16 lg:gap-20 xl:gap-24">

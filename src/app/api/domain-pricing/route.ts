@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Unexpected error while looking up domain pricing.";
+      error instanceof Error ? error.message : "Unexpected server error while looking up domain pricing.";
 
     return NextResponse.json(
       { error: message },
@@ -78,4 +78,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-

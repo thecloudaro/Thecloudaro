@@ -15,7 +15,7 @@ const ShootFor = () => {
     <div
       className="relative w-full min-h-[50vh] sm:min-h-[55vh] md:min-h-[60vh] flex items-center justify-center overflow-hidden"
       style={{ 
-        background: 'linear-gradient(to bottom, rgb(17 24 39) 0%, #17181a 20%, #17181a 100%)'
+        background: `linear-gradient(to bottom, rgb(17 24 39) 0%, hsl(var(--roadmap-shootfor-bg)) 20%, hsl(var(--roadmap-shootfor-bg)) 100%)`
       }}
     >
       

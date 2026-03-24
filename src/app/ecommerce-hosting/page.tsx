@@ -72,8 +72,12 @@ export default function HostingPage() {
         buttonOnClick={handleChoosePlanClick}
       />
 
-      {/* Pick Your Hosting Section */}
-      <PickYourHosting ref={pickYourHostingRef} onCompareClick={handleCompareClick} />
+      {/* Pick Your Hosting Section (Ecommerce packages) */}
+      <PickYourHosting
+        ref={pickYourHostingRef}
+        onCompareClick={handleCompareClick}
+        variant="ecommerce"
+      />
 
       {/* Build At Hosting Section */}
       <BuildAtHosting />

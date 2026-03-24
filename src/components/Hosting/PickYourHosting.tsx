@@ -6,17 +6,61 @@ import { Info, Plus } from "lucide-react";
 import ContentHeading from "@/components/ui/content-heading";
 import ContentDescription from "@/components/ui/content-description";
 import HostingPlanControls, { BillingCycle } from "./HostingPlanControls";
-import { hostingPlanProductIds } from "@/config/hosting-plans";
+import {
+  hostingPlanProductIds,
+  businessPlanProductIds,
+  ecommercePlanProductIds,
+} from "@/config/hosting-plans";
 
-// Buy Now URLs for web hosting packages (order product page by plan)
-const BUY_NOW_URLS: Record<string, string> = {
-  Essential: "https://my.thecloudaro.com/order/product?pid=052d137e-08d2-410d-e07b-0495163789e6",
+// Buy Now URLs for hosting packages (order product page by internal plan name)
+// Shared / Web Hosting
+const SHARED_BUY_NOW_URLS: Record<string, string> = {
+  Essential:
+    "https://my.thecloudaro.com/order/product?pid=052d137e-08d2-410d-e07b-0495163789e6",
   Pro: "https://my.thecloudaro.com/order/product?pid=2e071d93-1d5e-4687-100f-046028758396",
-  Supreme: "https://my.thecloudaro.com/order/product?pid=196e02e5-136d-4205-39dc-9429807875d3",
+  Supreme:
+    "https://my.thecloudaro.com/order/product?pid=196e02e5-136d-4205-39dc-9429807875d3",
+};
+
+// Business Hosting (Business Startup / Business Growth / Business Professional)
+const BUSINESS_BUY_NOW_URLS: Record<string, string> = {
+  Essential:
+    "https://my.thecloudaro.com/order/product?pid=7831d635-0d82-4908-538f-049e176259e0", // Business Startup
+  Pro: "https://my.thecloudaro.com/order/product?pid=d5308768-251d-4859-3e3b-747e390921e6", // Business Growth
+  Supreme:
+    "https://my.thecloudaro.com/order/product?pid=2e071d93-1d5e-4685-693a-046028758396", // Business Professional
+};
+
+// Ecommerce Hosting (Ecommerce Starter / Professional / Extreme)
+const ECOMMERCE_BUY_NOW_URLS: Record<string, string> = {
+  Essential:
+    "https://my.thecloudaro.com/order/product?pid=196e02e5-136d-4201-7e2b-9429807875d3", // Ecommerce Starter
+  Pro: "https://my.thecloudaro.com/order/product?pid=052d137e-08d2-4101-670f-0495163789e6", // Ecommerce Professional
+  Supreme:
+    "https://my.thecloudaro.com/order/product?pid=61e50989-73d2-4750-792b-745e610832d7", // Ecommerce Extreme
+};
+
+const getBuyNowUrl = (
+  planName: string,
+  variant: "shared" | "business" | "ecommerce" = "shared"
+): string => {
+  const map =
+    variant === "business"
+      ? BUSINESS_BUY_NOW_URLS
+      : variant === "ecommerce"
+      ? ECOMMERCE_BUY_NOW_URLS
+      : SHARED_BUY_NOW_URLS;
+
+  return (
+    map[planName] ??
+    SHARED_BUY_NOW_URLS[planName] ?? // fallback to shared mapping
+    "#"
+  );
 };
 
 interface PickYourHostingProps {
   onCompareClick?: () => void;
+  variant?: "shared" | "business" | "ecommerce";
 }
 
 interface PricingInfo {
@@ -50,6 +94,7 @@ interface HostingPlan {
     bandwidth: string;
     freeDomain?: string;
     migration?: string;
+    extras?: string[];
   };
 }
 
@@ -78,7 +123,8 @@ const FALLBACK_PRICING: Record<
   },
 };
 
-const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompareClick }, ref) => {
+const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(
+  ({ onCompareClick, variant = "shared" }, ref) => {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
   const [dataCenter, setDataCenter] = useState("US");
   const [selectedAddons, setSelectedAddons] = useState<{
@@ -86,8 +132,8 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
   }>({});
   const [loading, setLoading] = useState(true);
 
-  // Default plans structure (pricing from Upmind API). Content: Packages Web Hosting — Terms Monthly, Yearly and Biennially.
-  const defaultPlans: HostingPlan[] = [
+  // Shared Hosting plans (Packages Web Hosting — Terms Monthly, Yearly and Biennially.)
+  const sharedPlans: HostingPlan[] = [
     {
       name: "Essential",
       displayName: "Shared Essential",
@@ -155,26 +201,200 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
     },
   ];
 
+  // Business Hosting plans (Packages Business Hosting — Terms Monthly, Yearly and Biennially.)
+  // Note: internal plan names stay Essential/Pro/Supreme so pricing integration with Upmind still works.
+  const businessPlans: HostingPlan[] = [
+    {
+      name: "Essential",
+      displayName: "Business Startup",
+      description: "For small teams getting online",
+      pricing: {
+        monthly: undefined,
+        yearly: undefined,
+        biyearly: undefined,
+      },
+      popular: false,
+      features: {
+        storage: "15 GB SSD Storage",
+        websites: "5 websites",
+        ssl: "Free SSL",
+        backup: "Daily Backups x3",
+        mailboxes: "20 Mailboxes",
+        apps: "Softaculous Apps",
+        support: "Standard Support",
+        bandwidth: "10 GB Bandwidth",
+        migration: "Malware Scanning",
+        extras: ["Redis Caching", "Up to 2 GB RAM", "5 Databases"],
+      },
+    },
+    {
+      name: "Pro",
+      displayName: "Business Growth",
+      description: "For growing businesses and stores",
+      pricing: {
+        monthly: undefined,
+        yearly: undefined,
+        biyearly: undefined,
+      },
+      popular: true,
+      features: {
+        storage: "20 GB SSD Storage",
+        websites: "10 websites",
+        ssl: "Free SSL",
+        backup: "Daily Backups x5",
+        mailboxes: "40 Mailboxes",
+        apps: "Softaculous Apps",
+        support: "Standard Support",
+        bandwidth: "Unlimited Bandwidth",
+        freeDomain: "Free Domain (.com, .org, .xyz)",
+        migration: "Malware Scanning",
+        extras: ["Redis Caching", "3 GB RAM", "10 Databases"],
+      },
+    },
+    {
+      name: "Supreme",
+      displayName: "Business Professional",
+      description: "For demanding, high‑traffic projects",
+      pricing: {
+        monthly: undefined,
+        yearly: undefined,
+        biyearly: undefined,
+      },
+      popular: false,
+      features: {
+        storage: "30 GB SSD Storage",
+        websites: "30 websites",
+        ssl: "Free SSL",
+        backup: "Daily Backups x15",
+        mailboxes: "Unlimited Mailboxes",
+        apps: "Softaculous Apps",
+        support: "Premium Support",
+        bandwidth: "Unlimited Bandwidth",
+        freeDomain: "Free Domain (.com, .org, .xyz)",
+        migration: "Malware Scanning",
+        extras: ["Sitelock Included", "Redis Caching", "Load Balancer", "30 Databases"],
+      },
+    },
+  ];
+
+  // Ecommerce Hosting plans (Packages Ecommerce Hosting — Terms Monthly, Yearly and Biennially.)
+  const ecommercePlans: HostingPlan[] = [
+    {
+      name: "Essential",
+      displayName: "Ecommerce Starter",
+      description: "Optimized starter stack for online stores",
+      pricing: {
+        monthly: undefined,
+        yearly: undefined,
+        biyearly: undefined,
+      },
+      popular: false,
+      features: {
+        websites: "1 Website",
+        storage: "20 GB SSD Storage",
+        ssl: "SSL Wildcard",
+        backup: "Weekly Backups x15",
+        mailboxes: "Basic Malware Protection",
+        apps: "Softaculous Installer",
+        support: "Standard Support",
+        bandwidth: "Cloudflare CDN",
+        extras: ["Woo-Commerce Ready Server", "LiteSpeed Cache Enabled"],
+      },
+    },
+    {
+      name: "Pro",
+      displayName: "Ecommerce Professional",
+      description: "Everything in Starter, plus advanced performance",
+      pricing: {
+        monthly: undefined,
+        yearly: undefined,
+        biyearly: undefined,
+      },
+      popular: true,
+      features: {
+        websites: "Everything in Starter, plus",
+        storage: "30 GB SSD Storage",
+        ssl: "SSL Wildcard",
+        backup: "Staging environment",
+        mailboxes: "Image optimization enabled",
+        apps: "Enhanced firewall rules",
+        support: "Premium Support",
+        bandwidth: "Redis Object Cache",
+        extras: ["More CPU / RAM", "One-click restore"],
+      },
+    },
+    {
+      name: "Supreme",
+      displayName: "Ecommerce Extreme",
+      description: "Everything is Professional, plus maximum optimisation",
+      pricing: {
+        monthly: undefined,
+        yearly: undefined,
+        biyearly: undefined,
+      },
+      popular: false,
+      features: {
+        websites: "Everything is Professional, plus",
+        storage: "50 GB SSD Storage",
+        ssl: "SSL Wildcard",
+        backup: "Real-time malware scanning",
+        mailboxes: "Automatic security hardening",
+        apps: "Uptime monitoring",
+        support: "Premium Support",
+        bandwidth: "Dedicated PHP workers",
+        extras: [
+          "Highest CPU & RAM allocation",
+          "Advanced Redis tuning",
+          "Manual performance optimization (monthly)",
+        ],
+      },
+    },
+  ];
+
+  const defaultPlans: HostingPlan[] =
+    variant === "business"
+      ? businessPlans
+      : variant === "ecommerce"
+      ? ecommercePlans
+      : sharedPlans;
+
   const [plans, setPlans] = useState<HostingPlan[]>(defaultPlans);
 
-  // Fetch pricing from API
+  // Fetch pricing from Upmind API based on plan variant (shared, business, ecommerce)
   useEffect(() => {
     const fetchPricing = async () => {
       try {
-        const essentialProductId = hostingPlanProductIds.Essential;
-        const proProductId = hostingPlanProductIds.Pro;
-        const supremeProductId = hostingPlanProductIds.Supreme;
+        const productIds =
+          variant === "business"
+            ? businessPlanProductIds
+            : variant === "ecommerce"
+            ? ecommercePlanProductIds
+            : hostingPlanProductIds;
 
-        if (!essentialProductId || !proProductId || !supremeProductId) {
-          console.error('[PickYourHosting] ❌ Product IDs not configured');
+        const productIdEntries = Object.entries(productIds).filter(
+          ([planName, productId]) =>
+            planName.trim().length > 0 &&
+            typeof productId === "string" &&
+            productId.trim().length > 0
+        );
+
+        if (productIdEntries.length === 0) {
+          console.error("[PickYourHosting] ❌ Product IDs not configured");
           setLoading(false);
           return;
         }
 
-        console.log('[PickYourHosting] 🚀 Fetching pricing from Upmind API...');
+        const idsParam = encodeURIComponent(
+          JSON.stringify(Object.fromEntries(productIdEntries))
+        );
+
+        console.log("[PickYourHosting] 🚀 Fetching pricing from Upmind API...", {
+          variant,
+          planCount: productIdEntries.length,
+        });
 
         const response = await fetch(
-          `/api/hosting-pricing?essential=${essentialProductId}&pro=${proProductId}&supreme=${supremeProductId}`,
+          `/api/hosting-pricing?ids=${idsParam}`,
           {
             method: 'GET',
             headers: {
@@ -454,7 +674,7 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
     };
 
     fetchPricing();
-  }, []);
+  }, [variant]);
 
   const getPricing = (plan: (typeof plans)[0]) => {
     return plan.pricing[billingCycle];
@@ -692,6 +912,15 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
                           {plan.features.migration}
                         </div>
                       )}
+                      {plan.features.extras &&
+                        plan.features.extras.map((extra) => (
+                          <div
+                            key={extra}
+                            className="text-[rgb(var(--hosting-choose-text-gray-300))]"
+                          >
+                            {extra}
+                          </div>
+                        ))}
                     </div>
 
                     <div className="border-t border-[rgb(var(--hosting-choose-border-gray-800))] mt-15" />
@@ -800,7 +1029,7 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(({ onCompa
                     {/* Buy Now */}
                     <div>
                       <a
-                        href={BUY_NOW_URLS[plan.name] ?? "#"}
+                        href={getBuyNowUrl(plan.name, variant)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block w-full py-3 rounded-full text-sm font-semibold transition-all text-center"

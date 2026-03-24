@@ -117,7 +117,7 @@ export default function UniversalDropdown({
       sections: [
         { title: "Domains", desc: "Start your story with the right domain name.", href: "/domain" },
         { title: "Domain Name Search", desc: "Find the perfect domain name.", href: "/domain-search" },
-        { title: "Domain Pricing", desc: "Check the latest domain prices.", href: "/domain" },
+        { title: "Domain Pricing", desc: "Check the latest domain prices.", href: "/domain-search?tab=pricing" },
         { title: "Transfer Domains", desc: "Move your domains easily.", href: "/domain/transfer" }
       ]
     },
@@ -293,7 +293,7 @@ export default function UniversalDropdown({
             href="/promotions"
             onClick={onClose}
             className="w-full block rounded-full px-5 py-3 text-center text-xs font-semibold uppercase tracking-wide nav-promotions-gradient border border-white/10"
-            style={{ color: "#ffffff" }}
+            style={{ color: "hsl(var(--nav-promotions-text))" }}
           >
             Promotions
           </Link>

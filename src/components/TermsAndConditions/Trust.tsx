@@ -14,7 +14,7 @@ const Trust = () => {
   return (
     <div 
       className="relative w-full min-h-[50vh] sm:min-h-[60vh] flex items-center justify-center overflow-hidden"
-      style={{ backgroundColor: '#1a1a1a' }}
+      style={{ backgroundColor: 'hsl(var(--trust-section-bg))' }}
     >
       {/* Blue Vertical Gradient on Right Side */}
       <div className="absolute inset-0 pointer-events-none">

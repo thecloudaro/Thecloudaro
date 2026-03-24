@@ -6,6 +6,7 @@ import { ChevronDown } from "lucide-react";
 
 type ValidationType = "All" | "DV" | "OV" | "EV";
 type DomainType = "All" | "Single" | "Multi" | "Wildcard";
+type ProviderType = "All" | "Digicert" | "GeoTrust" | "Sectigo" | "Thawte" | "PerfectSSL";
 type Duration = "1" | "2" | "3" | "4" | "5";
 
 interface SSLProduct {
@@ -13,6 +14,7 @@ interface SSLProduct {
   name: string;
   validation: string;
   domains: string;
+  provider: string;
   pricing: {
     [duration: string]: number | null;
   };
@@ -27,6 +29,7 @@ const FALLBACK_PRODUCTS: SSLProduct[] = [
     name: "Standard DV SSL",
     validation: "DV",
     domains: "Single",
+    provider: "PerfectSSL",
     pricing: {
       "1": 19.99,
       "2": 34.99,
@@ -38,6 +41,7 @@ const FALLBACK_PRODUCTS: SSLProduct[] = [
     name: "Wildcard DV SSL",
     validation: "DV",
     domains: "Wildcard",
+    provider: "PerfectSSL",
     pricing: {
       "1": 79.99,
       "2": 139.99,
@@ -49,6 +53,7 @@ const FALLBACK_PRODUCTS: SSLProduct[] = [
     name: "Business OV SSL",
     validation: "OV",
     domains: "Single",
+    provider: "PerfectSSL",
     pricing: {
       "1": 49.99,
       "2": 89.99,
@@ -60,6 +65,7 @@ const FALLBACK_PRODUCTS: SSLProduct[] = [
     name: "Multi‑Domain OV SSL",
     validation: "OV",
     domains: "Multi",
+    provider: "PerfectSSL",
     pricing: {
       "1": 99.99,
       "2": 179.99,
@@ -71,6 +77,7 @@ const FALLBACK_PRODUCTS: SSLProduct[] = [
     name: "Advanced EV SSL",
     validation: "EV",
     domains: "Single",
+    provider: "PerfectSSL",
     pricing: {
       "1": 129.99,
       "2": 229.99,
@@ -82,6 +89,7 @@ const FALLBACK_PRODUCTS: SSLProduct[] = [
 const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
   const [validationFilter, setValidationFilter] = useState<ValidationType>("All");
   const [domainFilter, setDomainFilter] = useState<DomainType>("All");
+  const [providerFilter, setProviderFilter] = useState<ProviderType>("All");
   const [selectedDuration, setSelectedDuration] = useState<Duration>("1");
   const [products, setProducts] = useState<SSLProduct[]>([]);
   const [loading, setLoading] = useState(true);
@@ -101,24 +109,27 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
           throw new Error(data.error || 'Failed to fetch SSL products');
         }
 
-        // Convert products object to array
+        // Convert products object to array – show all fetched from Upmind (e.g. 13 SSL cards)
         const productsArray: SSLProduct[] = Object.entries(data.products || {}).map(
           ([id, product]: [string, any]) => ({
             id,
             name: product.name,
             validation: product.validation,
             domains: product.domains,
+            provider: product.provider || "Other",
             pricing: product.pricing || {},
           })
         );
 
-        // Ensure at least 5 products by adding fallbacks when needed
-        if (productsArray.length >= 5) {
+        console.log(`✅ [SSLFiltersAndCards] Received ${productsArray.length} SSL products from API`);
+        console.log(`📋 [SSLFiltersAndCards] Product names:`, productsArray.map(p => p.name).join(', '));
+
+        // Use API results only; fallbacks only when API returned no products (e.g. error/empty)
+        if (productsArray.length > 0) {
           setProducts(productsArray);
         } else {
-          const needed = 5 - productsArray.length;
-          const fallbackSlice = FALLBACK_PRODUCTS.slice(0, needed);
-          setProducts([...productsArray, ...fallbackSlice]);
+          console.warn('⚠️ [SSLFiltersAndCards] No products from API, using fallbacks');
+          setProducts(FALLBACK_PRODUCTS);
         }
       } catch (err) {
         console.error('Error fetching SSL products:', err);
@@ -138,9 +149,14 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
         validationFilter === "All" || product.validation === validationFilter;
       const matchesDomain =
         domainFilter === "All" || product.domains === domainFilter;
-      return matchesValidation && matchesDomain;
+      const matchesProvider =
+        providerFilter === "All" ||
+        (product.provider &&
+          product.provider.toLowerCase() === providerFilter.toLowerCase());
+
+      return matchesValidation && matchesDomain && matchesProvider;
     });
-  }, [products, validationFilter, domainFilter]);
+  }, [products, validationFilter, domainFilter, providerFilter]);
 
   // Get price for selected duration
   const getPrice = (product: SSLProduct): number | null => {
@@ -223,6 +239,34 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
                 <option value="Single">Single</option>
                 <option value="Multi">Multi</option>
                 <option value="Wildcard">Wildcard</option>
+              </select>
+              <ChevronDown
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-slate-400"
+              />
+            </div>
+
+            {/* Provider Filter */}
+            <div className="relative">
+              <label className="sr-only" htmlFor="provider-filter">
+                SSL Provider
+              </label>
+              <select
+                id="provider-filter"
+                value={providerFilter}
+                onChange={(e) => setProviderFilter(e.target.value as ProviderType)}
+                className="appearance-none rounded-lg border border-slate-700 bg-slate-900 px-4 py-2.5 pr-10 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                style={{
+                  backgroundColor: "rgb(15, 23, 42)",
+                  borderColor: "rgb(51, 65, 85)",
+                  color: "rgb(248, 250, 252)",
+                }}
+              >
+                <option value="All">All providers</option>
+                <option value="Digicert">Digicert</option>
+                <option value="GeoTrust">GeoTrust</option>
+                <option value="Sectigo">Sectigo</option>
+                <option value="Thawte">Thawte</option>
+                <option value="PerfectSSL">PerfectSSL</option>
               </select>
               <ChevronDown
                 className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-slate-400"

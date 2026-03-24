@@ -88,7 +88,7 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
             className="fixed inset-0 z-[10001] flex items-center justify-center px-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative w-full max-w-sm bg-[#1a1a1a] rounded-lg shadow-2xl border border-gray-800 p-6">
+            <div className="relative w-full max-w-sm bg-[rgb(var(--login-modal-bg))] rounded-lg shadow-2xl border border-gray-800 p-6">
               {/* Close Button */}
               <button
                 onClick={onClose}
@@ -114,7 +114,7 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Enter your username"
-                    className="w-full px-3 py-2.5 text-sm bg-[#2a2a2a] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full px-3 py-2.5 text-sm bg-[rgb(var(--login-modal-input-bg))] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
                   />
                 </div>
 
@@ -129,7 +129,7 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter your password"
-                      className="w-full px-3 py-2.5 text-sm bg-[#2a2a2a] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors pr-10"
+                      className="w-full px-3 py-2.5 text-sm bg-[rgb(var(--login-modal-input-bg))] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors pr-10"
                     />
                     <button
                       type="button"
@@ -166,7 +166,7 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
                 {/* Log in with passkey button */}
                 <button
                   type="button"
-                  className="w-full py-2.5 text-sm bg-[#2a2a2a] border border-gray-700 hover:border-gray-600 text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
+                  className="w-full py-2.5 text-sm bg-[rgb(var(--login-modal-input-bg))] border border-gray-700 hover:border-gray-600 text-white font-medium rounded-lg transition-colors flex items-center justifycenter gap-2"
                 >
                   <Key className="w-3.5 h-3.5" />
                   Log in with passkey

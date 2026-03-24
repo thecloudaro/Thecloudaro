@@ -1,5 +1,7 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Search, CheckCircle, XCircle, Star } from "lucide-react";
@@ -25,9 +27,10 @@ interface TldItem {
 }
 
 const DomainSearchPage = () => {
+  const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<DomainResult[]>([]);
-  const [activeTab, setActiveTab] = useState("domains");
+  const [activeTab, setActiveTab] = useState(searchParams.get('tab') === 'pricing' ? 'pricing' : 'domains');
   const [isSearching, setIsSearching] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
   const [widgetLoaded, setWidgetLoaded] = useState(false);
@@ -35,6 +38,14 @@ const DomainSearchPage = () => {
   const [domainNames, setDomainNames] = useState<TldItem[]>([]);
   const [domainNamesLoading, setDomainNamesLoading] = useState(false);
   const [domainNamesError, setDomainNamesError] = useState<string | null>(null);
+  const [isLocalhost, setIsLocalhost] = useState(false);
+
+  useEffect(() => {
+    setIsLocalhost(
+      typeof window !== "undefined" &&
+        (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+    );
+  }, []);
 
   // Load Upmind Domain Availability Checker widget
   useEffect(() => {
@@ -428,8 +439,8 @@ const DomainSearchPage = () => {
                   )}
                 </div>
 
-                {/* Localhost notice: widget needs a registered domain in Upmind */}
-                {typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") && (
+                {/* Localhost notice: only show after mount to avoid hydration mismatch */}
+                {isLocalhost && (
                   <div
                     className="rounded-xl p-4 flex items-center gap-3"
                     style={{
@@ -466,11 +477,7 @@ const DomainSearchPage = () => {
                         </p>
                         <div className="bg-black/30 rounded p-2 mb-2">
                           <code className="text-xs" style={{ color: 'rgb(var(--domain-search-text-muted))' }}>
-                            {typeof window !== 'undefined' && window.location.hostname === 'localhost' 
-                              ? 'localhost (Not Supported)'
-                              : typeof window !== 'undefined' 
-                                ? window.location.hostname 
-                                : 'Unknown Domain'}
+                            {isLocalhost ? 'localhost (Not Supported)' : typeof window !== 'undefined' ? window.location.hostname : 'Unknown Domain'}
                           </code>
                         </div>
                         <p className="text-xs" style={{ color: 'rgb(var(--domain-search-text-muted))' }}>
@@ -522,120 +529,115 @@ const DomainSearchPage = () => {
                   </div>
                 )}
                 
-                {/* Upmind Widget */}
-                {widgetLoaded && orderConfigUrl ? (
-                  <div className="rounded-xl p-6" style={{ 
-                    backgroundColor: 'rgba(var(--domain-search-card-bg))',
-                    border: '1px solid rgb(var(--domain-search-card-border))'
-                  }}>
+                {/* Upmind Widget: hidden so only our UI is visible (same design system) */}
+                {widgetLoaded && orderConfigUrl && (
+                  <div
+                    className="sr-only absolute left-[-9999px] h-0 overflow-hidden"
+                    aria-hidden
+                  >
                     {/* @ts-ignore - Upmind custom element */}
                     <upm-dac
                       order-config-url={orderConfigUrl}
                       currency-code={currencyCode}
                       onError={(e: any) => {
                         console.error('❌ [DomainSearchPage] Widget onError callback:', e);
-                        setWidgetError('Widget failed to load. Using fallback search.');
+                        setWidgetError('Widget failed to load. Using search below.');
                       }}
                     />
-                    {/* Widget error monitoring is handled via useEffect */}
-                  </div>
-                ) : (
-                  <div 
-                    className="rounded-full p-5 flex items-center space-x-3"
-                    style={{ 
-                      backgroundColor: 'rgba(var(--domain-search-info-bg))',
-                      border: '1px solid rgba(var(--domain-search-info-border))'
-                    }}
-                  >
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgb(var(--domain-search-info-icon-bg))' }}>
-                      <div className="w-4 h-4 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: 'rgb(var(--domain-search-info-icon-text))' }}></div>
-                    </div>
-                    <span className="text-base font-semibold" style={{ color: 'rgb(var(--domain-search-info-text))' }}>
-                      {!orderConfigUrl ? 'Configuring domain search widget...' : 'Loading Upmind domain search widget...'}
-                    </span>
                   </div>
                 )}
 
-                {/* Fallback: Custom Search (always available as alternative) */}
-                <div className="w-full space-y-4 pt-4 border-t" style={{ borderColor: 'rgba(var(--domain-search-info-border))' }}>
-                  <p className="text-sm font-medium" style={{ color: 'rgb(var(--domain-search-text))' }}>
-                    {widgetError ? 'Alternative: Use custom search below' : 'Or use custom search:'}
-                  </p>
-                    <div className="flex gap-3">
-                      <div className="relative flex-1">
-                        <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{ color: 'rgb(var(--domain-search-input-icon))' }} />
-                        <input
-                          type="text"
-                          value={searchTerm}
-                          onChange={(e) => setSearchTerm(e.target.value)}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter") {
-                              handleSearch(searchTerm);
-                            }
-                          }}
-                          placeholder="Search for a domain name (e.g., example)..."
-                          className="w-full pl-12 pr-4 py-5 text-base bg-transparent border rounded-full focus:outline-none hover:transition-all duration-300 placeholder:text-[rgb(var(--domain-search-input-placeholder))]"
-                          style={{ 
-                            borderColor: 'rgb(var(--domain-search-input-border))',
-                            color: 'rgb(var(--domain-search-input-text))'
-                          }}
-                          onFocus={(e) => {
-                            e.currentTarget.style.borderColor = 'rgb(var(--domain-search-input-border-focus))';
-                            e.currentTarget.style.boxShadow = `0 0 0 1px rgba(var(--domain-search-input-focus-ring))`;
-                          }}
-                          onBlur={(e) => {
-                            e.currentTarget.style.borderColor = 'rgb(var(--domain-search-input-border))';
-                            e.currentTarget.style.boxShadow = 'none';
-                          }}
-                        />
-                      </div>
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => handleSearch(searchTerm || 'example')}
-                        disabled={isSearching}
-                        className="px-8 py-5 rounded-full font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                        style={{ 
-                          backgroundColor: 'rgb(var(--domain-search-button-bg))',
-                          color: 'rgb(var(--domain-search-button-text))'
-                        }}
-                        onMouseEnter={(e) => {
-                          if (!isSearching) {
-                            e.currentTarget.style.backgroundColor = 'rgb(var(--domain-search-button-hover))';
+                {/* Primary domain search – same UI as rest of page */}
+                <div
+                  className="w-full space-y-4 rounded-xl p-6"
+                  style={{
+                    backgroundColor: 'rgba(var(--domain-search-card-bg))',
+                    border: '1px solid rgb(var(--domain-search-card-border))',
+                  }}
+                >
+                  <h3 className="text-base font-semibold mb-2" style={{ color: 'rgb(var(--domain-search-heading))' }}>
+                    Search for a domain
+                  </h3>
+                  <div className="flex gap-3">
+                    <div className="relative flex-1">
+                      <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{ color: 'rgb(var(--domain-search-input-icon))' }} />
+                      <input
+                        type="text"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            handleSearch(searchTerm);
                           }
                         }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgb(var(--domain-search-button-bg))';
+                        placeholder="Search for a domain name (e.g., example)..."
+                        className="w-full pl-12 pr-4 py-5 text-base bg-transparent border rounded-full focus:outline-none hover:transition-all duration-300 placeholder:text-[rgb(var(--domain-search-input-placeholder))]"
+                        style={{
+                          borderColor: 'rgb(var(--domain-search-input-border))',
+                          color: 'rgb(var(--domain-search-input-text))',
                         }}
-                      >
-                        {isSearching ? "Searching..." : "Search"}
-                      </motion.button>
+                        onFocus={(e) => {
+                          e.currentTarget.style.borderColor = 'rgb(var(--domain-search-input-border-focus))';
+                          e.currentTarget.style.boxShadow = `0 0 0 1px rgba(var(--domain-search-input-focus-ring))`;
+                        }}
+                        onBlur={(e) => {
+                          e.currentTarget.style.borderColor = 'rgb(var(--domain-search-input-border))';
+                          e.currentTarget.style.boxShadow = 'none';
+                        }}
+                      />
                     </div>
-                    
-                    {/* Show search results if available */}
-                    {searchError && (
-                      <div className="mt-4 rounded-lg p-4" style={{ 
-                        backgroundColor: 'rgba(var(--domain-search-info-bg))',
-                        border: '1px solid rgba(var(--domain-search-info-border))'
-                      }}>
-                        <div className="flex items-center space-x-2">
-                          <XCircle className="w-4 h-4" style={{ color: 'rgb(var(--domain-search-unavailable-icon))' }} />
-                          <span className="text-sm" style={{ color: 'rgb(var(--domain-search-info-text))' }}>{searchError}</span>
-                        </div>
-                      </div>
-                    )}
-                    
-                    {isSearching && (
-                      <div className="mt-4 rounded-lg p-4 flex items-center space-x-3" style={{ 
-                        backgroundColor: 'rgba(var(--domain-search-info-bg))',
-                        border: '1px solid rgba(var(--domain-search-info-border))'
-                      }}>
-                        <div className="w-4 h-4 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: 'rgb(var(--domain-search-info-icon-text))' }}></div>
-                        <span className="text-sm" style={{ color: 'rgb(var(--domain-search-info-text))' }}>Searching...</span>
-                      </div>
-                    )}
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => handleSearch(searchTerm || 'example')}
+                      disabled={isSearching}
+                      className="px-8 py-5 rounded-full font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                      style={{
+                        backgroundColor: 'rgb(var(--domain-search-button-bg))',
+                        color: 'rgb(var(--domain-search-button-text))',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!isSearching) {
+                          e.currentTarget.style.backgroundColor = 'rgb(var(--domain-search-button-hover))';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgb(var(--domain-search-button-bg))';
+                      }}
+                    >
+                      {isSearching ? "Searching..." : "Search"}
+                    </motion.button>
                   </div>
+
+                  {searchError && (
+                    <div
+                      className="mt-4 rounded-lg p-4"
+                      style={{
+                        backgroundColor: 'rgba(var(--domain-search-info-bg))',
+                        border: '1px solid rgba(var(--domain-search-info-border))',
+                      }}
+                    >
+                      <div className="flex items-center space-x-2">
+                        <XCircle className="w-4 h-4" style={{ color: 'rgb(var(--domain-search-unavailable-icon))' }} />
+                        <span className="text-sm" style={{ color: 'rgb(var(--domain-search-info-text))' }}>{searchError}</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {isSearching && (
+                    <div
+                      className="mt-4 rounded-lg p-4 flex items-center space-x-3"
+                      style={{
+                        backgroundColor: 'rgba(var(--domain-search-info-bg))',
+                        border: '1px solid rgba(var(--domain-search-info-border))',
+                      }}
+                    >
+                      <div className="w-4 h-4 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: 'rgb(var(--domain-search-info-icon-text))' }}></div>
+                      <span className="text-sm" style={{ color: 'rgb(var(--domain-search-info-text))' }}>Searching...</span>
+                    </div>
+                  )}
                 </div>
+              </div>
             )}
 
           </motion.div>
@@ -749,13 +751,16 @@ const DomainSearchPage = () => {
                     </div>
 
                     {result.available && (
-                      <motion.button
+                      <motion.a
+                        href={`${orderConfigUrl || 'https://my.thecloudaro.com/order/product'}${(orderConfigUrl || '').includes('?') ? '&' : '?'}domain=${encodeURIComponent(result.name)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="w-full py-3 rounded-lg font-medium transition-all duration-300"
-                        style={{ 
+                        className="w-full py-3 rounded-lg font-medium transition-all duration-300 block text-center"
+                        style={{
                           backgroundColor: 'rgb(var(--domain-search-button-bg))',
-                          color: 'rgb(var(--domain-search-button-text))'
+                          color: 'rgb(var(--domain-search-button-text))',
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.backgroundColor = 'rgb(var(--domain-search-button-hover))';
@@ -764,8 +769,8 @@ const DomainSearchPage = () => {
                           e.currentTarget.style.backgroundColor = 'rgb(var(--domain-search-button-bg))';
                         }}
                       >
-                        Add to Cart
-                      </motion.button>
+                        Buy Now
+                      </motion.a>
                     )}
                   </motion.div>
                 ))}

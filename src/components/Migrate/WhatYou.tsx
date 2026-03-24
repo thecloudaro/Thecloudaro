@@ -30,7 +30,7 @@ const WhatYou = () => {
   return (
     <div 
       className="relative w-full flex items-center justify-center overflow-hidden"
-      style={{ backgroundColor: '#17181a' }}
+      style={{ backgroundColor: 'hsl(var(--migrate-panel-bg))' }}
     >
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pb-12 sm:pb-16 md:pb-20 lg:pb-24">

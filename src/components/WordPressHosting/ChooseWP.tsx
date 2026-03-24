@@ -34,7 +34,7 @@ interface FeatureRow {
 const plans: PlanConfig[] = [
   {
     key: "starter",
-    name: "Starter",
+    name: "WordPress Basic",
     pricing: {
       monthly: 5.88,
       yearly: 4.88
@@ -42,7 +42,7 @@ const plans: PlanConfig[] = [
   },
   {
     key: "turbo",
-    name: "Turbo",
+    name: "WordPress Business",
     pricing: {
       monthly: 9.88,
       yearly: 7.88
@@ -50,7 +50,7 @@ const plans: PlanConfig[] = [
   },
   {
     key: "supersonic",
-    name: "Supersonic",
+    name: "WordPress Business Pro",
     pricing: {
       monthly: 12.88,
       yearly: 9.88

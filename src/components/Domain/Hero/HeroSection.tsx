@@ -151,9 +151,9 @@ export default function DomainHeroSection() {
 
             {/* Error / Result */}
             {searchError && (
-              <p className="text-sm sm:text-base md:text-lg" style={{ color: "#fca5a5" }}>
-                {searchError}
-              </p>
+            <p className="text-sm sm:text-base md:text-lg" style={{ color: "hsl(var(--domain-hero-error))" }}>
+              {searchError}
+            </p>
             )}
 
             {pricingResult && (

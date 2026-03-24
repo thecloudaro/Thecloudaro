@@ -495,6 +495,25 @@
     
     /* Business Email Page Colors */
     --business-email-page-bg: 5 2 17; /* #050211 - for rgb() */
+
+    /* Navbar Promotions button text */
+    --nav-promotions-text: 0 0% 100%; /* white */
+
+    /* Domain hero error text */
+    --domain-hero-error: 0 84% 63%; /* approx #fca5a5 */
+
+    /* Migrate page dark background panels */
+    --migrate-panel-bg: 0 0% 9%; /* approx #17181a */
+
+    /* Trust section background */
+    --trust-section-bg: 0 0% 10%; /* approx #1a1a1a */
+
+    /* Roadmap ShootFor background dark section */
+    --roadmap-shootfor-bg: 210 20% 7%; /* matches hero dark bg */
+
+    /* Login Modal Colors */
+    --login-modal-bg: 26 26 26; /* #1a1a1a - for rgb() */
+    --login-modal-input-bg: 42 42 42; /* #2a2a2a - for rgb() */
     
     /* BusinessHero Component Colors */
     --business-hero-gradient-from: 122, 59, 255, 0.8; /* #7a3bff/80 - for rgba() */
