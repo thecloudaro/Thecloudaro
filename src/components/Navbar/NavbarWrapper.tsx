@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 import HeaderBanner from "@/components/HeaderBanner";
@@ -7,11 +8,17 @@ import { DropdownProvider, useDropdown } from "./DropdownContext";
 
   const NavbarContent = () => {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const isHomepage = pathname === '/';
   const isVirtualMachine = pathname === '/virtual-machine';
   const { activeDropdown } = useDropdown();
   
-  const hasHeaderBanner = !activeDropdown && (isHomepage || isVirtualMachine);
+  // Render banner only on client mount to avoid server/client markup mismatch.
+  const hasHeaderBanner = mounted && !activeDropdown && (isHomepage || isVirtualMachine);
 
   // HeaderBanner content for virtual-machine page
   const virtualMachineBannerText = (

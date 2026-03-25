@@ -152,7 +152,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
           </div>
 
           <div className="hidden md:flex items-center space-x-3">
-            {[ShoppingCart, User].map((Icon, i) => {
+            {(isHomepage ? [User] : [ShoppingCart, User]).map((Icon, i) => {
               const isCart = Icon === ShoppingCart;
               const isUser = Icon === User;
               return (
@@ -220,7 +220,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
             </div>
 
             <div className="flex justify-center space-x-3">
-              {[ShoppingCart, User].map((Icon, i) => {
+              {(isHomepage ? [User] : [ShoppingCart, User]).map((Icon, i) => {
                 const isCart = Icon === ShoppingCart;
                 const isUser = Icon === User;
                 return (

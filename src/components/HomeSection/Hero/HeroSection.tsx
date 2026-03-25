@@ -153,8 +153,8 @@ const HeroSection = () => {
 >
   {[
     { label: ".com only $8.88", variant: "domain-pill--com", isCom: true },
-    { label: ".net only $11.20", variant: "domain-pill--purple", isCom: false },
-    { label: ".org only $9.88", variant: "domain-pill--purple", isCom: false },
+    { label: ".net only $11.20", variant: "domain-pill--com", isCom: false },
+    { label: ".org only $9.88", variant: "domain-pill--com", isCom: false },
   ].map((item, idx) => (
     item.isCom ? (
       <motion.div
@@ -167,20 +167,11 @@ const HeroSection = () => {
         }}
         transition={{ duration: 0.5, delay: 1.8 }}
       >
-        <motion.span
+        <span
           className="com-pill-inner block px-3 sm:px-3.5 md:px-4 py-1 sm:py-1.5 md:py-1.5 rounded-full text-[11px] sm:text-xs md:text-sm font-medium text-white cursor-pointer"
-          animate={{
-            opacity: [1, 0.88, 1],
-            y: [0, -4, 0],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            repeatType: 'reverse',
-          }}
         >
           {item.label}
-        </motion.span>
+        </span>
       </motion.div>
     ) : (
       <div

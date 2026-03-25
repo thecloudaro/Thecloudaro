@@ -1,18 +1,33 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const DashboardPage = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
     const redirectToUpmindDashboard = async () => {
-      // Check if user is logged in
-      const accessToken = localStorage.getItem('access_token');
-      const clientId = localStorage.getItem('client_id');
+      const accessTokenFromQuery = searchParams.get('access_token');
+      const clientIdFromQuery = searchParams.get('client_id');
+
+      // Check if user is logged in (prefer query params if provided)
+      const accessToken =
+        accessTokenFromQuery ?? localStorage.getItem('access_token');
+      const clientId =
+        clientIdFromQuery ?? localStorage.getItem('client_id');
+
+      // Persist tokens for this browser session so user won't be forced
+      // back to /login on subsequent redirects.
+      if (accessTokenFromQuery) {
+        localStorage.setItem('access_token', accessTokenFromQuery);
+      }
+      if (clientIdFromQuery) {
+        localStorage.setItem('client_id', clientIdFromQuery);
+      }
 
       if (!accessToken || !clientId) {
         // Redirect to login if not authenticated
@@ -20,13 +35,17 @@ const DashboardPage = () => {
         return;
       }
 
-      // Direct redirect to dashboard
-      const upmindClientUrl = 'https://my.thecloudaro.com/dashboard/';
-      window.location.href = `${upmindClientUrl}?access_token=${accessToken}&client_id=${clientId}`;
+      // Direct redirect to Upmind client dashboard.
+      // IMPORTANT: tokens are not always URL-safe -> encode them.
+      const upmindClientUrl = 'https://my.thecloudaro.com/dashboard';
+      const qs = `access_token=${encodeURIComponent(
+        accessToken
+      )}&client_id=${encodeURIComponent(clientId)}`;
+      window.location.href = `${upmindClientUrl}/?${qs}`;
     };
 
     redirectToUpmindDashboard();
-  }, [router]);
+  }, [router, searchParams]);
 
   if (error) {
     return (
