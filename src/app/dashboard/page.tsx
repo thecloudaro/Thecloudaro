@@ -1,19 +1,19 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const DashboardPage = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
     const redirectToUpmindDashboard = async () => {
-      const accessTokenFromQuery = searchParams.get('access_token');
-      const clientIdFromQuery = searchParams.get('client_id');
-      const actorIdFromQuery = searchParams.get('actor_id');
+      const urlParams = new URLSearchParams(window.location.search);
+      const accessTokenFromQuery = urlParams.get('access_token');
+      const clientIdFromQuery = urlParams.get('client_id');
+      const actorIdFromQuery = urlParams.get('actor_id');
 
       // Check if user is logged in (prefer query params if provided)
       const accessToken =
@@ -62,7 +62,7 @@ const DashboardPage = () => {
     };
 
     redirectToUpmindDashboard();
-  }, [router, searchParams]);
+  }, [router]);
 
   if (error) {
     return (

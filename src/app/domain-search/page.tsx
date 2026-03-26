@@ -1,7 +1,5 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Search, CheckCircle, XCircle, Star } from "lucide-react";
@@ -27,10 +25,10 @@ interface TldItem {
 }
 
 const DomainSearchPage = () => {
-  const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<DomainResult[]>([]);
-  const [activeTab, setActiveTab] = useState(searchParams.get('tab') === 'pricing' ? 'pricing' : 'domains');
+  type ActiveTab = "domains" | "pricing";
+  const [activeTab, setActiveTab] = useState<ActiveTab>("domains");
   const [isSearching, setIsSearching] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
   const [widgetLoaded, setWidgetLoaded] = useState(false);
@@ -45,6 +43,12 @@ const DomainSearchPage = () => {
       typeof window !== "undefined" &&
         (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
     );
+  }, []);
+
+  // Read `tab` query param on client only (avoids useSearchParams suspense requirement).
+  useEffect(() => {
+    const tab = new URLSearchParams(window.location.search).get("tab");
+    if (tab === "pricing") setActiveTab("pricing");
   }, []);
 
   // Load Upmind Domain Availability Checker widget
