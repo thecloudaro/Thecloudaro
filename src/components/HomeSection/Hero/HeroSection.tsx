@@ -128,14 +128,15 @@ const HeroSection = () => {
               <button 
                 className="text-white px-3 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-xs sm:text-base relative"
                 style={{
-                  background: `hsl(var(--header-banner-gradient-1))`,
-                  border: `1px solid hsl(var(--header-banner-gradient-3) / 0.4)`,
+                  background: 'rgb(37 99 235)',
+                  border: '1px solid rgba(37, 99, 235, 0.45)',
                 }}
               >
                 <span 
                   className="absolute inset-0 rounded-full opacity-40"
                   style={{
-                    background: `radial-gradient(circle at top, hsl(var(--header-banner-gradient-3)) 0%, transparent 70%)`,
+                    background:
+                      'radial-gradient(circle at top, rgba(59, 130, 246, 0.7) 0%, transparent 70%)',
                   }}
                 />
                 <span className="relative z-10">Search</span>

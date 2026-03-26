@@ -4,6 +4,7 @@ interface UpmindLoginResponse {
   access_token?: string;
   refresh_token?: string;
   expires_in?: number;
+  client_id?: string;
   actor_id?: string;
   actor_type?: string;
   second_factor_required?: boolean;
@@ -63,13 +64,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const resolvedClientId = responseData.client_id ?? responseData.actor_id;
+
     // 🔹 Successful login
     return NextResponse.json(
       {
         access_token: responseData.access_token,
         refresh_token: responseData.refresh_token,
         expires_in: responseData.expires_in,
-        client_id: responseData.actor_id,
+        client_id: resolvedClientId,
+        actor_id: responseData.actor_id,
         actor_type: responseData.actor_type,
         second_factor_required: responseData.second_factor_required,
       },

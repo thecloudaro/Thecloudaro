@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { X, Eye, EyeOff, Key } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useSignup } from '@/components/Signup/SignupContext';
 
 interface LoginModalProps {
@@ -13,6 +14,7 @@ interface LoginModalProps {
 
 const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
   const { openSignup } = useSignup();
+  const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -37,17 +39,23 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
         // 🔹 Store token
         localStorage.setItem('access_token', data.access_token);
         localStorage.setItem('refresh_token', data.refresh_token);
-        localStorage.setItem('client_id', data.client_id);
+        if (data.client_id) {
+          localStorage.setItem('client_id', data.client_id);
+        }
+        if (data.actor_id) {
+          localStorage.setItem('actor_id', data.actor_id);
+        }
 
         // Close modal
         onClose();
 
-        // 🔹 Direct redirect to dashboard
-        const dashboardUrl = `https://my.thecloudaro.com/dashboard/?access_token=${encodeURIComponent(data.access_token)}&client_id=${encodeURIComponent(data.client_id)}`;
-        console.log('Redirecting to dashboard:', dashboardUrl);
-        
-        // Immediate redirect to dashboard
-        window.location.href = dashboardUrl;
+        // 🔹 Always route through local dashboard bridge first.
+        // It persists tokens and forwards to client dashboard reliably.
+        router.push(
+          `/dashboard?access_token=${encodeURIComponent(
+            data.access_token
+          )}&client_id=${encodeURIComponent(data.client_id)}`
+        );
       } else {
         setError(data.message || 'Login failed');
         setLoading(false);

@@ -13,12 +13,16 @@ const DashboardPage = () => {
     const redirectToUpmindDashboard = async () => {
       const accessTokenFromQuery = searchParams.get('access_token');
       const clientIdFromQuery = searchParams.get('client_id');
+      const actorIdFromQuery = searchParams.get('actor_id');
 
       // Check if user is logged in (prefer query params if provided)
       const accessToken =
         accessTokenFromQuery ?? localStorage.getItem('access_token');
       const clientId =
-        clientIdFromQuery ?? localStorage.getItem('client_id');
+        clientIdFromQuery ??
+        actorIdFromQuery ??
+        localStorage.getItem('client_id') ??
+        localStorage.getItem('actor_id');
 
       // Persist tokens for this browser session so user won't be forced
       // back to /login on subsequent redirects.
@@ -28,8 +32,14 @@ const DashboardPage = () => {
       if (clientIdFromQuery) {
         localStorage.setItem('client_id', clientIdFromQuery);
       }
+      if (actorIdFromQuery) {
+        localStorage.setItem('actor_id', actorIdFromQuery);
+      }
+      if (clientId) {
+        localStorage.setItem('client_id', clientId);
+      }
 
-      if (!accessToken || !clientId) {
+      if (!accessToken) {
         // Redirect to login if not authenticated
         router.push('/login');
         return;
@@ -38,10 +48,17 @@ const DashboardPage = () => {
       // Direct redirect to Upmind client dashboard.
       // IMPORTANT: tokens are not always URL-safe -> encode them.
       const upmindClientUrl = 'https://my.thecloudaro.com/dashboard';
-      const qs = `access_token=${encodeURIComponent(
-        accessToken
-      )}&client_id=${encodeURIComponent(clientId)}`;
-      window.location.href = `${upmindClientUrl}/?${qs}`;
+      const params = new URLSearchParams();
+      params.set('access_token', accessToken);
+      if (clientId) {
+        params.set('client_id', clientId);
+        // Compatibility fallback for setups expecting actor_id naming.
+        params.set('actor_id', clientId);
+      }
+      const qs = params.toString();
+      // Replace current history entry so browser back returns to website
+      // instead of this bridge page.
+      window.location.replace(`${upmindClientUrl}/?${qs}`);
     };
 
     redirectToUpmindDashboard();
@@ -68,7 +85,6 @@ const DashboardPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-[rgb(var(--customer-bg))] text-white">
       <div className="text-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-        <p className="text-lg">Redirecting to your dashboard...</p>
       </div>
     </div>
   );

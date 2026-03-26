@@ -22,8 +22,9 @@ export default function Button({ label, isActive, onClick }: ButtonProps) {
                       : "text-[hsl(var(--hero-button-inactive-text))] hover:text-[hsl(var(--hero-button-inactive-hover-text))] hover:bg-[hsl(var(--hero-button-inactive-hover-bg))]"
                   }`}
       style={isActive ? {
-        backgroundImage: `linear-gradient(90deg, hsl(var(--header-banner-gradient-1)), hsl(var(--header-banner-gradient-2)), hsl(var(--header-banner-gradient-3)), hsl(var(--header-banner-gradient-4)), hsl(var(--header-banner-gradient-5)))`,
-        backgroundSize: '100% 100%',
+        backgroundImage: 'linear-gradient(90deg, rgb(37 99 235), rgb(29 78 216), rgb(37 99 235))',
+        backgroundSize: '200% 100%',
+        border: '1px solid rgba(37, 99, 235, 0.45)',
       } : undefined}
     >
       {label}

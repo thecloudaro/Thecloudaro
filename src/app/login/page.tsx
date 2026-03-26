@@ -32,14 +32,20 @@ const LoginPage = () => {
         // 🔹 Store token
         localStorage.setItem('access_token', data.access_token);
         localStorage.setItem('refresh_token', data.refresh_token);
-        localStorage.setItem('client_id', data.client_id);
+        if (data.client_id) {
+          localStorage.setItem('client_id', data.client_id);
+        }
+        if (data.actor_id) {
+          localStorage.setItem('actor_id', data.actor_id);
+        }
 
-        // 🔹 Direct redirect to dashboard
-        const dashboardUrl = `https://my.thecloudaro.com/dashboard/?access_token=${encodeURIComponent(data.access_token)}&client_id=${encodeURIComponent(data.client_id)}`;
-        console.log('Redirecting to dashboard:', dashboardUrl);
-        
-        // Immediate redirect to dashboard
-        window.location.href = dashboardUrl;
+        // 🔹 Always route through local dashboard bridge first.
+        // It persists tokens and forwards to client dashboard reliably.
+        router.push(
+          `/dashboard?access_token=${encodeURIComponent(
+            data.access_token
+          )}&client_id=${encodeURIComponent(data.client_id)}`
+        );
       } else {
         setError(data.message || 'Login failed');
       }
