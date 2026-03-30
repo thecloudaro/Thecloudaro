@@ -55,7 +55,7 @@ const More = () => {
           >
             <ContentHeading
               title="More protection, less expense"
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl leading-tight tracking-tight mx-auto text-white mb-5 sm:mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl leading-tight tracking-tight mx-auto mb-5 sm:mb-6 text-[rgb(var(--vpn-on-dark-text))]"
             />
           </motion.div>
 
@@ -69,7 +69,7 @@ const More = () => {
             <ContentDescription
               text="Get top-tier protection at a price that leaves the competition behind."
               size="lg"
-              className="text-white/80"
+              className="text-[rgba(var(--vpn-on-dark-muted))]"
             />
           </motion.div>
         </div>
@@ -87,13 +87,13 @@ const More = () => {
               {/* Table Header */}
               <thead>
                 <tr>
-                  <th className="text-left p-2 sm:p-3 text-white font-semibold text-sm sm:text-base border-b border-white/20">
+                  <th className="text-left p-2 sm:p-3 font-semibold text-sm sm:text-base border-b border-[rgba(var(--vpn-faq-border))] text-[rgb(var(--vpn-on-dark-text))]">
                     {/* Empty cell for feature column */}
                   </th>
                   {vpnServices.map((service) => (
                     <th
                       key={service.name}
-                      className={`p-2 sm:p-3 text-white font-semibold text-sm sm:text-base text-center border-b border-white/20 ${
+                      className={`p-2 sm:p-3 font-semibold text-sm sm:text-base text-center border-b border-[rgba(var(--vpn-faq-border))] text-[rgb(var(--vpn-on-dark-text))] ${
                         service.isHighlighted
                           ? "rounded-t-lg"
                           : ""
@@ -111,12 +111,12 @@ const More = () => {
                 {comparisonData.map((row, rowIndex) => (
                   <tr key={rowIndex}>
                     {/* Feature Column */}
-                    <td className={`p-2 sm:p-3 text-white ${rowIndex < comparisonData.length - 1 ? "border-b border-white/20" : ""}`}>
+                    <td className={`p-2 sm:p-3 text-[rgb(var(--vpn-on-dark-text))] ${rowIndex < comparisonData.length - 1 ? "border-b border-[rgba(var(--vpn-faq-border))]" : ""}`}>
                       <div className="flex flex-col">
                         <span className="font-semibold text-sm sm:text-base">
                           {row.feature}
                         </span>
-                        <span className="text-xs sm:text-sm text-white/70">
+                        <span className="text-xs sm:text-sm text-[rgba(var(--vpn-on-dark-subdued))]">
                           {row.subFeature}
                         </span>
                       </div>
@@ -124,7 +124,7 @@ const More = () => {
 
                     {/* FastVPN */}
                     <td
-                      className={`p-2 sm:p-3 text-white text-center text-sm sm:text-base ${rowIndex < comparisonData.length - 1 ? "border-b border-white/20" : ""} ${
+                      className={`p-2 sm:p-3 text-center text-sm sm:text-base text-[rgb(var(--vpn-on-dark-text))] ${rowIndex < comparisonData.length - 1 ? "border-b border-[rgba(var(--vpn-faq-border))]" : ""} ${
                         vpnServices[0].isHighlighted
                           ? `${rowIndex === comparisonData.length - 1 ? "rounded-b-lg" : ""}`
                           : ""
@@ -136,21 +136,21 @@ const More = () => {
 
                     {/* NordVPN */}
                     <td
-                      className={`p-2 sm:p-3 text-white text-center text-sm sm:text-base ${rowIndex < comparisonData.length - 1 ? "border-b border-white/20" : ""}`}
+                      className={`p-2 sm:p-3 text-center text-sm sm:text-base text-[rgb(var(--vpn-on-dark-text))] ${rowIndex < comparisonData.length - 1 ? "border-b border-[rgba(var(--vpn-faq-border))]" : ""}`}
                     >
                       {row.nordvpn}
                     </td>
 
                     {/* ExpressVPN */}
                     <td
-                      className={`p-2 sm:p-3 text-white text-center text-sm sm:text-base ${rowIndex < comparisonData.length - 1 ? "border-b border-white/20" : ""}`}
+                      className={`p-2 sm:p-3 text-center text-sm sm:text-base text-[rgb(var(--vpn-on-dark-text))] ${rowIndex < comparisonData.length - 1 ? "border-b border-[rgba(var(--vpn-faq-border))]" : ""}`}
                     >
                       {row.expressvpn}
                     </td>
 
                     {/* Surfshark */}
                     <td
-                      className={`p-2 sm:p-3 text-white text-center text-sm sm:text-base ${rowIndex < comparisonData.length - 1 ? "border-b border-white/20" : ""}`}
+                      className={`p-2 sm:p-3 text-center text-sm sm:text-base text-[rgb(var(--vpn-on-dark-text))] ${rowIndex < comparisonData.length - 1 ? "border-b border-[rgba(var(--vpn-faq-border))]" : ""}`}
                     >
                       {row.surfshark}
                     </td>
@@ -169,7 +169,7 @@ const More = () => {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
           className="mt-3 sm:mt-4 text-center"
         >
-          <p className="text-white/60 text-xs sm:text-sm">
+          <p className="text-xs sm:text-sm text-[rgba(var(--vpn-on-dark-faint))]">
             *Unlimited connections apply to privacy servers only. Prices verified August 2025; competitors may change rates.
           </p>
         </motion.div>

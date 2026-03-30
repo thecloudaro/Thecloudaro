@@ -45,7 +45,7 @@ const SSLBenefits = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.4, delay: idx * 0.08 }}
-              className="rounded-2xl border border-white/10 bg-black/30 px-5 py-5"
+              className="rounded-2xl border border-[rgba(var(--ssl-benefit-card-border))] bg-[rgba(var(--ssl-benefit-card-bg))] px-5 py-5"
             >
               <h3 className="mb-2 text-base sm:text-lg font-semibold text-security-spacemail-feature-title">
                 {benefit.title}

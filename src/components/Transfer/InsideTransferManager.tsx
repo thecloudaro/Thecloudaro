@@ -32,8 +32,8 @@ const InsideTransferManager = () => {
             heading="Inside Transfer Manager"
             description="The only tool you need for smoother, smarter transfers."
             headingTag="h2"
-            headingClassName="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 text-center"
-            descriptionClassName="text-gray-400 text-base sm:text-lg md:text-xl max-w-3xl mx-auto text-center"
+            headingClassName="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[rgb(var(--transfer-faq-heading))] mb-4 text-center"
+            descriptionClassName="text-[rgb(var(--transfer-hero-features-description))] text-base sm:text-lg md:text-xl max-w-3xl mx-auto text-center"
           />
         </div>
 
@@ -69,37 +69,39 @@ const InsideTransferManager = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="bg-gray-800/50 border border-gray-700 rounded-xl p-4 sm:p-5 shadow-xl relative"
+                className="rounded-xl border border-[rgb(var(--transfer-manager-preview-border))] bg-[rgba(var(--transfer-manager-preview-card-bg))] p-4 sm:p-5 shadow-xl relative"
               >
                 {/* Header */}
-                <div className="bg-gradient-to-r from-teal-600 to-teal-700 rounded-lg p-2.5 mb-4 flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
-                    <ArrowUpDown className="w-4 h-4 text-white" />
+                <div
+                  className="rounded-lg p-2.5 mb-4 flex items-center gap-2 bg-gradient-to-r from-[rgb(var(--transfer-manager-preview-header-from))] to-[rgb(var(--transfer-manager-preview-header-to))]"
+                >
+                  <div className="w-6 h-6 rounded-full bg-[rgba(var(--transfer-manager-preview-header-icon-circle))] flex items-center justify-center">
+                    <ArrowUpDown className="w-4 h-4 text-[rgb(var(--transfer-manager-preview-header-text))]" />
                   </div>
-                  <h3 className="text-white text-sm sm:text-base font-semibold">Transfer Manager</h3>
+                  <h3 className="text-[rgb(var(--transfer-manager-preview-header-text))] text-sm sm:text-base font-semibold">Transfer Manager</h3>
                 </div>
 
                 {/* Domains for transfer label */}
-                <p className="text-teal-400 text-xs font-medium mb-3">Domains for transfer</p>
+                <p className="text-[rgb(var(--transfer-manager-preview-section-label))] text-xs font-medium mb-3">Domains for transfer</p>
 
                 {/* Domain Input Card */}
-                <div className="bg-gray-900/50 border border-gray-700 rounded-lg p-3 mb-3">
+                <div className="rounded-lg border border-[rgb(var(--transfer-manager-preview-border))] bg-[rgba(var(--transfer-manager-preview-row-bg))] p-3 mb-3">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full border-2 border-teal-500 flex items-center justify-center">
-                        <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
+                      <div className="w-6 h-6 rounded-full border-2 border-[rgb(var(--transfer-manager-preview-radio-border))] flex items-center justify-center">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[rgb(var(--transfer-manager-preview-dot))]" />
                       </div>
-                      <span className="text-white text-xs sm:text-sm">mydomain.com</span>
+                      <span className="text-[rgb(var(--transfer-manager-preview-header-text))] text-xs sm:text-sm">mydomain.com</span>
                     </div>
-                    <span className="text-white font-semibold text-xs sm:text-sm">$7.99</span>
+                    <span className="text-[rgb(var(--transfer-manager-preview-header-text))] font-semibold text-xs sm:text-sm">$7.99</span>
                   </div>
 
                   {/* Authorization code */}
                   <div className="mt-3">
                     <div className="flex items-center gap-1.5 mb-1.5">
-                      <label className="text-white text-xs">Authorization code</label>
-                      <div className="w-3.5 h-3.5 rounded-full bg-gray-600 flex items-center justify-center">
-                        <span className="text-[8px] text-white">i</span>
+                      <label className="text-[rgb(var(--transfer-manager-preview-header-text))] text-xs">Authorization code</label>
+                      <div className="w-3.5 h-3.5 rounded-full bg-[rgb(var(--transfer-manager-preview-info-bg))] flex items-center justify-center">
+                        <span className="text-[8px] text-[rgb(var(--transfer-manager-preview-header-text))]">i</span>
                       </div>
                     </div>
                     <div className="relative">
@@ -107,10 +109,10 @@ const InsideTransferManager = () => {
                         type="password"
                         value="••••••••••"
                         readOnly
-                        className="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white text-xs pr-8"
+                        className="w-full rounded-lg border border-[rgb(var(--transfer-manager-preview-border))] bg-[rgb(var(--transfer-manager-preview-input-bg))] px-3 py-2 text-[rgb(var(--transfer-manager-preview-header-text))] text-xs pr-8"
                       />
                       <button className="absolute right-2 top-1/2 -translate-y-1/2">
-                        <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 text-[rgb(var(--transfer-manager-preview-muted-icon))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
                         </svg>
                       </button>
@@ -118,7 +120,7 @@ const InsideTransferManager = () => {
                   </div>
 
                   {/* Delete button */}
-                  <button className="mt-3 text-red-400 hover:text-red-300 transition-colors">
+                  <button className="mt-3 text-[rgb(var(--transfer-manager-preview-remove))] hover:text-[rgb(var(--transfer-manager-preview-remove-hover))] transition-colors">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
@@ -127,8 +129,8 @@ const InsideTransferManager = () => {
 
                 {/* Floating Action Button */}
                 <div className="flex justify-end">
-                  <button className="w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-700 flex items-center justify-center shadow-lg transition-colors">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <button className="w-10 h-10 rounded-full bg-[rgb(var(--transfer-hero-button-bg))] hover:bg-[rgb(var(--transfer-hero-button-hover))] flex items-center justify-center shadow-lg transition-colors">
+                    <svg className="w-5 h-5 text-[rgb(var(--transfer-hero-button-text))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                   </button>
@@ -154,10 +156,10 @@ const InsideTransferManager = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
                 >
-                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-2">
+                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-[rgb(var(--transfer-hero-features-title))] mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
+                  <p className="text-[rgb(var(--transfer-hero-features-description))] text-sm sm:text-base leading-relaxed">
                     {feature.description}
                   </p>
                 </motion.div>

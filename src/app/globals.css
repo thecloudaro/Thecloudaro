@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
+@config "../../tailwind.config.ts";
 
 
 /* ===============================
@@ -55,6 +56,9 @@
     --cart-button-hover-bg: 240 4% 16%; /* gray-800 */
     --cart-link: 217 91% 60%; /* blue-500 */
     --cart-link-hover: 217 91% 70%; /* blue-400 */
+    --cart-checkout-button-bg: 221.2 83.2% 53.3%; /* blue-600 */
+    --cart-checkout-button-hover: 224.3 76.3% 48%; /* blue-700 */
+    --cart-checkout-button-text: 0 0% 100%;
 
     /* Domain Transfer Submit Page Colors */
     --domain-transfer-card-bg: 29 31 29; /* #1d1f1d */
@@ -209,6 +213,16 @@
     --hero-section-search-button-bg: 217 91% 60%; /* blue-600 */
     --hero-section-search-button-hover-bg: 217 91% 55%; /* blue-700 */
     --hero-section-search-button-text: 0 0% 100%; /* white */
+    --hero-button-active-gradient-from: 37 99 235; /* blue-600 - rgb() triple */
+    --hero-button-active-gradient-via: 29 78 216; /* blue-700 */
+    --hero-button-active-gradient-to: 37 99 235;
+    --hero-button-active-border-rgb: 37, 99, 235, 0.45;
+    --hero-section-search-button-border-rgb: 37, 99, 235, 0.45;
+    --hero-section-search-button-glow: 59, 130, 246, 0.7;
+    --hero-domain-pill-com-bg: 37 99 235;
+    --hero-domain-pill-com-hover-bg: 29 78 216;
+    --hero-domain-pill-com-shadow: 37, 99, 235, 0.25;
+    --hero-domain-pill-com-shadow-hover: 37, 99, 235, 0.32;
 
     /* Build Around Section */
     --buildaround-bg: 0 0% 0%;
@@ -428,6 +442,7 @@
     --hosting-pick-button-bg: 33 150 243; /* blue-500 - #2196F3 */
     --hosting-pick-button-text: 255 255 255; /* white */
     --hosting-pick-discount-bg: 77, 208, 225, 0.12; /* cyan/12 - for rgba() */
+    --hosting-pick-popular-card-shadow: 77, 208, 225, 0.15; /* cyan spotlight - for rgba() in box-shadow */
     --hosting-pick-text-green: 76 175 80; /* green-500 - #4CAF50 */
     --hosting-pick-text-purple: 156 39 176; /* purple-500 - #9C27B0 */
     --hosting-pick-addon-button-bg: 31 41 55; /* gray-800 - #1F2937 */
@@ -498,22 +513,65 @@
 
     /* Navbar Promotions button text */
     --nav-promotions-text: 0 0% 100%; /* white */
+    --nav-promotions-border: 255, 255, 255, 0.1; /* white/10 - for rgba() */
 
     /* Domain hero error text */
     --domain-hero-error: 0 84% 63%; /* approx #fca5a5 */
 
     /* Migrate page dark background panels */
     --migrate-panel-bg: 0 0% 9%; /* approx #17181a */
+    --migrate-panel-text-muted: 156 163 175; /* gray-400 - body copy on panel */
+    --migrate-panel-divider: 55 65 81; /* gray-700 */
+    --migrate-panel-cta-bg: 37 99 235; /* blue-600 */
+    --migrate-panel-cta-hover: 29 78 216; /* blue-700 */
+    --migrate-panel-cta-text: 255 255 255;
 
     /* Trust section background */
     --trust-section-bg: 0 0% 10%; /* approx #1a1a1a */
+    /* Trust section blue glow (TermsAndConditions Trust.tsx) - for rgba() in gradients */
+    --trust-glow-wide-500-80: 59, 130, 246, 0.8;
+    --trust-glow-wide-600-60: 37, 99, 235, 0.6;
+    --trust-glow-wide-700-40: 29, 78, 216, 0.4;
+    --trust-glow-wide-500-20: 59, 130, 246, 0.2;
+    --trust-glow-core-500-100: 59, 130, 246, 1;
+    --trust-glow-core-600-80: 37, 99, 235, 0.8;
+    --trust-glow-core-700-40: 29, 78, 216, 0.4;
 
     /* Roadmap ShootFor background dark section */
     --roadmap-shootfor-bg: 210 20% 7%; /* matches hero dark bg */
+    /* ShootFor blue beam glows - comma-separated for rgba() in gradients */
+    --roadmap-shootfor-beam-500-90: 59, 130, 246, 0.9;
+    --roadmap-shootfor-beam-600-70: 37, 99, 235, 0.7;
+    --roadmap-shootfor-beam-400-50: 96, 165, 250, 0.5;
+    --roadmap-shootfor-beam-300-20: 147, 197, 253, 0.2;
+    --roadmap-shootfor-core-500-100: 59, 130, 246, 1;
+    --roadmap-shootfor-core-600-80: 37, 99, 235, 0.8;
+    --roadmap-shootfor-core-400-40: 96, 165, 250, 0.4;
+    --roadmap-shootfor-wide-600-40: 37, 99, 235, 0.4;
+    --roadmap-shootfor-wide-500-30: 59, 130, 246, 0.3;
+    --roadmap-shootfor-wide-400-15: 96, 165, 250, 0.15;
 
     /* Login Modal Colors */
     --login-modal-bg: 26 26 26; /* #1a1a1a - for rgb() */
     --login-modal-input-bg: 42 42 42; /* #2a2a2a - for rgb() */
+    --login-modal-backdrop: 0, 0, 0, 0.7; /* black/70 - for rgba() */
+    --login-modal-border: 31 41 55; /* gray-800 - for rgb() */
+    --login-modal-text-primary: 255 255 255;
+    --login-modal-text-secondary: 209 213 219; /* gray-300 */
+    --login-modal-text-muted: 156 163 175; /* gray-400 */
+    --login-modal-text-placeholder: 107 114 128; /* gray-500 */
+    --login-modal-icon-muted: 156 163 175;
+    --login-modal-icon-hover-text: 255 255 255;
+    --login-modal-input-border: 55 65 81; /* gray-700 */
+    --login-modal-input-border-focus: 59 130 246; /* blue-500 */
+    --login-modal-divider: 55 65 81;
+    --login-modal-secondary-border-hover: 75 85 99; /* gray-600 */
+    --login-modal-primary-bg: 37 99 235; /* blue-600 */
+    --login-modal-primary-hover: 29 78 216; /* blue-700 */
+    --login-modal-primary-text: 255 255 255;
+    --login-modal-link: 59 130 246; /* blue-500 */
+    --login-modal-link-hover: 96 165 250; /* blue-400 */
+    --login-modal-error: 239 68 68; /* red-500 */
     
     /* BusinessHero Component Colors */
     --business-hero-gradient-from: 122, 59, 255, 0.8; /* #7a3bff/80 - for rgba() */
@@ -528,6 +586,7 @@
     --business-hero-button-white-shadow: 0, 0, 0, 0.25; /* for rgba() */
     --business-hero-button-white-shadow-hover: 0, 0, 0, 0.35; /* for rgba() */
     --business-hero-button-purple-bg: 81 47 255; /* #512fff - for rgb() */
+    --business-hero-button-purple-text: 255 255 255; /* label on purple CTA - for rgb() */
     --business-hero-button-purple-hover: 67 29 245; /* #431df5 - for rgb() */
     --business-hero-button-purple-shadow: 80, 46, 255, 0.35; /* for rgba() */
     --business-hero-button-purple-shadow-hover: 80, 46, 255, 0.45; /* for rgba() */
@@ -1126,6 +1185,11 @@
     --ui-white-button-bg: 255 255 255; /* white - for rgb() */
     --ui-white-button-text: 31 41 55; /* gray-800 - Tailwind default */
     --ui-white-button-hover: 243 244 246; /* gray-100 - Tailwind default */
+    --ui-video-modal-backdrop: 0, 0, 0, 0.75; /* black/75 - for rgba() */
+    --ui-video-modal-surface: 0 0 0; /* black - for rgb() */
+    --ui-video-modal-close-bg: 55 65 81; /* gray-700 - for rgb() */
+    --ui-video-modal-close-hover: 75 85 99; /* gray-600 - for rgb() */
+    --ui-video-modal-close-icon: 255 255 255; /* white - for rgb() */
     
     /* BackToTopButton Colors */
     --back-to-top-bg: 255 255 255; /* white - for rgb() */
@@ -1146,6 +1210,15 @@
     --feature-modal-submit-hover: 29 78 216; /* blue-700 - Tailwind default */
     --feature-modal-submit-text: 255 255 255; /* white - for rgb() */
     --feature-modal-link: 96 165 250; /* blue-400 - Tailwind default */
+    --feature-modal-backdrop: 0, 0, 0, 0.7; /* black/70 - for rgba() */
+    --feature-modal-icon-glow-from: 29 78 216; /* blue-700 - for rgb() */
+    --feature-modal-icon-glow-via: 99 102 241; /* indigo-500 - for rgb() */
+    --feature-modal-icon-glow-to: 147 51 234; /* purple-600 - for rgb() */
+    --feature-modal-icon-badge-from: 37 99 235; /* blue-600 - for rgb() */
+    --feature-modal-icon-badge-to: 99 102 241; /* indigo-500 - for rgb() */
+    --feature-modal-icon-shadow: 30, 58, 138, 0.4; /* blue-800/40 - for rgba() */
+    --feature-modal-icon-border: 59, 130, 246, 0.3; /* blue-500/30 - for rgba() */
+    --feature-modal-icon-plus: 255 255 255; /* white - for rgb() */
     
     /* Logo Colors */
     --logo-icon-bg: 255 255 255; /* white - for rgb() */
@@ -1218,9 +1291,33 @@
     --cloud-hosting-card-featured-bg: 32 36 45; /* #20242d - for rgb() */
     --cloud-hosting-badge: 31 143 91; /* #1f8f5b - for rgb() */
     --cloud-hosting-badge-text: 120 255 198; /* #78ffc6 - for rgb() */
+    --cloud-hosting-card-border: 255, 255, 255, 0.1; /* white/10 - for rgba() */
+    --cloud-hosting-plan-disclaimer: 255, 255, 255, 0.4; /* white/40 - for rgba() */
+    --cloud-hosting-plan-subtitle: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --cloud-hosting-plan-meta: 255, 255, 255, 0.6; /* white/60 - for rgba() */
+    --cloud-hosting-plan-muted: 255, 255, 255, 0.5; /* white/50 - for rgba() */
+    --cloud-hosting-plan-features: 255, 255, 255, 0.8; /* white/80 - for rgba() */
+    --cloud-hosting-plan-feature-label: 255 255 255; /* white - for rgb() */
+    --cloud-hosting-plan-feature-emphasis: 255 255 255; /* white - for rgb() */
+    --cloud-hosting-plan-underline: 255, 255, 255, 0.4; /* white/40 - for rgba() */
     
     /* InsideTransferManager Colors */
     --transfer-manager-bg: 27 29 28; /* #1b1d1c - for rgb() */
+    --transfer-manager-preview-card-bg: 31, 41, 55, 0.5; /* gray-800/50 - for rgba() */
+    --transfer-manager-preview-border: 55 65 81; /* gray-700 - for rgb() */
+    --transfer-manager-preview-header-from: 13 148 136; /* teal-600 - for rgb() */
+    --transfer-manager-preview-header-to: 15 118 110; /* teal-700 - for rgb() */
+    --transfer-manager-preview-header-icon-circle: 255, 255, 255, 0.2; /* white/20 - for rgba() */
+    --transfer-manager-preview-header-text: 255 255 255; /* white - for rgb() */
+    --transfer-manager-preview-section-label: 45 212 191; /* teal-400 - for rgb() */
+    --transfer-manager-preview-row-bg: 17, 24, 39, 0.5; /* gray-900/50 - for rgba() */
+    --transfer-manager-preview-radio-border: 20 184 166; /* teal-500 - for rgb() */
+    --transfer-manager-preview-dot: 255 255 255; /* white - for rgb() */
+    --transfer-manager-preview-input-bg: 17 24 39; /* gray-900 - for rgb() */
+    --transfer-manager-preview-info-bg: 75 85 99; /* gray-600 - for rgb() */
+    --transfer-manager-preview-muted-icon: 156 163 175; /* gray-400 - for rgb() */
+    --transfer-manager-preview-remove: 248 113 113; /* red-400 - for rgb() */
+    --transfer-manager-preview-remove-hover: 252 165 165; /* red-300 - for rgb() */
     
     /* HeaderBanner Colors */
     --header-banner-bg: 0 27 85; /* #001b55 - for rgb() */
@@ -1250,10 +1347,27 @@
     --domain-common-border-yellow-600-30: 202, 138, 4, 0.3; /* yellow-600/30 - for rgba() */
     --domain-common-gradient-gray-600: 75 85 99; /* gray-600 - Tailwind default */
     --domain-common-gradient-gray-700: 55 65 81; /* gray-700 - Tailwind default */
+
+    /* Domain Features — icon pill gradients (Tailwind palette, space-separated rgb) */
+    --domain-features-red-500: 239 68 68;
+    --domain-features-pink-500: 236 72 153;
+    --domain-features-yellow-500: 234 179 8;
+    --domain-features-orange-500: 249 115 22;
+    --domain-features-blue-500: 59 130 246;
+    --domain-features-cyan-500: 6 182 212;
+    --domain-features-purple-500: 168 85 247;
+    --domain-features-indigo-500: 99 102 241;
+    --domain-features-green-500: 34 197 94;
+    --domain-features-teal-500: 20 184 166;
+    --domain-features-gray-500: 107 114 128;
+    --domain-features-slate-500: 100 116 139;
+    --domain-features-rose-500: 244 63 94;
     
     /* Domain Transfer Page Colors */
     --domain-transfer-page-bg: 45 46 46; /* #2d2e2e - for rgb() */
     --domain-transfer-page-text: 209 213 219; /* gray-300 - Tailwind default */
+    --domain-transfer-page-hero-heading: 255 255 255; /* white - hero H1 - for rgb() */
+    --domain-transfer-page-hero-description: 255 255 255; /* white - hero sub - for rgb() */
     --domain-transfer-page-breadcrumb-active: 229 231 235; /* gray-200 - Tailwind default */
     --domain-transfer-page-breadcrumb-inactive: 156 163 175; /* gray-400 - Tailwind default */
     --domain-transfer-page-search-bg: 27 29 28; /* #1b1d1c - for rgb() */
@@ -1283,7 +1397,9 @@
     --domain-name-privacy-register-gradient-teal-2: 5, 150, 105, 0.9; /* rgba(5, 150, 105, 0.9) - for rgba() */
     --domain-name-privacy-register-gradient-teal-3: 6, 95, 70, 0.95; /* rgba(6, 95, 70, 0.95) - for rgba() */
     --domain-name-privacy-register-input-bg: 31, 41, 55, 0.8; /* rgba(31, 41, 55, 0.8) - gray-800/80 - for rgba() */
-    --domain-name-privacy-register-button-bg: 37 99 235; /* rgb(37, 99, 235) - blue-600 - for rgb() */
+    --domain-name-privacy-register-input-placeholder: 156 163 175; /* gray-400 - for rgb() */
+    --domain-name-privacy-register-button-bg: 37 99 235; /* blue-600 - for rgb() */
+    --domain-name-privacy-register-button-hover: 29 78 216; /* blue-700 - for rgb() */
     
     /* Pop Page Colors */
     --pop-page-bg: 17 24 39; /* gray-900 - Tailwind default */
@@ -1378,6 +1494,51 @@
     --security-spacemail-feature-description-text: 255 255 255; /* white - for rgb() */
     --security-spacemail-link-text: 65 217 191; /* #41d9bf - teal/cyan - for rgb() */
 
+    /* SSL Certificates page (slate / blue palette) */
+    --ssl-bg-page: 2 6 23; /* slate-950 - for rgb() */
+    --ssl-bg-elevated: 15 23 42; /* slate-900 - for rgb() */
+    --ssl-border: 30 41 59; /* slate-800 - for rgb() */
+    --ssl-border-strong: 51 65 85; /* slate-700 - for rgb() */
+    --ssl-card-border-hover: 51 65 85; /* slate-700 - for rgb() */
+    --ssl-text-primary: 248 250 252; /* slate-50 - for rgb() */
+    --ssl-text-secondary: 203 213 225; /* slate-300 - for rgb() */
+    --ssl-text-muted: 148 163 184; /* slate-400 - for rgb() */
+    --ssl-text-subtle: 100 116 139; /* slate-500 - for rgb() */
+    --ssl-focus-ring: 59 130 246; /* blue-500 - for rgb() */
+    --ssl-accent: 37 99 235; /* blue-600 - for rgb() */
+    --ssl-accent-hover: 29 78 216; /* blue-700 - for rgb() */
+    --ssl-on-accent: 255 255 255; /* white - for rgb() */
+    --ssl-shadow-accent: 59, 130, 246, 0.45; /* blue-500/45 - for rgba() */
+    --ssl-shadow-accent-soft: 59, 130, 246, 0.1; /* blue-500/10 - for rgba() */
+    --ssl-duration-muted-bg: 30 41 59; /* slate-800 - for rgb() */
+    --ssl-duration-muted-text: 203 213 225; /* slate-300 - for rgb() */
+    --ssl-duration-muted-hover-bg: 51 65 85; /* slate-700 - for rgb() */
+    --ssl-badge-dv-bg: 59, 130, 246, 0.1; /* blue-500/10 - for rgba() */
+    --ssl-badge-dv-text: 96 165 250; /* blue-400 - for rgb() */
+    --ssl-badge-domain-bg: 16, 185, 129, 0.1; /* emerald-500/10 - for rgba() */
+    --ssl-badge-domain-text: 52 211 153; /* emerald-400 - for rgb() */
+    --ssl-badge-discount-bg: 239, 68, 68, 0.1; /* red-500/10 - for rgba() */
+    --ssl-badge-discount-text: 248 113 113; /* red-400 - for rgb() */
+    --ssl-feature-check: 52 211 153; /* emerald-400 - for rgb() */
+    --ssl-card-surface: 15, 23, 42, 0.6; /* slate-900/60 - for rgba() */
+    --ssl-error-text: 248 113 113; /* red-400 - for rgb() */
+    --ssl-hero-gradient-from: 15, 23, 42, 0.92;
+    --ssl-hero-gradient-to: 12, 74, 110, 0.9;
+    --ssl-hero-pill-bg: 15, 23, 42, 0.7;
+    --ssl-hero-pill-text: 148 163 184; /* slate-400 - for rgb() */
+    --ssl-hero-pill-border: 148, 163, 184, 0.3;
+    --ssl-hero-status-dot: 52 211 153; /* emerald-400 - for rgb() */
+    --ssl-hero-cta-bg: 248 250 252; /* slate-50 - for rgb() */
+    --ssl-hero-cta-text: 15 23 42; /* slate-900 - for rgb() */
+    --ssl-hero-cta-shadow: 15, 23, 42, 0.45;
+    --ssl-hero-cta2-border: 148, 163, 184, 0.6;
+    --ssl-hero-cta2-bg: 15, 23, 42, 0.6;
+    --ssl-hero-cta2-text: 226 232 240; /* slate-200 - for rgb() */
+    --ssl-hero-panel-border: 255, 255, 255, 0.1;
+    --ssl-hero-panel-bg: 255, 255, 255, 0.05;
+    --ssl-benefit-card-border: 255, 255, 255, 0.1;
+    --ssl-benefit-card-bg: 0, 0, 0, 0.3;
+
     /* Security FAQ Component Colors */
     --security-faq-bg: 26 26 26; /* #1a1a1a - deep charcoal/off-black - for rgb() */
     --security-faq-heading-text: 255 255 255; /* white - for rgb() */
@@ -1393,6 +1554,7 @@
     --security-faq-answer-text: 255, 255, 255, 0.8; /* white/80 - for rgba() */
 
     /* Roadmap Hero Component Colors */
+    --roadmap-navbar-wrapper-bg: 17 24 39; /* gray-900 - for rgb() - navbar seam behind header */
     --roadmap-hero-bg: 26 26 26; /* #1a1a1a - deep charcoal/off-black - for rgb() */
     --roadmap-hero-heading-text: 255 255 255; /* white - for rgb() */
     --roadmap-hero-description-text: 255, 255, 255, 0.8; /* white/80 - for rgba() */
@@ -1405,10 +1567,17 @@
     --roadmap-vote-text-white: 255 255 255; /* white - for rgb() */
     --roadmap-vote-text-gray: 156 163 175; /* gray-400 - for rgb() */
     --roadmap-vote-text-gray-light: 209 213 219; /* gray-300 - for rgb() */
+    --roadmap-vote-chip-bg: 31 41 55; /* gray-800 - for rgb() */
+    --roadmap-vote-chip-text: 209 213 219; /* gray-300 - for rgb() */
+    --roadmap-vote-chip-hover-bg: 55 65 81; /* gray-700 - for rgb() */
+    --roadmap-vote-request-hover-bg: 29 78 216; /* blue-700 - for rgb() */
     
     /* Policy Component Colors */
     --policy-bg: 26 26 26; /* #1a1a1a - for rgb() */
     --policy-text-white: 255 255 255; /* white - for rgb() */
+    --policy-text-muted: 156 163 175; /* gray-400 - for rgb() */
+    --policy-sidebar-track: 156, 163, 175, 0.5; /* gray-400/50 - for rgba() */
+    --policy-sidebar-indicator: 59 130 246; /* blue-500 - for rgb() */
     
     /* Migrate Hero Component Colors */
     --migrate-hero-gradient-from: 22 163 74; /* green-600 #16a34a - for rgb() */
@@ -1595,6 +1764,11 @@
     /* VPN Page Colors */
     /* VPN Section Background (common across most components) */
     --vpn-section-bg: 15 20 25; /* #0F1419 - for rgb() */
+    /* VPN dark sections — text on section background */
+    --vpn-on-dark-text: 255 255 255; /* white - for rgb() */
+    --vpn-on-dark-muted: 255, 255, 255, 0.8; /* white/80 - for rgba() */
+    --vpn-on-dark-subdued: 255, 255, 255, 0.7; /* white/70 - for rgba() */
+    --vpn-on-dark-faint: 255, 255, 255, 0.6; /* white/60 - for rgba() */
     
     /* VPN Hero Component Colors */
     --vpn-hero-subtitle-text: 55 65 81; /* gray-700 - #374151 - for rgb() */
@@ -1606,6 +1780,7 @@
     --vpn-hero-button-secondary-bg: 229 231 235; /* gray-200 - #E5E7EB - for rgb() */
     --vpn-hero-button-secondary-text: 55 65 81; /* gray-700 - #374151 - for rgb() */
     --vpn-hero-button-secondary-hover: 209 213 219; /* gray-300 - #D1D5DB - for rgb() */
+    --vpn-hero-image-overlay: 255, 255, 255, 0.1; /* white/10 - for rgba() */
     
     /* SetYourself Component Colors */
     --vpn-set-yourself-button-bg: 31 41 55; /* gray-800 - #1F2937 - for rgb() */
@@ -1621,10 +1796,16 @@
     --vpn-choose-gradient-brown-4: 92, 58, 31; /* #5c3a1f - for rgba() */
     --vpn-choose-card-bg: 31 41 55; /* gray-800 - #1F2937 - for rgb() */
     --vpn-choose-card-border: 55 65 81; /* gray-700 - #374151 - for rgb() */
+    --vpn-choose-muted-text: 156 163 175; /* gray-400 - for rgb() */
+    --vpn-choose-discount-bg: 22 163 74; /* green-600 - for rgb() */
+    --vpn-choose-discount-text: 255 255 255; /* white - for rgb() */
     
     /* Freedom Component Colors */
     --vpn-freedom-border: 31 41 55; /* gray-800 - for rgb() */
     --vpn-freedom-image-bg: 26 31 46; /* #1a1f2e - for rgb() */
+    --vpn-freedom-pill-selected-bg: 255 255 255; /* white - for rgb() */
+    --vpn-freedom-pill-unselected-bg: 255, 255, 255, 0.3; /* white/30 - for rgba() */
+    --vpn-freedom-tab-inactive-text: 156 163 175; /* gray-400 - for rgb() */
     
     /* More Component Colors */
     --vpn-more-table-highlight-bg: 42 58 74; /* #2a3a4a - for rgb() */
@@ -1669,6 +1850,72 @@
     --signup-modal-button-text: 255 255 255; /* white */
     --signup-modal-link: 59 130 246; /* blue-500 */
     --signup-modal-link-hover: 96 165 250; /* blue-400 */
+    --signup-modal-error-bg: 239, 68, 68, 0.2; /* red-500/20 - for rgba() */
+    --signup-modal-error-border: 239 68 68; /* red-500 - for rgb() */
+    --signup-modal-error-text: 248 113 113; /* red-400 - for rgb() */
+    
+    /* App routes — full-page shells & misc pages */
+    --login-page-bg: 16 19 22; /* #101316 - for rgb() */
+    --contact-page-bg: 37 38 38; /* #252626 - for rgb() */
+    --contact-text-heading: 255 255 255; /* white - for rgb() */
+    --contact-text-body: 255, 255, 255, 0.9; /* white/90 - for rgba() */
+    --contact-text-paragraph: 255 255 255; /* white - for rgb() */
+    --home-coming-soon-bg: 2 6 23; /* slate-950 - for rgb() */
+    --home-coming-soon-text: 255 255 255;
+    --home-coming-soon-muted: 255, 255, 255, 0.8;
+    --home-coming-soon-faint: 255, 255, 255, 0.6;
+    --home-coming-soon-footer: 255, 255, 255, 0.7;
+    --not-found-bg-from: 17 24 39; /* gray-900 - for rgb() */
+    --not-found-bg-to: 0 0 0; /* black - for rgb() */
+    --not-found-text: 229 231 235; /* gray-200 - for rgb() */
+    --not-found-title: 156 163 175; /* gray-400 - for rgb() */
+    --not-found-subtitle: 209 213 219; /* gray-300 - for rgb() */
+    --not-found-button-bg: 31, 41, 55, 0.6; /* gray-800/60 - for rgba() */
+    --not-found-button-border: 55 65 81; /* gray-700 - for rgb() */
+    --not-found-button-hover-bg: 55, 65, 81, 0.6; /* gray-600/60 - for rgba() */
+    --not-found-button-text: 229 231 235; /* gray-200 - for rgb() */
+    --checkout-row-bg: 243 244 246; /* gray-100 - for rgb() */
+    --checkout-price-text: 107 114 128; /* gray-500 - for rgb() */
+    --checkout-pay-bg: 37 99 235; /* blue-600 - for rgb() */
+    --checkout-pay-hover: 29 78 216; /* blue-700 - for rgb() */
+    --checkout-pay-text: 255 255 255; /* white - for rgb() */
+    --transfer-marketing-section-bg: 0 0 0; /* black - for rgb() */
+    --domain-transfer-submit-search-bg: 29 31 29; /* #1d1f1d - for rgb() */
+    --dashboard-error-text: 239 68 68; /* red-500 - for rgb() */
+    --dashboard-cta-bg: 37 99 235; /* blue-600 - for rgb() */
+    --dashboard-cta-hover: 29 78 216; /* blue-700 - for rgb() */
+    --dashboard-cta-text: 255 255 255; /* white - for rgb() */
+    --dashboard-spinner-border: 255 255 255; /* white - for rgb() */
+    --app-dev-callout-bg: 30, 58, 138, 0.2; /* blue-900/20 - for rgba() */
+    --app-dev-callout-border: 37 99 235; /* blue-600 - for rgb() */
+    --test-widget-page-bg: 17 24 39; /* gray-900 - for rgb() */
+    --test-widget-panel-bg: 31 41 55; /* gray-800 - for rgb() */
+    --test-widget-panel-inner: 55 65 81; /* gray-700 - for rgb() */
+    --test-widget-text: 255 255 255;
+    --test-widget-text-muted: 209 213 219; /* gray-300 - for rgb() */
+    --test-widget-text-subtle: 107 114 128; /* gray-500 - for rgb() */
+    --test-widget-console-bg: 0 0 0;
+    --test-widget-success: 74 222 128; /* green-400 - for rgb() */
+    --test-widget-info-panel-bg: 30, 58, 138, 0.5; /* blue-900/50 - for rgba() */
+    --test-widget-info-panel-border: 59 130 246; /* blue-500 - for rgb() */
+    --test-widget-info-inner-bg: 30, 58, 138, 0.5; /* blue-800/50 - for rgba() */
+    --test-widget-card-light-bg: 255 255 255; /* white - for rgb() */
+    --test-widget-error-label: 254 202 202; /* red-200 - for rgb() */
+    --test-widget-error-text: 252 165 165; /* red-300 - for rgb() */
+    --test-widget-alert-bg: 127, 29, 29, 0.5; /* red-900/50 - for rgba() */
+    --test-widget-alert-border: 239 68 68; /* red-500 - for rgb() */
+    --test-widget-code-bg: 0 0 0;
+    --test-widget-code-text: 255 255 255;
+    --domain-search-debug-overlay: 0, 0, 0, 0.3; /* black/30 - for rgba() */
+    --domain-search-debug-code-bg: 0, 0, 0, 0.3; /* black/30 - for rgba() */
+    --domain-search-dev-red-bg: 127, 29, 29, 0.2; /* red-900/20 - for rgba() */
+    --domain-search-dev-red-border: 220 38 38; /* red-600 - for rgb() */
+    --domain-search-dev-yellow-bg: 113, 63, 18, 0.2; /* yellow-900/20 - for rgba() */
+    --domain-search-dev-yellow-border: 202 138 4; /* yellow-600 - for rgb() */
+    --domain-search-dev-green-bg: 20, 83, 45, 0.2; /* green-900/20 - for rgba() */
+    --domain-search-dev-green-border: 22 163 74; /* green-600 - for rgb() */
+    --domain-search-dev-blue-bg: 30, 58, 138, 0.2; /* blue-900/20 - for rgba() */
+    --domain-search-dev-blue-border: 37 99 235; /* blue-600 - for rgb() */
   }
 
   .dark {
@@ -2123,15 +2370,15 @@
 
 /* .com pill: same blue as SSL Buy Now (bg-blue-600), no gradient */
 .domain-pill--com {
-  background: rgb(37 99 235);
+  background: rgb(var(--hero-domain-pill-com-bg));
   background-image: none;
   animation: none;
   /* Reduce bottom glow outside of the pill */
-  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 2px 10px rgba(var(--hero-domain-pill-com-shadow));
 }
 .domain-pill--com:hover {
-  background: rgb(29 78 216);
-  box-shadow: 0 3px 14px rgba(37, 99, 235, 0.32);
+  background: rgb(var(--hero-domain-pill-com-hover-bg));
+  box-shadow: 0 3px 14px rgba(var(--hero-domain-pill-com-shadow-hover));
 }
 .domain-pill--com .com-pill-inner {
   background: transparent !important;

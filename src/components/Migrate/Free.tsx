@@ -57,14 +57,14 @@ const Free = () => {
               <ContentDescription
                 text={feature.title}
                 size="md"
-                className="!text-base sm:!text-lg md:!text-xl !text-white font-semibold mb-2"
+                className="!text-base sm:!text-lg md:!text-xl !text-[rgb(var(--hosting-text-white))] font-semibold mb-2"
               />
 
               {/* Description */}
               <ContentDescription
                 text={feature.description}
                 size="sm"
-                className="!text-sm sm:!text-base !text-gray-400"
+                className="!text-sm sm:!text-base !text-[rgb(var(--migrate-panel-text-muted))]"
               />
             </motion.div>
           ))}

@@ -22,55 +22,55 @@ const DomainFeatures = () => {
       icon: Shield,
       title: "Advanced Security",
       description: "Protect your domain with enterprise-grade security features including DNSSEC, domain locking, and fraud protection.",
-      color: "from-red-500 to-pink-500"
+      color: "from-[rgb(var(--domain-features-red-500))] to-[rgb(var(--domain-features-pink-500))]"
     },
     {
       icon: Zap,
       title: "Lightning Fast DNS",
       description: "Global DNS network with sub-second response times across 200+ locations worldwide.",
-      color: "from-yellow-500 to-orange-500"
+      color: "from-[rgb(var(--domain-features-yellow-500))] to-[rgb(var(--domain-features-orange-500))]"
     },
     {
       icon: Globe,
       title: "Global Availability",
       description: "Register domains in over 200 countries with local support and compliance.",
-      color: "from-blue-500 to-cyan-500"
+      color: "from-[rgb(var(--domain-features-blue-500))] to-[rgb(var(--domain-features-cyan-500))]"
     },
     {
       icon: Lock,
       title: "Privacy Protection",
       description: "Keep your personal information private with our free WHOIS privacy protection service.",
-      color: "from-purple-500 to-indigo-500"
+      color: "from-[rgb(var(--domain-features-purple-500))] to-[rgb(var(--domain-features-indigo-500))]"
     },
     {
       icon: Mail,
       title: "Email Forwarding",
       description: "Forward emails from your domain to any email address with unlimited forwarding rules.",
-      color: "from-green-500 to-teal-500"
+      color: "from-[rgb(var(--domain-features-green-500))] to-[rgb(var(--domain-features-teal-500))]"
     },
     {
       icon: Settings,
       title: "Easy Management",
       description: "Intuitive control panel for managing DNS, subdomains, and domain settings.",
-      color: "from-gray-500 to-slate-500"
+      color: "from-[rgb(var(--domain-features-gray-500))] to-[rgb(var(--domain-features-slate-500))]"
     },
     {
       icon: BarChart3,
       title: "Analytics Dashboard",
       description: "Track your domain performance with detailed analytics and traffic insights.",
-      color: "from-indigo-500 to-blue-500"
+      color: "from-[rgb(var(--domain-features-indigo-500))] to-[rgb(var(--domain-features-blue-500))]"
     },
     {
       icon: Smartphone,
       title: "Mobile App",
       description: "Manage your domains on the go with our feature-rich mobile application.",
-      color: "from-pink-500 to-rose-500"
+      color: "from-[rgb(var(--domain-features-pink-500))] to-[rgb(var(--domain-features-rose-500))]"
     },
     {
       icon: Cloud,
       title: "Cloud Integration",
       description: "Seamlessly integrate with popular cloud services and hosting providers.",
-      color: "from-cyan-500 to-blue-500"
+      color: "from-[rgb(var(--domain-features-cyan-500))] to-[rgb(var(--domain-features-blue-500))]"
     }
   ];
 
@@ -193,7 +193,7 @@ const DomainFeatures = () => {
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute -top-4 -right-4 w-8 h-8 bg-[hsl(var(--gradient-bright-green))]/60 rounded-full flex items-center justify-center"
               >
-                <Clock className="w-4 h-4 text-white" />
+                <Clock className="w-4 h-4 text-[rgb(var(--domain-common-text-white))]" />
               </motion.div>
               
               <motion.div
@@ -201,7 +201,7 @@ const DomainFeatures = () => {
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                 className="absolute -bottom-4 -left-4 w-6 h-6 bg-[hsl(var(--gradient-turquoise))]/60 rounded-full flex items-center justify-center"
               >
-                <Zap className="w-3 h-3 text-white" />
+                <Zap className="w-3 h-3 text-[rgb(var(--domain-common-text-white))]" />
               </motion.div>
             </div>
           </div>

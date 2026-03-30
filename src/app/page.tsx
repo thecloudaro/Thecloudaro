@@ -21,16 +21,16 @@ export default function Home() {
   // 👉 Coming Soon Screen
   if (comingSoon) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-slate-950 text-white text-center px-6">
-        <h1 className="text-5xl font-bold mb-4">TheCloudaro</h1>
+      <div className="flex min-h-screen flex-col items-center justify-center bg-[rgb(var(--home-coming-soon-bg))] px-6 text-center text-[rgb(var(--home-coming-soon-text))]">
+        <h1 className="mb-4 text-5xl font-bold">TheCloudaro</h1>
 
-        <p className="text-xl opacity-80 mb-2">
+        <p className="mb-2 text-xl text-[rgba(var(--home-coming-soon-muted))]">
           We are building something powerful for websites, apps and digital growth.
         </p>
 
-        <p className="opacity-60">Website coming soon…</p>
+        <p className="text-[rgba(var(--home-coming-soon-faint))]">Website coming soon…</p>
 
-        <div className="mt-8 text-sm opacity-70">
+        <div className="mt-8 text-sm text-[rgba(var(--home-coming-soon-footer))]">
           Contact: info@thecloudaro.com
         </div>
       </div>

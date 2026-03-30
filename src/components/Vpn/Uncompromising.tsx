@@ -46,7 +46,7 @@ const Uncompromising = () => {
           >
             <ContentHeading
               title="Uncompromising security"
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight mx-auto text-white mb-3 sm:mb-4"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight mx-auto mb-3 sm:mb-4 text-[rgb(var(--vpn-on-dark-text))]"
             />
           </motion.div>
 
@@ -60,7 +60,7 @@ const Uncompromising = () => {
             <ContentDescription
               text="Secure your online world with FastVPN's advanced protection, designed for your safety."
               size="lg"
-              className="text-white/80"
+              className="text-[rgba(var(--vpn-on-dark-muted))]"
             />
           </motion.div>
         </div>
@@ -88,14 +88,14 @@ const Uncompromising = () => {
               </div>
 
               {/* Title */}
-              <h3 className="text-white text-lg sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-3">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-3 text-[rgb(var(--vpn-on-dark-text))]">
                 {feature.title}
               </h3>
 
               {/* Description */}
               <ContentDescription
                 size="md"
-                className="text-white/70"
+                className="text-[rgba(var(--vpn-on-dark-subdued))]"
               >
                 {feature.description.split(/<br\s*\/?>/i).map((line, index, arr) => (
                   <React.Fragment key={index}>

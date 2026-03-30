@@ -111,12 +111,12 @@ const DomainGuide = () => {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-white"
+            className="text-[rgb(var(--domain-guide-text-white))]"
           >
             <h3 className="text-4xl sm:text-5xl font-bold mb-6">
               Check availability
             </h3>
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-[rgb(var(--domain-guide-text-gray-300))] text-lg leading-relaxed">
               Use our domain search to see if your ideal domain is available. 
               If it&apos;s already been taken, check out the suggested alternatives.
             </p>
@@ -330,12 +330,12 @@ const DomainGuide = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-white"
+            className="text-[rgb(var(--domain-guide-text-white))]"
           >
             <h3 className="text-4xl sm:text-5xl font-bold mb-6">
               Protect your future
             </h3>
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-[rgb(var(--domain-guide-text-gray-300))] text-lg leading-relaxed">
               Aim for a timeless and powerfully brandable domain name. 
               Avoid on-trend words and buy a domain that allows your business to grow.
             </p>

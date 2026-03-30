@@ -78,7 +78,7 @@ const DomainExtensions = () => {
     >
       {/* Discount Badge */}
       {domain.discount && (
-        <div className="absolute top-3 right-3 bg-[hsl(var(--gradient-bright-green))] text-white w-16 h-7 flex items-center justify-center rounded-full text-xs font-semibold shadow-md">
+        <div className="absolute top-3 right-3 bg-[hsl(var(--gradient-bright-green))] text-[rgb(var(--hosting-text-white))] w-16 h-7 flex items-center justify-center rounded-full text-xs font-semibold shadow-md">
           {domain.discount}
         </div>
       )}

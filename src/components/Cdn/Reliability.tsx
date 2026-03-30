@@ -51,14 +51,14 @@ const Reliability = () => {
             {/* Heading */}
             <ContentHeading 
               title="Reliability you can<br/>count on"
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white font-bold"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-[rgb(var(--hosting-text-white))] font-bold"
             />
 
             {/* Description */}
             <ContentDescription 
               text="Everything you need to keep your site available and secure."
               size="lg"
-              className="max-w-3xl text-white"
+              className="max-w-3xl text-[rgb(var(--hosting-text-white))]"
             />
           </motion.div>
         </div>

@@ -142,7 +142,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
             {/* Promotions Button - animated gradient CTA */}
             <Link
               href="/promotions"
-              className="px-4 py-2 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide nav-promotions-gradient border border-white/10"
+              className="px-4 py-2 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide nav-promotions-gradient border border-[rgba(var(--nav-promotions-border))]"
               style={{
               color: "hsl(var(--nav-promotions-text))",
               }}
@@ -205,7 +205,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
                     </button>
                   )}
                   {isCart && items.length > 0 && (
-                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white z-20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
+                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[rgb(var(--navbar-cart-badge-bg))] text-xs text-[rgb(var(--navbar-cart-badge-text))] z-20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
                       {items.length}
                     </span>
                   )}
@@ -273,7 +273,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
                       </button>
                     )}
                     {isCart && items.length > 0 && (
-                      <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white z-20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
+                      <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[rgb(var(--navbar-cart-badge-bg))] text-xs text-[rgb(var(--navbar-cart-badge-text))] z-20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
                         {items.length}
                       </span>
                     )}

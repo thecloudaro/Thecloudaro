@@ -25,7 +25,7 @@ const BusinessEmailPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen text-white" style={{ backgroundColor: 'rgb(var(--business-email-page-bg))' }}>
+    <div className="min-h-screen text-[rgb(var(--hosting-text-white))]" style={{ backgroundColor: 'rgb(var(--business-email-page-bg))' }}>
       <BusinessHero />
       <Productivity />
       <GetSecurity />

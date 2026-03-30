@@ -91,7 +91,7 @@ const SetYourself = () => {
           >
             <ContentHeading
               title="Set yourself free"
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-4 sm:mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-4 sm:mb-6 text-[rgb(var(--vpn-on-dark-text))]"
             />
           </motion.div>
 
@@ -106,7 +106,7 @@ const SetYourself = () => {
             <ContentDescription
               text="Choose from 2,700+ high speed servers in 100+ countries and enjoy low-latency streaming, work, and gaming anywhere."
               size="lg"
-              className="text-white/80"
+              className="text-[rgba(var(--vpn-on-dark-muted))]"
             />
           </motion.div>
 
@@ -137,7 +137,7 @@ const SetYourself = () => {
                       unoptimized
                     />
                   </div>
-                  <span className="text-white text-xs sm:text-xs md:text-sm font-medium">
+                  <span className="text-xs sm:text-xs md:text-sm font-medium text-[rgb(var(--vpn-on-dark-text))]">
                     {country.name}
                   </span>
                 </motion.div>

@@ -13,9 +13,9 @@ export default function ContactUsPage() {
   }, []);
 
   return (
-    <div 
+    <div
       className="relative flex flex-col items-start justify-start overflow-hidden lg:min-h-screen"
-      style={{ backgroundColor: '#252626' }}
+      style={{ backgroundColor: 'rgb(var(--contact-page-bg))' }}
     >
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 pt-8 sm:pt-10 md:pt-12 lg:pt-16 pb-12 sm:pb-16 md:pb-20 lg:pb-24">
@@ -31,15 +31,15 @@ export default function ContactUsPage() {
             <ContentDescription
               text="Contact us"
               size="md"
-              className="text-xl sm:text-2xl md:text-2xl lg:text-2xl text-left !text-white font-bold"
+              className="text-left text-xl font-bold text-[rgb(var(--contact-text-heading))] sm:text-2xl md:text-2xl lg:text-2xl"
             />
 
-            <p className="!text-sm sm:!text-base md:!text-base text-left max-w-2xl !text-white/90 pt-1">
+            <p className="max-w-2xl pt-1 text-left text-sm text-[rgba(var(--contact-text-body))] sm:text-base md:text-base">
               We are a remote-first web hosting company. All sales and technical support requests are handled via email and our ticketing system.
             </p>
 
             {/* Description */}
-            <p className="!text-sm sm:!text-base md:!text-base text-left max-w-2xl !text-white">
+            <p className="max-w-2xl text-left text-sm text-[rgb(var(--contact-text-paragraph))] sm:text-base md:text-base">
               If you have any questions or need some help, please email us at{" "}
               <a
                 href="mailto:support@thecloudaro.com"

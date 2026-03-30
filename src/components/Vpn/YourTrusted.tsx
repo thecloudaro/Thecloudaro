@@ -50,7 +50,7 @@ const YourTrusted = () => {
           >
             <ContentHeading
               title="Your trusted online<br/>security app"
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-3 sm:mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-3 sm:mb-4 text-[rgb(var(--vpn-on-dark-text))]"
             />
           </motion.div>
 
@@ -65,7 +65,7 @@ const YourTrusted = () => {
             <ContentDescription
               text="Enjoy peace of mind knowing your online activities are secure."
               size="lg"
-              className="text-white/80"
+              className="text-[rgba(var(--vpn-on-dark-muted))]"
             />
           </motion.div>
 
@@ -94,20 +94,20 @@ const YourTrusted = () => {
                   {/* Icon */}
                   <div className="flex justify-center mb-3 sm:mb-4">
                     <Icon
-                      className="w-8 h-8 sm:w-9 sm:h-9 text-white"
+                      className="w-8 h-8 sm:w-9 sm:h-9 text-[rgb(var(--vpn-on-dark-text))]"
                       strokeWidth={1.8}
                     />
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-white text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3">
+                  <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3 text-[rgb(var(--vpn-on-dark-text))]">
                     {title}
                   </h3>
 
                   {/* Description */}
                   <ContentDescription
                     size="sm"
-                    className="text-white/70"
+                    className="text-[rgba(var(--vpn-on-dark-subdued))]"
                   >
                     {description}
                   </ContentDescription>

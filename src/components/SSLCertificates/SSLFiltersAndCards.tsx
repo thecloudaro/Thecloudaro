@@ -188,7 +188,7 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
   };
 
   return (
-    <section className="relative py-14 sm:py-16 lg:py-20 bg-slate-950">
+    <section className="relative py-14 sm:py-16 lg:py-20 bg-[rgb(var(--ssl-bg-page))]">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         {/* Filters Section */}
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -202,12 +202,7 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
                 id="validation-filter"
                 value={validationFilter}
                 onChange={(e) => setValidationFilter(e.target.value as ValidationType)}
-                className="appearance-none rounded-lg border border-slate-700 bg-slate-900 px-4 py-2.5 pr-10 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                style={{
-                  backgroundColor: "rgb(15, 23, 42)",
-                  borderColor: "rgb(51, 65, 85)",
-                  color: "rgb(248, 250, 252)",
-                }}
+                className="appearance-none rounded-lg border border-[rgb(var(--ssl-border-strong))] bg-[rgb(var(--ssl-bg-elevated))] px-4 py-2.5 pr-10 text-sm text-[rgb(var(--ssl-text-primary))] focus:outline-none focus:ring-2 focus:ring-[rgb(var(--ssl-focus-ring))] focus:border-transparent transition-all"
               >
                 <option value="All">All Validation</option>
                 <option value="DV">DV</option>
@@ -215,7 +210,7 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
                 <option value="EV">EV</option>
               </select>
               <ChevronDown
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-slate-400"
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-[rgb(var(--ssl-text-muted))]"
               />
             </div>
 
@@ -228,12 +223,7 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
                 id="domain-filter"
                 value={domainFilter}
                 onChange={(e) => setDomainFilter(e.target.value as DomainType)}
-                className="appearance-none rounded-lg border border-slate-700 bg-slate-900 px-4 py-2.5 pr-10 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                style={{
-                  backgroundColor: "rgb(15, 23, 42)",
-                  borderColor: "rgb(51, 65, 85)",
-                  color: "rgb(248, 250, 252)",
-                }}
+                className="appearance-none rounded-lg border border-[rgb(var(--ssl-border-strong))] bg-[rgb(var(--ssl-bg-elevated))] px-4 py-2.5 pr-10 text-sm text-[rgb(var(--ssl-text-primary))] focus:outline-none focus:ring-2 focus:ring-[rgb(var(--ssl-focus-ring))] focus:border-transparent transition-all"
               >
                 <option value="All">All Domains</option>
                 <option value="Single">Single</option>
@@ -241,7 +231,7 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
                 <option value="Wildcard">Wildcard</option>
               </select>
               <ChevronDown
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-slate-400"
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-[rgb(var(--ssl-text-muted))]"
               />
             </div>
 
@@ -254,12 +244,7 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
                 id="provider-filter"
                 value={providerFilter}
                 onChange={(e) => setProviderFilter(e.target.value as ProviderType)}
-                className="appearance-none rounded-lg border border-slate-700 bg-slate-900 px-4 py-2.5 pr-10 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                style={{
-                  backgroundColor: "rgb(15, 23, 42)",
-                  borderColor: "rgb(51, 65, 85)",
-                  color: "rgb(248, 250, 252)",
-                }}
+                className="appearance-none rounded-lg border border-[rgb(var(--ssl-border-strong))] bg-[rgb(var(--ssl-bg-elevated))] px-4 py-2.5 pr-10 text-sm text-[rgb(var(--ssl-text-primary))] focus:outline-none focus:ring-2 focus:ring-[rgb(var(--ssl-focus-ring))] focus:border-transparent transition-all"
               >
                 <option value="All">All providers</option>
                 <option value="Digicert">Digicert</option>
@@ -269,22 +254,22 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
                 <option value="PerfectSSL">PerfectSSL</option>
               </select>
               <ChevronDown
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-slate-400"
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-[rgb(var(--ssl-text-muted))]"
               />
             </div>
           </div>
 
           {/* Duration Selector */}
           <div className="flex items-center gap-2">
-            <span className="text-sm text-slate-400 mr-2">Duration:</span>
+            <span className="text-sm text-[rgb(var(--ssl-text-muted))] mr-2">Duration:</span>
             {(["1", "2", "3", "4", "5"] as Duration[]).map((duration) => (
               <button
                 key={duration}
                 onClick={() => setSelectedDuration(duration)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   selectedDuration === duration
-                    ? "bg-blue-600 text-white shadow-lg shadow-blue-500/50"
-                    : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700"
+                    ? "bg-[rgb(var(--ssl-accent))] text-[rgb(var(--ssl-on-accent))] shadow-lg shadow-[0_0_20px_rgba(var(--ssl-shadow-accent))]"
+                    : "bg-[rgb(var(--ssl-duration-muted-bg))] text-[rgb(var(--ssl-duration-muted-text))] hover:bg-[rgb(var(--ssl-duration-muted-hover-bg))] border border-[rgb(var(--ssl-border-strong))]"
                 }`}
                 aria-pressed={selectedDuration === duration}
               >
@@ -297,14 +282,14 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
         {/* Loading State */}
         {loading && (
           <div className="flex items-center justify-center py-20">
-            <div className="text-slate-400">Loading SSL certificates...</div>
+            <div className="text-[rgb(var(--ssl-text-muted))]">Loading SSL certificates...</div>
           </div>
         )}
 
         {/* Error State */}
         {error && !loading && (
           <div className="flex items-center justify-center py-20">
-            <div className="text-red-400">Error: {error}</div>
+            <div className="text-[rgb(var(--ssl-error-text))]">Error: {error}</div>
           </div>
         )}
 
@@ -313,7 +298,7 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
           <>
             {filteredProducts.length === 0 ? (
               <div className="flex items-center justify-center py-20">
-                <div className="text-slate-400">
+                <div className="text-[rgb(var(--ssl-text-muted))]">
                   No SSL certificates found matching your filters.
                 </div>
               </div>
@@ -329,25 +314,25 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3, delay: idx * 0.1 }}
-                      className="relative rounded-xl border border-slate-800 bg-slate-900/60 p-6 hover:border-slate-700 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10"
+                      className="relative rounded-xl border border-[rgb(var(--ssl-border))] bg-[rgba(var(--ssl-card-surface))] p-6 hover:border-[rgb(var(--ssl-card-border-hover))] transition-all duration-300 hover:shadow-xl hover:shadow-[0_0_40px_rgba(var(--ssl-shadow-accent-soft))]"
                     >
                       {/* Badge */}
                       <div className="mb-4 flex items-start justify-between">
                         <div className="flex flex-col gap-1">
-                          <h3 className="text-lg font-semibold text-slate-50">
+                          <h3 className="text-lg font-semibold text-[rgb(var(--ssl-text-primary))]">
                             {product.name}
                           </h3>
                           <div className="flex flex-wrap gap-2">
-                            <span className="inline-flex rounded-full bg-blue-500/10 px-2.5 py-1 text-xs font-medium text-blue-400">
+                            <span className="inline-flex rounded-full bg-[rgba(var(--ssl-badge-dv-bg))] px-2.5 py-1 text-xs font-medium text-[rgb(var(--ssl-badge-dv-text))]">
                               {product.validation}
                             </span>
-                            <span className="inline-flex rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-400">
+                            <span className="inline-flex rounded-full bg-[rgba(var(--ssl-badge-domain-bg))] px-2.5 py-1 text-xs font-medium text-[rgb(var(--ssl-badge-domain-text))]">
                               {product.domains}
                             </span>
                           </div>
                         </div>
                         {discount && (
-                          <span className="inline-flex rounded-full bg-red-500/10 px-2.5 py-1 text-xs font-medium text-red-400">
+                          <span className="inline-flex rounded-full bg-[rgba(var(--ssl-badge-discount-bg))] px-2.5 py-1 text-xs font-medium text-[rgb(var(--ssl-badge-discount-text))]">
                             {discount}
                           </span>
                         )}
@@ -356,28 +341,28 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
                       {/* Price */}
                       <div className="mb-6">
                         <div className="flex items-baseline gap-2">
-                          <span className="text-3xl font-bold text-slate-50">
+                          <span className="text-3xl font-bold text-[rgb(var(--ssl-text-primary))]">
                             {formatPrice(price)}
                           </span>
-                          <span className="text-sm text-slate-400">
+                          <span className="text-sm text-[rgb(var(--ssl-text-muted))]">
                             / {selectedDuration} {selectedDuration === "1" ? "year" : "years"}
                           </span>
                         </div>
                         {selectedDuration !== "1" && product.pricing["1"] && (
-                          <p className="mt-1 text-xs text-slate-500">
+                          <p className="mt-1 text-xs text-[rgb(var(--ssl-text-subtle))]">
                             ${(product.pricing["1"] * parseInt(selectedDuration)).toFixed(2)} if purchased separately
                           </p>
                         )}
                       </div>
 
                       {/* Features */}
-                      <ul className="mb-6 space-y-2 text-sm text-slate-300">
+                      <ul className="mb-6 space-y-2 text-sm text-[rgb(var(--ssl-text-secondary))]">
                         <li className="flex items-center gap-2">
-                          <span className="text-emerald-400">✓</span>
+                          <span className="text-[rgb(var(--ssl-feature-check))]">✓</span>
                           <span>{product.validation} Validation</span>
                         </li>
                         <li className="flex items-center gap-2">
-                          <span className="text-emerald-400">✓</span>
+                          <span className="text-[rgb(var(--ssl-feature-check))]">✓</span>
                           <span>
                             {product.domains === "Single"
                               ? "Single Domain"
@@ -387,18 +372,18 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
                           </span>
                         </li>
                         <li className="flex items-center gap-2">
-                          <span className="text-emerald-400">✓</span>
+                          <span className="text-[rgb(var(--ssl-feature-check))]">✓</span>
                           <span>{selectedDuration} Year Validity</span>
                         </li>
                         <li className="flex items-center gap-2">
-                          <span className="text-emerald-400">✓</span>
+                          <span className="text-[rgb(var(--ssl-feature-check))]">✓</span>
                           <span>Free Reissuance</span>
                         </li>
                       </ul>
 
                       {/* Buy Now Button - same style for all cards (no product-specific styling) */}
                       <button
-                        className="w-full rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/50 disabled:bg-blue-600 disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-full rounded-lg bg-[rgb(var(--ssl-accent))] px-4 py-3 text-sm font-semibold text-[rgb(var(--ssl-on-accent))] transition-all duration-200 hover:bg-[rgb(var(--ssl-accent-hover))] hover:shadow-lg hover:shadow-[0_0_24px_rgba(var(--ssl-shadow-accent))] disabled:bg-[rgb(var(--ssl-accent))] disabled:opacity-70 disabled:cursor-not-allowed"
                         disabled={price === null}
                       >
                         Buy Now

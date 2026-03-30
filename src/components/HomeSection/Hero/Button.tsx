@@ -18,13 +18,13 @@ export default function Button({ label, isActive, onClick }: ButtonProps) {
                   font-medium transition-colors duration-200
                   ${
                     isActive
-                      ? "text-white shadow-sm"
+                      ? "text-[hsl(var(--hero-button-active-text))] shadow-sm"
                       : "text-[hsl(var(--hero-button-inactive-text))] hover:text-[hsl(var(--hero-button-inactive-hover-text))] hover:bg-[hsl(var(--hero-button-inactive-hover-bg))]"
                   }`}
       style={isActive ? {
-        backgroundImage: 'linear-gradient(90deg, rgb(37 99 235), rgb(29 78 216), rgb(37 99 235))',
+        backgroundImage: 'linear-gradient(90deg, rgb(var(--hero-button-active-gradient-from)), rgb(var(--hero-button-active-gradient-via)), rgb(var(--hero-button-active-gradient-to)))',
         backgroundSize: '200% 100%',
-        border: '1px solid rgba(37, 99, 235, 0.45)',
+        border: '1px solid rgba(var(--hero-button-active-border-rgb))',
       } : undefined}
     >
       {label}

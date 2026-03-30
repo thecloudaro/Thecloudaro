@@ -1,4 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
+import {
+  extractSubscriptionTerms,
+  getAmountFromTerm,
+  normalizeUpmindListPayload,
+  pickPreferredDomainPriceTerm,
+} from '@/lib/upmind/pricingTerms';
 
 interface DomainSearchResult {
   name: string;
@@ -72,84 +78,85 @@ export async function GET(req: NextRequest) {
 
     let tldsList: any[] = [];
 
+    const fetchTldsFromModule = async (): Promise<any[]> => {
+      const tldsEndpoint = 'https://api.upmind.io/api/admin/modules/web_hosting/domains/tlds';
+      const tldsResponse = await fetch(tldsEndpoint, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${apiToken}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!tldsResponse.ok) {
+        const tldsErrorText = await tldsResponse.text();
+        console.error('❌ [Domain Search] TLDs endpoint failed:', tldsResponse.status, tldsErrorText);
+        return [];
+      }
+      const tldsData = await tldsResponse.json();
+      return normalizeUpmindListPayload(tldsData);
+    };
+
+    const fetchAllProducts = async (): Promise<any[]> => {
+      const productsEndpoint = 'https://api.upmind.io/api/admin/products?with=prices,costs';
+      const productsResponse = await fetch(productsEndpoint, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${apiToken}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!productsResponse.ok) {
+        const errorText = await productsResponse.text();
+        console.error('❌ [Domain Search] Products API error:', productsResponse.status, errorText);
+        return [];
+      }
+      const productsData = await productsResponse.json();
+      return normalizeUpmindListPayload(productsData);
+    };
+
     if (categoryResponse.ok) {
       const categoryData = await categoryResponse.json();
-      tldsList = Array.isArray(categoryData) 
-        ? categoryData 
-        : (categoryData.data || categoryData.products || categoryData.items || []);
+      tldsList = normalizeUpmindListPayload(categoryData);
       console.log(`✅ [Domain Search] Found ${tldsList.length} domain products from category endpoint`);
-      
-      // Log sample product structure for debugging
+
       if (tldsList.length > 0) {
-        console.log(`📦 [Domain Search] Sample product structure (first item):`, JSON.stringify(tldsList[0], null, 2).substring(0, 1000));
+        console.log(
+          `📦 [Domain Search] Sample product structure (first item):`,
+          JSON.stringify(tldsList[0], null, 2).substring(0, 1000)
+        );
       } else {
-        console.warn(`⚠️ [Domain Search] Products list is empty after parsing. Raw response:`, JSON.stringify(categoryData, null, 2).substring(0, 500));
+        console.warn(
+          `⚠️ [Domain Search] Category list empty after normalize. Raw keys:`,
+          categoryData && typeof categoryData === 'object' ? Object.keys(categoryData as object) : []
+        );
       }
     } else {
       const errorText = await categoryResponse.text();
       console.error('❌ [Domain Search] Category products endpoint error:', categoryResponse.status, errorText);
-      console.warn('⚠️ [Domain Search] Category endpoint failed, trying TLDs endpoint as fallback...');
-      
-      // Fallback: Try TLDs endpoint
-      const tldsEndpoint = 'https://api.upmind.io/api/admin/modules/web_hosting/domains/tlds';
-      
-      console.log('🚀 [Domain Search] Fetching TLDs from:', tldsEndpoint);
+    }
 
-      const tldsResponse = await fetch(tldsEndpoint, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${apiToken}`,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-      });
+    if (tldsList.length === 0) {
+      console.warn('⚠️ [Domain Search] Falling back to TLDs module endpoint…');
+      tldsList = await fetchTldsFromModule();
+      console.log(`✅ [Domain Search] TLDs module returned ${tldsList.length} rows`);
+    }
 
-      if (tldsResponse.ok) {
-        const tldsData = await tldsResponse.json();
-        tldsList = Array.isArray(tldsData) ? tldsData : (tldsData.data || tldsData.tlds || tldsData.items || []);
-        console.log(`✅ [Domain Search] Found ${tldsList.length} TLDs from TLDs endpoint`);
-      } else {
-        const tldsErrorText = await tldsResponse.text();
-        console.error('❌ [Domain Search] TLDs endpoint also failed:', tldsResponse.status, tldsErrorText);
-        
-        // Fallback: Try to fetch all products and filter for domain products
-        const productsEndpoint = 'https://api.upmind.io/api/admin/products?with=prices,costs';
-        
-        console.log('🚀 [Domain Search] Fetching products from:', productsEndpoint);
-
-        const productsResponse = await fetch(productsEndpoint, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${apiToken}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
+    if (tldsList.length === 0) {
+      console.warn('⚠️ [Domain Search] Falling back to admin products list…');
+      tldsList = await fetchAllProducts();
+      if (tldsList.length === 0) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: 'Upmind returned no domain/TLD products. Check catalogue category, TLD module, and API token scopes.',
+            domains: [],
           },
-        });
-
-        if (productsResponse.ok) {
-          const productsData = await productsResponse.json();
-          const productsList = Array.isArray(productsData) 
-            ? productsData 
-            : (productsData.data || productsData.products || productsData.items || []);
-
-          console.log(`✅ [Domain Search] Found ${productsList.length} products from Upmind`);
-          
-          // Filter for domain-related products (you can adjust this filter based on your product structure)
-          // For now, we'll process all products and extract TLDs
-          tldsList = productsList;
-        } else {
-          const errorText = await productsResponse.text();
-          console.error('❌ [Domain Search] Products API error:', productsResponse.status, errorText);
-          return NextResponse.json(
-            {
-              success: false,
-              error: `Upmind API returned ${productsResponse.status}. Please check your API configuration.`,
-              domains: []
-            },
-            { status: productsResponse.status }
-          );
-        }
+          { status: 502 }
+        );
       }
+      console.log(`✅ [Domain Search] Using ${tldsList.length} products from admin/products`);
     }
     
     // If no TLDs/products found, return empty
@@ -246,114 +253,102 @@ export async function GET(req: NextRequest) {
         console.log(`🔍 [Domain Search] Processing TLD ${processedCount}/${tldsList.length}: ${tld}`);
       }
 
-      // Extract pricing from TLD item
-      // TLD item structure: { prices: [...], pricing: [...] } or product structure
-      let prices = null;
-      
-      // Try multiple pricing structures
-      if (tldItem.prices && Array.isArray(tldItem.prices)) {
-        prices = tldItem.prices;
-      } else if (tldItem.pricing && Array.isArray(tldItem.pricing)) {
-        prices = tldItem.pricing;
-      } else if (tldItem.prices?.subscription_terms && Array.isArray(tldItem.prices.subscription_terms)) {
-        prices = tldItem.prices.subscription_terms;
-      } else if (tldItem.subscription_terms && Array.isArray(tldItem.subscription_terms)) {
-        prices = tldItem.subscription_terms;
-      } else if (tldItem.billing?.subscription_terms && Array.isArray(tldItem.billing.subscription_terms)) {
-        prices = tldItem.billing.subscription_terms;
-      } else if (tldItem.costs && Array.isArray(tldItem.costs)) {
-        prices = tldItem.costs;
-      } else if (tldItem.price && typeof tldItem.price === 'number') {
-        // If direct price field exists, create a mock pricing entry
-        prices = [{
-          price: tldItem.price,
-          currency_code: tldItem.currency || 'USD',
-          billing_cycle_months: 12
-        }];
-      } else if (tldItem.register_price || tldItem.registration_price) {
-        // If register_price exists directly
-        prices = [{
-          price: tldItem.register_price || tldItem.registration_price,
-          currency_code: tldItem.currency_code || 'USD',
-          billing_cycle_months: 12,
-          register_price: tldItem.register_price || tldItem.registration_price,
-          renew_price: tldItem.renew_price || tldItem.renewal_price || tldItem.register_price || tldItem.registration_price,
-          transfer_price: tldItem.transfer_price || tldItem.register_price || tldItem.registration_price
-        }];
-      }
+      let prices = extractSubscriptionTerms(tldItem);
 
-      if (!prices || !Array.isArray(prices) || prices.length === 0) {
-        console.log(`⚠️ [Domain Search] No pricing found for TLD ${tld}. Item keys:`, Object.keys(tldItem));
-        continue;
-      }
-      
-      console.log(`💰 [Domain Search] Found ${prices.length} pricing entries for TLD ${tld}`);
-
-      // Find USD pricing for 12 months (yearly) - domain pricing is typically yearly
-      // Also try to find any USD pricing if yearly not found
-      let usdYearlyPrice = prices.find((p: any) =>
-        (p.currency_code === 'USD' || p.currency_code === 'usd') &&
-        (p.billing_cycle_months === 12 || p.billing_cycle_years === 1 || p.billing_cycle === 12 || p.period_months === 12 || p.period === 12)
-      );
-      
-      // If no yearly price found, try to get any USD price
-      if (!usdYearlyPrice) {
-        usdYearlyPrice = prices.find((p: any) =>
-          p.currency_code === 'USD' || p.currency_code === 'usd'
-        );
-      }
-      
-      // If still no USD price, try any price (we'll convert later if needed)
-      if (!usdYearlyPrice && prices.length > 0) {
-        usdYearlyPrice = prices[0]; // Use first available price
-        console.log(`⚠️ [Domain Search] No USD pricing for ${tld}, using first available:`, usdYearlyPrice.currency_code);
-      }
-
-      if (!usdYearlyPrice) {
-        skippedCount++;
-        if (skippedCount <= 5) {
-          const availableCurrencies = prices.map((p: any) => p.currency_code || 'unknown').filter((v: any, i: number, arr: any[]) => arr.indexOf(v) === i);
-          console.log(`⚠️ [Domain Search] No pricing found for TLD ${tld}. Available currencies:`, availableCurrencies);
+      if (!prices?.length && tldItem.price != null) {
+        const raw = tldItem.price;
+        const n = typeof raw === 'number' ? raw : parseFloat(String(raw));
+        if (!Number.isNaN(n) && n > 0) {
+          prices = [
+            {
+              price: n,
+              currency_code: (tldItem as any).currency_code || (tldItem as any).currency || 'USD',
+              billing_cycle_months: 12,
+            },
+          ];
         }
-        continue;
-      }
-      
-      // Limit success logs
-      if (domainResults.length < 5) {
-        console.log(`✅ [Domain Search] Found pricing for TLD ${tld}:`, {
-          price: usdYearlyPrice.price,
-          billing_cycle_months: usdYearlyPrice.billing_cycle_months,
-          currency: usdYearlyPrice.currency_code
-        });
       }
 
-      const price = usdYearlyPrice.price || usdYearlyPrice.amount || usdYearlyPrice.cost || null;
+      if (!prices?.length && ((tldItem as any).register_price || (tldItem as any).registration_price)) {
+        const reg = (tldItem as any).register_price || (tldItem as any).registration_price;
+        const n = typeof reg === 'number' ? reg : parseFloat(String(reg));
+        if (!Number.isNaN(n) && n > 0) {
+          prices = [
+            {
+              price: n,
+              currency_code: (tldItem as any).currency_code || 'USD',
+              billing_cycle_months: 12,
+              register_price: reg,
+              renew_price: (tldItem as any).renew_price || (tldItem as any).renewal_price || reg,
+              transfer_price: (tldItem as any).transfer_price || reg,
+            },
+          ];
+        }
+      }
 
-      if (!price || price <= 0) {
+      if (!prices?.length) {
+        if (skippedCount <= 3) {
+          console.log(`⚠️ [Domain Search] No pricing found for TLD ${tld}. Item keys:`, Object.keys(tldItem));
+        }
         skippedCount++;
         continue;
       }
-      
-      // Get currency from price object
-      const currency = usdYearlyPrice.currency_code || 'USD';
 
-      // Construct domain name
+      if (domainResults.length < 5) {
+        console.log(`💰 [Domain Search] ${prices.length} pricing row(s) for TLD ${tld}`);
+      }
+
+      const usdYearlyPrice = pickPreferredDomainPriceTerm(prices);
+      if (!usdYearlyPrice) {
+        skippedCount++;
+        continue;
+      }
+
+      const baseAmount = getAmountFromTerm(usdYearlyPrice);
+      if (baseAmount == null || baseAmount <= 0) {
+        skippedCount++;
+        continue;
+      }
+
+      const currency =
+        usdYearlyPrice.currency_code || usdYearlyPrice.currency || 'USD';
+
       const domainName = `${cleanSearchTerm}${tld}`;
-      
-      // Premium domains are typically those with higher prices
-      const isPremium = price > 50;
+
+      const isPremium = baseAmount > 50;
       const isPopular = popularTlds.includes(tld);
-      
-      // Calculate original price (if there's a discount, otherwise same as price)
-      const originalPrice = usdYearlyPrice.original_price || usdYearlyPrice.price_discounted || null;
-      const registerPrice = usdYearlyPrice.register_price || usdYearlyPrice.registration_price || usdYearlyPrice.price || price;
+
+      const regRaw =
+        usdYearlyPrice.register_price ??
+        usdYearlyPrice.registration_price ??
+        baseAmount;
+      const registerPrice =
+        typeof regRaw === 'number' ? regRaw : parseFloat(String(regRaw));
+      if (!registerPrice || registerPrice <= 0) {
+        skippedCount++;
+        continue;
+      }
+
+      const originalRaw =
+        usdYearlyPrice.original_price ?? usdYearlyPrice.price_discounted ?? null;
+      const originalPrice =
+        originalRaw != null
+          ? typeof originalRaw === 'number'
+            ? originalRaw
+            : parseFloat(String(originalRaw))
+          : null;
 
       domainResults.push({
         name: domainName,
         available: true, // TODO: Implement actual availability check via Upmind API
         price: typeof registerPrice === 'number' ? registerPrice : parseFloat(String(registerPrice)),
         currency: currency, // Use currency from price object
-        originalPrice: originalPrice && originalPrice > registerPrice ? (typeof originalPrice === 'number' ? originalPrice : parseFloat(String(originalPrice))) : undefined,
+        originalPrice:
+          originalPrice != null &&
+          Number.isFinite(originalPrice) &&
+          originalPrice > registerPrice
+            ? originalPrice
+            : undefined,
         popular: isPopular,
         premium: isPremium,
         tld: tld,
@@ -367,8 +362,8 @@ export async function GET(req: NextRequest) {
       return a.price - b.price;
     });
 
-    // Limit to top 20 results
-    const limitedResults = domainResults.slice(0, 20);
+    // Cap so the response stays reasonable for the UI (full TLD catalogue can be large)
+    const limitedResults = domainResults.slice(0, 200);
 
     console.log(`✅ [Domain Search] Generated ${limitedResults.length} domain results for "${cleanSearchTerm}"`);
     console.log(`📊 [Domain Search] Processing summary:`, {

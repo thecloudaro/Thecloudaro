@@ -21,10 +21,13 @@ const CheckoutPage = () => {
         <div>
           <div className="space-y-4">
             {items.map((item, index) => (
-              <div key={index} className="flex items-center justify-between p-4 rounded-lg bg-gray-100">
+              <div
+                key={index}
+                className="flex items-center justify-between rounded-lg bg-[rgb(var(--checkout-row-bg))] p-4"
+              >
                 <div>
                   <p className="font-semibold">{item.name}</p>
-                  <p className="text-sm text-gray-500">${item.price}</p>
+                  <p className="text-sm text-[rgb(var(--checkout-price-text))]">${item.price}</p>
                 </div>
                 <p>Quantity: {item.quantity || 1}</p>
               </div>
@@ -37,7 +40,7 @@ const CheckoutPage = () => {
             </div>
             <button
               onClick={handlePayment}
-              className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors mt-4"
+              className="mt-4 w-full rounded-lg py-3 font-semibold text-[rgb(var(--checkout-pay-text))] transition-colors bg-[rgb(var(--checkout-pay-bg))] hover:bg-[rgb(var(--checkout-pay-hover))]"
             >
               Pay Now
             </button>

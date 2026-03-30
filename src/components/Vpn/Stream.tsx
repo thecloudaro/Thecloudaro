@@ -44,12 +44,12 @@ const Stream = () => {
           >
             <ContentHeading
               title="Stream without limits"
-              className="mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-5xl text-white"
+              className="mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-5xl text-[rgb(var(--vpn-on-dark-text))]"
             />
 
             <ContentDescription
               size="lg"
-              className="max-w-2xl text-white/80"
+              className="max-w-2xl text-[rgba(var(--vpn-on-dark-muted))]"
             >
               Watch your favorite shows from anywhere,
               <br />

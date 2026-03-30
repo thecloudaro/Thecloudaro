@@ -83,8 +83,8 @@ export default function DomainTransferSubmitPage() {
             <div 
               className="flex items-stretch backdrop-blur-md rounded-full p-1.5 sm:p-2 border shadow-lg"
               style={{
-                backgroundColor: "#1d1f1d",
-                borderColor: "rgb(var(--hero-search-border))"
+                backgroundColor: 'rgb(var(--domain-transfer-submit-search-bg))',
+                borderColor: 'rgb(var(--hero-search-border))',
               }}
             >
               <div className="flex items-center flex-1 px-3 sm:px-4">

@@ -56,7 +56,7 @@ const CdnHero = () => {
             <ContentDescription 
               text="Get a secure and efficient content delivery network (CDN) fully integrated into The Cloud Aro."
               size="md"
-              className="mb-6 sm:mb-8 text-left text-white"
+              className="mb-6 sm:mb-8 text-left text-[rgb(var(--hosting-text-white))]"
             />
             <div className="mt-2">
               <motion.button

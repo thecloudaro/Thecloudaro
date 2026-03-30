@@ -19,7 +19,7 @@ const WordPressHero = ({ onPickPlanClick }: WordPressHeroProps) => {
 
   return (
     <motion.section 
-      className="relative min-h-screen overflow-x-hidden text-white" 
+      className="relative min-h-screen overflow-x-hidden text-[rgb(var(--wp-hero-heading))]" 
       style={{ 
         backgroundImage: "url('')",
         backgroundSize: 'cover',

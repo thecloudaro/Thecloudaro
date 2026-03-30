@@ -15,16 +15,16 @@ const VideoModal = ({ isOpen, onClose, videoUrl }: VideoModalProps) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(var(--ui-video-modal-backdrop))]"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl p-4 mx-2 bg-black rounded-lg"
+        className="relative w-full max-w-4xl p-4 mx-2 rounded-lg bg-[rgb(var(--ui-video-modal-surface))]"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute -top-3 -right-3 text-white bg-gray-700 rounded-full p-1 hover:bg-gray-600"
+          className="absolute -top-3 -right-3 rounded-full p-1 bg-[rgb(var(--ui-video-modal-close-bg))] text-[rgb(var(--ui-video-modal-close-icon))] hover:bg-[rgb(var(--ui-video-modal-close-hover))]"
           aria-label="Close video"
         >
           <X size={24} />

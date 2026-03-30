@@ -21,7 +21,8 @@ const Trust = () => {
         <div 
           className="absolute top-0 right-0 w-1/2 h-full"
           style={{
-            background: 'linear-gradient(to left, rgba(59, 130, 246, 0.8) 0%, rgba(37, 99, 235, 0.6) 30%, rgba(29, 78, 216, 0.4) 60%, rgba(59, 130, 246, 0.2) 100%)',
+            background:
+              'linear-gradient(to left, rgba(var(--trust-glow-wide-500-80)) 0%, rgba(var(--trust-glow-wide-600-60)) 30%, rgba(var(--trust-glow-wide-700-40)) 60%, rgba(var(--trust-glow-wide-500-20)) 100%)',
             filter: 'blur(80px)',
           }}
         />
@@ -29,7 +30,8 @@ const Trust = () => {
         <div 
           className="absolute top-0 right-[20%] w-[30%] h-full"
           style={{
-            background: 'linear-gradient(to left, rgba(59, 130, 246, 1) 0%, rgba(37, 99, 235, 0.8) 40%, rgba(29, 78, 216, 0.4) 80%, transparent 100%)',
+            background:
+              'linear-gradient(to left, rgba(var(--trust-glow-core-500-100)) 0%, rgba(var(--trust-glow-core-600-80)) 40%, rgba(var(--trust-glow-core-700-40)) 80%, transparent 100%)',
             filter: 'blur(60px)',
           }}
         />
@@ -46,7 +48,7 @@ const Trust = () => {
           <ContentDescription
             text="Trust. Truth. Transparency."
             size="xl"
-            className="text-3xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl leading-tight !text-white"
+            className="text-3xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl leading-tight !text-[rgb(var(--hosting-text-white))]"
           />
         </motion.div>
       </div>

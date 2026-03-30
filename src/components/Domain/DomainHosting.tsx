@@ -206,10 +206,10 @@ const DomainHosting = () => {
 
         {/* Bundle Offer */}
         <div className="bg-gradient-to-r from-[hsl(var(--gradient-teal))]/20 to-[hsl(var(--gradient-dark-teal))]/20 border border-[hsl(var(--gradient-teal))]/30 rounded-2xl p-8 text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">
+          <h3 className="text-2xl font-bold text-[rgb(var(--domain-common-text-white))] mb-4">
             Domain + Hosting Bundle
           </h3>
-          <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
+          <p className="text-[rgb(var(--domain-common-text-gray-400))] mb-6 max-w-2xl mx-auto">
             Get your domain and hosting together and save up to 50% on your first year. 
             Perfect for getting your website online quickly and affordably.
           </p>

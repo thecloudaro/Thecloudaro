@@ -16,7 +16,7 @@ const BusinessHero = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden text-white">
+    <section className="relative overflow-hidden text-[rgb(var(--hosting-text-white))]">
       <motion.div
         className="absolute inset-0 -z-30"
         initial={{ opacity: 0 }}
@@ -61,7 +61,7 @@ const BusinessHero = () => {
 
               <ContentHeading
                 title="Business email<br/>made effortless"
-                className="text-left text-white !text-[2.5rem] sm:!text-[3.35rem] md:!text-[4.05rem] lg:!text-[5rem] font-bold leading-[1.08]"
+                className="text-left text-[rgb(var(--hosting-text-white))] !text-[2.5rem] sm:!text-[3.35rem] md:!text-[4.05rem] lg:!text-[5rem] font-bold leading-[1.08]"
               />
 
               <ContentDescription
@@ -96,9 +96,10 @@ const BusinessHero = () => {
                 </button>
                 <a
                   href="#"
-                  className="rounded-full px-6 py-2.5 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5"
+                  className="rounded-full px-6 py-2.5 text-sm font-semibold transition duration-300 hover:-translate-y-0.5"
                   style={{
                     backgroundColor: 'rgb(var(--business-hero-button-purple-bg))',
+                    color: 'rgb(var(--business-hero-button-purple-text))',
                     boxShadow: '0 12px 28px rgba(var(--business-hero-button-purple-shadow))'
                   }}
                   onMouseEnter={(e) => {

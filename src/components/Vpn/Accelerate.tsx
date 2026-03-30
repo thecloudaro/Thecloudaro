@@ -64,7 +64,7 @@ const Accelerate = () => {
           >
             <ContentHeading
               title="Accelerate your online<br/>journey"
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl leading-tight tracking-tight mx-auto text-white mb-3 sm:mb-4"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl leading-tight tracking-tight mx-auto mb-3 sm:mb-4 text-[rgb(var(--vpn-on-dark-text))]"
             />
           </motion.div>
 
@@ -77,7 +77,7 @@ const Accelerate = () => {
           >
             <ContentDescription
               size="lg"
-              className="text-white/80"
+              className="text-[rgba(var(--vpn-on-dark-muted))]"
             >
               {"Discover what makes FastVPN your ultimate digital<br/>companion.".split(/<br\s*\/?>/i).map((line, index, arr) => (
                 <React.Fragment key={index}>
@@ -102,19 +102,19 @@ const Accelerate = () => {
             >
               {/* Icon */}
               <Icon 
-                className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 text-white mb-5 sm:mb-6" 
+                className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 mb-5 sm:mb-6 text-[rgb(var(--vpn-on-dark-text))]" 
                 strokeWidth={1.8} 
               />
 
               {/* Title */}
-              <h3 className="text-white text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 text-[rgb(var(--vpn-on-dark-text))]">
                 {title}
               </h3>
 
               {/* Description */}
               <ContentDescription
                 size="md"
-                className="text-white/70"
+                className="text-[rgba(var(--vpn-on-dark-subdued))]"
               >
                 {description}
               </ContentDescription>

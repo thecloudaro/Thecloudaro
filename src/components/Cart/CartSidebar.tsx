@@ -174,7 +174,7 @@ const CartSidebar = () => {
               {/* Checkout Button */}
               <button
                 onClick={handleCheckout}
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                className="w-full py-3 rounded-lg font-semibold transition-colors bg-[hsl(var(--cart-checkout-button-bg))] text-[hsl(var(--cart-checkout-button-text))] hover:bg-[hsl(var(--cart-checkout-button-hover))]"
               >
                 Checkout
               </button>

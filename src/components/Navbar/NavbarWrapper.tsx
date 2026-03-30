@@ -49,7 +49,7 @@ import { DropdownProvider, useDropdown } from "./DropdownContext";
     if (isCdnPage) return 'rgb(var(--cdn-hero-bg))';
     if (isBusinessEmailPage) return 'rgb(var(--business-email-page-bg))';
     if (isDomainPage || isTransferPage) return 'transparent';
-    if (isRoadmapPage) return 'rgb(17 24 39)';
+    if (isRoadmapPage) return 'rgb(var(--roadmap-navbar-wrapper-bg))';
     if (isMigrationPage) return 'rgb(var(--migration-page-bg))';
     return 'transparent';
   };

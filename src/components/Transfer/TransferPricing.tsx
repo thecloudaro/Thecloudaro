@@ -15,7 +15,7 @@ const TransferPricing = () => {
         className="pointer-events-none absolute inset-0 bottom-0 z-0"
         style={{
           background: `
-            radial-gradient(130% 90% at 50% 115%, hsl(var(--gradient-teal) / 0.34) 0%, rgba(0,0,0,0) 64%)
+            radial-gradient(130% 90% at 50% 115%, hsl(var(--gradient-teal) / 0.34) 0%, transparent 64%)
           `
         }}
       />

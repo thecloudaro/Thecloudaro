@@ -10,7 +10,7 @@ const SSLHero = () => {
     <section
       className="relative min-h-screen overflow-hidden"
       style={{
-        color: "rgb(var(--security-spacemail-heading-text))",
+        color: "rgb(var(--ssl-text-primary))",
       }}
     >
       {/* Background image + overlay */}
@@ -26,7 +26,7 @@ const SSLHero = () => {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(135deg, rgba(15,23,42,0.92), rgba(12,74,110,0.9))",
+              "linear-gradient(135deg, rgba(var(--ssl-hero-gradient-from)), rgba(var(--ssl-hero-gradient-to)))",
           }}
         />
       </div>
@@ -38,13 +38,13 @@ const SSLHero = () => {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="inline-flex items-center gap-2 rounded-full px-4 py-1 text-xs font-medium uppercase tracking-[0.2em]"
           style={{
-            backgroundColor: "rgba(15,23,42,0.7)",
-            color: "rgba(148,163,184,1)",
-            border: "1px solid rgba(148,163,184,0.3)",
+            backgroundColor: "rgba(var(--ssl-hero-pill-bg))",
+            color: "rgb(var(--ssl-hero-pill-text))",
+            border: "1px solid rgba(var(--ssl-hero-pill-border))",
           }}
         >
           <span>Trust &amp; security</span>
-          <span className="h-1 w-1 rounded-full bg-emerald-400" />
+          <span className="h-1 w-1 rounded-full bg-[rgb(var(--ssl-hero-status-dot))]" />
           <span>SSL Certificates</span>
         </motion.div>
 
@@ -56,7 +56,7 @@ const SSLHero = () => {
         >
           <ContentHeading
             title="Encrypt every click with SSL."
-            className="!text-[2.75rem] sm:!text-[3.5rem] md:!text-[4.25rem] lg:!text-[4.75rem] font-bold leading-[1.1] !text-[rgb(var(--security-spacemail-heading-text))]"
+            className="!text-[2.75rem] sm:!text-[3.5rem] md:!text-[4.25rem] lg:!text-[4.75rem] font-bold leading-[1.1] !text-[rgb(var(--ssl-text-primary))]"
           />
         </motion.div>
 
@@ -68,7 +68,7 @@ const SSLHero = () => {
         >
           <ContentDescription
             size="lg"
-            className="!text-[rgb(var(--security-spacemail-description-text))]"
+            className="!text-[rgb(var(--ssl-text-secondary))]"
             text="Protect logins, payments, and customer data with SSL certificates that work seamlessly across The Cloud Aro hosting plans."
           />
         </motion.div>
@@ -82,9 +82,9 @@ const SSLHero = () => {
           <button
             className="rounded-full px-8 py-3 text-sm font-semibold transition duration-300 hover:-translate-y-0.5"
             style={{
-              backgroundColor: "rgb(248,250,252)",
-              color: "rgb(15,23,42)",
-              boxShadow: "0 18px 45px rgba(15,23,42,0.45)",
+              backgroundColor: "rgb(var(--ssl-hero-cta-bg))",
+              color: "rgb(var(--ssl-hero-cta-text))",
+              boxShadow: "0 18px 45px rgba(var(--ssl-hero-cta-shadow))",
             }}
           >
             Get SSL protection
@@ -92,9 +92,9 @@ const SSLHero = () => {
           <button
             className="rounded-full px-6 py-3 text-sm font-medium transition duration-300 hover:-translate-y-0.5"
             style={{
-              border: "1px solid rgba(148,163,184,0.6)",
-              backgroundColor: "rgba(15,23,42,0.6)",
-              color: "rgba(226,232,240,1)",
+              border: "1px solid rgba(var(--ssl-hero-cta2-border))",
+              backgroundColor: "rgba(var(--ssl-hero-cta2-bg))",
+              color: "rgb(var(--ssl-hero-cta2-text))",
             }}
           >
             Learn how SSL works
@@ -105,18 +105,18 @@ const SSLHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.45 }}
-          className="mt-10 grid w-full max-w-4xl grid-cols-1 gap-4 text-xs text-slate-300 sm:grid-cols-3"
+          className="mt-10 grid w-full max-w-4xl grid-cols-1 gap-4 text-xs text-[rgb(var(--ssl-text-secondary))] sm:grid-cols-3"
         >
-          <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-left">
-            <p className="font-semibold mb-1 text-slate-50">Padlock in the browser</p>
+          <div className="rounded-xl border border-[rgba(var(--ssl-hero-panel-border))] bg-[rgba(var(--ssl-hero-panel-bg))] px-4 py-3 text-left">
+            <p className="font-semibold mb-1 text-[rgb(var(--ssl-text-primary))]">Padlock in the browser</p>
             <p>Instant visual trust with HTTPS and padlock icons for your visitors.</p>
           </div>
-          <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-left">
-            <p className="font-semibold mb-1 text-slate-50">Strong encryption</p>
+          <div className="rounded-xl border border-[rgba(var(--ssl-hero-panel-border))] bg-[rgba(var(--ssl-hero-panel-bg))] px-4 py-3 text-left">
+            <p className="font-semibold mb-1 text-[rgb(var(--ssl-text-primary))]">Strong encryption</p>
             <p>Modern TLS keeps logins, payments, and forms encrypted in transit.</p>
           </div>
-          <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-left">
-            <p className="font-semibold mb-1 text-slate-50">Better SEO & trust</p>
+          <div className="rounded-xl border border-[rgba(var(--ssl-hero-panel-border))] bg-[rgba(var(--ssl-hero-panel-bg))] px-4 py-3 text-left">
+            <p className="font-semibold mb-1 text-[rgb(var(--ssl-text-primary))]">Better SEO & trust</p>
             <p>Search engines and customers both expect secure, HTTPS-ready sites.</p>
           </div>
         </motion.div>

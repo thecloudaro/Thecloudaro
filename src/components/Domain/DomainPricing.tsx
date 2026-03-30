@@ -19,7 +19,7 @@ const pricingTiers = [
         "SSL certificate"
       ],
       icon: Globe,
-      color: "from-gray-600 to-gray-700"
+      color: "from-[rgb(var(--domain-common-gradient-gray-600))] to-[rgb(var(--domain-common-gradient-gray-700))]"
     },
     {
       name: "Professional",
@@ -108,7 +108,7 @@ const DomainPricing = () => {
         </div>
 
         {/* Price Range Slider */}
-        <div className="mb-12 sm:mb-16 text-white text-center">
+        <div className="mb-12 sm:mb-16 text-center text-[rgb(var(--domain-common-text-white))]">
             <label htmlFor="price-range" className="block mb-4 text-lg font-medium">
                 Filter by Price: {currentPrice === maxPrice ? 'All Prices' : `Up to $${currentPrice}`}
             </label>
@@ -124,7 +124,7 @@ const DomainPricing = () => {
                 />
                 <button
                     onClick={() => setCurrentPrice(maxPrice)}
-                    className="px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 transition-colors"
+                    className="px-4 py-2 rounded-md transition-colors bg-[rgb(var(--domain-common-bg-gray-700))] hover:bg-[rgb(var(--domain-common-bg-gray-600))] text-[rgb(var(--domain-common-text-white))]"
                 >
                     Reset
                 </button>

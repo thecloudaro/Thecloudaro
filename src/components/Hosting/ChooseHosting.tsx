@@ -611,7 +611,7 @@ const ChooseHosting = forwardRef<HTMLElement>((props, ref) => {
         </div>
 
         <div className="space-y-8 sm:space-y-10 pt-8 sm:pt-10 md:mr-0 lg:mr-24">
-          <div className="flex items-center gap-2 text-white font-semibold text-base md:text-lg whitespace-nowrap">
+          <div className="flex items-center gap-2 text-[rgb(var(--hosting-text-white))] font-semibold text-base md:text-lg whitespace-nowrap">
             All plans include
             <span
               className="hidden md:block flex-1 border-t"
@@ -634,7 +634,7 @@ const ChooseHosting = forwardRef<HTMLElement>((props, ref) => {
 
               return (
                 <div key={section.label} className="space-y-4">
-                  <div className="flex items-center gap-2 text-white font-semibold text-base md:text-lg whitespace-nowrap">
+                  <div className="flex items-center gap-2 text-[rgb(var(--hosting-text-white))] font-semibold text-base md:text-lg whitespace-nowrap">
                     {section.label}
                     <span
                       className="inline-flex items-center justify-center w-5 h-5 rounded-full border"
@@ -654,14 +654,14 @@ const ChooseHosting = forwardRef<HTMLElement>((props, ref) => {
                   </div>
 
                   {section.helper && (
-                    <div className="pl-7 text-sm text-gray-300">
+                    <div className="pl-7 text-sm text-[rgb(var(--hosting-choose-text-gray-300))]">
                       {section.helper}
                     </div>
                   )}
 
                   {visibleItems.length > 0 && (
                     <div className="space-y-4 pl-7">
-                      <div className="flex flex-wrap items-center gap-x-6 gap-y-4 text-sm text-gray-300">
+                      <div className="flex flex-wrap items-center gap-x-6 gap-y-4 text-sm text-[rgb(var(--hosting-choose-text-gray-300))]">
                         {visibleItems.map((item, idx) => (
                           <div
                             key={`${section.label}-${idx}`}
@@ -699,8 +699,7 @@ const ChooseHosting = forwardRef<HTMLElement>((props, ref) => {
                               [section.label]: !isExpanded,
                             }))
                           }
-                          className="inline-flex items-center gap-1 rounded-full px-5 py-1.5 text-xs font-semibold text-white transition"
-                          style={{ color: "rgb(var(--hosting-text-white))" }}
+                          className="inline-flex items-center gap-1 rounded-full px-5 py-1.5 text-xs font-semibold text-[rgb(var(--hosting-text-white))] transition"
                           onMouseEnter={(e) => {
                             e.currentTarget.style.backgroundColor =
                               "rgba(var(--hosting-choose-showmore-hover))";

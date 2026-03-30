@@ -74,7 +74,7 @@ export default function FeatureRequestModal({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(var(--feature-modal-backdrop))] backdrop-blur-sm px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -98,12 +98,26 @@ export default function FeatureRequestModal({
 <div className="text-center mb-6">
   <div className="relative flex justify-center mb-5">
     {/* Background Glow */}
-    <div className="absolute w-28 h-28 sm:w-32 sm:h-32 bg-gradient-to-tr from-blue-700 via-indigo-500 to-purple-600 rounded-full blur-3xl opacity-40 animate-pulse" />
+    <div
+      className="absolute w-28 h-28 sm:w-32 sm:h-32 rounded-full blur-3xl opacity-40 animate-pulse"
+      style={{
+        background:
+          "linear-gradient(to top right, rgb(var(--feature-modal-icon-glow-from)), rgb(var(--feature-modal-icon-glow-via)), rgb(var(--feature-modal-icon-glow-to)))",
+      }}
+    />
     {/* Main Icon Badge */}
-    <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-600 to-indigo-500 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-800/40 border border-blue-500/30">
+    <div
+      className="relative flex w-16 h-16 sm:w-20 sm:h-20 items-center justify-center rounded-2xl border shadow-lg"
+      style={{
+        background:
+          "linear-gradient(to bottom right, rgb(var(--feature-modal-icon-badge-from)), rgb(var(--feature-modal-icon-badge-to)))",
+        boxShadow: "0 10px 15px -3px rgba(var(--feature-modal-icon-shadow)), 0 4px 6px -4px rgba(var(--feature-modal-icon-shadow))",
+        borderColor: "rgba(var(--feature-modal-icon-border))",
+      }}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="w-8 h-8 text-white"
+        className="w-8 h-8 text-[rgb(var(--feature-modal-icon-plus))]"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"

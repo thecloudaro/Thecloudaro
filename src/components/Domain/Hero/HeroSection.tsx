@@ -142,7 +142,7 @@ export default function DomainHeroSection() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-[hsl(var(--gradient-teal))] hover:bg-[hsl(var(--gradient-teal))]/80 px-8 py-4 rounded-full text-white transition-all duration-300 text-lg font-medium mx-auto"
+              className="bg-[hsl(var(--gradient-teal))] hover:bg-[hsl(var(--gradient-teal))]/80 px-8 py-4 rounded-full text-[rgb(var(--hosting-text-white))] transition-all duration-300 text-lg font-medium mx-auto"
               onClick={handleSearch}
               disabled={isSearching || !domainValue.trim()}
             >

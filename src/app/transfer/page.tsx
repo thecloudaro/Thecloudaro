@@ -52,7 +52,7 @@ export default function TransferPage() {
       </section>
 
       {/* Build Around Section */}
-      <div className="min-h-screen bg-black">
+      <div className="min-h-screen bg-[rgb(var(--transfer-marketing-section-bg))]">
         <BuildAround/>
       </div>
 
@@ -67,13 +67,13 @@ export default function TransferPage() {
 
       {/* Customer Section */}
       <section>
-        <div className="min-h-screen bg-black">
+        <div className="min-h-screen bg-[rgb(var(--transfer-marketing-section-bg))]">
           <Customer/>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <div className="min-h-screen bg-black">
+      <div className="min-h-screen bg-[rgb(var(--transfer-marketing-section-bg))]">
         <FAQ/>
       </div>
 

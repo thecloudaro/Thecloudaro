@@ -28,7 +28,7 @@ const EasyStep = () => {
           {/* Main Heading */}
           <ContentHeading
             title="3 easy steps to migrate<br/>your website hosting"
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl !text-white font-bold leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl !text-[rgb(var(--hosting-text-white))] font-bold leading-tight"
           />
         </motion.div>
 
@@ -61,12 +61,12 @@ const EasyStep = () => {
                 <ContentDescription
                   text="2. Start your website migration"
                   size="xl"
-                  className="!text-white font-bold text-left"
+                  className="!text-[rgb(var(--hosting-text-white))] font-bold text-left"
                 />
                 <ContentDescription
                   text="Enter your current site credentials to set up an automatic transfer."
                   size="sm"
-                  className="!text-white text-left"
+                  className="!text-[rgb(var(--hosting-text-white))] text-left"
                 />
               </div>
 
@@ -77,12 +77,12 @@ const EasyStep = () => {
               <ContentDescription
                 text="1. Set up your EasyWP"
                 size="xl"
-                className="!text-white font-bold text-left"
+                className="!text-[rgb(var(--hosting-text-white))] font-bold text-left"
               />
               <ContentDescription
                 text="Select the option to migrate your existing website."
                 size="sm"
-                className="!text-white text-left"
+                className="!text-[rgb(var(--hosting-text-white))] text-left"
               />
             </div>
           </div>
@@ -114,12 +114,12 @@ const EasyStep = () => {
                 <ContentDescription
                   text="3. Connect your domain"
                   size="xl"
-                  className="!text-white font-bold text-left"
+                  className="!text-[rgb(var(--hosting-text-white))] font-bold text-left"
                 />
                 <ContentDescription
                   text="Once migrated, you can connect your domain and start managing your website."
                   size="sm"
-                  className="!text-white text-left"
+                  className="!text-[rgb(var(--hosting-text-white))] text-left"
                 />
               </div>
             </div>

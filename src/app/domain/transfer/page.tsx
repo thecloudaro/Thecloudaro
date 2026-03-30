@@ -116,8 +116,8 @@ const DomainTransferPage = () => {
                 }
                 description="Effortless transfers and next-level domain management."
                 headingTag="h1"
-                headingClassName="text-[3rem] sm:text-[3rem] md:text-[3.75rem] font-bold text-white mb-4 leading-tight"
-                descriptionClassName="text-white text-xl sm:text-2xl md:text-3xl max-w-4xl mx-auto"
+                headingClassName="text-[3rem] sm:text-[3rem] md:text-[3.75rem] font-bold mb-4 leading-tight text-[rgb(var(--domain-transfer-page-hero-heading))]"
+                descriptionClassName="mx-auto max-w-4xl text-xl text-[rgb(var(--domain-transfer-page-hero-description))] sm:text-2xl md:text-3xl"
               />
             </div>
 

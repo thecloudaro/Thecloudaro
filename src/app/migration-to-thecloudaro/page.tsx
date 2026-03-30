@@ -9,7 +9,7 @@ import FAQMigration from "@/components/Migration/FAQMigration";
 
 const MigrationToTheCloudaroPage = () => {
   return (
-    <div className="min-h-screen text-white" style={{ backgroundColor: 'rgb(var(--migration-page-bg))' }}>
+    <div className="min-h-screen text-[rgb(var(--hosting-text-white))]" style={{ backgroundColor: 'rgb(var(--migration-page-bg))' }}>
       <MigrateHero />
       <HowToGet />
       <WhatYouNeed />

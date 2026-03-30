@@ -29,7 +29,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden pt-2 sm:pt-6 lg:pt-10 bg-hero-bg transition-colors duration-500">
+    <div className="relative min-h-screen overflow-hidden pt-2 sm:pt-6 lg:pt-10 bg-transparent transition-colors duration-500">
       {/* Background Image - Fixed to cover entire viewport from top */}
       <motion.div
         className="fixed inset-0 bg-cover bg-center bg-no-repeat"
@@ -42,7 +42,7 @@ const HeroSection = () => {
           height: '100vh',
           top: 0,
           left: 0,
-          zIndex: -1
+          zIndex: 0
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
@@ -126,17 +126,17 @@ const HeroSection = () => {
                 />
               </div>
               <button 
-                className="text-white px-3 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-xs sm:text-base relative"
+                className="text-[hsl(var(--hero-section-search-button-text))] px-3 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-xs sm:text-base relative"
                 style={{
-                  background: 'rgb(37 99 235)',
-                  border: '1px solid rgba(37, 99, 235, 0.45)',
+                  background: 'hsl(var(--hero-section-search-button-bg))',
+                  border: '1px solid rgba(var(--hero-section-search-button-border-rgb))',
                 }}
               >
                 <span 
                   className="absolute inset-0 rounded-full opacity-40"
                   style={{
                     background:
-                      'radial-gradient(circle at top, rgba(59, 130, 246, 0.7) 0%, transparent 70%)',
+                      'radial-gradient(circle at top, rgba(var(--hero-section-search-button-glow)) 0%, transparent 70%)',
                   }}
                 />
                 <span className="relative z-10">Search</span>
@@ -169,7 +169,7 @@ const HeroSection = () => {
         transition={{ duration: 0.5, delay: 1.8 }}
       >
         <span
-          className="com-pill-inner block px-3 sm:px-3.5 md:px-4 py-1 sm:py-1.5 md:py-1.5 rounded-full text-[11px] sm:text-xs md:text-sm font-medium text-white cursor-pointer"
+          className="com-pill-inner block px-3 sm:px-3.5 md:px-4 py-1 sm:py-1.5 md:py-1.5 rounded-full text-[11px] sm:text-xs md:text-sm font-medium text-hero-text cursor-pointer"
         >
           {item.label}
         </span>

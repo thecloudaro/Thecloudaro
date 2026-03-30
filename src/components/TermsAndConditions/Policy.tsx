@@ -151,7 +151,7 @@ const Policy: React.FC<PolicyProps> = ({ policyData }) => {
       <ContentDescription
         text={section.title}
         size="md"
-        className="text-base sm:text-lg md:text-xl text-left !text-white font-bold"
+        className="text-base sm:text-lg md:text-xl text-left !text-[rgb(var(--policy-text-white))] font-bold"
       />
       {typeof section.content === 'string' ? (
         <p className="text-xs leading-relaxed text-[rgb(var(--policy-text-white))]">
@@ -185,7 +185,7 @@ const Policy: React.FC<PolicyProps> = ({ policyData }) => {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="space-y-6 sm:space-y-8"
             >
-              <div className="text-xs" style={{ color: 'rgb(156 163 175)' }}>
+              <div className="text-xs text-[rgb(var(--policy-text-muted))]">
                 <Link href="/legal" className="hover:underline">Terms &amp; Conditions</Link>
                 <span className="mx-2">›</span>
                 <span>{policyData.breadcrumb}</span>
@@ -193,12 +193,12 @@ const Policy: React.FC<PolicyProps> = ({ policyData }) => {
               <ContentDescription
                 text={policyData.title}
                 size="xl"
-                className="text-lg sm:text-xl md:text-2xl lg:text-4xl text-left !text-white font-bold leading-tight"
+                className="text-lg sm:text-xl md:text-2xl lg:text-4xl text-left !text-[rgb(var(--policy-text-white))] font-bold leading-tight"
               />
-              <p className="text-xs" style={{ color: 'rgb(156 163 175)' }}>
+              <p className="text-xs text-[rgb(var(--policy-text-muted))]">
                 Last updated: {policyData.lastUpdated}
               </p>
-              <div className="space-y-4 sm:space-y-6 text-xs leading-relaxed" style={{ color: 'rgb(255 255 255)' }}>
+              <div className="space-y-4 sm:space-y-6 text-xs leading-relaxed text-[rgb(var(--policy-text-white))]">
                 {policyData.intro.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}
@@ -219,7 +219,7 @@ const Policy: React.FC<PolicyProps> = ({ policyData }) => {
                     <div 
                       className="absolute left-0 w-0.5"
                       style={{ 
-                        backgroundColor: 'rgba(156, 163, 175, 0.5)',
+                        backgroundColor: 'rgba(var(--policy-sidebar-track))',
                         top: `${whiteLineTop}px`,
                         height: `${whiteLineHeight}px`,
                         zIndex: 1
@@ -228,7 +228,7 @@ const Policy: React.FC<PolicyProps> = ({ policyData }) => {
                   )}
                   <motion.div
                     className="absolute left-0 w-1 h-6 sm:h-8 rounded-full z-10"
-                    style={{ backgroundColor: 'rgb(59 130 246)' }}
+                    style={{ backgroundColor: 'rgb(var(--policy-sidebar-indicator))' }}
                     animate={{
                       top: indicatorTop
                     }}
@@ -249,13 +249,9 @@ const Policy: React.FC<PolicyProps> = ({ policyData }) => {
                         >
                           <button
                             onClick={() => scrollToSection(item.id)}
-                            className={`text-xs hover:underline block text-left w-full flex items-center transition-all ${
+                            className={`text-xs hover:underline block text-left w-full flex items-center pl-3 text-[rgb(var(--policy-text-white))] transition-all ${
                               isActive ? 'font-bold' : ''
                             }`}
-                            style={{ 
-                              color: 'rgb(255 255 255)',
-                              paddingLeft: '12px'
-                            }}
                           >
                             <span>{item.label}</span>
                           </button>

@@ -17,12 +17,14 @@ const SignUpPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const inputClass =
+    'w-full rounded-lg border border-[rgb(var(--signup-modal-input-border))] bg-[rgb(var(--signup-modal-input-bg))] px-3 py-2 text-[rgb(var(--signup-modal-input-text))] placeholder:text-[rgb(var(--signup-modal-input-placeholder))] focus:border-[rgb(var(--signup-modal-input-focus-border))] focus:outline-none';
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    // 🔐 MOBILE-SAFE SANITIZATION
     const cleanFirstName = firstName.trim();
     const cleanLastName = lastName.trim();
     const cleanEmail = email.trim().toLowerCase();
@@ -83,32 +85,36 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-8 backdrop-blur-sm">
+    <div
+      className="flex min-h-screen items-center justify-center px-4 py-8 backdrop-blur-sm"
+      style={{ backgroundColor: 'rgb(var(--login-page-bg))' }}
+    >
       <motion.div
         initial={{ scale: 0.9, opacity: 0, y: 40 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="relative w-full max-w-md bg-[#1a1a1a] rounded-lg shadow-2xl border border-gray-800 p-6"
+        className="relative w-full max-w-md rounded-lg border border-[rgb(var(--signup-modal-border))] bg-[rgb(var(--signup-modal-bg))] p-6 shadow-2xl"
       >
         <button
+          type="button"
           onClick={() => router.push('/')}
-          className="absolute right-3 top-3 text-gray-400 hover:text-white"
+          className="absolute right-3 top-3 text-[rgb(var(--signup-modal-close-icon))] transition-colors hover:text-[rgb(var(--signup-modal-close-icon-hover))]"
         >
-          <X className="w-5 h-5" />
+          <X className="h-5 w-5" />
         </button>
 
-        <h2 className="text-xl font-bold text-white mb-2">
+        <h2 className="mb-2 text-xl font-bold text-[rgb(var(--signup-modal-title-text))]">
           Create your account
         </h2>
-        <p className="text-sm text-gray-400 mb-6">
+        <p className="mb-6 text-sm text-[rgb(var(--signup-modal-helper-text))]">
           Enter your details to get started. You’ll verify your email when logging in.
         </p>
 
-        {error && (
-          <div className="bg-red-500/20 border border-red-500 text-red-400 p-3 rounded-lg mb-4 text-sm">
+        {error ? (
+          <div className="mb-4 rounded-lg border border-[rgb(var(--signup-modal-error-border))] bg-[rgba(var(--signup-modal-error-bg))] p-3 text-sm text-[rgb(var(--signup-modal-error-text))]">
             {error}
           </div>
-        )}
+        ) : null}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
@@ -118,7 +124,7 @@ const SignUpPage = () => {
             onChange={(e) => setFirstName(e.target.value)}
             required
             autoCapitalize="words"
-            className="w-full px-3 py-2 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white"
+            className={inputClass}
           />
 
           <input
@@ -128,7 +134,7 @@ const SignUpPage = () => {
             onChange={(e) => setLastName(e.target.value)}
             required
             autoCapitalize="words"
-            className="w-full px-3 py-2 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white"
+            className={inputClass}
           />
 
           <input
@@ -139,7 +145,7 @@ const SignUpPage = () => {
             required
             autoCapitalize="none"
             autoCorrect="off"
-            className="w-full px-3 py-2 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white"
+            className={inputClass}
           />
 
           <input
@@ -148,7 +154,7 @@ const SignUpPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full px-3 py-2 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white"
+            className={inputClass}
           />
 
           <input
@@ -157,21 +163,24 @@ const SignUpPage = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
-            className="w-full px-3 py-2 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white"
+            className={inputClass}
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-medium"
+            className={`w-full rounded-lg py-2 font-medium text-[rgb(var(--signup-modal-button-text))] transition-colors bg-[rgb(var(--signup-modal-button-gradient-from))] ${loading ? 'cursor-not-allowed opacity-50' : 'hover:bg-[rgb(var(--signup-modal-button-gradient-from-hover))]'}`}
           >
             {loading ? 'Creating...' : 'Continue'}
           </button>
         </form>
 
-        <p className="mt-5 text-center text-sm text-gray-400">
+        <p className="mt-5 text-center text-sm text-[rgb(var(--signup-modal-helper-text))]">
           Already have an account?{' '}
-          <Link href="/login" className="text-blue-500">
+          <Link
+            href="/login"
+            className="text-[rgb(var(--signup-modal-link))] hover:text-[rgb(var(--signup-modal-link-hover))]"
+          >
             Log in
           </Link>
         </p>

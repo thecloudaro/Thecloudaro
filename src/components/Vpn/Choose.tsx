@@ -52,7 +52,7 @@ const Choose = () => {
           >
             <ContentHeading
               title="Choose the perfect plan"
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white mb-2 sm:mb-3"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-2 sm:mb-3 text-[rgb(var(--vpn-on-dark-text))]"
             />
           </motion.div>
 
@@ -67,7 +67,7 @@ const Choose = () => {
             <ContentDescription
               text="Select the ideal package to suit your browsing needs and budget."
               size="md"
-              className="text-white/80"
+              className="text-[rgba(var(--vpn-on-dark-muted))]"
             />
           </motion.div>
 
@@ -94,27 +94,27 @@ const Choose = () => {
                   }}
                 >
                   {/* Plan Name */}
-                  <h3 className="text-white text-xs sm:text-sm md:text-base font-semibold mb-5">
+                  <h3 className="text-xs sm:text-sm md:text-base font-semibold mb-5 text-[rgb(var(--vpn-on-dark-text))]">
                     {plan.name}
                   </h3>
 
                   {/* Price and Discount */}
                   <div className="mb-6">
                     <div className="flex items-center gap-1.5 mb-2.5">
-                      <span className="text-gray-400 line-through text-xs">
+                      <span className="line-through text-xs text-[rgb(var(--vpn-choose-muted-text))]">
                         {plan.originalPrice}
                       </span>
-                      <span className="bg-green-600 text-white text-xs font-semibold px-1.5 py-0.5 rounded">
+                      <span className="rounded px-1.5 py-0.5 text-xs font-semibold bg-[rgb(var(--vpn-choose-discount-bg))] text-[rgb(var(--vpn-choose-discount-text))]">
                         {plan.discount}
                       </span>
                     </div>
-                    <div className="text-white text-xl sm:text-2xl md:text-3xl font-bold">
+                    <div className="text-xl sm:text-2xl md:text-3xl font-bold text-[rgb(var(--vpn-on-dark-text))]">
                       {plan.currentPrice}
                     </div>
                   </div>
 
                   {/* Renewal Text */}
-                  <p className="text-gray-400 text-xs text-center mt-5">
+                  <p className="text-xs text-center mt-5 text-[rgb(var(--vpn-choose-muted-text))]">
                     {plan.renewalText}
                   </p>
                 </motion.div>
@@ -130,7 +130,7 @@ const Choose = () => {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
             className="mt-8 sm:mt-10"
           >
-            <p className="text-gray-400 text-xs sm:text-sm">
+            <p className="text-xs sm:text-sm text-[rgb(var(--vpn-choose-muted-text))]">
               *30-day money-back guarantee
             </p>
           </motion.div>

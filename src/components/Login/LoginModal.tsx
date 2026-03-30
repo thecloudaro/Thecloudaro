@@ -83,7 +83,8 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[10000]"
+            className="fixed inset-0 backdrop-blur-sm z-[10000]"
+            style={{ backgroundColor: 'rgba(var(--login-modal-backdrop))' }}
             onClick={onClose}
           />
 
@@ -96,17 +97,17 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
             className="fixed inset-0 z-[10001] flex items-center justify-center px-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative w-full max-w-sm bg-[rgb(var(--login-modal-bg))] rounded-lg shadow-2xl border border-gray-800 p-6">
+            <div className="relative w-full max-w-sm bg-[rgb(var(--login-modal-bg))] rounded-lg shadow-2xl border border-[rgb(var(--login-modal-border))] p-6">
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="absolute right-3 top-3 text-gray-400 hover:text-white transition-colors"
+                className="absolute right-3 top-3 text-[rgb(var(--login-modal-icon-muted))] hover:text-[rgb(var(--login-modal-icon-hover-text))] transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
 
               {/* Title */}
-              <h2 className="text-xl font-bold text-white mb-6">
+              <h2 className="text-xl font-bold text-[rgb(var(--login-modal-text-primary))] mb-6">
                 Log into The Cloud Aro
               </h2>
 
@@ -114,7 +115,7 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Username */}
                 <div>
-                  <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                  <label className="block text-xs font-medium text-[rgb(var(--login-modal-text-secondary))] mb-1.5">
                     Username
                   </label>
                   <input
@@ -122,13 +123,13 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Enter your username"
-                    className="w-full px-3 py-2.5 text-sm bg-[rgb(var(--login-modal-input-bg))] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full px-3 py-2.5 text-sm bg-[rgb(var(--login-modal-input-bg))] border border-[rgb(var(--login-modal-input-border))] rounded-lg text-[rgb(var(--login-modal-text-primary))] placeholder:text-[rgb(var(--login-modal-text-placeholder))] focus:outline-none focus:border-[rgb(var(--login-modal-input-border-focus))] transition-colors"
                   />
                 </div>
 
                 {/* Password */}
                 <div>
-                  <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                  <label className="block text-xs font-medium text-[rgb(var(--login-modal-text-secondary))] mb-1.5">
                     Password
                   </label>
                   <div className="relative">
@@ -137,12 +138,12 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter your password"
-                      className="w-full px-3 py-2.5 text-sm bg-[rgb(var(--login-modal-input-bg))] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors pr-10"
+                      className="w-full px-3 py-2.5 text-sm bg-[rgb(var(--login-modal-input-bg))] border border-[rgb(var(--login-modal-input-border))] rounded-lg text-[rgb(var(--login-modal-text-primary))] placeholder:text-[rgb(var(--login-modal-text-placeholder))] focus:outline-none focus:border-[rgb(var(--login-modal-input-border-focus))] transition-colors pr-10"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                      className="absolute right-2.5 top-1/2 transform -translate-y-1/2 text-[rgb(var(--login-modal-icon-muted))] hover:text-[rgb(var(--login-modal-icon-hover-text))] transition-colors"
                     >
                       {showPassword ? (
                         <EyeOff className="w-4 h-4" />
@@ -153,28 +154,28 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
                   </div>
                 </div>
 
-                {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+                {error && <p className="text-[rgb(var(--login-modal-error))] text-sm text-center">{error}</p>}
 
                 {/* Log in with password button */}
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`w-full py-2.5 text-sm bg-blue-600 text-white font-medium rounded-lg transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
+                  className={`w-full py-2.5 text-sm bg-[rgb(var(--login-modal-primary-bg))] text-[rgb(var(--login-modal-primary-text))] font-medium rounded-lg transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[rgb(var(--login-modal-primary-hover))]'}`}
                 >
                   {loading ? 'Logging in...' : 'Log in with password'}
                 </button>
 
                 {/* OR separator */}
                 <div className="flex items-center justify-center my-3">
-                  <div className="flex-1 border-t border-gray-700"></div>
-                  <span className="px-3 text-xs text-gray-400">OR</span>
-                  <div className="flex-1 border-t border-gray-700"></div>
+                  <div className="flex-1 border-t border-[rgb(var(--login-modal-divider))]" />
+                  <span className="px-3 text-xs text-[rgb(var(--login-modal-text-muted))]">OR</span>
+                  <div className="flex-1 border-t border-[rgb(var(--login-modal-divider))]" />
                 </div>
 
                 {/* Log in with passkey button */}
                 <button
                   type="button"
-                  className="w-full py-2.5 text-sm bg-[rgb(var(--login-modal-input-bg))] border border-gray-700 hover:border-gray-600 text-white font-medium rounded-lg transition-colors flex items-center justifycenter gap-2"
+                  className="w-full py-2.5 text-sm bg-[rgb(var(--login-modal-input-bg))] border border-[rgb(var(--login-modal-input-border))] hover:border-[rgb(var(--login-modal-secondary-border-hover))] text-[rgb(var(--login-modal-text-primary))] font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
                 >
                   <Key className="w-3.5 h-3.5" />
                   Log in with passkey
@@ -183,18 +184,18 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
 
               {/* Footer Links */}
               <div className="mt-5 flex flex-col sm:flex-row items-center justify-between text-xs gap-2">
-                <div className="text-gray-400">
+                <div className="text-[rgb(var(--login-modal-text-muted))]">
                   Don&apos;t have an account?{' '}
                   <button
                     onClick={handleSignUpClick}
-                    className="text-blue-500 hover:text-blue-400 transition-colors font-medium"
+                    className="text-[rgb(var(--login-modal-link))] hover:text-[rgb(var(--login-modal-link-hover))] transition-colors font-medium"
                   >
                     Sign up
                   </button>
                 </div>
                 <Link
                   href="#"
-                  className="text-blue-500 hover:text-blue-400 transition-colors"
+                  className="text-[rgb(var(--login-modal-link))] hover:text-[rgb(var(--login-modal-link-hover))] transition-colors"
                 >
                   Trouble with log in?
                 </Link>

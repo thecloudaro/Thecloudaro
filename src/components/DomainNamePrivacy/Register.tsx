@@ -75,11 +75,10 @@ const Register = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchTerm)}
                 placeholder="Enter a domain name"
-                className="w-full pl-4 pr-16 py-4 text-lg rounded-full text-white placeholder-gray-400 focus:outline-none transition-all duration-300"
+                className="w-full pl-4 pr-16 py-4 text-lg rounded-full text-[rgb(var(--domain-name-privacy-text-white))] placeholder:text-[rgb(var(--domain-name-privacy-register-input-placeholder))] focus:outline-none transition-all duration-300"
                 style={{ 
                   backgroundColor: 'rgba(var(--domain-name-privacy-register-input-bg))',
-                  borderColor: 'hsl(var(--cart-border-light))',
-                  color: 'rgb(var(--hosting-text-white))'
+                  borderColor: 'hsl(var(--cart-border-light))'
                 }}
                 onFocus={(e) => {
                   e.currentTarget.style.borderColor = 'hsl(var(--cart-border-lighter))';
@@ -96,14 +95,14 @@ const Register = () => {
                 onClick={() => handleSearch(searchTerm)}
                 className="absolute right-2 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg"
                 style={{ 
-                  backgroundColor: 'rgb(var(--hosting-blue-600))',
-                  color: 'rgb(var(--hosting-text-white))'
+                  backgroundColor: 'rgb(var(--domain-name-privacy-register-button-bg))',
+                  color: 'rgb(var(--domain-name-privacy-text-white))'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgb(var(--domain-transfer-button-hover))';
+                  e.currentTarget.style.backgroundColor = 'rgb(var(--domain-name-privacy-register-button-hover))';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgb(var(--hosting-blue-600))';
+                  e.currentTarget.style.backgroundColor = 'rgb(var(--domain-name-privacy-register-button-bg))';
                 }}
               >
                 <Search className="w-5 h-5" />

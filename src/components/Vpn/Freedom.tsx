@@ -43,12 +43,12 @@ const Freedom = () => {
         <div className="text-center space-y-8">
           <ContentHeading
             title="Freedom in your hands"
-            className="text-5xl sm:text-[4.5rem] md:text-[6rem] xl:text-[4.5rem] leading-tight tracking-tight mx-auto text-white"
+            className="text-5xl sm:text-[4.5rem] md:text-[6rem] xl:text-[4.5rem] leading-tight tracking-tight mx-auto text-[rgb(var(--vpn-on-dark-text))]"
           />
           <ContentDescription
             text="Instantly secure your online world, no matter how you connect."
             size="xl"
-            className="max-w-5xl mx-auto text-white/80"
+            className="max-w-5xl mx-auto text-[rgba(var(--vpn-on-dark-muted))]"
           />
         </div>
 
@@ -61,7 +61,9 @@ const Freedom = () => {
                 <span
                   key={platform.id}
                   className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                    selectedPlatform === platform.id ? "bg-white" : "bg-white/30"
+                    selectedPlatform === platform.id
+                      ? "bg-[rgb(var(--vpn-freedom-pill-selected-bg))]"
+                      : "bg-[rgba(var(--vpn-freedom-pill-unselected-bg))]"
                   }`}
                 />
               ))}
@@ -78,9 +80,9 @@ const Freedom = () => {
                 >
                   <h3
                     className={`font-semibold leading-tight mb-2 transition-colors ${
-                      selectedPlatform === platform.id 
-                        ? "text-2xl text-white" 
-                        : "text-xl text-gray-400"
+                      selectedPlatform === platform.id
+                        ? "text-2xl text-[rgb(var(--vpn-on-dark-text))]"
+                        : "text-xl text-[rgb(var(--vpn-freedom-tab-inactive-text))]"
                     }`}
                   >
                     {platform.name}
@@ -93,7 +95,7 @@ const Freedom = () => {
                     >
                       <ContentDescription
                         size="sm"
-                        className="text-white/70 leading-7"
+                        className="leading-7 text-[rgba(var(--vpn-on-dark-subdued))]"
                       >
                         {platform.description.split(/<br\s*\/?>/i).map((line, index, arr) => (
                           <React.Fragment key={index}>

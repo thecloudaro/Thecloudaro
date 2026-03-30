@@ -228,12 +228,11 @@ export default function UniversalDropdown({
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: -20, scale: 0.98 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className={`z-[9999] ${isHostingPage ? '' : 'border-t border-dropdown-border'} overflow-hidden bg-dropdown-bg-primary md:fixed md:top-14 sm:top-16 md:top-20 md:left-0 md:w-full md:h-[75vh] fixed inset-0 md:inset-auto`}
-        style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}
+        className={`z-[9999] ${isHostingPage ? '' : 'border-t border-[hsl(var(--dropdown-border))]'} overflow-hidden bg-[hsl(var(--dropdown-bg-primary))] md:fixed md:top-14 sm:top-16 md:top-20 md:left-0 md:w-full md:h-[75vh] fixed inset-0 md:inset-auto`}
         onClick={(e) => e.stopPropagation()}
       >
 {/* Mobile View */}
-<div className="md:hidden fixed top-0 left-0 right-0 h-screen overflow-y-auto z-[200] bg-dropdown-bg-primary" style={{ backgroundColor: 'hsl(210, 20%, 7%)' }}>
+<div className="md:hidden fixed top-0 left-0 right-0 h-screen overflow-y-auto z-[200] bg-[hsl(var(--dropdown-bg-primary))]">
   <AnimatePresence mode="wait">
     {!showMobileDetail ? (
       <motion.div
@@ -249,7 +248,7 @@ export default function UniversalDropdown({
 
   <button
     onClick={onClose}
-    className="text-dropdown-text-secondary hover:text-dropdown-text-primary transition-colors"
+    className="text-[hsl(var(--dropdown-text-secondary))] hover:text-[hsl(var(--dropdown-text-primary))] transition-colors"
   >
     <X size={24} />
   </button>
@@ -270,13 +269,13 @@ export default function UniversalDropdown({
               <h3 className="font-semibold text-sm" style={{ color: 'rgb(var(--navbar-mobile-menu-text))' }}>
                 Log in to TheCloudaro
               </h3>
-              <p className="text-dropdown-text-muted text-xs mt-1">
+              <p className="text-[hsl(var(--dropdown-text-muted))] text-xs mt-1">
                 Manage your products and Apps
               </p>
             </div>
           </div>
           <div className="flex items-center gap-2 text-xs">
-<span className="text-dropdown-text-muted">Don&apos;t have an account?</span>
+<span className="text-[hsl(var(--dropdown-text-muted))]">Don&apos;t have an account?</span>
             <Link
               href="/signup"
               className="font-medium hover:underline"
@@ -292,7 +291,7 @@ export default function UniversalDropdown({
           <Link
             href="/promotions"
             onClick={onClose}
-            className="w-full block rounded-full px-5 py-3 text-center text-xs font-semibold uppercase tracking-wide nav-promotions-gradient border border-white/10"
+            className="w-full block rounded-full px-5 py-3 text-center text-xs font-semibold uppercase tracking-wide nav-promotions-gradient border border-[rgba(var(--nav-promotions-border))]"
             style={{ color: "hsl(var(--nav-promotions-text))" }}
           >
             Promotions
@@ -312,7 +311,7 @@ export default function UniversalDropdown({
                     const navbarMenuName = mapKeyToMenu(item.key);
                     onMenuSelect?.(navbarMenuName);
                   }}
-                  className="w-full text-left flex items-center justify-between gap-3 px-3 py-3 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:scale-105"
+                  className="w-full text-left flex items-center justify-between gap-3 px-3 py-3 rounded-md transition-all duration-300 text-[hsl(var(--dropdown-text-secondary))] hover:scale-105"
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
                   }}
@@ -347,7 +346,7 @@ export default function UniversalDropdown({
                         const navbarMenuName = mapKeyToMenu(item.key!);
                         onMenuSelect?.(navbarMenuName);
                       }}
-                      className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:scale-105"
+                      className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-[hsl(var(--dropdown-text-secondary))] hover:scale-105"
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
                       }}
@@ -362,7 +361,7 @@ export default function UniversalDropdown({
                     <Link
                       href={item.href || "#"}
                       onClick={onClose}
-                      className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-dropdown-text-secondary hover:scale-105"
+                      className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-300 text-[hsl(var(--dropdown-text-secondary))] hover:scale-105"
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
                       }}
@@ -382,11 +381,11 @@ export default function UniversalDropdown({
 
         {/* Language & Currency - static text only */}
         <div className="mb-6 space-y-2">
-          <div className="flex items-center justify-between px-3 py-2 rounded-md bg-dropdown-bg-secondary text-dropdown-text-secondary">
+          <div className="flex items-center justify-between px-3 py-2 rounded-md bg-[hsl(var(--dropdown-bg-secondary))] text-[hsl(var(--dropdown-text-secondary))]">
             <span className="text-sm font-medium">English-US</span>
             <ChevronDown size={16} />
           </div>
-          <div className="flex items-center justify-between px-3 py-2 rounded-md bg-dropdown-bg-secondary text-dropdown-text-secondary">
+          <div className="flex items-center justify-between px-3 py-2 rounded-md bg-[hsl(var(--dropdown-bg-secondary))] text-[hsl(var(--dropdown-text-secondary))]">
             <span className="text-sm font-medium">US Dollar $</span>
             <ChevronDown size={16} />
           </div>
@@ -402,7 +401,7 @@ export default function UniversalDropdown({
       >
         {/* Back Button */}
         <div
-          className="flex items-center gap-2 text-dropdown-text-secondary mb-6 cursor-pointer"
+          className="flex items-center gap-2 text-[hsl(var(--dropdown-text-secondary))] mb-6 cursor-pointer"
           onClick={handleBackToMenu}
         >
           <ChevronLeft size={20} className="text-[hsl(var(--dropdown-text-primary))]" />
@@ -414,7 +413,7 @@ export default function UniversalDropdown({
             {/* Category Header */}
             <div className="flex items-center gap-3 mb-6">
               {getMenuIcon(selectedMenu)}
-              <h2 className="text-white text-xl font-bold">{currentMenu.title}</h2>
+              <h2 className="text-xl font-bold text-[hsl(var(--dropdown-text-primary))]">{currentMenu.title}</h2>
             </div>
 
             {/* Items List */}
@@ -424,7 +423,7 @@ export default function UniversalDropdown({
                   key={idx}
                   href={item.href || "#"}
                   onClick={onClose}
-                  className="group p-4 rounded-lg transition-all cursor-pointer border border-dropdown-border block"
+                  className="group p-4 rounded-lg transition-all cursor-pointer border border-[hsl(var(--dropdown-border))] block"
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = 'rgba(var(--dropdown-item-hover-bg))';
                   }}
@@ -432,10 +431,10 @@ export default function UniversalDropdown({
                     e.currentTarget.style.backgroundColor = 'transparent';
                   }}
                 >
-                  <h3 className="text-white font-semibold text-base mb-1">
+                  <h3 className="text-[hsl(var(--dropdown-text-primary))] font-semibold text-base mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-dropdown-text-muted text-sm">{item.desc}</p>
+                  <p className="text-[hsl(var(--dropdown-text-muted))] text-sm">{item.desc}</p>
                 </Link>
               ))}
             </div>
@@ -450,7 +449,7 @@ export default function UniversalDropdown({
       {/* Desktop View */}
       <div className="hidden md:flex h-full max-h-[80vh]">
         {/* Sidebar */}
-        <div className="bg-dropdown-bg-secondary border-r border-dropdown-border p-6 w-[18rem] flex flex-col" style={{ backgroundColor: 'hsl(210, 20%, 8%)' }}>
+        <div className="bg-[hsl(var(--dropdown-bg-secondary))] border-r border-[hsl(var(--dropdown-border))] p-6 w-[18rem] flex flex-col">
           <div className="flex-1 ml-[40px]">
 
 
@@ -580,7 +579,7 @@ export default function UniversalDropdown({
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-6 bg-dropdown-bg-primary relative overflow-y-auto max-h-[80vh]">
+        <div className="flex-1 p-6 bg-[hsl(var(--dropdown-bg-primary))] relative overflow-y-auto max-h-[80vh]">
           {currentMenu && (
             <>
               <SectionHeading title={currentMenu.title} showLine lineWidth="700px" />
@@ -599,10 +598,10 @@ export default function UniversalDropdown({
                       e.currentTarget.style.backgroundColor = 'transparent';
                     }}
                   >
-                    <h3 className="text-white font-semibold text-sm group-hover:text-white">
+                    <h3 className="text-[hsl(var(--dropdown-text-primary))] font-semibold text-sm group-hover:text-[hsl(var(--dropdown-text-primary))]">
                       {item.title}
                     </h3>
-                    <p className="text-dropdown-text-muted text-xs mt-1 leading-relaxed group-hover:text-white">{item.desc}</p>
+                    <p className="text-[hsl(var(--dropdown-text-muted))] text-xs mt-1 leading-relaxed group-hover:text-[hsl(var(--dropdown-text-primary))]">{item.desc}</p>
                   </Link>
                 ))}
               </div>

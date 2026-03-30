@@ -66,13 +66,14 @@ const DashboardPage = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[rgb(var(--customer-bg))] text-white">
+      <div className="flex min-h-screen items-center justify-center bg-[hsl(var(--customer-bg))] text-[hsl(var(--customer-text))]">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Error</h1>
-          <p className="text-red-500">{error}</p>
+          <h1 className="mb-4 text-2xl font-bold">Error</h1>
+          <p className="text-[rgb(var(--dashboard-error-text))]">{error}</p>
           <button
+            type="button"
             onClick={() => router.push('/login')}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="mt-4 rounded-lg px-4 py-2 text-[rgb(var(--dashboard-cta-text))] transition-colors bg-[rgb(var(--dashboard-cta-bg))] hover:bg-[rgb(var(--dashboard-cta-hover))]"
           >
             Go to Login
           </button>
@@ -82,9 +83,9 @@ const DashboardPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[rgb(var(--customer-bg))] text-white">
+    <div className="flex min-h-screen items-center justify-center bg-[hsl(var(--customer-bg))] text-[hsl(var(--customer-text))]">
       <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+        <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-[rgb(var(--dashboard-spinner-border))]" />
       </div>
     </div>
   );

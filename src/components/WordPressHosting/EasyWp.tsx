@@ -28,7 +28,7 @@ const tools: Record<
     image: "/WordPress/MalwareGuardian.png"
   },
   updates: {
-    title: "Automatic WordPress Updates <span class='uppercase text-[#7affc0]'>New</span>",
+    title: "Automatic WordPress Updates <span class='uppercase wp-easywp-new-badge'>New</span>",
     description:
       "Keep your WordPress site safe with automatic updates. If automatic updates are deactivated, they may need to be manuallyupdated.",
     image: "/WordPress/AutomaticWP.png"
@@ -107,7 +107,10 @@ const EasyWp = () => {
                     >
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: tool.title.replace("class='uppercase text-[#7affc0]'", `class='uppercase' style="color: rgb(var(--wp-easywp-badge-new))"`)
+                          __html: tool.title.replace(
+                            "class='uppercase wp-easywp-new-badge'",
+                            `class='uppercase' style="color: rgb(var(--wp-easywp-badge-new))"`
+                          )
                         }}
                       />
                     </div>

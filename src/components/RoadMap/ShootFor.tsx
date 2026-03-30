@@ -15,7 +15,7 @@ const ShootFor = () => {
     <div
       className="relative w-full min-h-[50vh] sm:min-h-[55vh] md:min-h-[60vh] flex items-center justify-center overflow-hidden"
       style={{ 
-        background: `linear-gradient(to bottom, rgb(17 24 39) 0%, hsl(var(--roadmap-shootfor-bg)) 20%, hsl(var(--roadmap-shootfor-bg)) 100%)`
+        background: `linear-gradient(to bottom, rgb(var(--roadmap-navbar-wrapper-bg)) 0%, hsl(var(--roadmap-shootfor-bg)) 20%, hsl(var(--roadmap-shootfor-bg)) 100%)`
       }}
     >
       
@@ -33,7 +33,8 @@ const ShootFor = () => {
         <div 
           className="absolute top-0 right-[35%] w-[15%] h-full"
           style={{
-            background: 'linear-gradient(to bottom, rgba(59, 130, 246, 1) 0%, rgba(37, 99, 235, 0.8) 30%, rgba(96, 165, 250, 0.4) 70%, transparent 100%)',
+            background:
+              'linear-gradient(to bottom, rgba(var(--roadmap-shootfor-core-500-100)) 0%, rgba(var(--roadmap-shootfor-core-600-80)) 30%, rgba(var(--roadmap-shootfor-core-400-40)) 70%, transparent 100%)',
             filter: 'blur(70px)',
           }}
         />
@@ -41,7 +42,8 @@ const ShootFor = () => {
         <div 
           className="absolute top-0 right-[10%] w-[50%] h-full"
           style={{
-            background: 'linear-gradient(to bottom, rgba(37, 99, 235, 0.4) 0%, rgba(59, 130, 246, 0.3) 40%, rgba(96, 165, 250, 0.15) 80%, transparent 100%)',
+            background:
+              'linear-gradient(to bottom, rgba(var(--roadmap-shootfor-wide-600-40)) 0%, rgba(var(--roadmap-shootfor-wide-500-30)) 40%, rgba(var(--roadmap-shootfor-wide-400-15)) 80%, transparent 100%)',
             filter: 'blur(120px)',
           }}
         />
@@ -58,7 +60,7 @@ const ShootFor = () => {
           <ContentDescription
             text="Shoot for the stars"
             size="xl"
-            className="text-3xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl leading-tight !text-white"
+            className="text-3xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl leading-tight !text-[rgb(var(--hosting-text-white))]"
           />
         </motion.div>
       </div>

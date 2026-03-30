@@ -19,12 +19,12 @@ export default function SectionHeading({
 
   return (
     <div className="flex items-center mb-1 whitespace-nowrap overflow-hidden">
-      <h3 className="text-[8px] sm:text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none">
+      <h3 className="text-[8px] sm:text-[9px] md:text-[10px] font-bold text-[rgb(var(--navbar-section-label-text))] uppercase tracking-wider leading-none">
         {title}
       </h3>
       {showLine && (
         <div
-          className="h-[1px] bg-slate-700 ml-2 flex-shrink"
+          className="h-[1px] bg-[rgb(var(--navbar-section-label-line))] ml-2 flex-shrink"
           style={{ width: normalizedWidth }}
         ></div>
       )}

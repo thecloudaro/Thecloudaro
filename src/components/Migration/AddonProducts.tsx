@@ -85,7 +85,7 @@ const AddonProducts = () => {
           />
           <ContentDescription
             text="Enhance your hosting with these powerful tools"
-            className="mt-4 text-base text-[rgb(var(--migration-choose-description))] sm:text-lg"
+            className="mt-4 text-base text-[rgba(var(--migration-choose-description))] sm:text-lg"
             size="md"
           />
         </div>

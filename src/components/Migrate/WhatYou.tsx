@@ -43,7 +43,7 @@ const WhatYou = () => {
         >
           <ContentHeading
             title="What you need for<br/>migration to EasyWP"
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl !text-white font-bold leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl !text-[rgb(var(--hosting-text-white))] font-bold leading-tight"
           />
         </motion.div>
 
@@ -56,9 +56,12 @@ const WhatYou = () => {
         >
           <ContentHeading
             title="Watch our video guide"
-            className="text-2xl sm:text-3xl !text-white font-bold leading-tight mb-6"
+            className="text-2xl sm:text-3xl !text-[rgb(var(--hosting-text-white))] font-bold leading-tight mb-6"
           />
-          <Button onClick={openModal} className="bg-blue-600 hover:bg-blue-700 text-white">
+          <Button
+            onClick={openModal}
+            className="bg-[rgb(var(--migrate-panel-cta-bg))] hover:bg-[rgb(var(--migrate-panel-cta-hover))] text-[rgb(var(--migrate-panel-cta-text))]"
+          >
             Watch Video
           </Button>
         </motion.div>
@@ -73,14 +76,14 @@ const WhatYou = () => {
           {/* Section 1: Website details */}
           <div className="mb-6 sm:mb-8 md:mb-10">
             <div className="flex items-center gap-3 mb-2 sm:mb-3">
-              <Folder className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              <Folder className="w-5 h-5 sm:w-6 sm:h-6 text-[rgb(var(--hosting-text-white))]" />
               <ContentDescription
                 text="Website details"
                 size="lg"
-                className="!text-lg sm:!text-xl md:!text-2xl !text-white font-bold"
+                className="!text-lg sm:!text-xl md:!text-2xl !text-[rgb(var(--hosting-text-white))] font-bold"
               />
             </div>
-            <ul className="space-y-2 sm:space-y-3 pl-0 sm:pl-8 text-xs" style={{ color: 'rgb(156 163 175)' }}>
+            <ul className="space-y-2 sm:space-y-3 pl-0 sm:pl-8 text-xs text-[rgb(var(--migrate-panel-text-muted))]">
               <li className="flex items-start gap-2">
                 <span className="mt-2">•</span>
                 <span>The full web address (URL) of your current website, e.g., https://yourdomain.com.</span>
@@ -97,24 +100,24 @@ const WhatYou = () => {
           </div>
 
           {/* Horizontal Line */}
-          <div className="border-t mb-6 sm:mb-8 md:mb-10 block max-w-2xl" style={{ borderColor: 'rgb(55 65 81)' }}></div>
+          <div className="border-t border-[rgb(var(--migrate-panel-divider))] mb-6 sm:mb-8 md:mb-10 block max-w-2xl" />
 
           {/* Section 2: File size and database account limits */}
           <div>
             <div className="flex items-center gap-3 mb-2 sm:mb-3">
-              <Folder className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              <Folder className="w-5 h-5 sm:w-6 sm:h-6 text-[rgb(var(--hosting-text-white))]" />
               <ContentDescription
                 text="File size and database account limits"
                 size="lg"
-                className="!text-lg sm:!text-xl md:!text-2xl !text-white font-bold"
+                className="!text-lg sm:!text-xl md:!text-2xl !text-[rgb(var(--hosting-text-white))] font-bold"
               />
             </div>
-            <p className="mb-2 sm:mb-3 text-xs" style={{ color: 'rgb(156 163 175)' }}>
+            <p className="mb-2 sm:mb-3 text-xs text-[rgb(var(--migrate-panel-text-muted))]">
               Before automatically migrating your website, we recommend checking that the size of your files and database are within<br/>the limits of your EasyWP account.
             
               The maximum available server disk space for your account depends on the EasyWP plan:
             </p>
-            <ul className="space-y-2 sm:space-y-3 pl-0 sm:pl-8 mb-2 sm:mb-3 text-xs" style={{ color: 'rgb(156 163 175)' }}>
+            <ul className="space-y-2 sm:space-y-3 pl-0 sm:pl-8 mb-2 sm:mb-3 text-xs text-[rgb(var(--migrate-panel-text-muted))]">
               <li className="flex items-start gap-2">
                 <span className="mt-2">•</span>
                 <span>EasyWP Starter: 10 GB</span>
@@ -128,7 +131,7 @@ const WhatYou = () => {
                 <span>EasyWP Supersonic 100 GB</span>
               </li>
             </ul>
-            <p className="text-xs" style={{ color: 'rgb(156 163 175)' }}>
+            <p className="text-xs text-[rgb(var(--migrate-panel-text-muted))]">
               The database size for each EasyWP plan is restricted to 3 GB.
               
               The database size does not count towards the subscription&apos;s<br/>overall disk usage.
@@ -136,7 +139,7 @@ const WhatYou = () => {
           </div>
 
           {/* Horizontal Line at the end */}
-          <div className="border-t mt-6 sm:mt-8 md:mt-10 block max-w-2xl" style={{ borderColor: 'rgb(55 65 81)' }}></div>
+          <div className="border-t border-[rgb(var(--migrate-panel-divider))] mt-6 sm:mt-8 md:mt-10 block max-w-2xl" />
         </motion.div>
       </div>
       <VideoModal

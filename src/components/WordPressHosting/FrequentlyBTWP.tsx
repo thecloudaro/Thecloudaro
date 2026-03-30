@@ -103,7 +103,7 @@ const SvgIcon = ({ card }: { card: ProductCard }) => {
     <svg
       viewBox="0 0 64 64"
       aria-hidden
-      className="h-14 w-14 text-white/90"
+      className="h-14 w-14 text-[rgba(var(--wp-frequentlybtwp-icon))]"
       fill="none"
       stroke="currentColor"
       strokeWidth="3.5"

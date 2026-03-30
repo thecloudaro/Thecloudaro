@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import ContentHeading from "@/components/ui/content-heading";
-import { migrateEmailStyles } from "@/lib/migrateEmailUtils";
+import { migrateEmailStyles, getCSSVariableRGBA } from "@/lib/migrateEmailUtils";
 
 interface FAQItem {
   question: string;
@@ -70,7 +70,7 @@ const MigrateEmailFAQ = () => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
               className="border-b"
-              style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }}
+              style={{ borderColor: getCSSVariableRGBA('choose-email-border-white-10') }}
             >
               <button
                 onClick={() => toggleFAQ(index)}

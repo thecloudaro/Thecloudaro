@@ -100,8 +100,8 @@ const DomainPrivacy = () => {
             </div>
 
             {/* Privacy Comparison */}
-            <div className="bg-gray-800/20 backdrop-blur-sm border border-gray-600 rounded-xl p-6">
-              <h4 className="text-xl font-semibold text-white mb-4">
+            <div className="bg-[rgba(var(--domain-common-bg-gray-800-20))] backdrop-blur-sm border border-[rgb(var(--domain-common-border-gray-600))] rounded-xl p-6">
+              <h4 className="text-xl font-semibold text-[rgb(var(--domain-common-text-white))] mb-4">
                 With vs Without Privacy Protection
               </h4>
               

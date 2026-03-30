@@ -740,7 +740,7 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(
             >
               <ContentHeading
                 title="Packages Web Hosting"
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white text-center"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[rgb(var(--hosting-text-white))] text-center"
               />
             </motion.div>
 
@@ -753,7 +753,7 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(
             >
               <ContentDescription
                 text="Terms Monthly, Yearly and Biennially."
-                className="text-lg sm:text-xl md:text-2xl text-center text-white"
+                className="text-lg sm:text-xl md:text-2xl text-center text-[rgb(var(--hosting-text-white))]"
               />
             </motion.div>
 
@@ -808,7 +808,7 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                   className={`relative rounded-2xl p-6 sm:p-8 w-full max-w-sm mx-auto md:max-w-none md:w-[320px] md:mx-1 ${
                     plan.popular
-                      ? "md:scale-105 md:-mt-4 shadow-[0px_20px_80px_rgba(77,208,225,0.15)]"
+                      ? "md:scale-105 md:-mt-4 shadow-[0px_20px_80px_rgba(var(--hosting-pick-popular-card-shadow))]"
                       : ""
                   }`}
                   style={{

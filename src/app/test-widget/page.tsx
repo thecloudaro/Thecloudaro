@@ -20,14 +20,12 @@ const TestWidgetPage = () => {
   };
 
   useEffect(() => {
-    // Get order config URL
     const configUrl = process.env.NEXT_PUBLIC_UPMIND_ORDER_CONFIG_URL || 'https://my.thecloudaro.com/order/product';
     setOrderConfigUrl(configUrl);
     addTestResult(`Order Config URL: ${configUrl}`);
     addTestResult(`Current Domain: ${window.location.hostname}`);
     addTestResult(`Current Origin: ${window.location.origin}`);
 
-    // Monitor for errors
     const handleError = (event: ErrorEvent) => {
       if (event.message && (event.message.includes('upm-dac') || event.message.includes('upmind'))) {
         addTestResult(`❌ Runtime Error: ${event.message}`);
@@ -43,11 +41,10 @@ const TestWidgetPage = () => {
     window.addEventListener('error', handleError);
     window.addEventListener('upm-dac-error', handleWidgetError);
 
-    // Monitor fetch requests
     const originalFetch = window.fetch;
     window.fetch = async (...args) => {
       const response = await originalFetch(...args);
-      
+
       if (args[0] && typeof args[0] === 'string' && args[0].includes('api.upmind.io')) {
         addTestResult(`📡 API Call: ${args[0]} - Status: ${response.status}`);
         if (response.status === 401) {
@@ -55,7 +52,7 @@ const TestWidgetPage = () => {
           setWidgetError('401 Unauthorized - Check domain registration in Upmind Settings → Domains');
         }
       }
-      
+
       return response;
     };
 
@@ -67,13 +64,12 @@ const TestWidgetPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Upmind Widget Test Page</h1>
-        
-        {/* Test Information */}
-        <div className="bg-gray-800 rounded-lg p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4">Test Configuration</h2>
+    <div className="min-h-screen bg-[rgb(var(--test-widget-page-bg))] p-8 text-[rgb(var(--test-widget-text))]">
+      <div className="mx-auto max-w-6xl">
+        <h1 className="mb-6 text-3xl font-bold">Upmind Widget Test Page</h1>
+
+        <div className="mb-6 rounded-lg bg-[rgb(var(--test-widget-panel-bg))] p-6">
+          <h2 className="mb-4 text-xl font-semibold">Test Configuration</h2>
           <div className="space-y-2 text-sm">
             <p><strong>Order Config URL:</strong> {orderConfigUrl || 'Loading...'}</p>
             <p><strong>Currency:</strong> USD</p>
@@ -82,7 +78,6 @@ const TestWidgetPage = () => {
           </div>
         </div>
 
-        {/* Widget Script */}
         <Script
           src="https://widgets.upmind.app/dac/upm-dac.min.js"
           strategy="lazyOnload"
@@ -96,18 +91,17 @@ const TestWidgetPage = () => {
           }}
         />
 
-        {/* Widget Container */}
-        <div className="bg-gray-800 rounded-lg p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4">Widget Display</h2>
-          {widgetError && (
-            <div className="bg-red-900/50 border border-red-500 rounded-lg p-4 mb-4">
-              <p className="text-red-200 font-semibold">Error Detected:</p>
-              <p className="text-red-300 text-sm mt-2">{widgetError}</p>
+        <div className="mb-6 rounded-lg bg-[rgb(var(--test-widget-panel-bg))] p-6">
+          <h2 className="mb-4 text-xl font-semibold">Widget Display</h2>
+          {widgetError ? (
+            <div className="mb-4 rounded-lg border border-[rgb(var(--test-widget-alert-border))] bg-[rgba(var(--test-widget-alert-bg))] p-4">
+              <p className="font-semibold text-[rgb(var(--test-widget-error-label))]">Error Detected:</p>
+              <p className="mt-2 text-sm text-[rgb(var(--test-widget-error-text))]">{widgetError}</p>
             </div>
-          )}
-          
+          ) : null}
+
           {widgetLoaded && orderConfigUrl ? (
-            <div className="bg-white rounded-lg p-6">
+            <div className="rounded-lg bg-[rgb(var(--test-widget-card-light-bg))] p-6">
               {/* @ts-ignore - Upmind custom element */}
               <upm-dac
                 order-config-url={orderConfigUrl}
@@ -115,23 +109,22 @@ const TestWidgetPage = () => {
               />
             </div>
           ) : (
-            <div className="bg-gray-700 rounded-lg p-6 text-center">
-              <p className="text-gray-300">
+            <div className="rounded-lg bg-[rgb(var(--test-widget-panel-inner))] p-6 text-center">
+              <p className="text-[rgb(var(--test-widget-text-muted))]">
                 {!orderConfigUrl ? 'Configuring...' : 'Loading widget...'}
               </p>
             </div>
           )}
         </div>
 
-        {/* Test Results Log */}
-        <div className="bg-gray-800 rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-4">Test Results Log</h2>
-          <div className="bg-black rounded-lg p-4 h-64 overflow-y-auto font-mono text-xs">
+        <div className="rounded-lg bg-[rgb(var(--test-widget-panel-bg))] p-6">
+          <h2 className="mb-4 text-xl font-semibold">Test Results Log</h2>
+          <div className="h-64 overflow-y-auto rounded-lg bg-[rgb(var(--test-widget-console-bg))] p-4 font-mono text-xs">
             {testResults.length === 0 ? (
-              <p className="text-gray-500">Waiting for test results...</p>
+              <p className="text-[rgb(var(--test-widget-text-subtle))]">Waiting for test results...</p>
             ) : (
               testResults.map((result, index) => (
-                <div key={index} className="mb-1 text-green-400">
+                <div key={index} className="mb-1 text-[rgb(var(--test-widget-success))]">
                   {result}
                 </div>
               ))
@@ -139,10 +132,9 @@ const TestWidgetPage = () => {
           </div>
         </div>
 
-        {/* Instructions */}
-        <div className="bg-blue-900/50 border border-blue-500 rounded-lg p-6 mt-6">
-          <h2 className="text-xl font-semibold mb-4">Testing Instructions</h2>
-          <ol className="list-decimal list-inside space-y-2 text-sm">
+        <div className="mt-6 rounded-lg border border-[rgb(var(--test-widget-info-panel-border))] bg-[rgba(var(--test-widget-info-panel-bg))] p-6">
+          <h2 className="mb-4 text-xl font-semibold">Testing Instructions</h2>
+          <ol className="list-inside list-decimal space-y-2 text-sm">
             <li>Check if widget script loads successfully</li>
             <li>Verify order-config-url is correct</li>
             <li>Test domain search functionality</li>
@@ -150,14 +142,17 @@ const TestWidgetPage = () => {
             <li>Monitor console for detailed error messages</li>
             <li>If widget works here, it can be implemented on main page</li>
           </ol>
-          <div className="mt-4 p-4 bg-blue-800/50 rounded">
-            <p className="font-semibold mb-2">⚠️ Important:</p>
+          <div className="mt-4 rounded bg-[rgba(var(--test-widget-info-inner-bg))] p-4">
+            <p className="mb-2 font-semibold">⚠️ Important:</p>
             <p className="text-sm">
               If you see 401 errors, you need to register this domain in Upmind Admin Panel:
               <br />
               <strong>Settings → Domains → Add Domain</strong>
               <br />
-              Domain: <code className="bg-black px-2 py-1 rounded">{typeof window !== 'undefined' ? window.location.hostname : 'your-domain'}</code>
+              Domain:{' '}
+              <code className="rounded bg-[rgb(var(--test-widget-code-bg))] px-2 py-1 text-[rgb(var(--test-widget-code-text))]">
+                {typeof window !== 'undefined' ? window.location.hostname : 'your-domain'}
+              </code>
             </p>
           </div>
         </div>

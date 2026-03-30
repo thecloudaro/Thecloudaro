@@ -279,7 +279,7 @@ const CloudHostingPlans = ({ billing, onCompareClick }: CloudHostingPlansProps) 
         ))}
       </div>
 
-      <p className="mt-10 text-center text-xs uppercase tracking-widest text-white/40">
+      <p className="mt-10 text-center text-xs uppercase tracking-widest text-[rgba(var(--cloud-hosting-plan-disclaimer))]">
         *Prices reflect discount on the first year.
       </p>
 
@@ -318,7 +318,7 @@ const PlanCard = ({ plan, billing }: PlanCardProps) => {
   return (
     <div
       className={cn(
-        "relative flex h-full w-full flex-col justify-between border border-white/10 p-8 text-left transition duration-300 hover:-translate-y-2 lg:min-w-[240px] lg:max-w-[280px]",
+        "relative flex h-full w-full flex-col justify-between border border-[rgba(var(--cloud-hosting-card-border))] p-8 text-left transition duration-300 hover:-translate-y-2 lg:min-w-[240px] lg:max-w-[280px]",
         isFeatured && "lg:scale-[1.015] lg:min-w-[260px] lg:max-w-[300px]"
       )}
       style={{
@@ -341,10 +341,10 @@ const PlanCard = ({ plan, billing }: PlanCardProps) => {
 
       <div className={cn("space-y-2", plan.badge ? "pt-10" : "")}>
         <h3 className="text-2xl font-semibold">{plan.name}</h3>
-        <p className="text-sm text-white/70">{plan.subtitle}</p>
+        <p className="text-sm text-[rgba(var(--cloud-hosting-plan-subtitle))]">{plan.subtitle}</p>
       </div>
 
-      <div className="mt-6 space-y-2 text-xs text-white/60">
+      <div className="mt-6 space-y-2 text-xs text-[rgba(var(--cloud-hosting-plan-meta))]">
         <div className="flex items-center gap-3">
           <span className="text-base line-through">{plan.regularPrice}</span>
         </div>
@@ -352,30 +352,30 @@ const PlanCard = ({ plan, billing }: PlanCardProps) => {
             <span className="text-4xl font-semibold leading-none tracking-tight">
             {plan.promoPrice}
           </span>
-            <span className="text-xs font-semibold text-white/70">
+            <span className="text-xs font-semibold text-[rgba(var(--cloud-hosting-plan-subtitle))]">
             {billing === "yearly" ? "/yr" : "/mo"}
           </span>
         </div>
         {billing === "yearly" && (
-          <p className="text-xs text-white/50">
+          <p className="text-xs text-[rgba(var(--cloud-hosting-plan-muted))]">
             ${(parseFloat(plan.promoPrice.replace('$', '')) / 12).toFixed(2)}/mo billed yearly
           </p>
         )}
         {plan.showPromoNote ? (
-          <p className="text-xs text-white/50">First month free with promo code</p>
+          <p className="text-xs text-[rgba(var(--cloud-hosting-plan-muted))]">First month free with promo code</p>
         ) : null}
       </div>
 
-      <div className="mt-6 flex flex-col gap-3 text-xs leading-relaxed text-white/80">
+      <div className="mt-6 flex flex-col gap-3 text-xs leading-relaxed text-[rgba(var(--cloud-hosting-plan-features))]">
         {plan.features.map((feature, index) => (
           <div key={index} className="pb-3 last:pb-0">
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
               {feature.label ? (
-                <span className="font-semibold text-white text-sm">
+                <span className="text-sm font-semibold text-[rgb(var(--cloud-hosting-plan-feature-label))]">
                   {feature.label}
                 </span>
               ) : null}
-              <span className="font-medium text-white underline decoration-dotted decoration-white/40 underline-offset-4 text-sm">
+              <span className="text-sm font-medium text-[rgb(var(--cloud-hosting-plan-feature-emphasis))] underline decoration-dotted underline-offset-4 decoration-[rgba(var(--cloud-hosting-plan-underline))]">
                 {feature.emphasis}
               </span>
             </div>

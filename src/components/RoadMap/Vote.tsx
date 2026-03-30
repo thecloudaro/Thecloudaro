@@ -209,18 +209,19 @@ const Vote = () => {
                 onClick={() => setActiveTab("under-review")}
                 className="pb-3 px-1 text-xs sm:text-sm font-medium transition-colors relative whitespace-nowrap"
                 style={{
-                  color: activeTab === "under-review" 
-                    ? 'rgb(37 99 235)' 
-                    : 'rgb(156 163 175)',
+                  color:
+                    activeTab === "under-review"
+                      ? "rgb(var(--roadmap-vote-category-bg))"
+                      : "rgb(var(--roadmap-vote-text-gray))",
                 }}
                 onMouseEnter={(e) => {
                   if (activeTab !== "under-review") {
-                    e.currentTarget.style.color = 'rgb(255 255 255)';
+                    e.currentTarget.style.color = "rgb(var(--roadmap-vote-text-white))";
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (activeTab !== "under-review") {
-                    e.currentTarget.style.color = 'rgb(156 163 175)';
+                    e.currentTarget.style.color = "rgb(var(--roadmap-vote-text-gray))";
                   }
                 }}
               >
@@ -229,7 +230,7 @@ const Vote = () => {
                   <motion.div
                     layoutId="activeTab"
                     className="absolute bottom-0 left-0 right-0 h-0.5"
-                    style={{ backgroundColor: 'rgb(37 99 235)' }}
+                    style={{ backgroundColor: "rgb(var(--roadmap-vote-category-bg))" }}
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
@@ -238,18 +239,19 @@ const Vote = () => {
                 onClick={() => setActiveTab("upcoming")}
                 className="pb-3 px-1 text-xs sm:text-sm font-medium transition-colors relative whitespace-nowrap"
                 style={{
-                  color: activeTab === "upcoming" 
-                    ? 'rgb(37 99 235)' 
-                    : 'rgb(156 163 175)',
+                  color:
+                    activeTab === "upcoming"
+                      ? "rgb(var(--roadmap-vote-category-bg))"
+                      : "rgb(var(--roadmap-vote-text-gray))",
                 }}
                 onMouseEnter={(e) => {
                   if (activeTab !== "upcoming") {
-                    e.currentTarget.style.color = 'rgb(255 255 255)';
+                    e.currentTarget.style.color = "rgb(var(--roadmap-vote-text-white))";
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (activeTab !== "upcoming") {
-                    e.currentTarget.style.color = 'rgb(156 163 175)';
+                    e.currentTarget.style.color = "rgb(var(--roadmap-vote-text-gray))";
                   }
                 }}
               >
@@ -258,7 +260,7 @@ const Vote = () => {
                   <motion.div
                     layoutId="activeTab"
                     className="absolute bottom-0 left-0 right-0 h-0.5"
-                    style={{ backgroundColor: 'rgb(37 99 235)' }}
+                    style={{ backgroundColor: "rgb(var(--roadmap-vote-category-bg))" }}
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
@@ -267,18 +269,19 @@ const Vote = () => {
                 onClick={() => setActiveTab("released")}
                 className="pb-3 px-1 text-xs sm:text-sm font-medium transition-colors relative whitespace-nowrap"
                 style={{
-                  color: activeTab === "released" 
-                    ? 'rgb(37 99 235)' 
-                    : 'rgb(156 163 175)',
+                  color:
+                    activeTab === "released"
+                      ? "rgb(var(--roadmap-vote-category-bg))"
+                      : "rgb(var(--roadmap-vote-text-gray))",
                 }}
                 onMouseEnter={(e) => {
                   if (activeTab !== "released") {
-                    e.currentTarget.style.color = 'rgb(255 255 255)';
+                    e.currentTarget.style.color = "rgb(var(--roadmap-vote-text-white))";
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (activeTab !== "released") {
-                    e.currentTarget.style.color = 'rgb(156 163 175)';
+                    e.currentTarget.style.color = "rgb(var(--roadmap-vote-text-gray))";
                   }
                 }}
               >
@@ -287,7 +290,7 @@ const Vote = () => {
                   <motion.div
                     layoutId="activeTab"
                     className="absolute bottom-0 left-0 right-0 h-0.5"
-                    style={{ backgroundColor: 'rgb(37 99 235)' }}
+                    style={{ backgroundColor: "rgb(var(--roadmap-vote-category-bg))" }}
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
@@ -301,14 +304,14 @@ const Vote = () => {
             <button
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors"
               style={{
-                backgroundColor: 'rgb(31 41 55)',
-                color: 'rgb(209 213 219)',
+                backgroundColor: "rgb(var(--roadmap-vote-chip-bg))",
+                color: "rgb(var(--roadmap-vote-chip-text))",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgb(55 65 81)';
+                e.currentTarget.style.backgroundColor = "rgb(var(--roadmap-vote-chip-hover-bg))";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgb(31 41 55)';
+                e.currentTarget.style.backgroundColor = "rgb(var(--roadmap-vote-chip-bg))";
               }}
             >
               <Filter className="w-3.5 h-3.5" />
@@ -317,14 +320,14 @@ const Vote = () => {
             <button
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors"
               style={{
-                backgroundColor: 'rgb(31 41 55)',
-                color: 'rgb(209 213 219)',
+                backgroundColor: "rgb(var(--roadmap-vote-chip-bg))",
+                color: "rgb(var(--roadmap-vote-chip-text))",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgb(55 65 81)';
+                e.currentTarget.style.backgroundColor = "rgb(var(--roadmap-vote-chip-hover-bg))";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgb(31 41 55)';
+                e.currentTarget.style.backgroundColor = "rgb(var(--roadmap-vote-chip-bg))";
               }}
             >
               <ArrowUpDown className="w-3.5 h-3.5" />
@@ -336,14 +339,14 @@ const Vote = () => {
             <button
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors"
               style={{
-                backgroundColor: 'rgb(37 99 235)',
-                color: 'rgb(255 255 255)',
+                backgroundColor: "rgb(var(--roadmap-vote-category-bg))",
+                color: "rgb(var(--roadmap-vote-text-white))",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgb(29 78 216)';
+                e.currentTarget.style.backgroundColor = "rgb(var(--roadmap-vote-request-hover-bg))";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgb(37 99 235)';
+                e.currentTarget.style.backgroundColor = "rgb(var(--roadmap-vote-category-bg))";
               }}
             >
               <Plus className="w-3.5 h-3.5" />

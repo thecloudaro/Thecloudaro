@@ -43,7 +43,7 @@ const TransferFrequentlyAskedQuestions = () => {
           <SectionHeading
             heading="Frequently asked questions"
             headingTag="h2"
-            headingClassName="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 text-center leading-tight sm:leading-tight md:leading-tight lg:leading-tight"
+            headingClassName="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-transfer-faq-heading mb-6 text-center leading-tight sm:leading-tight md:leading-tight lg:leading-tight"
           />
         </div>
 

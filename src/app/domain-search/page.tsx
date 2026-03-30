@@ -443,21 +443,6 @@ const DomainSearchPage = () => {
                   )}
                 </div>
 
-                {/* Localhost notice: only show after mount to avoid hydration mismatch */}
-                {isLocalhost && (
-                  <div
-                    className="rounded-xl p-4 flex items-center gap-3"
-                    style={{
-                      backgroundColor: "rgba(var(--domain-search-info-bg))",
-                      border: "1px solid rgba(var(--domain-search-info-border))",
-                    }}
-                  >
-                    <span className="text-sm" style={{ color: "rgb(var(--domain-search-info-text))" }}>
-                      <strong>Local:</strong> Upmind widget sirf production domain pe chalega (Upmind → Settings → Domains me add karein). Yahan neeche <strong>custom search</strong> use karein.
-                    </span>
-                  </div>
-                )}
-
                 {/* Widget Error Message */}
                 {widgetError && (
                   <div 
@@ -473,19 +458,23 @@ const DomainSearchPage = () => {
                         Widget 401 Error - Kyun Nahi Chal Raha?
                       </span>
                     </div>
-                    <div className="bg-red-900/20 border border-red-600/50 rounded-lg p-4 space-y-3">
+                    <div className="space-y-3 rounded-lg border border-[rgb(var(--domain-search-dev-red-border))] bg-[rgba(var(--domain-search-dev-red-bg))] p-4">
                       {/* Error Details */}
                       <div>
                         <p className="text-sm font-semibold mb-2" style={{ color: 'rgb(var(--domain-search-text))' }}>
                           ❌ Error Details:
                         </p>
-                        <div className="bg-black/30 rounded p-2 mb-2">
+                        <div className="mb-2 rounded bg-[rgba(var(--domain-search-debug-overlay))] p-2">
                           <code className="text-xs" style={{ color: 'rgb(var(--domain-search-text-muted))' }}>
                             {isLocalhost ? 'localhost (Not Supported)' : typeof window !== 'undefined' ? window.location.hostname : 'Unknown Domain'}
                           </code>
                         </div>
                         <p className="text-xs" style={{ color: 'rgb(var(--domain-search-text-muted))' }}>
-                          Widget <code className="bg-black/30 px-1 rounded">api.upmind.io/oauth/access_token</code> se <strong>guest token</strong> create karne ki koshish karta hai, lekin <strong>401 Unauthorized</strong> error aa raha hai.
+                          Widget{' '}
+                          <code className="rounded bg-[rgba(var(--domain-search-debug-code-bg))] px-1">
+                            api.upmind.io/oauth/access_token
+                          </code>{' '}
+                          se <strong>guest token</strong> create karne ki koshish karta hai, lekin <strong>401 Unauthorized</strong> error aa raha hai.
                         </p>
                       </div>
                       
@@ -500,7 +489,10 @@ const DomainSearchPage = () => {
                           <li>Sirf production domains (e.g., thecloudaro.com) register ho sakti hain</li>
                           <li>Isliye widget localhost par kaam nahi karta</li>
                         </ol>
-                        <p className="text-xs mt-2 p-2 bg-yellow-900/20 border border-yellow-600/50 rounded" style={{ color: 'rgb(var(--domain-search-text-muted))' }}>
+                        <p
+                          className="mt-2 rounded border border-[rgb(var(--domain-search-dev-yellow-border))] bg-[rgba(var(--domain-search-dev-yellow-bg))] p-2 text-xs"
+                          style={{ color: 'rgb(var(--domain-search-text-muted))' }}
+                        >
                           <strong>⚠️ Console me check karein:</strong> Browser console (F12) me detailed error logs milenge.
                         </p>
                       </div>
@@ -519,7 +511,7 @@ const DomainSearchPage = () => {
                               Apni actual domain (e.g., thecloudaro.com) <strong>Upmind Admin → Settings → Domains</strong> me add karein. Tab widget kaam karega.
                             </p>
                           </div>
-                          <div className="p-2 bg-blue-900/20 border border-blue-600/50 rounded">
+                          <div className="rounded border border-[rgb(var(--domain-search-dev-blue-border))] bg-[rgba(var(--domain-search-dev-blue-bg))] p-2">
                             <p className="text-xs font-semibold mb-1" style={{ color: 'rgb(var(--domain-search-text))' }}>
                               Development me:
                             </p>

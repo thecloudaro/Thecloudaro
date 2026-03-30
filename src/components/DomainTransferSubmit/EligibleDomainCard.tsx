@@ -41,7 +41,7 @@ const EligibleDomainCard: React.FC<EligibleDomainCardProps> = ({
           >
             <svg
               className="w-4 h-4"
-              style={{ color: 'rgb(var(--hosting-text-white))' }}
+              style={{ color: 'rgb(var(--domain-transfer-submit-button-text))' }}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -142,7 +142,7 @@ const EligibleDomainCard: React.FC<EligibleDomainCardProps> = ({
                 <>
                   <div
                     className="flex items-center gap-1 px-2 py-0.5 rounded-full"
-                    style={{ backgroundColor: 'hsl(var(--domain-transfer-lock-locked-bg))', color: 'rgb(var(--hosting-text-white))' }}
+                    style={{ backgroundColor: 'hsl(var(--domain-transfer-lock-locked-bg))', color: 'rgb(var(--domain-transfer-submit-button-text))' }}
                   >
                     <svg
                       className="w-3 h-3"

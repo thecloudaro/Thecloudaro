@@ -31,7 +31,7 @@ const VpnHero = () => {
 
       {/* Overlay for better text readability */}
       <div 
-        className="absolute inset-0 bg-white/10 pointer-events-none"
+        className="absolute inset-0 pointer-events-none bg-[rgba(var(--vpn-hero-image-overlay))]"
       />
 
       <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-8 sm:pb-12 md:pb-16">
