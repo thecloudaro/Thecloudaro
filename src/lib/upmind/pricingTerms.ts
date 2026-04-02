@@ -93,3 +93,69 @@ export function normalizeUpmindListPayload(data: unknown): any[] {
   if (inner && Array.isArray(inner.data)) return inner.data as any[];
   return [];
 }
+
+/**
+ * TLD module list rows often omit nested `prices.subscription_terms`; billing lives on the product.
+ * Fetch full product to get the same terms as Admin → Product billing.
+ */
+export async function fetchSubscriptionTermsForProduct(
+  productId: string,
+  apiToken: string
+): Promise<any[] | null> {
+  const endpoint = `https://api.upmind.io/api/admin/products/${encodeURIComponent(productId)}?with=prices,costs`;
+  const res = await fetch(endpoint, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${apiToken}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+  if (!res.ok) return null;
+  const data = await res.json();
+  const product =
+    (data as { data?: unknown }).data ??
+    (data as { product?: unknown }).product ??
+    data;
+  if (!product || typeof product !== "object") return null;
+  return extractSubscriptionTerms(product);
+}
+
+/**
+ * When list row has no nested terms, Upmind may still expose manual/display price on the row.
+ */
+export function buildSyntheticTermsFromModuleRow(o: Record<string, unknown>): any[] | null {
+  const manual =
+    o.manual_price ??
+    o.manual_recurring_price ??
+    o.recurring_price ??
+    null;
+  const display = o.display_price;
+  const monthsRaw = o.billing_cycle_months;
+  const months =
+    typeof monthsRaw === "number" && monthsRaw > 0 ? monthsRaw : 12;
+
+  let price: number | null = null;
+  if (manual != null && String(manual).trim() !== "") {
+    const n = typeof manual === "number" ? manual : parseFloat(String(manual));
+    if (!Number.isNaN(n) && n > 0) price = n;
+  }
+  if (price == null && display != null) {
+    const s = String(display).replace(/[^0-9.]/g, "");
+    const n = parseFloat(s);
+    if (!Number.isNaN(n) && n > 0) price = n;
+  }
+  if (price == null && o.price != null) {
+    const n = typeof o.price === "number" ? o.price : parseFloat(String(o.price));
+    if (!Number.isNaN(n) && n > 0) price = n;
+  }
+
+  if (price == null || price <= 0) return null;
+
+  const cc =
+    (typeof o.currency_code === "string" && o.currency_code) ||
+    (typeof o.currency === "string" && o.currency) ||
+    "USD";
+
+  return [{ price, currency_code: cc, billing_cycle_months: months }];
+}

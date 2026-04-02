@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
+  buildSyntheticTermsFromModuleRow,
   extractSubscriptionTerms,
+  fetchSubscriptionTermsForProduct,
   getAmountFromTerm,
   normalizeUpmindListPayload,
   pickPreferredDomainPriceTerm,
@@ -59,8 +61,10 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Domain category ID from Upmind (where .shop, .com, .xyz are configured)
-    const domainCategoryId = '5196e02e-5136-d426-837b-9429807875d3';
+    // Optional: set UPMIND_DOMAIN_CATEGORY_ID in .env to your Store catalogue → Domains category UUID.
+    const domainCategoryId =
+      process.env.UPMIND_DOMAIN_CATEGORY_ID?.trim() ||
+      '5196e02e-5136-d426-837b-9429807875d3';
     
     // First, try to fetch domain products from category endpoint (this will get the 3 configured domains)
     const categoryProductsEndpoint = `https://api.upmind.io/api/admin/catalogue/category/${domainCategoryId}/products?with=prices,costs`;
@@ -286,6 +290,16 @@ export async function GET(req: NextRequest) {
         }
       }
 
+      // TLD list rows are often stubs: full subscription terms live on the catalogue product.
+      if (!prices?.length && tldItem.id) {
+        const fromProduct = await fetchSubscriptionTermsForProduct(String(tldItem.id), apiToken);
+        if (fromProduct?.length) prices = fromProduct;
+      }
+      if (!prices?.length) {
+        const syn = buildSyntheticTermsFromModuleRow(tldItem as Record<string, unknown>);
+        if (syn?.length) prices = syn;
+      }
+
       if (!prices?.length) {
         if (skippedCount <= 3) {
           console.log(`⚠️ [Domain Search] No pricing found for TLD ${tld}. Item keys:`, Object.keys(tldItem));
@@ -374,40 +388,10 @@ export async function GET(req: NextRequest) {
       finalResults: limitedResults.length
     });
     
-    // If no results generated from pricing, build results only from Store catalogue (tldsList)
-    if (limitedResults.length === 0 && tldsList.length > 0) {
-      console.warn(`⚠️ [Domain Search] No domain results from pricing. Using Store catalogue TLDs only.`);
-      const defaultPrice = 10.99;
-
-      for (const tldItem of tldsList) {
-        let tld = '';
-        if (tldItem.tld) {
-          tld = String(tldItem.tld).toLowerCase();
-        } else if (tldItem.name) {
-          const nameStr = String(tldItem.name).toLowerCase().trim();
-          tld = nameStr.startsWith('.') ? nameStr : `.${nameStr}`;
-        } else {
-          const productName = String(tldItem.name || tldItem.title || tldItem.product_name || '').toLowerCase().trim();
-          if (productName.startsWith('.')) tld = productName;
-          else if (productName) tld = `.${productName}`;
-        }
-        if (!tld || !tld.startsWith('.')) continue;
-
-        limitedResults.push({
-          name: `${cleanSearchTerm}${tld}`,
-          available: true,
-          price: defaultPrice,
-          currency: 'USD',
-          popular: popularTlds.includes(tld),
-          premium: false,
-          tld,
-        });
-      }
-      console.log(`✅ [Domain Search] Created ${limitedResults.length} results from Store catalogue only`);
-    } else if (limitedResults.length > 0) {
+    if (limitedResults.length > 0) {
       console.log(`📊 [Domain Search] Sample results:`, limitedResults.slice(0, 3).map(d => ({ name: d.name, price: d.price, tld: d.tld })));
     } else {
-      console.warn(`⚠️ [Domain Search] No TLDs available to process!`);
+      console.warn(`⚠️ [Domain Search] No priced domain results from Upmind; returning empty list.`);
       if (tldsList.length > 0) {
         console.warn(`⚠️ [Domain Search] First TLD item structure:`, JSON.stringify(tldsList[0], null, 2).substring(0, 1000));
       }

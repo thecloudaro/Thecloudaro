@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
+  buildSyntheticTermsFromModuleRow,
   extractSubscriptionTerms,
+  fetchSubscriptionTermsForProduct,
   getAmountFromTerm,
   normalizeUpmindListPayload,
   pickPreferredDomainPriceTerm,
@@ -95,6 +97,15 @@ export async function GET(req: NextRequest) {
       }
       if (!prices?.length && Array.isArray((tldItem as any).pricing)) {
         prices = (tldItem as any).pricing;
+      }
+
+      if (!prices?.length && tldItem.id) {
+        const fromProduct = await fetchSubscriptionTermsForProduct(String(tldItem.id), apiToken);
+        if (fromProduct?.length) prices = fromProduct;
+      }
+      if (!prices?.length) {
+        const syn = buildSyntheticTermsFromModuleRow(tldItem as Record<string, unknown>);
+        if (syn?.length) prices = syn;
       }
 
       if (!prices?.length) {
