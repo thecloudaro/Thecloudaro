@@ -2,13 +2,25 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import Link from 'next/link';
 import Button from './Button';
 import ChatButton from '../ChatButton';
+
+interface DomainResult {
+  name: string;
+  available: boolean;
+  price: number;
+  currency: string;
+  tld?: string;
+}
 
 const HeroSection = () => {
   const [activeTab, setActiveTab] = useState('register');
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchError, setSearchError] = useState<string | null>(null);
+  const [result, setResult] = useState<DomainResult | null>(null);
 
   const { scrollY } = useScroll();
 
@@ -27,6 +39,54 @@ const HeroSection = () => {
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  const pickBestResult = (items: DomainResult[], term: string): DomainResult | null => {
+    if (!items.length) return null;
+    const clean = term.trim().toLowerCase();
+    const exact = items.find((x) => x.name.toLowerCase() === clean);
+    if (exact) return exact;
+    if (clean.includes('.')) {
+      const requestedTld = clean.slice(clean.lastIndexOf('.'));
+      const byTld = items.find((x) => x.tld?.toLowerCase() === requestedTld);
+      if (byTld) return byTld;
+    }
+    return items[0];
+  };
+
+  const handleSearch = async () => {
+    const value = searchTerm.trim();
+    if (!value) return;
+
+    setIsSearching(true);
+    setSearchError(null);
+    setResult(null);
+
+    try {
+      const res = await fetch(`/api/domain-search?term=${encodeURIComponent(value)}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        cache: 'no-store',
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data?.success || !Array.isArray(data?.domains)) {
+        setSearchError(data?.error || 'Unable to search domain right now.');
+        return;
+      }
+
+      const selected = pickBestResult(data.domains as DomainResult[], value);
+      if (!selected) {
+        setSearchError('No domain result found for this search.');
+        return;
+      }
+
+      setResult(selected);
+    } catch {
+      setSearchError('Network error while searching domain.');
+    } finally {
+      setIsSearching(false);
+    }
+  };
 
   return (
     <div className="relative min-h-screen overflow-hidden pt-2 sm:pt-6 lg:pt-10 bg-transparent transition-colors duration-500">
@@ -121,11 +181,16 @@ const HeroSection = () => {
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleSearch();
+                  }}
                   placeholder="Search for a domain name..."
                   className="flex-1 bg-transparent text-hero-text placeholder-hero-text-muted text-sm sm:text-base focus:outline-none placeholder:text-xs sm:placeholder:text-sm"
                 />
               </div>
-              <button 
+              <button
+                onClick={handleSearch}
+                disabled={isSearching}
                 className="text-[hsl(var(--hero-section-search-button-text))] px-3 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-xs sm:text-base relative"
                 style={{
                   background: 'hsl(var(--hero-section-search-button-bg))',
@@ -139,10 +204,40 @@ const HeroSection = () => {
                       'radial-gradient(circle at top, rgba(var(--hero-section-search-button-glow)) 0%, transparent 70%)',
                   }}
                 />
-                <span className="relative z-10">Search</span>
+                <span className="relative z-10">{isSearching ? 'Searching...' : 'Search'}</span>
               </button>
             </div>
           </div>
+
+          {(searchError || result) && (
+            <div className="mb-4 sm:mb-6 md:mb-8 rounded-2xl border border-hero-search-border bg-hero-search-bg backdrop-blur-md px-4 py-3 text-left">
+              {searchError ? (
+                <p className="text-xs sm:text-sm text-[hsl(var(--hero-text-muted))]">{searchError}</p>
+              ) : result ? (
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <div>
+                    <p className="text-sm sm:text-base font-semibold text-hero-text">{result.name}</p>
+                    <p className="text-xs sm:text-sm text-[hsl(var(--hero-text-muted))]">
+                      {result.available ? 'Available' : 'Unavailable'} • {result.currency} {result.price.toFixed(2)}/yr
+                    </p>
+                  </div>
+
+                  {result.available && (
+                    <Link
+                      href={activeTab === 'transfer' ? '/domain/transfer' : '/domain-search'}
+                      className="inline-flex items-center justify-center rounded-full px-4 py-2 text-xs sm:text-sm font-semibold text-[hsl(var(--hero-section-search-button-text))]"
+                      style={{
+                        background: 'hsl(var(--hero-section-search-button-bg))',
+                        border: '1px solid rgba(var(--hero-section-search-button-border-rgb))',
+                      }}
+                    >
+                      {activeTab === 'transfer' ? 'Transfer Now' : 'Buy Now'}
+                    </Link>
+                  )}
+                </div>
+              ) : null}
+            </div>
+          )}
 
 
          {/* Price snippet */}

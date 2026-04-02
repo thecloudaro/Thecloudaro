@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import TransferPricing from "@/components/Transfer/TransferPricing";
@@ -16,16 +17,14 @@ import SectionHeading from "@/components/ui/section-heading";
 const DomainTransferPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+  const router = useRouter();
 
   const handleSearch = async (term: string) => {
-    if (!term.trim()) return;
-    
+    const domain = term.trim();
+    if (!domain) return;
+
     setIsSearching(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSearching(false);
-    }, 1000);
+    router.push(`/domain/transfer/submit?domain=${encodeURIComponent(domain)}`);
   };
 
   return (

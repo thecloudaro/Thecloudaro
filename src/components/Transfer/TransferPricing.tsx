@@ -128,7 +128,7 @@ const TransferPricing = () => {
 
         {/* See More Button */}
         <div className="text-center mt-12">
-          <WhiteButton>
+          <WhiteButton href="/domain-search?tab=pricing">
             See More
           </WhiteButton>
         </div>

@@ -444,7 +444,7 @@ const DomainSearchPage = () => {
                 </div>
 
                 {/* Widget Error Message */}
-                {widgetError && (
+                {widgetError && !isLocalhost && (
                   <div 
                     className="rounded-xl p-5 flex flex-col space-y-3"
                     style={{ 

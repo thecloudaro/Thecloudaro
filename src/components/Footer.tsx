@@ -277,7 +277,7 @@ const Footer: React.FC = () => {
 
             {section.hasButton && (
               <Link href="/request-new-feature">
-                <Button className="mt-4 border border-footer-border text-footer-text-secondary hover:bg-footer-bg-secondary hover:text-footer-accent">
+                <Button className="mt-4 border border-footer-border bg-footer-bg-secondary text-footer-text-primary hover:bg-footer-accent hover:text-footer-bg-secondary">
                   Request New Feature
                 </Button>
               </Link>

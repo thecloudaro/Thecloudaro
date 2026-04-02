@@ -505,23 +505,24 @@ const DomainPricingTable = () => {
 
       {/* Bottom CTA */}
       <div className="text-center mt-12">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="px-8 py-4 rounded-full font-semibold transition-all duration-300"
-          style={{ 
-            backgroundColor: 'rgb(var(--domain-pricing-table-cta-button-bg))',
-            color: 'rgb(var(--hosting-text-white))'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-cta-button-hover))';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-cta-button-bg))';
-          }}
-        >
-          See More
-        </motion.button>
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
+          <Link
+            href="/domain-search?tab=pricing"
+            className="px-8 py-4 rounded-full font-semibold transition-all duration-300 inline-block"
+            style={{
+              backgroundColor: 'rgb(var(--domain-pricing-table-cta-button-bg))',
+              color: 'rgb(var(--hosting-text-white))'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-cta-button-hover))';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-cta-button-bg))';
+            }}
+          >
+            See More
+          </Link>
+        </motion.div>
       </div>
     </div>
   );
