@@ -4,7 +4,73 @@ import { useState, useEffect, forwardRef } from "react";
 import ContentHeading from "@/components/ui/content-heading";
 import HostingPlanControls, { BillingCycle } from "./HostingPlanControls";
 import { Info, ChevronDown } from "lucide-react";
-import { hostingPlanProductIds } from "@/config/hosting-plans";
+import {
+  hostingPlanProductIds,
+  businessPlanProductIds,
+  ecommercePlanProductIds,
+} from "@/config/hosting-plans";
+
+type HostingVariant = "shared" | "business" | "ecommerce";
+
+const SHARED_BUY_NOW_URLS: Record<string, string> = {
+  Essential:
+    "https://my.thecloudaro.com/order/product?pid=052d137e-08d2-410d-e07b-0495163789e6",
+  Pro: "https://my.thecloudaro.com/order/product?pid=2e071d93-1d5e-4687-100f-046028758396",
+  Supreme:
+    "https://my.thecloudaro.com/order/product?pid=196e02e5-136d-4205-39dc-9429807875d3",
+};
+
+const BUSINESS_BUY_NOW_URLS: Record<string, string> = {
+  Essential:
+    "https://my.thecloudaro.com/order/product?pid=7831d635-0d82-4908-538f-049e176259e0",
+  Pro: "https://my.thecloudaro.com/order/product?pid=d5308768-251d-4859-3e3b-747e390921e6",
+  Supreme:
+    "https://my.thecloudaro.com/order/product?pid=2e071d93-1d5e-4685-693a-046028758396",
+};
+
+const ECOMMERCE_BUY_NOW_URLS: Record<string, string> = {
+  Essential:
+    "https://my.thecloudaro.com/order/product?pid=196e02e5-136d-4201-7e2b-9429807875d3",
+  Pro: "https://my.thecloudaro.com/order/product?pid=052d137e-08d2-4101-670f-0495163789e6",
+  Supreme:
+    "https://my.thecloudaro.com/order/product?pid=61e50989-73d2-4750-792b-745e610832d7",
+};
+
+function buyNowUrlForPlan(
+  planName: string,
+  variant: HostingVariant
+): string {
+  const map =
+    variant === "business"
+      ? BUSINESS_BUY_NOW_URLS
+      : variant === "ecommerce"
+        ? ECOMMERCE_BUY_NOW_URLS
+        : SHARED_BUY_NOW_URLS;
+  return map[planName] ?? SHARED_BUY_NOW_URLS[planName] ?? "#";
+}
+
+/** Same fallback as PickYourHosting when API fails */
+const FALLBACK_PRICING: Record<
+  string,
+  { monthly: number; yearly: number; biyearly: number; originalMonthly?: number }
+> = {
+  Essential: {
+    monthly: 1,
+    yearly: 12,
+    biyearly: 24,
+    originalMonthly: 5,
+  },
+  Pro: {
+    monthly: 10,
+    yearly: 120,
+    biyearly: 240,
+  },
+  Supreme: {
+    monthly: 15,
+    yearly: 180,
+    biyearly: 360,
+  },
+};
 
 interface PricingInfo {
   price: number;
@@ -74,13 +140,6 @@ const defaultPlans: HostingPlan[] = [
     },
   },
 ];
-
-// Buy Now URLs for web hosting packages (order product page by plan)
-const BUY_NOW_URLS: Record<string, string> = {
-  Essential: "https://my.thecloudaro.com/order/product?pid=052d137e-08d2-410d-e07b-0495163789e6",
-  Pro: "https://my.thecloudaro.com/order/product?pid=2e071d93-1d5e-4687-100f-046028758396",
-  Supreme: "https://my.thecloudaro.com/order/product?pid=196e02e5-136d-4205-39dc-9429807875d3",
-};
 
 const featureRows = [
   {
@@ -272,7 +331,13 @@ const allPlansSections: AllPlansSection[] = [
   },
 ];
 
-const ChooseHosting = forwardRef<HTMLElement>((props, ref) => {
+export interface ChooseHostingProps {
+  /** Must match PickYourHosting on the same page so package cards and compare use the same Upmind products */
+  variant?: HostingVariant;
+}
+
+const ChooseHosting = forwardRef<HTMLElement, ChooseHostingProps>(
+  ({ variant = "shared" }, ref) => {
   const [billing, setBilling] = useState<BillingCycle>("monthly");
   const [dataCenter, setDataCenter] = useState("US");
   const [expandedSections, setExpandedSections] = useState<
@@ -280,70 +345,183 @@ const ChooseHosting = forwardRef<HTMLElement>((props, ref) => {
   >({});
   const [plans, setPlans] = useState<HostingPlan[]>(defaultPlans);
   const [loading, setLoading] = useState(true);
-  const [pricingLoaded, setPricingLoaded] = useState(false);
 
-  // Fetch pricing from API
+  // Same fetch + merge logic as PickYourHosting (ids JSON → /api/hosting-pricing)
   useEffect(() => {
     const fetchPricing = async () => {
       try {
-        // Get product IDs from config file
-        const essentialProductId = hostingPlanProductIds.Essential;
-        const proProductId = hostingPlanProductIds.Pro;
-        const supremeProductId = hostingPlanProductIds.Supreme;
+        const productIds =
+          variant === "business"
+            ? businessPlanProductIds
+            : variant === "ecommerce"
+              ? ecommercePlanProductIds
+              : hostingPlanProductIds;
 
-        // Only fetch if all product IDs are provided
-        if (!essentialProductId || !proProductId || !supremeProductId) {
-          console.error('❌ Product IDs not configured in hosting-plans.ts');
-          setPricingLoaded(false);
+        const productIdEntries = Object.entries(productIds).filter(
+          ([planName, productId]) =>
+            planName.trim().length > 0 &&
+            typeof productId === "string" &&
+            productId.trim().length > 0
+        );
+
+        if (productIdEntries.length === 0) {
+          console.error("[ChooseHosting] Product IDs not configured");
           setLoading(false);
           return;
         }
 
-        console.log('🚀 Fetching pricing from Upmind API...', {
-          essential: essentialProductId,
-          pro: proProductId,
-          supreme: supremeProductId,
-        });
+        const idsParam = encodeURIComponent(
+          JSON.stringify(Object.fromEntries(productIdEntries))
+        );
 
         const response = await fetch(
-          `/api/hosting-pricing?essential=${essentialProductId}&pro=${proProductId}&supreme=${supremeProductId}`,
+          `/api/hosting-pricing?ids=${idsParam}`,
           {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            cache: "no-store",
           }
         );
 
         const responseData = await response.json();
 
-        if (!response.ok) {
-          // Handle error response - log the actual error message
-          const errorMessage = responseData.error || responseData.message || `HTTP ${response.status}: ${response.statusText}`;
-          console.error('❌ API Error:', errorMessage);
-          console.error('❌ Full error response:', JSON.stringify(responseData, null, 2));
-          setPricingLoaded(false);
+        const applyFallbackPlans = () => {
+          setPlans(
+            defaultPlans.map((plan) => {
+              const fallback = FALLBACK_PRICING[plan.name];
+              if (!fallback) return plan;
+              return {
+                ...plan,
+                pricing: {
+                  monthly: {
+                    price: fallback.monthly,
+                    renewal: fallback.monthly,
+                    original:
+                      fallback.originalMonthly ?? fallback.monthly * 1.5,
+                    discountLabel: "",
+                    perMonth: fallback.monthly,
+                  },
+                  yearly: {
+                    price: fallback.yearly,
+                    renewal: fallback.yearly,
+                    original: fallback.yearly * 1.5,
+                    discountLabel: "",
+                    perMonth: fallback.yearly / 12,
+                  },
+                  biyearly: {
+                    price: fallback.biyearly,
+                    renewal: fallback.biyearly,
+                    original: fallback.biyearly * 1.5,
+                    discountLabel: "",
+                    perMonth: fallback.biyearly / 24,
+                  },
+                },
+              };
+            })
+          );
+        };
+
+        if (!response.ok || !responseData.pricing) {
+          console.error("[ChooseHosting] API error:", responseData.error);
+          applyFallbackPlans();
           setLoading(false);
           return;
         }
 
-        // Check if pricing data exists
-        if (!responseData.pricing) {
-          console.error('❌ No pricing data in response');
-          console.error('❌ Full response:', JSON.stringify(responseData, null, 2));
-          setPricingLoaded(false);
-          setLoading(false);
-          return;
-        }
-
-        console.log('✅ Pricing data received:', responseData.pricing);
-
-        // Update plans with fetched pricing from Upmind API
         const updatedPlans = defaultPlans.map((plan) => {
           const fetchedPricing = responseData.pricing[plan.name];
 
           if (!fetchedPricing) {
-            console.warn(`⚠️ No pricing found for ${plan.name} in API response`);
+            const fallback = FALLBACK_PRICING[plan.name];
+            if (!fallback) {
+              return {
+                ...plan,
+                pricing: {
+                  monthly: undefined,
+                  yearly: undefined,
+                  biyearly: undefined,
+                },
+              };
+            }
+            return {
+              ...plan,
+              pricing: {
+                monthly: {
+                  price: fallback.monthly,
+                  renewal: fallback.monthly,
+                  original:
+                    fallback.originalMonthly ?? fallback.monthly * 1.5,
+                  discountLabel: "",
+                  perMonth: fallback.monthly,
+                },
+                yearly: {
+                  price: fallback.yearly,
+                  renewal: fallback.yearly,
+                  original: fallback.yearly * 1.5,
+                  discountLabel: "",
+                  perMonth: fallback.yearly / 12,
+                },
+                biyearly: {
+                  price: fallback.biyearly,
+                  renewal: fallback.biyearly,
+                  original: fallback.biyearly * 1.5,
+                  discountLabel: "",
+                  perMonth: fallback.biyearly / 24,
+                },
+              },
+            };
+          }
+
+          const monthlyPrice =
+            fetchedPricing.monthly && fetchedPricing.monthly > 0
+              ? fetchedPricing.monthly
+              : null;
+          const yearlyPrice =
+            fetchedPricing.yearly && fetchedPricing.yearly > 0
+              ? fetchedPricing.yearly
+              : null;
+          const biyearlyPrice =
+            fetchedPricing.biyearly && fetchedPricing.biyearly > 0
+              ? fetchedPricing.biyearly
+              : null;
+
+          if (monthlyPrice || yearlyPrice || biyearlyPrice) {
+            return {
+              ...plan,
+              pricing: {
+                monthly: monthlyPrice
+                  ? {
+                      price: monthlyPrice,
+                      renewal: monthlyPrice,
+                      original: monthlyPrice * 1.5,
+                      discountLabel: "",
+                      perMonth: monthlyPrice,
+                    }
+                  : undefined,
+                yearly: yearlyPrice
+                  ? {
+                      price: yearlyPrice,
+                      renewal: yearlyPrice,
+                      original: yearlyPrice * 1.5,
+                      discountLabel: "",
+                      perMonth: yearlyPrice / 12,
+                    }
+                  : undefined,
+                biyearly: biyearlyPrice
+                  ? {
+                      price: biyearlyPrice,
+                      renewal: biyearlyPrice,
+                      original: biyearlyPrice * 1.5,
+                      discountLabel: "",
+                      perMonth: biyearlyPrice / 24,
+                    }
+                  : undefined,
+              },
+            };
+          }
+
+          const fallback = FALLBACK_PRICING[plan.name];
+          if (!fallback) {
             return {
               ...plan,
               pricing: {
@@ -353,72 +531,78 @@ const ChooseHosting = forwardRef<HTMLElement>((props, ref) => {
               },
             };
           }
-
-          // Extract pricing values - API may return simple numbers or full pricing objects
-          // For now, if API returns simple numbers, we'll structure them with calculated original/renewal
-          // When backend is ready, API should return: { price, original, renewal, discountLabel }
-          const processPricing = (price: number | null | undefined, cycle: string): PricingInfo | undefined => {
-            if (!price || price <= 0) return undefined;
-            
-            // If API returns full pricing object, use it (when backend is ready)
-            if (typeof price === 'object' && price !== null && 'price' in price) {
-              return price as PricingInfo;
-            }
-            
-            // Otherwise, calculate from current price (temporary until API provides full data)
-            const currentPrice = typeof price === 'number' ? price : parseFloat(String(price));
-            const originalPrice = currentPrice * 1.5; // Temporary calculation
-            const discountPercent = Math.round(((originalPrice - currentPrice) / originalPrice) * 100);
-            
-            return {
-              price: currentPrice,
-              original: originalPrice,
-              renewal: currentPrice,
-              discountLabel: `${discountPercent}% OFF*`,
-              perMonth: cycle === 'yearly' ? currentPrice / 12 : cycle === 'biyearly' ? currentPrice / 24 : currentPrice,
-            };
-          };
-
-          const monthly = processPricing(fetchedPricing.monthly, 'monthly');
-          const yearly = processPricing(fetchedPricing.yearly, 'yearly');
-          const biyearly = processPricing(fetchedPricing.biyearly, 'biyearly');
-
-          // Only update if at least one pricing value exists
-          if (monthly || yearly || biyearly) {
-            console.log(`✅ Updated ${plan.name} pricing:`, { monthly, yearly, biyearly });
-            return {
-              ...plan,
-              pricing: { monthly, yearly, biyearly },
-            };
-          }
-
-          console.warn(`⚠️ No valid pricing values for ${plan.name}`);
           return {
             ...plan,
             pricing: {
-              monthly: undefined,
-              yearly: undefined,
-              biyearly: undefined,
+              monthly: {
+                price: fallback.monthly,
+                renewal: fallback.monthly,
+                original:
+                  fallback.originalMonthly ?? fallback.monthly * 1.5,
+                discountLabel: "",
+                perMonth: fallback.monthly,
+              },
+              yearly: {
+                price: fallback.yearly,
+                renewal: fallback.yearly,
+                original: fallback.yearly * 1.5,
+                discountLabel: "",
+                perMonth: fallback.yearly / 12,
+              },
+              biyearly: {
+                price: fallback.biyearly,
+                renewal: fallback.biyearly,
+                original: fallback.biyearly * 1.5,
+                discountLabel: "",
+                perMonth: fallback.biyearly / 24,
+              },
             },
           };
         });
 
         setPlans(updatedPlans);
-        setPricingLoaded(true);
-        console.log('✅ All plans updated with Upmind pricing');
       } catch (error) {
-        // Handle network errors or JSON parsing errors
-        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-        console.error('❌ Failed to fetch pricing:', errorMessage);
-        console.error('❌ Error details:', error);
-        setPricingLoaded(false);
+        console.error("[ChooseHosting] Fetch failed:", error);
+        setPlans(
+          defaultPlans.map((plan) => {
+            const fallback = FALLBACK_PRICING[plan.name];
+            if (!fallback) return plan;
+            return {
+              ...plan,
+              pricing: {
+                monthly: {
+                  price: fallback.monthly,
+                  renewal: fallback.monthly,
+                  original:
+                    fallback.originalMonthly ?? fallback.monthly * 1.5,
+                  discountLabel: "",
+                  perMonth: fallback.monthly,
+                },
+                yearly: {
+                  price: fallback.yearly,
+                  renewal: fallback.yearly,
+                  original: fallback.yearly * 1.5,
+                  discountLabel: "",
+                  perMonth: fallback.yearly / 12,
+                },
+                biyearly: {
+                  price: fallback.biyearly,
+                  renewal: fallback.biyearly,
+                  original: fallback.biyearly * 1.5,
+                  discountLabel: "",
+                  perMonth: fallback.biyearly / 24,
+                },
+              },
+            };
+          })
+        );
       } finally {
         setLoading(false);
       }
     };
 
     fetchPricing();
-  }, []);
+  }, [variant]);
 
   const suffixMap: Record<BillingCycle, string> = {
     monthly: "/mo",
@@ -522,7 +706,7 @@ const ChooseHosting = forwardRef<HTMLElement>((props, ref) => {
                     )}
                   </div>
                 <a
-                  href={BUY_NOW_URLS[plan.name] ?? "#"}
+                  href={buyNowUrlForPlan(plan.name, variant)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block px-5 py-2.5 rounded-full text-xs font-semibold transition md:ml-auto text-center"
@@ -727,7 +911,8 @@ const ChooseHosting = forwardRef<HTMLElement>((props, ref) => {
       </div>
     </section>
   );
-});
+  }
+);
 
 ChooseHosting.displayName = "ChooseHosting";
 

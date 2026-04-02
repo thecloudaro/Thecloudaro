@@ -7,7 +7,14 @@ import HostingPlanControls, {
 } from "@/components/Hosting/HostingPlanControls";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { hostingPlanProductIds } from "@/config/hosting-plans";
 
+function buyNowUrlForPlan(planName: string): string {
+  const pid =
+    hostingPlanProductIds[planName as keyof typeof hostingPlanProductIds];
+  if (!pid) return "#";
+  return `https://my.thecloudaro.com/order/product?pid=${encodeURIComponent(pid)}`;
+}
 
 type HostingPlan = {
   name: string;
@@ -268,21 +275,26 @@ const ChooseYourHosting = () => {
                   {plan.features.wordpressAI && <li>WordPress AI Tools</li>}
                 </ul>
 
-                <button 
-                  className="mt-10 w-full rounded-full py-3 text-sm font-semibold transition"
-                  style={{ 
-                    backgroundColor: 'rgb(var(--migration-choose-button-bg))',
-                    color: 'rgb(var(--migration-choose-button-text))'
+                <a
+                  href={buyNowUrlForPlan(plan.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-10 block w-full rounded-full py-3 text-center text-sm font-semibold transition"
+                  style={{
+                    backgroundColor: "rgb(var(--migration-choose-button-bg))",
+                    color: "rgb(var(--migration-choose-button-text))",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgb(var(--migration-choose-button-hover))';
+                    e.currentTarget.style.backgroundColor =
+                      "rgb(var(--migration-choose-button-hover))";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgb(var(--migration-choose-button-bg))';
+                    e.currentTarget.style.backgroundColor =
+                      "rgb(var(--migration-choose-button-bg))";
                   }}
                 >
-                  Add to cart
-                </button>
+                  Buy Now
+                </a>
               </motion.article>
             );
           })}

@@ -1,18 +1,49 @@
 "use client";
 
-import { forwardRef, useMemo, useState } from "react";
+import { forwardRef, useMemo, useState, useEffect } from "react";
 import { ChevronDown, Info, ShoppingCart } from "lucide-react";
 import ContentHeading from "@/components/ui/content-heading";
 import HostingPlanControls, {
   BillingCycle
 } from "@/components/Hosting/HostingPlanControls";
+import { wordpressPlanProductIds } from "@/config/hosting-plans";
 
 type PlanKey = "starter" | "turbo" | "supersonic";
 
-interface PlanConfig {
+/** Same buy URLs as CloudHostingPlans */
+const BUY_NOW_URLS: Record<PlanKey, string> = {
+  starter: "https://my.thecloudaro.com/order/product?pid=93e8d569-d072-4568-03ea-64e853121607",
+  turbo: "https://my.thecloudaro.com/order/product?pid=5983e230-6e75-4003-7edc-d4981d210d76",
+  supersonic: "https://my.thecloudaro.com/order/product?pid=7831d635-0d82-490d-630a-049e176259e0",
+};
+
+interface PlanMeta {
   key: PlanKey;
   name: string;
-  pricing: Record<"monthly" | "yearly", number>;
+}
+
+const planList: PlanMeta[] = [
+  { key: "starter", name: "WordPress Basic" },
+  { key: "turbo", name: "WordPress Business" },
+  { key: "supersonic", name: "WordPress Business Pro" },
+];
+
+/** Fallback totals — aligned with CloudHostingPlans static yearly promos when API fails */
+const FALLBACK: Record<PlanKey, { monthly: number; yearlyTotal: number }> = {
+  starter: { monthly: 5.88, yearlyTotal: 59.88 },
+  turbo: { monthly: 9.88, yearlyTotal: 99.88 },
+  supersonic: { monthly: 12.88, yearlyTotal: 129.88 },
+};
+
+interface ApiPricing {
+  monthly?: number | null;
+  yearly?: number | null;
+}
+
+interface ApiPricingData {
+  Starter?: ApiPricing;
+  Turbo?: ApiPricing;
+  Supersonic?: ApiPricing;
 }
 
 interface FeatureValue {
@@ -30,33 +61,6 @@ interface FeatureRow {
   };
   showInfo?: boolean;
 }
-
-const plans: PlanConfig[] = [
-  {
-    key: "starter",
-    name: "WordPress Basic",
-    pricing: {
-      monthly: 5.88,
-      yearly: 4.88
-    }
-  },
-  {
-    key: "turbo",
-    name: "WordPress Business",
-    pricing: {
-      monthly: 9.88,
-      yearly: 7.88
-    }
-  },
-  {
-    key: "supersonic",
-    name: "WordPress Business Pro",
-    pricing: {
-      monthly: 12.88,
-      yearly: 9.88
-    }
-  }
-];
 
 const featureRows: FeatureRow[] = [
   {
@@ -142,26 +146,89 @@ const featureRows: FeatureRow[] = [
   }
 ];
 
-const priceSuffix: Record<BillingCycle, string> = {
-  monthly: "/mo",
-  yearly: "/mo* billed yearly",
-  biyearly: "/mo"
-};
-
 const ChooseWP = forwardRef<HTMLElement>((props, ref) => {
   const [billing, setBilling] = useState<BillingCycle>("monthly");
   const [dataCenter, setDataCenter] = useState("US");
   const [showAllServerFeatures, setShowAllServerFeatures] = useState(false);
+  const [apiPricing, setApiPricing] = useState<ApiPricingData | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const formattedPlans = useMemo(
-    () =>
-      plans.map((plan) => ({
+  useEffect(() => {
+    const fetchPricing = async () => {
+      try {
+        const starterProductId = wordpressPlanProductIds.wordpressBasic;
+        const turboProductId = wordpressPlanProductIds.wordpressBusiness;
+        const supersonicProductId = wordpressPlanProductIds.wordpressBusinessPro;
+        if (!starterProductId || !turboProductId || !supersonicProductId) {
+          setApiPricing(null);
+          setLoading(false);
+          return;
+        }
+        const response = await fetch(
+          `/api/wordpress-pricing?starter=${starterProductId}&turbo=${turboProductId}&supersonic=${supersonicProductId}`,
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            cache: "no-store",
+          }
+        );
+        const responseData = await response.json();
+        if (!response.ok || !responseData.pricing) {
+          setApiPricing(null);
+        } else {
+          setApiPricing(responseData.pricing);
+        }
+      } catch {
+        setApiPricing(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPricing();
+  }, []);
+
+  const formattedPlans = useMemo(() => {
+    return planList.map((plan) => {
+      const apiKey =
+        plan.key === "starter"
+          ? "Starter"
+          : plan.key === "turbo"
+            ? "Turbo"
+            : "Supersonic";
+      const pricing = apiPricing?.[apiKey as keyof ApiPricingData];
+      const fb = FALLBACK[plan.key];
+
+      const monthlyFromApi =
+        pricing?.monthly && pricing.monthly > 0 ? pricing.monthly : null;
+      const yearlyFromApi =
+        pricing?.yearly && pricing.yearly > 0
+          ? pricing.yearly
+          : monthlyFromApi
+            ? monthlyFromApi * 12
+            : null;
+
+      const monthly = monthlyFromApi ?? fb.monthly;
+      const yearlyTotal = yearlyFromApi ?? fb.yearlyTotal;
+
+      if (billing === "monthly") {
+        return {
+          ...plan,
+          displayPrice: `$${monthly.toFixed(2)}`,
+          suffix: "/mo" as const,
+          yearlyBilledLine: null as string | null,
+          loading,
+        };
+      }
+
+      return {
         ...plan,
-        displayPrice: `$${plan.pricing[billing as "monthly" | "yearly"].toFixed(2)}`,
-        suffix: priceSuffix[billing]
-      })),
-    [billing]
-  );
+        displayPrice: `$${yearlyTotal.toFixed(2)}`,
+        suffix: "/yr" as const,
+        yearlyBilledLine: `$${(yearlyTotal / 12).toFixed(2)}/mo billed yearly`,
+        loading,
+      };
+    });
+  }, [billing, apiPricing, loading]);
 
   return (
     <section ref={ref} className="py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'rgb(var(--wp-choosewp-bg))', color: 'rgb(var(--wp-choosewp-heading))' }}>
@@ -198,17 +265,33 @@ const ChooseWP = forwardRef<HTMLElement>((props, ref) => {
                 <h3 className="text-[1.6rem] font-semibold" style={{ color: 'rgb(var(--wp-choosewp-plan-name))' }}>
                   {plan.name}
                 </h3>
-                <div className="text-xl font-semibold tracking-tight" style={{ color: 'rgb(var(--wp-choosewp-price))' }}>
-                  {plan.displayPrice}
-                  <span className="ml-2 text-[0.7rem]" style={{ color: 'rgba(var(--wp-choosewp-price-suffix))' }}>
-                    {plan.suffix}
-                  </span>
-                </div>
-                <button 
+                {plan.loading ? (
+                  <div className="text-sm" style={{ color: 'rgba(var(--wp-choosewp-description))' }}>
+                    Loading…
+                  </div>
+                ) : (
+                  <div className="space-y-1">
+                    <div className="text-xl font-semibold tracking-tight" style={{ color: 'rgb(var(--wp-choosewp-price))' }}>
+                      {plan.displayPrice}
+                      <span className="ml-2 text-[0.7rem]" style={{ color: 'rgba(var(--wp-choosewp-price-suffix))' }}>
+                        {plan.suffix}
+                      </span>
+                    </div>
+                    {plan.yearlyBilledLine ? (
+                      <p className="text-[0.65rem]" style={{ color: 'rgba(var(--wp-choosewp-description))' }}>
+                        {plan.yearlyBilledLine}
+                      </p>
+                    ) : null}
+                  </div>
+                )}
+                <a
+                  href={BUY_NOW_URLS[plan.key]}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mx-auto flex items-center justify-center gap-2 rounded-full px-6 py-2 text-xs font-semibold uppercase tracking-wide transition"
-                  style={{ 
+                  style={{
                     backgroundColor: 'rgb(var(--wp-choosewp-button-bg))',
-                    color: 'rgb(var(--wp-choosewp-button-text))'
+                    color: 'rgb(var(--wp-choosewp-button-text))',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = 'rgba(var(--wp-choosewp-button-hover))';
@@ -219,7 +302,7 @@ const ChooseWP = forwardRef<HTMLElement>((props, ref) => {
                 >
                   <ShoppingCart className="h-3.5 w-3.5" strokeWidth={2} />
                   Buy now
-                </button>
+                </a>
               </div>
             ))}
           </div>

@@ -84,7 +84,7 @@ export default function HostingPage() {
       <ToolHosting />
 
       {/* Choose Hosting Section */}
-      <ChooseHosting ref={chooseHostingRef} />
+      <ChooseHosting ref={chooseHostingRef} variant="shared" />
 
       {/* AutoBackup Section */}
       <AutoBackupSection />
