@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { Search, CheckCircle, XCircle, Star } from "lucide-react";
 import DomainPricingTable from "@/components/Domain/DomainPricingTable";
 import BackToTopButton from "@/components/BackToTopButton";
 import Script from "next/script";
+import { buildDomainBuyUrl } from "@/lib/upmind/domainCheckoutUrl";
 
 interface DomainResult {
   name: string;
@@ -15,6 +16,9 @@ interface DomainResult {
   originalPrice?: number;
   popular?: boolean;
   premium?: boolean;
+  tld?: string;
+  productId?: string;
+  billingCycleMonths?: number;
 }
 
 interface TldItem {
@@ -37,6 +41,7 @@ const DomainSearchPage = () => {
   const [domainNamesLoading, setDomainNamesLoading] = useState(false);
   const [domainNamesError, setDomainNamesError] = useState<string | null>(null);
   const [isLocalhost, setIsLocalhost] = useState(false);
+  const domainSearchRequestId = useRef(0);
 
   useEffect(() => {
     setIsLocalhost(
@@ -115,7 +120,8 @@ const DomainSearchPage = () => {
   const handleSearch = async (term: string) => {
     // Allow empty search term - will show all available domains
     const searchTerm = term.trim() || 'example';
-    
+
+    const id = ++domainSearchRequestId.current;
     console.log('🔍 [DomainSearchPage] Starting search for:', searchTerm);
     setIsSearching(true);
     setSearchError(null);
@@ -140,6 +146,7 @@ const DomainSearchPage = () => {
       if (!response.ok) {
         const errorText = await response.text();
         console.error(`❌ [DomainSearchPage] HTTP Error: ${response.status}`, errorText);
+        if (id !== domainSearchRequestId.current) return;
         setSearchError(`Server error: ${response.status}. Please try again.`);
         setSearchResults([]);
         return;
@@ -157,6 +164,7 @@ const DomainSearchPage = () => {
 
       if (!response.ok || !data.success) {
         const errorMsg = data?.error || "Failed to search domains. Please try again.";
+        if (id !== domainSearchRequestId.current) return;
         setSearchError(errorMsg);
         setSearchResults([]);
         console.error('[DomainSearchPage] ❌ API error:', errorMsg);
@@ -166,21 +174,25 @@ const DomainSearchPage = () => {
 
       if (data.domains && Array.isArray(data.domains)) {
         if (data.domains.length > 0) {
+          if (id !== domainSearchRequestId.current) return;
           setSearchResults(data.domains);
           setSearchError(null);
           console.log(`✅ [DomainSearchPage] Loaded ${data.domains.length} domain results from Upmind API`);
           console.log(`📋 [DomainSearchPage] Sample results:`, data.domains.slice(0, 3));
         } else {
+          if (id !== domainSearchRequestId.current) return;
           setSearchResults([]);
           setSearchError("No domains found. Please try a different search term.");
           console.warn('[DomainSearchPage] ⚠️ No domains in response array');
         }
       } else {
+        if (id !== domainSearchRequestId.current) return;
         setSearchResults([]);
         setSearchError("No domains found. Please try a different search term.");
         console.warn('[DomainSearchPage] ⚠️ Invalid response structure:', data);
       }
     } catch (error) {
+      if (id !== domainSearchRequestId.current) return;
       const errorMsg = error instanceof Error ? error.message : "Failed to search domains. Please try again.";
       setSearchError(errorMsg);
       setSearchResults([]);
@@ -193,7 +205,9 @@ const DomainSearchPage = () => {
         setSearchError("Network error: Could not reach the server. Please check your connection and try again.");
       }
     } finally {
-      setIsSearching(false);
+      if (id === domainSearchRequestId.current) {
+        setIsSearching(false);
+      }
       console.log('🔍 [DomainSearchPage] Search completed');
     }
   };
@@ -560,7 +574,16 @@ const DomainSearchPage = () => {
                       <input
                         type="text"
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onChange={(e) => {
+                          const v = e.target.value;
+                          setSearchTerm(v);
+                          if (!v.trim()) {
+                            domainSearchRequestId.current += 1;
+                            setSearchResults([]);
+                            setSearchError(null);
+                            setIsSearching(false);
+                          }
+                        }}
                         onKeyDown={(e) => {
                           if (e.key === "Enter") {
                             handleSearch(searchTerm);
@@ -669,10 +692,18 @@ const DomainSearchPage = () => {
             >
               <div className="text-center">
                 <h2 className="text-3xl font-bold mb-2" style={{ color: 'rgb(var(--domain-search-heading))' }}>
-                  Available Domains
+                  All extensions
                 </h2>
                 <p className="text-sm" style={{ color: 'rgb(var(--domain-search-text))' }}>
-                  Found {searchResults.length} domain{searchResults.length !== 1 ? 's' : ''} for "{searchTerm}"
+                  {searchResults.length} result{searchResults.length !== 1 ? 's' : ''} for &quot;{searchTerm}&quot;
+                  {' · '}
+                  <span style={{ color: 'rgb(var(--domain-search-available-text))' }}>
+                    {searchResults.filter((r) => r.available).length} available
+                  </span>
+                  {', '}
+                  <span style={{ color: 'rgb(var(--domain-search-unavailable-text))' }}>
+                    {searchResults.filter((r) => !r.available).length} taken
+                  </span>
                 </p>
               </div>
               
@@ -748,7 +779,11 @@ const DomainSearchPage = () => {
 
                     {result.available && (
                       <motion.a
-                        href={`${orderConfigUrl || 'https://my.thecloudaro.com/order/product'}${(orderConfigUrl || '').includes('?') ? '&' : '?'}domain=${encodeURIComponent(result.name)}`}
+                        href={buildDomainBuyUrl({
+                          domainName: result.name,
+                          productId: result.productId,
+                          billingCycleMonths: result.billingCycleMonths,
+                        })}
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}

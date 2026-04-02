@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Link from 'next/link';
 import Button from './Button';
 import ChatButton from '../ChatButton';
+import { buildDomainBuyUrl } from '@/lib/upmind/domainCheckoutUrl';
 
 interface DomainResult {
   name: string;
@@ -12,6 +13,9 @@ interface DomainResult {
   price: number;
   currency: string;
   tld?: string;
+  productId?: string;
+  billingCycleMonths?: number;
+  popular?: boolean;
 }
 
 const HeroSection = () => {
@@ -20,7 +24,8 @@ const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
-  const [result, setResult] = useState<DomainResult | null>(null);
+  const [results, setResults] = useState<DomainResult[]>([]);
+  const heroSearchRequestId = useRef(0);
 
   const { scrollY } = useScroll();
 
@@ -40,26 +45,23 @@ const HeroSection = () => {
     setIsLoaded(true);
   }, []);
 
-  const pickBestResult = (items: DomainResult[], term: string): DomainResult | null => {
-    if (!items.length) return null;
-    const clean = term.trim().toLowerCase();
-    const exact = items.find((x) => x.name.toLowerCase() === clean);
-    if (exact) return exact;
-    if (clean.includes('.')) {
-      const requestedTld = clean.slice(clean.lastIndexOf('.'));
-      const byTld = items.find((x) => x.tld?.toLowerCase() === requestedTld);
-      if (byTld) return byTld;
-    }
-    return items[0];
+  const sortDomainResults = (items: DomainResult[]): DomainResult[] => {
+    return [...items].sort((a, b) => {
+      if (a.available !== b.available) return a.available ? -1 : 1;
+      if (a.popular && !b.popular) return -1;
+      if (!a.popular && b.popular) return 1;
+      return a.price - b.price;
+    });
   };
 
   const handleSearch = async () => {
     const value = searchTerm.trim();
     if (!value) return;
 
+    const id = ++heroSearchRequestId.current;
     setIsSearching(true);
     setSearchError(null);
-    setResult(null);
+    setResults([]);
 
     try {
       const res = await fetch(`/api/domain-search?term=${encodeURIComponent(value)}`, {
@@ -70,21 +72,27 @@ const HeroSection = () => {
       const data = await res.json();
 
       if (!res.ok || !data?.success || !Array.isArray(data?.domains)) {
+        if (id !== heroSearchRequestId.current) return;
         setSearchError(data?.error || 'Unable to search domain right now.');
         return;
       }
 
-      const selected = pickBestResult(data.domains as DomainResult[], value);
-      if (!selected) {
+      const list = data.domains as DomainResult[];
+      if (!list.length) {
+        if (id !== heroSearchRequestId.current) return;
         setSearchError('No domain result found for this search.');
         return;
       }
 
-      setResult(selected);
+      if (id !== heroSearchRequestId.current) return;
+      setResults(sortDomainResults(list));
     } catch {
+      if (id !== heroSearchRequestId.current) return;
       setSearchError('Network error while searching domain.');
     } finally {
-      setIsSearching(false);
+      if (id === heroSearchRequestId.current) {
+        setIsSearching(false);
+      }
     }
   };
 
@@ -180,7 +188,16 @@ const HeroSection = () => {
                 <input
                   type="text"
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    setSearchTerm(v);
+                    if (!v.trim()) {
+                      heroSearchRequestId.current += 1;
+                      setResults([]);
+                      setSearchError(null);
+                      setIsSearching(false);
+                    }
+                  }}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') handleSearch();
                   }}
@@ -209,33 +226,85 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {(searchError || result) && (
-            <div className="mb-4 sm:mb-6 md:mb-8 rounded-2xl border border-hero-search-border bg-hero-search-bg backdrop-blur-md px-4 py-3 text-left">
+          {(searchError || results.length > 0) && (
+            <div className="mb-4 sm:mb-6 md:mb-8 w-full rounded-2xl border border-hero-search-border bg-hero-search-bg backdrop-blur-md px-4 py-3 text-left">
               {searchError ? (
                 <p className="text-xs sm:text-sm text-[hsl(var(--hero-text-muted))]">{searchError}</p>
-              ) : result ? (
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                  <div>
-                    <p className="text-sm sm:text-base font-semibold text-hero-text">{result.name}</p>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
                     <p className="text-xs sm:text-sm text-[hsl(var(--hero-text-muted))]">
-                      {result.available ? 'Available' : 'Unavailable'} • {result.currency} {result.price.toFixed(2)}/yr
+                      {results.length} extension{results.length !== 1 ? 's' : ''} ·{' '}
+                      {results.filter((r) => r.available).length} available ·{' '}
+                      {results.filter((r) => !r.available).length} taken
                     </p>
-                  </div>
-
-                  {result.available && (
                     <Link
-                      href={activeTab === 'transfer' ? '/domain/transfer' : '/domain-search'}
-                      className="inline-flex items-center justify-center rounded-full px-4 py-2 text-xs sm:text-sm font-semibold text-[hsl(var(--hero-section-search-button-text))]"
-                      style={{
-                        background: 'hsl(var(--hero-section-search-button-bg))',
-                        border: '1px solid rgba(var(--hero-section-search-button-border-rgb))',
-                      }}
+                      href={`/domain-search?term=${encodeURIComponent(searchTerm.trim())}`}
+                      className="text-xs sm:text-sm font-medium text-hero-text underline underline-offset-2 hover:opacity-90"
                     >
-                      {activeTab === 'transfer' ? 'Transfer Now' : 'Buy Now'}
+                      Open full page
                     </Link>
-                  )}
+                  </div>
+                  <div className="max-h-64 sm:max-h-80 overflow-y-auto space-y-2 pr-1 -mr-1">
+                    {results.map((row) => (
+                      <div
+                        key={row.name}
+                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-xl border border-hero-search-border/60 bg-hero-search-bg/50 px-3 py-2"
+                      >
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm sm:text-base font-semibold text-hero-text truncate">
+                            {row.name}
+                          </p>
+                          <p className="text-xs text-[hsl(var(--hero-text-muted))]">
+                            {row.available ? (
+                              <span className="font-medium text-hero-text">Available</span>
+                            ) : (
+                              <span className="font-medium text-hero-text opacity-70">Taken</span>
+                            )}
+                            {' · '}
+                            {row.currency} {row.price.toFixed(2)}/yr
+                          </p>
+                        </div>
+                        <div className="shrink-0 flex sm:justify-end">
+                          {activeTab === 'transfer' ? (
+                            <Link
+                              href={`/domain/transfer/submit?domain=${encodeURIComponent(row.name)}`}
+                              className="inline-flex items-center justify-center rounded-full px-3 py-1.5 text-xs font-semibold text-[hsl(var(--hero-section-search-button-text))]"
+                              style={{
+                                background: 'hsl(var(--hero-section-search-button-bg))',
+                                border: '1px solid rgba(var(--hero-section-search-button-border-rgb))',
+                              }}
+                            >
+                              Transfer
+                            </Link>
+                          ) : row.available ? (
+                            <a
+                              href={buildDomainBuyUrl({
+                                domainName: row.name,
+                                productId: row.productId,
+                                billingCycleMonths: row.billingCycleMonths,
+                              })}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center rounded-full px-3 py-1.5 text-xs font-semibold text-[hsl(var(--hero-section-search-button-text))]"
+                              style={{
+                                background: 'hsl(var(--hero-section-search-button-bg))',
+                                border: '1px solid rgba(var(--hero-section-search-button-border-rgb))',
+                              }}
+                            >
+                              Buy
+                            </a>
+                          ) : (
+                            <span className="inline-flex items-center px-3 py-1.5 text-xs text-[hsl(var(--hero-text-muted))]">
+                              —
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              ) : null}
+              )}
             </div>
           )}
 

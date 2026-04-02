@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { fetchDomainAvailabilityByTld } from '@/lib/upmind/dacSearch';
 import {
   buildSyntheticTermsFromModuleRow,
   extractSubscriptionTerms,
@@ -17,6 +18,9 @@ interface DomainSearchResult {
   popular?: boolean;
   premium?: boolean;
   tld: string;
+  /** Upmind catalogue product id (TLD product) — used for client portal checkout / rapid order */
+  productId?: string;
+  billingCycleMonths?: number;
 }
 
 interface DomainSearchResponse {
@@ -352,9 +356,22 @@ export async function GET(req: NextRequest) {
             : parseFloat(String(originalRaw))
           : null;
 
+      const pid =
+        tldItem.id != null && String(tldItem.id).trim() !== ''
+          ? String(tldItem.id)
+          : undefined;
+      const cycleMonths =
+        typeof usdYearlyPrice.billing_cycle_months === 'number' &&
+        usdYearlyPrice.billing_cycle_months > 0
+          ? usdYearlyPrice.billing_cycle_months
+          : typeof usdYearlyPrice.billing_cycle_years === 'number' &&
+              usdYearlyPrice.billing_cycle_years > 0
+            ? Math.round(usdYearlyPrice.billing_cycle_years * 12)
+            : 12;
+
       domainResults.push({
         name: domainName,
-        available: true, // TODO: Implement actual availability check via Upmind API
+        available: false, // set from Upmind DAC after loop
         price: typeof registerPrice === 'number' ? registerPrice : parseFloat(String(registerPrice)),
         currency: currency, // Use currency from price object
         originalPrice:
@@ -366,11 +383,32 @@ export async function GET(req: NextRequest) {
         popular: isPopular,
         premium: isPremium,
         tld: tld,
+        productId: pid,
+        billingCycleMonths: cycleMonths,
       });
     }
 
-    // Sort results: popular first, then by price
+    // Real availability via Upmind DAC (not catalogue pricing alone)
+    const dac = await fetchDomainAvailabilityByTld(cleanSearchTerm, apiToken);
+    if (!dac.ok) {
+      console.warn(
+        '[Domain Search] DAC unavailable or error; marking all rows as not available (status:',
+        dac.status,
+        ')'
+      );
+    }
+    for (const row of domainResults) {
+      const key = row.tld.toLowerCase();
+      if (dac.ok && dac.byTld.has(key)) {
+        row.available = dac.byTld.get(key)!;
+      } else {
+        row.available = false;
+      }
+    }
+
+    // Sort: available first, then popular TLDs, then price (all extensions stay in list)
     domainResults.sort((a, b) => {
+      if (a.available !== b.available) return a.available ? -1 : 1;
       if (a.popular && !b.popular) return -1;
       if (!a.popular && b.popular) return 1;
       return a.price - b.price;
