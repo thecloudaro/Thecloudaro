@@ -760,21 +760,23 @@ const DomainSearchPage = () => {
                           {result.available ? "Available" : "Taken"}
                         </span>
                       </div>
-                      <div className="text-right">
-                        <div className="flex items-center space-x-2">
-                          <div className="text-2xl font-bold" style={{ color: 'rgb(var(--domain-search-price))' }}>
-                            {result.currency === 'USD' ? '$' : result.currency + ' '}
-                            {typeof result.price === 'number' ? result.price.toFixed(2) : result.price}
-                          </div>
-                          {result.originalPrice && result.originalPrice > result.price && (
-                            <div className="text-sm line-through" style={{ color: 'rgb(var(--domain-search-original-price))' }}>
+                      {result.available && (
+                        <div className="text-right">
+                          <div className="flex items-center space-x-2">
+                            <div className="text-2xl font-bold" style={{ color: 'rgb(var(--domain-search-price))' }}>
                               {result.currency === 'USD' ? '$' : result.currency + ' '}
-                              {typeof result.originalPrice === 'number' ? result.originalPrice.toFixed(2) : result.originalPrice}
+                              {typeof result.price === 'number' ? result.price.toFixed(2) : result.price}
                             </div>
-                          )}
+                            {result.originalPrice && result.originalPrice > result.price && (
+                              <div className="text-sm line-through" style={{ color: 'rgb(var(--domain-search-original-price))' }}>
+                                {result.currency === 'USD' ? '$' : result.currency + ' '}
+                                {typeof result.originalPrice === 'number' ? result.originalPrice.toFixed(2) : result.originalPrice}
+                              </div>
+                            )}
+                          </div>
+                          <div className="text-sm" style={{ color: 'rgb(var(--domain-search-price-label))' }}>per year</div>
                         </div>
-                        <div className="text-sm" style={{ color: 'rgb(var(--domain-search-price-label))' }}>per year</div>
-                      </div>
+                      )}
                     </div>
 
                     {result.available && (

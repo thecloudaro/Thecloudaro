@@ -1918,6 +1918,42 @@
     --domain-search-dev-blue-border: 37 99 235; /* blue-600 - for rgb() */
   }
 
+  /* Build Around — fallbacks so bg/text always paint (Tailwind v4 arbitrary + motion opacity bugs) */
+  .buildaround-root {
+    background-color: hsl(var(--buildaround-bg));
+    color: hsl(var(--buildaround-text));
+  }
+  .buildaround-root .buildaround-heading {
+    color: hsl(var(--buildaround-heading-text));
+  }
+  .buildaround-root .buildaround-lede {
+    color: hsl(var(--buildaround-paragraph-text));
+  }
+  .buildaround-root .ba-surface-webhosting {
+    background-color: hsl(var(--webhosting-card-main-bg));
+  }
+  .buildaround-root .ba-surface-easywp {
+    background-color: hsl(var(--easywp-card-bg));
+  }
+  .buildaround-root .ba-surface-starlight {
+    background-color: hsl(var(--starlight-card-bg));
+  }
+  .buildaround-root .ba-surface-spacemail {
+    background-color: hsl(var(--spacemail-card-bg));
+  }
+  .buildaround-root .ba-copy-web {
+    color: hsl(var(--webhosting-card-text));
+  }
+  .buildaround-root .ba-copy-easywp {
+    color: hsl(var(--easywp-card-text));
+  }
+  .buildaround-root .ba-copy-starlight {
+    color: hsl(var(--starlight-card-text));
+  }
+  .buildaround-root .ba-copy-spacemail {
+    color: hsl(var(--spacemail-card-text));
+  }
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;

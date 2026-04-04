@@ -1,17 +1,21 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import Typewriter from "typewriter-effect";
 import { CircleDesign } from "./CircleDesign";
 import DomainExtensions from "@/components/Domain/DomainExtensions";
+import { buildDomainBuyUrl } from "@/lib/upmind/domainCheckoutUrl";
 
-interface DomainPricingResult {
-  domain: string;
-  tld: string;
-  registerPrice: number;
-  renewPrice: number;
-  transferPrice: number;
+interface DomainResult {
+  name: string;
+  available: boolean;
+  price: number;
   currency: string;
+  tld?: string;
+  productId?: string;
+  billingCycleMonths?: number;
+  popular?: boolean;
 }
 
 export default function DomainHeroSection() {
@@ -20,11 +24,22 @@ export default function DomainHeroSection() {
   const [isTypewriterMode, setIsTypewriterMode] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
-  const [pricingResult, setPricingResult] = useState<DomainPricingResult | null>(null);
+  const [results, setResults] = useState<DomainResult[]>([]);
+  const [inputMountKey, setInputMountKey] = useState(0);
+  const searchRequestId = useRef(0);
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  const sortDomainResults = (items: DomainResult[]): DomainResult[] => {
+    return [...items].sort((a, b) => {
+      if (a.available !== b.available) return a.available ? -1 : 1;
+      if (a.popular && !b.popular) return -1;
+      if (!a.popular && b.popular) return 1;
+      return a.price - b.price;
+    });
+  };
 
   const handleSearch = async () => {
     const value = domainValue.trim();
@@ -32,31 +47,41 @@ export default function DomainHeroSection() {
       return;
     }
 
+    const id = ++searchRequestId.current;
     setIsSearching(true);
     setSearchError(null);
-    setPricingResult(null);
+    setResults([]);
 
     try {
-      const response = await fetch("/api/domain-pricing", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ domain: value }),
+      const res = await fetch(`/api/domain-search?term=${encodeURIComponent(value)}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        cache: "no-store",
       });
+      const data = await res.json();
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        setSearchError(data?.error || "Unable to fetch domain pricing. Please try again.");
+      if (!res.ok || !data?.success || !Array.isArray(data?.domains)) {
+        if (id !== searchRequestId.current) return;
+        setSearchError(data?.error || "Unable to search domain right now.");
         return;
       }
 
-      setPricingResult(data as DomainPricingResult);
+      const list = data.domains as DomainResult[];
+      if (!list.length) {
+        if (id !== searchRequestId.current) return;
+        setSearchError("No domain result found for this search.");
+        return;
+      }
+
+      if (id !== searchRequestId.current) return;
+      setResults(sortDomainResults(list));
     } catch {
-      setSearchError("Network error while looking up domain pricing. Please try again.");
+      if (id !== searchRequestId.current) return;
+      setSearchError("Network error while searching domain.");
     } finally {
-      setIsSearching(false);
+      if (id === searchRequestId.current) {
+        setIsSearching(false);
+      }
     }
   };
 
@@ -93,6 +118,11 @@ export default function DomainHeroSection() {
                   onClick={() => {
                     setIsTypewriterMode(false);
                     setDomainValue("");
+                    setInputMountKey((k) => k + 1);
+                    searchRequestId.current += 1;
+                    setResults([]);
+                    setSearchError(null);
+                    setIsSearching(false);
                   }}
                 >
                   <Typewriter
@@ -108,9 +138,19 @@ export default function DomainHeroSection() {
                 </div>
               ) : (
                 <input
+                  key={inputMountKey}
                   type="text"
                   value={domainValue}
-                  onChange={(e) => setDomainValue(e.target.value)}
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    setDomainValue(v);
+                    if (!v.trim()) {
+                      searchRequestId.current += 1;
+                      setResults([]);
+                      setSearchError(null);
+                      setIsSearching(false);
+                    }
+                  }}
                   onBlur={() => {
                     if (domainValue.trim() === "") {
                       setIsTypewriterMode(true);
@@ -126,7 +166,11 @@ export default function DomainHeroSection() {
                   }}
                   className="w-full text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight bg-transparent border-transparent outline-none transition-all duration-300 text-center"
                   style={{ color: "rgb(var(--hosting-text-white))" }}
-                  placeholder="youridea.com"
+                  placeholder=""
+                  autoComplete="off"
+                  autoCorrect="off"
+                  spellCheck={false}
+                  aria-label="Domain or brand name to search"
                   autoFocus
                 />
               )}
@@ -149,49 +193,96 @@ export default function DomainHeroSection() {
               {isSearching ? "Searching..." : "Search"}
             </motion.button>
 
-            {/* Error / Result */}
-            {searchError && (
-            <p className="text-sm sm:text-base md:text-lg" style={{ color: "hsl(var(--domain-hero-error))" }}>
-              {searchError}
-            </p>
-            )}
-
-            {pricingResult && (
-              <div className="mt-6 inline-flex flex-col items-center justify-center rounded-2xl px-6 py-4 sm:px-8 sm:py-6 backdrop-blur-sm"
+            {/* Error / multi-TLD results (same API + behaviour as homepage hero) */}
+            {(searchError || results.length > 0) && (
+              <div
+                className="mt-4 w-full max-w-xl mx-auto rounded-2xl border px-4 py-3 text-left backdrop-blur-md"
                 style={{
-                  backgroundColor: "rgba(15,23,42,0.7)",
-                  border: "1px solid rgba(148, 163, 184, 0.4)",
+                  borderColor: "rgba(148, 163, 184, 0.35)",
+                  backgroundColor: "rgba(15,23,42,0.65)",
                 }}
               >
-                <h3
-                  className="text-2xl sm:text-3xl font-semibold mb-2"
-                  style={{ color: "rgb(var(--hosting-text-white))" }}
-                >
-                  {pricingResult.domain}
-                </h3>
-                <p className="text-sm sm:text-base mb-3" style={{ color: "rgb(var(--domain-hero-text-gray-300))" }}>
-                  Registration, renewal, and transfer pricing for {pricingResult.tld} domains.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 text-sm sm:text-base">
-                  <div>
-                    <span className="block font-semibold">Registration</span>
-                    <span>
-                      {pricingResult.currency} {pricingResult.registerPrice.toFixed(2)}
-                    </span>
+                {searchError ? (
+                  <p className="text-sm sm:text-base" style={{ color: "hsl(var(--domain-hero-error))" }}>
+                    {searchError}
+                  </p>
+                ) : (
+                  <div className="flex flex-col gap-3">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <p className="text-xs sm:text-sm" style={{ color: "rgb(var(--domain-hero-text-gray-400))" }}>
+                        {results.length} extension{results.length !== 1 ? "s" : ""} ·{" "}
+                        {results.filter((r) => r.available).length} available ·{" "}
+                        {results.filter((r) => !r.available).length} taken
+                      </p>
+                      <Link
+                        href={`/domain-search?term=${encodeURIComponent(domainValue.trim())}`}
+                        className="text-xs sm:text-sm font-medium underline underline-offset-2 hover:opacity-90"
+                        style={{ color: "rgb(var(--hosting-text-white))" }}
+                      >
+                        Open full page
+                      </Link>
+                    </div>
+                    <div className="max-h-64 sm:max-h-80 overflow-y-auto space-y-2 pr-1 -mr-1 text-left">
+                      {results.map((row) => (
+                        <div
+                          key={row.name}
+                          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-xl border px-3 py-2 backdrop-blur-sm"
+                          style={{
+                            borderColor: "rgba(148, 163, 184, 0.25)",
+                            backgroundColor: "rgba(255,255,255,0.06)",
+                          }}
+                        >
+                          <div className="min-w-0 flex-1">
+                            <p
+                              className="text-sm sm:text-base font-semibold truncate"
+                              style={{ color: "rgb(var(--hosting-text-white))" }}
+                            >
+                              {row.name}
+                            </p>
+                            <p className="text-xs" style={{ color: "rgb(var(--domain-hero-text-gray-400))" }}>
+                              {row.available ? (
+                                <>
+                                  <span className="font-medium" style={{ color: "rgb(var(--hosting-text-white))" }}>
+                                    Available
+                                  </span>
+                                  {" · "}
+                                  {row.currency} {row.price.toFixed(2)}/yr
+                                </>
+                              ) : (
+                                <span className="font-medium opacity-70" style={{ color: "rgb(var(--hosting-text-white))" }}>
+                                  Taken
+                                </span>
+                              )}
+                            </p>
+                          </div>
+                          <div className="shrink-0 flex sm:justify-end">
+                            {row.available ? (
+                              <a
+                                href={buildDomainBuyUrl({
+                                  domainName: row.name,
+                                  productId: row.productId,
+                                  billingCycleMonths: row.billingCycleMonths,
+                                })}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center rounded-full px-3 py-1.5 text-xs font-semibold text-[rgb(var(--hosting-text-white))] bg-[hsl(var(--gradient-teal))] hover:bg-[hsl(var(--gradient-teal))]/80 transition-colors"
+                              >
+                                Buy
+                              </a>
+                            ) : (
+                              <span
+                                className="inline-flex items-center px-3 py-1.5 text-xs"
+                                style={{ color: "rgb(var(--domain-hero-text-gray-400))" }}
+                              >
+                                —
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div>
-                    <span className="block font-semibold">Renewal</span>
-                    <span>
-                      {pricingResult.currency} {pricingResult.renewPrice.toFixed(2)}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="block font-semibold">Transfer</span>
-                    <span>
-                      {pricingResult.currency} {pricingResult.transferPrice.toFixed(2)}
-                    </span>
-                  </div>
-                </div>
+                )}
               </div>
             )}
           </motion.div>

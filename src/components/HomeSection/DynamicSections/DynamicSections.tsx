@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { motion, useViewportScroll, useTransform, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { useRevealOnceInView } from '@/hooks/useRevealOnceInView';
 
 interface SectionProps {
   heading: string;
@@ -10,45 +11,39 @@ interface SectionProps {
 }
 
 const DynamicSection: React.FC<SectionProps> = ({ heading, text, bgImage = '/BgPics/black.jpg' }) => {
-  const { scrollY } = useViewportScroll();
-
-  // Background zoom + fade
-  const rawBgScale = useTransform(scrollY, [0, 500], [1.2, 1]);
-  const rawBgOpacity = useTransform(scrollY, [0, 500], [0, 1]);
-  const bgScale = useSpring(rawBgScale, { stiffness: 80, damping: 20 });
-  const bgOpacity = useSpring(rawBgOpacity, { stiffness: 80, damping: 20 });
-
-  // Bottom fade shadow
-  const rawBottomShadow = useTransform(scrollY, [0, 400], [0, 1]);
-  const bottomShadowOpacity = useSpring(rawBottomShadow, { stiffness: 80, damping: 20 });
-
-  // Content animation
-  const rawContentY = useTransform(scrollY, [0, 500], [60, 0]);
-  const rawContentOpacity = useTransform(scrollY, [0, 500], [0, 1]);
-  const contentY = useSpring(rawContentY, { stiffness: 80, damping: 20 });
-  const contentOpacity = useSpring(rawContentOpacity, { stiffness: 80, damping: 20 });
+  const { ref, revealed } = useRevealOnceInView({ amount: 0.2, margin: '-8% 0px' });
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[hsl(var(--dynamic-section-bg))] transition-colors duration-500">
-      {/* Background image */}
+    <section
+      ref={ref}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[hsl(var(--dynamic-section-bg))] transition-colors duration-500"
+    >
       <motion.img
         src={bgImage}
-        alt="Background"
+        alt=""
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        style={{ scale: bgScale, opacity: bgOpacity }}
         loading="lazy"
+        initial={false}
+        animate={
+          revealed
+            ? { scale: 1, opacity: 1 }
+            : { scale: 1.06, opacity: 0.88 }
+        }
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
       />
 
-      {/* Bottom gradient shadow */}
       <motion.div
         className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[hsl(var(--dynamic-section-bg))] to-transparent z-20 pointer-events-none"
-        style={{ opacity: bottomShadowOpacity }}
+        initial={false}
+        animate={revealed ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.6, delay: 0.15 }}
       />
 
-      {/* Content */}
       <motion.div
         className="relative z-30 text-center text-[hsl(var(--dynamic-section-text))] px-4 sm:px-8 max-w-xl sm:max-w-2xl transition-colors duration-500"
-        style={{ y: contentY, opacity: contentOpacity }}
+        initial={false}
+        animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+        transition={{ duration: 0.65, ease: 'easeOut', delay: 0.08 }}
       >
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-[hsl(var(--dynamic-section-heading))]">
           {heading}

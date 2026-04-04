@@ -6,8 +6,12 @@ import Heading from "@/components/HomeSection/BuildAround/Heading";
 import Paragraph from "@/components/HomeSection/BuildAround/Paragraph";
 import RatingSummary from "./RatingSummary";
 import ReviewCard from "./ReviewCard";
+import { useRevealOnceInView } from "@/hooks/useRevealOnceInView";
 
 export default function Customer() {
+  const { ref: headerRef, revealed: headerRevealed } = useRevealOnceInView();
+  const { ref: trustRef, revealed: trustRevealed } = useRevealOnceInView();
+
   const reviews = [
     { name: "S.K.", date: "2 days ago", title: "Reliable domain provider with...", review: "I use TheCloudaro.com from Germany to purchase domains and currently have seven registered there. Together with the Advanced DNS Manager,...", rating: 5 },
     { name: "ZealCrypto", date: "3 days ago", title: "Great Service Since Getting My...", review: "I've had a really positive experience with TheCloudaro.com since registering my domain. The process was smooth, setup was quick, and everything...", rating: 5 },
@@ -50,10 +54,10 @@ export default function Customer() {
       <div className="max-w-[1400px] mx-auto flex flex-col space-y-28 sm:space-y-32 md:space-y-40">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          ref={headerRef}
+          initial={false}
+          animate={headerRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
         >
           <div>
@@ -112,10 +116,10 @@ export default function Customer() {
         </div>
 {/* Trustpilot Section - Center mein */}
 <motion.div
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
+  ref={trustRef}
+  initial={false}
+  animate={trustRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
   transition={{ duration: 0.6 }}
-  viewport={{ once: true }}
   className="flex items-center justify-center gap-2 sm:gap-3 bg-customer-trustpilot-bg py-3 sm:py-4 px-4 sm:px-6 w-auto max-w-[200px] sm:max-w-[240px] h-14 sm:h-16 mx-auto"
 >
   <p className="text-customer-trustpilot-text text-md sm:text-lg font-medium whitespace-nowrap">Review us</p>

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { X } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { commitPortalHandoffThenRedirect } from '@/lib/upmind/commitPortalHandoffClient';
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -74,8 +75,45 @@ const SignUpPage = () => {
         return;
       }
 
-      alert('Account created successfully!');
-      router.push('/login');
+      // Same session as manual login: OAuth token then bridge → Upmind client area.
+      const loginRes = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: cleanEmail, password: cleanPassword }),
+      });
+      const loginData = await loginRes.json();
+
+      if (!loginRes.ok || !loginData?.access_token) {
+        setError(
+          loginData?.message ||
+            'Account created. Please sign in with your email and password.'
+        );
+        router.push('/login');
+        setLoading(false);
+        return;
+      }
+
+      localStorage.setItem('access_token', loginData.access_token);
+      if (loginData.refresh_token) {
+        localStorage.setItem('refresh_token', loginData.refresh_token);
+      }
+      if (loginData.client_id) {
+        localStorage.setItem('client_id', loginData.client_id);
+      }
+      if (loginData.actor_id) {
+        localStorage.setItem('actor_id', loginData.actor_id);
+      }
+
+      try {
+        await commitPortalHandoffThenRedirect({
+          access_token: loginData.access_token,
+          client_id: loginData.client_id,
+          actor_id: loginData.actor_id,
+        });
+      } catch {
+        setError('Account created but could not open client area. Please sign in from the login page.');
+        router.push('/login');
+      }
     } catch (err) {
       console.error('Signup failed:', err);
       setError('An unexpected error occurred. Please try again.');

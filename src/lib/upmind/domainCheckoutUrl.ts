@@ -21,6 +21,11 @@ function clientOrigin(): string {
   return DEFAULT_ORIGIN;
 }
 
+/** Public origin for Upmind client portal (SSO / order links). */
+export function getUpmindClientPortalOrigin(): string {
+  return clientOrigin();
+}
+
 export interface DomainBuyUrlInput {
   /** Full hostname e.g. example.com */
   domainName: string;

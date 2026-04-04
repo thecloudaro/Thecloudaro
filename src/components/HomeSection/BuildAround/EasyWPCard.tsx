@@ -4,8 +4,10 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import SeePlanButton from "./SeePlan";
 import { useState } from "react";
+import { useRevealOnceInView } from "@/hooks/useRevealOnceInView";
 
 const EasyWPCard = () => {
+  const { ref, revealed } = useRevealOnceInView();
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   const handleMouseEnter = () => {
@@ -20,16 +22,16 @@ const EasyWPCard = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      ref={ref}
+      initial={false}
+      animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ delay: 0.3, duration: 0.8 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -8, scale: 1.02 }}
+      whileHover={{ y: -8 }}
       className="group"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="bg-[hsl(var(--easywp-card-bg))] rounded-2xl sm:rounded-3xl overflow-hidden h-[400px] sm:h-[450px] md:h-[550px] lg:h-[650px] xl:h-[720px] flex flex-col transition-all duration-500 ease-in-out touch-manipulation">
+      <div className="ba-surface-easywp bg-[hsl(var(--easywp-card-bg))] rounded-2xl sm:rounded-3xl overflow-hidden h-[400px] sm:h-[450px] md:h-[550px] lg:h-[650px] xl:h-[720px] flex flex-col transition-all duration-500 ease-in-out touch-manipulation">
         {/* Top - 3D geometric shapes */}
         <div className="h-1/3 sm:h-2/5 bg-gradient-to-r from-[hsl(var(--easywp-card-gradient-from))] to-[hsl(var(--easywp-card-gradient-to))] relative overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">
@@ -44,7 +46,7 @@ const EasyWPCard = () => {
         </div>
         
         {/* Bottom - Content */}
-        <div className="h-2/3 sm:h-3/5 p-3 sm:p-5 md:p-6 lg:pl-12 flex flex-col justify-center items-start text-left font-sans">
+        <div className="ba-copy-easywp min-h-0 h-2/3 sm:h-3/5 p-3 sm:p-5 md:p-6 lg:pl-12 flex flex-col justify-center items-start text-left font-sans text-[hsl(var(--easywp-card-text))]">
           <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-1.5 sm:mb-2 leading-tight">No stress hosting <br/> for WordPress</h3>
           <p className="text-[hsl(var(--easywp-card-text-muted))] text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed items-start text-left max-w-xl">
             Give your site a head start with the fastest <br/> 

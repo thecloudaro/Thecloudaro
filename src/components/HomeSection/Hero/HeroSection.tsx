@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Button from './Button';
 import ChatButton from '../ChatButton';
@@ -26,20 +26,6 @@ const HeroSection = () => {
   const [searchError, setSearchError] = useState<string | null>(null);
   const [results, setResults] = useState<DomainResult[]>([]);
   const heroSearchRequestId = useRef(0);
-
-  const { scrollY } = useScroll();
-
-  // Zoom-out animation for hero
-  const rawScale = useTransform(scrollY, [0, 500], [1, 0.8]);
-  const scale = useSpring(rawScale, { stiffness: 80, damping: 20 });
-
-  // Base shadow fade
-  const rawBaseShadow = useTransform(scrollY, [0, 100], [0, 0.25]);
-  const baseShadow = useSpring(rawBaseShadow, { stiffness: 80, damping: 20 });
-
-  // Scroll transition overlay
-  const rawTransitionShadow = useTransform(scrollY, [200, 700], [0, 1]);
-  const transitionShadow = useSpring(rawTransitionShadow, { stiffness: 80, damping: 20 });
 
   useEffect(() => {
     setIsLoaded(true);
@@ -97,7 +83,7 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden pt-2 sm:pt-6 lg:pt-10 bg-transparent transition-colors duration-500">
+    <div className="relative min-h-screen overflow-x-hidden overflow-y-visible pt-2 sm:pt-6 lg:pt-10 bg-transparent transition-colors duration-500">
       {/* Background Image - Fixed to cover entire viewport from top */}
       <motion.div
         className="fixed inset-0 bg-cover bg-center bg-no-repeat"
@@ -117,27 +103,13 @@ const HeroSection = () => {
         transition={{ duration: 1, delay: 0.5 }}
       />
 
-      {/* Base Overlay */}
-      <motion.div
-        className="absolute inset-0 bg-hero-bg z-10 pointer-events-none transition-colors duration-500"
-        style={{ opacity: baseShadow }}
-      />
-
-      {/* Scroll Transition Overlay */}
-      <motion.div
-        className="absolute inset-0 bg-hero-bg z-20 pointer-events-none transition-colors duration-500"
-        style={{ opacity: transitionShadow }}
-      />
-
-
-      {/* Main Content */}
+      {/* Main Content — no scroll-linked fade/scale so copy stays visible when scrolling up/down */}
       <motion.div
         className="relative z-30 flex flex-col items-center justify-start pt-20 sm:pt-24 md:pt-28 lg:pt-40 px-4 sm:px-6 md:px-8 lg:px-10 text-center"
-        style={{ scale }}
       >
         {/* Heading */}
         <motion.h1
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-hero-text mb-4 sm:mb-6 md:mb-8 leading-tight"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 md:mb-8 leading-tight text-[hsl(var(--hero-text))]"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 50 }}
           transition={{ duration: 0.8, delay: 1 }}
@@ -154,8 +126,7 @@ const HeroSection = () => {
         >
          {/* Tabs */}
          <div className="flex justify-center mb-4 sm:mb-6 md:mb-8">
-  <div className="bg-hero-tab-bg backdrop-blur-md transition 
-                  rounded-full p-1 flex shadow-md border border-hero-search-border">
+  <div className="backdrop-blur-md transition rounded-full p-1 flex shadow-md bg-[hsl(var(--hero-tab-bg))] border border-[hsl(var(--hero-search-border))]">
     {["register", "transfer"].map((tab) => (
       <Button
         key={tab}
@@ -170,7 +141,7 @@ const HeroSection = () => {
 
           {/* Search Bar */}
           <div className="relative w-full mb-4 sm:mb-6 md:mb-8">
-            <div className="flex items-stretch bg-hero-search-bg backdrop-blur-md rounded-full p-1 sm:p-2 border border-hero-search-border shadow-lg">
+            <div className="flex items-stretch backdrop-blur-md rounded-full p-1 sm:p-2 border shadow-lg bg-[hsl(var(--hero-search-bg))] border-[hsl(var(--hero-search-border))]">
               <div className="flex items-center flex-1 px-2 sm:px-4">
                 <svg
                   className="w-4 h-4 sm:w-5 sm:h-5 text-[hsl(var(--hero-section-search-icon))] mr-2 sm:mr-3"
@@ -202,7 +173,7 @@ const HeroSection = () => {
                     if (e.key === 'Enter') handleSearch();
                   }}
                   placeholder="Search for a domain name..."
-                  className="flex-1 bg-transparent text-hero-text placeholder-hero-text-muted text-sm sm:text-base focus:outline-none placeholder:text-xs sm:placeholder:text-sm"
+                  className="flex-1 bg-transparent text-sm sm:text-base focus:outline-none placeholder:text-xs sm:placeholder:text-sm text-[hsl(var(--hero-text))] placeholder:text-[hsl(var(--hero-text-muted))]"
                 />
               </div>
               <button
@@ -227,7 +198,7 @@ const HeroSection = () => {
           </div>
 
           {(searchError || results.length > 0) && (
-            <div className="mb-4 sm:mb-6 md:mb-8 w-full rounded-2xl border border-hero-search-border bg-hero-search-bg backdrop-blur-md px-4 py-3 text-left">
+            <div className="mb-4 sm:mb-6 md:mb-8 w-full rounded-2xl border backdrop-blur-md px-4 py-3 text-left border-[hsl(var(--hero-search-border))] bg-[hsl(var(--hero-search-bg))]">
               {searchError ? (
                 <p className="text-xs sm:text-sm text-[hsl(var(--hero-text-muted))]">{searchError}</p>
               ) : (
@@ -240,7 +211,7 @@ const HeroSection = () => {
                     </p>
                     <Link
                       href={`/domain-search?term=${encodeURIComponent(searchTerm.trim())}`}
-                      className="text-xs sm:text-sm font-medium text-hero-text underline underline-offset-2 hover:opacity-90"
+                      className="text-xs sm:text-sm font-medium underline underline-offset-2 hover:opacity-90 text-[hsl(var(--hero-text))]"
                     >
                       Open full page
                     </Link>
@@ -249,20 +220,22 @@ const HeroSection = () => {
                     {results.map((row) => (
                       <div
                         key={row.name}
-                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-xl border border-hero-search-border/60 bg-hero-search-bg/50 px-3 py-2"
+                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-xl border px-3 py-2 border-[hsl(var(--hero-search-border)/0.55)] bg-[hsl(0_0%_100%/0.06)] backdrop-blur-sm"
                       >
                         <div className="min-w-0 flex-1">
-                          <p className="text-sm sm:text-base font-semibold text-hero-text truncate">
+                          <p className="text-sm sm:text-base font-semibold truncate text-[hsl(var(--hero-text))]">
                             {row.name}
                           </p>
                           <p className="text-xs text-[hsl(var(--hero-text-muted))]">
                             {row.available ? (
-                              <span className="font-medium text-hero-text">Available</span>
+                              <>
+                                <span className="font-medium text-[hsl(var(--hero-text))]">Available</span>
+                                {' · '}
+                                {row.currency} {row.price.toFixed(2)}/yr
+                              </>
                             ) : (
-                              <span className="font-medium text-hero-text opacity-70">Taken</span>
+                              <span className="font-medium text-[hsl(var(--hero-text))] opacity-70">Taken</span>
                             )}
-                            {' · '}
-                            {row.currency} {row.price.toFixed(2)}/yr
                           </p>
                         </div>
                         <div className="shrink-0 flex sm:justify-end">
@@ -324,7 +297,7 @@ const HeroSection = () => {
     item.isCom ? (
       <motion.div
         key={idx}
-        className="domain-pill domain-pill--com backdrop-blur-md border border-hero-price-border rounded-2xl shadow-md"
+        className="domain-pill domain-pill--com backdrop-blur-md border rounded-2xl shadow-md border-[hsl(var(--hero-price-border))]"
         initial={{ opacity: 0, y: 12 }}
         animate={{
           opacity: 1,
@@ -333,7 +306,7 @@ const HeroSection = () => {
         transition={{ duration: 0.5, delay: 1.8 }}
       >
         <span
-          className="com-pill-inner block px-3 sm:px-3.5 md:px-4 py-1 sm:py-1.5 md:py-1.5 rounded-full text-[11px] sm:text-xs md:text-sm font-medium text-hero-text cursor-pointer"
+          className="com-pill-inner block px-3 sm:px-3.5 md:px-4 py-1 sm:py-1.5 md:py-1.5 rounded-full text-[11px] sm:text-xs md:text-sm font-medium cursor-pointer text-[hsl(var(--hero-text))]"
         >
           {item.label}
         </span>
@@ -341,7 +314,7 @@ const HeroSection = () => {
     ) : (
       <div
         key={idx}
-        className={`domain-pill ${item.variant} backdrop-blur-md border border-hero-price-border rounded-2xl shadow-md`}
+        className={`domain-pill ${item.variant} backdrop-blur-md border rounded-2xl shadow-md border-[hsl(var(--hero-price-border))]`}
       >
         <Button label={item.label} />
       </div>

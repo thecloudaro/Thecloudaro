@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { X, Eye, EyeOff, Key } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useSignup } from '@/components/Signup/SignupContext';
+import { commitPortalHandoffThenRedirect } from '@/lib/upmind/commitPortalHandoffClient';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -14,7 +14,6 @@ interface LoginModalProps {
 
 const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
   const { openSignup } = useSignup();
-  const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -46,16 +45,18 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
           localStorage.setItem('actor_id', data.actor_id);
         }
 
-        // Close modal
         onClose();
 
-        // 🔹 Always route through local dashboard bridge first.
-        // It persists tokens and forwards to client dashboard reliably.
-        router.push(
-          `/dashboard?access_token=${encodeURIComponent(
-            data.access_token
-          )}&client_id=${encodeURIComponent(data.client_id)}`
-        );
+        try {
+          await commitPortalHandoffThenRedirect({
+            access_token: data.access_token,
+            client_id: data.client_id,
+            actor_id: data.actor_id,
+          });
+        } catch {
+          setError('Signed in but could not open client area. Try again.');
+          setLoading(false);
+        }
       } else {
         setError(data.message || 'Login failed');
         setLoading(false);

@@ -207,12 +207,14 @@ const DomainSearch = () => {
                       {result.available ? 'Available' : 'Taken'}
                     </span>
                   </div>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold text-[rgb(var(--domain-search-price))]">
-                      ${result.price}
+                  {result.available && (
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-[rgb(var(--domain-search-price))]">
+                        ${result.price}
+                      </div>
+                      <div className="text-sm text-[rgb(var(--domain-search-price-label))]">per year</div>
                     </div>
-                    <div className="text-sm text-[rgb(var(--domain-search-price-label))]">per year</div>
-                  </div>
+                  )}
                 </div>
                 
                 {result.available && (
@@ -261,12 +263,14 @@ const DomainSearch = () => {
                         {domain.available ? 'Available' : 'Taken'}
                       </span>
                     </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-[rgb(var(--domain-search-price))]">
-                        ${domain.price}
+                    {domain.available && (
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-[rgb(var(--domain-search-price))]">
+                          ${domain.price}
+                        </div>
+                        <div className="text-sm text-[rgb(var(--domain-search-price-label))]">per year</div>
                       </div>
-                      <div className="text-sm text-[rgb(var(--domain-search-price-label))]">per year</div>
-                    </div>
+                    )}
                   </div>
                   
                   {domain.available && (

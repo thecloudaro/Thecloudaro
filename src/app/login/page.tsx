@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { X, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { commitPortalHandoffThenRedirect } from '@/lib/upmind/commitPortalHandoffClient';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -38,11 +39,15 @@ const LoginPage = () => {
           localStorage.setItem('actor_id', data.actor_id);
         }
 
-        router.push(
-          `/dashboard?access_token=${encodeURIComponent(
-            data.access_token
-          )}&client_id=${encodeURIComponent(data.client_id)}`
-        );
+        try {
+          await commitPortalHandoffThenRedirect({
+            access_token: data.access_token,
+            client_id: data.client_id,
+            actor_id: data.actor_id,
+          });
+        } catch {
+          setError('Signed in but could not open client area. Try again or use the client portal link.');
+        }
       } else {
         setError(data.message || 'Login failed');
       }

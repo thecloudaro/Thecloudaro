@@ -59,11 +59,11 @@ export default function Home() {
         </section>
       )}
 
-      <div className="min-h-screen bg-[hsl(var(--faq-bg-default))]">
+      <div className="relative z-10 min-h-screen bg-[hsl(var(--faq-bg-default))]">
         <BuildAround />
       </div>
 
-      <section>
+      <section className="relative z-10">
         <DynamicSection
           heading="Security as Standard"
           text="This page will be developed later once the pictures are available and animations are added."
@@ -80,7 +80,7 @@ export default function Home() {
         </section>
       )}
 
-      <div className="min-h-screen bg-[hsl(var(--faq-bg-default))]">
+      <div className="relative z-10 min-h-screen bg-[hsl(var(--faq-bg-default))]">
         <FAQ />
       </div>
 

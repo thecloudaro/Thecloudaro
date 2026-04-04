@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { commitPortalHandoffThenRedirect } from '@/lib/upmind/commitPortalHandoffClient';
 
 const DashboardPage = () => {
   const router = useRouter();
@@ -15,17 +16,16 @@ const DashboardPage = () => {
       const clientIdFromQuery = urlParams.get('client_id');
       const actorIdFromQuery = urlParams.get('actor_id');
 
-      // Check if user is logged in (prefer query params if provided)
       const accessToken =
         accessTokenFromQuery ?? localStorage.getItem('access_token');
-      const clientId =
-        clientIdFromQuery ??
-        actorIdFromQuery ??
-        localStorage.getItem('client_id') ??
-        localStorage.getItem('actor_id');
+      const storedClientId = localStorage.getItem('client_id');
+      const storedActorId = localStorage.getItem('actor_id');
 
-      // Persist tokens for this browser session so user won't be forced
-      // back to /login on subsequent redirects.
+      const clientId =
+        clientIdFromQuery ?? storedClientId ?? actorIdFromQuery ?? storedActorId;
+      const actorId =
+        actorIdFromQuery ?? storedActorId ?? clientIdFromQuery ?? storedClientId ?? clientId;
+
       if (accessTokenFromQuery) {
         localStorage.setItem('access_token', accessTokenFromQuery);
       }
@@ -35,33 +35,28 @@ const DashboardPage = () => {
       if (actorIdFromQuery) {
         localStorage.setItem('actor_id', actorIdFromQuery);
       }
-      if (clientId) {
+      if (clientId && !storedClientId && !clientIdFromQuery) {
         localStorage.setItem('client_id', clientId);
       }
 
       if (!accessToken) {
-        // Redirect to login if not authenticated
         router.push('/login');
         return;
       }
 
-      // Direct redirect to Upmind client dashboard.
-      // IMPORTANT: tokens are not always URL-safe -> encode them.
-      const upmindClientUrl = 'https://my.thecloudaro.com/dashboard';
-      const params = new URLSearchParams();
-      params.set('access_token', accessToken);
-      if (clientId) {
-        params.set('client_id', clientId);
-        // Compatibility fallback for setups expecting actor_id naming.
-        params.set('actor_id', clientId);
+      try {
+        await commitPortalHandoffThenRedirect({
+          access_token: accessToken,
+          client_id: clientId || null,
+          actor_id: actorId || null,
+        });
+      } catch (e) {
+        setError(e instanceof Error ? e.message : 'Redirect failed');
+        setLoading(false);
       }
-      const qs = params.toString();
-      // Replace current history entry so browser back returns to website
-      // instead of this bridge page.
-      window.location.replace(`${upmindClientUrl}/?${qs}`);
     };
 
-    redirectToUpmindDashboard();
+    void redirectToUpmindDashboard();
   }, [router]);
 
   if (error) {

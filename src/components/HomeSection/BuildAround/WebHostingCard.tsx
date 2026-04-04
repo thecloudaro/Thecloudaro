@@ -4,8 +4,10 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import SeePlanButton from "./SeePlan";
 import { useState } from "react";
+import { useRevealOnceInView } from "@/hooks/useRevealOnceInView";
 
 const WebHostingCard = () => {
+  const { ref, revealed } = useRevealOnceInView();
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   const handleMouseEnter = () => {
@@ -20,18 +22,18 @@ const WebHostingCard = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      ref={ref}
+      initial={false}
+      animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ delay: 0.2, duration: 0.8 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -8, scale: 1.02 }}
+      whileHover={{ y: -8 }}
       className="group"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="bg-[hsl(var(--webhosting-card-main-bg))] rounded-2xl sm:rounded-3xl overflow-hidden h-auto lg:h-[460px] flex flex-col lg:flex-row gap-3 transition-all duration-500 ease-in-out touch-manipulation">
+      <div className="ba-surface-webhosting bg-[hsl(var(--webhosting-card-main-bg))] rounded-2xl sm:rounded-3xl overflow-hidden h-auto lg:h-[460px] flex flex-col lg:flex-row gap-3 transition-all duration-500 ease-in-out touch-manipulation">
         {/* Left side - Abstract graphic */}
-        <div className="w-full lg:w-1/2 lg:h-full min-h-36 sm:min-h-48 relative overflow-hidden bg-webhosting-card-bg">
+        <div className="w-full lg:w-1/2 lg:h-full min-h-[200px] sm:min-h-[260px] lg:min-h-0 relative overflow-hidden bg-[hsl(var(--webhosting-card-main-bg))]">
           <div className="absolute inset-0 flex items-center justify-center">
             <Image 
               src="/Home/WebHosting.png" 
@@ -44,8 +46,8 @@ const WebHostingCard = () => {
         </div>
 
         {/* Right side - Content */}
-        <div className="w-full lg:w-1/2 lg:h-full p-3 sm:p-5 md:p-6 lg:pl-12 flex flex-col justify-center items-start text-left font-sans">
-          <p className="text-xs sm:text-sm md:text-base uppercase tracking-widest text-[hsl(var(--webhosting-card-text))] font-normal">
+        <div className="ba-copy-web w-full lg:w-1/2 lg:h-full p-3 sm:p-5 md:p-6 lg:pl-12 flex flex-col justify-center items-start text-left font-sans text-[hsl(var(--webhosting-card-text))]">
+          <p className="text-xs sm:text-sm md:text-base uppercase tracking-widest font-normal">
             WEB HOSTING
           </p>
 

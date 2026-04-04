@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import QuestionAnswer from "./QandA";
 import Heading from "../BuildAround/Heading";
+import { useRevealOnceInView } from "@/hooks/useRevealOnceInView";
 
 interface FAQItem {
   question: string;
@@ -91,6 +92,8 @@ const FAQ = ({
   sectionStyle,
   headingClassName = "text-4xl sm:text-5xl md:text-6xl font-bold"
 }: FAQProps) => {
+  const { ref: footerRef, revealed: footerRevealed } = useRevealOnceInView();
+
   const wrapperClasses = [
     "min-h-screen",
     "py-12",
@@ -136,9 +139,9 @@ const FAQ = ({
 
         {/* Footer Note */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          ref={footerRef}
+          initial={false}
+          animate={footerRevealed ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-16 text-center"
         >

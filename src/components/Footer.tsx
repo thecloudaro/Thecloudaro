@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-footer-bg-primary text-footer-text-secondary">
+    <footer className="relative z-10 bg-footer-bg-primary text-footer-text-secondary">
       {/* Footer Links */}
       <div className="container mx-auto max-w-screen-xl px-8 lg:px-10 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
         {/* FIRST COLUMN */}
