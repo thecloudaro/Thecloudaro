@@ -6,6 +6,11 @@ import { X } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { commitPortalHandoffThenRedirect } from '@/lib/upmind/commitPortalHandoffClient';
+import {
+  SIGNUP_PASSWORD_RED_HINT,
+  getSignupPasswordValidationError,
+} from '@/lib/signupPasswordPolicy';
+import SignupPasswordHint from '@/components/Signup/SignupPasswordHint';
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -46,6 +51,12 @@ const SignUpPage = () => {
 
     if (cleanPassword !== cleanConfirmPassword) {
       setError("Passwords don't match.");
+      setLoading(false);
+      return;
+    }
+
+    if (getSignupPasswordValidationError(cleanPassword)) {
+      setError(SIGNUP_PASSWORD_RED_HINT);
       setLoading(false);
       return;
     }
@@ -149,7 +160,7 @@ const SignUpPage = () => {
         </p>
 
         {error ? (
-          <div className="mb-4 rounded-lg border border-[rgb(var(--signup-modal-error-border))] bg-[rgba(var(--signup-modal-error-bg))] p-3 text-sm text-[rgb(var(--signup-modal-error-text))]">
+          <div className="mb-4 rounded-lg border border-[rgb(var(--signup-modal-error-border))] bg-[rgba(var(--signup-modal-error-bg))] p-3 text-sm text-[rgb(var(--signup-modal-error-text))] whitespace-pre-line">
             {error}
           </div>
         ) : null}
@@ -192,8 +203,12 @@ const SignUpPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete="new-password"
+            minLength={8}
             className={inputClass}
           />
+
+          <SignupPasswordHint />
 
           <input
             type="password"
@@ -201,6 +216,8 @@ const SignUpPage = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
+            autoComplete="new-password"
+            minLength={8}
             className={inputClass}
           />
 
