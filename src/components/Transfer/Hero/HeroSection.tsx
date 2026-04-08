@@ -2,13 +2,16 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import Button from './Button';
 import ChatButton from '../ChatButton';
+import UpmindTransferWidget from '../UpmindTransferWidget';
 
 const TransferHeroSection = () => {
   const [activeTab, setActiveTab] = useState('transfer');
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
+  const router = useRouter();
 
   const { scrollY } = useScroll();
 
@@ -27,6 +30,12 @@ const TransferHeroSection = () => {
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  const handleRegisterSearch = () => {
+    const domain = searchTerm.trim();
+    if (!domain) return;
+    router.push(`/domain-search?term=${encodeURIComponent(domain)}`);
+  };
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-transfer-hero transition-colors duration-500">
@@ -97,37 +106,43 @@ const TransferHeroSection = () => {
             </div>
           </div>
 
-          {/* Search Bar */}
+          {/* Search/Widget */}
           <div className="relative w-full mb-4 sm:mb-6 md:mb-8">
-            <div className="flex items-stretch bg-transfer-hero-search backdrop-blur-md rounded-full p-1 sm:p-2 border border-transfer-hero-search shadow-lg">
-              <div className="flex items-center flex-1 px-2 sm:px-4">
-                <svg
-                  className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-transfer-hero-icon"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            {activeTab === 'transfer' ? (
+              <UpmindTransferWidget />
+            ) : (
+              <div className="flex items-stretch bg-transfer-hero-search backdrop-blur-md rounded-full p-1 sm:p-2 border border-transfer-hero-search shadow-lg">
+                <div className="flex items-center flex-1 px-2 sm:px-4">
+                  <svg
+                    className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-transfer-hero-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleRegisterSearch()}
+                    placeholder="Enter domain to register"
+                    className="flex-1 bg-transparent text-transfer-hero placeholder-transfer-hero-text-muted text-sm sm:text-base focus:outline-none placeholder:text-xs sm:placeholder:text-sm"
                   />
-                </svg>
-                <input
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Enter domain to transfer"
-                  className="flex-1 bg-transparent text-transfer-hero placeholder-transfer-hero-text-muted text-sm sm:text-base focus:outline-none placeholder:text-xs sm:placeholder:text-sm"
-                />
+                </div>
+                <button
+                  onClick={handleRegisterSearch}
+                  className="px-3 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-xs sm:text-base transition bg-transfer-hero-button text-transfer-hero-button hover:bg-transfer-hero-button-hover"
+                >
+                  Search
+                </button>
               </div>
-              <button 
-                className="px-3 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-xs sm:text-base transition bg-transfer-hero-button text-transfer-hero-button hover:bg-transfer-hero-button-hover"
-              >
-                Transfer
-              </button>
-            </div>
+            )}
           </div>
 
           {/* Price snippet */}

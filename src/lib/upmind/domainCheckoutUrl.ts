@@ -1,6 +1,7 @@
 /**
  * Build my.thecloudaro (Upmind client) URLs for domain "Buy Now".
- * Uses /order/basket/ — rapid /order/_ is not enabled on all portals and can 404.
+ * Uses /order/product by default so users land on configured domain product
+ * (instead of empty basket screen). Optional rapid order can be enabled by env.
  */
 
 const DEFAULT_ORIGIN = 'https://my.thecloudaro.com';
@@ -36,29 +37,46 @@ export interface DomainBuyUrlInput {
 }
 
 /**
- * Client cart/checkout: https://my.thecloudaro.com/order/basket/
- * Query params help Upmind pre-fill domain + product where supported.
+ * Default checkout journey:
+ *   https://my.thecloudaro.com/order/product?pid=...&domain_name=example.com
+ *
+ * Optional rapid order (experimental):
+ *   set NEXT_PUBLIC_UPMIND_USE_RAPID_ORDER=true
+ *   https://my.thecloudaro.com/order/_?product={...}&fields={...}
  */
 export function buildDomainBuyUrl(input: DomainBuyUrlInput): string {
   const origin = clientOrigin();
-  const base = `${origin}/order/basket/`;
-  const u = new URL(base);
-
   const domain = input.domainName.trim().toLowerCase();
-  if (domain) {
-    u.searchParams.set('domain', domain);
-  }
-  if (input.productId) {
-    u.searchParams.set('pid', input.productId);
-  }
   const months =
     typeof input.billingCycleMonths === 'number' &&
     input.billingCycleMonths > 0
       ? input.billingCycleMonths
       : null;
-  if (months != null) {
-    u.searchParams.set('billing_cycle_months', String(months));
+
+  const useRapidOrder =
+    process.env.NEXT_PUBLIC_UPMIND_USE_RAPID_ORDER === '1' ||
+    process.env.NEXT_PUBLIC_UPMIND_USE_RAPID_ORDER === 'true';
+
+  if (useRapidOrder && input.productId && domain) {
+    const u = new URL(`${origin}/order/_`);
+    const product = {
+      product_id: input.productId,
+      quantity: 1,
+      ...(months != null ? { billing_cycle_months: months } : {}),
+    };
+    const fields = {
+      domain_name: domain,
+    };
+    u.searchParams.set('product', JSON.stringify(product));
+    u.searchParams.set('fields', JSON.stringify(fields));
+    return u.toString();
   }
+
+  // Stable default route supported across most portals.
+  const u = new URL(`${origin}/order/product`);
+  if (input.productId) u.searchParams.set('pid', input.productId);
+  if (domain) u.searchParams.set('domain_name', domain);
+  if (months != null) u.searchParams.set('billing_cycle_months', String(months));
 
   return u.toString();
 }

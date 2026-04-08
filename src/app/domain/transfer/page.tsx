@@ -19,12 +19,56 @@ const DomainTransferPage = () => {
   const [isSearching, setIsSearching] = useState(false);
   const router = useRouter();
 
+  const redirectWithEligibility = (domain: string, eligible: boolean, message: string) => {
+    const params = new URLSearchParams({
+      domain,
+      eligible: eligible ? "1" : "0",
+      message,
+    });
+    router.push(`/domain/transfer/submit?${params.toString()}`);
+  };
+
   const handleSearch = async (term: string) => {
     const domain = term.trim();
     if (!domain) return;
 
+    if (!domain.includes(".")) {
+      redirectWithEligibility(
+        domain,
+        false,
+        "Please enter a full domain name (e.g. example.com) to check transfer eligibility."
+      );
+      return;
+    }
+
     setIsSearching(true);
-    router.push(`/domain/transfer/submit?domain=${encodeURIComponent(domain)}`);
+    try {
+      const res = await fetch(`/api/domain-search?term=${encodeURIComponent(domain)}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        cache: "no-store",
+      });
+      const data = await res.json().catch(() => ({}));
+      const list = Array.isArray(data?.domains) ? data.domains : [];
+      const exact = list.find(
+        (row: { name?: string; available?: boolean }) =>
+          String(row?.name || "").toLowerCase() === domain.toLowerCase()
+      );
+
+      if (exact && exact.available === false) {
+        redirectWithEligibility(domain, true, "Your domain is eligible for transfer to us.");
+      } else {
+        redirectWithEligibility(domain, false, "Your domain is not eligible for transfer to us.");
+      }
+    } catch {
+      redirectWithEligibility(
+        domain,
+        false,
+        "We could not verify transfer eligibility right now. Please try again."
+      );
+    } finally {
+      setIsSearching(false);
+    }
   };
 
   return (

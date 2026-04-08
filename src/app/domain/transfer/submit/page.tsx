@@ -1,35 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
-import { Search, ArrowRight, AlertCircle } from "lucide-react";
+import { ArrowRight, AlertCircle } from "lucide-react";
+import UpmindTransferWidget from "@/components/Transfer/UpmindTransferWidget";
 
-const DomainTransferSubmitPage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+const DomainTransferSubmitContent = () => {
+  const searchParams = useSearchParams();
+  const selectedDomain = (searchParams.get("domain") || "").trim();
+  const eligibleParam = searchParams.get("eligible");
+  const isEligible = eligibleParam === "1";
+  const statusMessage =
+    (searchParams.get("message") || "").trim() ||
+    (eligibleParam
+      ? isEligible
+        ? "Your domain is eligible for transfer to us."
+        : "Your domain is not eligible for transfer to us."
+      : "");
+
   const [authCode, setAuthCode] = useState("");
   const [registerLock, setRegisterLock] = useState(true);
-  const [cartItems, setCartItems] = useState([
-    {
-      name: "envidat.com",
-      price: 9.48,
-      currency: "USD",
-      type: "transfer"
-    }
-  ]);
-
-  const handleSearch = async (term: string) => {
-    if (!term.trim()) return;
-    
-    // Simulate adding to cart
-    const newItem = {
-      name: term,
-      price: Math.random() * 50 + 5,
-      currency: "USD",
-      type: "transfer"
-    };
-    
-    setCartItems([...cartItems, newItem]);
-  };
+  const [cartItems, setCartItems] = useState<
+    { name: string; price: number; currency: string; type: string }[]
+  >([]);
 
   const removeFromCart = (index: number) => {
     setCartItems(cartItems.filter((_, i) => i !== index));
@@ -46,6 +40,18 @@ const DomainTransferSubmitPage = () => {
             <p className="text-lg sm:text-xl max-w-3xl mx-auto" style={{ color: 'rgb(var(--domain-transfer-submit-description))' }}>
               Review your domains and complete the transfer process
             </p>
+            {statusMessage ? (
+              <div
+                className={`mt-6 inline-flex max-w-3xl items-center justify-center rounded-lg border px-4 py-3 text-sm sm:text-base ${
+                  isEligible
+                    ? "border-emerald-400/40 bg-emerald-500/10 text-emerald-200"
+                    : "border-rose-400/40 bg-rose-500/10 text-rose-200"
+                }`}
+              >
+                {selectedDomain ? `${selectedDomain}: ` : ""}
+                {statusMessage}
+              </div>
+            ) : null}
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -53,47 +59,14 @@ const DomainTransferSubmitPage = () => {
             <div>
               {/* Search Section */}
               <div className="mb-8">
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{ color: 'rgb(var(--domain-transfer-submit-input-icon))' }} />
-                  <input
-                    type="text"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchTerm)}
-                    placeholder="Type your domain to transfer..."
-                    className="w-full pl-12 pr-4 py-4 text-lg border rounded-lg focus:outline-none transition-all duration-300 placeholder:text-[rgb(var(--domain-transfer-submit-input-placeholder))]"
-                    style={{
-                      backgroundColor: 'rgba(var(--domain-transfer-submit-input-bg))',
-                      borderColor: 'rgb(var(--domain-transfer-submit-input-border))',
-                      color: 'rgb(var(--domain-transfer-submit-input-text))'
-                    }}
-                    onFocus={(e) => {
-                      e.currentTarget.style.borderColor = 'hsl(var(--gradient-teal))';
-                      e.currentTarget.style.boxShadow = '0 0 0 2px hsl(var(--gradient-teal) / 0.2)';
-                    }}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = 'rgb(var(--domain-transfer-submit-input-border))';
-                      e.currentTarget.style.boxShadow = 'none';
-                    }}
-                  />
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => handleSearch(searchTerm)}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 px-6 py-2 rounded-md font-medium transition-all duration-300"
-                    style={{
-                      backgroundColor: 'rgb(var(--domain-transfer-submit-button-bg))',
-                      color: 'rgb(var(--domain-transfer-submit-button-text))'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'rgba(var(--domain-transfer-submit-button-hover))';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'rgb(var(--domain-transfer-submit-button-bg))';
-                    }}
+                <div className="space-y-3">
+                  <UpmindTransferWidget />
+                  <p
+                    className="text-sm"
+                    style={{ color: "rgb(var(--domain-transfer-submit-description))" }}
                   >
-                    Transfer
-                  </motion.button>
+                    Use the Upmind widget above to continue transfer search and checkout.
+                  </p>
                 </div>
               </div>
 
@@ -101,89 +74,101 @@ const DomainTransferSubmitPage = () => {
               <div className="backdrop-blur-sm rounded-xl p-6" style={{ backgroundColor: 'rgba(var(--domain-transfer-submit-card-bg))', border: '1px solid rgb(var(--domain-transfer-submit-card-border))' }}>
                 <h3 className="text-xl font-semibold mb-6" style={{ color: 'rgb(var(--domain-transfer-submit-card-title))' }}>Domains eligible for transfer</h3>
                 
-                <div className="space-y-4">
-                  {cartItems.map((item, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="rounded-lg p-4"
-                      style={{ backgroundColor: 'rgba(var(--domain-transfer-submit-item-bg))' }}
-                    >
-                      <div className="flex items-center justify-between mb-4">
-                        <h4 className="text-lg font-semibold" style={{ color: 'rgb(var(--domain-transfer-submit-item-name))' }}>{item.name}</h4>
-                        <div className="text-right">
-                          <div className="text-xl font-bold" style={{ color: 'rgb(var(--domain-transfer-submit-item-price))' }}>
-                            ${item.price}
+                {cartItems.length === 0 ? (
+                  <div
+                    className="rounded-lg p-4 text-sm"
+                    style={{
+                      backgroundColor: "rgba(var(--domain-transfer-submit-item-bg))",
+                      color: "rgb(var(--domain-transfer-submit-item-label))",
+                    }}
+                  >
+                    No transfer domains added yet. Use the Upmind widget above to search and continue checkout.
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {cartItems.map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        className="rounded-lg p-4"
+                        style={{ backgroundColor: 'rgba(var(--domain-transfer-submit-item-bg))' }}
+                      >
+                        <div className="flex items-center justify-between mb-4">
+                          <h4 className="text-lg font-semibold" style={{ color: 'rgb(var(--domain-transfer-submit-item-name))' }}>{item.name}</h4>
+                          <div className="text-right">
+                            <div className="text-xl font-bold" style={{ color: 'rgb(var(--domain-transfer-submit-item-price))' }}>
+                              ${item.price}
+                            </div>
+                            <div className="text-sm" style={{ color: 'rgb(var(--domain-transfer-submit-item-label))' }}>per year</div>
                           </div>
-                          <div className="text-sm" style={{ color: 'rgb(var(--domain-transfer-submit-item-label))' }}>per year</div>
-                        </div>
-                      </div>
-                      
-                      <div className="space-y-3">
-                        <div>
-                          <label className="block text-sm font-medium mb-2" style={{ color: 'rgb(var(--domain-transfer-submit-item-label))' }}>
-                            Authorization code
-                          </label>
-                          <input
-                            type="text"
-                            value={authCode}
-                            onChange={(e) => setAuthCode(e.target.value)}
-                            placeholder="Enter authorization code"
-                            className="w-full px-4 py-3 border rounded-lg focus:outline-none transition-all duration-300 placeholder:text-[rgb(var(--domain-transfer-submit-input-placeholder))]"
-                            style={{
-                              backgroundColor: 'rgba(var(--domain-transfer-submit-auth-input-bg))',
-                              borderColor: 'rgb(var(--domain-transfer-submit-auth-input-border))',
-                              color: 'rgb(var(--domain-transfer-submit-input-text))'
-                            }}
-                            onFocus={(e) => {
-                              e.currentTarget.style.borderColor = 'hsl(var(--gradient-teal))';
-                              e.currentTarget.style.boxShadow = '0 0 0 2px hsl(var(--gradient-teal) / 0.2)';
-                            }}
-                            onBlur={(e) => {
-                              e.currentTarget.style.borderColor = 'rgb(var(--domain-transfer-submit-auth-input-border))';
-                              e.currentTarget.style.boxShadow = 'none';
-                            }}
-                          />
                         </div>
                         
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <span className="text-sm mr-2" style={{ color: 'rgb(var(--domain-transfer-submit-item-label))' }}>Register Lock</span>
-                            <button
-                              onClick={() => setRegisterLock(!registerLock)}
-                              className="w-12 h-6 rounded-full transition-all duration-300"
-                              style={{ backgroundColor: registerLock ? 'rgb(var(--domain-transfer-submit-toggle-active))' : 'rgb(var(--domain-transfer-submit-toggle-inactive))' }}
-                            >
-                              <div 
-                                className="w-5 h-5 rounded-full transition-all duration-300"
-                                style={{ 
-                                  backgroundColor: 'rgb(var(--domain-transfer-submit-toggle-thumb))',
-                                  transform: registerLock ? 'translateX(24px)' : 'translateX(4px)'
-                                }}
-                              />
-                            </button>
+                        <div className="space-y-3">
+                          <div>
+                            <label className="block text-sm font-medium mb-2" style={{ color: 'rgb(var(--domain-transfer-submit-item-label))' }}>
+                              Authorization code
+                            </label>
+                            <input
+                              type="text"
+                              value={authCode}
+                              onChange={(e) => setAuthCode(e.target.value)}
+                              placeholder="Enter authorization code"
+                              className="w-full px-4 py-3 border rounded-lg focus:outline-none transition-all duration-300 placeholder:text-[rgb(var(--domain-transfer-submit-input-placeholder))]"
+                              style={{
+                                backgroundColor: 'rgba(var(--domain-transfer-submit-auth-input-bg))',
+                                borderColor: 'rgb(var(--domain-transfer-submit-auth-input-border))',
+                                color: 'rgb(var(--domain-transfer-submit-input-text))'
+                              }}
+                              onFocus={(e) => {
+                                e.currentTarget.style.borderColor = 'hsl(var(--gradient-teal))';
+                                e.currentTarget.style.boxShadow = '0 0 0 2px hsl(var(--gradient-teal) / 0.2)';
+                              }}
+                              onBlur={(e) => {
+                                e.currentTarget.style.borderColor = 'rgb(var(--domain-transfer-submit-auth-input-border))';
+                                e.currentTarget.style.boxShadow = 'none';
+                              }}
+                            />
                           </div>
                           
-                          <button
-                            onClick={() => removeFromCart(index)}
-                            className="text-sm font-medium"
-                            style={{ color: 'rgb(var(--domain-transfer-submit-remove-text))' }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.color = 'rgb(var(--domain-transfer-submit-remove-hover))';
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.color = 'rgb(var(--domain-transfer-submit-remove-text))';
-                            }}
-                          >
-                            Remove
-                          </button>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              <span className="text-sm mr-2" style={{ color: 'rgb(var(--domain-transfer-submit-item-label))' }}>Register Lock</span>
+                              <button
+                                onClick={() => setRegisterLock(!registerLock)}
+                                className="w-12 h-6 rounded-full transition-all duration-300"
+                                style={{ backgroundColor: registerLock ? 'rgb(var(--domain-transfer-submit-toggle-active))' : 'rgb(var(--domain-transfer-submit-toggle-inactive))' }}
+                              >
+                                <div
+                                  className="w-5 h-5 rounded-full transition-all duration-300"
+                                  style={{
+                                    backgroundColor: 'rgb(var(--domain-transfer-submit-toggle-thumb))',
+                                    transform: registerLock ? 'translateX(24px)' : 'translateX(4px)'
+                                  }}
+                                />
+                              </button>
+                            </div>
+                            
+                            <button
+                              onClick={() => removeFromCart(index)}
+                              className="text-sm font-medium"
+                              style={{ color: 'rgb(var(--domain-transfer-submit-remove-text))' }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.color = 'rgb(var(--domain-transfer-submit-remove-hover))';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.color = 'rgb(var(--domain-transfer-submit-remove-text))';
+                              }}
+                            >
+                              Remove
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -290,4 +275,10 @@ const DomainTransferSubmitPage = () => {
   );
 };
 
-export default DomainTransferSubmitPage;
+export default function DomainTransferSubmitPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen pt-14" />}>
+      <DomainTransferSubmitContent />
+    </Suspense>
+  );
+}
