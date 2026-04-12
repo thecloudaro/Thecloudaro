@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Search } from "lucide-react";
+import UpmindTransferWidget from "@/components/Transfer/UpmindTransferWidget";
 import TransferPricing from "@/components/Transfer/TransferPricing";
 import TransferHeroFeatures from "@/components/Transfer/TransferHeroFeatures";
 import TransferInstructions from "@/components/Transfer/TransferInstructions";
@@ -15,62 +13,6 @@ import TransferFrequentlyAskedQuestions from "@/components/Transfer/TransferFreq
 import SectionHeading from "@/components/ui/section-heading";
 
 const DomainTransferPage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isSearching, setIsSearching] = useState(false);
-  const router = useRouter();
-
-  const redirectWithEligibility = (domain: string, eligible: boolean, message: string) => {
-    const params = new URLSearchParams({
-      domain,
-      eligible: eligible ? "1" : "0",
-      message,
-    });
-    router.push(`/domain/transfer/submit?${params.toString()}`);
-  };
-
-  const handleSearch = async (term: string) => {
-    const domain = term.trim();
-    if (!domain) return;
-
-    if (!domain.includes(".")) {
-      redirectWithEligibility(
-        domain,
-        false,
-        "Please enter a full domain name (e.g. example.com) to check transfer eligibility."
-      );
-      return;
-    }
-
-    setIsSearching(true);
-    try {
-      const res = await fetch(`/api/domain-search?term=${encodeURIComponent(domain)}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        cache: "no-store",
-      });
-      const data = await res.json().catch(() => ({}));
-      const list = Array.isArray(data?.domains) ? data.domains : [];
-      const exact = list.find(
-        (row: { name?: string; available?: boolean }) =>
-          String(row?.name || "").toLowerCase() === domain.toLowerCase()
-      );
-
-      if (exact && exact.available === false) {
-        redirectWithEligibility(domain, true, "Your domain is eligible for transfer to us.");
-      } else {
-        redirectWithEligibility(domain, false, "Your domain is not eligible for transfer to us.");
-      }
-    } catch {
-      redirectWithEligibility(
-        domain,
-        false,
-        "We could not verify transfer eligibility right now. Please try again."
-      );
-    } finally {
-      setIsSearching(false);
-    }
-  };
-
   return (
     <div className="relative min-h-screen overflow-hidden" style={{ backgroundColor: 'rgb(var(--domain-transfer-page-bg))', color: 'rgb(var(--domain-transfer-page-text))' }}>
       {/* Radial gradient overlays to match reference (stronger from bottom) */}
@@ -164,45 +106,10 @@ const DomainTransferPage = () => {
               />
             </div>
 
-            {/* Search Section */}
+            {/* Upmind transfer widget (same integration idea as domain flow: primary hero action) */}
             <div className="max-w-2xl mx-auto w-full">
               <div className="relative w-full mb-2 sm:mb-3 md:mb-4">
-                <div className="flex items-stretch bg-hero-search-bg backdrop-blur-md rounded-full p-1.5 sm:p-2 border border-hero-search-border shadow-lg" style={{ backgroundColor: 'rgb(var(--domain-transfer-page-search-bg))' }}>
-                  <div className="flex items-center flex-1 px-3 sm:px-4">
-                    <Search className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" style={{ color: 'rgb(var(--domain-common-text-gray-400))' }} />
-                    <input
-                      type="text"
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      onKeyDown={(e) => e.key === 'Enter' && handleSearch(searchTerm)}
-                      placeholder="Type your domain to transfer..."
-                      className="flex-1 bg-transparent text-hero-text placeholder-hero-text-muted text-sm sm:text-base focus:outline-none"
-                    />
-                  </div>
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => handleSearch(searchTerm)}
-                    disabled={isSearching}
-                    className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-sm sm:text-base transition disabled:opacity-50"
-                    style={{
-                      backgroundColor: 'rgb(var(--domain-transfer-page-button-bg))',
-                      color: 'rgb(var(--domain-transfer-page-button-text))'
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!e.currentTarget.disabled) {
-                        e.currentTarget.style.backgroundColor = 'rgb(var(--domain-transfer-page-button-hover))';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!e.currentTarget.disabled) {
-                        e.currentTarget.style.backgroundColor = 'rgb(var(--domain-transfer-page-button-bg))';
-                      }
-                    }}
-                  >
-                    {isSearching ? "Searching..." : "Transfer"}
-                  </motion.button>
-                </div>
+                <UpmindTransferWidget currencyCode="USD" variant="domain" />
               </div>
             </div>
           </div>

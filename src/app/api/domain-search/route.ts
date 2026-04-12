@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { extractTldFromFqdn } from '@/lib/domain/extractTldFromFqdn';
 import { fetchDomainAvailabilityByTld } from '@/lib/upmind/dacSearch';
 import {
   buildSyntheticTermsFromModuleRow,
@@ -198,6 +199,20 @@ export async function GET(req: NextRequest) {
       console.log(`ℹ️ [Domain Search] Extracted domain name from search: "${cleanSearchTerm}"`);
     }
 
+    /**
+     * When the client passes a full FQDN (e.g. transfer flow), only build pricing for that extension.
+     * Otherwise we iterate the entire catalogue (hundreds of rows) and may call Upmind once per TLD — minutes of work and “infinite loading” in the UI.
+     */
+    const filterCatalogueToTld =
+      searchTerm && String(searchTerm).includes('.')
+        ? extractTldFromFqdn(String(searchTerm).trim().toLowerCase())
+        : null;
+    if (filterCatalogueToTld) {
+      console.log(
+        `⚡ [Domain Search] FQDN mode: restricting catalogue loop to TLD ${filterCatalogueToTld}`
+      );
+    }
+
     console.log(`🔍 [Domain Search] Processing ${tldsList.length} TLDs with search term: "${cleanSearchTerm}"`);
 
     // Process each TLD item to extract domain information
@@ -253,6 +268,14 @@ export async function GET(req: NextRequest) {
           // Only log first few skipped items to avoid spam
           console.log(`⚠️ [Domain Search] Skipping item ${processedCount} - no valid TLD found. Item keys:`, Object.keys(tldItem));
         }
+        continue;
+      }
+
+      if (
+        filterCatalogueToTld &&
+        tld.toLowerCase() !== filterCatalogueToTld.toLowerCase()
+      ) {
+        skippedCount++;
         continue;
       }
       
