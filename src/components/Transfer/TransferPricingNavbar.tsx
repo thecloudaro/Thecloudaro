@@ -34,9 +34,7 @@ const TransferPricingNavbar = () => {
   // Always show navbar when visible (don't hide on scroll up)
   if (!isVisible) return null;
 
-  // Match Spaceship behavior exactly:
-  // - Scroll up: pricing navbar below main navbar (responsive heights)
-  // - Scroll down: pricing navbar at very top (0px, no margins)
+  // Sticky transfer bar: below main navbar when scrolling up; flush to top when scrolling down.
   const topOffsetClass = isScrollingUp 
     ? 'top-14 sm:top-16 md:top-20' // Below main navbar when scrolling up
     : ''; // No class when scrolling down - use inline style only
@@ -85,7 +83,7 @@ const TransferPricingNavbar = () => {
                 <input
                   type="text"
                   placeholder="Enter domain name to transfer..."
-                  className="flex-1 bg-transparent text-hero-text placeholder-hero-text-muted text-base focus:outline-none"
+                  className="min-w-0 flex-1 bg-transparent text-hero-text placeholder-hero-text-muted text-base focus:outline-none"
                 />
               </div>
               <button 

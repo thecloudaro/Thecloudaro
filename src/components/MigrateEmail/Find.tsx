@@ -30,7 +30,7 @@ const Find = () => {
                 size="md"
                 className="!text-[rgba(var(--migrate-email-hero-text-85))]"
               >
-                Click &apos;Migrate to Spacemail&apos; to launch our migration tool.
+                Click &apos;Migrate to business mail&apos; to launch our migration tool.
               </ContentDescription>
             </div>
           </motion.div>

@@ -105,21 +105,23 @@ const SignUpPage = () => {
       }
 
       localStorage.setItem('access_token', loginData.access_token);
+      const resolvedClientId = loginData.client_id || loginData.actor_id || null;
+      const resolvedActorId = loginData.actor_id || loginData.client_id || null;
       if (loginData.refresh_token) {
         localStorage.setItem('refresh_token', loginData.refresh_token);
       }
-      if (loginData.client_id) {
-        localStorage.setItem('client_id', loginData.client_id);
+      if (resolvedClientId) {
+        localStorage.setItem('client_id', resolvedClientId);
       }
-      if (loginData.actor_id) {
-        localStorage.setItem('actor_id', loginData.actor_id);
+      if (resolvedActorId) {
+        localStorage.setItem('actor_id', resolvedActorId);
       }
 
       try {
         await commitPortalHandoffThenRedirect({
           access_token: loginData.access_token,
-          client_id: loginData.client_id,
-          actor_id: loginData.actor_id,
+          client_id: resolvedClientId,
+          actor_id: resolvedActorId,
         });
       } catch {
         setError('Account created but could not open client area. Please sign in from the login page.');

@@ -32,7 +32,7 @@ const TransferPricing = () => {
         </div>
 
         {/* Get 1-year renewal note */}
-        <p className="text-xs sm:text-base md:text-md text-center mb-6 mt-30 text-transfer-pricing-note">
+        <p className="text-xs sm:text-base md:text-lg text-center mb-6 mt-30 text-transfer-pricing-note">
           Get 1-year renewal with every transfer.
         </p>
 

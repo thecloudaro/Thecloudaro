@@ -719,7 +719,7 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(
         className="relative w-full h-[40vh] sm:h-[45vh] md:h-[50vh] min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex items-center justify-center"
         style={{ backgroundColor: "rgb(var(--hosting-bg))" }}
       >
-        {/* Spotlight Gradient Effect - #4dd0e1 color only in center, gray sides */}
+        {/* Spotlight Gradient Effect - accent cyan in center, neutral sides */}
         <div
           className="absolute inset-0 flex items-center justify-center"
           style={{

@@ -30,20 +30,23 @@ const LoginPage = () => {
       const data = await response.json();
 
       if (response.ok) {
+        const resolvedClientId = data.client_id || data.actor_id || null;
+        const resolvedActorId = data.actor_id || data.client_id || null;
+
         localStorage.setItem('access_token', data.access_token);
         localStorage.setItem('refresh_token', data.refresh_token);
-        if (data.client_id) {
-          localStorage.setItem('client_id', data.client_id);
+        if (resolvedClientId) {
+          localStorage.setItem('client_id', resolvedClientId);
         }
-        if (data.actor_id) {
-          localStorage.setItem('actor_id', data.actor_id);
+        if (resolvedActorId) {
+          localStorage.setItem('actor_id', resolvedActorId);
         }
 
         try {
           await commitPortalHandoffThenRedirect({
             access_token: data.access_token,
-            client_id: data.client_id,
-            actor_id: data.actor_id,
+            client_id: resolvedClientId,
+            actor_id: resolvedActorId,
           });
         } catch {
           setError('Signed in but could not open client area. Try again or use the client portal link.');

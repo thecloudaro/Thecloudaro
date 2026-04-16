@@ -309,7 +309,7 @@ const ChooseEmail = () => {
 
       <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center px-4 pb-16 pt-16 text-center sm:px-6 sm:pt-20 lg:px-8 lg:pb-12 lg:pt-24">
         <div className="mb-6 text-md font-semibold uppercase tracking-[0.35em]" style={{ color: 'rgba(var(--migrate-email-hero-brand-text))' }}>
-          SPACEMAIL™
+          BUSINESS MAIL
         </div>
 
         <ContentHeading
@@ -321,7 +321,7 @@ const ChooseEmail = () => {
           size="xl"
           className="mt-4 text-lg sm:text-xl md:text-2xl max-w-4xl text-[rgba(var(--migrate-email-hero-text-85))]"
         >
-          Whatever you need it for, you&apos;ll find the right Spacemail plan for you.
+          Whatever you need it for, you&apos;ll find the right business mail plan for you.
         </ContentDescription>
 
         <div className="mt-10 flex w-full flex-col items-center gap-10 sm:flex-row sm:justify-center sm:gap-14">
@@ -448,7 +448,7 @@ const ChooseEmail = () => {
               e.currentTarget.style.opacity = '1';
             }}
           >
-            Explore Spacemail
+            Explore business mail
           </button>
         </div>
       </div>

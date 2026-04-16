@@ -33,14 +33,14 @@ const articles: Article[] = [
   },
   {
     id: "4",
-    title: "How to Use the Spacemail App on iOS and Android",
-    category: "SPACEMAIL",
+    title: "How to Use the business mail App on iOS and Android",
+    category: "business mail",
     href: "/knowledgebase/article/4",
   },
   {
     id: "5",
-    title: "How to Set Up a Contact Form with Spacemail (Step-by-Step Guide)",
-    category: "SPACEMAIL",
+    title: "How to Set Up a Contact Form with business mail (Step-by-Step Guide)",
+    category: "business mail",
     href: "/knowledgebase/article/5",
   },
 ];

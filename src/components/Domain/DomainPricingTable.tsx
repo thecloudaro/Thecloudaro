@@ -17,11 +17,16 @@ interface DomainPricingRow {
   transfer: RegisterTransferPricing;
 }
 
+type SortOrder = "none" | "price_desc" | "price_asc";
+
 const DomainPricingTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showPriceRange, setShowPriceRange] = useState(false);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [appliedMinPrice, setAppliedMinPrice] = useState<number | null>(null);
+  const [appliedMaxPrice, setAppliedMaxPrice] = useState<number | null>(null);
+  const [sortOrder, setSortOrder] = useState<SortOrder>("none");
   const [minPriceFocused, setMinPriceFocused] = useState(false);
   const [maxPriceFocused, setMaxPriceFocused] = useState(false);
   const [domainPricing, setDomainPricing] = useState<DomainPricingRow[]>([]);
@@ -109,19 +114,55 @@ const DomainPricingTable = () => {
     fetchPricing();
   }, []);
 
-  const filteredDomains = domainPricing.filter((domain) =>
-    domain.tld.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const parseNumericPrice = (pricing: RegisterTransferPricing): number | null => {
+    const raw = pricing.isSale ? pricing.sale : pricing.price;
+    const numeric = Number(String(raw).replace(/[^0-9.]/g, ""));
+    return Number.isFinite(numeric) ? numeric : null;
+  };
+
+  const filteredDomains = domainPricing
+    .filter((domain) =>
+      domain.tld.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .filter((domain) => {
+      const registerPrice = parseNumericPrice(domain.register);
+      if (registerPrice == null) return false;
+      if (appliedMinPrice != null && registerPrice < appliedMinPrice) return false;
+      if (appliedMaxPrice != null && registerPrice > appliedMaxPrice) return false;
+      return true;
+    })
+    .sort((a, b) => {
+      if (sortOrder === "none") return a.tld.localeCompare(b.tld);
+      const aPrice = parseNumericPrice(a.register) ?? Number.MAX_SAFE_INTEGER;
+      const bPrice = parseNumericPrice(b.register) ?? Number.MAX_SAFE_INTEGER;
+      return sortOrder === "price_desc" ? bPrice - aPrice : aPrice - bPrice;
+    });
 
 
   const handleClearPriceRange = () => {
     setMinPrice("");
     setMaxPrice("");
+    setAppliedMinPrice(null);
+    setAppliedMaxPrice(null);
+    setSortOrder("none");
+    setShowPriceRange(false);
   };
 
   const handleApplyPriceRange = () => {
-    // Handle apply price range logic here
-    console.log(`Price range: ${minPrice} - ${maxPrice}`);
+    const parsedMin = minPrice.trim() === "" ? null : Number(minPrice);
+    const parsedMax = maxPrice.trim() === "" ? null : Number(maxPrice);
+    const min = parsedMin != null && Number.isFinite(parsedMin) && parsedMin >= 0 ? parsedMin : null;
+    const max = parsedMax != null && Number.isFinite(parsedMax) && parsedMax >= 0 ? parsedMax : null;
+
+    if (min != null && max != null && min > max) {
+      setAppliedMinPrice(max);
+      setAppliedMaxPrice(min);
+      setMinPrice(String(max));
+      setMaxPrice(String(min));
+    } else {
+      setAppliedMinPrice(min);
+      setAppliedMaxPrice(max);
+    }
     setShowPriceRange(false);
   };
 
@@ -155,7 +196,7 @@ const DomainPricingTable = () => {
       <div className="mb-8">
         <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
           {/* TLD Search - Wider and shorter */}
-          <div className="relative max-w-md">
+          <div className="relative w-full sm:max-w-md">
             <TLDSearchBar
               value={searchTerm}
               onChange={setSearchTerm}
@@ -305,6 +346,26 @@ const DomainPricingTable = () => {
                         </div>
                       </div>
                     </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <label className="block text-xs mb-1" style={{ color: 'rgb(var(--hosting-text-white))' }}>
+                      Sort by price
+                    </label>
+                    <select
+                      value={sortOrder}
+                      onChange={(e) => setSortOrder(e.target.value as SortOrder)}
+                      className="w-full px-3 py-2 border rounded-md text-sm focus:outline-none"
+                      style={{
+                        backgroundColor: 'rgb(var(--domain-pricing-table-input-bg))',
+                        borderColor: 'rgb(var(--domain-pricing-table-input-border-default))',
+                        color: 'rgb(var(--hosting-text-white))',
+                      }}
+                    >
+                      <option value="none">Default</option>
+                      <option value="price_desc">Highest to Lowest</option>
+                      <option value="price_asc">Lowest to Highest</option>
+                    </select>
                   </div>
 
                   {/* Line after Min to Max */}

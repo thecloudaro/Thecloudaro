@@ -260,8 +260,8 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
           </div>
 
           {/* Duration Selector */}
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-[rgb(var(--ssl-text-muted))] mr-2">Duration:</span>
+          <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
+            <span className="mr-2 text-sm text-[rgb(var(--ssl-text-muted))]">Duration:</span>
             {(["1", "2", "3", "4", "5"] as Duration[]).map((duration) => (
               <button
                 key={duration}

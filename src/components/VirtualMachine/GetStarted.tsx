@@ -65,7 +65,7 @@ const GetStarted = () => {
             <div className="flex justify-center w-full">
               <ContentHeading
                 title="Get started with your Virtual Machine"
-                className="text-center !text-[2.5rem] sm:!text-[3.35rem] md:!text-[4.05rem] lg:!text-[4.5rem] font-bold leading-[1.08] !text-[rgb(var(--virtual-machine-text-deep-gray))] whitespace-nowrap"
+                className="text-center !text-[2.5rem] sm:!text-[3.35rem] md:!text-[4.05rem] lg:!text-[4.5rem] font-bold leading-[1.08] !text-[rgb(var(--virtual-machine-text-deep-gray))]"
               />
             </div>
 

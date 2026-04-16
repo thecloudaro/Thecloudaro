@@ -43,7 +43,7 @@ const TakeEffortless = () => {
             <div className="max-w-3xl space-y-4 lg:max-w-2xl mt-8 sm:mt-12 md:mt-16">
               <ContentHeading
                 title="Take effortless<br/>control"
-                className="text-left !text-[2.5rem] sm:!text-[3.35rem] md:!text-[4.05rem] lg:!text-[3.5rem] font-bold leading-[1.08] !text-[rgb(var(--virtual-machine-hero-text))]"
+                className="text-left !text-[2.5rem] sm:!text-[3.35rem] md:!text-[4.05rem] lg:!text-[4rem] font-bold leading-[1.08] !text-[rgb(var(--virtual-machine-hero-text))]"
               />
 
               <ContentDescription

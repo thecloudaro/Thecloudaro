@@ -35,7 +35,7 @@ const TLDSearchBar = ({
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`flex-1 bg-transparent text-hero-text placeholder-hero-text-muted text-sm sm:text-base focus:outline-none ${inputClassName}`}
+        className={`min-w-0 flex-1 bg-transparent text-hero-text placeholder-hero-text-muted text-sm sm:text-base focus:outline-none ${inputClassName}`}
       />
     </div>
   );

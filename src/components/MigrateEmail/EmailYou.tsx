@@ -7,7 +7,7 @@ import { migrateEmailStyles, getCSSVariable } from "@/lib/migrateEmailUtils";
 const EmailYou = () => {
   const pricingData = [
     {
-      name: "Spacemail",
+      name: "business mail",
       price: "$6.88/yr",
       save: null,
       highlighted: true

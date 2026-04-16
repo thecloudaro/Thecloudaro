@@ -29,7 +29,7 @@ const EligibleDomainCard: React.FC<EligibleDomainCardProps> = ({
       }}
     >
       {/* Top Row - Domain Name and Pricing in same line */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4 gap-2 flex-wrap">
         <div className="flex items-center gap-2.5">
           {/* Green Circle Icon with Target - White target symbol */}
           <div
@@ -51,13 +51,13 @@ const EligibleDomainCard: React.FC<EligibleDomainCardProps> = ({
             </svg>
           </div>
           <h4
-            className="text-sm font-semibold"
+            className="text-sm font-semibold truncate max-w-[10rem] sm:max-w-none"
             style={{ color: "rgb(var(--domain-transfer-submit-item-name))" }}
           >
             {domain}
           </h4>
         </div>
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 ml-auto">
           <span
             className="text-xs line-through"
             style={{ color: "rgb(var(--domain-transfer-submit-item-label))" }}
@@ -101,7 +101,7 @@ const EligibleDomainCard: React.FC<EligibleDomainCardProps> = ({
             value={authCode}
             onChange={(e) => setAuthCode(e.target.value)}
             placeholder="Enter your authorisation code"
-            className="w-auto max-w-xs px-2.5 py-1.5 rounded-lg text-xs focus:outline-none transition-all"
+            className="w-full sm:w-auto sm:max-w-xs px-2.5 py-1.5 rounded-lg text-xs focus:outline-none transition-all"
             style={{
               backgroundColor: "rgba(var(--domain-transfer-submit-auth-input-bg))",
               borderColor: "rgb(var(--domain-transfer-submit-auth-input-border))",
@@ -116,7 +116,7 @@ const EligibleDomainCard: React.FC<EligibleDomainCardProps> = ({
             }}
           />
           {/* Registrar Lock - Positioned further right */}
-          <div className="flex items-center gap-1.5 ml-6">
+          <div className="flex items-center gap-1.5 ml-0 sm:ml-6 w-full sm:w-auto justify-between sm:justify-start">
             <div className="flex items-center gap-1.5">
               <span
                 className="text-xs font-medium whitespace-nowrap"

@@ -1,26 +1,18 @@
 "use client";
 
 import {
-  createElement,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
-import Script from "next/script";
 import { buildDomainTransferUrl } from "@/lib/upmind/domainCheckoutUrl";
 import {
   fetchDomainTransferInsight,
   type DomainTransferInsight,
 } from "@/lib/domain/fetchDomainTransferInsight";
 import TransferResultPanel from "@/components/Transfer/TransferResultPanel";
-
-function isDacRuntimeReady(): boolean {
-  if (typeof window === "undefined") return false;
-  if (window.customElements?.get("upm-dac")) return true;
-  return Boolean((window as unknown as { UpmDac?: unknown }).UpmDac);
-}
 
 type Props = {
   currencyCode?: string;
@@ -32,14 +24,12 @@ type Props = {
 };
 
 export default function UpmindTransferWidget({
-  currencyCode = "USD",
+  currencyCode: _currencyCode = "USD",
   variant = "default",
   initialDomain,
   blockCheckout = false,
   onTransferDomainReset,
 }: Props) {
-  const [scriptReady, setScriptReady] = useState(false);
-  const [scriptError, setScriptError] = useState<string | null>(null);
   const [domainName, setDomainName] = useState("");
   const [authCode, setAuthCode] = useState("");
   const [insightLoading, setInsightLoading] = useState(false);
@@ -54,28 +44,6 @@ export default function UpmindTransferWidget({
 
   const envTransferProductId =
     process.env.NEXT_PUBLIC_UPMIND_DOMAIN_TRANSFER_PRODUCT_ID?.trim() || "";
-
-  const effectiveProductId =
-    envTransferProductId || insight?.productId || "";
-
-  /** Upmind docs: `order-config-url` should point at shop route, e.g. `{origin}/order/product`. */
-  const orderConfigUrl = useMemo(() => {
-    const transferSpecific =
-      process.env.NEXT_PUBLIC_UPMIND_TRANSFER_ORDER_CONFIG_URL?.trim();
-    const generic = process.env.NEXT_PUBLIC_UPMIND_ORDER_CONFIG_URL?.trim();
-    const base =
-      transferSpecific ||
-      generic ||
-      "https://my.thecloudaro.com/order/product";
-    if (!effectiveProductId) return base;
-    try {
-      const u = new URL(base);
-      u.searchParams.set("pid", effectiveProductId);
-      return u.toString();
-    } catch {
-      return base;
-    }
-  }, [effectiveProductId]);
 
   useEffect(() => {
     const v = initialDomain?.trim();
@@ -131,10 +99,7 @@ export default function UpmindTransferWidget({
     runTransferCheck();
   }, [initialDomain, domainIsValid, runTransferCheck]);
 
-  /**
-   * Submit page: if `NEXT_PUBLIC_UPMIND_DOMAIN_TRANSFER_PRODUCT_ID` is set, allow portal link
-   * without waiting on eligibility (matches sidebar “Continue to checkout”).
-   */
+  /** Strict mode: checkout only when domain is verified as transfer-eligible. */
   const canTransferCheckout = (() => {
     if (blockCheckout || !domainIsValid) return false;
     const hasPid = Boolean(envTransferProductId || insight?.productId);
@@ -155,36 +120,19 @@ export default function UpmindTransferWidget({
     [normalizedDomain, authCode, insight]
   );
 
-  useEffect(() => {
-    if (scriptReady || scriptError) return;
-    if (isDacRuntimeReady()) {
-      setScriptReady(true);
-      return;
+  const checkoutBlockedReason = (() => {
+    if (canTransferCheckout) return null;
+    if (normalizedDomain.length === 0) return null;
+    if (!domainIsValid) return "Enter a valid domain first.";
+    if (!insight?.ok) return "Click 'Check transfer' first.";
+    if (!insight.eligibleForTransfer) {
+      return "Checkout is enabled only for domains marked 'Eligible for transfer'.";
     }
-    const started = Date.now();
-    const id = window.setInterval(() => {
-      if (isDacRuntimeReady()) {
-        window.clearInterval(id);
-        setScriptReady(true);
-        setScriptError(null);
-        return;
-      }
-      if (Date.now() - started > 8000) {
-        window.clearInterval(id);
-        setScriptError(
-          "Optional Upmind search module did not load. You can still use Check transfer + checkout above."
-        );
-      }
-    }, 150);
-    return () => window.clearInterval(id);
-  }, [scriptReady, scriptError]);
-
-  const handleScriptLoad = () => {
-    if (isDacRuntimeReady()) {
-      setScriptReady(true);
-      setScriptError(null);
+    if (!envTransferProductId && !insight.productId) {
+      return "Transfer product mapping not found for this TLD.";
     }
-  };
+    return "Complete transfer check before checkout.";
+  })();
 
   const isDomainVariant = variant === "domain";
   const isSubmitVariant = variant === "submit";
@@ -217,17 +165,6 @@ export default function UpmindTransferWidget({
     : isDomainVariant
       ? "text-xs text-hero-text-muted"
       : "text-xs text-transfer-hero-text-muted";
-  const errorBoxClass = isSubmitVariant
-    ? "rounded-lg border p-3 text-left text-xs border-[rgb(var(--domain-transfer-submit-card-border))] bg-black/20 text-[rgb(var(--domain-transfer-submit-description))]"
-    : isDomainVariant
-      ? "rounded-lg border border-hero-search-border bg-black/20 p-3 text-left text-xs text-hero-text"
-      : "rounded-lg border border-transfer-hero-search bg-transfer-hero-tab p-3 text-left text-xs text-transfer-hero";
-  const loadingClass = isSubmitVariant
-    ? "py-3 text-center text-sm text-[rgb(var(--domain-transfer-submit-description))]"
-    : isDomainVariant
-      ? "py-3 text-center text-sm text-hero-text"
-      : "py-3 text-center text-sm text-transfer-hero";
-
   const primaryBtnClass =
     isSubmitVariant || isDomainVariant
       ? `rounded-xl px-5 py-3 text-center text-sm font-semibold transition ${
@@ -246,7 +183,7 @@ export default function UpmindTransferWidget({
       ? `rounded-xl px-4 py-3 text-center text-sm font-semibold transition ${
           canTransferCheckout
             ? ""
-            : "cursor-not-allowed opacity-50 pointer-events-none"
+            : "cursor-not-allowed pointer-events-none"
         }`
       : `rounded-xl px-4 py-3 text-center text-sm font-semibold transition ${
           canTransferCheckout
@@ -256,19 +193,6 @@ export default function UpmindTransferWidget({
 
   return (
     <div className={outerClass} style={outerStyle}>
-      <Script
-        src="https://widgets.upmind.app/dac/upm-dac.min.js"
-        strategy="afterInteractive"
-        onLoad={handleScriptLoad}
-        onReady={handleScriptLoad}
-        onError={() => {
-          setScriptError(
-            "Upmind search script failed to load (optional). Check network / adblock."
-          );
-          setScriptReady(false);
-        }}
-      />
-
       <div className="space-y-4 text-left">
         <div>
           <label className={labelClass} htmlFor="transfer-domain-input">
@@ -353,15 +277,24 @@ export default function UpmindTransferWidget({
           rel={isSubmitVariant ? undefined : "noopener noreferrer"}
           className={checkoutBtnClass}
           style={
-            (isSubmitVariant || isDomainVariant) && canTransferCheckout
-              ? isSubmitVariant
-                ? {
-                    backgroundColor: "rgb(var(--domain-transfer-submit-button-bg))",
-                    color: "rgb(var(--domain-transfer-submit-button-text))",
-                  }
+            isSubmitVariant || isDomainVariant
+              ? canTransferCheckout
+                ? isSubmitVariant
+                  ? {
+                      backgroundColor: "rgb(var(--domain-transfer-submit-button-bg))",
+                      color: "rgb(var(--domain-transfer-submit-button-text))",
+                    }
+                  : {
+                      backgroundColor: "rgb(var(--domain-transfer-page-button-bg))",
+                      color: "rgb(var(--domain-transfer-page-button-text))",
+                    }
                 : {
-                    backgroundColor: "rgb(var(--domain-transfer-page-button-bg))",
-                    color: "rgb(var(--domain-transfer-page-button-text))",
+                    backgroundColor: isSubmitVariant
+                      ? "rgb(var(--domain-transfer-submit-button-bg) / 0.35)"
+                      : "rgb(var(--domain-transfer-page-button-bg) / 0.35)",
+                    color: isSubmitVariant
+                      ? "rgb(var(--domain-transfer-submit-button-text) / 0.75)"
+                      : "rgb(var(--domain-transfer-page-button-text) / 0.75)",
                   }
               : undefined
           }
@@ -383,38 +316,10 @@ export default function UpmindTransferWidget({
         >
           Add to cart — Continue to checkout
         </a>
-        <p className={mutedClass}>
-          Opens Upmind checkout in a new tab. Review transfer and billing there.
-        </p>
-      </div>
-
-      <div className="mt-6 border-t border-white/10 pt-4">
-        <p
-          className={`text-xs font-semibold uppercase tracking-wide opacity-80 ${
-            isSubmitVariant
-              ? "text-[rgb(var(--domain-transfer-submit-description))]"
-              : isDomainVariant
-                ? "text-hero-text"
-                : "text-transfer-hero"
-          }`}
-        >
-          Search availability &amp; more extensions
-        </p>
-        <p className={`mt-1 text-xs ${mutedClass}`}>
-          Upmind Domain Availability Checker — same script as{" "}
-          <code className="rounded bg-black/20 px-1">order-config-url=…/order/product</code> per docs.
-        </p>
-        {scriptError ? (
-          <div className={`mt-3 ${errorBoxClass}`}>{scriptError}</div>
-        ) : scriptReady ? (
-          <div className="mt-3 text-left" key={orderConfigUrl}>
-            {createElement("upm-dac", {
-              "order-config-url": orderConfigUrl,
-              "currency-code": currencyCode,
-            })}
-          </div>
-        ) : (
-          <div className={`mt-3 ${loadingClass}`}>Loading optional search module…</div>
+        {!canTransferCheckout && checkoutBlockedReason && (
+          <p className={`${mutedClass} mt-4 rounded-lg border border-amber-500/30 bg-amber-500/5 px-3 py-2`}>
+            {checkoutBlockedReason}
+          </p>
         )}
       </div>
     </div>

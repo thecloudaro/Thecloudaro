@@ -9,9 +9,9 @@ import ReviewCard from "@/components/HomeSection/Customers/ReviewCard";
 
 export default function Rated() {
   const reviews = [
-    { name: "Philip", date: "13 days ago", title: "Cheap, reliable and helpful", review: "I've purchased numerous domains from Spaceship and they have always been the cheapest I have found them. All of the domains are very easy to s...", rating: 5 },
-    { name: "Mahmudul Hussain", date: "15 days ago", title: "I've been using Spaceship.com...", review: "I've been using Spaceship.com for hosting my 4 websites, and honestly, it's been a great experience so far. Everything runs fast and smooth - n...", rating: 5 },
-    { name: "Mohammad Rasel", date: "17 days ago", title: "Spaceship.com has been an...", review: "Spaceship.com has been an excellent platform for managing my domains. Everything from registration to DNS setup is super easy and fast. The...", rating: 5 },
+    { name: "Philip", date: "13 days ago", title: "Cheap, reliable and helpful", review: "I've purchased numerous domains from the cloudaro and they have always been the cheapest I have found them. All of the domains are very easy to s...", rating: 5 },
+    { name: "Mahmudul Hussain", date: "15 days ago", title: "I've been using the cloudaro.com...", review: "I've been using the cloudaro.com for hosting my 4 websites, and honestly, it's been a great experience so far. Everything runs fast and smooth - n...", rating: 5 },
+    { name: "Mohammad Rasel", date: "17 days ago", title: "the cloudaro.com has been an...", review: "the cloudaro.com has been an excellent platform for managing my domains. Everything from registration to DNS setup is super easy and fast. The...", rating: 5 },
     { name: "Skco A", date: "19 days ago", title: "This is", review: "This is I have e use and", rating: 2 },
     { name: "S.K.", date: "2 days ago", title: "Reliable domain provider with...", review: "I use TheCloudaro.com from Germany to purchase domains and currently have seven registered there. Together with the Advanced DNS Manager,...", rating: 5 },
     { name: "ZealCrypto", date: "3 days ago", title: "Great Service Since Getting My...", review: "I've had a really positive experience with TheCloudaro.com since registering my domain. The process was smooth, setup was quick, and everything...", rating: 5 },
@@ -128,7 +128,7 @@ export default function Rated() {
               {reviews.map((review, i) => (
                 <div
                   key={`first-${i}`}
-                  className="min-w-[60%] xs:min-w-[55%] sm:min-w-[220px] md:min-w-[280px] lg:min-w-[340px] flex-shrink-0"
+                  className="min-w-[70%] sm:min-w-[220px] md:min-w-[280px] lg:min-w-[340px] flex-shrink-0"
                 >
                   <ReviewCard {...review} />
                 </div>
@@ -136,7 +136,7 @@ export default function Rated() {
               {reviews.map((review, i) => (
                 <div
                   key={`second-${i}`}
-                  className="min-w-[60%] xs:min-w-[55%] sm:min-w-[220px] md:min-w-[280px] lg:min-w-[340px] flex-shrink-0"
+                  className="min-w-[70%] sm:min-w-[220px] md:min-w-[280px] lg:min-w-[340px] flex-shrink-0"
                 >
                   <ReviewCard {...review} />
                 </div>
@@ -158,7 +158,7 @@ export default function Rated() {
           }}
         >
           <p 
-            className="text-md sm:text-lg font-medium whitespace-nowrap"
+            className="text-md sm:text-lg font-medium text-center"
             style={{ color: 'rgb(var(--about-rated-trustpilot-text))' }}
           >
             Review us on

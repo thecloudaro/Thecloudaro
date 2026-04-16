@@ -3,22 +3,35 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import SeePlanButton from "./SeePlan";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRevealOnceInView } from "@/hooks/useRevealOnceInView";
 
 const WebHostingCard = () => {
   const { ref, revealed } = useRevealOnceInView();
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleMouseEnter = () => {
+    if (hideTimerRef.current) {
+      clearTimeout(hideTimerRef.current);
+      hideTimerRef.current = null;
+    }
     setHoveredCard('active');
   };
 
   const handleMouseLeave = () => {
-    setTimeout(() => {
+    if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    hideTimerRef.current = setTimeout(() => {
       setHoveredCard(null);
+      hideTimerRef.current = null;
     }, 2000); // 2 seconds delay before hiding
   };
+
+  useEffect(() => {
+    return () => {
+      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    };
+  }, []);
 
   return (
     <motion.div

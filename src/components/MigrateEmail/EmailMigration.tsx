@@ -28,7 +28,7 @@ const EmailMigration = () => {
               size="xl"
               className="!text-[rgba(var(--migrate-email-hero-text-85))]"
             >
-              Move your emails to Spacemail in no time
+              Move your emails to business mail in no time
             </ContentDescription>
           </motion.div>
         </div>

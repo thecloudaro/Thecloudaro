@@ -23,8 +23,7 @@ const SpacemailCard = () => {
             Effortless email
           </h3>
           <p className="text-[hsl(var(--spacemail-card-text-muted))] text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed items-start text-left max-w-xl mb-4 sm:mb-6">
-            Send the right message with ultra-simple and <br/>
-            full-service business email for your<br/> Domain.
+            Send the right message with ultra-simple and full-service business email for your domain.
           </p>
           
           {/* See Plan button and SPACEMAIL badge intentionally removed from this (Spacemail) card */}

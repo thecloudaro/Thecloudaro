@@ -71,7 +71,7 @@ const WhatYou = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 30 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-12 sm:mt-16 md:mt-20 lg:mt-24 text-left ml-20 sm:ml-24 md:ml-28 lg:ml-48"
+          className="mt-12 sm:mt-16 md:mt-20 lg:mt-24 text-left ml-0 sm:ml-6 md:ml-12 lg:ml-24 xl:ml-48"
         >
           {/* Section 1: Website details */}
           <div className="mb-6 sm:mb-8 md:mb-10">

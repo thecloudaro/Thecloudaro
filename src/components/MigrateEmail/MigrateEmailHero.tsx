@@ -45,7 +45,7 @@ const MigrateEmailHero = () => {
               transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
               className="space-y-4"
             >
-              {/* SPACEMAIL™ Branding */}
+              {/* BUSINESS MAIL branding */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isLoaded ? 1 : 0 }}
@@ -53,7 +53,7 @@ const MigrateEmailHero = () => {
                 className="text-md font-semibold uppercase tracking-[0.35em] mb-2"
                 style={{ color: migrateEmailStyles.heroBrandText }}
               >
-                SPACEMAIL™
+                BUSINESS MAIL
               </motion.div>
 
               <ContentHeading

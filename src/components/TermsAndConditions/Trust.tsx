@@ -12,10 +12,7 @@ const Trust = () => {
   }, []);
 
   return (
-    <div 
-      className="relative w-full min-h-[50vh] sm:min-h-[60vh] flex items-center justify-center overflow-hidden"
-      style={{ backgroundColor: 'hsl(var(--trust-section-bg))' }}
-    >
+    <div className="relative flex min-h-[50vh] w-full items-center justify-center overflow-hidden bg-[hsl(var(--trust-section-bg))] sm:min-h-[60vh]">
       {/* Blue Vertical Gradient on Right Side */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
@@ -48,7 +45,7 @@ const Trust = () => {
           <ContentDescription
             text="Trust. Truth. Transparency."
             size="xl"
-            className="text-3xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl leading-tight !text-[rgb(var(--hosting-text-white))]"
+            className="text-2xl leading-tight sm:text-3xl lg:text-4xl !text-[rgb(var(--hosting-text-white))]"
           />
         </motion.div>
       </div>

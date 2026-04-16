@@ -11,7 +11,7 @@ const MakeEmail = () => {
   const features = [
     {
       title: "Easy setup",
-      description: "One-click Unbox™ links Spacemail to your domain <br/> — no technical know-how required.",
+      description: "One-click Unbox™ links business mail to your domain <br/> — no technical know-how required.",
       image: "/businessEmail/EasySetup.webp"
     },
     {
@@ -30,7 +30,7 @@ const MakeEmail = () => {
             className="text-[rgb(var(--hosting-text-white))] !text-3xl sm:!text-4xl md:!text-5xl lg:!text-6xl font-bold"
           />
           <ContentDescription
-            text="How Spacemail takes simplicity to new levels"
+            text="How business mail takes simplicity to new levels"
             size="xl"
             className="max-w-5xl mx-auto text-[rgba(var(--business-productivity-text-white-70))]"
           />

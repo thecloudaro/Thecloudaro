@@ -22,10 +22,7 @@ const BENEFITS = [
 
 const SSLBenefits = () => {
   return (
-    <section
-      className="relative py-16 sm:py-20 lg:py-24"
-      style={{ backgroundColor: "rgb(var(--security-spacemail-bg))" }}
-    >
+    <section className="relative bg-security-spacemail py-16 sm:py-20 lg:py-24">
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 sm:px-10 lg:flex-row lg:items-start">
         <div className="lg:w-1/3">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-security-spacemail-heading mb-4">

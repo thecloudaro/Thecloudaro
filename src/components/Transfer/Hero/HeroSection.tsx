@@ -132,7 +132,7 @@ const TransferHeroSection = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleRegisterSearch()}
                     placeholder="Enter domain to register"
-                    className="flex-1 bg-transparent text-transfer-hero placeholder-transfer-hero-text-muted text-sm sm:text-base focus:outline-none placeholder:text-xs sm:placeholder:text-sm"
+                    className="min-w-0 flex-1 bg-transparent text-transfer-hero placeholder-transfer-hero-text-muted text-sm sm:text-base focus:outline-none placeholder:text-xs sm:placeholder:text-sm"
                   />
                 </div>
                 <button

@@ -270,12 +270,12 @@ export default function DomainHeroSection() {
                                 Buy
                               </a>
                             ) : (
-                              <span
-                                className="inline-flex items-center px-3 py-1.5 text-xs"
-                                style={{ color: "rgb(var(--domain-hero-text-gray-400))" }}
+                              <Link
+                                href={`/domain/transfer/submit?domain=${encodeURIComponent(row.name)}`}
+                                className="inline-flex items-center justify-center rounded-full px-3 py-1.5 text-xs font-semibold text-[rgb(var(--hosting-text-white))] bg-[hsl(var(--gradient-teal))] hover:bg-[hsl(var(--gradient-teal))]/80 transition-colors"
                               >
-                                —
-                              </span>
+                                Transfer
+                              </Link>
                             )}
                           </div>
                         </div>

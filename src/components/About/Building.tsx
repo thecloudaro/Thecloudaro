@@ -18,7 +18,7 @@ const Building = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col justify-center items-start text-left order-1 ml-0 sm:ml-4 md:ml-8 lg:ml-12 xl:ml-20"
+            className="flex flex-col justify-center items-start text-left order-1 lg:pl-8 xl:pl-12"
           >
             {/* Heading */}
             <motion.div

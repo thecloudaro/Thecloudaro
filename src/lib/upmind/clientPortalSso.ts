@@ -23,16 +23,28 @@ export type ClientPortalSsoInput = {
 
 /**
  * Full URL to open the Upmind client area with OAuth-style params.
- * Some builds read query; others read the hash — toggle with NEXT_PUBLIC_UPMIND_SSO_USE_HASH=true.
- * Path override: NEXT_PUBLIC_UPMIND_SSO_PATH (default `/dashboard`).
+ * Some builds read query; others read hash.
+ * Default mode is `both` so either parser can pick the token.
+ * Override with NEXT_PUBLIC_UPMIND_SSO_MODE = query | hash | both
+ * (legacy flag NEXT_PUBLIC_UPMIND_SSO_USE_HASH still works).
+ * Path override: NEXT_PUBLIC_UPMIND_SSO_PATH (default `/login`).
  */
 export function buildClientPortalSsoUrl(input: ClientPortalSsoInput): string {
   const origin = getUpmindClientPortalOrigin();
-  const rawPath = process.env.NEXT_PUBLIC_UPMIND_SSO_PATH?.trim() || '/dashboard';
+  const rawPath = process.env.NEXT_PUBLIC_UPMIND_SSO_PATH?.trim() || '/login';
   const path = rawPath.startsWith('/') ? rawPath : `/${rawPath}`;
-  const useHash =
+  const postLoginRedirect =
+    process.env.NEXT_PUBLIC_UPMIND_SSO_REDIRECT?.trim() || '/dashboard';
+  const modeFromEnv = (process.env.NEXT_PUBLIC_UPMIND_SSO_MODE || '').trim().toLowerCase();
+  const legacyUseHash =
     process.env.NEXT_PUBLIC_UPMIND_SSO_USE_HASH === '1' ||
     process.env.NEXT_PUBLIC_UPMIND_SSO_USE_HASH === 'true';
+  const ssoMode: 'query' | 'hash' | 'both' =
+    modeFromEnv === 'query' || modeFromEnv === 'hash' || modeFromEnv === 'both'
+      ? (modeFromEnv as 'query' | 'hash' | 'both')
+      : legacyUseHash
+        ? 'hash'
+        : 'both';
 
   const hp = new URLSearchParams();
   hp.set('access_token', input.accessToken);
@@ -45,12 +57,18 @@ export function buildClientPortalSsoUrl(input: ClientPortalSsoInput): string {
   if (aid) {
     hp.set('actor_id', aid);
   }
+  hp.set('redirect', postLoginRedirect);
 
   const base = `${origin}${path}`;
-  if (useHash) {
-    return `${base}#${hp.toString()}`;
-  }
+
+  if (ssoMode === 'hash') return `${base}#${hp.toString()}`;
+
   const url = new URL(base);
   hp.forEach((v, k) => url.searchParams.set(k, v));
+
+  if (ssoMode === 'both') {
+    url.hash = hp.toString();
+  }
+
   return url.toString();
 }

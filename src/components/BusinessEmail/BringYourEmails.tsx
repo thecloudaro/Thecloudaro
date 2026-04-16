@@ -34,7 +34,7 @@ const BringYourEmails = () => {
               size="xl"
               className="text-[rgb(var(--hosting-text-white))] text-base sm:text-lg md:text-xl lg:text-2xl"
             >
-              Migrating your emails into Spacemail is quick, easy, and free. Use our built-in migration tool to transfer your emails in just a few steps.
+              Migrating your emails into business mail is quick, easy, and free. Use our built-in migration tool to transfer your emails in just a few steps.
             </ContentDescription>
 
             <button 

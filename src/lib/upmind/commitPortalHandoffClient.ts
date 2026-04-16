@@ -11,10 +11,16 @@ export type PortalHandoffPayload = {
  * If token is too large for cookies, falls back to GET SSO URL (query/hash).
  */
 export async function commitPortalHandoffThenRedirect(payload: PortalHandoffPayload): Promise<void> {
-  const skipPost =
-    process.env.NEXT_PUBLIC_UPMIND_SSO_SKIP_POST === '1' ||
-    process.env.NEXT_PUBLIC_UPMIND_SSO_SKIP_POST === 'true';
-  if (skipPost) {
+  const forcePostBridge =
+    process.env.NEXT_PUBLIC_UPMIND_SSO_USE_POST_BRIDGE === '1' ||
+    process.env.NEXT_PUBLIC_UPMIND_SSO_USE_POST_BRIDGE === 'true';
+
+  /**
+   * Default strategy: direct SSO URL to Upmind dashboard.
+   * Some branded portals ignore `/login` POST token fields and show login form again.
+   * Keep old POST bridge available only when explicitly forced by env.
+   */
+  if (!forcePostBridge) {
     window.location.replace(
       buildClientPortalSsoUrl({
         accessToken: payload.access_token,

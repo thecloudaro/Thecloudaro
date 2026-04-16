@@ -1,12 +1,11 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
-import { ArrowRight, AlertCircle, Loader2, CheckCircle2, XCircle } from "lucide-react";
+import { AlertCircle, Loader2, CheckCircle2, XCircle } from "lucide-react";
 import UpmindTransferWidget from "@/components/Transfer/UpmindTransferWidget";
 import { fetchDomainTransferInsight } from "@/lib/domain/fetchDomainTransferInsight";
-import { buildDomainTransferUrl } from "@/lib/upmind/domainCheckoutUrl";
 
 type ReadinessState =
   | { phase: "idle" }
@@ -113,21 +112,6 @@ const DomainTransferSubmitContent = () => {
     if (cur === "USD") return `$${amount.toFixed(2)}`;
     return `${amount.toFixed(2)} ${cur}`;
   };
-
-  /** Upmind transfer checkout — only when registry check says transfer-in eligible. */
-  const transferPortalCheckoutUrl = useMemo(() => {
-    const d = selectedDomain.trim().toLowerCase();
-    if (!d || !d.includes(".")) return null;
-    if (readiness.phase !== "ready" || readiness.eligibility !== "eligible") {
-      return null;
-    }
-    return buildDomainTransferUrl({
-      domainName: d,
-      authCode: authCode.trim() || undefined,
-      productId: readiness.productId,
-      billingCycleMonths: readiness.billingCycleMonths,
-    });
-  }, [readiness, selectedDomain, authCode]);
 
   const handleTransferDomainReset = () => {
     router.replace(pathname || "/domain/transfer/submit");
@@ -620,31 +604,6 @@ const DomainTransferSubmitContent = () => {
                   </div>
                 </div>
 
-                <a
-                  href={transferPortalCheckoutUrl ?? undefined}
-                  aria-disabled={!transferPortalCheckoutUrl}
-                  className={`w-full mt-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center ${
-                    transferPortalCheckoutUrl
-                      ? "cursor-pointer hover:opacity-95"
-                      : "cursor-not-allowed opacity-50 pointer-events-none"
-                  }`}
-                  style={{
-                    backgroundColor: "rgb(var(--domain-transfer-submit-button-bg))",
-                    color: "rgb(var(--domain-transfer-submit-button-text))",
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!transferPortalCheckoutUrl) return;
-                    e.currentTarget.style.backgroundColor =
-                      "rgba(var(--domain-transfer-submit-button-hover))";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor =
-                      "rgb(var(--domain-transfer-submit-button-bg))";
-                  }}
-                >
-                  Continue to checkout
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </a>
               </div>
             </div>
           </div>

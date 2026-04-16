@@ -111,7 +111,7 @@ const BusinessHero = () => {
                     e.currentTarget.style.boxShadow = '0 12px 28px rgba(var(--business-hero-button-purple-shadow))';
                   }}
                 >
-                  Log in to Spacemail
+                  Log in to Business Mail
                 </a>
               </div>
             </div>

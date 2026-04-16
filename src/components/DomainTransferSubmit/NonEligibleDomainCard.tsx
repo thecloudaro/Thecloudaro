@@ -48,7 +48,7 @@ const NonEligibleDomainCard: React.FC<NonEligibleDomainCardProps> = ({
 
         <div className="flex items-center gap-2.5 flex-1 min-w-0">
           <h4
-            className="text-sm font-semibold whitespace-nowrap"
+            className="text-sm font-semibold truncate max-w-[9rem] sm:max-w-none"
             style={{ color: "rgb(var(--domain-transfer-submit-item-name))" }}
           >
             {domain}

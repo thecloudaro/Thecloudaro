@@ -58,7 +58,7 @@ const Register = () => {
           {/* Heading */}
           <ContentHeading 
             title="Register your domain confidentially"
-            className="mb-8 sm:mb-10 md:mb-12 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl whitespace-nowrap"
+            className="mb-8 sm:mb-10 md:mb-12 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
           />
 
           {/* Search Bar */}

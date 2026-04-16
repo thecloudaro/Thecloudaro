@@ -38,7 +38,7 @@ const WhySpacemail = () => {
             className="space-y-4 sm:space-y-6"
           >
             <ContentHeading
-              title="Why Spacemail?"
+              title="Why business mail?"
               className="!text-3xl sm:!text-4xl md:!text-5xl lg:!text-6xl xl:!text-7xl !text-[rgb(var(--migrate-email-simple-text-white))]"
             />
             

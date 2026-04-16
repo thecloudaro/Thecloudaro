@@ -43,7 +43,7 @@ const Freedom = () => {
         <div className="text-center space-y-8">
           <ContentHeading
             title="Freedom in your hands"
-            className="text-5xl sm:text-[4.5rem] md:text-[6rem] xl:text-[4.5rem] leading-tight tracking-tight mx-auto text-[rgb(var(--vpn-on-dark-text))]"
+            className="text-5xl sm:text-[4.5rem] md:text-[6rem] leading-tight tracking-tight mx-auto text-[rgb(var(--vpn-on-dark-text))]"
           />
           <ContentDescription
             text="Instantly secure your online world, no matter how you connect."

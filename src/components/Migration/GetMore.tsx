@@ -19,9 +19,9 @@ const features: Feature[] = [
   },
   {
     icon: Lock,
-    title: "SSL certificates and SPACEMAIL®",
+    title: "SSL certificates and business mail",
     description:
-      "Enjoy SSL by Let’s Encrypt free forever or PositiveSSL free for a year then $4.99/year, plus SPACEMAIL® professional email free for a year then $3.88/year."
+      "Enjoy SSL by Let’s Encrypt free forever or PositiveSSL free for a year then $4.99/year, plus business mail professional email free for a year then $3.88/year."
   },
   {
     icon: ShieldCheck,

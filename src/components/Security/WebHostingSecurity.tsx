@@ -40,7 +40,7 @@ const WebHostingSecurity = () => {
           >
             <div className="relative w-full h-[600px] sm:h-[700px] md:h-[800px]">
               <Image
-                src="https://spaceship-cdn.com/security-ui/assets/shared-hosting-dark.f1375bcd72e714d50740.svg"
+                src="https://thecloudaro-cdn.com/security-ui/assets/shared-hosting-dark.f1375bcd72e714d50740.svg"
                 alt="Web Hosting Security"
                 fill
                 className="object-contain scale-125 sm:scale-150 md:scale-[1.75] lg:scale-[2]"

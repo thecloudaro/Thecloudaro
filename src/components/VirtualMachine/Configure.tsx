@@ -130,7 +130,7 @@ const Configure = () => {
                 {/* Standard 1 - Row 1 (with background) */}
                 <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_auto] gap-4 items-center p-5 rounded-lg border" style={{ backgroundColor: virtualMachineStyles.tableRowBg, borderColor: virtualMachineStyles.borderColor }}>
                 <div className="text-left min-w-0">
-                  <p className="text-sm font-semibold whitespace-nowrap" style={{ color: virtualMachineStyles.cardText }}>Standard 1</p>
+                  <p className="text-sm font-semibold" style={{ color: virtualMachineStyles.cardText }}>Standard 1</p>
                 </div>
                 <div className="text-left min-w-0">
                   <p className="text-sm font-bold mb-0.5" style={{ color: virtualMachineStyles.cardText }}>2</p>
@@ -172,7 +172,7 @@ const Configure = () => {
                 {/* Standard 2 - Row 2 (no background) */}
                 <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_auto] gap-4 items-center p-5 rounded-lg border" style={{ borderColor: virtualMachineStyles.borderColor }}>
                   <div className="text-left min-w-0">
-                    <p className="text-sm font-semibold whitespace-nowrap" style={{ color: virtualMachineStyles.cardText }}>Standard 2</p>
+                    <p className="text-sm font-semibold" style={{ color: virtualMachineStyles.cardText }}>Standard 2</p>
                   </div>
                   <div className="text-left min-w-0">
                     <p className="text-sm font-bold mb-0.5" style={{ color: virtualMachineStyles.cardText }}>3</p>
@@ -214,7 +214,7 @@ const Configure = () => {
                 {/* Standard 3 - Row 3 (with background) */}
                 <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_auto] gap-4 items-center p-5 rounded-lg border" style={{ backgroundColor: virtualMachineStyles.tableRowBg, borderColor: virtualMachineStyles.borderColor }}>
                   <div className="text-left min-w-0">
-                    <p className="text-sm font-semibold whitespace-nowrap" style={{ color: virtualMachineStyles.cardText }}>Standard 3</p>
+                    <p className="text-sm font-semibold" style={{ color: virtualMachineStyles.cardText }}>Standard 3</p>
                   </div>
                   <div className="text-left min-w-0">
                     <p className="text-sm font-bold mb-0.5" style={{ color: virtualMachineStyles.cardText }}>4</p>
@@ -256,7 +256,7 @@ const Configure = () => {
                 {/* Standard 4 - Row 4 (no background) */}
                 <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_auto] gap-4 items-center p-5 rounded-lg border" style={{ borderColor: virtualMachineStyles.borderColor }}>
                   <div className="text-left min-w-0">
-                    <p className="text-sm font-semibold whitespace-nowrap" style={{ color: virtualMachineStyles.cardText }}>Standard 4</p>
+                    <p className="text-sm font-semibold" style={{ color: virtualMachineStyles.cardText }}>Standard 4</p>
                   </div>
                   <div className="text-left min-w-0">
                     <p className="text-sm font-bold mb-0.5" style={{ color: virtualMachineStyles.cardText }}>8</p>
@@ -298,7 +298,7 @@ const Configure = () => {
                 {/* CPU-optimized 1 - Row 5 (with background) */}
                 <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_auto] gap-4 items-center p-5 rounded-lg border" style={{ backgroundColor: virtualMachineStyles.tableRowBg, borderColor: virtualMachineStyles.borderColor }}>
                   <div className="text-left min-w-0">
-                    <p className="text-sm font-semibold whitespace-nowrap" style={{ color: virtualMachineStyles.cardText }}>CPU-optimized 1</p>
+                    <p className="text-sm font-semibold" style={{ color: virtualMachineStyles.cardText }}>CPU-optimized 1</p>
                   </div>
                   <div className="text-left min-w-0">
                     <p className="text-sm font-bold mb-0.5" style={{ color: virtualMachineStyles.cardText }}>2</p>
@@ -340,7 +340,7 @@ const Configure = () => {
                 {/* CPU-optimized 2 - Row 6 (no background) */}
                 <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_auto] gap-4 items-center p-5 rounded-lg border" style={{ borderColor: virtualMachineStyles.borderColor }}>
                   <div className="text-left min-w-0">
-                    <p className="text-sm font-semibold whitespace-nowrap" style={{ color: virtualMachineStyles.cardText }}>CPU-optimized 2</p>
+                    <p className="text-sm font-semibold" style={{ color: virtualMachineStyles.cardText }}>CPU-optimized 2</p>
                   </div>
                   <div className="text-left min-w-0">
                     <p className="text-sm font-bold mb-0.5" style={{ color: virtualMachineStyles.cardText }}>4</p>
@@ -382,7 +382,7 @@ const Configure = () => {
                 {/* CPU-optimized 3 - Row 7 (with background) */}
                 <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_auto] gap-4 items-center p-5 rounded-lg border" style={{ backgroundColor: virtualMachineStyles.tableRowBg, borderColor: virtualMachineStyles.borderColor }}>
                   <div className="text-left min-w-0">
-                    <p className="text-sm font-semibold whitespace-nowrap" style={{ color: virtualMachineStyles.cardText }}>CPU-optimized 3</p>
+                    <p className="text-sm font-semibold" style={{ color: virtualMachineStyles.cardText }}>CPU-optimized 3</p>
                   </div>
                   <div className="text-left min-w-0">
                     <p className="text-sm font-bold mb-0.5" style={{ color: virtualMachineStyles.cardText }}>8</p>
@@ -424,7 +424,7 @@ const Configure = () => {
                 {/* Memory-optimized 1 - Row 8 (no background) */}
                 <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_auto] gap-4 items-center p-5 rounded-lg border" style={{ borderColor: virtualMachineStyles.borderColor }}>
                   <div className="text-left min-w-0">
-                    <p className="text-sm font-semibold whitespace-nowrap" style={{ color: virtualMachineStyles.cardText }}>Memory-optimized 1</p>
+                    <p className="text-sm font-semibold" style={{ color: virtualMachineStyles.cardText }}>Memory-optimized 1</p>
                   </div>
                   <div className="text-left min-w-0">
                     <p className="text-sm font-bold mb-0.5" style={{ color: virtualMachineStyles.cardText }}>2</p>
@@ -466,7 +466,7 @@ const Configure = () => {
                 {/* Memory-optimized 2 - Row 9 (with background) */}
                 <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_auto] gap-4 items-center p-5 rounded-lg border" style={{ backgroundColor: virtualMachineStyles.tableRowBg, borderColor: virtualMachineStyles.borderColor }}>
                   <div className="text-left min-w-0">
-                    <p className="text-sm font-semibold whitespace-nowrap" style={{ color: virtualMachineStyles.cardText }}>Memory-optimized 2</p>
+                    <p className="text-sm font-semibold" style={{ color: virtualMachineStyles.cardText }}>Memory-optimized 2</p>
                   </div>
                   <div className="text-left min-w-0">
                     <p className="text-sm font-bold mb-0.5" style={{ color: virtualMachineStyles.cardText }}>4</p>

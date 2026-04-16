@@ -16,32 +16,32 @@ const MigrateEmailFAQ = () => {
 
   const faqs: FAQItem[] = [
     {
-      question: "How to migrate email to Spacemail?",
-      answer: "To migrate your email to Spacemail, you can use our built-in migration tool. First, create your Spacemail account and choose your plan. Then, navigate to the Settings menu and click 'Migrate to Spacemail' to launch our migration tool. Follow the step-by-step instructions to connect your existing email provider and transfer your emails, contacts, and calendar data."
+      question: "How to migrate email to business mail?",
+      answer: "To migrate your email to business mail, you can use our built-in migration tool. First, create your business mail account and choose your plan. Then, navigate to the Settings menu and click 'Migrate to business mail' to launch our migration tool. Follow the step-by-step instructions to connect your existing email provider and transfer your emails, contacts, and calendar data."
     },
     {
       question: "I have a trial subscription, can I still migrate email?",
       answer: "Yes, you can migrate your email even if you have a trial subscription. Our migration tool works with trial accounts, allowing you to transfer your emails during the trial period. Once your trial ends and you upgrade to a paid plan, all your migrated data will remain intact."
     },
     {
-      question: "Which providers support migration to Spacemail?",
-      answer: "Spacemail supports migration from most major email providers including Gmail, Outlook, Yahoo Mail, and other IMAP-compatible email services. Our migration tool can automatically detect and connect to these providers, making the transfer process seamless and straightforward."
+      question: "Which providers support migration to business mail?",
+      answer: "business mail supports migration from most major email providers including Gmail, Outlook, Yahoo Mail, and other IMAP-compatible email services. Our migration tool can automatically detect and connect to these providers, making the transfer process seamless and straightforward."
     },
     {
       question: "How long does it take to migrate?",
       answer: "The migration time depends on the amount of data you're transferring. For most users with a few thousand emails, the migration typically completes within a few hours. Larger migrations with tens of thousands of emails may take up to 24-48 hours. You can monitor the progress in real-time through the migration dashboard."
     },
     {
-      question: "How can I get Spacemail free for 1 year?",
-      answer: "You can get Spacemail free for 1 year by migrating a domain into The Cloud Aro. When you transfer your domain to The Cloud Aro hosting, you'll automatically receive a complimentary year of Spacemail service. This offer applies to new domain migrations and is a great way to try our email service at no cost."
+      question: "How can I get business mail free for 1 year?",
+      answer: "You can get business mail free for 1 year by migrating a domain into The Cloud Aro. When you transfer your domain to The Cloud Aro hosting, you'll automatically receive a complimentary year of business mail service. This offer applies to new domain migrations and is a great way to try our email service at no cost."
     },
     {
       question: "Can I migrate my calendar/contacts?",
-      answer: "Yes, Spacemail's migration tool supports transferring your calendar events and contacts along with your emails. The tool can sync calendar data from Google Calendar, Outlook Calendar, and other standard calendar services. Your contacts will be imported from your existing email provider's contact list."
+      answer: "Yes, business mail's migration tool supports transferring your calendar events and contacts along with your emails. The tool can sync calendar data from Google Calendar, Outlook Calendar, and other standard calendar services. Your contacts will be imported from your existing email provider's contact list."
     },
     {
       question: "Can I migrate using a backup?",
-      answer: "Yes, if you have a backup of your emails (such as a PST, MBOX, or EML file), you can import it into Spacemail. Our migration tool supports various backup formats, allowing you to restore your emails from a local backup file. This is particularly useful if you want to migrate from an old email client or have archived emails stored locally."
+      answer: "Yes, if you have a backup of your emails (such as a PST, MBOX, or EML file), you can import it into business mail. Our migration tool supports various backup formats, allowing you to restore your emails from a local backup file. This is particularly useful if you want to migrate from an old email client or have archived emails stored locally."
     }
   ];
 

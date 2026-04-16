@@ -54,7 +54,7 @@ const Want = () => {
             size="xl"
             className="max-w-4xl mx-auto !text-[rgba(var(--migrate-email-hero-text-85))]"
           >
-            Migrate a domain into The Cloud Aro and you&apos;ll get a year of<br/>Spacemail — absolutely free.
+            Migrate a domain into The Cloud Aro and you&apos;ll get a year of<br/>business mail — absolutely free.
           </ContentDescription>
 
           {/* Button */}

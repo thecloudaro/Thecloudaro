@@ -25,7 +25,8 @@ const ShootFor = () => {
         <div 
           className="absolute top-0 right-[20%] w-[40%] sm:w-[35%] md:w-[30%] h-full"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.9) 0%, rgba(37, 99, 235, 0.7) 20%, rgba(96, 165, 250, 0.5) 50%, rgba(147, 197, 253, 0.2) 80%, transparent 100%)',
+            background:
+              'radial-gradient(ellipse at center, rgba(var(--roadmap-shootfor-beam-500-90)) 0%, rgba(var(--roadmap-shootfor-beam-600-70)) 20%, rgba(var(--roadmap-shootfor-beam-400-50)) 50%, rgba(var(--roadmap-shootfor-beam-300-20)) 80%, transparent 100%)',
             filter: 'blur(100px)',
           }}
         />

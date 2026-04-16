@@ -36,7 +36,7 @@ const SpacemailSecurity = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="space-y-4 sm:space-y-6 ml-4 sm:ml-6 md:ml-8 lg:ml-12"
+            className="space-y-4 sm:space-y-6 ml-0 sm:ml-6 md:ml-8 lg:ml-12"
           >
             {/* Tagline with Icon */}
             <div className="flex items-center gap-2">
@@ -118,7 +118,7 @@ const SpacemailSecurity = () => {
             <div className="relative w-full h-[600px] sm:h-[700px] md:h-[800px]">
               <Image
                 src="https://thecloudaro-cdn.com/security-ui/assets/spacemail-dark.77ee62aa0ab75bf46e9f.svg"
-                alt="Spacemail Security"
+                alt="Business Email security"
                 fill
                 className="object-contain scale-125 sm:scale-150 md:scale-[1.75] lg:scale-[2]"
               />

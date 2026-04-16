@@ -30,7 +30,7 @@ const essentials: EssentialItem[] = [
     description: (
       <>
         Email should be migrated separately after you create email accounts in
-        Spacemail. Learn how to{" "}
+        business mail. Learn how to{" "}
         <Link
           href="#"
           className="hover:underline transition"

@@ -240,7 +240,7 @@ const ChooseYourBusiness = forwardRef<HTMLElement, ChooseYourBusinessProps>(({ }
 
       <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center px-4 text-center sm:px-6 lg:px-8">
         <span className="text-lg font-semibold uppercase tracking-[0.35em] mb-2" style={{ color: 'rgba(var(--business-productivity-text-white-70))' }}>
-          Spacemail™
+          Business Mail™
         </span>
         <ContentHeading
           title="Choose your business<br/>email plan"
@@ -265,7 +265,7 @@ const ChooseYourBusiness = forwardRef<HTMLElement, ChooseYourBusinessProps>(({ }
           />
         </div>
 
-        <div className="mt-16 grid w-full gap-8 justify-center grid-cols-1 md:[grid-template-columns:repeat(3,320px)]">
+        <div className="mt-16 grid w-full gap-8 justify-center grid-cols-1 md:grid-cols-2 xl:[grid-template-columns:repeat(3,320px)]">
           {plans.map((plan, index) => {
             const pricing = plan.pricing[billingCycle];
             const mailboxCount = mailboxCounts[plan.name] || plan.defaultMailboxes;
@@ -329,7 +329,7 @@ const ChooseYourBusiness = forwardRef<HTMLElement, ChooseYourBusinessProps>(({ }
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <div className="text-sm mb-1" style={{ color: 'rgba(var(--business-choose-text-white-80))' }}>Mailboxes</div>
-                      <div className="text-xs whitespace-nowrap -ml-2" style={{ color: 'rgba(var(--business-choose-text-white-50))' }}>
+                      <div className="text-xs -ml-2 sm:whitespace-nowrap" style={{ color: 'rgba(var(--business-choose-text-white-50))' }}>
                         +${plan.extraMailboxPrice.toFixed(2)}/mo per extra mailbox
                       </div>
                     </div>

@@ -3,22 +3,35 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import SeePlanButton from "./SeePlan";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRevealOnceInView } from "@/hooks/useRevealOnceInView";
 
 const EasyWPCard = () => {
   const { ref, revealed } = useRevealOnceInView();
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleMouseEnter = () => {
+    if (hideTimerRef.current) {
+      clearTimeout(hideTimerRef.current);
+      hideTimerRef.current = null;
+    }
     setHoveredCard('active');
   };
 
   const handleMouseLeave = () => {
-    setTimeout(() => {
+    if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    hideTimerRef.current = setTimeout(() => {
       setHoveredCard(null);
+      hideTimerRef.current = null;
     }, 2000); // 2 seconds delay before hiding
   };
+
+  useEffect(() => {
+    return () => {
+      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    };
+  }, []);
 
   return (
     <motion.div
@@ -48,14 +61,14 @@ const EasyWPCard = () => {
         {/* Bottom - Content */}
         <div className="ba-copy-easywp min-h-0 h-2/3 sm:h-3/5 p-3 sm:p-5 md:p-6 lg:pl-12 flex flex-col justify-center items-start text-left font-sans text-[hsl(var(--easywp-card-text))]">
           <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-1.5 sm:mb-2 leading-tight">No stress hosting <br/> for WordPress</h3>
-          <p className="text-[hsl(var(--easywp-card-text-muted))] text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed items-start text-left max-w-xl">
+          <p className="text-[hsl(var(--easywp-card-text-muted))] text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed items-start text-left max-w-xl mb-3 sm:mb-4">
             Give your site a head start with the fastest <br/> 
             hosting for WordPress on next-gen cloud <br/>
             technology.
           </p>
 
           {/* See Plan Button - always visible on mobile, animated on desktop */}
-          <div className="mt-2 block lg:hidden">
+          <div className="mt-1.5 block lg:hidden">
             <SeePlanButton href="/hosting-for-wordpress" className="px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm" />
           </div>
           <motion.div

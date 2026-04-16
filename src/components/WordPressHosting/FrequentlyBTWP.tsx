@@ -15,7 +15,7 @@ type ProductCard = {
 
 const products: ProductCard[] = [
   {
-    name: "Spacemail",
+    name: "business mail",
     subtitle: "Pro",
     features: [
       "1 mailbox per domain",
@@ -40,7 +40,7 @@ const products: ProductCard[] = [
     icon: "easywp"
   },
   {
-    name: "Spacemail",
+    name: "business mail",
     subtitle: "Advanced",
     features: [
       "5 mailboxes per domain",
@@ -159,7 +159,7 @@ const FrequentlyBTWP = () => {
 
               <div className="flex flex-1 flex-col justify-between px-7 pb-7 pt-6 text-left">
                 <div className="space-y-0.5">
-                  <h3 className="text-md font-semibold" style={{ color: 'rgb(var(--wp-frequentlybtwp-card-name))' }}>
+                  <h3 className="text-base font-semibold" style={{ color: 'rgb(var(--wp-frequentlybtwp-card-name))' }}>
                     {product.name}
                   </h3>
                   <p className="text-xs font-semibold uppercase tracking-[0.25em]" style={{ color: 'rgba(var(--wp-frequentlybtwp-card-subtitle))' }}>

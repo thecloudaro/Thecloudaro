@@ -29,7 +29,7 @@ const PayAs = () => {
             >
               <ContentHeading
                 title="Pay-as-you-go billing"
-                className="text-center !text-[2.5rem] sm:!text-[3.35rem] md:!text-[4.05rem] lg:!text-[3.5rem] font-bold leading-[1.08] !text-[rgb(var(--virtual-machine-hero-text))]"
+                className="text-center !text-[2.5rem] sm:!text-[3.35rem] md:!text-[4.05rem] lg:!text-[4rem] font-bold leading-[1.08] !text-[rgb(var(--virtual-machine-hero-text))]"
               />
             </motion.div>
             <motion.div

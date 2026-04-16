@@ -25,7 +25,7 @@ const PLAN_ROWS = [
 
 const SSLPlansStrip = () => {
   return (
-    <section className="relative py-14 sm:py-16 lg:py-18 bg-[rgb(var(--ssl-bg-elevated))]">
+    <section className="relative py-14 sm:py-16 lg:py-20 bg-[rgb(var(--ssl-bg-elevated))]">
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>

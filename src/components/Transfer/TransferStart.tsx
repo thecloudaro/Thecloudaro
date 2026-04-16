@@ -93,7 +93,7 @@ const TransferStart = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-left"
           >
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 whitespace-nowrap text-transfer-start-heading">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-transfer-start-heading">
               Start your transfer
             </h3>
             <div className="space-y-3">

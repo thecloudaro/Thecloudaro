@@ -73,7 +73,7 @@ const SuperSonicCard = () => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className={`relative rounded-md p-5 sm:p-6 max-w-[280px] mx-auto md:max-w-none ${
-                index === 1 ? '-mt-6 sm:-mt-8' : 'mt-6 sm:mt-8'
+                index === 1 ? 'mt-6 sm:mt-8 md:-mt-8' : 'mt-6 sm:mt-8'
               }`}
               style={{
                 backgroundColor: 'rgba(var(--cdn-card-bg))'

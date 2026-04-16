@@ -18,14 +18,14 @@ const Design = () => {
             size="xl"
             className="text-[rgba(var(--business-productivity-text-white-70))] text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto"
           >
-            Spacemail&apos;s clean-and-clear interface makes email management a breeze.
+            business mail&apos;s clean-and-clear interface makes email management a breeze.
           </ContentDescription>
 
           <div className="flex justify-center mt-8 sm:mt-10 md:mt-12">
             <div className="relative w-full max-w-[160rem]">
               <Image
                 src="/businessEmail/Design.webp"
-                alt="Spacemail design interface"
+                alt="business mail design interface"
                 width={2500}
                 height={1500}
                 className="h-auto w-full object-contain"

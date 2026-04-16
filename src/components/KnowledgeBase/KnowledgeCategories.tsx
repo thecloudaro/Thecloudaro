@@ -15,7 +15,7 @@ const categories: CategoryCard[] = [
   { id: "1", title: "DNS", articleCount: 3, href: "/knowledgebase/dns" },
   { id: "2", title: "Domains", articleCount: 15, href: "/knowledgebase/domains" },
   { id: "3", title: "EasyWP", articleCount: 14, href: "/knowledgebase/easywp" },
-  { id: "4", title: "Spacemail", articleCount: 59, href: "/knowledgebase/spacemail" },
+  { id: "4", title: "business mail", articleCount: 59, href: "/knowledgebase/spacemail" },
   { id: "5", title: "Starlight Hyperlift", articleCount: 3, href: "/knowledgebase/starlight-hyperlift" },
   { id: "6", title: "Virtual Machines", articleCount: 12, href: "/knowledgebase/virtual-machines" },
   { id: "7", title: "VPN", articleCount: 21, href: "/knowledgebase/vpn" },
