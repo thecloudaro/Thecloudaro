@@ -296,7 +296,6 @@ const allPlansSections: AllPlansSection[] = [
     label: "Server features",
     initialVisible: 5,
     items: [
-      { label: "Data Center Location", info: true },
       { label: "Cloud Storage", info: true },
       { label: "Litespeed Web Server", info: true },
       { label: "CloudLinux", info: true },

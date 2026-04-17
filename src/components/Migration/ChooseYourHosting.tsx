@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ContentHeading from "@/components/ui/content-heading";
 import HostingPlanControls, {
   type BillingCycle
@@ -67,7 +67,7 @@ const plans: HostingPlan[] = [
         price: 34.88,
         renewal: 34.88,
         original: 48.88,
-        discountLabel: "29% OFF*",
+        discountLabel: "",
         perMonth: 1.45
       }
     },
@@ -92,21 +92,21 @@ const plans: HostingPlan[] = [
         price: 4.88,
         renewal: 4.88,
         original: 6.88,
-        discountLabel: "29% OFF*",
+        discountLabel: "",
         perMonth: 4.88
       },
       yearly: {
         price: 28.88,
         renewal: 28.88,
         original: 48.88,
-        discountLabel: "41% OFF*",
+        discountLabel: "",
         perMonth: 2.41
       },
       biyearly: {
         price: 54.88,
         renewal: 54.88,
         original: 88.88,
-        discountLabel: "38% OFF*",
+        discountLabel: "",
         perMonth: 2.29
       }
     },
@@ -132,21 +132,21 @@ const plans: HostingPlan[] = [
         price: 6.88,
         renewal: 6.88,
         original: 9.88,
-        discountLabel: "30% OFF*",
+        discountLabel: "",
         perMonth: 6.88
       },
       yearly: {
         price: 38.88,
         renewal: 38.88,
         original: 68.88,
-        discountLabel: "44% OFF*",
+        discountLabel: "",
         perMonth: 3.24
       },
       biyearly: {
         price: 72.88,
         renewal: 72.88,
         original: 118.88,
-        discountLabel: "39% OFF*",
+        discountLabel: "",
         perMonth: 3.04
       }
     },
@@ -168,6 +168,96 @@ const plans: HostingPlan[] = [
 const ChooseYourHosting = () => {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
   const [dataCenter, setDataCenter] = useState("US");
+  const [plansData, setPlansData] = useState<HostingPlan[]>(plans);
+
+  useEffect(() => {
+    const loadPricing = async () => {
+      try {
+        const productIdEntries = Object.entries(hostingPlanProductIds).filter(
+          ([planName, productId]) =>
+            planName.trim().length > 0 &&
+            typeof productId === "string" &&
+            productId.trim().length > 0
+        );
+
+        if (productIdEntries.length === 0) {
+          return;
+        }
+
+        const idsParam = encodeURIComponent(
+          JSON.stringify(Object.fromEntries(productIdEntries))
+        );
+
+        const response = await fetch(`/api/hosting-pricing?ids=${idsParam}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          cache: "no-store",
+        });
+
+        const responseData = await response.json();
+        if (!response.ok || !responseData?.pricing) {
+          return;
+        }
+
+        const updatedPlans = plans.map((plan) => {
+          const fetchedPricing = responseData.pricing[plan.name];
+          if (!fetchedPricing) return plan;
+
+          const monthlyPrice =
+            typeof fetchedPricing.monthly === "number" && fetchedPricing.monthly > 0
+              ? fetchedPricing.monthly
+              : null;
+          const yearlyPrice =
+            typeof fetchedPricing.yearly === "number" && fetchedPricing.yearly > 0
+              ? fetchedPricing.yearly
+              : null;
+          const biyearlyPrice =
+            typeof fetchedPricing.biyearly === "number" && fetchedPricing.biyearly > 0
+              ? fetchedPricing.biyearly
+              : null;
+
+          return {
+            ...plan,
+            pricing: {
+              monthly: monthlyPrice
+                ? {
+                    price: monthlyPrice,
+                    renewal: monthlyPrice,
+                    original: monthlyPrice * 1.5,
+                    discountLabel: "",
+                    perMonth: monthlyPrice,
+                  }
+                : plan.pricing.monthly,
+              yearly: yearlyPrice
+                ? {
+                    price: yearlyPrice,
+                    renewal: yearlyPrice,
+                    original: yearlyPrice * 1.5,
+                    discountLabel: "",
+                    perMonth: yearlyPrice / 12,
+                  }
+                : plan.pricing.yearly,
+              biyearly: biyearlyPrice
+                ? {
+                    price: biyearlyPrice,
+                    renewal: biyearlyPrice,
+                    original: biyearlyPrice * 1.5,
+                    discountLabel: "",
+                    perMonth: biyearlyPrice / 24,
+                  }
+                : plan.pricing.biyearly,
+            },
+          };
+        });
+
+        setPlansData(updatedPlans);
+      } catch {
+        // Keep static fallback plans on API failure.
+      }
+    };
+
+    loadPricing();
+  }, []);
 
   const billingSuffix = useMemo(() => {
     switch (billingCycle) {
@@ -200,7 +290,7 @@ const ChooseYourHosting = () => {
         </div>
 
         <div className="mt-24 grid w-full gap-14 justify-center grid-cols-1 md:[grid-template-columns:repeat(3,320px)]">
-          {plans.map((plan, index) => {
+          {plansData.map((plan, index) => {
             const pricing = plan.pricing[billingCycle];
             const perMonthLabel =
               billingCycle === "monthly"
@@ -272,7 +362,7 @@ const ChooseYourHosting = () => {
                   <li>{plan.features.mailboxes}</li>
                   {plan.features.imunify360 && <li>Imunify360 Protection</li>}
                   {plan.features.websiteBuilder && <li>Website Builder</li>}
-                  {plan.features.wordpressAI && <li>WordPress AI Tools</li>}
+                  {plan.features.wordpressAI && <li>AI Tools</li>}
                 </ul>
 
                 <a

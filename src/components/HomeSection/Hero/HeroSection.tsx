@@ -11,6 +11,8 @@ interface DomainResult {
   name: string;
   available: boolean;
   price: number;
+  renewPrice?: number;
+  transferPrice?: number;
   currency: string;
   tld?: string;
   productId?: string;
@@ -207,7 +209,7 @@ const HeroSection = () => {
                     <p className="text-xs sm:text-sm text-[hsl(var(--hero-text-muted))]">
                       {results.length} extension{results.length !== 1 ? 's' : ''} ·{' '}
                       {results.filter((r) => r.available).length} available ·{' '}
-                      {results.filter((r) => !r.available).length} taken
+                      {results.filter((r) => !r.available).length} unavailable
                     </p>
                     <Link
                       href={`/domain-search?term=${encodeURIComponent(searchTerm.trim())}`}
@@ -230,11 +232,23 @@ const HeroSection = () => {
                             {row.available ? (
                               <>
                                 <span className="font-medium text-[hsl(var(--hero-text))]">Available</span>
-                                {' · '}
-                                {row.currency} {row.price.toFixed(2)}/yr
+                                {activeTab === 'transfer' ? (
+                                  <>
+                                    {' · '}Transfer {row.currency}{' '}
+                                    {(row.transferPrice ?? row.price).toFixed(2)}
+                                  </>
+                                ) : (
+                                  <>
+                                    {' · '}Register {row.currency} {row.price.toFixed(2)}
+                                    {' · '}Transfer {row.currency}{' '}
+                                    {(row.transferPrice ?? row.price).toFixed(2)}
+                                    {' · '}Renew {row.currency}{' '}
+                                    {(row.renewPrice ?? row.price).toFixed(2)}
+                                  </>
+                                )}
                               </>
                             ) : (
-                              <span className="font-medium text-[hsl(var(--hero-text))] opacity-70">Taken</span>
+                              <span className="font-medium text-[hsl(var(--hero-text))] opacity-70">Unavailable</span>
                             )}
                           </p>
                         </div>
@@ -265,7 +279,7 @@ const HeroSection = () => {
                                 border: '1px solid rgba(var(--hero-section-search-button-border-rgb))',
                               }}
                             >
-                              Buy
+                              Add to cart
                             </a>
                           ) : (
                             <span className="inline-flex items-center px-3 py-1.5 text-xs text-[hsl(var(--hero-text-muted))]">
@@ -290,35 +304,17 @@ const HeroSection = () => {
   transition={{ duration: 0.6, delay: 1.6 }}
 >
   {[
-    { label: ".com only $8.88", variant: "domain-pill--com", isCom: true },
-    { label: ".net only $11.20", variant: "domain-pill--com", isCom: false },
-    { label: ".org only $9.88", variant: "domain-pill--com", isCom: false },
+    { label: ".com only $8.88", variant: "domain-pill--com" },
+    { label: ".net only $11.20", variant: "domain-pill--com" },
+    { label: ".org only $9.88", variant: "domain-pill--com" },
+    { label: ".io only $39.00", variant: "domain-pill--com" },
   ].map((item, idx) => (
-    item.isCom ? (
-      <motion.div
-        key={idx}
-        className="domain-pill domain-pill--com backdrop-blur-md border rounded-2xl shadow-md border-[hsl(var(--hero-price-border))]"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{ duration: 0.5, delay: 1.8 }}
-      >
-        <span
-          className="com-pill-inner block px-3 sm:px-3.5 md:px-4 py-1 sm:py-1.5 md:py-1.5 rounded-full text-[11px] sm:text-xs md:text-sm font-medium cursor-pointer text-[hsl(var(--hero-text))]"
-        >
-          {item.label}
-        </span>
-      </motion.div>
-    ) : (
-      <div
-        key={idx}
-        className={`domain-pill ${item.variant} backdrop-blur-md border rounded-2xl shadow-md border-[hsl(var(--hero-price-border))]`}
-      >
-        <Button label={item.label} />
-      </div>
-    )
+    <div
+      key={idx}
+      className={`domain-pill ${item.variant} backdrop-blur-md border rounded-2xl shadow-md border-[hsl(var(--hero-price-border))]`}
+    >
+      <Button label={item.label} />
+    </div>
   ))}
         </motion.div>
       </motion.div>

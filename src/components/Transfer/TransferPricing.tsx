@@ -1,12 +1,75 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import TLDSearchBar from "@/components/ui/tld-search-bar";
-import WhiteButton from "@/components/ui/white-button";
 import SectionHeading from "@/components/ui/section-heading";
+
+interface TransferPricingRow {
+  tld: string;
+  transferPrice: number;
+  renewPrice: number;
+  currency: string;
+}
 
 const TransferPricing = () => {
   const [tldSearchTerm, setTldSearchTerm] = useState("");
+  const [allRows, setAllRows] = useState<TransferPricingRow[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState(20);
+
+  useEffect(() => {
+    const load = async () => {
+      setLoading(true);
+      setLoadError(null);
+      try {
+        const res = await fetch("/api/domain-tld-pricing", { cache: "no-store" });
+        const data = await res.json();
+        if (!res.ok || !data?.success || !Array.isArray(data?.tlds)) {
+          setLoadError(data?.error || "Unable to load transfer pricing right now.");
+          setAllRows([]);
+          return;
+        }
+
+        const rows: TransferPricingRow[] = data.tlds
+          .map((item: Record<string, unknown>) => ({
+            tld: String(item.tld || "").toLowerCase(),
+            transferPrice: Number(item.transferPrice ?? 0),
+            renewPrice: Number(item.renewPrice ?? 0),
+            currency: String(item.currency || "USD").toUpperCase(),
+          }))
+          .filter((row: TransferPricingRow) => row.tld.startsWith("."));
+
+        setAllRows(rows);
+      } catch (error) {
+        setLoadError(error instanceof Error ? error.message : "Failed to load transfer pricing.");
+        setAllRows([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    load();
+  }, []);
+
+  const filteredRows = useMemo(
+    () =>
+      allRows.filter((row) =>
+        row.tld.toLowerCase().includes(tldSearchTerm.trim().toLowerCase())
+      ),
+    [allRows, tldSearchTerm]
+  );
+
+  useEffect(() => {
+    setVisibleCount(20);
+  }, [tldSearchTerm, allRows.length]);
+
+  const visibleRows = filteredRows.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredRows.length;
+
+  const formatPrice = (value: number, currency: string) =>
+    Number.isFinite(value) && value > 0 ? `${currency} ${value.toFixed(2)}` : "—";
+
   return (
     <div className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16 md:pt-20 lg:pt-24 xl:pt-32 pb-12 sm:pb-16 md:pb-20 lg:pb-24 xl:pb-32 relative bg-transfer-pricing">
       {/* Teal gradient at bottom */}
@@ -66,72 +129,57 @@ const TransferPricing = () => {
         {/* TLD Pricing table-like list */}
         <div className="flex justify-center mt-2">
           <div className="w-fit rounded-lg overflow-hidden" style={{ backgroundColor: 'transparent', border: 'none' }}>
-          {
-            (() => {
-              const tlds: { tld: string; price: string; original?: string; sale?: boolean }[] = [
-                { tld: '.com', price: '$9.48', original: '$9.98', sale: true },
-                { tld: '.org', price: '$9.50', original: '$9.80', sale: true },
-                { tld: '.net', price: '$10.20' },
-                { tld: '.io', price: '$39.00' },
-                { tld: '.co', price: '$22.00', original: '$28.00', sale: true },
-                { tld: '.ai', price: '$69.00' },
-                { tld: '.app', price: '$14.50' },
-                { tld: '.dev', price: '$12.80' },
-                { tld: '.info', price: '$11.90' },
-                { tld: '.biz', price: '$12.40' },
-                { tld: '.online', price: '$3.88', original: '$29.00', sale: true },
-                { tld: '.shop', price: '$1.99', original: '$35.00', sale: true },
-                { tld: '.store', price: '$2.99', original: '$49.00', sale: true },
-                { tld: '.me', price: '$16.00' },
-                { tld: '.xyz', price: '$1.10', original: '$12.00', sale: true },
-                { tld: '.tech', price: '$6.99', original: '$39.99', sale: true },
-                { tld: '.cloud', price: '$7.99', original: '$19.99', sale: true },
-                { tld: '.site', price: '$1.49', original: '$29.99', sale: true },
-                { tld: '.live', price: '$3.99', original: '$21.99', sale: true },
-                { tld: '.blog', price: '$4.99', original: '$19.99', sale: true },
-                { tld: '.pro', price: '$9.99', original: '$17.99', sale: true },
-                { tld: '.space', price: '$1.59', original: '$19.99', sale: true }
-              ];
-              const filteredTlds = tlds.filter(tld =>
-                tld.tld.toLowerCase().includes(tldSearchTerm.toLowerCase())
-              );
-              return filteredTlds.map((row, idx) => (
-                <div key={idx} className="flex flex-col md:flex-row md:gap-4 items-center px-4 py-4 relative">
-                  <div className="w-full md:w-5/12 flex items-center justify-center md:justify-start gap-3">
+            {loading && (
+              <div className="px-4 py-6 text-sm text-transfer-pricing-note">Loading transfer pricing...</div>
+            )}
+            {loadError && !loading && (
+              <div className="px-4 py-6 text-sm text-transfer-pricing-note">{loadError}</div>
+            )}
+            {!loading && !loadError && visibleRows.length === 0 && (
+              <div className="px-4 py-6 text-sm text-transfer-pricing-note">No TLDs found for this filter.</div>
+            )}
+            {!loading && !loadError &&
+              visibleRows.map((row, idx) => (
+                <div key={`${row.tld}-${idx}`} className="flex flex-col md:flex-row md:gap-4 items-center px-4 py-4 relative">
+                  <div className="w-full md:w-4/12 flex items-center justify-center md:justify-start gap-3">
                     <span className="font-semibold text-2xl text-transfer-pricing-tld">{row.tld}</span>
                     <svg className="w-4 h-4 text-transfer-pricing-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     </svg>
                   </div>
-                  <div className="w-full md:w-7/12 flex flex-col items-center md:items-start mt-4 md:mt-0">
+                  <div className="w-full md:w-8/12 flex flex-col items-center md:items-start mt-4 md:mt-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-sm text-transfer-pricing-label">Transfer and renew</span>
-                      {row.sale && <span className="text-[10px] px-2 py-0.5 rounded bg-transfer-pricing-sale-badge text-transfer-pricing-sale-badge-text">SALE</span>}
+                      <span className="text-sm text-transfer-pricing-label">Transfer</span>
                     </div>
-                    <div className="flex items-baseline gap-2">
-                      <span className="font-semibold text-transfer-pricing-price">{row.price}</span>
-                      {row.original && <span className="line-through text-sm text-transfer-pricing-original-price">{row.original}</span>}
+                    <div className="font-semibold text-transfer-pricing-price">
+                      {formatPrice(row.transferPrice, row.currency)}
+                    </div>
+                    <div className="mt-1 text-sm text-transfer-pricing-label">
+                      Renew: {formatPrice(row.renewPrice, row.currency)}
                     </div>
                   </div>
-                  {idx < filteredTlds.length - 1 && (
+                  {idx < visibleRows.length - 1 && (
                     <div className="absolute bottom-0 left-4 right-4" style={{ 
                       height: '1px', 
                       background: 'rgb(var(--transfer-pricing-divider))' 
                     }}></div>
                   )}
                 </div>
-              ));
-            })()
-          }
+              ))}
           </div>
         </div>
 
         {/* See More Button */}
-        <div className="text-center mt-12">
-          <WhiteButton href="/domain-search?tab=pricing">
-            See More
-          </WhiteButton>
-        </div>
+        {hasMore && !loading && !loadError && (
+          <div className="text-center mt-12">
+            <button
+              className="inline-flex items-center justify-center rounded-full px-8 py-3 text-sm sm:text-base font-semibold transition-all bg-transfer-pricing-recommended text-transfer-pricing-recommended hover:bg-transfer-pricing-recommended-hover"
+              onClick={() => setVisibleCount((prev) => prev + 20)}
+            >
+              See More
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

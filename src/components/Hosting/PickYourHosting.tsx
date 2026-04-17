@@ -797,9 +797,6 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(
                   ? `Renews for $${pricing.renewal.toFixed(2)}/mo`
                   : `$${pricing.perMonth.toFixed(2)}/mo`
                 : "";
-              const renewalSuffix =
-                billingCycle === "monthly" ? "/mo" : billingSuffix;
-
               return (
                 <motion.div
                   key={plan.name}
@@ -1057,12 +1054,6 @@ const PickYourHosting = forwardRef<HTMLElement, PickYourHostingProps>(
 
           {/* Footer */}
           <div className="mt-8 text-center">
-            <p
-              className="text-sm mb-4"
-              style={{ color: "rgb(var(--hosting-text-muted))" }}
-            >
-              *Prices reflect discount on the first billing cycle.
-            </p>
             <button
               onClick={onCompareClick}
               className="px-6 py-3 rounded-full text-sm font-medium transition-all"

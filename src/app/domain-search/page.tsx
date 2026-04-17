@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { Search, CheckCircle, XCircle, Star } from "lucide-react";
+import Link from "next/link";
 import DomainPricingTable from "@/components/Domain/DomainPricingTable";
 import BackToTopButton from "@/components/BackToTopButton";
 import Script from "next/script";
@@ -702,7 +703,7 @@ const DomainSearchPage = () => {
                   </span>
                   {', '}
                   <span style={{ color: 'rgb(var(--domain-search-unavailable-text))' }}>
-                    {searchResults.filter((r) => !r.available).length} taken
+                    {searchResults.filter((r) => !r.available).length} unavailable
                   </span>
                 </p>
               </div>
@@ -757,7 +758,7 @@ const DomainSearchPage = () => {
                           className="font-medium"
                           style={{ color: result.available ? 'rgb(var(--domain-search-available-text))' : 'rgb(var(--domain-search-unavailable-text))' }}
                         >
-                          {result.available ? "Available" : "Taken"}
+                          {result.available ? "Available" : "Unavailable"}
                         </span>
                       </div>
                       {result.available && (
@@ -779,7 +780,7 @@ const DomainSearchPage = () => {
                       )}
                     </div>
 
-                    {result.available && (
+                    {result.available ? (
                       <motion.a
                         href={buildDomainBuyUrl({
                           domainName: result.name,
@@ -802,8 +803,25 @@ const DomainSearchPage = () => {
                           e.currentTarget.style.backgroundColor = 'rgb(var(--domain-search-button-bg))';
                         }}
                       >
-                        Buy Now
+                        Add to cart
                       </motion.a>
+                    ) : (
+                      <Link
+                        href={`/domain/transfer/submit?domain=${encodeURIComponent(result.name)}`}
+                        className="w-full py-3 rounded-lg font-medium transition-all duration-300 block text-center"
+                        style={{
+                          backgroundColor: 'rgb(var(--domain-search-button-bg))',
+                          color: 'rgb(var(--domain-search-button-text))',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgb(var(--domain-search-button-hover))';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgb(var(--domain-search-button-bg))';
+                        }}
+                      >
+                        Transfer
+                      </Link>
                     )}
                   </motion.div>
                 ))}

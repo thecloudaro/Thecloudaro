@@ -291,7 +291,7 @@ export default function UniversalDropdown({
           <Link
             href="/promotions"
             onClick={onClose}
-            className="w-full block rounded-full px-5 py-3 text-center text-xs font-semibold uppercase tracking-wide nav-promotions-gradient border border-[rgba(var(--nav-promotions-border))]"
+            className="w-full block rounded-full px-5 py-3 text-center text-xs font-semibold uppercase tracking-wide nav-promotions-gradient"
             style={{ color: "hsl(var(--nav-promotions-text))" }}
           >
             Promotions

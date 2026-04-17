@@ -11,6 +11,8 @@ interface DomainResult {
   name: string;
   available: boolean;
   price: number;
+  renewPrice?: number;
+  transferPrice?: number;
   currency: string;
   tld?: string;
   productId?: string;
@@ -212,7 +214,7 @@ export default function DomainHeroSection() {
                       <p className="text-xs sm:text-sm" style={{ color: "rgb(var(--domain-hero-text-gray-400))" }}>
                         {results.length} extension{results.length !== 1 ? "s" : ""} ·{" "}
                         {results.filter((r) => r.available).length} available ·{" "}
-                        {results.filter((r) => !r.available).length} taken
+                        {results.filter((r) => !r.available).length} unavailable
                       </p>
                       <Link
                         href={`/domain-search?term=${encodeURIComponent(domainValue.trim())}`}
@@ -245,12 +247,13 @@ export default function DomainHeroSection() {
                                   <span className="font-medium" style={{ color: "rgb(var(--hosting-text-white))" }}>
                                     Available
                                   </span>
-                                  {" · "}
-                                  {row.currency} {row.price.toFixed(2)}/yr
+                                  {" · "}Register {row.currency} {row.price.toFixed(2)}
+                                  {" · "}Transfer {row.currency} {(row.transferPrice ?? row.price).toFixed(2)}
+                                  {" · "}Renew {row.currency} {(row.renewPrice ?? row.price).toFixed(2)}
                                 </>
                               ) : (
                                 <span className="font-medium opacity-70" style={{ color: "rgb(var(--hosting-text-white))" }}>
-                                  Taken
+                                  Unavailable
                                 </span>
                               )}
                             </p>
@@ -267,7 +270,7 @@ export default function DomainHeroSection() {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center rounded-full px-3 py-1.5 text-xs font-semibold text-[rgb(var(--hosting-text-white))] bg-[hsl(var(--gradient-teal))] hover:bg-[hsl(var(--gradient-teal))]/80 transition-colors"
                               >
-                                Buy
+                                Add to cart
                               </a>
                             ) : (
                               <Link

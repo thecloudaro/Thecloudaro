@@ -3,35 +3,10 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import SeePlanButton from "./SeePlan";
-import { useEffect, useRef, useState } from "react";
 import { useRevealOnceInView } from "@/hooks/useRevealOnceInView";
 
 const EasyWPCard = () => {
   const { ref, revealed } = useRevealOnceInView();
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const handleMouseEnter = () => {
-    if (hideTimerRef.current) {
-      clearTimeout(hideTimerRef.current);
-      hideTimerRef.current = null;
-    }
-    setHoveredCard('active');
-  };
-
-  const handleMouseLeave = () => {
-    if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
-    hideTimerRef.current = setTimeout(() => {
-      setHoveredCard(null);
-      hideTimerRef.current = null;
-    }, 2000); // 2 seconds delay before hiding
-  };
-
-  useEffect(() => {
-    return () => {
-      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
-    };
-  }, []);
 
   return (
     <motion.div
@@ -41,8 +16,6 @@ const EasyWPCard = () => {
       transition={{ delay: 0.3, duration: 0.8 }}
       whileHover={{ y: -8 }}
       className="group"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       <div className="ba-surface-easywp bg-[hsl(var(--easywp-card-bg))] rounded-2xl sm:rounded-3xl overflow-hidden h-[400px] sm:h-[450px] md:h-[550px] lg:h-[650px] xl:h-[720px] flex flex-col transition-all duration-500 ease-in-out touch-manipulation">
         {/* Top - 3D geometric shapes */}
@@ -67,21 +40,10 @@ const EasyWPCard = () => {
             technology.
           </p>
 
-          {/* See Plan Button - always visible on mobile, animated on desktop */}
-          <div className="mt-1.5 block lg:hidden">
+          {/* See Plan Button - permanently visible */}
+          <div className="mt-2">
             <SeePlanButton href="/hosting-for-wordpress" className="px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm" />
           </div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ 
-              opacity: hoveredCard ? 1 : 0,
-              y: hoveredCard ? 0 : 20
-            }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="mt-2 hidden lg:block"
-          >
-            <SeePlanButton href="/hosting-for-wordpress" className="px-4 py-2 text-sm" />
-          </motion.div>
         </div>
       </div>
     </motion.div>

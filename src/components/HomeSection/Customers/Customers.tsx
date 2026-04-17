@@ -9,6 +9,9 @@ import ReviewCard from "./ReviewCard";
 import { useRevealOnceInView } from "@/hooks/useRevealOnceInView";
 
 export default function Customer() {
+  const showReviewSection = false;
+  if (!showReviewSection) return null;
+
   const { ref: headerRef, revealed: headerRevealed } = useRevealOnceInView();
   const { ref: trustRef, revealed: trustRevealed } = useRevealOnceInView();
 

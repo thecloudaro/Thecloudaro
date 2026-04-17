@@ -30,6 +30,7 @@ const DomainPricingTable = () => {
   const [minPriceFocused, setMinPriceFocused] = useState(false);
   const [maxPriceFocused, setMaxPriceFocused] = useState(false);
   const [domainPricing, setDomainPricing] = useState<DomainPricingRow[]>([]);
+  const [visibleCount, setVisibleCount] = useState(20);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -137,6 +138,12 @@ const DomainPricingTable = () => {
       const bPrice = parseNumericPrice(b.register) ?? Number.MAX_SAFE_INTEGER;
       return sortOrder === "price_desc" ? bPrice - aPrice : aPrice - bPrice;
     });
+  const visibleDomains = filteredDomains.slice(0, visibleCount);
+  const hasMoreDomains = visibleCount < filteredDomains.length;
+
+  useEffect(() => {
+    setVisibleCount(20);
+  }, [searchTerm, appliedMinPrice, appliedMaxPrice, sortOrder, domainPricing.length]);
 
 
   const handleClearPriceRange = () => {
@@ -451,7 +458,7 @@ const DomainPricingTable = () => {
               </p>
             </div>
           ) : (
-            filteredDomains.map((domain, index) => (
+            visibleDomains.map((domain, index) => (
               <motion.div
                 key={domain.tld}
                 initial={{ opacity: 0, y: 20 }}
@@ -565,10 +572,11 @@ const DomainPricingTable = () => {
       </div>
 
       {/* Bottom CTA */}
-      <div className="text-center mt-12">
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
-          <Link
-            href="/domain-search?tab=pricing"
+      {hasMoreDomains && !isLoading && !loadError && (
+        <div className="text-center mt-12">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="px-8 py-4 rounded-full font-semibold transition-all duration-300 inline-block"
             style={{
               backgroundColor: 'rgb(var(--domain-pricing-table-cta-button-bg))',
@@ -580,11 +588,12 @@ const DomainPricingTable = () => {
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'rgb(var(--domain-pricing-table-cta-button-bg))';
             }}
+            onClick={() => setVisibleCount((prev) => prev + 20)}
           >
             See More
-          </Link>
-        </motion.div>
-      </div>
+          </motion.button>
+        </div>
+      )}
     </div>
   );
 };

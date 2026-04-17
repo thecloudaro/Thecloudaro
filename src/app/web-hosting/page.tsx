@@ -7,7 +7,6 @@ import { PickYourHosting } from '@/components/Hosting/PickYourHosting';
 import BeSecureHosting from '@/components/Hosting/BeSecureHosting';
 import MigrateHosting from '@/components/Hosting/MigrateHosting';
 import ToolHosting from '@/components/Hosting/ToolHosting';
-import AutoBackupSection from '@/components/Hosting/AutoBackupSection';
 import ChooseHosting from '@/components/Hosting/ChooseHosting';
 import FAQWebHosting from '@/components/Hosting/FAQWebHosting';
 import Disclaimers from '@/components/Hosting/Disclaimers';
@@ -85,9 +84,6 @@ export default function HostingPage() {
 
       {/* Choose Hosting Section */}
       <ChooseHosting ref={chooseHostingRef} variant="shared" />
-
-      {/* AutoBackup Section */}
-      <AutoBackupSection />
 
       {/* FAQ Section */}
       <FAQWebHosting />

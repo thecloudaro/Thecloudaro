@@ -14,6 +14,8 @@ interface DomainSearchResult {
   name: string;
   available: boolean;
   price: number;
+  renewPrice?: number;
+  transferPrice?: number;
   currency: string;
   originalPrice?: number;
   popular?: boolean;
@@ -369,6 +371,12 @@ export async function GET(req: NextRequest) {
         skippedCount++;
         continue;
       }
+      const renewRaw = usdYearlyPrice.renew_price ?? usdYearlyPrice.renewal_price ?? registerPrice;
+      const transferRaw = usdYearlyPrice.transfer_price ?? registerPrice;
+      const renewPrice =
+        typeof renewRaw === 'number' ? renewRaw : parseFloat(String(renewRaw));
+      const transferPrice =
+        typeof transferRaw === 'number' ? transferRaw : parseFloat(String(transferRaw));
 
       const originalRaw =
         usdYearlyPrice.original_price ?? usdYearlyPrice.price_discounted ?? null;
@@ -396,6 +404,10 @@ export async function GET(req: NextRequest) {
         name: domainName,
         available: false, // set from Upmind DAC after loop
         price: typeof registerPrice === 'number' ? registerPrice : parseFloat(String(registerPrice)),
+        renewPrice:
+          Number.isFinite(renewPrice) && renewPrice > 0 ? renewPrice : undefined,
+        transferPrice:
+          Number.isFinite(transferPrice) && transferPrice > 0 ? transferPrice : undefined,
         currency: currency, // Use currency from price object
         originalPrice:
           originalPrice != null &&

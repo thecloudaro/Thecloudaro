@@ -140,7 +140,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasHeaderBanner }) => {
             {/* Promotions Button - animated gradient CTA */}
             <Link
               href="/promotions"
-              className="px-4 py-2 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide nav-promotions-gradient border border-[rgba(var(--nav-promotions-border))]"
+              className="px-4 py-2 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide nav-promotions-gradient"
               style={{
               color: "hsl(var(--nav-promotions-text))",
               }}
