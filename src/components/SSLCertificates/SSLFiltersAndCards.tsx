@@ -169,6 +169,21 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
     return `$${price.toFixed(2)}`;
   };
 
+  const buildSslBuyUrl = (product: SSLProduct): string | null => {
+    // Fallback cards are display-only and do not map to real Upmind product IDs.
+    if (!product.id || product.id.startsWith("fallback-")) return null;
+
+    const origin =
+      (process.env.NEXT_PUBLIC_UPMIND_CLIENT_ORIGIN || "https://my.thecloudaro.com").replace(/\/$/, "");
+    const months = parseInt(selectedDuration, 10) * 12;
+
+    const checkoutUrl = new URL(`${origin}/order/product`);
+    checkoutUrl.searchParams.set("pid", product.id);
+    checkoutUrl.searchParams.set("billing_cycle_months", String(months));
+
+    return checkoutUrl.toString();
+  };
+
   // Calculate discount (if applicable - comparing 1 year vs multi-year)
   const getDiscount = (product: SSLProduct): string | null => {
     const oneYearPrice = product.pricing["1"];
@@ -381,13 +396,31 @@ const SSLFiltersAndCards = ({}: SSLFiltersAndCardsProps) => {
                         </li>
                       </ul>
 
-                      {/* Buy Now Button - same style for all cards (no product-specific styling) */}
-                      <button
-                        className="w-full rounded-lg bg-[rgb(var(--ssl-accent))] px-4 py-3 text-sm font-semibold text-[rgb(var(--ssl-on-accent))] transition-all duration-200 hover:bg-[rgb(var(--ssl-accent-hover))] hover:shadow-lg hover:shadow-[0_0_24px_rgba(var(--ssl-shadow-accent))] disabled:bg-[rgb(var(--ssl-accent))] disabled:opacity-70 disabled:cursor-not-allowed"
-                        disabled={price === null}
-                      >
-                        Buy Now
-                      </button>
+                      {/* Buy Now Button - redirects to Upmind basket */}
+                      {(() => {
+                        const buyUrl = buildSslBuyUrl(product);
+                        const isDisabled = price === null || !buyUrl;
+
+                        if (isDisabled) {
+                          return (
+                            <button
+                              className="w-full rounded-lg bg-[rgb(var(--ssl-accent))] px-4 py-3 text-sm font-semibold text-[rgb(var(--ssl-on-accent))] transition-all duration-200 disabled:bg-[rgb(var(--ssl-accent))] disabled:opacity-70 disabled:cursor-not-allowed"
+                              disabled
+                            >
+                              Buy Now
+                            </button>
+                          );
+                        }
+
+                        return (
+                          <a
+                            href={buyUrl}
+                            className="block w-full rounded-lg bg-[rgb(var(--ssl-accent))] px-4 py-3 text-center text-sm font-semibold text-[rgb(var(--ssl-on-accent))] transition-all duration-200 hover:bg-[rgb(var(--ssl-accent-hover))] hover:shadow-lg hover:shadow-[0_0_24px_rgba(var(--ssl-shadow-accent))]"
+                          >
+                            Buy Now
+                          </a>
+                        );
+                      })()}
                     </motion.div>
                   );
                 })}
