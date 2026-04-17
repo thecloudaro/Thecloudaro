@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: 'spaceship-cdn.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'thecloudaro-cdn.com',
+        pathname: '/**',
+      },
     ],
   },
 };

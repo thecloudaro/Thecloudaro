@@ -2,11 +2,14 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Link2, ArrowRight } from "lucide-react";
 import ContentHeading from "@/components/ui/content-heading";
 import ContentDescription from "@/components/ui/content-description";
+
+/** Served from /public — avoids next/image + SVG edge cases in production */
+const WEB_HOSTING_ILLUSTRATION_SRC =
+  "/security-ui/assets/shared-hosting-dark.f1375bcd72e714d50740.svg";
 
 const WebHostingSecurity = () => {
   const features = [
@@ -36,14 +39,17 @@ const WebHostingSecurity = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="flex justify-center lg:justify-start"
+            className="flex w-full min-w-0 justify-center lg:justify-start"
           >
-            <div className="relative w-full h-[600px] sm:h-[700px] md:h-[800px]">
-              <Image
-                src="https://thecloudaro-cdn.com/security-ui/assets/shared-hosting-dark.f1375bcd72e714d50740.svg"
+            <div className="w-full max-w-[min(100%,520px)] lg:max-w-[640px] xl:max-w-[720px]">
+              <img
+                src={WEB_HOSTING_ILLUSTRATION_SRC}
                 alt="Web Hosting Security"
-                fill
-                className="object-contain scale-125 sm:scale-150 md:scale-[1.75] lg:scale-[2]"
+                width={1300}
+                height={1300}
+                className="h-auto w-full object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </motion.div>
