@@ -78,6 +78,11 @@ const config: Config = {
           text: "hsl(var(--header-banner-text))",
         },
 
+        // Portal bridge (SSO handoff HTML)
+        "portal-bridge": {
+          message: "hsl(var(--portal-bridge-message-text))",
+        },
+
         // Feature Request Modal
         modal: {
           bg: "hsl(var(--modal-bg))",

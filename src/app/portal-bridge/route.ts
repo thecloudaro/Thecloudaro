@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import {
@@ -8,6 +10,15 @@ import {
   getPortalPostLoginRedirect,
 } from '@/lib/upmind/portalHandoffServer';
 import { buildClientPortalSsoUrl } from '@/lib/upmind/clientPortalSso';
+
+const PORTAL_BRIDGE_VARS_PATH = path.join(
+  process.cwd(),
+  'src/styles/portal-bridge-variables.css'
+);
+
+function getPortalBridgeVarsCss(): string {
+  return fs.readFileSync(PORTAL_BRIDGE_VARS_PATH, 'utf8');
+}
 
 function clearHandoffCookies(): string[] {
   const secure = process.env.NODE_ENV === 'production';
@@ -52,14 +63,17 @@ export async function GET(req: NextRequest) {
   const aidEsc = escapeHtmlAttr(actorId);
   const redEsc = escapeHtmlAttr(redirectAfter);
 
+  const portalBridgeVarsCss = getPortalBridgeVarsCss();
+
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <title>Signing you in…</title>
+  <style>${portalBridgeVarsCss}</style>
 </head>
 <body>
-  <p style="font-family:system-ui,sans-serif;text-align:center;margin-top:2rem;color:#444">Opening your client area…</p>
+  <p style="font-family:system-ui,sans-serif;text-align:center;margin-top:2rem;color:hsl(var(--portal-bridge-message-text))">Opening your client area…</p>
   <form id="upmind-sso" method="post" action="${escapeHtmlAttr(postUrl)}">
     <input type="hidden" name="access_token" value="${atEsc}" />
     <input type="hidden" name="token_type" value="Bearer" />

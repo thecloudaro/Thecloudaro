@@ -1,0 +1,4 @@
+/* Portal SSO handoff page + app theme (imported in globals.css; injected in portal-bridge/route.ts). */
+:root {
+  --portal-bridge-message-text: 0 0% 27%; /* #444 */
+}

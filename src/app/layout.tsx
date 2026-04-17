@@ -25,8 +25,7 @@ export const metadata: Metadata = {
   description: "Professional web hosting and domain services",
   icons: {
     icon: [
-      { url: '/logo/icon.png', sizes: '512x512', type: 'image/png' },
-      { url: '/logo/icon.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo/icon.png', sizes: '80x120', type: 'image/png' },
       { url: '/logo/icon.png', sizes: '16x16', type: 'image/png' },
     ],
     shortcut: '/logo/icon.png',
