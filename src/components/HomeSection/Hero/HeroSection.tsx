@@ -107,7 +107,7 @@ const HeroSection = () => {
 
       {/* Main Content — no scroll-linked fade/scale so copy stays visible when scrolling up/down */}
       <motion.div
-        className="relative z-30 flex flex-col items-center justify-start pt-20 sm:pt-24 md:pt-28 lg:pt-40 px-4 sm:px-6 md:px-8 lg:px-10 text-center"
+        className="relative z-30 flex min-h-[calc(100svh-4rem)] flex-col items-center justify-center px-4 pb-8 text-center sm:min-h-0 sm:justify-start sm:pb-0 sm:pt-24 md:pt-28 lg:pt-40 sm:px-6 md:px-8 lg:px-10"
       >
         {/* Heading */}
         <motion.h1

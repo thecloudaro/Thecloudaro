@@ -274,11 +274,12 @@ export default function UniversalDropdown({
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2 text-xs">
-<span className="text-[hsl(var(--dropdown-text-muted))]">Don&apos;t have an account?</span>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+            <span className="text-[hsl(var(--dropdown-text-muted))]">Don&apos;t have an account?</span>
             <Link
               href="/signup"
-              className="font-medium hover:underline"
+              onClick={onClose}
+              className="relative z-10 inline-flex min-h-[44px] min-w-[44px] items-center font-medium underline-offset-2 hover:underline [-webkit-tap-highlight-color:transparent]"
               style={{ color: 'rgb(var(--dropdown-login-link))' }}
             >
               Sign up
