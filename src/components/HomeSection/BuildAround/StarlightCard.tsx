@@ -27,11 +27,11 @@ const StarlightCard = () => {
         </div>
         
         <div className="ba-copy-starlight min-h-0 h-2/3 sm:h-3/5 p-3 sm:p-5 md:p-6 lg:pl-12 flex flex-col justify-center items-start text-left font-sans text-[hsl(var(--starlight-card-text))]">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-1.5 sm:mb-2 leading-tight">Virtual machines</h3>
+          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-1.5 sm:mb-2 leading-tight">More control</h3>
           <p className="text-[hsl(var(--starlight-card-text-muted))] text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed items-start text-left max-w-xl">
-            Power more possibilities through extra server<br/> 
-             muscle matched with flexible control and <br/> 
-             scalability.
+            Use virtual machines when shared hosting isn’t <br/> 
+             enough, and choose how your applications and  <br/> 
+             services run.
           </p>
 
           {/* See Plan button intentionally removed from this (Starlight) card */}
