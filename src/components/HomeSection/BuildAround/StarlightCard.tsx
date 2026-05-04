@@ -32,7 +32,7 @@ const StarlightCard = () => {
           <p className="text-[hsl(var(--starlight-card-text-muted))] text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed items-start text-left max-w-xl">
             Use virtual machines when shared hosting isn’t <br/> 
              enough, and choose how your applications and  <br/> 
-             services run.
+             services run. <br/>
           </p>
 
           {/* See Plan button intentionally removed from this (Starlight) card */}
