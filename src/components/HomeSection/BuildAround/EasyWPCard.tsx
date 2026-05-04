@@ -33,11 +33,10 @@ const EasyWPCard = () => {
         
         {/* Bottom - Content */}
         <div className="ba-copy-easywp min-h-0 h-2/3 sm:h-3/5 p-3 sm:p-5 md:p-6 lg:pl-12 flex flex-col justify-center items-start text-left font-sans text-[hsl(var(--easywp-card-text))]">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-1.5 sm:mb-2 leading-tight">No stress hosting <br/> for WordPress</h3>
+          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-1.5 sm:mb-2 leading-tight">Hosting that <br/> understands WordPress</h3>
           <p className="text-[hsl(var(--easywp-card-text-muted))] text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed items-start text-left max-w-xl mb-3 sm:mb-4">
-            Give your site a head start with the fastest <br/> 
-            hosting for WordPress on next-gen cloud <br/>
-            technology.
+            Run your WordPress site on hosting designed to <br/> 
+            support updates, performance, and everyday use. <br/>
           </p>
 
           {/* See Plan Button - permanently visible */}
