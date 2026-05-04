@@ -42,8 +42,8 @@ const WebHostingCard = () => {
           </h3>
 
           <p className="text-[hsl(var(--webhosting-card-text-muted))] text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed items-start text-left max-w-xl mb-3 sm:mb-4">
-            Keep your website online with reliable  <br />
-            web hosting that’s easy to manage. <br />
+            Keep your website online with reliable web hosting <br />
+            that’s easy to manage. <br />
           </p>
 
           {/* See Plan Button - permanently visible */}
