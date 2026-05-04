@@ -20,10 +20,10 @@ const SpacemailCard = () => {
         {/* Left side - Content */}
         <div className="ba-copy-spacemail w-full lg:w-1/2 lg:h-full p-4 sm:p-6 md:p-8 lg:pl-16 flex flex-col justify-center items-start text-left font-sans text-[hsl(var(--spacemail-card-text))]">
           <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 sm:mb-3 leading-tight">
-            Effortless email
+            Business email
           </h3>
           <p className="text-[hsl(var(--spacemail-card-text-muted))] text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed items-start text-left max-w-xl mb-4 sm:mb-6">
-            Send the right message with ultra-simple and full-service business email for your domain.
+            Build trust with every email.
           </p>
           
           {/* See Plan button and SPACEMAIL badge intentionally removed from this (Spacemail) card */}
