@@ -59,8 +59,8 @@ export default function TransferPage() {
       {/* Security Section */}
       <section>
         <DynamicSection
-          heading="Security as Standard"
-          text="Your domain is protected with enterprise-grade security features and SSL certificates."
+          heading="Always-on Security"
+          text="Security features that help protect your website, data, and domain from everyday risks."
           bgImage="/BgPics/black.jpg"
         />
       </section>
