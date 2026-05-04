@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import SeePlanButton from "./SeePlan";
 import { useRevealOnceInView } from "@/hooks/useRevealOnceInView";
 
 const StarlightCard = () => {
