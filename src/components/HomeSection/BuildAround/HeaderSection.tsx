@@ -17,12 +17,12 @@ const HeaderSection = () => {
       className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-12 sm:mb-16 md:mb-20 gap-6 sm:gap-8"
     >
       <div className="lg:w-1/2">
-        <Heading title="Build around <br/>
-        your domain" />
+        <Heading title="Let your domain <br/>
+        lead the way" />
       </div>
 
       <div className="lg:w-1/2 lg:pl-8">
-        <Paragraph text="Choose and connect exactly what<br/>you need to take your domain and<br/>website to the world." />
+        <Paragraph text="Next, choose what you need to bring your website to your customers, and add more as you grow." />
       </div>
     </motion.div>
   );
