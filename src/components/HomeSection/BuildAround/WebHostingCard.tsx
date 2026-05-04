@@ -38,13 +38,12 @@ const WebHostingCard = () => {
           </p>
 
           <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-1.5 sm:mb-2 leading-tight">
-            Powerfully simple
+            Made for your website
           </h3>
 
           <p className="text-[hsl(var(--webhosting-card-text-muted))] text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed items-start text-left max-w-xl mb-3 sm:mb-4">
-            Get everything for launching a successful <br />
-            website, from high-performance servers to easy <br />
-            management.
+            Keep your website online with reliable  <br />
+            web hosting that’s easy to manage. <br />
           </p>
 
           {/* See Plan Button - permanently visible */}
