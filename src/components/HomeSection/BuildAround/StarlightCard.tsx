@@ -35,6 +35,9 @@ const StarlightCard = () => {
           </p>
 
           {/* See Plan button intentionally removed from this (Starlight) card */}
+          <div className="mt-2">
+            <SeePlanButton href="/hosting-for-wordpress" className="px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm" />
+          </div>
         </div>
       </div>
     </motion.div>
