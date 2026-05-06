@@ -40,7 +40,7 @@ const HostingHeroSection = ({ onChoosePlanClick }: HostingHeroSectionProps) => {
 
             {/* Description */}
             <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl leading-relaxed max-w-2xl mt-4 sm:mt-6" style={{ color: 'rgb(var(--hosting-text-white))' }}>
-              Hosting built to last... A steady place to run your website, <br />with the essentials handled and nothing extra to get in the way.
+              Hosting built to last... <br />A steady place to run your website.
             </p>
 
             {/* CTA Button */}
