@@ -16,8 +16,8 @@ interface StayHostingProps {
 }
 
 const StayHosting = ({
-  heading = "Stay up and open",
-  description = "Keep your site up, business open, and visitors happy with 99.99% uptime.",
+  heading = "Stay online",
+  description = "Your site should be there when people look for it.",
   buttonText = "See my options",
   buttonHref = "/business-hosting",
   buttonOnClick,
