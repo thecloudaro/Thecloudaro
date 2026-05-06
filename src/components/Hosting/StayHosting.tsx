@@ -22,7 +22,7 @@ const StayHosting = ({
   buttonHref = "/business-hosting",
   buttonOnClick,
   imageSrc = "/Hosting/stayup.svg",
-  imageAlt = "Stay up and open"
+  imageAlt = "Stay online"
 }: StayHostingProps) => {
   const resolvedHref = buttonOnClick ? undefined : buttonHref;
 
