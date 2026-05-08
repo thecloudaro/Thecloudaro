@@ -44,7 +44,7 @@ const MigrateHosting = () => {
               className="!text-[2rem] sm:!text-[2.3rem] md:!text-[3.10rem]"
             />
             <ContentDescription
-              text={`Start the migration when you’re ready. Upload \na backup from your current host and follow clear steps\n that show what’s happening at each stage. \n You stay in control until the move is complete.`}
+              text={`Start the migration when you’re ready. Upload \na backup from your current host and follow clear steps that show what’s happening at each stage. You stay in control until the move is complete.`}
               size="lg"
               className="text-[rgb(var(--hosting-choose-text-gray-300))] whitespace-pre-line max-w-xl"
             />
