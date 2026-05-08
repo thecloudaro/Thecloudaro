@@ -8,13 +8,13 @@ const tools = [
   {
     title: "Credible Email",
     description:
-      "Use your domain for email so messages \ndon’t feel temporary or improvised. It’s \na small detail that changes how customers \nrespond and how your business is perceived.",
+      "Use your domain for email so messages \ndon’t feel temporary or improvised. It’s a \n small detail that changes how customers \n respond and how your business is perceived.",
     Icon: Mail
   },
   {
     title: "Control without getting lost",
     description:
-      "Manage your site, updates, \nand resources in one place. Common tasks \nare easy to find, and deeper controls \nare there when you need them, \nnot in the way when you don’t.",
+      "Manage your site, updates, and resources \n in one place. Common tasks are easy to find, \n and deeper controls are there when you need them, \nnot in the way when you don’t.",
     Icon: SlidersHorizontal
   },
   {
