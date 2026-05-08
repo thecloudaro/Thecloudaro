@@ -6,24 +6,24 @@ import { Lock, Infinity, Server, BarChart3 } from "lucide-react";
 
 const features = [
   {
-    title: "SSL certificates",
+    title: "SSL included",
     description:
-      "FreeSSL, with no renewal fee and issued \n by Let’s Encrypt, or PositiveSSL, free for \n the first year then $4.99/year, issued by \n Sectigo.",
+      "Encrypt connections to your site so visitors \n and browsers can trust what they’re loading. \n Certificates are supported and managed from one place.",
     Icon: Lock
   },
   {
-    title: "Unmetered bandwidth",
-    description: "Get all the traffic and none of the limits.",
+    title: "Bandwidth without guesswork",
+    description: "Your site can handle normal traffic changes \n without hitting artificial limits or surprise restrictions.",
     Icon: Infinity
   },
   {
-    title: "LiteSpeed web server",
-    description: "Enjoy extra speed with a high-performance \n server.",
+    title: "Stable LiteSpeed web server",
+    description: "Hosting runs on a modern server stack chosen \n for consistency and everyday reliability, \n not tuning experiments.",
     Icon: Server
   },
   {
-    title: "Scalable plans",
-    description: "Add all the power and tools you need in an \n instant.",
+    title: "Plans that adapt over time",
+    description: "If your site needs more resources later, \n you can adjust without starting over.",
     Icon: BarChart3
   }
 ];
