@@ -37,7 +37,7 @@ const BeSecureHosting = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
         <div className="text-center space-y-5">
           <ContentHeading
-            title={"Be secure with web\nhosting"}
+            title={"A safer foundation\nfor your site"}
             className="!text-5xl sm:!text-[3.75rem] md:!text-[4.75rem] lg:!text-[4.50rem] whitespace-pre-line"
           />
         </div>
