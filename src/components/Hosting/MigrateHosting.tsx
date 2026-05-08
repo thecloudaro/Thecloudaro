@@ -14,11 +14,11 @@ const MigrateHosting = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         <div className="text-center space-y-4">
           <ContentHeading
-            title={"Migrate to The Cloud Aro hosting"}
+            title={"Move your site to The Cloud Aro"}
             className="!text-4xl sm:!text-[3rem] md:!text-[3.75rem] whitespace-pre-line"
           />
           <ContentDescription
-            text="It's free and easy to do."
+            text="It's easy to do with our support."
             size="xl"
             className="text-[rgb(var(--hosting-choose-text-gray-300))]"
           />
@@ -40,12 +40,11 @@ const MigrateHosting = () => {
 
           <div className="space-y-6 text-left">
             <ContentHeading
-              title="Run your own migration"
+              title="Move your site on your terms"
               className="!text-[2rem] sm:!text-[2.3rem] md:!text-[3.10rem]"
             />
             <ContentDescription
-              text={`It just takes a few steps to complete migration.\nWhen you Unbox™ your Spaceship Hosting, select\n 'Migrate your web hosting'. Then upload your \
-                \ncPanel backup file from your existing account.`}
+              text={`Start the migration when you’re ready. Upload \na backup from your current host and follow clear steps\n that show what’s happening at each stage. \n You stay in control until the move is complete.`}
               size="lg"
               className="text-[rgb(var(--hosting-choose-text-gray-300))] whitespace-pre-line max-w-xl"
             />
@@ -56,11 +55,11 @@ const MigrateHosting = () => {
         <div className="grid gap-16 lg:grid-cols-2 items-center pt-10">
           <div className="space-y-6 text-left">
             <ContentHeading
-              title="Save time and money"
+              title="No added cost to move"
               className="!text-[2rem] sm:!text-[2.3rem] md:!text-[3.10rem]"
             />
             <ContentDescription
-              text="Migration is quick, easy, and it won't cost you a thing. Keep control of your data and get your migration done in a few simple stages."
+              text="The migration is included with hosting. There’s nothing extra to pay, and no surprise charges along the way. Your data stays under your control throughout the process."
               size="lg"
               className="text-[rgb(var(--hosting-choose-text-gray-300))] max-w-xl"
             />
