@@ -6,21 +6,21 @@ import { Mail, SlidersHorizontal, Shield } from "lucide-react";
 
 const tools = [
   {
-    title: "Professional email",
+    title: "Credible Email",
     description:
-      "Make closer connections\n with the quick and efficient\nservice from SPACEMAIL®.",
+      "Use your domain for email so messages \ndon’t feel temporary or improvised. It’s \na small detail that changes how customers \nrespond and how your business is perceived.",
     Icon: Mail
   },
   {
-    title: "Effortless control",
+    title: "Control without getting lost",
     description:
-      "Manage content, monitor\n performance and more with \n our cPanel-powered\n Hosting Manager.",
+      "Manage your site, updates, \nand resources in one place. Common tasks \nare easy to find, and deeper controls \nare there when you need them, \nnot in the way when you don’t.",
     Icon: SlidersHorizontal
   },
   {
-    title: "24/7 protection",
+    title: "Everyday protection",
     description:
-      "Looking for free malware\n protection for websites?\nBoost shared hosting \nsecurity with Imunify360,\nincluded in every hosting\n package.",
+      "Core security measures run in the \nbackground to help keep your site stable \nand your data intact, without \nconstant intervention.",
     Icon: Shield
   }
 ];
@@ -34,7 +34,7 @@ const ToolHosting = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
         <div className="text-center space-y-5">
           <ContentHeading
-            title="Tools that mean business"
+            title="What your site relies on"
             className="!text-5xl sm:!text-[3.75rem] md:!text-[4.5rem]"
           />
         </div>
