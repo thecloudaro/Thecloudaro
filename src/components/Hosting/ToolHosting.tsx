@@ -14,7 +14,7 @@ const tools = [
   {
     title: "Control without getting lost",
     description:
-      "Manage your site, updates, and resources \n in one place. Common tasks are easy to find, \n and deeper controls are there when you need them, \nnot in the way when you don’t.",
+      "Manage your site, updates, and resources in one place. Common tasks are easy to find, and deeper controls are there when you need them, not in the way when you don’t.",
     Icon: SlidersHorizontal
   },
   {
