@@ -8,7 +8,7 @@ const features = [
   {
     title: "SSL included",
     description:
-      "Encrypt connections to your site so visitors \n and browsers can trust what they’re loading. \n Certificates are supported and managed from one place.",
+      "Encrypt connections to your site so visitors \n and browsers can trust what they’re loading.\nCertificates are supported and managed from \none place.",
     Icon: Lock
   },
   {
