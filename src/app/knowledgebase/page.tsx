@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import KnowledgeHero from "@/components/KnowledgeBase/KnowledgeHero";
 import KnowledgeCategories from "@/components/KnowledgeBase/KnowledgeCategories";
 import RecentArticles from "@/components/KnowledgeBase/RecentArticles";
@@ -22,7 +23,9 @@ export default function KnowledgeBasePage() {
         </svg>
       </div>
       
-      <KnowledgeCategories />
+      <Suspense fallback={null}>
+        <KnowledgeCategories />
+      </Suspense>
       {showRecentArticles && <RecentArticles />}
     </div>
   );

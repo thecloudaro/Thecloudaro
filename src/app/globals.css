@@ -1610,6 +1610,25 @@
     --knowledge-categories-title-text: 255 255 255; /* white - title text - for rgb() */
     --knowledge-categories-count-text: 209, 213, 219, 0.8; /* gray-300/80 - article count text - for rgba() */
     --knowledge-categories-link-text: 59 130 246; /* blue-500 - link text - for rgb() */
+    --knowledge-scrollbar-track: 17 24 39; /* slate-900 - scrollbar track - for rgb() */
+    --knowledge-scrollbar-thumb: 51 65 85; /* slate-700 - scrollbar thumb - for rgb() */
+    --knowledge-scrollbar-thumb-hover: 71 85 105; /* slate-600 - scrollbar thumb hover - for rgb() */
+    
+    /* Knowledge Base — category article list panel (See all) */
+    --knowledge-article-list-backdrop: 0, 0, 0, 0.7; /* for rgba() */
+    --knowledge-article-list-panel-bg: 17 17 17; /* near #111 - for rgb() */
+    --knowledge-article-list-panel-border: 55, 65, 81, 0.45; /* gray-700/45 - for rgba() */
+    --knowledge-article-list-tab-text: 255 255 255; /* for rgb() */
+    --knowledge-article-list-tab-badge-bg: 55 65 81; /* gray-700 - for rgb() */
+    --knowledge-article-list-tab-badge-text: 255 255 255; /* for rgb() */
+    --knowledge-article-list-tab-underline: 59 130 246; /* blue-500 - for rgb() */
+    --knowledge-article-list-row-border: 39 39 42; /* subtle divider - for rgb() */
+    --knowledge-article-list-row-hover: 30 32 38; /* for rgb() */
+    --knowledge-article-list-title: 255 255 255; /* for rgb() */
+    --knowledge-article-list-arrow: 209 213 219; /* gray-300 - for rgb() */
+    --knowledge-article-list-footer-text: 163 163 163; /* gray-400 - for rgb() */
+    --knowledge-article-list-close-icon: 163 163 163; /* for rgb() */
+    --knowledge-article-list-close-hover-bg: 39 39 42; /* for rgb() */
     
     /* Knowledge Base Recent Articles Component Colors */
     --knowledge-recent-articles-bg: 23 25 29; /* #17191d - dark gray background - for rgb() */
@@ -2447,3 +2466,27 @@
 .text-transfer-unlock-heading { color: rgb(var(--transfer-unlock-heading)); }
 .text-transfer-unlock-description { color: rgb(var(--transfer-unlock-description)); }
 .bg-transfer-unlock-inner-highlight { background: radial-gradient(circle, rgba(var(--transfer-unlock-inner-highlight)) 0%, transparent 70%); }
+
+/* Knowledge base — themed scrollbars (category article list; uses --knowledge-scrollbar-* in .dark) */
+.knowledge-scrollbar-themed {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--knowledge-scrollbar-thumb)) rgb(var(--knowledge-scrollbar-track));
+}
+
+.knowledge-scrollbar-themed::-webkit-scrollbar {
+  width: 8px;
+}
+
+.knowledge-scrollbar-themed::-webkit-scrollbar-track {
+  background: rgb(var(--knowledge-scrollbar-track));
+  border-radius: 9999px;
+}
+
+.knowledge-scrollbar-themed::-webkit-scrollbar-thumb {
+  background: rgb(var(--knowledge-scrollbar-thumb));
+  border-radius: 9999px;
+}
+
+.knowledge-scrollbar-themed::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--knowledge-scrollbar-thumb-hover));
+}

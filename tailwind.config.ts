@@ -590,6 +590,31 @@ const config: Config = {
           "button-bg": "rgb(var(--hosting-button-bg))",
           "button-hover": "rgb(var(--hosting-button-hover))",
         },
+
+        // Knowledge Base — category article list (See all modal)
+        "knowledge-article-list": {
+          backdrop: "rgba(var(--knowledge-article-list-backdrop))",
+          panel: "rgb(var(--knowledge-article-list-panel-bg))",
+          "panel-border": "rgba(var(--knowledge-article-list-panel-border))",
+          "tab-text": "rgb(var(--knowledge-article-list-tab-text))",
+          "tab-badge-bg": "rgb(var(--knowledge-article-list-tab-badge-bg))",
+          "tab-badge-text": "rgb(var(--knowledge-article-list-tab-badge-text))",
+          "tab-underline": "rgb(var(--knowledge-article-list-tab-underline))",
+          "row-border": "rgb(var(--knowledge-article-list-row-border))",
+          "row-hover": "rgb(var(--knowledge-article-list-row-hover))",
+          title: "rgb(var(--knowledge-article-list-title))",
+          arrow: "rgb(var(--knowledge-article-list-arrow))",
+          footer: "rgb(var(--knowledge-article-list-footer-text))",
+          "close-icon": "rgb(var(--knowledge-article-list-close-icon))",
+          "close-hover-bg": "rgb(var(--knowledge-article-list-close-hover-bg))",
+        },
+
+        // Knowledge Base — scrollbars (track / thumb use globals.css variables)
+        "knowledge-scrollbar": {
+          track: "rgb(var(--knowledge-scrollbar-track))",
+          thumb: "rgb(var(--knowledge-scrollbar-thumb))",
+          "thumb-hover": "rgb(var(--knowledge-scrollbar-thumb-hover))",
+        },
       },
 
       borderRadius: {
