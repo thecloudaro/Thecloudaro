@@ -69,7 +69,7 @@ const SSLHero = () => {
           <ContentDescription
             size="lg"
             className="!text-[rgb(var(--ssl-text-secondary))]"
-            text="Protect logins, payments, and customer data with SSL certificates that work seamlessly across The Cloud Aro hosting plans."
+            text="Protect logins, payments, and customer data with SSL certificates that work seamlessly across our hosting plans."
           />
         </motion.div>
 
