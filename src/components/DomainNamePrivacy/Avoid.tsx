@@ -22,11 +22,11 @@ const Avoid = () => {
             className="w-full lg:w-1/2 flex flex-col justify-center items-start text-left"
           >
             <ContentHeading 
-              title="Avoid unwanted attention"
+              title="Stay hidden"
               className="mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
             />
             <ContentDescription 
-              text="Your information is replaced with randomly generated data, keeping it safe from spammers, hackers, and identity thieves."
+              text="Your information is safe from spammers and hackers."
               size="md"
               className="max-w-2xl"
             />
