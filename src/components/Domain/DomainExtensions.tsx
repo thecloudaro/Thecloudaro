@@ -25,29 +25,29 @@ const DomainExtensions = () => {
     {
       extension: ".org",
       price: 6.48,
-      originalPrice: 12.96,
-      discount: "50% OFF",
+      originalPrice: null,
+      discount: null,
       description: "Organization domains"
     },
     {
       extension: ".xyz",
       price: 1.86,
-      originalPrice: 18.60,
-      discount: "90% OFF",
+      originalPrice: null,
+      discount: null,
       description: "Creative and modern"
     },
     {
       extension: ".online",
       price: 0.98,
-      originalPrice: 9.80,
-      discount: "90% OFF",
+      originalPrice: null,
+      discount: null,
       description: "Perfect for online presence"
     },
     {
       extension: ".io",
       price: 31.05,
-      originalPrice: 44.35,
-      discount: "30% OFF",
+      originalPrice: null,
+      discount: null,
       description: "Tech startup favorite"
     }
   ];
