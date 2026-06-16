@@ -99,7 +99,7 @@ const DomainTransferPage = () => {
                     <span className="block mt-1">The Cloud Aro</span>
                   </>
                 }
-                description="Effortless transfers and next-level domain management."
+                description="Move your domain without the hassle."
                 headingTag="h1"
                 headingClassName="text-[3rem] sm:text-[3rem] md:text-[3.75rem] font-bold mb-4 leading-tight text-[rgb(var(--domain-transfer-page-hero-heading))]"
                 descriptionClassName="mx-auto max-w-4xl text-xl text-[rgb(var(--domain-transfer-page-hero-description))] sm:text-2xl md:text-3xl"
