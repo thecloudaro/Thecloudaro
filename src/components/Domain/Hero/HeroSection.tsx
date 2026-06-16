@@ -108,7 +108,7 @@ export default function DomainHeroSection() {
               className="text-xl sm:text-2xl md:text-3xl"
               style={{ color: "rgb(var(--domain-hero-text-gray-400))" }}
             >
-              Start typing...
+              Enter your domain...
             </h2>
 
             {/* Domain Input Field with Typewriter Effect */}
@@ -129,7 +129,7 @@ export default function DomainHeroSection() {
                 >
                   <Typewriter
                     options={{
-                      strings: ["youridea.com"],
+                      strings: ["yourcompany.com"],
                       autoStart: true,
                       loop: true,
                       delay: 100,
@@ -182,7 +182,7 @@ export default function DomainHeroSection() {
               className="text-xl sm:text-2xl md:text-3xl"
               style={{ color: "rgb(var(--domain-hero-text-gray-400))" }}
             >
-              Start your online story. Register a domain.
+              Start your business.
             </p>
 
             <motion.button
