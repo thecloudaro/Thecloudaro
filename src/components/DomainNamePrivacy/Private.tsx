@@ -41,11 +41,11 @@ const Private = () => {
             className="w-full lg:w-1/2 flex flex-col justify-center items-start text-left"
           >
             <ContentHeading 
-              title="Private, not public"
+              title="Private domain info"
               className="mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
             />
             <ContentDescription 
-              text="Your details stay off the WHOIS public directory, where every domain owner has their name, address, and contact info listed."
+              text="Your details stay hidden from WHOIS public directory."
               size="md"
               className="max-w-2xl"
             />
