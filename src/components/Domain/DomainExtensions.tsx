@@ -12,8 +12,8 @@ const DomainExtensions = () => {
       extension: ".com",
       price: 8.88,
       originalPrice: 17.76,
-      discount: "50% OFF",
-      description: "Most popular domain extension"
+      //discount: "50% OFF",
+      ,description: "Most popular domain extension"
     },
     {
       extension: ".net",
