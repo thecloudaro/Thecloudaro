@@ -11,15 +11,15 @@ const DomainExtensions = () => {
     {
       extension: ".com",
       price: 8.88,
-      originalPrice: 17.76,
-      //discount: "50% OFF",
-      ,description: "Most popular domain extension"
+      originalPrice: null,
+      discount: null,
+      description: "Most popular domain extension"
     },
     {
       extension: ".net",
       price: 11.20,
       originalPrice: null,
-      discount: "50% OFF",
+      discount: null,
       description: "Network-focused domains"
     },
     {
@@ -59,8 +59,8 @@ const DomainExtensions = () => {
           {/* Header */}
           <div className="mb-16">
             <SectionHeading
-              heading="Register a domain"
-              description="Discover the perfect match for your needs."
+              heading="Register your domain"
+              description="Discover the best domain for your business."
               headingTag="h2"
               headingClassName="text-5xl sm:text-6xl md:text-7xl font-bold text-[rgb(var(--hosting-text-white))] mb-6"
               descriptionClassName="text-[rgb(var(--domain-hero-text-gray-400))] text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl max-w-3xl mx-auto leading-relaxed"
@@ -129,7 +129,7 @@ const DomainExtensions = () => {
             }}
             onClick={handleScrollToPricing}
           >
-            See all domains
+            View all domains
           </motion.button>
         </div>
 
