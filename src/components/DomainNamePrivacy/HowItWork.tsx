@@ -9,17 +9,17 @@ const HowItWork = () => {
     {
       icon: Circle,
       title: "Register a domain",
-      description: "Start your online story by searching for a domain name, and registering it."
+      description: "Start your online business by registering a domain name."
     },
     {
       icon: Shield,
-      title: "Free protection",
-      description: "Privacy protection service Withheld for Privacy automatically hides your details."
+      title: "Privacy protection",
+      description: "Privacy protection automatically hides your details."
     },
     {
       icon: User,
-      title: "Stay anonymous",
-      description: "Anyone that searches for your domain on WHOIS will see anonymized information."
+      title: "Maintain Anonymity",
+      description: "Anyone searches for your domain on WHOIS will see anonymized information."
     }
   ];
 
