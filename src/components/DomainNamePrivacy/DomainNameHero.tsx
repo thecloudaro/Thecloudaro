@@ -48,11 +48,11 @@ const DomainNameHero = () => {
           className="max-w-5xl mx-auto"
         >
           <ContentHeading 
-            title="Free domain privacy"
+            title="Built-in privacy"
             className="mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl"
           />
           <ContentDescription 
-            text="Keeping your domain registration info private."
+            text="We keep your domain registration info private."
             size="lg"
             className="text-[hsl(var(--domain-name-privacy-hero-description))] text-xl sm:text-2xl md:text-3xl lg:text-2xl"
           />
