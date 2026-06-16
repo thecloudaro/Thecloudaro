@@ -7,7 +7,7 @@ const PLAN_ROWS = [
     name: "Standard DV SSL",
     audience: "Personal sites & blogs",
     note: "Encrypts traffic and shows the padlock for one domain.",
-    badge: "Included on most plans",
+    badge: "Mostly used",
   },
   {
     name: "Business OV SSL",
