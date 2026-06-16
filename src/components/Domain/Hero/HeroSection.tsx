@@ -129,7 +129,7 @@ export default function DomainHeroSection() {
                 >
                   <Typewriter
                     options={{
-                      strings: ["yourcompany.com"],
+                      strings: ["business.com"],
                       autoStart: true,
                       loop: true,
                       delay: 100,
