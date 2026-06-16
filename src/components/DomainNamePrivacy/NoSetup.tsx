@@ -41,11 +41,11 @@ const NoSetup = () => {
             className="w-full lg:w-1/2 flex flex-col justify-center items-start text-left"
           >
             <ContentHeading 
-              title="No setup needed"
+              title="Enabled by default"
               className="mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
             />
             <ContentDescription 
-              text="Domain privacy is free for life with nearly all our domains, and simply gets added automatically when you register yours."
+              text="Domain privacy is free for most of our domains, and enabled automatically when you register your domain."
               size="md"
               className="max-w-2xl"
             />
