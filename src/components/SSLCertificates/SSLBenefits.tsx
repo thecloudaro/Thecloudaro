@@ -29,7 +29,7 @@ const SSLBenefits = () => {
             Why SSL with The Cloud Aro?
           </h2>
           <p className="text-sm sm:text-base text-security-spacemail-description max-w-md">
-            SSL certificates are built into our Cloudaro stack, so you can turn
+            SSL certificates are built into our stack, so you can turn
             on secure browsing without wrestling with server configs.
           </p>
         </div>
