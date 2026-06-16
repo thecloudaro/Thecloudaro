@@ -56,11 +56,11 @@ const YourPrivacy = () => {
             className="text-center pt-12 sm:pt-16 md:pt-20 pb-8 sm:pb-12"
           >
             <ContentHeading 
-              title="Your privacy is our priority"
+              title="Privacy is priority"
               className="mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl"
             />
             <ContentDescription 
-              text="See the difference"
+              text="See difference below"
               size="lg"
               className="text-[hsl(var(--domain-name-privacy-hero-description))] text-xl sm:text-2xl md:text-3xl lg:text-2xl"
             />
@@ -84,11 +84,11 @@ const YourPrivacy = () => {
                   WHOIS LOOKUP
                 </p>
                 <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm text-left" style={{ color: 'rgb(var(--domain-name-privacy-text-gray))' }}>
-                  <div>123, Amber Drive, Springfield, US</div>
-                  <div>Smith Consultancy</div>
-                  <div>john@smithconsultancy.com</div>
-                  <div>John Smith</div>
-                  <div>301-301-9000</div>
+                  <div>Richmond, Virginia, US</div>
+                  <div>The Cloud Aro</div>
+                  <div>john@thecloudaro.com</div>
+                  <div>John</div>
+                  <div>302-302-8000</div>
                 </div>
               </motion.div>
 
