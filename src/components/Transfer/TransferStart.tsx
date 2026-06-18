@@ -94,17 +94,17 @@ const TransferStart = () => {
             className="text-left"
           >
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-transfer-start-heading">
-              Start your transfer
+              Start the transfer
             </h3>
             <div className="space-y-3">
               <p className="text-xl sm:text-2xl leading-relaxed text-transfer-start-description">
-                Use the search bar to find your domain.
+                Find your domain.
               </p>
               <p className="text-xl sm:text-2xl leading-relaxed text-transfer-start-description">
-                Enter your auth code and check out.
+                Enter the transfer code.
               </p>
               <p className="text-xl sm:text-2xl leading-relaxed text-transfer-start-description">
-                Normally, transfers autocomplete in 30 minutes, but no longer than 5 days max.
+                Most transfers complete within a few hours, though some can take up to five days.
               </p>
             </div>
           </motion.div>
