@@ -7,16 +7,16 @@ import { HelpCircle } from "lucide-react";
 const TransferFAQ = () => {
   const faqs = [
     {
-      question: "What am I paying for during a transfer?",
-      answer: "You only pay for 1-year renewal when you transfer an eligible domain. The year is added to your current expiration date, so no registration time is lost."
+      question: "What do I pay when transferring a domain?",
+      answer: "You pay for a one-year renewal when transferring an eligible domain. That year is added to your existing expiration date, so you don’t lose any remaining time."
     },
     {
-      question: "Can expiring or expired domains be transferred?",
-      answer: "This depends on the stage of expiry. To check if your domain can be transferred, search your domain, hit Transfer, and we'll check for you."
+      question: "Can I transfer a domain that’s close to expiring or already expired?",
+      answer: "It depends on the domain’s current status. Search for your domain and start the transfer to see if it’s eligible, and we’ll check for you."
     },
     {
-      question: "Is privacy protection included?",
-      answer: "Privacy protection is free for life with eligible domain name transfers."
+      question: "Is domain privacy included after a transfer?",
+      answer: "Yes. Domain privacy is included with eligible domain transfers and remains active after the move."
     }
   ];
 
@@ -26,7 +26,7 @@ const TransferFAQ = () => {
         {/* Heading */}
         <div className="mb-16 sm:mb-20 md:mb-24">
           <SectionHeading
-            heading="What you need to know"
+            heading="Before you transfer"
             headingTag="h2"
             headingClassName="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-center text-transfer-faq-heading"
           />
