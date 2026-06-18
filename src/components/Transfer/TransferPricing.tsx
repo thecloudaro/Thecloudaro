@@ -87,7 +87,7 @@ const TransferPricing = () => {
         <div className="mb-10 sm:mb-12 md:mb-14">
           <SectionHeading
             heading="Domain transfer prices"
-            description="Lower rates, higher savings."
+            description="With no hidden fees or surprises."
             headingTag="h2"
             headingClassName="text-[3.2rem] sm:text-[3.5rem] md:text-[4rem] font-bold leading-tight text-transfer-pricing-heading"
             descriptionClassName="text-xl sm:text-2xl md:text-3xl max-w-4xl mx-auto mt-2 text-transfer-pricing-description"
@@ -96,7 +96,7 @@ const TransferPricing = () => {
 
         {/* Get 1-year renewal note */}
         <p className="text-xs sm:text-base md:text-lg text-center mb-6 mt-30 text-transfer-pricing-note">
-          Get 1-year renewal with every transfer.
+          Comes with a one-year renewal included.
         </p>
 
         {/* Controls row: TLD search + Recommended button */}
