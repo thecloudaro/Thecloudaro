@@ -11,7 +11,7 @@ const TransferInstructions = () => {
         <div className="mb-16 sm:mb-20 md:mb-24">
           <SectionHeading
             heading="How to transfer"
-            description="What you need for domain migration."
+            description="What you’ll need to transfer your domain."
             headingTag="h2"
             headingClassName="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-center text-transfer-instructions-heading"
             descriptionClassName="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto text-center text-transfer-instructions-description"
@@ -74,12 +74,12 @@ const TransferInstructions = () => {
             className="text-left"
           >
              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 whitespace-nowrap text-transfer-instructions-heading">
-               Get your authorization code
+               Find your transfer code
              </h3>
              <p className="text-xl sm:text-2xl leading-relaxed text-transfer-instructions-description">
-               <span>First, you need an authorization code (also</span><br /><span>
-                 known as an EPP, auth code, or transfer</span><br /><span>
-                   code).You can find it with your existing </span><br /><span>registrar.</span>
+               <span>FYou’ll need a transfer code from your current registrar.</span><br /><span>
+                 You can find this code in your current registrar’s </span><br /><span>
+                   domain settings, often called an authorization or EPP code. </span><br />
              </p>
           </motion.div>
         </div>
