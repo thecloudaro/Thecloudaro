@@ -60,7 +60,7 @@ const SpacemailSecurity = () => {
 
             {/* Main Description */}
             <ContentDescription
-              text="Effortless professional email that keeps your communications safe."
+              text="Professional email that keeps your communications safe."
               className="text-base sm:text-lg md:text-xl text-security-spacemail-description text-left max-w-2xl"
             />
 
@@ -89,7 +89,7 @@ const SpacemailSecurity = () => {
               ))}
             </div>
 
-            {/* Call to Action Link */}
+{/*           // Call to Action Link 
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -108,7 +108,7 @@ const SpacemailSecurity = () => {
               </Link>
             </motion.div>
           </motion.div>
-
+*/}
           {/* Right Side - Image */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
