@@ -19,7 +19,7 @@ const BuiltIn = () => {
           className="text-center"
         >
           <ContentHeading
-            title="Built-in security<br/>everywhere"
+            title="Always-on security<br/>everywhere"
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-security-builtin-heading"
           />
 
