@@ -10,23 +10,23 @@ const Protected = () => {
   const features = [
     {
       icon: UserCheck,
-      title: "Suspicious login monitoring",
-      description: "You will get a verification email when there's a potentially suspicious login, like from a new device."
+      title: "Login monitoring",
+      description: "Monitoring suspicious login."
     },
     {
       icon: ShieldCheck,
-      title: "Two-factor authentication",
+      title: "2FA",
       description: "Two forms of verification are required at every login, adding another layer of account protection."
     },
     {
       icon: KeyRound,
-      title: "Bye-bye passwords",
-      description: "No more forgetting complicated passwords. Logging in is easier and safer than ever with Passkeys."
+      title: "Support Pin",
+      description: "Protection from identity theft. Only you can access your account."
     },
     {
       icon: MessageSquare,
-      title: "Social engineering prevention",
-      description: "Limited front-line Customer Support access to your private info and product settings protects everyone."
+      title: "Social engineering protection",
+      description: "Protecting your information."
     }
   ];
 
@@ -52,11 +52,11 @@ const Protected = () => {
             className="text-center mb-16 sm:mb-20 md:mb-24 lg:mb-32 w-full"
           >
             <ContentHeading
-              title="Protected accounts"
+              title="Secure accounts"
               className="mb-8 sm:mb-10 md:mb-12 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-security-protected-heading"
             />
             <ContentDescription
-              text="Strong security features ensure your account stays protected<br/>at all times."
+              text="Security in-place to ensure your account stays protected"
               size="lg"
               className="mb-8 sm:mb-10 md:mb-12 text-security-protected-description"
             />
@@ -126,7 +126,7 @@ const Protected = () => {
             <button
               className="px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-full font-medium text-xs sm:text-xs md:text-sm transition-all duration-300 hover:opacity-90 bg-security-protected-button text-security-protected-button"
             >
-              Open your secure account
+              Open your account
             </button>
           </motion.div>
         </div>
