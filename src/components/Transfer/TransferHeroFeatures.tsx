@@ -8,18 +8,18 @@ const TransferHeroFeatures = () => {
   const features = [
     {
       icon: ArrowDown,
-      title: "Simple",
-      description: "Transfer hassle-free with simplicity at every stage."
+      title: "Straightforward",
+      description: "Clear steps that guide you through the transfer."
     },
     {
       icon: Gauge,
-      title: "Swift",
-      description: "Save time with automatic steps and minimal input."
+      title: "Time-saving",
+      description: "Most of the process is handled automatically."
     },
     {
       icon: Shield,
-      title: "Secure",
-      description: "Keep details safe with top-tier security on all transfers."
+      title: "Well-protected",
+      description: "Your domain details stay protected throughout the transfer process."
     }
   ];
 
@@ -29,8 +29,8 @@ const TransferHeroFeatures = () => {
         {/* Heading and Description */}
         <div className="mb-20 sm:mb-24 md:mb-28 lg:mb-32">
           <SectionHeading
-            heading="Effortless domain name transfer"
-            description="Easy, fast, and safe transfers with free privacy protection."
+            heading="Moving your domain is easy"
+            description="Transfers with free privacy protection."
             headingTag="h2"
             headingClassName="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-center text-transfer-hero-features-heading"
             descriptionClassName="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto text-center text-transfer-hero-features-description"
