@@ -7,26 +7,26 @@ const TransferGetMore = () => {
   const features: Feature[] = [
     {
       icon: RotateCcw,
-      title: "Yours by default",
-      description: "Make sure your domain stays yours with automatic domain renewal.",
+      title: "Yours to manage",
+      description: "Your domain stays under your control, with renewals handled automatically unless you choose otherwise..",
     },
     {
       icon: Settings,
-      title: "Set up, sped up",
-      description: "All your products are automatically connected and ready to activate.",
+      title: "Works together",
+      description: "Hosting, email, and other tools connect to your domain without extra setup.",
     },
     {
       icon: Shield,
-      title: "Privacy assured",
-      description: "Keep personal details hidden and your inbox free from spam.",
+      title: "Privacy included",
+      description: "Personal details stay out of public records, helping reduce unwanted contact.",
     },
   ];
 
   return (
     <DomainTransferHero
       showHeader={false}
-      heroTitle="Get more with The Cloud Aro."
-      heroSubtitle="Transfer a domain to have all you need, all in one."
+      heroTitle="Everything in one place."
+      heroSubtitle="When you transfer your domain, it becomes part of a setup that’s easier to manage and ready to grow with you."
       features={features}
     />
   );
