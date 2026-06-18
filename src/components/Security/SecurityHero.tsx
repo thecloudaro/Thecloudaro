@@ -31,7 +31,7 @@ const SecurityHero = () => {
               <Typewriter
                 onInit={(typewriter) => {
                   typewriter
-                    .typeString('<span class="text-security-hero-heading-green">Security</span> <span class="text-gradient-security-hero">as standard</span>')
+                    .typeString('<span class="text-security-hero-heading-green">Always-on</span> <span class="text-gradient-security-hero">Security</span>')
                     .start();
                 }}
                 options={{
@@ -55,7 +55,7 @@ const SecurityHero = () => {
           className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 md:mb-20"
         >
           <ContentDescription
-            text="Grow your online presence with TheCloudAro, where secure<br>is the default setting."
+            text="Security features that help protect your website, data, and domain from everyday risks."
             size="lg"
             className="text-security-hero-description"
           />
