@@ -11,23 +11,26 @@ const Safeguarded = () => {
   const features = [
     {
       icon: Lock,
-      title: "DNSSEC authentication",
-      description: "You get an extra layer of security for your<br/>DNS, ensuring fraudulent sites can't<br/>pretend to be you."
+      title: "DNSSEC",
+      description: "Enhance your DNS security and stop malicious<br/>actors from spoofing your website."
     },
     {
       icon: Shield,
-      title: "DNS DDoS prevention",
-      description: "Filters out malicious traffic when<br/>attackers try to flood your site, keeping<br/>the DNS working."
+      title: "DDoS protection",
+      description: "Blocks harmful traffic during<br/>flood attempts, keeping your DNS<br/>operational and reliable."
+        
     },
     {
       icon: User,
-      title: "Free domain privacy",
-      description: "Your registration info will be kept private<br/>and won't go up on WHOIS, a public<br/>directory of domain owners."
+      title: "Domain privacy",
+      description: "Keep your personal information secure. <br/>Your registration details are <br/>hidden from WHOIS"
     },
     {
       icon: Key,
-      title: "Free SSL-protected redirects",
-      description: "Your custom URL redirects are SSL-<br/>protected for enhanced security and data<br/>integrity."
+      title: "SSL-protected redirects",
+      description: "Custom URL redirects powered by SSL-<br/>security—keeping your data protected<br/>, private, and reliable."
+                   
+
     }
   ];
 
@@ -45,11 +48,11 @@ const Safeguarded = () => {
           className="text-center mb-12 sm:mb-16 md:mb-20"
         >
           <ContentHeading
-            title="Safeguarded domains"
+            title="Protect domains"
             className="mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-security-safeguarded-heading"
           />
           <ContentDescription
-            text="Your domain is the centerpiece of your digital life, and we've<br/>got what you need to keep it attack proof."
+            text="Keep your domain attack proof."
             size="lg"
             className="text-security-safeguarded-description"
           />
@@ -181,7 +184,7 @@ const Safeguarded = () => {
             href="/domain"
             className="inline-flex items-center gap-2 text-base sm:text-lg md:text-md font-medium hover:gap-3 transition-all duration-300 text-security-safeguarded-link-blue"
           >
-            Register your secure domain
+            Register your domain
             <ArrowRight className="w-5 h-5" />
           </Link>
         </motion.div>
