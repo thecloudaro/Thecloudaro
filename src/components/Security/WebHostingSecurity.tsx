@@ -14,16 +14,16 @@ const WEB_HOSTING_ILLUSTRATION_SRC =
 const WebHostingSecurity = () => {
   const features = [
     {
-      title: "Free SSL certificate",
-      description: "Encrypts the connection between user browsers and your site's server, shielding the private data."
+      title: "Free SSL",
+      description: "Encrypts the connection to shield your data."
     },
     {
       title: "Virus and malware monitoring",
-      description: "Real-time servers continually scan your site's server for malicious activity to stop it in its tracks."
+      description: "Continuous monitoring to keep your site healthy."
     },
     {
-      title: "Firewall protection",
-      description: "Strict firewall rules track and control incoming and outgoing site traffic, preventing cyber attacks."
+      title: "Firewall enabled",
+      description: "Strict rules to control incoming and outgoing traffic, preventing cyber attacks."
     }
   ];
 
@@ -82,7 +82,7 @@ const WebHostingSecurity = () => {
 
             {/* Main Description */}
             <ContentDescription
-              text="Fast, stable, and scalable with powerful protection included."
+              text="Powerful web hosting with protection included."
               className="text-base sm:text-lg md:text-xl text-security-webhosting-description text-left max-w-2xl"
             />
 
