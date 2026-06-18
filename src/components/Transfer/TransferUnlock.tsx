@@ -17,10 +17,10 @@ const TransferUnlock = () => {
             className="text-left"
           >
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 whitespace-nowrap text-transfer-unlock-heading">
-              Unlock your domains
+              Check that your domain is unlocked
             </h3>
             <p className="text-xl sm:text-2xl leading-relaxed text-transfer-unlock-description">
-              You may need to disable the registrar lock with your current registrar. Head there to check before transferring.
+              Some registrars lock domains by default. Before starting the transfer, confirm that the lock is turned off in your current domain settings.
             </p>
           </motion.div>
 
