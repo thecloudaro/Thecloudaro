@@ -16,13 +16,13 @@ const essentials: EssentialItem[] = [
   {
     title: "Backup file",
     description:
-      "Make a cPanel backup file for your website, with all your essential data, files, and databases.",
+      "Make a backup file for your website, with all your essential data, files, and databases.",
     icon: ArchiveRestore
   },
   {
     title: "File type and size limit",
     description:
-      "cPanel backups support tar.gz and zip files that are less than 20 GB in size.",
+      "Backups support tar.gz and zip files that are less than 20 GB in size.",
     icon: FileText
   },
   {
