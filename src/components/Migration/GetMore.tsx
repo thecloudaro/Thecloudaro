@@ -7,27 +7,27 @@ import type { Feature } from "@/components/Domain/DomainTransferHero";
 const features: Feature[] = [
   {
     icon: Cpu,
-    title: "Powerful hosting",
+    title: "Beast hosting",
     description:
-      "With lightning-fast performance, your websites will load instantly and without disruption."
+      "Extremely fast servers makes your websites load instantly."
   },
   {
     icon: LayoutDashboard,
-    title: "Easy to manage",
+    title: "Simple Management",
     description:
-      "Hosting Manager makes dealing with your websites and domains much easier."
+      "Easy to use hosting panel with modern UI."
   },
   {
     icon: Lock,
-    title: "SSL certificates and business mail",
+    title: "SSL certificates",
     description:
-      "Enjoy SSL by Let’s Encrypt free forever or PositiveSSL free for a year then $4.99/year, plus business mail professional email free for a year then $3.88/year."
+      "Enjoy free SSL forever."
   },
   {
     icon: ShieldCheck,
-    title: "Completely secure",
+    title: "Secure",
     description:
-      "Stay protected at all times with the advanced security of your hosting environment."
+      "Hosting environment is secure with advance security."
   }
 ];
 
@@ -35,8 +35,8 @@ const GetMore = () => {
   return (
     <DomainTransferHero
       showHeader={false}
-      heroTitle="Get more with TheCloudAro"
-      heroSubtitle="Move your website to us and enjoy hosting with extra benefits."
+      heroTitle="Move to The Cloud Aro"
+      heroSubtitle="Migrate your website to us and enjoy awesome benefits."
       features={features}
       sectionClassName="!bg-[rgb(var(--migration-getmore-bg))]"
       featureContainerClassName="max-w-4xl mx-auto"
