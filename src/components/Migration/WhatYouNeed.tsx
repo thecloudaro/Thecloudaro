@@ -42,7 +42,7 @@ const essentials: EssentialItem[] = [
             e.currentTarget.style.color = 'rgb(var(--migration-whatyouneed-link))';
           }}
         >
-          import your<br/>cPanel emails
+          import your<br/> emails
         </Link>
         .
       </>
@@ -50,11 +50,10 @@ const essentials: EssentialItem[] = [
     icon: Mail
   },
   {
-    title: "SSLs",
+    title: "SSL Certificates",
     description: (
       <>
-        Manually install your existing SSL keys when these are migrated,
-        and make use of free SSLs for the first year with<br/>Web Hosting.
+        You can manually install SSL using your keys or can use free SSL forever.
       </>
     ),
     icon: Lock
@@ -63,7 +62,7 @@ const essentials: EssentialItem[] = [
     title: "Databases",
     description: (
       <>
-        MySQL and MariaDB databases are supported for migration, but other databases will not be migrated.
+        MySQL and MariaDB databases are supported for migration.
       </>
     ),
     icon: Database
@@ -71,7 +70,7 @@ const essentials: EssentialItem[] = [
   {
     title: "Internet connection",
     description:
-      "Your connection will need to be stable to avoid any disruptions during backup file upload and migration.",
+      "You need stable Internet to avoid any disruptions during migration.",
     icon: Wifi
   }
 ];
@@ -82,7 +81,7 @@ const WhatYouNeed = () => {
       <div className="mx-auto max-w-6.5xl px-6 sm:px-10">
         <div className="space-y-6 text-center">
           <ContentHeading
-            title="What you need for migration"
+            title="Things you need to migrate"
             className="!text-[2.5rem] sm:!text-[3.25rem] md:!text-[4rem] font-bold pb-16 !text-[rgb(var(--migration-whatyouneed-heading))]"
           />
 
