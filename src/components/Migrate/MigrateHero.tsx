@@ -28,14 +28,14 @@ const MigrateHero = () => {
         >
           {/* Main Heading */}
           <ContentDescription
-            text="Migrate your website"
+            text="Transfer your website to us"
             size="xl"
             className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl !text-[rgb(var(--hosting-text-white))] font-bold leading-tight"
           />
 
           {/* Description */}
           <ContentDescription
-            text="Move your website and files in a few simple steps."
+            text="Move your website in a few simple steps."
             size="lg"
             className="!text-xl sm:!text-xl md:!text-2xl lg:!text-2xl !text-[rgb(var(--hosting-text-white))] max-w-2xl mx-auto"
           />
