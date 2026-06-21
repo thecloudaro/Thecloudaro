@@ -12,19 +12,19 @@ const steps: Array<{
   {
     title: "Upload your backup",
     description:
-      "Begin migration by uploading your cPanel backup file in a few simple steps.",
+      "Upload your control panel backup file in a few simple steps.",
     icon: "upload"
   },
   {
-    title: "Get your file checked",
+    title: "Get your file verified",
     description:
-      "Check your backup file’s data compatibility and integrity easily by simply following the Unbox™ process.",
+      "Check your backup file’s data compatibility and integrity.",
     icon: "check"
   },
   {
-    title: "Restore and connect",
+    title: "Restore",
     description:
-      "Recover all your data then manually connect your domains in Hosting Manager, your center for hosting products.",
+      "Restore all your data then manually connect your domains from control panel.",
     icon: "connect"
   }
 ];
@@ -34,7 +34,7 @@ const KeepMigration = () => {
     <section className="py-24 -mt-px" style={{ backgroundColor: 'rgb(var(--migration-keep-bg))', color: 'rgb(var(--migration-keep-text))' }}>
       <div className="mx-auto max-w-8xl px-6 text-center sm:px-10">
         <ContentHeading
-          title="Keep migration simple"
+          title="Simple migration"
           className="!text-[2.5rem] sm:!text-[3.25rem] md:!text-[4rem] font-bold !text-[rgb(var(--migration-keep-heading))]"
         />
 
@@ -42,7 +42,7 @@ const KeepMigration = () => {
           size="xl"
           className="mt-6 text-sm sm:text-base md:text-xl !text-[rgba(var(--migration-keep-description))]"
         >
-          {"Unbox™ is our solution that helps you seamlessly get started with all your products, including migration — no special skills needed."}
+          {"Get our free support during migration if you stuck anywhere."}
         </ContentDescription>
       </div>
 
