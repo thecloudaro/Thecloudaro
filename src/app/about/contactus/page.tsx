@@ -50,6 +50,10 @@ export default function ContactUsPage() {
               >
                 info@thecloudaro.com
               </a>
+              <br />Helpline: {" "}
+              +1(804)-
+              <br />Address: {" "}
+              8401 Mayland Dr. STE S, Richmond, VA 23294
             </p>
 
             <p className="max-w-2xl pt-1 text-left text-sm text-[rgba(var(--contact-text-body))] sm:text-base md:text-base">
@@ -67,7 +71,7 @@ export default function ContactUsPage() {
             <div className="relative w-full max-w-[500px] h-[300px] sm:h-[350px] md:h-[400px] lg:h-[500px]">
               <Image
                 src="#"
-                alt="Contact Us"
+                alt=""
                 fill
                 className="object-contain"
                 priority
