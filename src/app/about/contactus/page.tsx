@@ -35,7 +35,7 @@ export default function ContactUsPage() {
             />
 
             <p className="max-w-2xl pt-1 text-left text-sm text-[rgba(var(--contact-text-body))] sm:text-base md:text-base">
-              We're a remote-first web hosting company, allowing us to provide reliable support to customers worldwide.
+              We're a remote-first web hosting company, allowing us to provide reliable support to customers worldwide.<br />
             </p>
 
             {/* Description */}
@@ -49,7 +49,7 @@ export default function ContactUsPage() {
                 style={{ color: 'hsl(var(--link-blue))' }}
               >
                 info@thecloudaro.com
-              </a>.
+              </a>
             </p>
 
             <p className="max-w-2xl pt-1 text-left text-sm text-[rgba(var(--contact-text-body))] sm:text-base md:text-base">
