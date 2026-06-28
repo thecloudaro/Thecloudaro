@@ -28,7 +28,7 @@ const Trust = () => {
           className="absolute top-0 right-[20%] w-[30%] h-full"
           style={{
             background:
-              'linear-gradient(to left, rgba(var(--trust-glow-core-500-100)) 0%, rgba(var(--trust-glow-core-600-80)) 40%, rgba(var(--trust-glow-core-700-40)) 80%, transparent 100%)',
+              'linear-gradient(to left, rgba(147, 51, 234, 1) 0%, rgba(88, 28, 135, 0.8) 40%, rgba(31, 41, 55, 0.4) 80%, transparent 100%)',
             filter: 'blur(60px)',
           }}
         />
@@ -43,7 +43,7 @@ const Trust = () => {
           className="text-center"
         >
           <ContentDescription
-            text="Trust. Truth. Transparency."
+            text="Pure Transparency"
             size="xl"
             className="text-2xl leading-tight sm:text-3xl lg:text-4xl !text-[rgb(var(--hosting-text-white))]"
           />
