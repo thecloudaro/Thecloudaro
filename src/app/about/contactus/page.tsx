@@ -40,7 +40,6 @@ export default function ContactUsPage() {
 
             {/* Description */}
             <p className="max-w-2xl text-left text-sm text-[rgb(var(--contact-text-paragraph))] sm:text-base md:text-base">
-              <br />
               
               <br />Email: {" "}
               <a
@@ -57,7 +56,7 @@ export default function ContactUsPage() {
             </p>
 
             <p className="max-w-2xl pt-1 text-left text-sm text-[rgba(var(--contact-text-body))] sm:text-base md:text-base">
-              We aim to respond to all inquiries as quickly as possible, with most requests receiving a reply within a few hours.
+              <br />We aim to respond to all inquiries as quickly as possible, with most requests receiving a reply within a few hours.
             </p>
           </motion.div>
 
