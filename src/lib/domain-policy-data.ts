@@ -136,7 +136,7 @@ export const domainPolicyData = {
         "For questions regarding domain registration data or this policy, contact us at:",
         "Cloud Aro",
         "Email: legal@thecloudaro.com",
-        "Address: 8401 MAYLAND DR STE S, RICHMOND, VA 23294",
+        "Address: 8401 Mayland Dr. STE S, Richmond, VA 23294",
       ],
     },
   ],
