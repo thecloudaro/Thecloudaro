@@ -28,7 +28,7 @@ const Trust = () => {
           className="absolute top-0 right-[20%] w-[30%] h-full"
           style={{
             background:
-              'linear-gradient(to left, rgba(147, 51, 234, 1) 0%, rgba(88, 28, 135, 0.8) 40%, rgba(31, 41, 55, 0.4) 80%, transparent 100%)',
+              'linear-gradient(270deg, rgba(139, 92, 246, 1) 0%, rgba(76, 29, 149, 0.8) 40%, rgba(17, 17, 17, 0.4) 80%, transparent 100%)',
             filter: 'blur(60px)',
           }}
         />
