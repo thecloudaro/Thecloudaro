@@ -29,13 +29,13 @@ const LegalHero = () => {
           >
             {/* Main Heading */}
             <ContentHeading
-              title="Terms & Conditions"
+              title="Terms of Service"
               className="text-4xl sm:text-4xl md:text-4xl lg:text-4xl xl:text-4xl text-left text-[rgb(var(--legal-hero-text-white))]"
             />
 
             {/* Description */}
             <ContentDescription
-              text="Here you will find the documentation regarding terms of use, acceptable use policy, registration agreement, privacy policy and other product agreements. If you have any further questions, please, contact us."
+              text="Review our terms, policies, and agreements below. If there’s anything you’re unsure about, feel free to reach out to us."
               size="md"
               className="text-md text-left max-w-2xl text-[rgb(var(--legal-hero-text-white))]"
             />
@@ -50,7 +50,7 @@ const LegalHero = () => {
           >
             <div className="relative w-full max-w-[450px] h-[150px] sm:h-[200px] md:h-[250px] lg:h-[280px]">
               <Image
-                src="/Legal/Hero.svg"
+                src="#"
                 alt="The Cloud Aro Legal"
                 width={450}
                 height={280}
