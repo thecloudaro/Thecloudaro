@@ -173,7 +173,7 @@ export const privacyPolicyData = {
       id: "Contact Us",
       title: "14. Contact Us",
       content:
-        "If you have questions or requests regarding this Privacy Policy or your personal data, contact us at:\n\nThe Cloud Aro\nEmail: dpo@thecloudaro.com\nAddress: 8401 Mayland Dr. STE S, Richmond, VA 23294",
+        "If you have questions or requests regarding this Privacy Policy or your personal data, contact us at:\n\nCloud Aro\nEmail: dpo@thecloudaro.com\nAddress: 8401 Mayland Dr. STE S, Richmond, VA 23294",
     },
   ],
 };
