@@ -66,7 +66,7 @@ export default function ContactUsPage() {
           >
             <div className="relative w-full max-w-[500px] h-[300px] sm:h-[350px] md:h-[400px] lg:h-[500px]">
               <Image
-                src="/ContactUs/Hero.svg"
+                src="#"
                 alt="Contact Us"
                 fill
                 className="object-contain"
