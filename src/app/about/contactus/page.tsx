@@ -41,7 +41,8 @@ export default function ContactUsPage() {
             {/* Description */}
             <p className="max-w-2xl text-left text-sm text-[rgb(var(--contact-text-paragraph))] sm:text-base md:text-base">
               Whether you have a sales inquiry, need technical assistance, or have a general question, our team is here to help.<br />
-              \nEmail: {" "}
+              
+              <br />Email: {" "}
               <a
                 href="mailto:info@thecloudaro.com"
                 className="hover:!underline"
