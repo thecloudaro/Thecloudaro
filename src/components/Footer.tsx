@@ -313,8 +313,8 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="text-footer-text-muted text-sm mt-4 lg:mt-0">
-            <p>©2025 The Cloud Aro</p>
-            <p className="mt-2 opacity-90">Remote-operated web hosting company · Support via email & tickets</p>
+            <p>©2026 Cloud Aro</p>
+            <p className="mt-2 opacity-90">Richmond, VA, USA</p>
           </div>
         </div>
       </div>
