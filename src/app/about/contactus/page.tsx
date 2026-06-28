@@ -35,12 +35,12 @@ export default function ContactUsPage() {
             />
 
             <p className="max-w-2xl pt-1 text-left text-sm text-[rgba(var(--contact-text-body))] sm:text-base md:text-base">
-              <br />
+              Whether you have a sales inquiry, need technical assistance, or have a general question, our team is here to help.<br />
             </p>
 
             {/* Description */}
             <p className="max-w-2xl text-left text-sm text-[rgb(var(--contact-text-paragraph))] sm:text-base md:text-base">
-              Whether you have a sales inquiry, need technical assistance, or have a general question, our team is here to help.<br />
+              <br />
               
               <br />Email: {" "}
               <a
