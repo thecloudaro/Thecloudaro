@@ -150,7 +150,7 @@ export const termsOfServiceData = {
       id: "contact-information",
       title: "Contact Information",
       content: [
-        "If you have questions, billing issues, or legal concerns, contact us:",
+        "If you have questions, contact us:",
         "Cloud Aro",
         "Email: info@thecloudaro.com",
         "Address: 8401 Mayland Dr. STE S, Richmond, VA 23294",
