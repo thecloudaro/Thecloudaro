@@ -47,7 +47,7 @@ export const domainPolicyData = {
       id: "Legal & Regulatory Framework",
       title: "4. Legal & Regulatory Framework",
       content: [
-        "TheCloudaro processes domain registration data in accordance with: - ICANN Temporary Specification & Registration Data Policies - GDPR (EU) - Pakistan data protection principles - Applicable US laws",
+        "Cloud Aro processes domain registration data in accordance with: - ICANN Temporary Specification & Registration Data Policies - GDPR (EU) - Pakistan data protection principles - Applicable US laws",
         "We apply the principles of data minimization, purpose limitation, and proportionality.",
       ],
     },
@@ -90,7 +90,7 @@ export const domainPolicyData = {
       title: "7. How to Submit a Data Disclosure Request (Guide)",
       content: [
         "To request access to non-public domain registration data, submit a written request to:",
-        "Email: support@thecloudaro.com",
+        "Email: legal@thecloudaro.com",
         "Your request should include: - Requestor’s full name and organization - Contact information - Domain name(s) involved - Legal basis or legitimate interest - Supporting documentation (court order, trademark certificate, etc.)",
         "Incomplete requests may be rejected.",
       ],
@@ -133,10 +133,10 @@ export const domainPolicyData = {
       id: "Contact Information",
       title: "13. Contact Information",
       content: [
-        "For questions regarding domain registration data or this policy:",
-        "The Cloud Aro",
-        "Email: support@thecloudaro.com",
-        "Address: Karachi, Pakistan",
+        "For questions regarding domain registration data or this policy, contact us at:",
+        "Cloud Aro",
+        "Email: legal@thecloudaro.com",
+        "Address: 8401 MAYLAND DR STE S, RICHMOND, VA 23294",
       ],
     },
   ],
