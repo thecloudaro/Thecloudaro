@@ -3,7 +3,7 @@ export const domainPolicyData = {
   lastUpdated: "01-January-2026",
   breadcrumb: "Domain Registration Data Disclosure Policy & Guide",
   intro: [
-    "This Domain Registration Data Disclosure Policy & Guide explains how The Cloud Aro collects, processes, protects, and discloses domain registration data (also known as WHOIS or Registration Data) in compliance with ICANN policies, applicable registrar requirements, GDPR, Pakistan data protection principles, and relevant US laws.",
+    "This Domain Registration Data Disclosure Policy & Guide explains how Cloud Aro collects, processes, protects, and discloses domain registration data (also known as WHOIS or Registration Data) in compliance with ICANN policies, applicable registrar requirements, GDPR, Pakistan data protection principles, and relevant US laws.",
     "This document is intended for domain registrants, resellers, law enforcement authorities, intellectual property holders, and other legitimate requestors.",
   ],
   sections: [
