@@ -35,19 +35,24 @@ export default function ContactUsPage() {
             />
 
             <p className="max-w-2xl pt-1 text-left text-sm text-[rgba(var(--contact-text-body))] sm:text-base md:text-base">
-              We are a remote-first web hosting company. All sales and technical support requests are handled via email and our ticketing system.
+              We're a remote-first web hosting company, allowing us to provide reliable support to customers worldwide.
             </p>
 
             {/* Description */}
             <p className="max-w-2xl text-left text-sm text-[rgb(var(--contact-text-paragraph))] sm:text-base md:text-base">
-              If you have any questions or need some help, please email us at{" "}
+              Whether you have a sales inquiry, need technical assistance, or have a general question, our team is here to help. All requests are handled through our secure email and ticketing system to ensure every inquiry is tracked and resolved efficiently.
+              Email: {" "}
               <a
-                href="mailto:support@thecloudaro.com"
+                href="mailto:info@thecloudaro.com"
                 className="hover:!underline"
                 style={{ color: 'hsl(var(--link-blue))' }}
               >
-                support@thecloudaro.com
+                info@thecloudaro.com
               </a>.
+            </p>
+
+            <p className="max-w-2xl pt-1 text-left text-sm text-[rgba(var(--contact-text-body))] sm:text-base md:text-base">
+              We aim to respond to all inquiries as quickly as possible, with most requests receiving a reply within a few hours.
             </p>
           </motion.div>
 
