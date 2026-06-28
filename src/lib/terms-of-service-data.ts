@@ -10,7 +10,7 @@ export const termsOfServiceData = {
       id: "terms-of-service",
       title: "Terms of Service (ToS)",
       content: [
-        "These Terms of Service govern your access to and use of the services provided by The Cloud Aro (“we”, “us”, “our”), including web hosting, virtual servers, domains, SSL certificates, email hosting, cloud services, and related offerings (“Services”). By using our Services, you agree to these Terms.",
+        "These Terms of Service govern your access to and use of the services provided by Cloud Aro (“we”, “us”, “our”), including web hosting, virtual servers, domains, SSL certificates, email hosting, cloud services, and related offerings (“Services”). By using our Services, you agree to these Terms.",
       ],
     },
     {
