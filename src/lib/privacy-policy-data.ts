@@ -3,7 +3,7 @@ export const privacyPolicyData = {
   lastUpdated: "01-January-2026",
   breadcrumb: "Privacy Policy",
   intro: [
-    "This Privacy Policy explains how The Cloud Aro (“we”, “us”, “our”) collects, uses, discloses, and protects your personal information when you use our website, hosting services, domain registration, and related products (collectively, the “Services”).",
+    "This Privacy Policy explains how Cloud Aro (“we”, “us”, “our”) collects, uses, discloses, and protects your personal information when you use our website, hosting services, domain registration, and related products (collectively, the “Services”).",
     "This policy is designed to comply with applicable data protection laws in Pakistan, the European Union (GDPR), and the United States.",
   ],
   sections: [
@@ -173,7 +173,7 @@ export const privacyPolicyData = {
       id: "Contact Us",
       title: "14. Contact Us",
       content:
-        "If you have questions or requests regarding this Privacy Policy or your personal data, contact us at:\n\nThe Cloud Aro\nEmail: privacy@thecloudaro.com\nAddress: Karachi, Pakistan",
+        "If you have questions or requests regarding this Privacy Policy or your personal data, contact us at:\n\nThe Cloud Aro\nEmail: dpo@thecloudaro.com\nAddress: 8401 Mayland Dr. STE S, Richmond, VA 23294",
     },
   ],
 };
