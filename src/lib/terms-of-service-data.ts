@@ -3,7 +3,7 @@ export const termsOfServiceData = {
   lastUpdated: "01-January-2026",
   breadcrumb: "Terms of Service",
   intro: [
-    "These Terms of Service govern your access to and use of the services provided by The Cloud Aro (“we”, “us”, “our”), including web hosting, virtual servers, domains, SSL certificates, email hosting, cloud services, and related offerings (“Services”). By using our Services, you agree to these Terms.",
+    "These Terms of Service govern your access to and use of the services provided by Cloud Aro (“we”, “us”, “our”), including web hosting, virtual servers, domains, SSL certificates, email hosting, cloud services, and related offerings (“Services”). By using our Services, you agree to these Terms.",
   ],
   sections: [
     {
@@ -33,9 +33,9 @@ export const termsOfServiceData = {
       id: "billing-payments",
       title: "3. Billing & Payments",
       content: [
-        "Services are billed in advance unless stated otherwise",
-        "Fees are non-refundable except as stated in our Refund Policy",
-        "Late or failed payments may result in suspension or termination",
+        "Services are billed in advance unless stated otherwise",
+        "Fees are non-refundable except as stated in our Refund Policy",
+        "Late or failed payments may result in suspension or termination",
         "Payments are processed securely via third-party providers.",
       ],
     },
@@ -50,7 +50,7 @@ export const termsOfServiceData = {
       id: "limitation-of-liability",
       title: "5. Limitation of Liability",
       content: [
-        "The Cloud Aro is not liable for indirect, incidental, or consequential damages, including data loss or business interruption.",
+        "Cloud Aro is not liable for indirect, incidental, or consequential damages, including data loss or business interruption.",
       ],
     },
     {
@@ -64,7 +64,7 @@ export const termsOfServiceData = {
       id: "acceptable-use-policy",
       title: "Acceptable Use Policy (AUP)",
       content: [
-        "This AUP defines prohibited activities on The Cloud Aro infrastructure.",
+        "This AUP defines prohibited activities on Cloud Aro infrastructure.",
       ],
     },
     {
@@ -102,8 +102,8 @@ export const termsOfServiceData = {
       id: "cancellation",
       title: "2. Cancellation",
       content: [
-        "You may cancel services via client portal",
-        "Cancellation stops future billing but does not guarantee refunds",
+        "You may cancel services via client portal",
+        "Cancellation stops future billing but does not guarantee refunds",
       ],
     },
     {
@@ -117,11 +117,11 @@ export const termsOfServiceData = {
       id: "refund-policy",
       title: "Refund Policy",
       content: [
-        "To comply with PayFast requirements:",
-        "Refund requests must be submitted via support ticket or email to refund @thecloudaro.com",
-        "Approved refunds are processed back to the original payment method",
-        "Refund processing time: 7–10 business days",
-        "Transaction and processing fees may be deducted where applicable",
+        
+        "Refund requests must be submitted via support ticket or email to billing@thecloudaro.com",
+        "Approved refunds are processed back to the original payment method",
+        "Refund processing time: 7–10 business days",
+        "Transaction and processing fees may be deducted where applicable",
         "The Cloud Aro reserves the right to decline refunds for digital services already provisioned or consumed.",
       ],
     },
@@ -129,14 +129,14 @@ export const termsOfServiceData = {
       id: "service-level-agreement",
       title: "Service Level Agreement (SLA)",
       content: [
-        "The Cloud Aro targets 99.9% network uptime per month excluding scheduled maintenance. Critical support issues are responded to within 4 hours, standard issues within 24 hours. No SLA credits apply for abuse, force majeure, or customer misconfiguration.",
+        "Cloud Aro targets 99.9% network uptime per month excluding scheduled maintenance. Critical support issues are responded to within 4 hours, standard issues within 24 hours. No SLA credits apply for abuse, force majeure, or customer misconfiguration.",
       ],
     },
     {
       id: "dmca-copyright-policy",
       title: "DMCA & Copyright Policy",
       content: [
-        "The Cloud Aro complies with the Digital Millennium Copyright Act (DMCA). Valid takedown requests may be sent to dmca @thecloudaro.com or copyright @thecloudaro.com. Repeat infringers may have services terminated. Customers are responsible for hosted content.",
+        "Cloud Aro complies with the Digital Millennium Copyright Act (DMCA). Valid takedown requests may be sent to legal@thecloudaro.com. Repeat infringers may have services terminated. Customers are responsible for hosted content.",
       ],
     },
     {
@@ -151,9 +151,9 @@ export const termsOfServiceData = {
       title: "Contact Information",
       content: [
         "If you have questions, billing issues, or legal concerns, contact us:",
-        "The Cloud Aro",
-        "Email: info @thecloudaro.com",
-        "Address: Karachi, Pakistan",
+        "Cloud Aro",
+        "Email: info@thecloudaro.com",
+        "Address: 8401 Mayland Dr. STE S, Richmond, VA 23294",
       ],
     },
   ],
