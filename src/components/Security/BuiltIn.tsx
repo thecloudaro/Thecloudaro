@@ -32,10 +32,11 @@ const BuiltIn = () => {
           >
             <div className="relative w-full min-h-[200px] sm:min-h-[260px] md:min-h-[300px]">
               <Image
-                src="/Security/Security.png"
+                src="#"
                 alt="Built-in security — secure browsing and encrypted data"
                 fill
                 className="object-contain object-center"
+                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 90vw, 1024px"
                 priority={false}
               />
             </div>
