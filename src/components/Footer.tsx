@@ -314,7 +314,7 @@ const Footer: React.FC = () => {
 
           <div className="text-footer-text-muted text-sm mt-4 lg:mt-0">
             <p>©2026 Cloud Aro LLC | 8401 Mayland Dr. STE S, Richmond, VA, USA</p>
-            <p className="mt-2 opacity-90">Richmond, VA, USA</p>
+            <p className="mt-2 opacity-90"></p>
           </div>
         </div>
       </div>
