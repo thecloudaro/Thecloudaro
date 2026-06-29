@@ -65,9 +65,9 @@ export default function Home() {
 
       <section className="relative z-10">
         <DynamicSection
-          heading="Security as Standard"
-          text="This page will be developed later once the pictures are available and animations are added."
-          bgImage="/BgPics/black.jpg"
+          heading="Always-on Security"
+          text="Continuous, automated protection shielding infrastructure from threats 24/7"
+          bgImage="/Security/Security.png"
         />
       </section>
 
