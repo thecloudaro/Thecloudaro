@@ -29,7 +29,7 @@ const Building = () => {
               className="mb-4 sm:mb-6"
             >
               <ContentHeading
-                title="Building digital<br/>harmony"
+                title="Built for <br/>Every Business"
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl text-[rgb(var(--about-text-white))] font-bold leading-tight tracking-tight text-left"
               />
             </motion.div>
@@ -43,12 +43,11 @@ const Building = () => {
               className="max-w-2xl"
             >
               <ContentDescription
-                text="By creating and bringing together digital products so<br/>
-                practically anyone can use them, we bypass the usual<br/>
-                web complexities. No pain. No fuss. Just beautiful<br/>
-                digital experiences. Domains, hosting, email... Simply<br/>
-                choose, connect, and launch what you need.<br/>
-                'Seamless' will never mean the same thing again."
+                text="Cloud Aro simplifies the technology behind your online<br/>
+                success. With domains, high-performance hosting, business email,<br/>
+                and essential cloud services in one place, getting started has<br/>
+                never been easier. We handle the infrastructure, so you can focus<br/>
+                on building your business—not managing technical complexity.."
                 size="md"
                 className="text-[rgba(var(--about-text-white-90))] text-left"
               />
