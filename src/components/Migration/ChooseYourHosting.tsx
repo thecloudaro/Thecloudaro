@@ -360,9 +360,9 @@ const ChooseYourHosting = () => {
                     Secured by <span className="!text-[rgb(var(--migration-choose-ssl))]">SSL</span>
                   </li>
                   <li>{plan.features.mailboxes}</li>
-                  {plan.features.imunify360 && <li>Imunify360 Protection</li>}
+                  {plan.features.imunify360 && <li>Imunify360 Protection</li>} 
                   {plan.features.websiteBuilder && <li>Website Builder</li>}
-                  {plan.features.wordpressAI && <li>AI Tools</li>}
+                  {plan.features.wordpressAI && <li>WordPress Tools</li>}
                 </ul>
 
                 <a
