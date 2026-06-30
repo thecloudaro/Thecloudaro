@@ -10,42 +10,42 @@ const DomainExtensions = () => {
   const domainExtensions = [
     {
       extension: ".com",
-      price: 8.88,
+      price: 13,
       originalPrice: null,
       discount: null,
       description: "Most popular domain extension"
     },
     {
       extension: ".net",
-      price: 11.20,
+      price: 14,
       originalPrice: null,
       discount: null,
       description: "Network-focused domains"
     },
     {
       extension: ".org",
-      price: 6.48,
+      price: 15,
       originalPrice: null,
       discount: null,
       description: "Organization domains"
     },
     {
       extension: ".xyz",
-      price: 1.86,
+      price: 15,
       originalPrice: null,
       discount: null,
       description: "Creative and modern"
     },
     {
       extension: ".online",
-      price: 0.98,
+      price: 30,
       originalPrice: null,
       discount: null,
       description: "Perfect for online presence"
     },
     {
       extension: ".io",
-      price: 31.05,
+      price: 53,
       originalPrice: null,
       discount: null,
       description: "Tech startup favorite"
