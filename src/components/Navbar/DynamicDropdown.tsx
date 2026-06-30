@@ -205,7 +205,7 @@ export default function UniversalDropdown({
 
   const universeItems: UniverseItem[] = [
     { href: "/migration-to-thecloudaro", icon: <ArrowRight size={14} />, label: "Transfer to Us" },
-    { key: "why-thecloudaro", icon: <Star size={14} />, label: "Why TheCloudaro" },
+    { key: "why-thecloudaro", icon: <Star size={14} />, label: "Why Cloud Aro" },
     { key: "about-us", icon: <HelpCircle size={14} />, label: "About Us" }
   ];
 
