@@ -23,7 +23,7 @@ const Integrity = () => {
             <div className="relative w-full h-full">
               <Image
                 src="/about/Intergrity.svg"
-                alt="Integrity by design"
+                alt="Security by Design"
                 fill
                 className="object-contain"
                 priority
@@ -49,7 +49,7 @@ const Integrity = () => {
               className="mb-4 sm:mb-6"
             >
               <ContentHeading
-                title="Integrity by<br/>design"
+                title="Security by <br/>design"
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl text-[rgb(var(--about-text-white))] font-bold leading-tight tracking-tight text-left"
               />
             </motion.div>
@@ -63,11 +63,9 @@ const Integrity = () => {
               className="max-w-2xl"
             >
               <ContentDescription
-                text="Just like amazing websites and digital futures, trust<br/>
-                needs to be built. That's why you won't find any<br/>
-                hidden costs or buried information on our website, or<br/>
-                anywhere else that belongs to us. Everything is<br/>
-                upfront and where you need it."
+                text="Trust starts with transparency. Cloud Aro offers<br/>
+                clear pricing, honest communication, and no hidden fees—just<br/>
+                reliable services you can count on."
                 size="md"
                 className="text-[rgba(var(--about-text-white-90))] text-left"
               />
