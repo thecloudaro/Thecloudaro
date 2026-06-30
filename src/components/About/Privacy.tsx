@@ -29,7 +29,7 @@ const Privacy = () => {
               className="mb-4 sm:mb-6"
             >
               <ContentHeading
-                title="Privacy first, and<br/>last"
+                title="Committed to <br/>Privacy"
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl text-[rgb(var(--about-text-white))] font-bold leading-tight tracking-tight text-left"
               />
             </motion.div>
@@ -43,10 +43,9 @@ const Privacy = () => {
               className="max-w-2xl"
             >
               <ContentDescription
-                text="Your business should be no one else's business. A<br/>
-                dedication and commitment to your privacy runs<br/>
-                through everything we do. First, last, and everywhere,<br />
-                in between, your information and rights are protected."
+                text="Privacy is built into everything we do. From<br />
+                secure infrastructure to responsible data handling,<br />
+                your information is always protected."
                 size="md"
                 className="text-[rgba(var(--about-text-white-90))] text-left"
               />
@@ -64,7 +63,7 @@ const Privacy = () => {
             <div className="relative w-full h-full">
               <Image
                 src="/about/Privacy.svg"
-                alt="Privacy first, and last"
+                alt="Committed to Privacy"
                 fill
                 className="object-contain"
                 priority
