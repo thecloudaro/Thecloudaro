@@ -63,7 +63,7 @@ export default function UniversalDropdown({
       "email": "email",
       // "cloud": "cloud",
       "security": "security",
-      "why thecloudaro": "why-thecloudaro",
+      "why cloud aro": "why-thecloudaro",
       "about us": "about-us",
       "explore all": "domains"
     };
@@ -78,7 +78,7 @@ export default function UniversalDropdown({
       "email": "Email",
       // "cloud": "Cloud",
       "security": "Security",
-      "why-thecloudaro": "Why TheCloudaro",
+      "why-thecloudaro": "Why Cloud Aro",
       "about-us": "About Us"
     };
     return keyMap[key] || "Domains";
@@ -149,7 +149,7 @@ export default function UniversalDropdown({
     security: {
       title: "Security",
       sections: [
-        { title: "Security", desc: "See how Thecloudaro keeps you secure.", href: "/security" },
+        { title: "Security", desc: "See how we keep you secure.", href: "/security" },
         { title: "Domain Privacy", desc: "Keep your domain info private.", href: "/domain-name-privacy" },
         { title: "SSL Certificates", desc: "Secure your website with SSL certificates.", href: "/ssl-certificates" },
         // { title: "CDN", desc: "Speed up your site worldwide.", href: "/cdn" },
@@ -157,9 +157,9 @@ export default function UniversalDropdown({
       ]
     },
     "why-thecloudaro": {
-      title: "Why TheCloudaro",
+      title: "Why Cloud Aro",
       sections: [
-        { title: "Security", desc: "See how Thecloudaro keeps you secure.", href: "/security" },
+        { title: "Security", desc: "See how we keep you secure.", href: "/security" },
         { title: "Request New Feature", desc: "Help us improve by suggesting new features.", href: "/request-new-feature" }
       ]
     },
