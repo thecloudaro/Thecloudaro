@@ -49,7 +49,7 @@ const Pushing = () => {
               className="mb-4 sm:mb-6"
             >
               <ContentHeading
-                title="Pushing what's<br/>possible"
+                title="Creating Better <br/>Hosting"
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl text-[rgb(var(--about-text-white))] font-bold leading-tight tracking-tight text-left"
               />
             </motion.div>
@@ -63,12 +63,13 @@ const Pushing = () => {
               className="max-w-2xl"
             >
               <ContentDescription
-                text="We're here to take digital technology further, and then<br/>
-                put it in your hands. Everyone should have the<br/>
-                freedom to get their vision online. That doesn't mean<br/>
-                we use 'the latest innovations'. It means we build<br/>
-                innovation from scratch! From behind the scenes and<br/>
-                onto your screens, we go further so you go further."
+                text="Technology should remove barriers, not create them.<br/>
+                Cloud Aro delivers modern hosting solutions that<br/>
+                combine performance, security, and simplicity, giving<br/> 
+                businesses, developers, and creators the freedom to<br/>
+                bring their ideas to life. We continuously improve the<br/>
+                infrastructure behind your success, so you can focus on<br/>
+                building what matters most."
                 size="md"
                 className="text-[rgba(var(--about-text-white-90))] text-left"
               />
