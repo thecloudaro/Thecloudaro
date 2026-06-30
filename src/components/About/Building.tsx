@@ -43,11 +43,12 @@ const Building = () => {
               className="max-w-2xl"
             >
               <ContentDescription
-                text="Cloud Aro simplifies the technology behind your online<br/>
-                success. With domains, high-performance hosting, business email,<br/>
-                and essential cloud services in one place, getting started has<br/>
-                never been easier. We handle the infrastructure, so you can focus<br/>
-                on building your business—not managing technical complexity.."
+                text="Cloud Aro simplifies the technology behind your online<br />
+                success. With domains, high-performance hosting, business<br />
+                email, and essential cloud services in one place, getting<br />
+                started has never been easier. We handle the infrastructure,<br />
+                so you can focus on building your business—not managing<br />
+                technical complexity."
                 size="md"
                 className="text-[rgba(var(--about-text-white-90))] text-left"
               />
