@@ -59,18 +59,18 @@ const pricingTiers = [
   ];
 
   const domainExtensions = [
-    { extension: ".com", price: 12.99, description: "Most popular", popular: true },
-    { extension: ".net", price: 15.99, description: "Network focused" },
-    { extension: ".org", price: 18.99, description: "Organizations" },
-    { extension: ".io", price: 45.99, description: "Tech startups", popular: true },
-    { extension: ".co", price: 25.99, description: "Companies" },
-    { extension: ".app", price: 20.99, description: "Applications" },
-    { extension: ".dev", price: 15.99, description: "Developers" },
-    { extension: ".blog", price: 8.99, description: "Blogging" },
-    { extension: ".shop", price: 25.99, description: "E-commerce" },
-    { extension: ".tech", price: 35.99, description: "Technology" },
-    { extension: ".ai", price: 89.99, description: "Artificial Intelligence", popular: true },
-    { extension: ".xyz", price: 1.99, description: "Creative" }
+    { extension: ".com", price: 13, description: "Most popular", popular: true },
+    { extension: ".net", price: 14, description: "Network focused" },
+    { extension: ".org", price: 14, description: "Organizations" },
+    { extension: ".io", price: 53, description: "Tech startups", popular: true },
+    { extension: ".co", price: 29, description: "Companies" },
+    { extension: ".app", price: 17, description: "Applications" },
+    { extension: ".dev", price: 15, description: "Developers" },
+    { extension: ".blog", price: 23, description: "Blogging" },
+    { extension: ".shop", price: 33, description: "E-commerce" },
+    { extension: ".tech", price: 52, description: "Technology" },
+    { extension: ".ai", price: 188, description: "Artificial Intelligence", popular: true },
+    { extension: ".xyz", price: 15, description: "Creative" }
   ];
 
 const DomainPricing = () => {
