@@ -35,10 +35,10 @@ const Primary = () => {
             className="mb-6 sm:mb-8"
           >
             <ContentDescription
-              text="Technology is only as powerful as the people behind it.< /br>
-              Your ideas, ambitions, and vision deserve a hosting platform that is fast,< /br>
-              secure, and effortless—so you can focus on building, growing, and reaching< /br>
-              your goals online."
+              text="Technology is only as powerful as the people behind it.<br />
+              Your ideas, ambitions, and vision deserve a hosting platform<br />
+              that is fast, secure, and effortless—so you can focus on<br />
+              building, growing, and reaching your goals online."
               size="md"
               className="text-[rgba(var(--about-text-white-90))] text-center"
             />
