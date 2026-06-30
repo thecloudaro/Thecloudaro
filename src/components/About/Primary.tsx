@@ -52,7 +52,7 @@ const Primary = () => {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
           >
             <ContentDescription
-              text="Welcome to (your) The Cloud Aro..."
+              text="Welcome to the Cloud Aro..."
               size="md"
               className="text-[rgba(var(--about-text-white-90))] text-center"
             />
