@@ -81,8 +81,8 @@ const AboutHero = () => {
             className="mb-6 sm:mb-8"
           >
             <ContentHeading
-              title="Launching digital<br/>futures further, faster"
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-[rgb(var(--about-text-white))] font-bold leading-tight tracking-tight"
+              title="Reliable Infrastructure<br/>futures further, faster"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-[rgb(var(--about-text-white))] font-bold for Growing Businesses"
             />
           </motion.div>
         </div>
