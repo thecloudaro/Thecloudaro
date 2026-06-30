@@ -20,7 +20,7 @@ const Primary = () => {
             className="mb-6 sm:mb-8"
           >
             <ContentDescription
-              text="The Cloud Aro's primary mission is to redefine speed and simplicity so everyone, everywhere can do more, make more, and be more online."
+              text="Our mission is to simplify cloud hosting through high-performance infrastructure, making it easier for anyone to launch, scale, and succeed."
               size="lg"
               className="text-2xl sm:text-2xl md:text-3xl lg:text-3xl text-[rgb(var(--about-text-white))] font-bold leading-tight text-center"
             />
@@ -35,9 +35,10 @@ const Primary = () => {
             className="mb-6 sm:mb-8"
           >
             <ContentDescription
-              text="Why? Because it's people that really power the internet — your vision,<br/>
-              ideas, and ambitions. You deserve an easier, faster, better way to get<br/>
-              where you want to be online, no matter how close or far away it seems."
+              text="Technology is only as powerful as the people behind it. 
+              Your ideas, ambitions, and vision deserve a hosting platform that is fast,<br/>
+              secure, and effortless—so you can focus on building, growing, and reaching<br/>
+              your goals online."
               size="md"
               className="text-[rgba(var(--about-text-white-90))] text-center"
             />
