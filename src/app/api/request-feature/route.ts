@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
       email?: string;
       name?: string;
     };
-
+    console.log("RESEND_API_KEY:", process.env.RESEND_API_KEY);
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
       return NextResponse.json(
